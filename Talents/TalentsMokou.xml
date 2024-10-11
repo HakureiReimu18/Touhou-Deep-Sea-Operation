@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="Immortal_Human">
+        <Icon texture="%ModDir%/Images/Talents/Immortal_Human.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Immortal_Human"/>
+
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="No_Effects11" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveResistance resistanceid="Resurrection" multiplier="0" />
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupInterval maxtriggercount="1" >
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix" />
+                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" multiplyafflictionsbymaxvitality="true" disabledeltatime="true" >
+                            <Affliction identifier="Resurrection" amount="30"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupInterval abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Resurrection" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies allowself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" >
+                            <Affliction identifier="No_Effects10" strength="1"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="Phoenix_Burn" addedmultiplier="0.5" />
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="BallastFloraDamageMultiplier" value="0.8"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+    </Talent>
+</Talents>

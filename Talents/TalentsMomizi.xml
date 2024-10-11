@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="MomiziTalent">
+        <Icon texture="%ModDir%/Images/Talents/MomiziTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.MomiziTalent"/>
+        <AbilityGroupInterval>
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Grunt_Security_Tengu" />
+                <AbilityConditionNearbyCharacterCount distance="1500" targettypes="Enemy,Alive" count="1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="Grunt_Security_Tengu_Senor" amount="100" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="4">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Grunt_Security_Tengu" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <ReduceAffliction identifier="Momizi_Tail_Spawn" amount="100"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="1">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="This" multiplyafflictionsbymaxvitality="true" disabledeltatime="true">
+                            <Affliction identifier="Tenshi_Guarded" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Grunt_Security_Tengu" />
+                <AbilityConditionHasAffliction afflictionidentifier="Tenshi_Guarded" minimumpercentage="1.0"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="NoWeapon,Melee,Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAttacker>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true">
+                            <Affliction identifier="Momizi_OnAttacked_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAttacker>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttackedResult">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="This">
+                            <ReduceAffliction identifier="Tenshi_Guarded" strength="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+</Talents>

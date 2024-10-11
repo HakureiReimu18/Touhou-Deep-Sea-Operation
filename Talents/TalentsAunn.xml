@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="AunnTalent">
+        <Icon texture="%ModDir%/Images/Talents/AunnTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.AunnTalent"/>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionCharacter>
+                    <Conditional speciesgroup="neq human" />
+                </AbilityConditionCharacter>
+                <AbilityConditionHasAffliction afflictionidentifier="Naivete_Koma_Inu" />
+                <AbilityConditionHasAffliction afflictionidentifier="Aunn_Lion" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="internaldamage,blunttrauma,lacerations,bitewounds,gunshotwound,organdamage,explosiondamage,Reiki_Pressure,burn,Touhou_Bite" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Naivete_Koma_Inu" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="TeamAttackMultiplier" value="-0.5"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Naivete_Koma_Inu" />
+                <AbilityConditionHasAffliction afflictionidentifier="Aunn_Koma_Inu" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies maxdistance="2500" allowself="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="Aunn_Koma_Inu_Others" amount="10"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="4">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Naivete_Koma_Inu" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <ReduceAffliction identifier="Aunn_Tail_Spawn" amount="100"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+</Talents>

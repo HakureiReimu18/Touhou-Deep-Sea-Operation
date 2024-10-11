@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+
+    <Talent identifier="KoishiTalent">
+        <Icon texture="%ModDir%/Images/Talents/KoishiTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.KoishiTalent"/>
+        <AbilityGroupEffect abilityeffecttype="OnGainMissionExperience">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyValue multiplyvalue="1.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+                <AbilityConditionHasAffliction afflictionidentifier="Koishi_Dodge_CD" invert="true" />
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="NoWeapon,Melee,Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <SpawnCharacter speciesname="Touhou_Koishi_Phantom" count="1" />
+                            <ParticleEmitter particle="Touhou_Koishi_Phantom" DistanceMin="-20" DistanceMax="20" VelocityMin="-3" VelocityMax="3"
+                                             ScaleMultiplier="1,1" EmitInterval="1" ParticleAmount="1" ColorMultiplier="255,255,255,255" Distance="-20"
+                                             Velocity="-3" />
+                            <Affliction identifier="Koishi_Dodge_CD" strength="10" />
+                            <Affliction identifier="Koishi_Unconscious03" strength="100" />
+                            <Affliction identifier="Koishi_Unconscious_Flag" strength="100" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="15.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+                <AbilityConditionHasAffliction afflictionidentifier="Koishi_Unconscious_Flag" invert="true" />
+                <AbilityConditionServerRandom randomchance="0.75" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <TriggerEvent identifier="KoishiTalent_Unconscious" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttackResult">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+                <AbilityConditionHasAffliction afflictionidentifier="Koishi_Weapons" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <Affliction identifier="Koishi_Unconscious_Removed" amount="100" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+                <AbilityConditionHasAffliction afflictionidentifier="Koishi_Weapons" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <Conditional Koishi_Unconscious01="lte 0"/>
+                            <Conditional Koishi_Unconscious02="lte 0"/>
+                            <Conditional Koishi_Unconscious03="lte 0"/>
+                            <Affliction identifier="Koishi_Unconscious01" strength="6" />
+                            <Affliction identifier="Koishi_Unconscious_Flag" strength="6" />
+                        </StatusEffect>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <Conditional Koishi_Unconscious01="gt 0"/>
+                            <Affliction identifier="Koishi_Unconscious02" strength="3" />
+                            <Affliction identifier="Koishi_Unconscious_Flag" strength="3" />
+                        </StatusEffect>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <Conditional Koishi_Unconscious02="gt 0"/>
+                            <Affliction identifier="Koishi_Unconscious03" strength="3" />
+                            <Affliction identifier="Koishi_Unconscious_Flag" strength="3" />
+                        </StatusEffect>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <Conditional Koishi_Unconscious03="gt 0"/>
+                            <Affliction identifier="Koishi_Unconscious03" strength="3" />
+                            <Affliction identifier="Koishi_Unconscious_Flag" strength="3" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+                <AbilityConditionHasAffliction afflictionidentifier="Koishi_Unconscious_Flag" />
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="NoWeapon,Melee,Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.257" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+                <AbilityConditionHasAffliction afflictionidentifier="Koishi_Unconscious_Flag" invert="true" />
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="NoWeapon,Melee,Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.514" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+            </Conditions>
+            <Conditions>
+                <AbilityConditionCharacter>
+                    <Conditional Touhou_Strange_Phone_Effect="gt 0" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.3"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--特种部队拮抗-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasTalent identifier="specops" />
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional WasFullHealth="true"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveResistance resistanceid="Touhou_Strange_Phone_Effect" multiplier="0" />
+            </Abilities>
+        </AbilityGroupEffect>
+<!--        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+            </Conditions>
+            <Conditions>
+                <AbilityConditionCharacter>
+                    <Conditional Touhou_Strange_Phone_Effect="gt 0" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="bleeding" replacewith="Reiki_Pressure" addedmultiplier="-0.75" />
+            </Abilities>
+        </AbilityGroupEffect>-->
+    </Talent>
+</Talents>

@@ -1,0 +1,69 @@
+﻿<Character speciesname="Touhou_reiki_deterioration_tigerthresher" humanoid="False" husk="False" needsair="False" needswater="False" canspeak="False" noise="100" visibility="200" blooddecal="blood" group="Touhou_Monster" eatingspeed="6" displayname="" hasinfo="False" usehuskappendage="False" bleedparticleair="blooddrop" bleedparticlewater="waterblood" pathfinderpriority="1" hideinsonar="False" speciestranslationoverride="" sonardisruption="0" AISlowTurretPriority="0.5">
+  <ragdolls />
+  <animations />
+  <health vitality="300" doesbleed="True" crushdepth="Infinity" usehealthwindow="False" bleedingreduction="1" burnreduction="0.4" constanthealthregeneration="0.3" healthregenerationwheneating="3" />
+  <ai combatstrength="400" sight="2" hearing="2" aggressionhurt="200" aggressiongreed="10" fleehealththreshold="0" attackwhenprovoked="True" aggressiveboarding="True" targetouterwalls="False" avoidgunfire="True" DamageThreshold="10" enforceaggressivebehaviorformissions="True" randomattack="False" avoidtime="3" minfleetime="20">
+    <target tag="decoy" state="Attack" priority="100" ignoreifnotinsamesub="True" />
+    <target tag="provocative" state="Attack" priority="100" ignoreifnotinsamesub="True"/>
+    <target tag="weapon" state="Attack" priority="100" ignoreifnotinsamesub="True"/>
+    <target tag="nasonov" state="Attack" priority="100" ignoreinside="True"/>
+    <target tag="tool" state="Aggressive" priority="50" reactdistance="1000" attackdistance="0" timer="0" ignorecontained="False" ignoreifnotinsamesub="True"/>
+    <target tag="human" state="Attack" priority="150" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" ignoreifnotinsamesub="True"/>
+    <target tag="weaker" state="Attack" priority="50" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
+    <target tag="equal" state="Attack" priority="50" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
+    <target tag="stronger" state="Aggressive" priority="50" reactdistance="2000" attackdistance="0" timer="0" ignorecontained="False" />
+    <target tag="leucocyte" state="Avoid" priority="50" reactdistance="1000" attackdistance="0" timer="0" ignorecontained="False" />
+    <target tag="engine" state="Avoid" priority="40" reactdistance="500" ignoreinside="True" />
+    <target tag="dead" state="Eat" priority="20" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
+    <target tag="door" state="Attack" priority="60" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
+    <target tag="room" state="Attack" priority="60" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
+    <target tag="wall" state="Attack" priority="10" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
+    <target tag="sonar" state="Attack" priority="10" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
+    <target tag="bonethresher" state="Protect" priority="2" reactdistance="1000" attackdistance="0" timer="0" ignorecontained="False" />
+    <target tag="turret" state="Attack" priority="1" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" ignoreinside="true"/>
+    <target tag="watcher" state="Protect" priority="1" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" ignoreinside="true"/>
+    <target tag="monsterfood" state="Eat" priority="1" />
+    <target tag="terminalcell" state="Idle" priority="0" reactdistance="0" attackdistance="0" timer="0" ignorecontained="False" />
+    <SwarmBehavior mindistfromclosest="400" maxdistfromcenter="2000" cohesion="0.5" />
+  </ai>
+  <StatusEffect type="OnDeath" delay="5" target="This" targetlimb="Torso">
+    <sound file="Content/Items/Weapons/ExplosionSmall1.ogg" selectionmode="Random" volume="0.4" range="1400"/>
+    <sound file="Content/Items/Weapons/ExplosionSmall2.ogg" selectionmode="Random" volume="0.4" range="1400"/>
+    <sound file="Content/Items/Weapons/ExplosionSmall3.ogg" selectionmode="Random" volume="0.4" range="1400"/>
+    <SpawnItem identifier="Touhou_Reiki_Tear_Bolt" spawnposition="This" count="4" aimspread="360" rotationtype="Collider" rotation="0" Impulse="40" />
+    <ParticleEmitter particle="shrapnel" copyentityangle="true" anglemin="0" anglemax="360" particleamount="3" velocitymin="100" velocitymax="2000" scalemin="1.0" scalemax="1.0" />
+    <Explosion range="50.0" ballastfloradamage="100" structuredamage="10" itemdamage="5" force="10.0" severlimbsprobability="0.5" decal="explosion" decalsize="0.3" penetration="0.5">
+      <Affliction identifier="explosiondamage" strength="5" />
+      <Affliction identifier="Reiki_Pressure" strength="5" />
+    </Explosion>
+  </StatusEffect>
+  <StatusEffect type="OnActive" target="Character" targetlimb="Head" Interval="5" >
+    <Conditional HealthPercentage="lte 50" />
+    <Affliction identifier="Touhou_Tigerthresher_Half_Healh_Effect" strength="10" />
+  </StatusEffect>
+  <sound file="Content/Characters/Tigerthresher/TIGERTRESHER_idle1.ogg" state="Idle" range="3000" volume="1" />
+  <sound file="Content/Characters/Tigerthresher/TIGERTRESHER_idle2.ogg" state="Idle" range="3000" volume="1" />
+  <sound file="Content/Characters/Tigerthresher/TIGERTRESHER_damage1.ogg" state="Damage" range="3000" volume="1" />
+  <sound file="Content/Characters/Tigerthresher/TIGERTRESHER_damage2.ogg" state="Damage" range="3000" volume="1" />
+  <sound file="Content/Characters/Tigerthresher/TIGERTRESHER_attack1.ogg" state="Attack" range="4000" volume="1" />
+  <sound file="Content/Characters/Tigerthresher/TIGERTRESHER_attack2.ogg" state="Attack" range="4000" volume="1" />
+  <sound file="Content/Characters/Tigerthresher/TIGERTRESHER_death1.ogg" state="Die" range="3000" volume="1" />
+  <sound file="Content/Characters/Tigerthresher/TIGERTRESHER_death2.ogg" state="Die" range="3000" volume="1" />
+  <Inventory Slots="Any, Any, Any, Any" AccessibleWhenAlive="False" Commonness="0.15">
+    <Item Identifier="Score_Point" />
+    <Item Identifier="Touhou_Base_Metal" />
+  </Inventory>
+  <Inventory Slots="Any, Any, Any, Any" AccessibleWhenAlive="False" Commonness="0.3">
+    <Item Identifier="Magic_Material" amount="1" />
+    <Item Identifier="Touhou_Base_Metal" amount="2" />
+  </Inventory>
+  <Inventory Slots="Any, Any, Any, Any" AccessibleWhenAlive="False" Commonness="0.55">
+    <Item Identifier="Magic_Material" amount="2" />
+    <Item Identifier="Touhou_Base_Metal" />
+  </Inventory>
+  <damageemitter particle="gib" drawontop="True" particleamount="10" velocitymin="50" velocitymax="300" anglemin="0" anglemax="360" scalemin="0.25" scalemax="0.5" emitinterval="0" particlespersecond="0" highqualitycollisiondetection="False" copyentityangle="False" />
+  <bloodemitter particle="blood" anglemin="1" anglemax="2" scalemin="1" scalemax="1" velocitymin="0" velocitymax="0" emitinterval="0" particlespersecond="0" particleamount="10" highqualitycollisiondetection="False" copyentityangle="False" />
+  <bloodemitter particle="waterblood" anglemin="1" anglemax="2" scalemin="1" scalemax="1" velocitymin="0" velocitymax="0" emitinterval="0" particlespersecond="0" particleamount="1" highqualitycollisiondetection="False" copyentityangle="False" />
+  <gibemitter particle="gib" anglemin="0" anglemax="360" scalemin="1" scalemax="2" velocitymin="200" velocitymax="1500" emitinterval="0" particlespersecond="0" particleamount="30" highqualitycollisiondetection="False" copyentityangle="False" />
+  <gibemitter particle="heavygib" anglemin="0" anglemax="360" scalemin="0.8" scalemax="1.0" velocitymin="50" velocitymax="500" emitinterval="0" particlespersecond="0" particleamount="5" highqualitycollisiondetection="False" copyentityangle="False" />
+</Character>

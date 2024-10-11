@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="Kappa_Pororoca">
+        <Icon texture="%ModDir%/Images/Talents/Kappa_Pororoca.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Kappa_Pororoca"/>
+        <AbilityGroupInterval interval="0.5">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Candid_Friend" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="RepairSpeed" maxvalue="0.16" skillidentifier="mechanical" />
+                <CharacterAbilityModifyStatToSkill stattype="RepairSpeed" maxvalue="0.16" skillidentifier="electrical" />
+                <CharacterAbilityModifyStatToSkill stattype="RepairToolStructureRepairMultiplier" maxvalue="0.16" skillidentifier="mechanical" />
+                <CharacterAbilityModifyStatToSkill stattype="RepairToolStructureRepairMultiplier" maxvalue="0.16" skillidentifier="electrical" />
+                <CharacterAbilityModifyStatToSkill stattype="AttackMultiplier" maxvalue="0.1" skillidentifier="mechanical" />
+                <CharacterAbilityModifyStatToSkill stattype="MeleeAttackMultiplier" maxvalue="-0.1" skillidentifier="mechanical" />
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnOpenItemContainer">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Candid_Friend" />
+                <AbilityConditionItemInSubmarine submarinetype="Wreck"/>
+                <AbilityConditionItem tags="container"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilitySpawnItemsToContainer randomchance="0.15" oncepercontainer="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget" >
+                            <SpawnItem identifiers="Touhou_Simple_Parts" spawnposition="ThisInventory" spawnifcantbecontained="false" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilitySpawnItemsToContainer>
+                <CharacterAbilitySpawnItemsToContainer randomchance="0.05" oncepercontainer="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget" >
+                            <SpawnItem identifiers="Touhou_Precision_Parts" spawnposition="ThisInventory" spawnifcantbecontained="false" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilitySpawnItemsToContainer>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnOpenItemContainer">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Candid_Friend" />
+                <AbilityConditionItemInSubmarine submarinetype="BeaconStation"/>
+                <AbilityConditionItem tags="container,beaconengcab,beaconsupplycab"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilitySpawnItemsToContainer randomchance="0.3" oncepercontainer="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget" >
+                            <SpawnItem identifiers="Touhou_Precision_Parts" spawnposition="ThisInventory" spawnifcantbecontained="false" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilitySpawnItemsToContainer>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnRepairComplete">
+            <Conditions>
+                <AbilityConditionItem category="Electrical" />
+                <AbilityConditionHasAffliction afflictionidentifier="Candid_Friend" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveItemStat stattype="DetoriationSpeed" value="0.2"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnRepairComplete">
+            <Conditions>
+                <AbilityConditionItem category="Machine" />
+                <AbilityConditionHasAffliction afflictionidentifier="Candid_Friend" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveItemStat stattype="DetoriationSpeed" value="0.2"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Candid_Friend" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="coalition" stattype="ShipyardBuyMultiplier" value="0.1" targetallies="false" setvalue="true" />
+                <CharacterAbilityGivePermanentStat statidentifier="clowns" stattype="ShipyardBuyMultiplier" value="0.1" targetallies="false" setvalue="true" />
+                <CharacterAbilityGivePermanentStat statidentifier="huskcult" stattype="ShipyardBuyMultiplier" value="0.1" targetallies="false" setvalue="true" />
+                <CharacterAbilityGivePermanentStat statidentifier="separatists" stattype="ShipyardBuyMultiplier" value="0.1" targetallies="false" setvalue="true" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+</Talents>

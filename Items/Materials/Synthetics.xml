@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Items>
+
+    <!--伊奘诺物质-->
+    <Item name="" identifier="Magic_Material" tags="smallitem,round,ammo" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="32" scale="0.4" HideConditionBar="true">
+        <PreferredContainer primary="ruinstorage,ruinstoragesmall" minamount="1" maxamount="5" spawnprobability="0.3" />
+        <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="5" spawnprobability="0.3" />
+        <PreferredContainer primary="ruintreasure" minamount="2" maxamount="5" spawnprobability="0.5" />
+        <PreferredContainer secondary="outpostmedcompartment" amount="3" spawnprobability="0.1" />
+        <PreferredContainer secondary="supplycab,wreckstoragecab" minamount="1" maxamount="4" spawnprobability="0.05" />
+        <PreferredContainer secondary="abandonedstoragecab" minamount="1" maxamount="4" spawnprobability="0.1" />
+        <Price baseprice="900"  minleveldifficulty="12">
+            <Price locationtype="outpost" multiplier="1.1" minavailable="6" />
+            <Price locationtype="city" multiplier="0.9" minavailable="14" />
+            <Price locationtype="research" multiplier="0.85" maxavailable="16" />
+            <Price locationtype="military" multiplier="1.2" minavailable="10" />
+            <Price locationtype="mine" multiplier="1.2" maxavailable="12"/>
+        </Price>
+        <Deconstruct time="2" chooserandom="True" amount="2" requireddeconstructor="Alchemy_Table">
+            <Item identifier="Mu_Alchemical" amount="2" commonness="0.2" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Huo_Alchemical" amount="2" commonness="0.2" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Tu_Alchemical" amount="2" commonness="0.2" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Jin_Alchemical" amount="2" commonness="0.2" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Shui_Alchemical" amount="2" commonness="0.2" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="medicalfabricator" requiredtime="2.5" amount="4">
+            <RequiredSkill identifier="medical" level="50" />
+            <RequiredItem identifier="fulgurium" />
+            <RequiredItem identifier="physicorium" />
+            <RequiredItem identifier="incendium" />
+            <RequiredItem identifier="dementonite"/>
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="2.5" >
+            <RequiredSkill identifier="Touhou_Magic" level="60" />
+            <RequiredItem identifier="Reiki_Dust_Caking" amount="2"/>
+            <RequiredItem identifier="Reiki_Stone" amount="4"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Magic_Material.png" sourcerect="0,0,150,110" />
+        <Sprite texture="%ModDir%/Images/Materials/Magic_Material.png" depth="0.4" sourcerect="0,0,150,110" />
+        <Body width="32" height="32" density="10" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
+
+        <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Amulet" removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="Amulet" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                <SpawnItem identifiers="Amulet" spawnposition="ThisInventory" />
+            </StatusEffect>
+        </ItemContainer>
+    </Item>
+
+    <!--雪球-->
+    <Item name="" identifier="Mc_SnowBall" tags="smallitem,round,ammo" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="9" scale="0.4" HideConditionBar="true">
+        <Price baseprice="99" >
+            <Price storeidentifier="merchantoutpost" minavailable="3"/>
+            <Price storeidentifier="merchantcity" minavailable="3" />
+            <Price storeidentifier="merchantresearch" minavailable="3" />
+            <Price storeidentifier="merchantmilitary" minavailable="3" />
+            <Price storeidentifier="merchantmine" minavailable="3"/>
+        </Price>
+        <Deconstruct time="4.5">
+            <Item identifier="aluminium" />
+            <Item identifier="carbon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="4.5">
+        <RequiredSkill identifier="weapons" level="9" />
+        <RequiredItem identifier="aluminium" />
+        <RequiredItem identifier="carbon" />
+        <RequiredItem identifier="steel" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Materials/SnowBall.png" sourcerect="0,0,150,150" />
+        <Sprite texture="%ModDir%/Images/Materials/SnowBall.png" depth="0.4" sourcerect="0,0,150,150" />
+        <Body width="32" height="32" density="10" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
+
+        <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="IceIce" removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="IceIce" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                <SpawnItem identifiers="IceIce" spawnposition="ThisInventory" />
+            </StatusEffect>
+        </ItemContainer>
+    </Item>
+
+    <!--灵石-->
+    <Item name="" identifier="Reiki_Stone" tags="smallitem" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="48" scale="0.4" HideConditionBar="true">
+        <PreferredContainer primary="medcontainer" spawnprobability="0.02"/>
+        <PreferredContainer secondary="outpostmedcompartment" minamount="4" maxamount="18" spawnprobability="0.2" />
+        <PreferredContainer secondary="supplycab,wreckstoragecab" minamount="10" maxamount="20" spawnprobability="0.05" notcampaign="true"/>
+        <PreferredContainer secondary="abandonedstoragecab" minamount="4" maxamount="18" spawnprobability="0.18" />
+        <Price baseprice="60" >
+            <Price storeidentifier="merchantoutpost" minavailable="24" maxavailable="64"/>
+            <Price storeidentifier="merchantcity" minavailable="60" maxavailable="64" />
+            <Price storeidentifier="merchantresearch" minavailable="48" maxavailable="64" />
+            <Price storeidentifier="merchantmilitary" minavailable="36" maxavailable="64" />
+            <Price storeidentifier="merchantmine" minavailable="36" maxavailable="64"/>
+        </Price>
+        <Deconstruct time="4.5">
+            <Item identifier="Reiki_Dust" amount="2" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="1.5" amount="4">
+            <RequiredSkill identifier="mechanical" level="30" />
+            <RequiredItem identifier="silicon" amount="2" />
+            <RequiredItem identifier="carbon" />
+            <RequiredItem identifier="Spiritual_Water" mincondition="0.0499" usecondition="true"/>
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="0.5" amount="3">
+            <RequiredSkill identifier="Touhou_Magic" level="40" />
+            <RequiredItem identifier="Reiki_Dust" />
+            <RequiredItem identifier="Plant_Essential_Oil" amount="2" />
+            <RequiredItem identifier="aluminium" />
+            <RequiredItem identifier="Spiritual_Water" mincondition="0.0099" usecondition="true"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Reiki_Stone.png" sourcerect="0,0,80,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Reiki_Stone.png" depth="0.4" sourcerect="0,0,80,100" />
+        <Body width="32" height="32" density="10.1" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
+    </Item>
+
+    <!--灵水-->
+    <Item name="" identifier="Spiritual_Water" tags="smallitem,Spiritual_Water" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="4" scale="0.4">
+        <PreferredContainer primary="medcab" secondary="medcontainer" spawnprobability="0.02"/>
+        <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.02" />
+        <PreferredContainer secondary="supplycab" minamount="1" maxamount="2" spawnprobability="0.05" notcampaign="true"/>
+        <Price baseprice="100" >
+            <Price storeidentifier="merchantoutpost" minavailable="4"/>
+            <Price storeidentifier="merchantcity" minavailable="4" />
+            <Price storeidentifier="merchantresearch" minavailable="4" />
+            <Price storeidentifier="merchantmilitary" minavailable="4" />
+            <Price storeidentifier="merchantmine" minavailable="4"/>
+        </Price>
+        <Deconstruct time="2.5">
+            <Item identifier="silicon" />
+            <Item identifier="carbon" />
+            <Item identifier="aluminium" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="4" outcondition="0.0">
+            <RequiredSkill identifier="mechanical" level="30" />
+            <RequiredItem identifier="aluminium" />
+            <RequiredItem identifier="carbon" />
+            <RequiredItem identifier="silicon" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" depth="0.4" sourcerect="0,0,100,139" scale="0.4"/>
+        <Body width="80" height="80" density="10.1" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
+            <StatusEffect type="Always" target="This" Condition="1.5">
+                <Conditional InWater="true" />
+            </StatusEffect>
+        </Holdable>
+
+        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="100,0,100,139" depth="0.5" maxcondition="75.5" origin="0.5,0.5" scale="0.4" />
+        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="200,0,100,139" depth="0.5" maxcondition="50.5" origin="0.5,0.5" scale="0.4" />
+        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="300,0,100,139" depth="0.5" maxcondition="25.5" origin="0.5,0.5" scale="0.4" />
+        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="400,0,100,139" depth="0.5" maxcondition="0.5" origin="0.5,0.5" scale="0.4" />
+
+    </Item>
+
+    <!--灵尘-->
+    <Item name="" identifier="Reiki_Dust" tags="smallitem" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="48" scale="0.15" HideConditionBar="true">
+        <PreferredContainer primary="medcab" secondary="medcontainer"/>
+        <PreferredContainer secondary="outpostmedcompartment" amount="12" spawnprobability="0.06" />
+        <PreferredContainer secondary="supplycab" minamount="12" maxamount="18" spawnprobability="0.15" notcampaign="true"/>
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab" minamount="24" maxamount="48" spawnprobability="0.3" />
+        <Price baseprice="15" >
+            <Price storeidentifier="merchantoutpost" minavailable="96"/>
+            <Price storeidentifier="merchantcity" minavailable="196" />
+            <Price storeidentifier="merchantresearch" minavailable="132" />
+            <Price storeidentifier="merchantmilitary" minavailable="132" />
+            <Price storeidentifier="merchantmine" minavailable="196"/>
+        </Price>
+        <Deconstruct time="1">
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="0.5" amount="6">
+            <RequiredSkill identifier="Touhou_Magic" level="30" />
+            <RequiredItem identifier="carbon" amount="2"/>
+            <RequiredItem identifier="iron" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Materials/Magics.png" depth="0.4" sourcerect="0,0,293,305" />
+        <Body width="32" height="32" density="10.1" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,-55" handle2="0,-55" >
+            <StatusEffect type="InWater" target="This" >
+                <Remove/>
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--灵尘（结块）-->
+    <Item name="" identifier="Reiki_Dust_Caking" tags="smallitem" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="48" scale="0.15" HideConditionBar="true">
+        <PreferredContainer primary="storagecab" />
+        <PreferredContainer secondary="outpostmedcompartment" amount="16" spawnprobability="0.08" />
+        <PreferredContainer secondary="supplycab" minamount="8" maxamount="18" spawnprobability="0.1" notcampaign="true"/>
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab" minamount="24" maxamount="36" spawnprobability="0.2" />
+        <Price baseprice="50" >
+            <Price storeidentifier="merchantoutpost" minavailable="72"/>
+            <Price storeidentifier="merchantcity" minavailable="144" />
+            <Price storeidentifier="merchantresearch" minavailable="96" />
+            <Price storeidentifier="merchantmilitary" minavailable="72" />
+            <Price storeidentifier="merchantmine" minavailable="72"/>
+        </Price>
+        <Deconstruct time="1">
+            <Item identifier="carbon" />
+            <Item identifier="iron" />
+            <Item identifier="Reiki_Dust" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="0.5" amount="2">
+            <RequiredSkill identifier="medical" level="60" />
+            <RequiredItem identifier="Reiki_Dust" amount="2"/>
+            <RequiredItem identifier="Plant_Essential_Oil" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Materials/Magics.png" depth="0.4" sourcerect="320,0,250,302" />
+        <Body width="32" height="32" density="14" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,-55" handle2="0,-55" />
+    </Item>
+
+    <!--《东方求闻口授》（木卫二专供版）-->
+    <Item name="" identifier="Symposium_Of_Post_Mysticism" tags="smallitem" subcategory="Touhou" category="Misc" cargocontaineridentifier="metalcrate" maxstacksize="32" scale="0.5" >
+        <Price baseprice="600" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="8"/>
+            <Price storeidentifier="merchantcity" minavailable="8" />
+            <Price storeidentifier="merchantresearch" minavailable="8" />
+            <Price storeidentifier="merchantmilitary" minavailable="8" />
+            <Price storeidentifier="merchantmine" minavailable="8"/>
+        </Price>
+        <Deconstruct time="1" >
+            <Item identifier="organicfiber" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Materials/Symposium_Of_Post_Mysticism.png" depth="0.4" sourcerect="0,0,36,52" />
+        <Body width="96" height="96" density="14" />
+        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="-20" handangle="300" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnSecondaryUse" target="This,Character" Condition="-32.0" >
+                <Conditional Memory_Of_Gensokyo="eq 0"/>
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And">
+                <Conditional Condition="lte 0" />
+                <Conditional Memory_Of_Gensokyo="eq 0"/>
+                <GiveSkill skillidentifier="electrical" amount="2" triggertalents="false" />
+                <GiveSkill skillidentifier="helm" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="mechanical" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="medical" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="weapons" amount="2" triggertalents="false"/>
+                <GiveExperience amount="200" />
+                <RemoveItem />
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" condition="2.0" >
+                <Conditional condition="gt 10"/>
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--《东方求闻史纪》（木卫二专供版）-->
+    <Item name="" identifier="Perfect_Memento_In_Strict_Sense" tags="smallitem" subcategory="Touhou" category="Misc" cargocontaineridentifier="metalcrate" maxstacksize="32" scale="0.5" >
+        <Price baseprice="600" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="8"/>
+            <Price storeidentifier="merchantcity" minavailable="8" />
+            <Price storeidentifier="merchantresearch" minavailable="8" />
+            <Price storeidentifier="merchantmilitary" minavailable="8" />
+            <Price storeidentifier="merchantmine" minavailable="8"/>
+        </Price>
+        <Deconstruct time="1" >
+            <Item identifier="organicfiber" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Materials/Perfect_Memento_In_Strict_Sense.png" depth="0.4" sourcerect="0,0,36,52" />
+        <Body width="96" height="96" density="14" />
+        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="-20" handangle="300" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnSecondaryUse" target="This,Character" Condition="-22.0" >
+                <Conditional Memory_Of_Gensokyo="eq 0"/>
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And" >
+                <Conditional Condition="lte 0" />
+                <Conditional Memory_Of_Gensokyo="eq 0"/>
+                <GiveSkill skillidentifier="Touhou_Magic" amount="5" triggertalents="false"/>
+                <GiveExperience amount="250" />
+                <RemoveItem />
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" condition="2.0" >
+                <Conditional condition="gt 10"/>
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--《东方求闻渊识》-->
+    <Item name="" identifier="Touhou_Europa_Customs" tags="smallitem" subcategory="Touhou" category="Misc" cargocontaineridentifier="metalcrate" maxstacksize="32" scale="0.75" >
+        <Price baseprice="4000" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="8"/>
+            <Price storeidentifier="merchantcity" minavailable="8" />
+            <Price storeidentifier="merchantresearch" minavailable="8" />
+            <Price storeidentifier="merchantmilitary" minavailable="8" />
+            <Price storeidentifier="merchantmine" minavailable="8"/>
+        </Price>
+        <Deconstruct time="1" >
+            <Item identifier="organicfiber" amount="4" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="2" >
+            <RequiredSkill identifier="mechanical" level="50" />
+            <RequiredItem identifier="Aya_News" />
+            <RequiredItem identifier="Symposium_Of_Post_Mysticism" />
+            <RequiredItem identifier="Perfect_Memento_In_Strict_Sense" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Europa_Customs.png" sourcerect="0,0,56,36" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Europa_Customs.png" depth="0.4" sourcerect="70,0,38,36" />
+        <Body width="28" height="36" density="10" />
+        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="-20" handangle="0" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnSecondaryUse" target="This" Condition="-7" />
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And" >
+                <Conditional Condition="lte 0" />
+                <GiveSkill skillidentifier="electrical" amount="4" triggertalents="false" />
+                <GiveSkill skillidentifier="helm" amount="4" triggertalents="false"/>
+                <GiveSkill skillidentifier="mechanical" amount="4" triggertalents="false"/>
+                <GiveSkill skillidentifier="medical" amount="4" triggertalents="false"/>
+                <GiveSkill skillidentifier="weapons" amount="4" triggertalents="false"/>
+                <GiveSkill skillidentifier="Touhou_Magic" amount="4" triggertalents="false"/>
+                <GiveExperience amount="800" />
+                <RemoveItem />
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" condition="2.0" >
+                <Conditional condition="gt 10"/>
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--《魔法书》-->
+    <Item name="" identifier="Touhou_Spell_Book" tags="smallitem" subcategory="Touhou" category="Alien,Misc" cargocontaineridentifier="metalcrate" maxstacksize="32" scale="0.8" >
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab" amount="1" spawnprobability="0.08" />
+        <Price baseprice="1000" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="8"/>
+            <Price storeidentifier="merchantcity" minavailable="8" />
+            <Price storeidentifier="merchantresearch" minavailable="8" />
+            <Price storeidentifier="merchantmilitary" minavailable="8" />
+            <Price storeidentifier="merchantmine" minavailable="8"/>
+        </Price>
+        <Deconstruct time="4" chooserandom="true" amount="2">
+            <Item identifier="Mu_Alchemical" commonness="0.2" />
+            <Item identifier="Huo_Alchemical" commonness="0.2" />
+            <Item identifier="Tu_Alchemical" commonness="0.2" />
+            <Item identifier="Jin_Alchemical" commonness="0.2" />
+            <Item identifier="Shui_Alchemical" commonness="0.2" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Spell_Book.png" depth="0.4" sourcerect="0,0,36,52" />
+        <Body width="28" height="36" density="14" />
+        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="340" handangle="300" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnSecondaryUse" target="This" Condition="-10" />
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true">
+                <Conditional Condition="lte 0" />
+                <GiveSkill skillidentifier="weapons" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="Touhou_Magic" amount="4" triggertalents="false"/>
+                <GiveExperience amount="350" />
+                <RemoveItem />
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" condition="2.0" >
+                <Conditional condition="gt 10"/>
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--《魔法教学》-->
+    <Item name="" identifier="Touhou_Spell_Tutorial" tags="smallitem" subcategory="Touhou" category="Alien,Misc" cargocontaineridentifier="metalcrate" maxstacksize="32" scale="0.8" spritecolor="110,20,170,200" >
+        <Price baseprice="1000" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="8"/>
+            <Price storeidentifier="merchantcity" minavailable="8" />
+            <Price storeidentifier="merchantresearch" minavailable="8" />
+            <Price storeidentifier="merchantmilitary" minavailable="8" />
+            <Price storeidentifier="merchantmine" minavailable="8"/>
+        </Price>
+        <Deconstruct time="4" chooserandom="true" >
+            <Item identifier="Mu_Alchemical" commonness="0.2" />
+            <Item identifier="Huo_Alchemical" commonness="0.2" />
+            <Item identifier="Tu_Alchemical" commonness="0.2" />
+            <Item identifier="Jin_Alchemical" commonness="0.2" />
+            <Item identifier="Shui_Alchemical" commonness="0.2" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Spell_Tutorial.png" depth="0.4" sourcerect="0,0,36,52" />
+        <Body width="28" height="36" density="14" />
+        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="340" handangle="300" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnSecondaryUse" target="This" Condition="-22" />
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true">
+                <Conditional Condition="lte 0" />
+                <GiveSkill skillidentifier="Touhou_Magic" amount="3" triggertalents="false"/>
+                <GiveExperience amount="150" />
+                <RemoveItem />
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" condition="2.0" >
+                <Conditional condition="gt 10"/>
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--《文文。新闻》-->
+    <Item identifier="Aya_News" tags="smallitem" subcategory="Touhou" category="Misc" cargocontaineridentifier="metalcrate" maxstacksize="32" scale="0.1" >
+        <Price baseprice="3200" >
+            <Price storeidentifier="merchantoutpost" minavailable="8"/>
+            <Price storeidentifier="merchantcity" minavailable="8" />
+            <Price storeidentifier="merchantresearch" minavailable="8" />
+            <Price storeidentifier="merchantmilitary" minavailable="8" />
+            <Price storeidentifier="merchantmine" minavailable="8"/>
+        </Price>
+        <Deconstruct time="1"/>
+        <Sprite texture="%ModDir%/Images/Materials/Aya_News.png" sourcerect="0,0,535,512" depth="0.6" origin="0.5,0.5" />
+        <Body width="48" height="36" density="14" />
+        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="340" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect"/>
+    </Item>
+
+    <!--帕秋莉手册-木元素-->
+    <Item name="帕秋莉手册-护符篇" identifier="Patchouli_Book_Charm_01" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <Price baseprice="20" canbespecial="false" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchanthusk" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="huskcult" min="0"/>
+            </Price>
+            <Price storeidentifier="merchantclown" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="clowns" min="0"/>
+            </Price>
+        </Price>
+        <Deconstruct time="1"/>
+        <PreferredContainer primary="crewcab" secondary="locker"/>
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" AutoHideScrollbar="true" readonly="true" autoscrolltobottom="false" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.5,0.75" anchor="Center" style="Patchouli_Book_Charm_01" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+    <!--帕秋莉手册-五行元素转换-->
+    <Item name="帕秋莉手册-元素转换篇" identifier="Patchouli_Book_01" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <Price baseprice="20" canbespecial="false" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchanthusk" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="huskcult" min="0"/>
+            </Price>
+            <Price storeidentifier="merchantclown" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="clowns" min="0"/>
+            </Price>
+        </Price>
+        <Deconstruct time="1"/>
+        <PreferredContainer primary="crewcab" secondary="locker"/>
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" AutoHideScrollbar="true" readonly="true" autoscrolltobottom="false" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.5,0.75" anchor="Center" style="Patchouli_Book_01" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+    <!--帕秋莉手册-以太层金属篇-->
+    <Item name="帕秋莉手册-以太层金属篇" identifier="Patchouli_Book_02" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <Price baseprice="20" canbespecial="false" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchanthusk" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="huskcult" min="0"/>
+            </Price>
+            <Price storeidentifier="merchantclown" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="clowns" min="0"/>
+            </Price>
+        </Price>
+        <Deconstruct time="1"/>
+        <PreferredContainer primary="crewcab" secondary="locker"/>
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" AutoHideScrollbar="true" readonly="true" autoscrolltobottom="false" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.5,0.75" anchor="Center" style="Patchouli_Book_02" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+    <!--帕秋莉手册-副产物篇-->
+    <Item name="帕秋莉手册-副产物篇" identifier="Patchouli_Book_03" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <Price baseprice="20" canbespecial="false" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchanthusk" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="huskcult" min="0"/>
+            </Price>
+            <Price storeidentifier="merchantclown" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="clowns" min="0"/>
+            </Price>
+        </Price>
+        <Deconstruct time="1"/>
+        <PreferredContainer primary="crewcab" secondary="locker"/>
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" AutoHideScrollbar="true" readonly="true" autoscrolltobottom="false" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.5,0.75" anchor="Center" style="Patchouli_Book_03" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+    <!--帕秋莉手册-贤者之石篇-->
+    <Item name="帕秋莉手册-贤者之石篇" identifier="Patchouli_Book_04" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <Price baseprice="20" canbespecial="false" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchanthusk" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="huskcult" min="0"/>
+            </Price>
+            <Price storeidentifier="merchantclown" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="clowns" min="0"/>
+            </Price>
+        </Price>
+        <Deconstruct time="1"/>
+        <PreferredContainer primary="crewcab" secondary="locker"/>
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" AutoHideScrollbar="true" readonly="true" autoscrolltobottom="false" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.5,0.75" anchor="Center" style="Patchouli_Book_04" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+    <!--帕秋莉手册-伊奘诺物质篇-->
+    <Item name="帕秋莉手册-伊奘诺物质篇" identifier="Patchouli_Book_05" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <Price baseprice="20" canbespecial="false" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchanthusk" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="huskcult" min="0"/>
+            </Price>
+            <Price storeidentifier="merchantclown" minavailable="1" maxavailable="2" sold="true">
+                <Reputation faction="clowns" min="0"/>
+            </Price>
+        </Price>
+        <Deconstruct time="1"/>
+        <PreferredContainer primary="crewcab" secondary="locker"/>
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" AutoHideScrollbar="true" readonly="true" autoscrolltobottom="false" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.5,0.75" anchor="Center" style="Patchouli_Book_05" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+    <!--baka喇叭-->
+    <Item name="" identifier="Baka_Horn" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" cargocontaineridentifier="metalcrate" description="BAKA!">
+        <PreferredContainer primary="crewcab" spawnprobability="0.05" notcampaign="true"/>
+        <PreferredContainer secondary="wreckcrewcab,abandonedcrewcab" spawnprobability="0.05"/>
+        <Price baseprice="5" canbespecial="false">
+            <Price storeidentifier="merchantoutpost" minavailable="1"/>
+            <Price storeidentifier="merchantcity" minavailable="1"/>
+            <Price storeidentifier="merchantresearch" sold="false" />
+            <Price storeidentifier="merchantmilitary" sold="false" />
+            <Price storeidentifier="merchantmine" sold="false" />
+            <Price storeidentifier="merchantclown" minavailable="3" maxavailable="5">
+                <Reputation faction="clowns" min="30"/>
+            </Price>
+        </Price>
+        <Deconstruct time="1"/>
+        <Fabricate suitablefabricators="vendingmachine" requiredtime="1" requiredmoney="99" fabricationlimitmin="1" fabricationlimitmax="3" />
+        <Sprite texture="%ModDir%/Images/Materials/Baka_Horn.png" sourcerect="0,0,52,20" depth="0.55" />
+        <Body width="50" height="20" density="20" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="100,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" />
+        <RangedWeapon reload="2">
+            <Sound file="%ModDir%/Sounds/Afflictions/Baka!.ogg" type="OnUse" range="800" />
+        </RangedWeapon>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--肋骨-->
+    <Item name="肋骨" identifier="Touhou_Rib" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.4" cargocontaineridentifier="metalcrate" description="">
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Rib.png" sourcerect="0,0,64,100" depth="0.55" />
+        <Body width="50" height="20" density="20" />
+        <Deconstruct time="1"/>
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="100,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" />
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--面粉-->
+    <Item name="" identifier="Touhou_Flour" category="Misc" subcategory="Touhou" maxstacksize="8" tags="smallitem" scale="0.5" cargocontaineridentifier="metalcrate" description="">
+        <PreferredContainer primary="crewcab" />
+        <Price baseprice="300" >
+            <Price storeidentifier="merchantoutpost" minavailable="2"/>
+            <Price storeidentifier="merchantcity" minavailable="4"/>
+            <Price storeidentifier="merchantresearch" minavailable="3" />
+            <Price storeidentifier="merchantmilitary" sold="false" />
+            <Price storeidentifier="merchantmine" sold="false" />
+        </Price>
+        <Deconstruct time="1"/>
+        <Fabricate suitablefabricators="vendingmachine" requiredtime="1" requiredmoney="300" fabricationlimitmin="1" fabricationlimitmax="3" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Flour.png" sourcerect="0,0,110,110" depth="0.55" />
+        <Body width="50" height="50" density="20" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="100,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" />
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--事件触发用ID卡-补给站事件01-->
+    <Item name="事件触发用ID卡-补给站事件01" identifier="Trigger_Touhou_Supply_Station01" category="Misc" subcategory="Touhou" maxstacksize="8" tags="smallitem" scale="0.5" cargocontaineridentifier="metalcrate" description="">
+        <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="192,64,64,64" origin="0.5,0.5" />
+        <Sprite texture="Content/Items/idcard.png" depth="0.5" sourcerect="0,0,16,16" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="100,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="Always" target="NearbyCharacters,This" Interval="5" range="2000">
+                <Conditional speciesname="human"/>
+                <TriggerEvent identifier="Touhou_Supply_Station01" />
+                <TriggerEvent identifier="Touhou_Supply_Station01_Data_Clear" />
+                <RemoveItem />
+            </StatusEffect>
+        </Holdable>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--文文的礼物清单-->
+    <Item name="文文的礼物清单" identifier="Touhou_Aya_Gift_List" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Aya_Gift_List.png" depth="0.5" sourcerect="0,0,68,48" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+    </Item>
+
+    <!--阿求的任务日志-绿UFO-->
+    <Item name="阿求的任务日志-绿UFO" identifier="Touhou_Missions_Collection_Green_UFO" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Missions_Collection.png" depth="0.5" sourcerect="0,0,108,108" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+        <Deconstruct time="1"/>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.2,0.15" anchor="TopCenter" style="ItemUI" />
+            <Button text="真相不明-忠义绿色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Green_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="幽灵线">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Ghost_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="泥牛入海">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Erode_Crawler_Mission" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
+
+    <!--阿求的任务日志-红UFO-->
+    <Item name="阿求的任务日志-红UFO" identifier="Touhou_Missions_Collection_Red_UFO" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Missions_Collection.png" depth="0.5" sourcerect="0,0,108,108" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+        <Deconstruct time="1"/>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.2,0.2" anchor="TopCenter" style="ItemUI" />
+            <Button text="真相不明-愤怒红色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Red_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="长眠不醒的噩梦">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Photosphere_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声隐隐">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Erode_Mudraptor_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声阵阵">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Deterioration_Tigerthresher_Mission" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
+
+    <!--阿求的任务日志-蓝UFO-->
+    <Item name="阿求的任务日志-蓝UFO" identifier="Touhou_Missions_Collection_Blue_UFO" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Missions_Collection.png" depth="0.5" sourcerect="0,0,108,108" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+        <Deconstruct time="1"/>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.2,0.25" anchor="TopCenter" style="ItemUI" />
+            <Button text="真相不明-哀愁蓝色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Blue_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="魔法物质运输">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_MagicItems_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="清理毛玉">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Maoyu_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声滚滚">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Deterioration_Hammerhead_Mission" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
+
+    <!--阿求的任务日志-黑暗-->
+    <Item name="阿求的任务日志-黑暗" identifier="Touhou_Missions_Collection_Nue" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Missions_Collection.png" depth="0.5" sourcerect="0,0,108,108" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+        <Deconstruct time="1"/>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.3,0.4" anchor="TopCenter" style="ItemUI" />
+            <Button text="真相不明的黑暗-Easy">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Easy" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Normal">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Normal" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Hard">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Hard" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Lunatic">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Lunatic" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
+
+    <!--阿求的任务日志-灵异的波纹与漫漫长夜-->
+    <Item name="阿求的任务日志-灵异的波纹与漫漫长鵺" identifier="Touhou_Missions_Collection_Nue_List" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Missions_Collection.png" depth="0.5" sourcerect="0,0,108,108" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+        <Deconstruct time="1"/>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="0.5" >
+            <RequiredItem identifier="Touhou_Missions_Collection_Green_UFO" />
+            <RequiredItem identifier="Touhou_Missions_Collection_Red_UFO" />
+            <RequiredItem identifier="Touhou_Missions_Collection_Blue_UFO" />
+            <RequiredItem identifier="Touhou_Missions_Collection_Nue" />
+        </Fabricate>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.3,0.6" anchor="TopCenter" style="ItemUI" relativeoffset="-0.2,0" />
+            <Button text="魔法物质运输">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_MagicItems_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="清理毛玉">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Maoyu_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="幽灵线">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Ghost_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="泥牛入海">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Erode_Crawler_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声隐隐">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Erode_Mudraptor_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声阵阵">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Deterioration_Tigerthresher_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声滚滚">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Deterioration_Hammerhead_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="地狱月食">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindClownpiece_Mission" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.3,0.6" anchor="TopCenter" style="ItemUI" relativeoffset="0.2,0" />
+            <Button text="长眠不醒的噩梦">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Photosphere_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明-忠义绿色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Green_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明-愤怒红色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Red_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明-哀愁蓝色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Blue_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Easy">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Mission_Easy" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Normal">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Mission_Normal" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Hard">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Mission_Hard" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Lunatic">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Mission_Lunatic" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
+
+    <!--灵异珠-波纹-任务物品-->
+    <Item name="灵异珠-波纹-任务物品" identifier="Touhou_Mysterious_Pearl_Rippling_Mission" tags="smallitem,Touhou_Mysterious_Pearl_Rippling_Mission,alienartifact" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" scale="0.2">
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Mysterious_Pearl_Rippling.png" depth="0.4" sourcerect="0,0,256,256" />
+        <Body width="256" height="256" density="10" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
+            <StatusEffect type="OnActive" target="Character" interval="5" oneshot="true">
+                <SpawnItem identifier="Salvage_Mysterious_Pearl_Mission_Completed" spawnposition="SameInventory" />
+                <TriggerEvent identifier="Salvage_Mysterious_Pearl_Completed" />
+            </StatusEffect>
+            <StatusEffect type="Always" Interval="180.0" disabledeltatime="true" target="This" >
+                <Conditional hastag="neq artifactcontainer" targetcontainer="true" />
+                <Conditional voltage="lte 0" targetcontainer="true" />
+                <SpawnCharacter speciesname="Touhou_reiki_erode_crawler" count="1" spread="100" />
+            </StatusEffect>
+        </Holdable>
+        <AiTarget soundrange="350000" sonarlabel="???" sight="500" staticsight="true"/>
+        <LightComponent LightColor="0.0,1.0,0.0,1.0" range="50" powerconsumption="0" blinkfrequency="2" IsOn="true" canbeselected="false">
+            <StatusEffect type="Always" targettype="This" SoundRange="350000" setvalue="true"/>
+        </LightComponent>
+    </Item>
+
+    <!--未确认未知遗迹-任务完成凭证-->
+    <Item name="未确认未知遗迹-任务完成凭证" identifier="Salvage_Mysterious_Pearl_Mission_Completed" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" cargocontaineridentifier="metalcrate" description="" spritecolor="200,36,0,255">
+        <Sprite texture="Content/Items/idcard.png" depth="0.5" sourcerect="0,0,16,16" />
+        <Body width="16" height="12" density="10.05" />
+        <Deconstruct time="1"/>
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="50,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" />
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--灵异珠-波纹-->
+    <Item name="灵异珠-波纹" identifier="Touhou_Mysterious_Pearl_Rippling" tags="smallitem,loadable,battery,Touhou_Mysterious_Pearl_Rippling,alienartifact" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" scale="0.2">
+        <PreferredContainer primary="ruintreasure" amount="1" spawnprobability="0.02" />
+        <PreferredContainer secondary="ruinstoragelarge" amount="1" spawnprobability="0.01" />
+        <PreferredContainer primary="Touhou_Rippling" amount="1" spawnprobability="1" />
+        <Price baseprice="10000" sold="false">
+            <Price locationtype="outpost" multiplier="1.1" minavailable="6" />
+            <Price locationtype="city" multiplier="0.9" minavailable="14" />
+            <Price locationtype="research" multiplier="0.85" maxavailable="16" />
+            <Price locationtype="military" multiplier="1.2" minavailable="10" />
+            <Price locationtype="mine" multiplier="1.2" maxavailable="12"/>
+        </Price>
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Mysterious_Pearl_Rippling.png" depth="0.4" sourcerect="0,0,256,256" />
+        <Body width="256" height="256" density="10" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
+            <StatusEffect type="OnActive" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Mysterious_Pearl_Rippling_Talent" />
+            </StatusEffect>
+        </Holdable>
+        <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Touhou_Rippling_Bolt" removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="Touhou_Rippling_Bolt" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <StatusEffect type="OnUse" target="This" condition="-0.5" disabledeltatime="true" >
+                <SpawnItem identifiers="Touhou_Rippling_Bolt" spawnposition="ThisInventory" />
+            </StatusEffect>
+        </ItemContainer>
+    </Item>
+
+    <!--简单零件-->
+    <Item name="简单零件" identifier="Touhou_Simple_Parts" tags="smallitem" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="48" scale="0.15" HideConditionBar="true">
+        <PreferredContainer primary="engcab" />
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab" minamount="1" maxamount="2" spawnprobability="0.1" />
+        <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab" amount="1" spawnprobability="0.15"/>
+        <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.15" />
+        <Deconstruct time="10" chooserandom="true" amount="4">
+            <Item identifier="iron" commonness="0.8" />
+            <Item identifier="steel" commonness="0.6" />
+            <Item identifier="aluminium" commonness="0.6" />
+            <Item identifier="titaniumaluminiumalloy" commonness="0.3" />
+            <Item identifier="copper" commonness="0.8" />
+            <Item identifier="rubber" commonness="0.5" />
+            <Item identifier="carbon" commonness="0.6" />
+            <Item identifier="lead" commonness="0.7" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Simple_Parts.png" depth="0.4" sourcerect="0,0,100,100" />
+        <Body width="96" height="96" density="10.1" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,-55" handle2="0,-55" />
+    </Item>
+
+    <!--精密零件-->
+    <Item name="精密零件" identifier="Touhou_Precision_Parts" tags="smallitem" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="48" scale="0.15" HideConditionBar="true">
+        <PreferredContainer primary="engcab" />
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab,piratestoragecab" amount="1" spawnprobability="0.05"/>
+        <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab" amount="1" spawnprobability="0.05"/>
+        <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.1" />
+        <Deconstruct time="10" chooserandom="true" amount="8">
+            <Item identifier="iron" commonness="0.4" />
+            <Item identifier="steel" commonness="0.4" />
+            <Item identifier="aluminium" commonness="0.4" />
+            <Item identifier="titaniumaluminiumalloy" commonness="0.5" />
+            <Item identifier="copper" commonness="0.4" />
+            <Item identifier="rubber" commonness="0.5" />
+            <Item identifier="carbon" commonness="0.6" />
+            <Item identifier="lead" commonness="0.6" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Precision_Parts.png" depth="0.4" sourcerect="0,0,100,100" />
+        <Body width="96" height="96" density="10.1" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,-55" handle2="0,-55" />
+    </Item>
+
+</Items>

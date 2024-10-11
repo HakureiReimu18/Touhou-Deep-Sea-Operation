@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Items>
+    <Item name="" identifier="Power_Point" tags="smallitem,Touhou_Power_Point" subcategory="Touhou" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.01" />
+        <PreferredContainer primary="ruinstoragelarge" amount="1" spawnprobability="0.02" />
+        <PreferredContainer primary="ruintreasure" amount="1" spawnprobability="0.04" />
+        <Price baseprice="8000" minleveldifficulty="40">
+            <Price locationtype="outpost" multiplier="0.5" sold="false" />
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <Deconstruct time="6">
+            <Item identifier="Score_Point" amount="4"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="30">
+            <RequiredSkill identifier="Touhou_Magic" level="80" />
+            <RequiredItem identifier="Reiki_Dust" amount="8"/>
+            <RequiredItem identifier="Spiritual_Water" mincondition="0.4999" usecondition="true"/>
+            <RequiredItem identifier="Score_Point" amount="8"/>
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" displayname="Touhou_Efficient_Synthesis" requiresrecipe="true" requiredtime="15">
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredItem identifier="Spiritual_Water" mincondition="0.4999" usecondition="true"/>
+            <RequiredItem identifier="Score_Point" amount="4"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Maoyu/Point.png" sourcerect="0,0,32,32" />
+        <Sprite texture="%ModDir%/Images/Maoyu/Point.png" depth="0.4" sourcerect="0,0,32,32" />
+        <Body width="32" height="32" density="10" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
+    </Item>
+
+    <Item name="" identifier="Score_Point" tags="smallitem" subcategory="Touhou" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="2" spawnprobability="0.06" />
+        <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="3" spawnprobability="0.12" />
+        <PreferredContainer primary="ruintreasure" minamount="1" maxamount="3" spawnprobability="0.15" />
+        <Price baseprice="4500" minleveldifficulty="6">
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="4" />
+            <Price locationtype="city" multiplier="0.9" minavailable="10" />
+            <Price locationtype="research" multiplier="0.85" minavailable="8" />
+            <Price locationtype="military" multiplier="1.1" minavailable="6" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="6" />
+        </Price>
+        <Deconstruct time="6">
+            <Item identifier="Magic_Material" amount="3"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
+            <RequiredSkill identifier="Touhou_Magic" level="60" />
+            <RequiredItem identifier="Magic_Material" amount="4"/>
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" amount="6">
+            <RequiredSkill identifier="medical" level="80" />
+            <RequiredItem identifier="alientrinket1" />
+            <RequiredItem identifier="alientrinket2" />
+            <RequiredItem identifier="alientrinket3" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Maoyu/Point.png" sourcerect="33,0,32,32" />
+        <Sprite texture="%ModDir%/Images/Maoyu/Point.png" depth="0.4" sourcerect="33,0,32,32" />
+        <Body width="32" height="32" density="10" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
+    </Item>
+
+    <!--毛玉的外壳-->
+    <Item identifier="Maoyu_Duffel_Bag" subcategory="Touhou" category="Equipment" tags="mobilecontainer" showcontentsintooltip="true" fireproof="true" waterproof="true" impactsoundtag="impact_soft" scale="1.8">
+        <Deconstruct time="8" chooserandom="true" amount="2">
+            <Item identifier="Score_Point" commonness="0.1" />
+            <Item identifier="Magic_Material" commonness="0.3" />
+            <Item identifier="organicfiber" commonness="0.8" />
+            <Item identifier="ethanol" commonness="0.5" />
+            <Item identifier="carbon" commonness="0.6" />
+            <Item identifier="Reiki_Stone" commonness="0.6" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Maoyu/Maoyu.png" sourcerect="0,3,44,32" origin="0.5,0.5" depth="0.56" />
+        <Body width="50" radius="13" density="10" friction="1.0" />
+        <Holdable slots="RightHand+LeftHand" holdpos="0,0" handle1="0,0" handle2="0,0" aimable="true" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnBroken" target="This">
+                <DropContainedItems />
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+        <ItemContainer capacity="36" maxstacksize="63" slotsperrow="6" keepopenwhenequipped="true" canbeselected="false" movableframe="true">
+            <Containable items="smallitem,mediumitem,ammobox,railgunammo,tsm_weaponbox,deepdiving,diving,bigitem,mountableweapon,tsm_gun,depthchargeammo" excludeditems="largemobilecontainer,Maoyu_Duffel_Bag,backpack" />
+        </ItemContainer>
+    </Item>
+
+</Items>

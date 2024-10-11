@@ -1,0 +1,1400 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Randomevents>
+    <EventSprites>
+        <Sprite identifier="Touhou_Supply_Station01" texture="%ModDir%/Images/Missions/Touhou_Akyuu_Mission.png" sourcerect="0,0,504,712" origin="0.5,0.5" />
+        <Sprite identifier="Touhou_Supply_Station02" texture="%ModDir%/Images/Missions/Touhou_Aunn_Mission.png" sourcerect="0,0,504,712" origin="0.5,0.5" />
+    </EventSprites>
+    <EventPrefabs>
+        <!--清除阿求的设定值，用于下一次触发-->
+        <ScriptedEvent identifier="Touhou_Supply_Station01_Data_Clear" commonness="0">
+            <SetDataAction value="false" identifier="Player_Bought01" />
+            <SetDataAction value="false" identifier="Player_Bought02" />
+            <SetDataAction value="false" identifier="Akyuu_bought01" />
+            <SetDataAction value="false" identifier="talked" />
+            <SetDataAction value="false" identifier="gift" />
+            <SetDataAction value="false" identifier="Player_Donated" />
+        </ScriptedEvent>
+
+        <!--站点无敌-->
+        <ScriptedEvent identifier="Touhou_Indestructible_Wall">
+            <!-- StructurePrefabs.xml -->
+            <TagAction criteria="structureidentifier:ff_x_wall" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:ff_y_wall" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshella25" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshella26" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshellaglassd" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshellaglasse" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshellaglassf" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:topwindow" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:verticalwindow" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <!-- OutpostStructurePrefabs.xml -->
+            <TagAction criteria="structureidentifier:icewall" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:icewall90" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <!-- StructurePrefabsWrecked.xml -->
+            <TagAction criteria="structureidentifier:ff_x_wall_wrecked" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshella07wrecked" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshella21wrecked" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshella23wrecked" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:shella26degwrecked" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshellaglassdwrecked" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshellaglassewrecked" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <TagAction criteria="structureidentifier:sshellaglassfwrecked" tag="targetwall" submarinetype="outpost" continueifnotargetsfound="true" />
+            <StatusEffectAction targettag="targetwall">
+                <StatusEffect target="This" indestructible="true" />
+            </StatusEffectAction>
+        </ScriptedEvent>
+
+        <!--魔法物质运输任务-->
+        <ScriptedEvent identifier="Touhou_MagicItems_Mission" commonness="0">
+            <MissionAction missiontag="cargoMagicItems" />
+        </ScriptedEvent>
+        <!--清理毛玉任务-->
+        <ScriptedEvent identifier="Touhou_Maoyu_Mission" commonness="0">
+            <MissionAction missiontag="killMaoyu" />
+        </ScriptedEvent>
+        <!--幽灵线任务-->
+        <ScriptedEvent identifier="Touhou_Ghost_Mission" commonness="0">
+            <MissionAction missiontag="killghost" />
+        </ScriptedEvent>
+        <!--魔咒爬行者任务-->
+        <ScriptedEvent identifier="Touhou_Reiki_Erode_Crawler_Mission" commonness="0">
+            <MissionAction missiontag="Clear_Reiki_Erode_Crawler_Nest" />
+        </ScriptedEvent>
+        <!--魔咒迅猛龙任务-->
+        <ScriptedEvent identifier="Touhou_Reiki_Erode_Mudraptor_Mission" commonness="0">
+            <MissionAction missiontag="Clear_Reiki_Erode_Mudraptor_Nest" />
+        </ScriptedEvent>
+        <!--劣化虎尾鲨任务-->
+        <ScriptedEvent identifier="Touhou_Reiki_Deterioration_Tigerthresher_Mission" commonness="0">
+            <MissionAction missiontag="Clear_Reiki_Deterioration_Tigerthresher_Nest" />
+        </ScriptedEvent>
+        <!--劣化锤头鲨任务-->
+        <ScriptedEvent identifier="Touhou_Reiki_Deterioration_Hammerhead_Mission" commonness="0">
+            <MissionAction missiontag="Kill_Reiki_Deterioration_Hammerhead" />
+        </ScriptedEvent>
+        <!--长眠不醒的噩梦任务-->
+        <ScriptedEvent identifier="Touhou_Photosphere_Mission" commonness="0">
+            <MissionAction missiontag="killphotosphere" />
+        </ScriptedEvent>
+        <!--绿UFO任务-->
+        <ScriptedEvent identifier="Touhou_Green_UFO_Mission" commonness="0">
+            <MissionAction missiontag="killgreenufo_Hard" />
+        </ScriptedEvent>
+        <!--红UFO任务-->
+        <ScriptedEvent identifier="Touhou_Red_UFO_Mission" commonness="0">
+            <MissionAction missiontag="killRedufo_Hard" />
+        </ScriptedEvent>
+        <!--蓝UFO任务-->
+        <ScriptedEvent identifier="Touhou_Blue_UFO_Mission" commonness="0">
+            <MissionAction missiontag="killBlueufo_Hard" />
+        </ScriptedEvent>
+        <!--寻找灵异珠-获得凭证-->
+        <ScriptedEvent identifier="Salvage_Mysterious_Pearl_Completed" commonness="0">
+            <SetDataAction value="true" identifier="Salvage_Mysterious_Pearl_Completed" />
+            <SetDataAction value="true" identifier="Touhou_Find_Nue_Mission_End" />
+        </ScriptedEvent>
+        <!--击败绿UFO-->
+        <ScriptedEvent identifier="Touhou_Green_UFO_Mission_Completed" commonness="0">
+            <SetDataAction value="true" identifier="Touhou_Green_UFO_Mission" />
+            <SetDataAction value="false" identifier="Touhou_Akyuu_UFO_Mission01_Agree" />
+            <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
+                <Success>
+
+                </Success>
+                <Failure>
+                    <TriggerEventAction identifier="Touhou_Akyuu_UFO_Mission01" nextround="true" />
+                </Failure>
+            </CheckDataAction>
+        </ScriptedEvent>
+        <!--击败红UFO-->
+        <ScriptedEvent identifier="Touhou_Red_UFO_Mission_Completed" commonness="0">
+            <SetDataAction value="true" identifier="Touhou_Red_UFO_Mission" />
+            <SetDataAction value="false" identifier="Touhou_Akyuu_UFO_Mission02_Agree" />
+            <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
+                <Success>
+
+                </Success>
+                <Failure>
+                    <TriggerEventAction identifier="Touhou_Akyuu_UFO_Mission02" nextround="true" />
+                </Failure>
+            </CheckDataAction>
+        </ScriptedEvent>
+        <!--击败蓝UFO-->
+        <ScriptedEvent identifier="Touhou_Blue_UFO_Mission_Completed" commonness="0">
+            <SetDataAction value="true" identifier="Touhou_Blue_UFO_Mission" />
+            <SetDataAction value="false" identifier="Touhou_Akyuu_UFO_Mission03_Agree" />
+            <SetDataAction value="false" identifier="Touhou_Find_Nue_Mission_End" />
+            <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
+                <Success>
+
+                </Success>
+                <Failure>
+                    <TriggerEventAction identifier="Touhou_Akyuu_UFO_Mission03" nextround="true" />
+                </Failure>
+            </CheckDataAction>
+        </ScriptedEvent>
+        <!--击败封兽-->
+        <ScriptedEvent identifier="Touhou_Find_Nue_Mission_Completed" commonness="0">
+            <SetDataAction value="true" identifier="Touhou_Find_Nue_Mission" />
+            <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
+                <Success>
+
+                </Success>
+                <Failure>
+                    <TriggerEventAction identifier="Touhou_Akyuu_UFO_Mission04" nextround="true" />
+                </Failure>
+            </CheckDataAction>
+        </ScriptedEvent>
+        <!--封兽鵺Easy-->
+        <ScriptedEvent identifier="FindHoujuuNue_Mission_Easy" commonness="0">
+            <MissionAction missiontag="FindHoujuuNue_Easy" />
+        </ScriptedEvent>
+        <!--封兽鵺Normal-->
+        <ScriptedEvent identifier="FindHoujuuNue_Mission_Normal" commonness="0">
+            <MissionAction missiontag="FindHoujuuNue_Normal" />
+        </ScriptedEvent>
+        <!--封兽鵺Hard-->
+        <ScriptedEvent identifier="FindHoujuuNue_Mission_Hard" commonness="0">
+            <MissionAction missiontag="FindHoujuuNue_Hard" />
+        </ScriptedEvent>
+        <!--封兽鵺Lunatic-->
+        <ScriptedEvent identifier="FindHoujuuNue_Mission_Lunatic" commonness="0">
+            <MissionAction missiontag="FindHoujuuNue_Lunatic" />
+        </ScriptedEvent>
+        <!--皮丝任务-->
+        <ScriptedEvent identifier="FindClownpiece_Mission" commonness="0">
+            <MissionAction missiontag="FindClownpiece" />
+        </ScriptedEvent>
+        <!--文文的记者证选择事件-->
+        <ScriptedEvent identifier="Aya_Press_Card_Select_Event" commonness="0">
+            <CheckDataAction identifier="Touhou_Mysterious_Pearl_Rippling_Completed" condition="eq true">
+                <Success>
+                    <TriggerEventAction identifier="Akyuu_Join"/>
+                </Success>
+                <Failure>
+                    <TriggerEventAction identifier="Touhou_Akyuu_Mission"/>
+                </Failure>
+            </CheckDataAction>
+        </ScriptedEvent>
+
+        <!--恋恋的无意识概率事件-->
+        <ScriptedEvent identifier="KoishiTalent_Unconscious" commonness="0">
+            <CheckAfflictionAction identifier="Koishi_Unconscious_Flag" MinStrength="0.1" >
+                <Success>
+
+                </Success>
+                <Failure>
+                    <RNGAction chance="0.5">
+                        <!--长时间无意识-->
+                        <Success>
+                            <RNGAction chance="0.5">
+                                <!--最长时间无意识-->
+                                <Success>
+                                    <RNGAction chance="0.33">
+                                        <!--3级无意识-->
+                                        <Success>
+                                            <StatusEffectAction targettag="statuseffectuser">
+                                                <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                    <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                    <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                    <Affliction identifier="Koishi_Unconscious_Flag" strength="25"/>
+                                                    <Affliction identifier="Koishi_Unconscious03" strength="25"/>
+                                                </StatusEffect>
+                                            </StatusEffectAction>
+                                        </Success>
+                                        <!--低等级无意识-->
+                                        <Failure>
+                                            <RNGAction chance="0.5">
+                                                <!--2级无意识-->
+                                                <Success>
+                                                    <StatusEffectAction targettag="statuseffectuser">
+                                                        <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                            <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                            <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                            <Affliction identifier="Koishi_Unconscious_Flag" strength="25"/>
+                                                            <Affliction identifier="Koishi_Unconscious02" strength="25"/>
+                                                        </StatusEffect>
+                                                    </StatusEffectAction>
+                                                </Success>
+                                                <!--1级无意识-->
+                                                <Failure>
+                                                    <StatusEffectAction targettag="statuseffectuser">
+                                                        <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                            <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                            <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                            <Affliction identifier="Koishi_Unconscious_Flag" strength="25"/>
+                                                            <Affliction identifier="Koishi_Unconscious01" strength="25"/>
+                                                        </StatusEffect>
+                                                    </StatusEffectAction>
+                                                </Failure>
+                                            </RNGAction>
+                                        </Failure>
+                                    </RNGAction>
+                                </Success>
+                                <!--较长时间无意识-->
+                                <Failure>
+                                    <RNGAction chance="0.33">
+                                        <!--3级无意识-->
+                                        <Success>
+                                            <StatusEffectAction targettag="statuseffectuser">
+                                                <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                    <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                    <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                    <Affliction identifier="Koishi_Unconscious_Flag" strength="12"/>
+                                                    <Affliction identifier="Koishi_Unconscious03" strength="12"/>
+                                                </StatusEffect>
+                                            </StatusEffectAction>
+                                        </Success>
+                                        <!--低等级无意识-->
+                                        <Failure>
+                                            <RNGAction chance="0.5">
+                                                <!--2级无意识-->
+                                                <Success>
+                                                    <StatusEffectAction targettag="statuseffectuser">
+                                                        <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                            <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                            <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                            <Affliction identifier="Koishi_Unconscious_Flag" strength="12"/>
+                                                            <Affliction identifier="Koishi_Unconscious02" strength="12"/>
+                                                        </StatusEffect>
+                                                    </StatusEffectAction>
+                                                </Success>
+                                                <!--1级无意识-->
+                                                <Failure>
+                                                    <StatusEffectAction targettag="statuseffectuser">
+                                                        <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                            <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                            <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                            <Affliction identifier="Koishi_Unconscious_Flag" strength="12"/>
+                                                            <Affliction identifier="Koishi_Unconscious01" strength="12"/>
+                                                        </StatusEffect>
+                                                    </StatusEffectAction>
+                                                </Failure>
+                                            </RNGAction>
+                                        </Failure>
+                                    </RNGAction>
+                                </Failure>
+                            </RNGAction>
+                        </Success>
+                        <!--短时间无意识-->
+                        <Failure>
+                            <RNGAction chance="0.5">
+                                <!--较短时间无意识-->
+                                <Success>
+                                    <RNGAction chance="0.33">
+                                        <!--3级无意识-->
+                                        <Success>
+                                            <StatusEffectAction targettag="statuseffectuser">
+                                                <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                    <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                    <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                    <Affliction identifier="Koishi_Unconscious_Flag" strength="8"/>
+                                                    <Affliction identifier="Koishi_Unconscious03" strength="8"/>
+                                                </StatusEffect>
+                                            </StatusEffectAction>
+                                        </Success>
+                                        <!--低等级无意识-->
+                                        <Failure>
+                                            <RNGAction chance="0.5">
+                                                <!--2级无意识-->
+                                                <Success>
+                                                    <StatusEffectAction targettag="statuseffectuser">
+                                                        <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                            <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                            <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                            <Affliction identifier="Koishi_Unconscious_Flag" strength="8"/>
+                                                            <Affliction identifier="Koishi_Unconscious02" strength="8"/>
+                                                        </StatusEffect>
+                                                    </StatusEffectAction>
+                                                </Success>
+                                                <!--1级无意识-->
+                                                <Failure>
+                                                    <StatusEffectAction targettag="statuseffectuser">
+                                                        <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                            <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                            <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                            <Affliction identifier="Koishi_Unconscious_Flag" strength="8"/>
+                                                            <Affliction identifier="Koishi_Unconscious01" strength="8"/>
+                                                        </StatusEffect>
+                                                    </StatusEffectAction>
+                                                </Failure>
+                                            </RNGAction>
+                                        </Failure>
+                                    </RNGAction>
+                                </Success>
+                                <!--最短时间无意识-->
+                                <Failure>
+                                    <RNGAction chance="0.33">
+                                        <!--3级无意识-->
+                                        <Success>
+                                            <StatusEffectAction targettag="statuseffectuser">
+                                                <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                    <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                    <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                    <Affliction identifier="Koishi_Unconscious_Flag" strength="5"/>
+                                                    <Affliction identifier="Koishi_Unconscious03" strength="5"/>
+                                                </StatusEffect>
+                                            </StatusEffectAction>
+                                        </Success>
+                                        <!--低等级无意识-->
+                                        <Failure>
+                                            <RNGAction chance="0.5">
+                                                <!--2级无意识-->
+                                                <Success>
+                                                    <StatusEffectAction targettag="statuseffectuser">
+                                                        <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                            <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                            <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                            <Affliction identifier="Koishi_Unconscious_Flag" strength="5"/>
+                                                            <Affliction identifier="Koishi_Unconscious02" strength="5"/>
+                                                        </StatusEffect>
+                                                    </StatusEffectAction>
+                                                </Success>
+                                                <!--1级无意识-->
+                                                <Failure>
+                                                    <StatusEffectAction targettag="statuseffectuser">
+                                                        <StatusEffect target="Character" disabledeltatime="true" comparison="And" >
+                                                            <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                            <Conditional Koishi_Unconscious_Flag="lte 0"/>
+                                                            <Affliction identifier="Koishi_Unconscious_Flag" strength="5"/>
+                                                            <Affliction identifier="Koishi_Unconscious01" strength="5"/>
+                                                        </StatusEffect>
+                                                    </StatusEffectAction>
+                                                </Failure>
+                                            </RNGAction>
+                                        </Failure>
+                                    </RNGAction>
+                                </Failure>
+                            </RNGAction>
+                        </Failure>
+                    </RNGAction>
+                </Failure>
+            </CheckAfflictionAction>
+        </ScriptedEvent>
+
+        <!--补给站事件01-->
+        <ScriptedEvent identifier="Touhou_Supply_Station01" commonness="0">
+            <!--声望检测部分也许不应该放在spawnNPC前-->
+            <!--必须在所有选项下一个个判断声望？也许和判断的位置有关，先生成角色再判断，可以一试，但是角色入组不能这么做，否则入组事件会直接触发，等待更好的解决方案-->
+            <!--以后可以做一个事件用于判断声望，然后根据声望直接触发不同的事件，减少编写难度-->
+            <!--英文文本化问题-->
+            <CheckDataAction identifier="Akyuu_Join_complete" condition="eq true">
+                <Success>
+                    <TagAction criteria="player" tag="player" />
+                    <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Komano_Aunn_Store01" targettag="Komano_Aunn_Store01" spawnpointtag="saferoom" spawnlocation="beaconstation" requirespawnpointtag="true" teamid="FriendlyNPC" />
+                    <TriggerAction target1tag="Komano_Aunn_Store01" target2tag="player" applytotarget2="triggerer_player" radius="120" waitforinteraction="true" />
+                    <Label name="waitfortalk_Aunn" />
+                    <ConversationAction targettag="triggerer_player" speakertag="Komano_Aunn_Store01" text="”你好，有什么事吗“" eventsprite="Touhou_Supply_Station02">
+                        <Option text="购买">
+                            <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 20">
+                                <Success>
+                                    <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“你想要什么呢？”" >
+                                        <Option text="一些医疗补给，需要600马克">
+                                            <CheckDataAction identifier="Player_Bought01" condition="eq true" >
+                                                <Success>
+                                                    <ConversationAction text="阿吽看了看手里的报告单：“暂时没有更多了哦。”" targettag="triggerer_player"  />
+                                                    <GoTo name="waitfortalk_Aunn" />
+                                                </Success>
+                                                <Failure>
+                                                    <CheckMoneyAction amount="600">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“拿去用吧！”" />
+                                                            <MoneyAction amount="-600" />
+                                                            <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                                                            <SpawnAction itemidentifier="antidama1" targetinventory="triggerer_player" />
+                                                            <SpawnAction itemidentifier="stabilozine" targetinventory="triggerer_player" amount="2" />
+                                                            <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="2" />
+                                                            <RNGAction chance="0.65">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Player_Bought01" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="”你摸了摸口袋，发现身上并没有那么多钱，也许可以找这里的人收购一些？“" />
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Failure>
+                                            </CheckDataAction>
+                                        </Option>
+                                        <Option text="一些燃料和食物，需要200马克">
+                                            <CheckDataAction identifier="Player_Bought02" condition="eq true" >
+                                                <Success>
+                                                    <ConversationAction text="阿吽看了看手里的报告单：“暂时没有更多了哦。”" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Aunn" />
+                                                </Success>
+                                                <Failure>
+                                                    <CheckMoneyAction amount="200">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“拿去用吧！”" />
+                                                            <MoneyAction amount="-200" />
+                                                            <SpawnAction itemidentifier="fuelrod" targetinventory="triggerer_player" amount="2" />
+                                                            <SpawnAction itemidentifier="Touhou_Apple" targetinventory="triggerer_player" amount="2" />
+                                                            <RNGAction chance="0.5">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Player_Bought02" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="”你摸了摸口袋，发现身上并没有那么多钱，也许可以找这里的人收购一些？“" />
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Failure>
+                                            </CheckDataAction>
+                                        </Option>
+                                        <Option text="以后再说">
+                                            <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" targettag="triggerer_player" />
+                                            <GoTo name="waitfortalk_Aunn" />
+                                        </Option>
+                                    </ConversationAction>
+                                </Success>
+                                <Failure>
+                                    <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“你想要什么呢？”" >
+                                        <Option text="一些医疗补给，需要800马克">
+                                            <CheckDataAction identifier="Player_Bought01" condition="eq true" >
+                                                <Success>
+                                                    <ConversationAction text="阿吽看了看手里的报告单：“暂时没有更多了哦。”" targettag="triggerer_player"  />
+                                                    <GoTo name="waitfortalk_Aunn" />
+                                                </Success>
+                                                <Failure>
+                                                    <CheckMoneyAction amount="800">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“拿去用吧！”" />
+                                                            <MoneyAction amount="-800" />
+                                                            <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                                                            <SpawnAction itemidentifier="antidama1" targetinventory="triggerer_player" />
+                                                            <SpawnAction itemidentifier="stabilozine" targetinventory="triggerer_player" amount="2" />
+                                                            <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="2" />
+                                                            <RNGAction chance="0.75">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Player_Bought01" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="”你摸了摸口袋，发现身上并没有那么多钱，也许可以找这里的人收购一些？“" />
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Failure>
+                                            </CheckDataAction>
+                                        </Option>
+                                        <Option text="一些燃料和食物，需要400马克">
+                                            <CheckDataAction identifier="Player_Bought02" condition="eq true" >
+                                                <Success>
+                                                    <ConversationAction text="阿吽看了看手里的报告单：“补给站里的空闲物资就这些啦。”" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Aunn" />
+                                                </Success>
+                                                <Failure>
+                                                    <CheckMoneyAction amount="400">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“拿去用吧！”" />
+                                                            <MoneyAction amount="-400" />
+                                                            <SpawnAction itemidentifier="fuelrod" targetinventory="triggerer_player" amount="2" />
+                                                            <SpawnAction itemidentifier="Touhou_Apple" targetinventory="triggerer_player" amount="2" />
+                                                            <RNGAction chance="0.7">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Player_Bought02" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="”你摸了摸口袋，发现身上并没有那么多钱，也许可以找这里的人收购一些？“" />
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Failure>
+                                            </CheckDataAction>
+                                        </Option>
+                                        <Option text="以后再说">
+                                            <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" targettag="triggerer_player" />
+                                            <GoTo name="waitfortalk_Aunn" />
+                                        </Option>
+                                    </ConversationAction>
+                                </Failure>
+                            </CheckReputationAction>
+                        </Option>
+                        <Option text="出售">
+                            <CheckDataAction identifier="Akyuu_bought01" condition="eq true" >
+                                <Success>
+                                    <ConversationAction text="“好像……不是很缺的样子？”少女挠了挠头" targettag="triggerer_player" />
+                                    <GoTo name="waitfortalk_Aunn" />
+                                </Success>
+                                <Failure>
+                                    <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 20">
+                                        <Success>
+                                            <ConversationAction targettag="triggerer_player" text="“巫女大人让我买一点肉桂皮，能从你这里买1块吗？1个就够了。我可以出1000马克”" >
+                                                <Option text="成交">
+                                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Cinnamon_Branch">
+                                                        <Success>
+                                                            <RemoveItemAction targettag="triggerer_player" itemidentifier="Cinnamon_Branch" />
+                                                            <MoneyAction amount="1000" />
+                                                            <ConversationAction targettag="triggerer_player" text="“谢谢，已经转到你的账户里了。”" />
+                                                            <RNGAction chance="0.6">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Akyuu_bought01" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你摸了摸口袋，发现身上并没有少女需要的东西。“抱歉，我曾经有些来着，现在找不到了。”" />
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Failure>
+                                                    </CheckItemAction>
+                                                </Option>
+                                                <Option text="抱歉，我也没有你要的东西">
+                                                    <ConversationAction text="“没关系，以后再说吧。”" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Aunn" />
+                                                </Option>
+                                            </ConversationAction>
+                                        </Success>
+                                        <Failure>
+                                            <ConversationAction targettag="triggerer_player" text="“巫女大人让我买一点肉桂皮，能从你这里买1块吗？1个就够了。我可以出800马克”" >
+                                                <Option text="成交">
+                                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Cinnamon_Branch">
+                                                        <Success>
+                                                            <RemoveItemAction targettag="triggerer_player" itemidentifier="Cinnamon_Branch" />
+                                                            <MoneyAction amount="800" />
+                                                            <ConversationAction targettag="triggerer_player" text="“谢谢，已经转到你的账户里了。”" />
+                                                            <RNGAction chance="0.6">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Akyuu_bought01" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你摸了摸口袋，发现身上并没有少女需要的东西。“抱歉，我曾经有些来着，现在找不到了。”" />
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Failure>
+                                                    </CheckItemAction>
+                                                </Option>
+                                                <Option text="抱歉，我也没有你要的东西">
+                                                    <ConversationAction text="“没关系，以后再说吧。”" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Aunn" />
+                                                </Option>
+                                            </ConversationAction>
+                                        </Failure>
+                                    </CheckReputationAction>
+                                </Failure>
+                            </CheckDataAction>
+                        </Option>
+                        <Option text="赠送">
+                            <CheckDataAction identifier="Player_Donated" condition="eq true" >
+                                <Success>
+                                    <ConversationAction text="“我还没什么需要的……”" eventsprite="Touhou_Supply_Station02"/>
+                                    <GoTo name="waitfortalk_Aunn" />
+                                </Success>
+                                <Failure>
+                                    <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 20">
+                                        <Success>
+                                            <ConversationAction text="你要赠送什么呢" targettag="triggerer_player" >
+                                                <Option text="1000马克">
+                                                    <CheckMoneyAction amount="1000">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”谢谢你！我会记住的。“" />
+                                                            <MoneyAction amount="-1000" />
+                                                            <ReputationAction targettype="Faction" identifier="Touhou_Gensokyo" increase="2" />
+                                                            <RNGAction chance="0.7">
+                                                                <Success>
+                                                                    <SetDataAction identifier="Player_Donated" value="true"/>
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你身上并没有这么多钱。" />
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Option>
+                                                <Option text="2块以太层金属">
+                                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Base_Metal" amount="2">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”谢谢你！我会记住的。“" />
+                                                            <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Base_Metal" amount="2" />
+                                                            <ReputationAction targettype="Faction" identifier="Touhou_Gensokyo" increase="2" />
+                                                            <RNGAction chance="0.7">
+                                                                <Success>
+                                                                    <SetDataAction identifier="Player_Donated" value="true"/>
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你身上并没有这些材料。" eventsprite="Touhou_Supply_Station02"/>
+                                                            <Goto name="waitfortalk_Aunn"/>
+                                                        </Failure>
+                                                    </CheckItemAction>
+                                                </Option>
+                                                <Option text="一份赏月团子和一份月饼">
+                                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Fullmoon_Dumpling" >
+                                                        <Success>
+                                                            <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Fullmoon_Cake" >
+                                                                <Success>
+                                                                    <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”谢谢你！我会记住的。“" />
+                                                                    <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Fullmoon_Dumpling" />
+                                                                    <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Fullmoon_Cake" />
+                                                                    <ReputationAction targettype="Faction" identifier="Touhou_Gensokyo" increase="2" />
+                                                                    <RNGAction chance="0.7">
+                                                                        <Success>
+                                                                            <SetDataAction identifier="Player_Donated" value="true"/>
+                                                                        </Success>
+                                                                        <Failure>
+
+                                                                        </Failure>
+                                                                    </RNGAction>
+                                                                    <GoTo name="waitfortalk_Aunn" />
+                                                                </Success>
+                                                                <Failure>
+                                                                    <ConversationAction targettag="triggerer_player" text="你身上并没有这些材料。" eventsprite="Touhou_Supply_Station02"/>
+                                                                    <Goto name="waitfortalk_Aunn"/>
+                                                                </Failure>
+                                                            </CheckItemAction>
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你身上并没有这些材料。" eventsprite="Touhou_Supply_Station02"/>
+                                                            <Goto name="waitfortalk_Aunn"/>
+                                                        </Failure>
+                                                    </CheckItemAction>
+                                                </Option>
+                                                <Option text="以后再说">
+                                                    <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" dialogtype="Small" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Aunn" />
+                                                </Option>
+                                            </ConversationAction>
+                                        </Success>
+                                        <Failure>
+                                            <ConversationAction targettag="triggerer_player" text="你要赠送什么呢" eventsprite="Touhou_Supply_Station02">
+                                                <Option text="1600马克">
+                                                    <CheckMoneyAction amount="1600">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”谢谢你！我会记住的。“" />
+                                                            <MoneyAction amount="-1600" />
+                                                            <ReputationAction targettype="Faction" identifier="Touhou_Gensokyo" increase="2" />
+                                                            <RNGAction chance="0.8">
+                                                                <Success>
+                                                                    <SetDataAction identifier="Player_Donated" value="true"/>
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你身上并没有这么多钱。" />
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Option>
+                                                <Option text="3块以太层金属">
+                                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Base_Metal" amount="3">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”谢谢你！我会记住的。“" />
+                                                            <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Base_Metal" amount="3" />
+                                                            <ReputationAction targettype="Faction" identifier="Touhou_Gensokyo" increase="2" />
+                                                            <RNGAction chance="0.8">
+                                                                <Success>
+                                                                    <SetDataAction identifier="Player_Donated" value="true"/>
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Aunn" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你身上并没有这些材料。" eventsprite="Touhou_Supply_Station02"/>
+                                                            <Goto name="waitfortalk_Aunn"/>
+                                                        </Failure>
+                                                    </CheckItemAction>
+                                                </Option>
+                                                <Option text="以后再说">
+                                                    <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" dialogtype="Small" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Aunn" />
+                                                </Option>
+                                            </ConversationAction>
+                                        </Failure>
+                                    </CheckReputationAction>
+                                </Failure>
+                            </CheckDataAction>
+                        </Option>
+                        <Option text="以后再说">
+                            <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" dialogtype="Small" targettag="triggerer_player" />
+                            <GoTo name="waitfortalk_Aunn" />
+                        </Option>
+                    </ConversationAction>
+                </Success>
+                <Failure>
+                    <TagAction criteria="player" tag="player" />
+                    <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Store_Hieda_no_Akyuu01" targettag="Store_Hieda_no_Akyuu01" spawnpointtag="saferoom" spawnlocation="beaconstation" requirespawnpointtag="true" teamid="FriendlyNPC" />
+                    <TriggerAction target1tag="Store_Hieda_no_Akyuu01" target2tag="player" applytotarget2="triggerer_player" radius="120" waitforinteraction="true" />
+                    <Label name="waitfortalk_Akyuu" />
+                    <ConversationAction targettag="triggerer_player" speakertag="Store_Hieda_no_Akyuu01" text="”你好，有什么事吗“" eventsprite="Touhou_Supply_Station01">
+                        <Option text="购买">
+                            <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 20">
+                                <Success>
+                                    <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“你想要什么呢？”" >
+                                        <Option text="一些医疗补给，需要600马克">
+                                            <CheckDataAction identifier="Player_Bought01" condition="eq true" >
+                                                <Success>
+                                                    <ConversationAction text="少女核对了手里的日志：“暂时没有更多了呢。”" targettag="triggerer_player"  />
+                                                    <GoTo name="waitfortalk_Akyuu" />
+                                                </Success>
+                                                <Failure>
+                                                    <CheckMoneyAction amount="600">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“希望这些能帮上你。”" />
+                                                            <MoneyAction amount="-600" />
+                                                            <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                                                            <SpawnAction itemidentifier="antidama1" targetinventory="triggerer_player" />
+                                                            <SpawnAction itemidentifier="stabilozine" targetinventory="triggerer_player" amount="2" />
+                                                            <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="2" />
+                                                            <RNGAction chance="0.65">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Player_Bought01" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="”你摸了摸口袋，发现身上并没有那么多钱，也许可以找这里的人收购一些？“" />
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Failure>
+                                            </CheckDataAction>
+                                        </Option>
+                                        <Option text="一些燃料和食物，需要200马克">
+                                            <CheckDataAction identifier="Player_Bought02" condition="eq true" >
+                                                <Success>
+                                                    <ConversationAction text="少女核对了手里的日志：“补给站里只能提供这么多了呢。”" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Akyuu" />
+                                                </Success>
+                                                <Failure>
+                                                    <CheckMoneyAction amount="200">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“希望这些能帮上你。”" />
+                                                            <MoneyAction amount="-200" />
+                                                            <SpawnAction itemidentifier="fuelrod" targetinventory="triggerer_player" amount="2" />
+                                                            <SpawnAction itemidentifier="Touhou_Apple" targetinventory="triggerer_player" amount="2" />
+                                                            <RNGAction chance="0.5">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Player_Bought02" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="”你摸了摸口袋，发现身上并没有那么多钱，也许可以找这里的人收购一些？“" />
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Failure>
+                                            </CheckDataAction>
+                                        </Option>
+                                        <Option text="以后再说">
+                                            <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" targettag="triggerer_player" />
+                                            <GoTo name="waitfortalk_Akyuu" />
+                                        </Option>
+                                    </ConversationAction>
+                                </Success>
+                                <Failure>
+                                    <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“你想要什么呢？”" >
+                                        <Option text="一些医疗补给，需要800马克">
+                                            <CheckDataAction identifier="Player_Bought01" condition="eq true" >
+                                                <Success>
+                                                    <ConversationAction text="少女核对了手里的日志：“暂时没有更多了呢。”" targettag="triggerer_player"  />
+                                                    <GoTo name="waitfortalk_Akyuu" />
+                                                </Success>
+                                                <Failure>
+                                                    <CheckMoneyAction amount="800">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“希望这些能帮上你。”" />
+                                                            <MoneyAction amount="-800" />
+                                                            <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                                                            <SpawnAction itemidentifier="antidama1" targetinventory="triggerer_player" />
+                                                            <SpawnAction itemidentifier="stabilozine" targetinventory="triggerer_player" amount="2" />
+                                                            <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="2" />
+                                                            <RNGAction chance="0.75">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Player_Bought01" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="”你摸了摸口袋，发现身上并没有那么多钱，也许可以找这里的人收购一些？“" />
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Failure>
+                                            </CheckDataAction>
+                                        </Option>
+                                        <Option text="一些燃料和食物，需要400马克">
+                                            <CheckDataAction identifier="Player_Bought02" condition="eq true" >
+                                                <Success>
+                                                    <ConversationAction text="少女核对了手里的日志：“补给站里只能提供这么多了呢。”" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Akyuu" />
+                                                </Success>
+                                                <Failure>
+                                                    <CheckMoneyAction amount="400">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“希望这些能帮上你。”" />
+                                                            <MoneyAction amount="-400" />
+                                                            <SpawnAction itemidentifier="fuelrod" targetinventory="triggerer_player" amount="2" />
+                                                            <SpawnAction itemidentifier="Touhou_Apple" targetinventory="triggerer_player" amount="2" />
+                                                            <RNGAction chance="0.7">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Player_Bought02" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="”你摸了摸口袋，发现身上并没有那么多钱，也许可以找这里的人收购一些？“" />
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Failure>
+                                            </CheckDataAction>
+                                        </Option>
+                                        <Option text="以后再说">
+                                            <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" targettag="triggerer_player" />
+                                            <GoTo name="waitfortalk_Akyuu" />
+                                        </Option>
+                                    </ConversationAction>
+                                </Failure>
+                            </CheckReputationAction>
+                        </Option>
+                        <Option text="出售">
+                            <CheckDataAction identifier="Akyuu_bought01" condition="eq true" >
+                                <Success>
+                                    <ConversationAction text="“我还没有什么想买的……”少女摇了摇头" targettag="triggerer_player" />
+                                    <GoTo name="waitfortalk_Akyuu" />
+                                </Success>
+                                <Failure>
+                                    <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 20">
+                                        <Success>
+                                            <ConversationAction targettag="triggerer_player" text="“补给站里的植物材料快用完了，能从你这里买1块肉桂皮吗？1个就够了。我可以出1000马克”" >
+                                                <Option text="成交">
+                                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Cinnamon_Branch">
+                                                        <Success>
+                                                            <RemoveItemAction targettag="triggerer_player" itemidentifier="Cinnamon_Branch" />
+                                                            <MoneyAction amount="1000" />
+                                                            <ConversationAction targettag="triggerer_player" text="“谢谢，已经转到你的账户里了。”" />
+                                                            <RNGAction chance="0.6">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Akyuu_bought01" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你摸了摸口袋，发现身上并没有少女需要的东西。“抱歉，我曾经有些来着，现在找不到了。”" />
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Failure>
+                                                    </CheckItemAction>
+                                                </Option>
+                                                <Option text="抱歉，我也没有你要的东西">
+                                                    <ConversationAction text="少女叹了口气，轻轻地离开了" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Akyuu" />
+                                                </Option>
+                                            </ConversationAction>
+                                        </Success>
+                                        <Failure>
+                                            <ConversationAction targettag="triggerer_player" text="“补给站里的植物材料快用完了，能从你这里买1块肉桂皮吗？1个就够了。我可以出800马克”" >
+                                                <Option text="成交">
+                                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Cinnamon_Branch">
+                                                        <Success>
+                                                            <RemoveItemAction targettag="triggerer_player" itemidentifier="Cinnamon_Branch" />
+                                                            <MoneyAction amount="800" />
+                                                            <ConversationAction targettag="triggerer_player" text="“谢谢，已经转到你的账户里了。”" />
+                                                            <RNGAction chance="0.6">
+                                                                <Success>
+                                                                    <SetDataAction value="true" identifier="Akyuu_bought01" />
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你摸了摸口袋，发现身上并没有少女需要的东西。“抱歉，我曾经有些来着，现在找不到了。”" />
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Failure>
+                                                    </CheckItemAction>
+                                                </Option>
+                                                <Option text="抱歉，我也没有你要的东西">
+                                                    <ConversationAction text="少女叹了口气，轻轻地离开了" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Akyuu" />
+                                                </Option>
+                                            </ConversationAction>
+                                        </Failure>
+                                    </CheckReputationAction>
+                                </Failure>
+                            </CheckDataAction>
+                        </Option>
+                        <Option text="赠送">
+                            <CheckDataAction identifier="Player_Donated" condition="eq true" >
+                                <Success>
+                                    <ConversationAction  targettag="triggerer_player" text="“我还没什么需要的……”" eventsprite="Touhou_Supply_Station01"/>
+                                    <GoTo name="waitfortalk_Akyuu" />
+                                </Success>
+                                <Failure>
+                                    <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 20">
+                                        <Success>
+                                            <ConversationAction text="你要赠送什么呢" eventsprite="Touhou_Supply_Station01">
+                                                <Option text="1000马克">
+                                                    <CheckMoneyAction amount="1000">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”感谢你做出的贡献，我会记住的。“" />
+                                                            <MoneyAction amount="-1000" />
+                                                            <ReputationAction targettype="Faction" identifier="Touhou_Gensokyo" increase="2" />
+                                                            <RNGAction chance="0.7">
+                                                                <Success>
+                                                                    <SetDataAction identifier="Player_Donated" value="true"/>
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你身上并没有这么多钱。" />
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Option>
+                                                <Option text="2块以太层金属">
+                                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Base_Metal" amount="2">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”感谢你做出的贡献，我会记住的。“" />
+                                                            <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Base_Metal" amount="2" />
+                                                            <ReputationAction targettype="Faction" identifier="Touhou_Gensokyo" increase="2" />
+                                                            <RNGAction chance="0.7">
+                                                                <Success>
+                                                                    <SetDataAction identifier="Player_Donated" value="true"/>
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你身上并没有这些材料。" eventsprite="Touhou_Supply_Station01"/>
+                                                            <Goto name="waitfortalk_Akyuu"/>
+                                                        </Failure>
+                                                    </CheckItemAction>
+                                                </Option>
+                                                <Option text="一份赏月团子和一份月饼">
+                                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Fullmoon_Dumpling" >
+                                                        <Success>
+                                                            <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Fullmoon_Cake" >
+                                                                <Success>
+                                                                    <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”感谢你做出的贡献，我会记住的。“" />
+                                                                    <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Fullmoon_Dumpling" />
+                                                                    <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Fullmoon_Cake" />
+                                                                    <ReputationAction targettype="Faction" identifier="Touhou_Gensokyo" increase="2" />
+                                                                    <RNGAction chance="0.7">
+                                                                        <Success>
+                                                                            <SetDataAction identifier="Player_Donated" value="true"/>
+                                                                        </Success>
+                                                                        <Failure>
+
+                                                                        </Failure>
+                                                                    </RNGAction>
+                                                                    <GoTo name="waitfortalk_Akyuu" />
+                                                                </Success>
+                                                                <Failure>
+                                                                    <ConversationAction targettag="triggerer_player" text="你身上并没有这些材料。" eventsprite="Touhou_Supply_Station01"/>
+                                                                    <Goto name="waitfortalk_Akyuu"/>
+                                                                </Failure>
+                                                            </CheckItemAction>
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你身上并没有这些材料。" eventsprite="Touhou_Supply_Station01"/>
+                                                            <Goto name="waitfortalk_Akyuu"/>
+                                                        </Failure>
+                                                    </CheckItemAction>
+                                                </Option>
+                                                <Option text="以后再说">
+                                                    <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" dialogtype="Small" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Akyuu" />
+                                                </Option>
+                                            </ConversationAction>
+                                        </Success>
+                                        <Failure>
+                                            <ConversationAction targettag="triggerer_player" text="你要赠送什么呢" eventsprite="Touhou_Supply_Station01">
+                                                <Option text="1600马克">
+                                                    <CheckMoneyAction amount="1600">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”感谢你做出的贡献，我会记住的。“" />
+                                                            <MoneyAction amount="-1600" />
+                                                            <ReputationAction targettype="Faction" identifier="Touhou_Gensokyo" increase="2" />
+                                                            <RNGAction chance="0.8">
+                                                                <Success>
+                                                                    <SetDataAction identifier="Player_Donated" value="true"/>
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你身上并没有这么多钱。" />
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Failure>
+                                                    </CheckMoneyAction>
+                                                </Option>
+                                                <Option text="3块以太层金属">
+                                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Base_Metal" amount="3">
+                                                        <Success>
+                                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”感谢你做出的贡献，我会记住的。“" />
+                                                            <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Base_Metal" amount="3" />
+                                                            <ReputationAction targettype="Faction" identifier="Touhou_Gensokyo" increase="2" />
+                                                            <RNGAction chance="0.8">
+                                                                <Success>
+                                                                    <SetDataAction identifier="Player_Donated" value="true"/>
+                                                                </Success>
+                                                                <Failure>
+
+                                                                </Failure>
+                                                            </RNGAction>
+                                                            <GoTo name="waitfortalk_Akyuu" />
+                                                        </Success>
+                                                        <Failure>
+                                                            <ConversationAction targettag="triggerer_player" text="你身上并没有这些材料。" eventsprite="Touhou_Supply_Station01"/>
+                                                            <Goto name="waitfortalk_Akyuu"/>
+                                                        </Failure>
+                                                    </CheckItemAction>
+                                                </Option>
+                                                <Option text="以后再说">
+                                                    <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" dialogtype="Small" targettag="triggerer_player" />
+                                                    <GoTo name="waitfortalk_Akyuu" />
+                                                </Option>
+                                            </ConversationAction>
+                                        </Failure>
+                                    </CheckReputationAction>
+                                </Failure>
+                            </CheckDataAction>
+                        </Option>
+                        <Option text="闲聊">
+                            <CheckDataAction identifier="talked" condition="eq true" >
+                                <Success>
+                                    <ConversationAction text="闲聊已经够多了，还是不要打扰她比较好……" targettag="triggerer_player" />
+                                    <GoTo name="waitfortalk_Akyuu" />
+                                </Success>
+                                <Failure>
+                                    <ConversationAction text="“你好，有什么事吗？”少女放下手里的笔记，转身看向你。" dialogtype="Small" targettag="triggerer_player" >
+                                        <Option text="“是河童重工组在这里修建的补给站吗？没想到深海下竟然能有休息的地方。”">
+                                            <ConversationAction text="“实际上河童对人类并不友好，她修建补给站是为了更好地开掘这里的外星遗迹，是联盟出重金请求合作，才让河童开放这些补给站。”" dialogtype="Small" targettag="triggerer_player" />
+                                            <SetDataAction value="true" identifier="talked" />
+                                            <GoTo name="waitfortalk_Akyuu" />
+                                        </Option>
+                                        <Option text="“这里并没有天狗特遣队的影子，她们不来这里巡逻吗？”">
+                                            <ConversationAction text="“天狗们很讨厌狭窄的环境，她们似乎正在自己建设更大的补给站。除了前哨站外，她们很少来这种地方巡逻。”" dialogtype="Small" targettag="triggerer_player" />
+                                            <SetDataAction value="true" identifier="talked" />
+                                            <GoTo name="waitfortalk_Akyuu" />
+                                        </Option>
+                                        <Option text="”我可以用补给站里的物资吗？“">
+                                            <ConversationAction text="少女点了点头“都可以，补给站就是为此而建造的。”" dialogtype="Small" targettag="triggerer_player" />
+                                            <SetDataAction value="true" identifier="talked" />
+                                            <GoTo name="waitfortalk_Akyuu" />
+                                        </Option>
+                                        <Option text="以后再说">
+                                            <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" dialogtype="Small" targettag="triggerer_player" />
+                                            <GoTo name="waitfortalk_Akyuu" />
+                                        </Option>
+                                    </ConversationAction>
+                                </Failure>
+                            </CheckDataAction>
+                        </Option>
+                        <Option text="请求施舍">
+                            <CheckDataAction identifier="gift" condition="eq true" >
+                                <Success>
+                                    <ConversationAction text="你想了想，觉得没有必要再去索取了。" targettag="triggerer_player" />
+                                    <GoTo name="waitfortalk_Akyuu" />
+                                </Success>
+                                <Failure>
+                                    <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 20">
+                                        <Success>
+                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“需要帮助的话，以后也可以来找我哦？”少女的微笑让人安心" />
+                                            <SpawnAction itemidentifier="steel" targetinventory="triggerer_player" amount="2" />
+                                            <SpawnAction itemidentifier="alienblood" targetinventory="triggerer_player" amount="2" />
+                                            <SpawnAction itemidentifier="Touhou_Flour" targetinventory="triggerer_player" amount="2" />
+                                            <SetDataAction value="true" identifier="gift" />
+                                            <GoTo name="waitfortalk_Akyuu" />
+                                        </Success>
+                                        <Failure>
+                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“需要帮助的话，以后也可以来找我哦？”少女的微笑让人安心" />
+                                            <SpawnAction itemidentifier="steel" targetinventory="triggerer_player" />
+                                            <SpawnAction itemidentifier="alienblood" targetinventory="triggerer_player" amount="2" />
+                                            <SetDataAction value="true" identifier="gift" />
+                                            <GoTo name="waitfortalk_Akyuu" />
+                                        </Failure>
+                                    </CheckReputationAction>
+                                </Failure>
+                            </CheckDataAction>
+                        </Option>
+                        <Option text="以后再说">
+                            <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" dialogtype="Small" targettag="triggerer_player" />
+                            <GoTo name="waitfortalk_Akyuu" />
+                        </Option>
+                    </ConversationAction>
+                </Failure>
+            </CheckDataAction>
+        </ScriptedEvent>
+        <!--补给站事件02-->
+<!--        <ScriptedEvent identifier="Touhou_Supply_Station02" commonness="0">
+            <TagAction criteria="player" tag="player" />
+            <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Komano_Aunn_Store01" targettag="Komano_Aunn_Store01" spawnpointtag="saferoom" spawnlocation="beaconstation" requirespawnpointtag="true" teamid="FriendlyNPC" />
+            <NPCWaitAction npctag="Komano_Aunn_Store01" wait="true" />
+            <TriggerAction target1tag="Komano_Aunn_Store01" target2tag="player" applytotarget2="triggerer_player" radius="120" waitforinteraction="true" />
+            <Label name="waitfortalk" />
+            <ConversationAction targettag="triggerer_player" dialogtype="Small" speakertag="Komano_Aunn_Store01" text="”你好，有什么事吗“" eventsprite="Touhou_Supply_Station02">
+                <Option text="购买">
+                    <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“你想要什么呢？”" >
+                        <Option text="一些医疗补给，需要500马克">
+                            <CheckDataAction identifier="Player_Bought01" condition="eq true" >
+                                <Success>
+                                    <ConversationAction text="少女核对了手里的日志：“暂时没有更多了呢。”" targettag="triggerer_player"  />
+                                    <GoTo name="waitfortalk" />
+                                </Success>
+                                <Failure>
+                                    <CheckMoneyAction amount="500">
+                                        <Success>
+                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“希望这些能帮上你。”" />
+                                            <MoneyAction amount="-500" />
+                                            <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                                            <SpawnAction itemidentifier="antidama1" targetinventory="triggerer_player" />
+                                            <SpawnAction itemidentifier="stabilozine" targetinventory="triggerer_player" amount="2" />
+                                            <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="2" />
+                                            <SetDataAction value="true" identifier="Player_Bought01" />
+                                            <RNGAction chance="0.6">
+                                                <Success>
+                                                    <SetDataAction value="true" identifier="Player_Bought01" />
+                                                    <GoTo name="waitfortalk" />
+                                                </Success>
+                                                <Failure>
+                                                    <GoTo name="waitfortalk" />
+                                                </Failure>
+                                            </RNGAction>
+                                        </Success>
+                                        <Failure>
+                                            <ConversationAction targettag="triggerer_player" text="”你摸了摸口袋，发现身上并没有那么多钱，也许可以找这里的人收购一些？“" />
+                                            <GoTo name="waitfortalk" />
+                                        </Failure>
+                                    </CheckMoneyAction>
+                                </Failure>
+                            </CheckDataAction>
+                        </Option>
+                        <Option text="一些燃料和食物，需要200马克">
+                            <CheckDataAction identifier="Player_Bought02" condition="eq true" >
+                                <Success>
+                                    <ConversationAction text="少女核对了手里的日志：“补给站里只能提供这么多了呢。”" targettag="triggerer_player" />
+                                    <GoTo name="waitfortalk" />
+                                </Success>
+                                <Failure>
+                                    <CheckMoneyAction amount="200">
+                                        <Success>
+                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“希望这些能帮上你。”" />
+                                            <MoneyAction amount="-200" />
+                                            <SpawnAction itemidentifier="fuelrod" targetinventory="triggerer_player" amount="2" />
+                                            <SpawnAction itemidentifier="Touhou_Apple" targetinventory="triggerer_player" amount="2" />
+                                            <SetDataAction value="true" identifier="Player_Bought02" />
+                                            <RNGAction chance="0.5">
+                                                <Success>
+                                                    <SetDataAction value="true" identifier="Player_Bought02" />
+                                                    <GoTo name="waitfortalk" />
+                                                </Success>
+                                                <Failure>
+                                                    <GoTo name="waitfortalk" />
+                                                </Failure>
+                                            </RNGAction>
+                                        </Success>
+                                        <Failure>
+                                            <ConversationAction targettag="triggerer_player" text="”你摸了摸口袋，发现身上并没有那么多钱，也许可以找这里的人收购一些？“" />
+                                            <GoTo name="waitfortalk" />
+                                        </Failure>
+                                    </CheckMoneyAction>
+                                </Failure>
+                            </CheckDataAction>
+                        </Option>
+                        <Option text="以后再说">
+                            <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" dialogtype="Small" targettag="triggerer_player" />
+                            <GoTo name="waitfortalk" />
+                        </Option>
+                    </ConversationAction>
+                </Option>
+                <Option text="出售">
+                    <CheckDataAction identifier="Akyuu_bought01" condition="eq true" >
+                        <Success>
+                            <ConversationAction text="“我还没有什么想买的……”少女摇了摇头" targettag="triggerer_player" />
+                            <GoTo name="waitfortalk" />
+                        </Success>
+                        <Failure>
+                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“补给站里的植物材料快用完了，能从你这里买1块肉桂皮吗？1个就够了。我可以出1200马克”" >
+                                <Option text="成交">
+                                    <CheckItemAction targettag="triggerer_player" itemidentifiers="Cinnamon_Branch">
+                                        <Success>
+                                            <RemoveItemAction targettag="triggerer_player" itemidentifier="Cinnamon_Branch" />
+                                            <MoneyAction amount="1200" />
+                                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“谢谢，已经转到你的账户里了。”" />
+                                            <RNGAction chance="0.25">
+                                                <Success>
+                                                    <SetDataAction value="true" identifier="Akyuu_bought01" />
+                                                    <GoTo name="waitfortalk" />
+                                                </Success>
+                                                <Failure>
+                                                    <GoTo name="waitfortalk" />
+                                                </Failure>
+                                            </RNGAction>
+                                        </Success>
+                                        <Failure>
+                                            <ConversationAction targettag="triggerer_player" text="你摸了摸口袋，发现身上并没有少女需要的东西。“抱歉，我曾经有些来着，现在找不到了。”" />
+                                            <GoTo name="waitfortalk" />
+                                        </Failure>
+                                    </CheckItemAction>
+                                </Option>
+                                <Option text="抱歉，我也没有你要的东西">
+                                    <ConversationAction text="少女叹了口气，轻轻地离开了" dialogtype="Small" targettag="triggerer_player" />
+                                    <GoTo name="waitfortalk" />
+                                </Option>
+                            </ConversationAction>
+                        </Failure>
+                    </CheckDataAction>
+                </Option>
+                <Option text="赠送">
+                    <CheckDataAction identifier="Player_Donated" condition="eq true" >
+                        <Success>
+                            <ConversationAction text="捐赠1000马克" targettag="triggerer_player" />
+                            <GoTo name="waitfortalk" />
+                        </Success>
+                        <Failure>
+                            <CheckMoneyAction amount="1000">
+                                <Success>
+                                    <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”感谢你做出的贡献，我会记住的。“" />
+                                    <MoneyAction amount="-1000" />
+                                    <SetDataAction identifier="Player_Donated" value="true"/>
+                                    <GoTo name="waitfortalk" />
+                                </Success>
+                                <Failure>
+                                    <ConversationAction targettag="triggerer_player" dialogtype="Small" text="你身上并没有这么多钱。" />
+                                    <GoTo name="waitfortalk" />
+                                </Failure>
+                            </CheckMoneyAction>
+                        </Failure>
+                    </CheckDataAction>
+                </Option>
+                <Option text="闲聊">
+                    <CheckDataAction identifier="talked" condition="eq true" >
+                        <Success>
+                            <ConversationAction text="闲聊已经够多了，还是不要打扰她比较好……" targettag="triggerer_player" />
+                            <GoTo name="waitfortalk" />
+                        </Success>
+                        <Failure>
+                            <ConversationAction text="“你好，有什么事吗？”少女放下手里的笔记，转身看向你。" dialogtype="Small" targettag="triggerer_player" >
+                                <Option text="“是河童重工组在这里修建的补给站吗？没想到深海下竟然能有休息的地方。”">
+                                    <ConversationAction text="“实际上河童对人类并不友好，她修建补给站是为了更好地开掘这里的外星遗迹，是联盟出重金请求合作，才让河童开放这些补给站。”" dialogtype="Small" targettag="triggerer_player" />
+                                        <SetDataAction value="true" identifier="talked" />
+                                        <GoTo name="waitfortalk" />
+                                </Option>
+                                <Option text="“这里并没有天狗特遣队的影子，她们不来这里巡逻吗？”">
+                                    <ConversationAction text="“天狗们很讨厌狭窄的环境，她们似乎正在自己建设更大的补给站。除了前哨站外，她们很少来这种地方巡逻。”" dialogtype="Small" targettag="triggerer_player" />
+                                        <SetDataAction value="true" identifier="talked" />
+                                        <GoTo name="waitfortalk" />
+                                </Option>
+                                <Option text="”我可以用补给站里的物资吗？“">
+                                    <ConversationAction text="少女点了点头“都可以，补给站就是为此而建造的。”" dialogtype="Small" targettag="triggerer_player" />
+                                        <SetDataAction value="true" identifier="talked" />
+                                        <GoTo name="waitfortalk" />
+                                </Option>
+                                <Option text="以后再说">
+                                    <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" dialogtype="Small" targettag="triggerer_player" />
+                                    <GoTo name="waitfortalk" />
+                                </Option>
+                            </ConversationAction>
+                        </Failure>
+                    </CheckDataAction>
+                </Option>
+                <Option text="请求施舍">
+                    <CheckDataAction identifier="gift" condition="eq true" >
+                        <Success>
+                            <ConversationAction text="你想了想，觉得没有必要再去索取了。" targettag="triggerer_player" />
+                            <GoTo name="waitfortalk" />
+                        </Success>
+                        <Failure>
+                            <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“需要帮助的话，以后也可以来找我哦？”少女的微笑让人安心" />
+                            <SpawnAction itemidentifier="steel" targetinventory="triggerer_player" amount="2" />
+                            <SpawnAction itemidentifier="alienblood" targetinventory="triggerer_player" amount="2" />
+                            <SpawnAction itemidentifier="Touhou_Flour" targetinventory="triggerer_player" amount="2" />
+                            <SetDataAction value="true" identifier="gift" />
+                            <GoTo name="waitfortalk" />
+                        </Failure>
+                    </CheckDataAction>
+                </Option>
+                <Option text="以后再说">
+                    <ConversationAction text="你想起还有些事情没有忙完，匆匆走开了" dialogtype="Small" targettag="triggerer_player" />
+                    <GoTo name="waitfortalk" />
+                </Option>
+            </ConversationAction>
+        </ScriptedEvent>-->
+    </EventPrefabs>
+    <EventSet identifier="Touhou_Supply_Station_Store" chooserandom="false" triggereventcooldown="false" allowatstart="true">
+        <ScriptedEvent identifier="Touhou_Supply_Station01" commonness="0" triggercooldown="false" />
+<!--        <ScriptedEvent identifier="Touhou_Supply_Station02" commonness="0" triggercooldown="false" />-->
+    </EventSet>
+</Randomevents>

@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+  <Talent identifier="demonkingcradle">
+    <Icon texture="%ModDir%/Images/TalentsIcon/Remilia/TalentsIcons_Remilia.png" sheetindex="0,0" sheetelementsize="128,128" />
+    <Description tag="talentdescription.demonkingcradle"/>
+    <AbilityGroupInterval abilityeffecttype="None" Interval="0.1">
+      <Conditions>
+        <AbilityConditionHasAffliction afflictionidentifier="bloodpackB" />
+        <AbilityConditionHasAffliction afflictionidentifier="scarletdevil" />
+      </Conditions>
+      <Abilities>
+        <CharacterAbilityApplyStatusEffects>
+          <StatusEffects>
+            <StatusEffect type="OnAbility" target="Character">
+              <Affliction identifier="Demon_King_Cradle" amount="1000" />
+              <Affliction identifier="strengthen" amount="10" />
+              <Affliction identifier="haste" amount="30" />
+              <Affliction identifier="psychosisresistance" amount="20" />
+              <Affliction identifier="durationincrease" amount="20" />
+            </StatusEffect>
+          </StatusEffects>
+        </CharacterAbilityApplyStatusEffects>
+      </Abilities>
+    </AbilityGroupInterval>
+
+    <!--击杀治疗出血和失血-->
+    <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+      <Abilities>
+        <CharacterAbilityResetPermanentStat statidentifier="Remilia_Kill" />
+      </Abilities>
+    </AbilityGroupEffect>
+    <AbilityGroupEffect abilityeffecttype="None">
+      <Abilities>
+        <CharacterAbilityGivePermanentStat statidentifier="Remilia_Kill" value="0" setvalue="true" />
+      </Abilities>
+    </AbilityGroupEffect>
+    <AbilityGroupInterval Interval="0.9">
+      <Conditions>
+        <AbilityConditionHasAffliction afflictionidentifier="scarletdevil" />
+        <AbilityConditionHasPermanentStat statidentifier="Remilia_Kill" min="1" />
+      </Conditions>
+      <Abilities>
+        <CharacterAbilityApplyStatusEffects>
+          <StatusEffects>
+            <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+              <Affliction identifier="Scarletdevil_Treatment_Effect" amount="10" />
+<!--              <Reduceaffliction identifier="bloodloss" amount="2" />
+              <Reduceaffliction identifier="bleeding" amount="8" />-->
+            </StatusEffect>
+          </StatusEffects>
+        </CharacterAbilityApplyStatusEffects>
+        <CharacterAbilityGivePermanentStat statidentifier="Remilia_Kill" value="-1" />
+      </Abilities>
+    </AbilityGroupInterval>
+    <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+      <Conditions>
+        <AbilityConditionHasAffliction afflictionidentifier="scarletdevil" />
+      </Conditions>
+      <Abilities>
+        <CharacterAbilityGivePermanentStat statidentifier="Remilia_Kill" value="1" />
+      </Abilities>
+    </AbilityGroupEffect>
+  </Talent>
+</Talents>

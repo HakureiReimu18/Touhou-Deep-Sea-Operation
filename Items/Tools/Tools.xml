@@ -1,0 +1,1632 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Items>
+
+    <!--魔理沙的扫帚-->
+    <Item name="" identifier="Marisa_Broom" subcategory="Touhou" category="Equipment" cargocontaineridentifier="metalcrate" tags="mediumitem,provocative,scooter,underwaterscooter,light,Marisa_Broom" description="" impactsoundtag="impact_soft" scale="0.5" fireproof="true" isshootable="true">
+        <PreferredContainer primary="crewcab" amount="1" spawnprobability="0.12"/>
+        <Price baseprice="1200">
+            <Price storeidentifier="merchantoutpost" minavailable="1" />
+            <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="1" />
+            <Price storeidentifier="merchantresearch" minavailable="1" />
+            <Price storeidentifier="merchantmilitary" minavailable="1" />
+            <Price storeidentifier="merchantmine" minavailable="1" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="carbon" />
+            <Item identifier="organicfiber" />
+            <Item identifier="incendium" amount="2"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="20">
+            <RequiredSkill identifier="mechanical" level="30" />
+            <RequiredItem identifier="organicfiber" />
+            <RequiredItem identifier="carbon" />
+            <RequiredItem identifier="Reiki_Stone" />
+            <RequiredItem identifier="Score_Point" />
+        </Fabricate>
+        <Fabricate suitablefabricators="fabricator" requiredtime="40">
+            <RequiredSkill identifier="mechanical" level="60" />
+            <RequiredItem identifier="organicfiber" />
+            <RequiredItem identifier="carbon" />
+            <RequiredItem identifier="Reiki_Stone" amount="3"/>
+            <RequiredItem identifier="Touhou_Simple_Parts" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Marisa_Items/broom.png" sourcerect="4,22,379,128" depth="0.3" origin="0.5,0.5" />
+        <Body width="328" height="128" density="10" />
+        <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="10,-90" handle1="60,0" handle2="75,0" msg="ItemMsgPickUpSelect" holdangle="95" aimangle="10">
+            <LightComponent LightColor="1.0,1.0,1.0,0.8" range="1000" powerconsumption="10" IsOn="true">
+                <LightTexture texture="Content/Lights/lightcone.png" origin="-0.03, 0.5" size="1.5,1.0" />
+            </LightComponent>
+            <StatusEffect type="OnSecondaryUse" target="This" voltage="1.0" setvalue="true"/>
+        </Holdable>
+        <Propulsion force="280" usablein="Both" ApplyToHands="false" particles="bubbles">
+            <sound file="Content/Items/Diving/ScooterLoop.ogg" type="OnUse" range="800.0" loop="true" />
+            <LightComponent LightColor="1.0,1.0,1.0,0.8" range="1000" AllowInGameEditing="false">
+                <LightTexture texture="Content/Lights/lightcone.png" origin="-0.03, 0.5" size="1.5,1.0" />
+            </LightComponent>
+            <StatusEffect type="Always" target="This" force="280" setvalue="true" >
+                <Conditional InWater="true" />
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" force="160" setvalue="true" >
+                <Conditional InWater="false" />
+            </StatusEffect>
+        </Propulsion>
+        <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true">
+            <Containable items="smallitem,mediumitem" excludeditems="Marisa_Broom,Kappa_Backpack,backpack,toolbelt"/>
+        </ItemContainer>
+        <AiTarget soundrange="2000" />
+    </Item>
+
+
+    <!--文文的充电宝-->
+    <Item name="" identifier="Power_Bank" tags="mediumitem,batterycellrecharger,loadable,Power_Bank" subcategory="Touhou" category="Electrical" scale="0.4" >
+        <Price baseprice="1500" minleveldifficulty="5">
+            <Price storeidentifier="merchantoutpost" minavailable="1" sold="false"/>
+            <Price storeidentifier="merchantcity" multiplier="1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="1.1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="1.1" sold="true" maxavailable="1" />
+        </Price>
+        <Deconstruct time="32">
+            <Item identifier="batterycell" amount="4"/>
+            <Item identifier="Magic_Material" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="60">
+            <RequiredSkill identifier="electrical" level="60" />
+            <RequiredSkill identifier="medical" level="60" />
+            <RequiredItem identifier="Magic_Material" />
+            <RequiredItem identifier="batterycell" amount="4"/>
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Power_Bank.png" sourcerect="0,0,72,76" depth="0.15" scale="0.5" origin="0.5,0.5" />
+        <Body width="50" height="50" density="10" />
+        <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="63,0" handle1="-26,-11" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="Always" target="Contained" Condition="2.5" >
+                <Conditional TargetContainer="true" condition="gt 0" />
+            </StatusEffect>
+        </Holdable>
+        <ItemContainer capacity="2" maxstacksize="1" canbeselected="true" hideitems="true" >
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <Containable items="loadable,battery" excludeditems="Power_Bank"/>
+        </ItemContainer>
+    </Item>
+
+
+    <!--河童背包-->
+    <Item name="" identifier="Nitori_Backpack" scale="0.4" subcategory="Touhou" category="Equipment" tags="mediumitem,Nitori_Backpack,backpack" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="medcab" amount="1" spawnprobability="0.02" />
+        <Price baseprice="2000" >
+            <Price storeidentifier="merchantoutpost" multiplier="1.4" minavailable="1" />
+            <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="2" />
+            <Price storeidentifier="merchantresearch" multiplier="0.9" sold="true" minavailable="2" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.2" minavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="1.2" minavailable="1" />
+            <Price storeidentifier="merchantmedical" multiplier="1.2" minavailable="1" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="organicfiber" amount="2"/>
+            <Item identifier="plastic" amount="2"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="20">
+            <RequiredSkill identifier="mechanical" level="20" />
+            <RequiredSkill identifier="medical" level="20" />
+            <RequiredItem identifier="organicfiber" amount="2" />
+            <RequiredItem identifier="plastic" amount="2" />
+            <RequiredItem identifier="Magic_Material" />
+            <RequiredItem identifier="Reiki_Stone" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Kappa_Backpack.png" depth="0.7" sourcerect="0,0,88,126" origin="0.5,0.5" />
+        <Body width="88" height="126" density="10" />
+        <ItemContainer autofill="False" capacity="1" maxstacksize="1" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
+            <Containable identifiers="oxygentank,oxygensource" />
+            <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
+            <SubContainer capacity="19" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem,mountableweapon" excludeditems="backpack,crate,toolbelt"/>
+            </SubContainer>
+        </ItemContainer>
+
+
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
+                  canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
+
+        <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
+
+            <sprite name="Backpack Wearable" texture="%ModDir%/Images/Nitori_Clothes/Tools.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
+                    inherittexturescale="false" hideotherwearables="false" sourcerect="17,28,102,104" origin="0.75,0.57" scale="0.5" />
+
+            <StatusEffect type="OnWearing" target="Character" PressureProtection="3600.0" SpeedMultiplier="0.88" setvalue="true" disabledeltatime="true" />
+
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="0.0" UseHullOxygen="true" />
+            <StatusEffect type="Always" target="Contained" Condition="0.1" targetslot="0" comparison="And">
+                <RequiredItem items="oxygentank" type="Contained" excludebroken="false" />
+                <Conditional HullOxygenPercentage="gt 50" />
+                <Conditional InWater="false" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+                <Conditional IsDead="false" />
+                <Conditional HullOxygenPercentage="lt 50" />
+                <Conditional InWater="false" />
+                <Conditional decreasedoxygenconsumption="lt 100" />
+                <RequiredItem items="oxygentank,oxygenitetank" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+                <Conditional IsDead="false" />
+                <Conditional InWater="true" />
+                <RequiredItem items="oxygentank,oxygenitetank" type="Contained" />
+            </StatusEffect>
+
+            <SkillModifier skillidentifier="mechanical" skillvalue="6" />
+            <SkillModifier skillidentifier="electrical" skillvalue="6" />
+            <!--            <SkillModifier skillidentifier="medical" skillvalue="6" />
+                        <SkillModifier skillidentifier="weapons" skillvalue="6" />
+                        <SkillModifier skillidentifier="helm" skillvalue="6" />-->
+        </Wearable>
+        <aitarget maxsightrange="1500" />
+    </Item>
+
+
+    <!--河童背包Plus-->
+    <Item name="" identifier="Kappa_Backpack_Plus" scale="0.4" subcategory="Touhou" category="Equipment" tags="mediumitem,Kappa_Backpack_Plus,backpack" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="medcab" />
+        <Price baseprice="6000" minleveldifficulty="25">
+            <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
+            <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="0.9" minavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmine" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmedical" multiplier="1.2" sold="false" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="organicfiber" amount="2"/>
+            <Item identifier="plastic" amount="2"/>
+            <Item identifier="Magic_Material"/>
+            <Item identifier="Score_Point"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
+            <RequiredSkill identifier="mechanical" level="20" />
+            <RequiredSkill identifier="medical" level="20" />
+            <RequiredItem identifier="organicfiber" amount="2" />
+            <RequiredItem identifier="Magic_Material" amount="2"/>
+            <RequiredItem identifier="Nitori_Backpack" />
+            <RequiredItem identifier="Score_Point" amount="2"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Kappa_Backpack_Plus.png" sourcerect="0,0,100,132" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Kappa_Backpack.png" depth="0.7" sourcerect="0,0,88,126" origin="0.5,0.5" />
+        <Body width="88" height="126" density="10" />
+        <ItemContainer autofill="False" capacity="1" maxstacksize="1" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
+            <Containable identifiers="oxygentank,oxygensource" />
+            <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
+            <SubContainer capacity="19" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem,mountableweapon" excludeditems="backpack,crate,toolbelt"/>
+            </SubContainer>
+        </ItemContainer>
+
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
+                  canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
+
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.1,0.1" anchor="BottomRight" relativeoffset="0,0.7" style="ItemUI" />
+            <Button text="声呐显示开启">
+                <StatusEffect type="OnUse" target="This" TargetItemComponent="Sonar" drawhudwhenequipped="true" setvalue="true" />
+            </Button>
+            <Button text="声呐显示关闭">
+                <StatusEffect type="OnUse" target="This" TargetItemComponent="Sonar" currentmode="Passive" drawhudwhenequipped="false" setvalue="true" />
+            </Button>
+        </CustomInterface>
+
+        <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
+
+            <sprite name="Backpack Wearable" texture="%ModDir%/Images/Nitori_Clothes/Tools.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
+                    inherittexturescale="false" hideotherwearables="false" sourcerect="17,28,102,104" origin="0.75,0.57" scale="0.5" />
+            <Sonar range="7500.0" powerconsumption="0" drawhudwhenequipped="true" detectsubmarinewalls="false" displaybordersize="-0.1" characterusable="false" hasmineralscanner="true" allowuioverlap="true">
+                <sound file="Content/Items/Command/SonarPing.ogg" type="OnUse" range="1000.0" />
+                <GuiFrame relativesize="0.3,0.3" anchor="TopRight" relativeoffset="-0.038,-0.088" />
+                <PingCircle texture="Content/Items/Command/pingCircle.png" origin="0.5,0.5" />
+                <DirectionalPingCircle texture="Content/Items/Command/directionalPingCircle.png" origin="0.0,0.5" />
+                <ScreenOverlay texture="Content/Items/Command/sonarOverlay.png" origin="0.5,0.5" />
+                <ScreenBackground texture="Content/Items/Command/sonarBackground.png" origin="0.5,0.5" />
+                <DirectionalPingBackground texture="Content/Items/Command/directionalPingBackground.png" origin="0.5,0.5" />
+                <DirectionalPingButton index="0" texture="Content/Items/Command/directionalPingButton.png" sourcerect="0,0,91,266" origin="-4.5275,0.5" />
+                <DirectionalPingButton index="1" texture="Content/Items/Command/directionalPingButton.png" sourcerect="133,0,91,266" origin="-4.5275,0.5" />
+                <DirectionalPingButton index="2" texture="Content/Items/Command/directionalPingButton.png" sourcerect="266,0,91,266" origin="-4.5275,0.5" />
+                <Blip texture="Content/Items/Command/sonarBlip.png" origin="0.5,0.5" />
+                <LineSprite texture="Content/Items/Command/NavUI.png" sourcerect="181,141,109,4" origin="0,0.5" />
+                <icon identifier="outpost" texture="Content/UI/MainIconsAtlas.png" sourcerect="352,398,16,8" origin="0.5,0.5" />
+                <icon identifier="submarine" texture="Content/UI/MainIconsAtlas.png" sourcerect="353,407,14,6" origin="0.5,0.5" />
+                <icon identifier="shuttle" texture="Content/UI/MainIconsAtlas.png" sourcerect="336,407,8,6" origin="0.5,0.5" />
+                <icon identifier="artifact" texture="Content/UI/MainIconsAtlas.png" sourcerect="336,414,8,8" origin="0.5,0.5" />
+                <icon identifier="mineral" texture="Content/UI/MainIconsAtlas.png" sourcerect="336,434,7,12" origin="0.5,0.5" />
+                <icon identifier="" texture="Content/UI/MainIconsAtlas.png" sourcerect="346,416,4,4" origin="0.5,0.5" />
+            </Sonar>
+            <StatusEffect type="OnWearing" target="Character" PressureProtection="5000.0" setvalue="true" disabledeltatime="true" />
+
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="0.0" UseHullOxygen="true" />
+            <StatusEffect type="Always" target="Contained" Condition="0.1" targetslot="0" comparison="And">
+                <RequiredItem items="oxygentank" type="Contained" excludebroken="false" />
+                <Conditional HullOxygenPercentage="gt 50" />
+                <Conditional InWater="false" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+                <Conditional IsDead="false" />
+                <Conditional HullOxygenPercentage="lt 50" />
+                <Conditional InWater="false" />
+                <Conditional decreasedoxygenconsumption="lt 100" />
+                <RequiredItem items="oxygentank,oxygenitetank" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
+                <Conditional IsDead="false" />
+                <Conditional InWater="true" />
+                <RequiredItem items="oxygentank,oxygenitetank" type="Contained" />
+            </StatusEffect>
+
+            <StatusEffect type="OnWearing" target="Character" comparison="And" >
+                <Conditional IsDead="false" />
+                <Conditional Candid_Friend="gt 0"/>
+                <Affliction identifier="Nitori_Tools" amount="50" />
+            </StatusEffect>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.8" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.5" damagesound="LimbArmor" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="paralysis" damagemultiplier="0.8" damagesound="LimbArmor" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="alieninfection" damagemultiplier="1" probabilitymultiplier="0.8" damagesound="LimbArmor" />
+            <SkillModifier skillidentifier="mechanical" skillvalue="10" />
+            <SkillModifier skillidentifier="electrical" skillvalue="10" />
+        </Wearable>
+        <aitarget maxsightrange="1500" />
+    </Item>
+
+
+    <!--河童采矿机-->
+    <Item name="" identifier="Kappa_Miningdrill" subcategory="Touhou" category="Equipment" Tags="smallitem,cuttingequipment,tool" cargocontaineridentifier="metalcrate" Scale="0.8" waterproof="true" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="divingcab" minamount="1" maxamount="2" spawnprobability="0.32" />
+        <PreferredContainer primary="engcab" minamount="1" maxamount="2" spawnprobability="0.22" />
+        <PreferredContainer primary="wreckstoragecab" minamount="0" maxamount="2" spawnprobability="0.225" />
+        <PreferredContainer primary="outpostcrewcabinet" minamount="0" maxamount="1" spawnprobability="0.2" />
+        <Price baseprice="600" >
+            <Price storeidentifier="merchantoutpost" multiplier="1" />
+            <Price storeidentifier="merchantcity" multiplier="0.9" maxavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="1.25" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" />
+            <Price storeidentifier="merchantmine" multiplier="0.8" minavailable="6" />
+            <Price storeidentifier="merchantengineering" multiplier="1.2" minavailable="3" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="steel" />
+            <Item identifier="titanium" />
+            <Item identifier="plastic" />
+            <Item identifier="Reiki_Stone" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="20">
+            <RequiredSkill identifier="mechanical" level="10" />
+            <RequiredItem identifier="steel" />
+            <RequiredItem identifier="carbon" />
+            <RequiredItem identifier="Reiki_Stone" amount="2"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Kappa_Miningdrill.png" sourcerect="0,0,95,82" />
+        <Sprite texture="%ModDir%/Images/Tools/Kappa_Miningdrill.png" sourcerect="0,85,107,56" depth="0.55" origin="0.5,0.5" />
+        <Body width="200" height="100" density="10" />
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="55,-10" aimpos="50,0" handle1="-40,-14" handle2="-5,-16" holdangle="-40" msg="ItemMsgPickUpSelect" />
+        <RepairTool firedamage="10.0" structurefixamount="-0.7" range="300" barrelpos="64,16" combatpriority="23" RepairMultiple="true" RepairThroughHoles="false" levelwallfixamount="-15.0">
+            <RequiredItems identifier="batterycell,Spiritual_Water,fulguriumbatterycell" type="Contained" msg="需要电池或灵水" />
+            <ParticleEmitter particle="plasma" particlespersecond="50" copyentityangle="true" scalemin="1.8" scalemax="2.2"/>
+            <StatusEffect type="OnUse" target="This" Condition="-18" />
+            <StatusEffect type="Always" target="This" Condition="10">
+                <Conditional condition="gt 0" />
+            </StatusEffect>
+            <StatusEffect type="InWater" target="This" Condition="4">
+                <Conditional condition="gt 0" />
+            </StatusEffect>
+            <StatusEffect type="OnBroken" target="This">
+                <sound file="%ModDir%/Sounds/Tools/Overheating_Restart01.ogg" type="OnUse" range="500.0" loop="false" />
+            </StatusEffect>
+            <StatusEffect type="OnBroken" target="This" Condition="50" disabledeltatime="true" delay="2" stackable="false" />
+            <StatusEffect type="OnUse" targettype="Contained" targets="Spiritual_Water" Condition="-2" />
+            <StatusEffect type="OnUse" targettype="Contained" targets="batterycell" Condition="-2.5" />
+            <StatusEffect type="OnUse" targettype="Contained" targets="fulguriumbatterycell" Condition="-1.0" />
+            <StatusEffect type="OnUse" target="UseTarget" targetidentifiers="door,windoweddoor,hatch,ductblock,aliendoor,alienhatch" Stuck="-20.0" Condition="-46.0" />
+            <StatusEffect type="OnUse" target="UseTarget" targetidentifiers="ore" DeattachTimer="0.25" Condition="-75.0" />
+            <StatusEffect type="OnUse" target="Limb" >
+                <Conditional EntityType="eq Limb" />
+                <Affliction identifier="lacerations" strength="1" />
+                <Affliction identifier="internaldamage" strength="1" />
+                <Affliction identifier="bleeding" amount="2" />
+                <Sound file="Content/Sounds/Damage/LimbSlash1.ogg" range="800" selectionmode="Random" />
+                <Sound file="Content/Sounds/Damage/LimbSlash2.ogg" range="800" />
+                <Sound file="Content/Sounds/Damage/LimbSlash3.ogg" range="800" />
+                <Sound file="Content/Sounds/Damage/LimbSlash4.ogg" range="800" />
+                <Sound file="Content/Sounds/Damage/LimbSlash5.ogg" range="800" />
+                <Sound file="Content/Sounds/Damage/LimbSlash6.ogg" range="800" />
+                <RequiredItems identifier="batterycell,Spiritual_Water,fulguriumbatterycell" type="Contained" />
+            </StatusEffect>
+            <ParticleEmitterHitStructure particle="plasma" particlespersecond="50" anglemin="-70" anglemax="70" velocitymin="100" velocitymax="800" />
+            <ParticleEmitterHitStructure particle="plasmaspark" particlespersecond="25" anglemin="-45" anglemax="45" velocitymin="100" velocitymax="200" scalemin="1" scalemax="1.75" />
+            <ParticleEmitterHitItem identifiers="door,windoweddoor,hatch,ductblock,aliendoor,alienhatch" particle="plasma" particlespersecond="50" anglemin="-70" anglemax="70" velocitymin="100" velocitymax="800" />
+            <ParticleEmitterHitItem identifiers="door,windoweddoor,hatch,ductblock,aliendoor,alienhatch" particle="plasmaspark" particlespersecond="25" anglemin="-45" anglemax="45" velocitymin="100" velocitymax="200" scalemin="0.5" scalemax="0.75" />
+            <ParticleEmitterHitItem identifiers="ore" particle="iceshards" particlespersecond="5" anglemin="-40" anglemax="40" velocitymin="10" velocitymax="300" scalemin="0.5" scalemax="1.0" />
+            <ParticleEmitterHitCharacter particle="fleshsmoke" particlespersecond="3" anglemin="-5" anglemax="5" velocitymin="0" velocitymax="50" />
+            <sound file="Content/Items/Tools/PlasmaCutterLoop.ogg" type="OnUse" range="750.0" loop="true" />
+            <LightComponent LightColor="0.5,0.5,1.0,0.6" range="250" Flicker="0.3">
+                <sprite texture="Content/Items/Electricity/lightsprite.png" origin="0.5,0.5" />
+            </LightComponent>
+            <Fixable identifier="structure" />
+        </RepairTool>
+        <ItemContainer autofill="True" capacity="1" maxstacksize="1" hideitems="true">
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <Containable items="Spiritual_Water" />
+            <Containable items="batterycell" />
+            <Containable items="fulguriumbatterycell" />
+        </ItemContainer>
+        <Quality>
+            <QualityStat stattype="RepairToolStructureDamageMultiplier" value="0.3" />
+            <QualityStat stattype="RepairToolDeattachTimeMultiplier" value="0.3"/>
+        </Quality>
+    </Item>
+<!--
+
+    &lt;!&ndash;植物燃料&ndash;&gt;
+    <Item name="" identifier="Touhou_Plant_Fuel" Category="Fuel" Tags="smallitem,reactorfuel,fuelrod" maxstacksize="32" cargocontaineridentifier="metalcrate"
+          scale="0.5" spritecolor="255,200,70,255" >
+        <PreferredContainer primary="reactorcab"/>
+        <PreferredContainer secondary="nucleargun" minamount="1" maxamount="1" spawnprobability="1"/>
+        <PreferredContainer secondary="wreckreactorcab,abandonedreactorcab" minamount="1" maxamount="2" spawnprobability="0.6"/>
+        <PreferredContainer secondary="abandonedengcab,wreckengcab" amount="1" spawnprobability="0.05"/>
+        <Price baseprice="100" displaynonempty="true" minavailable="5">
+            <Price storeidentifier="merchantoutpost" />
+            <Price storeidentifier="merchantcity" minavailable="8" />
+            <Price storeidentifier="merchantresearch" />
+            <Price storeidentifier="merchantmilitary" />
+            <Price storeidentifier="merchantmine" />
+            <Price storeidentifier="merchantengineering" multiplier="0.9" minavailable="12" />
+            <Price storeidentifier="merchanttutorial" multiplier="0.5" minavailable="8" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="steel" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="10">
+            <RequiredSkill identifier="electrical" level="25" />
+            <RequiredItem identifier="steel" />
+            <RequiredItem identifier="Plant_Essential_Oil" amount="2" />
+            <RequiredItem identifier="Spiritual_Water" mincondition="0.049" usecondition="true"/>
+        </Fabricate>
+        <Sprite texture="Content/Items/Tools/tools.png" depth="0.55" sourcerect="410,1,19,68" />
+        <Body radius="6" height="55" density="20" />
+        <Holdable handle1="0,0" slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+            <StatusEffect type="OnContained" target="This" condition="-0.1">
+                <Conditional condition="lt 99"/>
+            </StatusEffect>
+            <StatusEffect type="OnContained" target="This" condition="-0.2" range="300">
+                <Conditional condition="lt 90"/>
+            </StatusEffect>
+            <StatusEffect type="Always" target="NearbyCharacters" range="300">
+                <Conditional condition="lt 90"/>
+                <Affliction identifier="radiationsickness" strength="0.15" />
+            </StatusEffect>
+            <StatusEffect type="OnContained" target="This" condition="-0.3">
+                <Conditional condition="lt 70"/>
+            </StatusEffect>
+            <StatusEffect type="OnContained" target="This" condition="-0.4">
+                <Conditional condition="lt 30"/>
+            </StatusEffect>
+            <StatusEffect type="Always" target="NearbyCharacters" range="300">
+                <Conditional condition="lt 30"/>
+                <Affliction identifier="radiationsickness" strength="0.3" />
+            </StatusEffect>
+        </Holdable>
+        <ItemContainer hideitems="true" capacity="1" itemrotation="90" drawinventory="false" canbeselected="false" SpawnWithId="nucleargunbolt" removecontaineditemsondeconstruct="true" showcontainedstateindicator="false">
+            <Containable items="nucleargunbolt" />
+            <StatusEffect type="OnUse" target="This" condition="-50.0" disabledeltatime="true">
+                <SpawnItem identifiers="nucleargunbolt" spawnposition="ThisInventory" />
+            </StatusEffect>
+        </ItemContainer>
+        <Quality>
+            <QualityStat stattype="Condition" value="0.05"/>
+        </Quality>
+    </Item>
+-->
+
+    <!--病气平愈护符-->
+    <Item name="" identifier="Illness_Recovery_Charm" tags="smallitem,mobileradio" subcategory="Touhou" category="Equipment" allowasextracargo="true" cargocontaineridentifier="metalcrate" maxstacksize="1" scale="0.25" >
+        <PreferredContainer primary="medcab"/>
+        <Price baseprice="1600" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="8"/>
+            <Price storeidentifier="merchantcity" minavailable="8" />
+            <Price storeidentifier="merchantresearch" minavailable="8" />
+            <Price storeidentifier="merchantmilitary" minavailable="8" />
+            <Price storeidentifier="merchantmine" minavailable="8"/>
+        </Price>
+        <Sprite texture="%ModDir%/Images/Tools/Illness_Recovery_Charm.png" sourcerect="0,0,128,128" depth="0.6" origin="0.5,0.5" />
+        <Body width="48" height="48" density="10" />
+        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="260" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect"/>
+        <Deconstruct time="3" chooserandom="false" amount="1" requireddeconstructor="Alchemy_Table">
+            <!--炼金桌内回收-->
+            <Item identifier="Mu_Alchemical" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="organicfiber" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Reiki_Stone" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+        </Deconstruct>
+        <!--如果添加新职业，也许会用到配方解锁-->
+        <!--        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" requiresrecipe="true">-->
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" >
+            <RequiredSkill identifier="Touhou_Magic" level="30" />
+            <RequiredItem identifier="Mu_Alchemical" />
+            <RequiredItem identifier="organicfiber" />
+            <RequiredItem identifier="Reiki_Stone" />
+        </Fabricate>
+        <WifiComponent range="65000.0" LinkToChat="true" MinChatMessageInterval="0.0" />
+        <ItemContainer capacity="1" maxstacksize="1" autoinject="true">
+            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
+            <Containable items="chem,syringe" />
+        </ItemContainer>
+        <Wearable limbtype="Head" slots="Any,Headset" msg="ItemMsgPickUpSelect" >
+            <sprite name="Headset Wearable" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.7" hideotherwearables="false" origin="0.5,0.5" />
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.02" Interval="1.0" disabledeltatime="true" >
+                <Conditional HealthPercentage="lt 100" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="damage" amount="0.15" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="1.5" disabledeltatime="true" >
+                <Conditional burn="gte 1" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="burn" amount="0.1" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="1.0" disabledeltatime="true" >
+                <Conditional bleeding="gte 1" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="bleeding" amount="0.2" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="1.0" Duration="1.0" >
+                <Conditional oxygenlow="gte 2" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="oxygenlow" amount="2" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="1.0" Duration="1.0" >
+                <Conditional HealthPercentage="lte 2" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="oxygenlow" amount="1" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="3.0" >
+                <Conditional psychosis="gte 5" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="psychosis" amount="0.9" />
+                <ReduceAffliction type="nausea" amount="5" />
+                <Affliction identifier="psychosisresistance" amount="5" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.01" Interval="1.0" disabledeltatime="true" >
+                <Conditional Reiki_Side_Effect="gt 0" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="Reiki_Side_Effect" amount="0.03" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="3.0" disabledeltatime="true" >
+                <Conditional hallucinating="gte 10" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="hallucinating" amount="20" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" Interval="5.0" Duration="5.0" >
+                <Conditional condition="gt 0" />
+                <Affliction identifier="Touhou_Water_Heart" amount="50" />
+            </StatusEffect>
+        </Wearable>
+        <Quality>
+            <QualityStat stattype="Condition" value="0.334" />
+        </Quality>
+    </Item>
+
+    <!--元素腰带-->
+    <Item name="元素腰带" identifier="Magic_Pouch" scale="0.3" subcategory="Touhou" category="Equipment" tags="mediumitem,mobilecontainer,tool,backpack,locker,container" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="medcab" />
+        <Price baseprice="1800" minleveldifficulty="10">
+            <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
+            <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="0.9" minavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmine" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmedical" multiplier="1.2" sold="false" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="organicfiber" amount="4"/>
+            <Item identifier="plastic" amount="2"/>
+            <Item identifier="Magic_Material" />
+            <Item identifier="Touhou_Base_Metal" amount="2"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
+            <RequiredSkill identifier="mechanical" level="20" />
+            <RequiredSkill identifier="Touhou_Magic" level="20" />
+            <Item identifier="organicfiber" amount="4"/>
+            <Item identifier="plastic" amount="2"/>
+            <Item identifier="Tu_Alchemical" />
+            <Item identifier="Magic_Material" />
+            <Item identifier="Touhou_Base_Metal" amount="2"/>
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Magic_Pouch.png" depth="0.7" sourcerect="0,0,160,136" origin="0.5,0.5" />
+        <Body width="160" height="100" density="10" />
+        <ItemContainer autofill="False" capacity="0" maxstacksize="0" containedstateindicatorslot="0">
+            <Containable identifiers="Elements_Book_Ammo" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <SlotIcon slotindex="0" texture="%ModDir%/Images/Tools/Element_In_Bottle_Indicator.png" sourcerect="0,0,108,288" origin="0.5,0.5" />
+            <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Element_In_Bottle_Indicator.png" sourcerect="0,0,108,288" origin="0.5,0.5" />
+            <SlotIcon slotindex="2" texture="%ModDir%/Images/Tools/Element_In_Bottle_Indicator.png" sourcerect="0,0,108,288" origin="0.5,0.5" />
+            <SubContainer capacity="3" depth="0.5" maxstacksize="1" displaycontainedstatus="true">
+                <Containable items="Elements_Book_Ammo" />
+                <Containable items="Mu_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained">
+                        <Conditional condition="lt 5.0" />
+                        <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" OxygenAvailable="1000.0" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Mu_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <Affliction identifier="Touhou_Mu_Elements" amount="3"/>
+                        <ReduceAffliction identifier="psychosis" amount="0.6"/>
+                        <ReduceAffliction identifier="oxygenlow" amount="1"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" OxygenAvailable="1000.0" targetslot="1" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Mu_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <Affliction identifier="Touhou_Mu_Elements" amount="3"/>
+                        <ReduceAffliction identifier="psychosis" amount="0.6"/>
+                        <ReduceAffliction identifier="oxygenlow" amount="1"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" OxygenAvailable="1000.0" targetslot="2" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Mu_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <Affliction identifier="Touhou_Mu_Elements" amount="3"/>
+                        <ReduceAffliction identifier="psychosis" amount="0.6"/>
+                        <ReduceAffliction identifier="oxygenlow" amount="1"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Huo_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Huo_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="burn" amount="0.15"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="1" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Huo_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="burn" amount="0.15"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="2" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Huo_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="burn" amount="0.15"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Tu_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Tu_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="damage" amount="0.15"/>
+                        <ReduceAffliction identifier="stun" amount="0.1"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="1" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Tu_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="damage" amount="0.15"/>
+                        <ReduceAffliction identifier="stun" amount="0.1"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="2" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Tu_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="damage" amount="0.15"/>
+                        <ReduceAffliction identifier="stun" amount="0.1"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Jin_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Jin_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="bleeding" amount="0.15"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="1" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Jin_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="bleeding" amount="0.15"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="2" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Jin_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="bleeding" amount="0.15"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Shui_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Shui_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="burn" amount="0.15"/>
+                        <ReduceAffliction type="poison" amount="0.3"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="1" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Shui_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="burn" amount="0.15"/>
+                        <ReduceAffliction type="poison" amount="0.3"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="2" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Shui_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="burn" amount="0.15"/>
+                        <ReduceAffliction type="poison" amount="0.3"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Yang_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Yang_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction identifier="psychosis" amount="1"/>
+                        <ReduceAffliction identifier="oxygenlow" amount="1"/>
+                        <ReduceAffliction type="burn" amount="0.1"/>
+                        <ReduceAffliction type="poison" amount="0.3"/>
+                        <ReduceAffliction type="damage" amount="0.15"/>
+                        <ReduceAffliction identifier="stun" amount="0.1"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="1" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Yang_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction identifier="psychosis" amount="1"/>
+                        <ReduceAffliction identifier="oxygenlow" amount="1"/>
+                        <ReduceAffliction type="burn" amount="0.1"/>
+                        <ReduceAffliction type="poison" amount="0.3"/>
+                        <ReduceAffliction type="damage" amount="0.15"/>
+                        <ReduceAffliction identifier="stun" amount="0.1"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="2" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Yang_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction identifier="psychosis" amount="1"/>
+                        <ReduceAffliction identifier="oxygenlow" amount="1"/>
+                        <ReduceAffliction type="burn" amount="0.1"/>
+                        <ReduceAffliction type="poison" amount="0.3"/>
+                        <ReduceAffliction type="damage" amount="0.15"/>
+                        <ReduceAffliction identifier="stun" amount="0.1"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Yin_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Yin_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="bleeding" amount="0.2"/>
+                        <ReduceAffliction type="burn" amount="0.2"/>
+                        <ReduceAffliction type="poison" amount="0.4"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="1" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Yin_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="bleeding" amount="0.2"/>
+                        <ReduceAffliction type="burn" amount="0.2"/>
+                        <ReduceAffliction type="poison" amount="0.4"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="2" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Yin_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="bleeding" amount="0.2"/>
+                        <ReduceAffliction type="burn" amount="0.2"/>
+                        <ReduceAffliction type="poison" amount="0.4"/>
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+            <SubContainer capacity="12" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem,mountableweapon" excludeditems="backpack,crate"/>
+            </SubContainer>
+        </ItemContainer>
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
+                  canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
+        <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
+
+            <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Magic_Pouch.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
+                    inherittexturescale="false" hideotherwearables="false" sourcerect="0,0,160,136" origin="0.6,0.0" scale="0.23" />
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="0.0" UseHullOxygen="true" />
+
+            <StatusEffect type="OnWearing" target="Character" comparison="And" >
+                <Conditional skillrequirement="true" Touhou_Magic="gt 60" />
+                <Conditional Touhou_Magic_Boost="lte 149" />
+                <Affliction identifier="Touhou_Magic_Boost" amount="2" />
+            </StatusEffect>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.65" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.8" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.5" probabilitymultiplier="0.5" damagesound="LimbArmor" />
+            <SkillModifier skillidentifier="mechanical" skillvalue="5" />
+            <SkillModifier skillidentifier="electrical" skillvalue="5" />
+            <SkillModifier skillidentifier="Touhou_Magic" skillvalue="10" />
+        </Wearable>
+        <aitarget maxsightrange="1500" />
+    </Item>
+
+    <!--文文的记者证-->
+    <Item name="文文的记者证" identifier="Aya_Press_Card" category="Misc" subcategory="Touhou" maxstacksize="32" tags="smallitem" scale="0.25" cargocontaineridentifier="metalcrate" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Aya_Press_Card.png" sourcerect="0,0,108,108" depth="0.55" />
+        <Body width="96" height="96" density="10" />
+        <Deconstruct time="0.1"/>
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnSecondaryUse" target="This" Condition="-33" />
+            <StatusEffect type="OnBroken" target="This" disabledeltatime="true" >
+                <TriggerEvent identifier="Aya_Press_Card_Select_Event" />
+                <RemoveItem />
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" condition="3.0" >
+                <Conditional condition="gt 10"/>
+            </StatusEffect>
+        </Holdable>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--文文的信物-->
+    <Item name="文文的信物" identifier="Touhou_Aya_Token" category="Misc" subcategory="Touhou" maxstacksize="32" tags="smallitem" scale="0.35" cargocontaineridentifier="metalcrate" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Aya_Token.png" sourcerect="0,0,108,108" depth="0.55" />
+        <Body width="96" height="96" density="10" />
+        <Fabricate suitablefabricators="fabricator" requiredtime="4" >
+            <RequiredItem identifier="Aya_Press_Card" />
+            <RequiredItem identifier="Aya_News" />
+            <RequiredItem identifier="Aya_Maple_Leaves" />
+        </Fabricate>
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnSecondaryUse" target="This,Character" delay="0.2" Condition="-90" >
+                <Conditional Grunt_Security_Tengu="gt 2"/>
+                <Conditional Wind_God_Girl="gt 2"/>
+                <Affliction identifier="Touhou_Aya_Token_Effect" strength="100" />
+            </StatusEffect>
+            <StatusEffect type="OnBroken" target="This" disabledeltatime="true" >
+                <RemoveItem />
+            </StatusEffect>
+        </Holdable>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--遗物袋收容箱-->
+    <Item name="遗物袋收容箱" identifier="Touhou_Duffel_Bag_Box" subcategory="Touhou" category="Equipment" tags="mobilecontainer" showcontentsintooltip="true"
+          fireproof="true" waterproof="true" impactsoundtag="impact_soft" scale="0.5">
+        <Deconstruct time="2" >
+            <Item identifier="Maoyu_Duffel_Bag" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="10" >
+            <RequiredItem identifier="Maoyu_Duffel_Bag" />
+            <RequiredItem identifier="organicfiber" />
+        </Fabricate>
+        <Sprite texture="Content/Items/Containers/containers.png" depth="0.54" sourcerect="561,377,151,86" origin="0.5,0.5" />
+        <Body width="150" height="75" density="25" />
+        <Holdable slots="Any,RightHand+LeftHand" holdpos="0,-80" handle1="-30,14" handle2="30,14" aimable="false" msg="ItemMsgPickUpSelect" />
+        <ItemContainer capacity="24" maxstacksize="63" slotsperrow="6" autofill="true" keepopenwhenequipped="true" canbeselected="false" movableframe="true">
+            <Containable items="duffelbag"  />
+        </ItemContainer>
+    </Item>
+
+    <!--糖果袋-->
+    <Item name="糖果袋" identifier="Touhou_Candy_Pouch" scale="0.3" subcategory="Touhou" category="Equipment" tags="smallitem,tool" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="medcab" />
+        <Price baseprice="200" >
+            <Price storeidentifier="merchantoutpost" multiplier="1.4"  />
+            <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="0.9" minavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.2"  />
+            <Price storeidentifier="merchantmine" multiplier="1.2" />
+            <Price storeidentifier="merchantmedical" multiplier="1.2"  />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="organicfiber" amount="2"/>
+            <Item identifier="plastic" amount="1"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
+            <RequiredSkill identifier="mechanical" level="20" />
+            <RequiredSkill identifier="Touhou_Magic" level="20" />
+            <Item identifier="organicfiber" amount="4"/>
+            <Item identifier="plastic" amount="2"/>
+        </Fabricate>
+        <Sprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="841,704,49,65" depth="0.55" origin="0.5,0.5" />
+        <Body width="45" height="60" density="12" />
+        <ItemContainer autofill="False" capacity="8" maxstacksize="63" hideitems="true" slotsperrow="2" >
+            <Containable items="Touhou_Candy" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+        </ItemContainer>
+        <Holdable slots="Any,RightHand+LeftHand" holdpos="0,0" handle1="0,0" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
+                  canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
+        <aitarget maxsightrange="1500" />
+    </Item>
+
+
+    <!--元素腰带-医疗拓展-->
+    <Item name="元素腰带-医疗拓展" identifier="Magic_Pouch_Medical_Expansion" scale="0.3" subcategory="Touhou" category="Equipment" tags="mediumitem,mobilecontainer,tool,backpack,locker,container,refrigerated" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="medcab" />
+        <Price baseprice="3000" minleveldifficulty="15">
+            <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
+            <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="0.9" minavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmine" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmedical" multiplier="1.2" sold="false" />
+        </Price>
+        <Deconstruct time="5">
+            <Item identifier="Magic_Material" amount="2" />
+            <Item identifier="Magic_Pouch" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="15">
+            <RequiredSkill identifier="medical" level="60" />
+            <RequiredSkill identifier="Touhou_Magic" level="60" />
+            <Item identifier="Magic_Pouch" />
+            <Item identifier="organicfiber" amount="4"/>
+            <Item identifier="Mu_Alchemical" amount="4" />
+            <Item identifier="Score_Point" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Magic_Pouch_Medical_Expansion.png" sourcerect="0,0,160,136" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Magic_Pouch.png" depth="0.7" sourcerect="0,0,160,136" origin="0.5,0.5" />
+        <Body width="160" height="100" density="10" />
+        <ItemContainer autofill="False" capacity="0" maxstacksize="0" slotsperrow="4" containedstateindicatorslot="0">
+            <Containable identifiers="Elements_Book_Ammo" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <SlotIcon slotindex="0" texture="%ModDir%/Images/Tools/Element_In_Bottle_Indicator.png" sourcerect="0,0,108,288" origin="0.5,0.5" />
+            <SubContainer capacity="1" depth="0.5" maxstacksize="1" displaycontainedstatus="true">
+                <Containable items="Elements_Book_Ammo" />
+                <Containable items="Mu_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained">
+                        <Conditional condition="lt 5.0" />
+                        <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" OxygenAvailable="1000.0" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Mu_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <Affliction identifier="Touhou_Mu_Elements" amount="3"/>
+                        <ReduceAffliction identifier="psychosis" amount="0.6"/>
+                        <ReduceAffliction identifier="oxygenlow" amount="1"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Huo_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Huo_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="burn" amount="0.15"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Tu_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Tu_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="damage" amount="0.15"/>
+                        <ReduceAffliction identifier="stun" amount="0.1"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Jin_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Jin_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="bleeding" amount="0.15"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Shui_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Shui_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="burn" amount="0.15"/>
+                        <ReduceAffliction type="poison" amount="0.3"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Yang_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Yang_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction identifier="psychosis" amount="1"/>
+                        <ReduceAffliction identifier="oxygenlow" amount="1"/>
+                        <ReduceAffliction type="burn" amount="0.1"/>
+                        <ReduceAffliction type="poison" amount="0.3"/>
+                        <ReduceAffliction type="damage" amount="0.15"/>
+                        <ReduceAffliction identifier="stun" amount="0.1"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Yin_Alchemical">
+                    <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.01" targetslot="0" Interval="10.0" Duration="10.0">
+                        <RequiredItem items="Yin_Alchemical" type="Contained" />
+                        <Conditional IsDead="false" />
+                        <ReduceAffliction type="bleeding" amount="0.2"/>
+                        <ReduceAffliction type="burn" amount="0.2"/>
+                        <ReduceAffliction type="poison" amount="0.4"/>
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+            <SubContainer capacity="23" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,Power_Bank,chem,medical,refrigerated,stasisbag" excludeditems="backpack,toolbelt,toolbox,bandolier,organ"/>
+            </SubContainer>
+        </ItemContainer>
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
+                  canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
+        <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
+
+            <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Magic_Pouch.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
+                    inherittexturescale="false" hideotherwearables="false" sourcerect="0,0,160,136" origin="0.6,0.0" scale="0.23" />
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="0.0" UseHullOxygen="true" />
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.95" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.9" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.6" probabilitymultiplier="0.5" damagesound="LimbArmor" />
+            <SkillModifier skillidentifier="medical" skillvalue="15" />
+            <SkillModifier skillidentifier="Touhou_Magic" skillvalue="15" />
+        </Wearable>
+        <aitarget maxsightrange="1500" />
+    </Item>
+
+    <!--河童工具枪-->
+    <Item name="河童工具枪" identifier="Touhou_Kappa_Welding_Tool" category="Equipment" subcategory="Touhou"
+          Tags="smallitem,weldingequipment,tool,mountableweapon,Welding_Mode_Parent,Laser_Mode_Parent,Normal_Alchemical_Metal"
+          cargocontaineridentifier="metalcrate" description="" Scale="0.75" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="wreckstoragecab,abandonedstoragecab,piratestoragecab" amount="1" spawnprobability="0.04"/>
+        <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab,outpostengcab" amount="1" spawnprobability="0.04"/>
+        <Price baseprice="4000">
+            <Price storeidentifier="merchantoutpost" maxavailable="3" />
+            <Price storeidentifier="merchantcity" maxavailable="2" />
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3" />
+            <Price storeidentifier="merchantengineering" maxavailable="1" multiplier="0.9"/>
+        </Price>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Kappa_Welding_Tool.png" sourcerect="0,0,90,76" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Kappa_Welding_Tool.png" depth="0.55" sourcerect="90,0,106,58" origin="0.5,0.5" />
+        <!-- the item takes 10 seconds to break down in a deconstructor and turns into steel and plastic -->
+        <Deconstruct time="10">
+            <Item identifier="steel" amount="4" />
+            <Item identifier="plastic" amount="4" />
+            <Item identifier="Score_Point" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="15">
+            <RequiredSkill identifier="mechanical" level="30" />
+            <RequiredItem identifier="steel" amount="6" />
+            <RequiredItem identifier="plastic" amount="4" />
+            <RequiredItem identifier="Touhou_Base_Metal" amount="2" />
+            <RequiredItem identifier="Score_Point" />
+        </Fabricate>
+        <!-- physics body -->
+        <Body width="120" height="60" density="10" />
+        <!-- the character will hold the item 50 pixels in front of him, with his hands at the handle1 and handle2 positions -->
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="30,0" handle1="-15,-16" handle2="-10,-6" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnActive" target="Character">
+                <Conditional Candid_Friend="gt 0"/>
+                <Affliction identifier="Nitori_Weapons" strength="50" />
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="Character">
+                <Conditional Candid_Friend="eq 0"/>
+                <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100" />
+            </StatusEffect>
+        </Holdable>
+        <RepairTool firedamage="10.0" structurefixamount="3.5" range="200" barrelpos="25,5" particles="weld" repairmultiple="true" repairthroughwalls="false" combatpriority="20" levelwallfixamount="-0.8" targetforce="10">
+            <!-- the item must contain a welding fuel tank for it to work -->
+            <RequiredItems items="weldingtoolfuel,Touhou_Fix_Foamg_Tank" type="Contained" />
+            <RequiredItems items="Welding_Mode" type="Contained" />
+            <RequiredSkill identifier="mechanical" level="70" />
+            <ParticleEmitter particle="weld" particlespersecond="50" copyentityangle="true"  scalemultiplier="1.4,1.1"/>
+            <ParticleEmitterHitStructure particle="weldspark" particlespersecond="200" anglemin="-40" anglemax="40" velocitymin="200" velocitymax="800" />
+            <ParticleEmitterHitStructure particle="GlowDot" particlespersecond="60" emitinterval="0.7" particleamount="10" scalemin="0.9" scalemax="1.0" anglemin="0" anglemax="360" velocitymin="10" velocitymax="50" />
+            <ParticleEmitterHitStructure particle="MistSmoke" particlespersecond="20" anglemin="-10" anglemax="10" velocitymin="0" velocitymax="50" />
+            <ParticleEmitterHitItem identifiers="door,hatch,ductblock" particle="weldspark" particlespersecond="200" anglemin="-40" anglemax="40" velocitymin="200" velocitymax="800" />
+            <ParticleEmitterHitItem identifiers="door,hatch,ductblock" particle="MistSmoke" particlespersecond="20" anglemin="-10" anglemax="10" velocitymin="10" velocitymax="100" />
+            <ParticleEmitterHitCharacter particle="fleshsmoke" particlespersecond="3" anglemin="-5" anglemax="5" velocitymin="0" velocitymax="50" />
+            <sound file="Content/Items/Tools/WeldingLoop.ogg" type="OnUse" range="500.0" loop="true" />
+            <!-- when using, the contained welding fuel tank will detoriate (= lose fuel) -->
+            <StatusEffect type="OnUse" targettype="Contained" targets="weldingfueltank" Condition="-2.7" />
+            <StatusEffect type="OnUse" targettype="Contained" targets="incendiumfueltank" Condition="-1.5" />
+            <StatusEffect type="OnUse" targettype="Contained" targets="Touhou_Fix_Foamg_Tank" Condition="-0.3" />
+            <!-- welding a door, it will get stuck after a while -->
+            <StatusEffect type="OnSuccess" targettype="UseTarget" targets="weldable" Stuck="15.0" />
+            <StatusEffect type="OnSuccess" targettype="UseTarget" targets="item" Condition="-9.0">
+                <Conditional HasTag="neq weldable"/>
+            </StatusEffect>
+            <!-- do burn damage to characters -->
+            <StatusEffect type="OnUse" target="UseTarget" >
+                <Affliction identifier="burn" amount="0.1" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="Character,This" disabledeltatime="true" >
+                <RequiredItems items="Touhou_Fix_Foamg_Tank" type="Contained" />
+                <Affliction identifier="Touhou_Fix_Foamg_Tank_Effect" amount="100" />
+            </StatusEffect>
+            <!-- the tool can fix structures, i.e. walls and windows -->
+            <Fixable identifier="structure" />
+            <NonFixable identifier="thalamus,ice" />
+            <LightComponent LightColor="255,229,178,100" Range="200" Flicker="0.5">
+                <sprite texture="Content/Items/Electricity/lightsprite.png" origin="0.5,0.5" />
+            </LightComponent>
+        </RepairTool>
+        <!--武器参数-->
+        <RangedWeapon barrelpos="30,5" spread="1" unskilledspread="8" reload="0.2" maxchargetime="0.6" combatPriority="50" drawhudwhenequipped="true"
+                      crosshairscale="0.4" penetrationmultiplier="1.0" penetration="0.2" >
+            <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+            <ParticleEmitterCharge particle="ElectricShock" particlespersecond="30" scalemultiplier="0.5,0.5" scalemin="0.1" scalemax="0.2" anglemin="0" anglemax="359" Distance="10" />
+            <ChargeSound file="Content/Items/JobGear/Engineer/WEAPONS_rapidFissileAcceleratorStartLoop.ogg" range="200" />
+            <StatusEffect type="OnUse" target="This">
+                <Explosion range="100.0" force="1.0" shockwave="false" smoke="false" flames="false" sparks="false" underwaterbubble="false" camerashake="2.0" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" forceplaysounds="true">
+                <Sound file="%ModDir%/Sounds/Weapons/Touhou_Kappa_Welding_Tool/01.ogg" type="OnUse" range="300" Volume="0.6" selectionmode="Random" />
+                <Sound file="%ModDir%/Sounds/Weapons/Touhou_Kappa_Welding_Tool/02.ogg" type="OnUse" range="300" Volume="0.6" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="Contained" >
+                <RequiredItems items="Touhou_Kappa_Welding_Tool_Ammo" type="Contained" />
+                <Use />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" reload="0.2" maxchargetime="0.6" setvalue="true" >
+                <RequiredItems items="Touhou_Nuclear_Battery" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" reload="0.1" maxchargetime="0.3" setvalue="true" >
+                <RequiredItems items="Touhou_Nuclear_Energy_Capacitor_Magazine" type="Contained" />
+            </StatusEffect>
+            <RequiredSkill identifier="mechanical" level="70" />
+            <RequiredItems items="Touhou_Kappa_Welding_Tool_Ammo" type="Contained" />
+            <RequiredItems items="Laser_Mode" type="Contained" />
+        </RangedWeapon>
+
+<!--        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.11,0.11" anchor="BottomLeft" absoluteoffset="20,196" style="ItemUI" />
+            <Button text="焊接器">
+                <StatusEffect type="OnUse" target="This" tags="Welding_Mode_Parent" setvalue="true" disabledeltatime="true" />
+            </Button>
+            <Button text="修复射线">
+                <StatusEffect type="OnUse" target="This" tags="Laser_Mode_Parent" setvalue="true" disabledeltatime="true" />
+            </Button>
+        </CustomInterface>-->
+        <ItemContainer capacity="1" maxstacksize="1" hideitems="false" itempos="12,-18" containedspritedepth="0.56" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
+            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+            <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="320,448,64,64" origin="0.5,0.5" />
+            <Containable items="weldingtoolfuel,incendiumfueltank,Touhou_Fix_Foamg_Tank,Touhou_Kappa_Welding_Tool_Ammo" />
+            <StatusEffect type="Always" target="Contained" targets="weldingtoolfuel,incendiumfueltank,Touhou_Fix_Foamg_Tank" tags="Welding_Mode" setvalue="true">
+                <Conditional hastag="Welding_Mode_Parent" targetcontainer="true" />
+            </StatusEffect>
+            <StatusEffect type="Always" target="Contained" targets="Touhou_Kappa_Welding_Tool_Ammo" tags="Laser_Mode" setvalue="true">
+                <Conditional hastag="Laser_Mode_Parent" targetcontainer="true" />
+            </StatusEffect>
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="flashlight" hide="false" itempos="25,0" setactive="true"/>
+            </SubContainer>
+        </ItemContainer>
+        <aitarget sightrange="2000" soundrange="500" fadeouttime="3" />
+        <Quality>
+            <QualityStat stattype="RepairToolStructureRepairMultiplier" value="0.0834"/>
+            <QualityStat stattype="firingratemultiplier" value="0.05"/>
+            <QualityStat stattype="firepowermultiplier" value="0.0667"/>
+        </Quality>
+        <SkillRequirementHint identifier="mechanical" level="70" />
+    </Item>
+
+    <!--固化泡沫罐-->
+    <Item name="固化泡沫罐" identifier="Touhou_Fix_Foamg_Tank" category="Equipment,Fuel" subcategory="Touhou" maxstacksize="32" maxstacksizecharacterinventory="8"
+          MaxStackSizeHoldableOrWearableInventory="8" Tags="smallitem,Touhou_Fix_Foamg_Tank,weldingfuel" cargocontaineridentifier="metalcrate"
+          scale="0.4" impactsoundtag="impact_metal_light" description="高度压缩的固化泡沫，专用于河童工具枪的船体修复，相当耐用的同时，还能加快约40%的修复速度。\n——“外物虽好，也不要忘了锻炼自身的能力。”">
+        <PreferredContainer primary="Touhou_Kappa_Welding_Tool" amount="1" spawnprobability="1" />
+        <PreferredContainer primary="engcab" minamount="1" maxamount="2" spawnprobability="0.05" notcampaign="true"/>
+        <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab,outpostengcab,beaconengcab" minamount="1" maxamount="3" spawnprobability="0.05"/>
+        <PreferredContainer primary="wreckstoragecab,abandonedstoragecab,piratestoragecab" amount="1" spawnprobability="0.05"/>
+        <PreferredContainer secondary="engcab"/>
+        <Price baseprice="1000" minleveldifficulty="15">
+            <Price storeidentifier="merchantoutpost" maxavailable="3" />
+            <Price storeidentifier="merchantcity" maxavailable="3" />
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="7" />
+            <Price storeidentifier="merchantengineering" maxavailable="5" multiplier="0.9"/>
+            <Price storeidentifier="merchanttutorial" multiplier="0.5" maxavailable="1" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="aluminium" amount="4" />
+            <Item identifier="rubber" amount="3" />
+            <Item identifier="steel" amount="4" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="10">
+            <RequiredSkill identifier="mechanical" level="70" />
+            <RequiredItem identifier="aluminium" amount="4" />
+            <RequiredItem identifier="rubber" amount="6" />
+            <RequiredItem identifier="fixfoamgrenade" amount="2" />
+            <RequiredItem identifier="steel" amount="2" />
+        </Fabricate>
+        <Fabricate suitablefabricators="fabricator" displayname="recycleitem" requiredtime="5">
+            <RequiredSkill identifier="mechanical" level="60" />
+            <RequiredItem identifier="Touhou_Fix_Foamg_Tank" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
+            <RequiredItem identifier="sodium" />
+            <RequiredItem identifier="fixfoamgrenade" />
+            <RequiredItem identifier="aluminium" amount="4" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Fix_Foamg_Tank.png" depth="0.55" sourcerect="0,0,40,80" origin="0.5,0.5" />
+        <Body width="40" height="80" density="10" />
+        <Holdable canbecombined="true" slots="Any,RightHand,LeftHand" holdpos="30,-15" handle1="0,5" handle2="0,-5" msg="ItemMsgPickUpSelect" />
+        <Quality>
+            <QualityStat stattype="Condition" value="0.05"/>
+        </Quality>
+        <Upgrade gameversion="0.10.0.0" scale="0.5" />
+    </Item>
+
+
+    <!--河能燃料-->
+    <Item name="“河能燃料”" identifier="Touhou_Nuclear_Battery" scale="0.5" subcategory="Touhou" category="Equipment" maxstacksize="8" cargocontaineridentifier="metalcrate"
+          tags="smallitem,Touhou_Kappa_Welding_Tool_Ammo,Normal_Alchemical_Metal" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="Touhou_Kappa_Welding_Tool" amount="1" spawnprobability="1" />
+        <Price baseprice="2000" minleveldifficulty="10">
+            <Price storeidentifier="merchantoutpost" maxavailable="3" sold="false" />
+            <Price storeidentifier="merchantcity" maxavailable="2" />
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3" />
+            <Price storeidentifier="merchantengineering" maxavailable="1" multiplier="0.9"/>
+        </Price>
+        <Deconstruct time="6">
+            <Item identifier="steel" amount="6" />
+            <Item identifier="titaniumaluminiumalloy" amount="6" />
+            <Item identifier="fulgurium" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="30" >
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredSkill identifier="mechanical" level="70" />
+            <RequiredItem identifier="fixfoamgrenade" />
+            <RequiredItem identifier="aluminium" amount="6" />
+            <RequiredItem identifier="titaniumaluminiumalloy" amount="6" />
+            <RequiredItem identifier="fulgurium" />
+            <RequiredItem identifier="Tu_Alchemical" />
+            <RequiredItem identifier="fuelrod" />
+            <RequiredItem identifier="thoriumfuelrod" />
+            <RequiredItem identifier="Score_Point" />
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem" >
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredSkill identifier="mechanical" level="70" />
+            <RequiredItem identifier="fuelrod" mincondition="0.5" maxcondition="1.0" usecondition="false" />
+            <RequiredItem identifier="thoriumfuelrod" mincondition="0.5" maxcondition="1.0" usecondition="false" />
+            <RequiredItem identifier="fulgurium" />
+            <RequiredItem identifier="Tu_Alchemical" />
+            <RequiredItem identifier="Touhou_Nuclear_Battery" mincondition="0.0" maxcondition="0.5" usecondition="false" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Nuclear_Battery.png" sourcerect="0,0,28,40" depth="0.45" origin="0.5,0.5" />
+        <Body width="28" height="40" density="10" />
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
+        <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Touhou_Repair_Light00" removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="Touhou_Repair_Light" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <StatusEffect type="OnUse" target="This" condition="-0.4" disabledeltatime="true" >
+                <Conditional qualitylevel="eq 0"/>
+                <SpawnItem identifiers="Touhou_Repair_Light00" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" condition="-0.4" disabledeltatime="true" >
+                <Conditional qualitylevel="eq 1"/>
+                <SpawnItem identifiers="Touhou_Repair_Light01" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" condition="-0.4" disabledeltatime="true" >
+                <Conditional qualitylevel="eq 2"/>
+                <SpawnItem identifiers="Touhou_Repair_Light02" spawnposition="ThisInventory" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" condition="-0.4" disabledeltatime="true" >
+                <Conditional qualitylevel="eq 3"/>
+                <SpawnItem identifiers="Touhou_Repair_Light03" spawnposition="ThisInventory" />
+            </StatusEffect>
+        </ItemContainer>
+        <Quality>
+            <QualityStat stattype="Condition" value="0.334"/>
+            <QualityStat stattype="explosionradius" value="0.1"/>
+            <QualityStat stattype="explosiondamage" value="0.2"/>
+        </Quality>
+    </Item>
+
+<!--爆炸范围修复修正值：20-->
+<!--爆炸结构修复修正值：5-->
+    <!--修复光线00-->
+    <Item name="" identifier="Touhou_Repair_Light00" category="Weapon" tags="Touhou_Repair_Light" scale="0.5" sonarsize="0.5" hideinmenus="true" >
+        <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55" />
+        <Body width="170" height="10" density="10" />
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
+            <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.4" colormultiplier="160,200,160,160"/>
+            <Attack structuredamage="-8" targetforce="1" targetimpulse="1">
+                <Affliction identifier="burn" strength="0.1" />
+            </Attack>
+            <StatusEffect type="OnImpact" target="UseTarget">
+                <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="0" anglemax="360" velocitymin="100" velocitymax="500" scalemin="0.1" scalemax="0.2" />
+                <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
+                <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
+                <Explosion range="250" ballastfloradamage="100" structuredamage="-40" force="1.0" flames="false" smoke="true" sparks="false"
+                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
+                    <Affliction identifier="burn" strength="0.25" />
+                </Explosion>
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="limb" >
+                <Conditional speciesgroup="neq human"/>
+                <Affliction identifier="burn" strength="20" />
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="UseTarget" >
+                <Conditional entitytype="eq Structure"/>
+                <Conditional hastag="eq door"/>
+                <ParticleEmitter particle="spark" copyentityangle="true" anglemin="-10" anglemax="10" particleamount="5" velocitymin="-10" velocitymax="-200" scalemin="0.5" scalemax="1" />
+            </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This">
+                <Remove />
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
+    <!--修复光线01-->
+    <Item name="" identifier="Touhou_Repair_Light01" category="Weapon" tags="Touhou_Repair_Light" scale="0.5" sonarsize="0.5" hideinmenus="true" >
+        <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55" />
+        <Body width="170" height="10" density="10" />
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
+            <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.4" colormultiplier="120,200,120,160"/>
+            <Attack structuredamage="-9.6" targetforce="2" targetimpulse="2">
+                <Affliction identifier="burn" strength="0.1" />
+            </Attack>
+            <StatusEffect type="OnImpact" target="UseTarget">
+                <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="0" anglemax="360" velocitymin="100" velocitymax="500" scalemin="0.1" scalemax="0.2" />
+                <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
+                <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
+                <Explosion range="295" ballastfloradamage="200" structuredamage="-52" force="1.0" flames="false" smoke="true" sparks="false"
+                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
+                    <Affliction identifier="burn" strength="0.25" />
+                </Explosion>
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="limb" >
+                <Conditional speciesgroup="neq human"/>
+                <Affliction identifier="burn" strength="30" />
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="UseTarget" >
+                <Conditional entitytype="eq Structure"/>
+                <Conditional hastag="eq door"/>
+                <ParticleEmitter particle="spark" copyentityangle="true" anglemin="-10" anglemax="10" particleamount="5" velocitymin="-10" velocitymax="-200" scalemin="0.5" scalemax="1" />
+            </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This">
+                <Remove />
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
+    <!--修复光线02-->
+    <Item name="" identifier="Touhou_Repair_Light02" category="Weapon" tags="Touhou_Repair_Light" scale="0.5" sonarsize="0.5" hideinmenus="true" >
+        <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55" />
+        <Body width="170" height="10" density="10" />
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
+            <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.4" colormultiplier="80,160,80,180"/>
+            <Attack structuredamage="-11.2" targetforce="3" targetimpulse="3">
+                <Affliction identifier="burn" strength="0.1" />
+            </Attack>
+            <StatusEffect type="OnImpact" target="UseTarget">
+                <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="0" anglemax="360" velocitymin="100" velocitymax="500" scalemin="0.1" scalemax="0.2" />
+                <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
+                <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
+                <Explosion range="328" ballastfloradamage="300" structuredamage="-63" force="1.0" flames="false" smoke="true" sparks="false"
+                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
+                    <Affliction identifier="burn" strength="0.25" />
+                </Explosion>
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="limb" >
+                <Conditional speciesgroup="neq human"/>
+                <Affliction identifier="burn" strength="40" />
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="UseTarget" >
+                <Conditional entitytype="eq Structure"/>
+                <Conditional hastag="eq door"/>
+                <ParticleEmitter particle="spark" copyentityangle="true" anglemin="-10" anglemax="10" particleamount="5" velocitymin="-10" velocitymax="-200" scalemin="0.5" scalemax="1" />
+            </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This">
+                <Remove />
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
+    <!--修复光线03-->
+    <Item name="" identifier="Touhou_Repair_Light03" category="Weapon" tags="Touhou_Repair_Light" scale="0.5" sonarsize="0.5" hideinmenus="true" >
+        <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55" />
+        <Body width="170" height="10" density="10" />
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
+            <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.4" colormultiplier="20,150,20,200"/>
+            <Attack structuredamage="-12.8" targetforce="4" targetimpulse="4">
+                <Affliction identifier="burn" strength="0.1" />
+            </Attack>
+            <StatusEffect type="OnImpact" target="UseTarget">
+                <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="0" anglemax="360" velocitymin="100" velocitymax="500" scalemin="0.1" scalemax="0.2" />
+                <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
+                <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
+                <Explosion range="361" ballastfloradamage="400" structuredamage="-72" force="1.0" flames="false" smoke="true" sparks="false"
+                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
+                    <Affliction identifier="burn" strength="0.25" />
+                </Explosion>
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="limb" >
+                <Conditional speciesgroup="neq human"/>
+                <Affliction identifier="burn" strength="50" />
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="UseTarget" >
+                <Conditional entitytype="eq Structure"/>
+                <Conditional hastag="eq door"/>
+                <ParticleEmitter particle="spark" copyentityangle="true" anglemin="-10" anglemax="10" particleamount="5" velocitymin="-10" velocitymax="-200" scalemin="0.5" scalemax="1" />
+            </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This">
+                <Remove />
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
+
+    <!--核能电容弹匣-->
+    <Item name="“核能电容弹匣”" identifier="Touhou_Nuclear_Energy_Capacitor_Magazine" scale="0.32" subcategory="Touhou" category="Weapon"
+          maxstacksize="16" maxstacksizecharacterinventory="4" cargocontaineridentifier="metalcrate"
+          tags="smallitem,Touhou_Kappa_Welding_Tool_Ammo" impactsoundtag="impact_metal_light" >
+        <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.08" />
+        <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.05" />
+        <PreferredContainer secondary="wreckweaponholder" amount="1" spawnprobability="0.04" />
+        <PreferredContainer secondary="armcab" />
+        <Price baseprice="1500" minleveldifficulty="20">
+            <Price storeidentifier="merchantoutpost" maxavailable="3" sold="false" />
+            <Price storeidentifier="merchantcity" maxavailable="2" />
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3" />
+            <Price storeidentifier="merchantengineering" maxavailable="1" multiplier="0.9"/>
+        </Price>
+        <Deconstruct time="6">
+            <Item identifier="uranium" amount="4" />
+            <Item identifier="aluminium" amount="4" />
+            <Item identifier="titaniumaluminiumalloy" amount="2" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20" >
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredSkill identifier="mechanical" level="50" />
+            <RequiredItem identifier="uranium" amount="2" />
+            <RequiredItem identifier="flashpowder" />
+            <RequiredItem identifier="aluminium" amount="4" />
+            <RequiredItem identifier="titaniumaluminiumalloy" amount="2" />
+            <RequiredItem identifier="Shui_Alchemical" />
+            <RequiredItem identifier="Huo_Alchemical" />
+            <RequiredItem identifier="Touhou_Base_Metal" />
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem" >
+            <RequiredSkill identifier="Touhou_Magic" level="40" />
+            <RequiredSkill identifier="mechanical" level="40" />
+            <RequiredItem identifier="uranium" amount="2" />
+            <RequiredItem identifier="flashpowder" />
+            <RequiredItem identifier="Touhou_Base_Metal" />
+            <RequiredItem identifier="Touhou_Nuclear_Energy_Capacitor_Magazine" mincondition="0.0" maxcondition="0.5" usecondition="false" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Nuclear_Energy_Capacitor_Magazine.png" sourcerect="0,0,80,116" depth="0.45" origin="0.5,0.5" />
+        <Body width="28" height="40" density="14" />
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
+        <ItemContainer autofill="False" hideitems="true" capacity="4" maxstacksize="1" SpawnWithId="Touhou_Nuclear_Energy_Burn_Light" removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="Touhou_Nuclear_Energy_Burn_Light" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <StatusEffect type="OnUse" target="This" condition="-0.8" disabledeltatime="true" >
+                <SpawnItem identifiers="Touhou_Nuclear_Energy_Burn_Light" spawnposition="ThisInventory" />
+            </StatusEffect>
+        </ItemContainer>
+        <Quality>
+            <QualityStat stattype="Condition" value="0.167"/>
+        </Quality>
+    </Item>
+
+    <!--灼烧射线-->
+    <Item name="" identifier="Touhou_Nuclear_Energy_Burn_Light" category="Weapon" tags="Touhou_Repair_Light" scale="0.5" sonarsize="0.5" hideinmenus="true" >
+        <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55" />
+        <Body width="170" height="10" density="10" />
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
+            <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.5" colormultiplier="255,100,100,220"/>
+            <Attack itemdamage="110" targetforce="12" targetimpulse="16" penetration="0.2" severlimbsprobability="0.4">
+                <Affliction identifier="lacerations" strength="5" />
+                <Affliction identifier="burn" strength="20" />
+                <Affliction identifier="gunshotwound" strength="5" />
+                <Affliction identifier="Touhou_Weakness" strength="0.7" />
+                <Affliction identifier="stun" strength="0.1" probability="0.6"/>
+                <Affliction identifier="stun" strength="0.1" probability="0.4"/>
+                <Affliction identifier="stun" strength="0.1" probability="0.2"/>
+            </Attack>
+            <StatusEffect type="OnImpact" target="UseTarget">
+                <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
+                <ParticleEmitter particle="FlareBubbles" particleamount="6" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="limb" >
+                <Conditional speciesgroup="neq human"/>
+                <Affliction identifier="burn" strength="20" />
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="UseTarget" >
+                <Conditional entitytype="eq Structure"/>
+                <Conditional hastag="eq door"/>
+                <ParticleEmitter particle="spark" copyentityangle="true" anglemin="-10" anglemax="10" particleamount="5" velocitymin="-10" velocitymax="-200" scalemin="0.5" scalemax="1" />
+            </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This">
+                <Remove />
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
+    <!--河童多功能工具-->
+    <Item name="河童多功能工具" identifier="Touhou_Kappa_Multi_Functional_Tool" category="Equipment" subcategory="Touhou" Tags="smallitem,tool,Normal_Alchemical_Metal,screwdriver,wrench" cargocontaineridentifier="metalcrate" Scale="0.3" impactsoundtag="impact_metal_light" RequireAimToUse="True">
+        <PreferredContainer primary="engcab"/>
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab,piratestoragecab" amount="1" spawnprobability="0.05"/>
+        <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab" amount="1" spawnprobability="0.05"/>
+        <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.1" />
+        <Price baseprice="2000" maxavailable="1" minleveldifficulty="15">
+            <Price storeidentifier="merchantoutpost" sold="false" />
+            <Price storeidentifier="merchantcity" maxavailable="2" />
+            <Price storeidentifier="merchantresearch" multiplier="1.25" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" />
+            <Price storeidentifier="merchantmine" />
+            <Price storeidentifier="merchantengineering" maxavailable="3" multiplier="0.9"/>
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="iron" amount="8" />
+            <Item identifier="Reiki_Stone" amount="12" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="15">
+            <RequiredSkill identifier="mechanical" level="100" />
+            <RequiredItem identifier="Reiki_Stone" amount="2"/>
+            <RequiredItem identifier="Touhou_Precision_Parts" />
+            <RequiredItem identifier="Touhou_Simple_Parts" />
+            <RequiredItem identifier="Magic_Material" amount="3" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Kappa_Multi_Functional_Tool.png" sourcerect="0,0,110,100" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Kappa_Multi_Functional_Tool.png" sourcerect="110,0,142,100" depth="0.45" origin="0.5,0.5" />
+        <Body width="60" height="15" density="30" />
+        <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="-8,0" holdangle="60" reload="1.0" range="50" combatpriority="8" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnActive" target="Character" disabledeltatime="true" comparison="And" >
+                <Conditional skillrequirement="true" mechanical="gte 50"/>
+                <Conditional skillrequirement="true" mechanical="lte 90"/>
+                <Affliction identifier="Touhou_Kappa_Multi_Functional_Tool_Effect01" amount="100" />
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="Character" disabledeltatime="true" comparison="And" >
+                <Conditional skillrequirement="true" mechanical="gt 90"/>
+                <Affliction identifier="Touhou_Kappa_Multi_Functional_Tool_Effect02" amount="100" />
+            </StatusEffect>
+            <Attack structuredamage="0" itemdamage="4" targetimpulse="5">
+                <Affliction identifier="blunttrauma" strength="5" />
+                <Affliction identifier="lacerations" strength="5" />
+                <Affliction identifier="stun" strength="0.2" />
+                <StatusEffect type="OnUse" target="UseTarget">
+                    <Conditional entitytype="eq Character"/>
+                    <Sound file="Content/Items/Weapons/Smack1.ogg" selectionmode="random" range="500"/>
+                    <Sound file="Content/Items/Weapons/Smack2.ogg" range="500" />
+                </StatusEffect>
+            </Attack>
+        </MeleeWeapon>
+        <aitarget sightrange="500" soundrange="500" fadeouttime="1" />
+        <Quality>
+            <QualityStat stattype="RepairSpeed" value="0.1"/>
+        </Quality>
+        <Upgrade gameversion="0.10.0.0" scale="0.5" />
+    </Item>
+
+    <!--河童背包-战术拓展-->
+    <Item name="" identifier="Nitori_Backpack_Tactical_Expansion" scale="0.4" subcategory="Touhou" category="Equipment" tags="mediumitem,Nitori_Backpack,backpack" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="medcab" />
+        <Deconstruct time="10">
+            <Item identifier="organicfiber" amount="2"/>
+            <Item identifier="plastic" amount="2"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="20">
+            <RequiredSkill identifier="mechanical" level="20" />
+            <RequiredSkill identifier="medical" level="20" />
+            <RequiredItem identifier="Nitori_Backpack" />
+            <RequiredItem identifier="Touhou_Precision_Parts" amount="2" />
+            <RequiredItem identifier="Touhou_Base_Metal" amount="6" />
+            <RequiredItem identifier="Reiki_Stone" amount="4" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Nitori_Backpack_Tactical_Expansion.png" sourcerect="0,0,100,132" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Kappa_Backpack.png" depth="0.7" sourcerect="0,0,88,126" origin="0.5,0.5" />
+        <Body width="88" height="126" density="10" />
+        <ItemContainer autofill="False" capacity="0" maxstacksize="0" containedstateindicatorslot="0">
+            <Containable identifiers="Touhou_Nuclear_Energy_Capacitor_Magazine,Touhou_Nuclear_Battery" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <SlotIcon slotindex="0" texture="%ModDir%/Images/Tools/Nitori_Backpack_Tactical_Expansion_Indicator.png" sourcerect="0,0,80,116" origin="0.5,0.45" />
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="Touhou_Nuclear_Battery,Touhou_Nuclear_Energy_Capacitor_Magazine" />
+                <Containable items="Touhou_Nuclear_Battery">
+                    <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" />
+                    <StatusEffect type="OnWearing" target="Contained" Condition="-0.01" comparison="And">
+                        <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+                        <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                        <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained">
+                        <Conditional condition="lt 5.0" />
+                        <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Interval="5.0" Duration="5.0" targetslot="0">
+                        <RequiredItem items="Touhou_Nuclear_Battery" type="Contained" />
+                        <Conditional condition="gt 0"/>
+                        <Affliction identifier="Nitori_Backpack_Tactical_Expansion_Effect02" amount="10" />
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Touhou_Nuclear_Energy_Capacitor_Magazine">
+                    <StatusEffect type="OnWearing" target="Contained" Condition="-0.02" comparison="And">
+                        <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+                        <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                        <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Interval="5.0" Duration="5.0" targetslot="0">
+                        <RequiredItem items="Touhou_Nuclear_Energy_Capacitor_Magazine" type="Contained" />
+                        <Conditional condition="gt 0"/>
+                        <Affliction identifier="Nitori_Backpack_Tactical_Expansion_Effect" amount="10" />
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+            <SubContainer capacity="15" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem,bigitem,mountableweapon,tsm_gun" excludeditems="backpack,crate"/>
+            </SubContainer>
+        </ItemContainer>
+
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
+                  canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
+
+        <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
+
+            <sprite name="Backpack Wearable" texture="%ModDir%/Images/Nitori_Clothes/Tools.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
+                    inherittexturescale="false" hideotherwearables="false" sourcerect="17,28,102,104" origin="0.75,0.57" scale="0.5" />
+
+            <StatusEffect type="OnWearing" target="Character" PressureProtection="4200.0" SpeedMultiplier="0.95" setvalue="true" disabledeltatime="true" />
+
+
+            <StatusEffect type="OnWearing" target="Character" >
+                <Conditional Candid_Friend="gt 0"/>
+                <Affliction identifier="Nitori_Tools" amount="50" />
+            </StatusEffect>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.8" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.8" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.75" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.5" probabilitymultiplier="0.5" damagesound="LimbArmor" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="paralysis" damagemultiplier="0.7" probabilitymultiplier="0.5" damagesound="LimbArmor" />
+            <SkillModifier skillidentifier="mechanical" skillvalue="10" />
+            <SkillModifier skillidentifier="electrical" skillvalue="10" />
+            <SkillModifier skillidentifier="weapons" skillvalue="10" />
+        </Wearable>
+        <aitarget maxsightrange="1500" />
+    </Item>
+
+
+    <!--灵摆项链-->
+    <Item name="灵摆项链" identifier="Touhou_Pendulum_Necklace" tags="smallitem,mobileradio" subcategory="Touhou" category="Equipment" allowasextracargo="true" cargocontaineridentifier="metalcrate" maxstacksize="1" scale="0.25" >
+        <PreferredContainer primary="medcab"/>
+        <Price baseprice="1600" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="8"/>
+            <Price storeidentifier="merchantcity" minavailable="8" />
+            <Price storeidentifier="merchantresearch" minavailable="8" />
+            <Price storeidentifier="merchantmilitary" minavailable="8" />
+            <Price storeidentifier="merchantmine" minavailable="8"/>
+        </Price>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Pendulum_Necklace.png" sourcerect="0,0,64,120" depth="0.6" origin="0.5,0.5" />
+        <Body width="48" height="48" density="10" />
+        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="260" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect"/>
+        <Deconstruct time="3" >
+            <Item identifier="organicfiber" amount="2"/>
+            <Item identifier="Touhou_Base_Metal" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" >
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredItem identifier="Touhou_Base_Metal" />
+            <RequiredItem identifier="organicfiber" amount="2" />
+            <RequiredItem identifier="Reiki_Stone" />
+        </Fabricate>
+        <WifiComponent range="65000.0" LinkToChat="true" MinChatMessageInterval="0.0" />
+        <Wearable limbtype="Head" slots="Any,Headset" msg="ItemMsgPickUpSelect" >
+            <sprite name="Headset Wearable" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.7" hideotherwearables="false" origin="0.5,0.5" />
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="1.0" Duration="1.0" >
+                <Conditional oxygenlow="gte 2" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="oxygenlow" amount="3" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="3.0" >
+                <Conditional psychosis="gte 5" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="psychosis" amount="1.2" />
+                <ReduceAffliction type="nausea" amount="9" />
+                <Affliction identifier="psychosisresistance" amount="15" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.01" Interval="1.0" disabledeltatime="true" >
+                <Conditional Reiki_Side_Effect="gt 0" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="Reiki_Side_Effect" amount="0.03" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" Interval="5.0" Duration="5.0" >
+                <Conditional condition="gt 0" />
+                <Affliction identifier="Touhou_Pendulum_Magic" amount="50" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" comparison="And" >
+                <Conditional skillrequirement="true" Touhou_Magic="gt 80" />
+                <Affliction identifier="Touhou_Pendulum_Magic_Effect" amount="50" />
+            </StatusEffect>
+            <SkillModifier skillidentifier="Touhou_Magic" skillvalue="15" />
+        </Wearable>
+        <Quality>
+            <QualityStat stattype="Condition" value="0.334" />
+        </Quality>
+    </Item>
+</Items>

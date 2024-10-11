@@ -1,0 +1,1535 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Randomevents>
+  <EventSprites>
+    <Sprite identifier="youmujoin" texture="%ModDir%/Images/Missions/youmujoin.png" sourcerect="0,0,504,504" origin="0.7,0.7" />
+    <Sprite identifier="ayajoin" texture="%ModDir%/Images/Missions/ayajoin.png" sourcerect="0,0,504,712" origin="0.7,0.7" />
+    <Sprite identifier="mokoujoin" texture="%ModDir%/Images/Missions/mokoujoin.png" sourcerect="0,0,504,712" origin="0.7,0.7" />
+    <Sprite identifier="patchoulijoin" texture="%ModDir%/Images/Missions/patchoulijoin.png" sourcerect="0,0,504,712" origin="0.7,0.7" />
+    <Sprite identifier="yukajoin" texture="%ModDir%/Images/Missions/yukajoin.png" sourcerect="0,0,504,712" origin="0.7,0.7" />
+    <Sprite identifier="Tenshi_Join" texture="%ModDir%/Images/Missions/Tenshi_Join.png" sourcerect="0,0,504,712" origin="0.7,0.7" />
+    <Sprite identifier="Momizi_Join" texture="%ModDir%/Images/Missions/Momizi_Join.png" sourcerect="0,0,504,656" origin="0.7,0.7" />
+    <Sprite identifier="Touhou_Akyuu_Mission" texture="%ModDir%/Images/Missions/Touhou_Akyuu_Mission.png" sourcerect="0,0,504,712" origin="0.7,0.7" />
+  </EventSprites>
+
+  <EventPrefabs>
+    <!--妖梦入组-->
+    <ScriptedEvent identifier="youmujoin" commonness="200">
+      <CheckDataAction identifier="youmujoin_complete" condition="eq true">
+        <Success>
+          <!--Don't repeat event-->
+        </Success>
+        <Failure>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="youmukonpaku" targettag="youmu" spawnlocation="Outpost" targetmoduletags="airlock" />
+          <TriggerAction target1tag="youmu" target2tag="player" applytotarget1="targetyoumu" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" text="EventText.youmujoin.c1" eventsprite="youmujoin">
+            <Option text="EventText.youmujoin.o1">
+              <ConversationAction targettag="triggerer_player" text="EventText.youmujoin.c2" eventsprite="youmujoin">
+                <Option text="EventText.youmujoin.o2">
+                  <ConversationAction targettag="triggerer_player" text="EventText.youmujoin.c3" eventsprite="youmujoin">
+                    <Option text="EventText.youmujoin.o3">
+                      <CheckItemAction targettag="triggerer_player" itemidentifiers="youmuwatermelon">
+                        <Success>
+                          <Label name="checkwatermelon" />
+                          <RemoveItemAction targettag="triggerer_player" itemidentifier="youmuwatermelon" />
+                          <ConversationAction targettag="triggerer_player" text="EventText.youmujoin.c3.c1" eventsprite="youmujoin">
+                            <Option text="EventText.youmujoin.c3.o1">
+                              <ConversationAction targettag="triggerer_player" text="EventText.youmujoin.c3.o1.c1" eventsprite="youmujoin" />
+                              <NPCChangeTeamAction npctag="youmu" teamid="Team1" addtocrew="true" />
+                              <SetDataAction identifier="youmujoin_complete" value="true" />
+                            </Option>
+                            <Option text="EventText.youmujoin.c3.o2">
+                              <ConversationAction targettag="triggerer_player" text="EventText.youmujoin.c3.o2.c1" eventsprite="youmujoin" />
+                              <NPCChangeTeamAction npctag="youmu" teamid="Team1" addtocrew="true" />
+                              <SetDataAction identifier="youmujoin_complete" value="true" />
+                            </Option>
+                          </ConversationAction>
+                        </Success>
+                        <Failure>
+                          <ConversationAction targettag="triggerer_player" text="EventText.youmujoin.c3.c2">
+                            <Option text="EventText.youmujoin.c3.c2.o1">
+                              <ConversationAction targettag="triggerer_player" text="EventText.youmujoin.c3.c2.c1" />
+                              <Label name="waitingforwatermelon" />
+                              <ConversationAction text="EventText.youmujoin_return.c1" eventsprite="youmujoin" speakertag="youmu" dialogtype="Small">
+                                <Option text="EventText.youmujoin_return.o1" endconversation="true">
+                                  <CheckItemAction targettag="triggerer_player" itemidentifiers="youmuwatermelon">
+                                    <Success>
+                                      <GoTo name="checkwatermelon" />
+                                    </Success>
+                                    <Failure>
+                                      <ConversationAction targettag="triggerer_player" waitforinteraction="false" text="EventText.youmujoin_return.o1.c2" eventsprite="youmujoin" dialogtype="Small" />
+                                      <GoTo name="waitingforwatermelon" />
+                                    </Failure>
+                                  </CheckItemAction>
+                                </Option>
+                                <Option text="EventText.youmujoin_return.o2" endconversation="true">
+                                  <GoTo name="waitingforwatermelon" />
+                                </Option>
+                              </ConversationAction>
+                            </Option>
+                            <Option text="EventText.youmujoin.c3.c2.o2" />
+                          </ConversationAction>
+                        </Failure>
+                      </CheckItemAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--文文入组-->
+    <ScriptedEvent identifier="aya_join" commonness="200">
+      <CheckDataAction identifier="Aya_Join_Complete" condition="eq true" _npos="0,0">
+        <Failure>
+          <TagAction criteria="player" tag="player" _npos="600,0" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Syameimaru_Aya" targettag="Aya" spawnlocation="Outpost" targetmoduletags="airlock" _npos="1200,0" />
+          <Label name="Aya_Wait_Gift_List"/>
+          <TriggerAction target1tag="Aya" target2tag="player" applytotarget1="targetAya" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" _npos="1800.0001,0" />
+          <CheckDataAction identifier="Aya_join_save0" condition="eq true" _npos="2400,0">
+            <Failure>
+              <ConversationAction text="又一次的深潜凯旋。当你离开潜艇后，你决定在这个站点好好休息一番。然而，当你走在站点狭隘的走廊里时， 你却突然发现这个地方同你潜艇的舱室中一样，逼仄的让人喘不过气来。钢铁的墙壁围绕而成的狭小空间几乎是所有木卫二居民自出生以来所见过的全部景象，尽管在书中曾见过许多有关地面的世界的描写， 然而又有几人能真正看见呢？深海的黑暗吞噬了所有对自由的想象。" targettag="triggerer_player" eventsprite="ayajoin" _npos="2400,0">
+                <Option text="继续">
+                  <ConversationAction text="但是这些也只是想想罢了。你还有许多工作要做，清点货物，安排任务，还有和那些站点总督交接什么的， 留给你自己休息的时间只能在这些事情之间的缝隙中挤出来。" targettag="triggerer_player" eventsprite="ayajoin" _npos="3000,0">
+                    <Option text="继续">
+                      <ConversationAction text="“你好？请问你现在有空吗？”身后突然有女性的声音响起，你感觉自己的肩膀被人拍了一下" targettag="triggerer_player" eventsprite="ayajoin" _npos="3600,0">
+                        <Option text="转身">
+                          <ConversationAction text="一个黑头发，看起来很漂亮的少女站在你的身后，手里还拿着笔记本和一支笔。她的打扮看起来像是什么新闻记者，但是她的背后有一个东西吸引了你的注意力。那是一对黑色的翅膀，和书里鸟类的翅膀极为相似。" targettag="triggerer_player" eventsprite="ayajoin" _npos="4200,0">
+                            <Option text="继续">
+                              <ConversationAction text="但是少女没有给你机会询问翅膀的事情。她见你应了声，于是立马抛出来一堆有关深海潜航的问题。" targettag="triggerer_player" eventsprite="ayajoin" dialogtype="Small" _npos="4852.5234,111.61743">
+                                <Option text="回答她">
+                                  <SetDataAction value="true" identifier="Aya_join_save0" _npos="6000,0" />
+                                  <SetDataAction value="false" identifier="Aya_join_save1" _npos="6600,0" />
+                                  <SetDataAction value="true" identifier="Aya_join_save2" _npos="7200,0" />
+                                  <SetDataAction value="true" identifier="Aya_join_Answer" _npos="7800,0" />
+                                  <Goto name="Answer" _npos="8400,0" />
+                                </Option>
+                                <Option text="拒绝回答" endconversation="true">
+                                  <ConversationAction text="“真是的，这里的人都这么冷漠的吗……”看见你似乎完全没有回答她的问题想法，少女摇摇头便走远了。" targettag="triggerer_player" eventsprite="ayajoin" _npos="5350.732,676.9056">
+                                    <Option text="将这次偶遇丢到脑后，继续享受来之不易的空闲时光。" />
+                                  </ConversationAction>
+                                  <SetDataAction value="true" identifier="Aya_join_save0" _npos="6728,296" />
+                                  <SetDataAction value="true" identifier="Aya_join_save1" _npos="7328,343" />
+                                  <SetDataAction value="false" identifier="Aya_join_Answer" _npos="7928,322" />
+                                </Option>
+                              </ConversationAction>
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </CheckDataAction>
+          <CheckDataAction identifier="Aya_join_save1" condition="eq true" _npos="3128,678">
+            <Success>
+              <CheckDataAction identifier="Aya_join_Answer" condition="eq true" _npos="3728,694">
+                <Success>
+                  <Label name="Answer" _npos="5329.0503,-134.31085" />
+                  <ConversationAction text="“啊呀呀呀，真是感谢你的配合呢。”当你将少女的问题一一回答后，她认真地在笔记本上记下了你的回答，然后微笑着对你说道：“这里的人都好冷漠的，你还是第一个愿意回答我问题的。看你的样子，你是一艘潜艇的舰长吗？”" targettag="triggerer_player" eventsprite="ayajoin" _npos="5977.575,-134.98709">
+                    <Option text="“是的，那边就是我的潜艇。”">
+                      <SetDataAction value="false" identifier="Aya_join_save2" _npos="5912,1318" />
+                      <SetDataAction value="true" identifier="Aya_join_save3" _npos="6384,960" />
+                      <GoTo name="MySub" _npos="7928.4453,905.4345" />
+                    </Option>
+                    <Option text="“不，只是对这些知识有些了解罢了。”" endconversation="true">
+                      <ConversationAction text="少女听见你的话，看起来有些遗憾。“啊呀呀呀……那么感谢你的配合了，有机会我还会来找你聊聊的。”她这么说着，然后离开了。" targettag="triggerer_player" eventsprite="ayajoin" _npos="6689.4717,306.1738" />
+                      <GoTo name="Return2" _npos="7131.9707,306.25043" />
+                    </Option>
+                  </ConversationAction>
+                </Success>
+                <Failure>
+                  <Label name="Return1" _npos="5866.2407,1003.4127" />
+                  <ConversationAction text="你再一次遇到了那个长翅膀的少女。看见你主动找了上来，少女说道：“我记得你……找我有什么事吗？”" speakertag="Aya" eventsprite="ayajoin" dialogtype="Small" _npos="6248.02,1447.7274">
+                    <Option text="“我想了想，回答你的问题也没什么。有什么问题请问吧。”">
+                      <SetDataAction value="false" identifier="Aya_join_save1" _npos="5528,402" />
+                      <SetDataAction value="true" identifier="Aya_join_save2" _npos="6256,642" />
+                      <SetDataAction value="true" identifier="Aya_join_asksub" _npos="6984,1166" />
+                      <GoTo name="Answer" _npos="6886.6523,1480.8828" />
+                    </Option>
+                    <Option text="“没什么，只是刚好路过。”" endconversation="true">
+                      <SetDataAction value="false" identifier="Aya_join_asksub" _npos="5656,716" />
+                      <GoTo name="Return1" _npos="6834.6553,1808.8501" />
+                    </Option>
+                  </ConversationAction>
+                </Failure>
+              </CheckDataAction>
+            </Success>
+          </CheckDataAction>
+          <CheckDataAction identifier="Aya_join_save2" condition="eq true" _npos="3856,1009">
+            <Success>
+              <CheckDataAction identifier="Aya_join_asksub" condition="eq true" _npos="4328,731">
+                <Success>
+                  <Label name="MySub" _npos="6618.9336,-297.40436" />
+                    <CheckDataAction identifier="Momizi_Join_complete" condition="eq true">
+                      <Success>
+                        <ConversationAction text="“啊呀呀呀，我的眼光还蛮好的嘛。”少女露出了笑容，然后说道：“我是射命丸文，是一个清正廉洁的记者！我现在正在寻找一个大新闻，顺带看看能不能找到我的朋友。你的船上感觉会很有意思，我能跟着你吗？”" targettag="triggerer_player" eventsprite="ayajoin" _npos="7191.285,-297.18378">
+                          <Option text="“等等，你说你叫射命丸文？">
+                            <ConversationAction text="“对呀？难道你看过我的报纸？”她对于你知道她的名字似乎显得很惊喜。" targettag="triggerer_player" eventsprite="ayajoin" >
+                              <Option text="“不……只是我想起来，我的船上有位船员天天念叨着要给你一个教训。”">
+                                <ConversationAction text="“哎？给我一个教训？”射命丸文的表情凝固了，然后皱着眉头开始思索她在这里得罪过谁。" targettag="triggerer_player" eventsprite="ayajoin" />
+                                <ConversationAction text="最后，她突然脸色一变，慌张地对你问道：“那个船员，是不是一个叫犬走椛的白狼天狗？”" targettag="triggerer_player" eventsprite="ayajoin" >
+                                  <Option text="你猜对了。我在之前的一个站点捡到了身上证件和零花钱都被同伴带走的她，然后帮她补办了证件一路带着她寻找同伴。”">
+                                    <ConversationAction text="射命丸文的表情十分精彩。半晌，她对你说道：“额……这位船长，能不能帮我个忙？”她很努力地想要冷静下来，只是她的手抖得不成样子表明了她的内心活动有多么剧烈。" targettag="triggerer_player" eventsprite="ayajoin" />
+                                    <ConversationAction text="“帮我去买些礼物……这是清单，你千万别看！把清单给商人他就知道要做什么了……”她把一张小纸条塞到你手中，然后说道：“救救咱吧，不然椛椛要把咱生吞了的！”" targettag="triggerer_player" eventsprite="ayajoin" >
+                                      <Option text="接过清单" endconversation="true">
+                                        <SetDataAction value="false" identifier="Aya_join_save2"  />
+                                        <SetDataAction value="false" identifier="Aya_join_save3"  />
+                                        <SetDataAction value="false" identifier="Aya_Gift_List_Event_Complete"  />
+                                        <SetDataAction value="true" identifier="Aya_Gift_List_Event_Not_Complete"  />
+                                        <TriggerEventAction identifier="Aya_Gift_List_Event" />
+                                        <SpawnAction itemidentifier="Touhou_Aya_Gift_List" targetinventory="triggerer_player" />
+                                        <GoTo name="Aya_Wait_Gift_List" />
+                                      </Option>
+                                    </ConversationAction>
+                                  </Option>
+                                </ConversationAction>
+                              </Option>
+                            </ConversationAction>
+                          </Option>
+                        </ConversationAction>
+                      </Success>
+                      <Failure>
+                        <ConversationAction text="“啊呀呀呀，我的眼光还蛮好的嘛。”少女露出了笑容，然后说道：“我是射命丸文，是一个清正廉洁的记者！我现在正在寻找一个大新闻，顺带看看能不能找到我的朋友。你的船上感觉会很有意思，我能跟着你吗？”" targettag="triggerer_player" eventsprite="ayajoin" _npos="7191.285,-297.18378">
+                          <Option text="“大新闻……？算了，正好缺人，你要来的话也行。不过，你的翅膀是怎么回事？">
+                            <SetDataAction value="true" identifier="Aya_join_submarine_yes" _npos="6512,1480" />
+                            <GoTo name="Agree" _npos="8528,632" />
+                          </Option>
+                          <Option text="“小姐，对于一个记者来说恐怕潜艇上还是太危险了一点，抱歉我不能同意你的请求。”" endconversation="true">
+                            <SetDataAction value="false" identifier="Aya_join_submarine_yes" _npos="6768,2016" />
+                            <GoTo name="Return3" _npos="7878.5244,-189.5087" />
+                          </Option>
+                        </ConversationAction>
+                      </Failure>
+                    </CheckDataAction>
+                </Success>
+                <Failure>
+                  <Label name="Return2" _npos="6671.491,1068.6614" />
+                  <ConversationAction text="你再次找到了少女，她同样认出了你。“怎么了？又有什么发现了吗？”她兴奋地问道。" speakertag="Aya" eventsprite="ayajoin" dialogtype="Small" _npos="7156.475,587.7698">
+                    <Option text="“事实上，我有一艘潜艇。你有什么需要吗？”">
+                      <SetDataAction value="false" identifier="Aya_join_save2" _npos="6384,1157" />
+                      <SetDataAction value="true" identifier="Aya_join_save3" _npos="6984,991" />
+                      <SetDataAction value="true" identifier="Aya_join_submarine_yes" _npos="7584,1023" />
+                      <GoTo name="MySub" _npos="7928.4453,905.4345" />
+                    </Option>
+                    <Option text="“不，我只是路过。”" endconversation="true">
+                      <GoTo name="Return2" _npos="7890.9263,1068.574" />
+                    </Option>
+                  </ConversationAction>
+                </Failure>
+              </CheckDataAction>
+            </Success>
+          </CheckDataAction>
+          <CheckDataAction identifier="Aya_join_save3" condition="eq true" _npos="4456,1022">
+            <Success>
+              <CheckDataAction identifier="Aya_join_submarine_yes" condition="eq true" _npos="5056,1018">
+                <Success>
+                  <Label name="Agree" _npos="7880.4795,-438.04712" />
+                  <ConversationAction text="“你说这个吗？”射命丸文摆动了一下身后的翅膀，说道：“我是天狗嘛……算了，你也不知道什么是天狗，总之绝对不会碍什么事的。”说罢，她似乎很兴奋地向着你的潜艇走去。你看着她的背影，不知道为什么感觉到了某种你在这深海之中从未感受过的气息。" targettag="triggerer_player" eventsprite="ayajoin" _npos="8499.26,-0.7694702">
+                    <Option text="你下意识地思考了一下，随即在记忆的角落得到了一个答案——">
+                      <ConversationAction text="“她看起来真自由啊……以后的航行大概要有趣些了吧。”" targettag="triggerer_player" eventsprite="ayajoin" _npos="9028.22,32.315094" />
+                      <NPCChangeTeamAction npctag="Aya" teamid="Team1" addtocrew="true" _npos="9580.279,32.315125" />
+                      <SetDataAction value="false" identifier="Aya_Gift_List_Event_Not_Complete" />
+                      <SetDataAction value="false" identifier="Aya_join_save3" _npos="8184,1389" />
+                      <SetDataAction value="true" identifier="Aya_Join_Complete" _npos="10108.872,32.315125" />
+                    </Option>
+                  </ConversationAction>
+                </Success>
+                <Failure>
+                  <Label name="Return3" _npos="7583.404,89.741516" />
+                  <ConversationAction text="你又一次遇见了射命丸文，她同样也认出了你，看见你接近于是对你挥挥手，然后问道：“怎么？现在我可以上你的潜艇了吗？”" speakertag="Aya" eventsprite="ayajoin" dialogtype="Small" _npos="7928,287.5636">
+                    <Option text="“当然了，我们现在正缺人呢。不过，你的翅膀是怎么回事？”">
+                      <SetDataAction value="true" identifier="Aya_join_submarine_yes" _npos="7240,1577" />
+                      <GoTo name="Agree" _npos="8528,632" />
+                    </Option>
+                    <Option text="“不，我只是路过。”" endconversation="true">
+                      <GoTo name="Return3" _npos="8495.293,809.2918" />
+                    </Option>
+                  </ConversationAction>
+                </Failure>
+              </CheckDataAction>
+            </Success>
+          </CheckDataAction>
+          <CheckDataAction identifier="Aya_Gift_List_Event_Complete" condition="eq true" >
+            <Success>
+              <Label name="Aya_Gift_List_Event_Complete"/>
+              <ConversationAction text="“啊！真是非常感谢！之后还请多多关照我就先去找椛椛了再见！”少女说完了这些话后就火急火燎地离开了。" speakertag="Aya" targettag="triggerer_player" eventsprite="ayajoin" >
+                <Option text="“真是……看起来，未来的航行会有趣很多了呢。”">
+                  <ConversationAction text="射命丸文入组" targettag="triggerer_player" eventsprite="ayajoin" />
+                  <NPCChangeTeamAction npctag="Aya" teamid="Team1" addtocrew="true"/>
+                  <SetDataAction value="false" identifier="Aya_join_save3" />
+                  <SetDataAction value="false" identifier="Aya_Gift_List_Event_Not_Complete" />
+                  <SetDataAction value="true" identifier="Aya_Join_Complete" />
+                </Option>
+              </ConversationAction>
+            </Success>
+            <Failure>
+              <CheckDataAction identifier="Aya_Gift_List_Event_Not_Complete" condition="eq true" >
+                <Success>
+                  <ConversationAction text="“就把清单给商人就行了，我的命运可都在你手上了！”" targettag="triggerer_player" eventsprite="ayajoin" />
+                  <GoTo name="Aya_Wait_Gift_List" />
+                </Success>
+              </CheckDataAction>
+            </Failure>
+          </CheckDataAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--妹红入组-->
+    <ScriptedEvent identifier="mokou_join" commonness="200">
+      <CheckDataAction identifier="Mokou_Join_Complete" condition="eq true" _npos="0,0">
+        <Failure>
+          <TagAction criteria="player" tag="player" _npos="600,0" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Huziwara_no_Mokou" targettag="Mokou" spawnlocation="Outpost" targetmoduletags="airlock" _npos="1200,0" />
+          <TriggerAction target1tag="Mokou" target2tag="player" applytotarget1="targetMokou" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" _npos="1800.0001,0" />
+          <CheckDataAction identifier="mokou_save0" condition="eq true" _npos="2091.128,989.19464">
+            <Failure>
+              <ConversationAction text="当你结束了潜航，出色地完成了一次危险的航行后，其他船员都会拿着分发的赏金去好好享受劫后余生的时光。毕竟，每一次下潜都是九死一生的冒险，而像你们这样的队伍，每天都有数以百记在木卫二的各个角落悄然消失。人总是会死的，所以必须在生命无忧时抓紧欢纵。 　　但是他们能享受，你不行。毕竟，你是船长，你要去找站点总督洽谈事务，要把站点工程部的工程师们找来修缮船体，还有那些武器弹药和各种必需品的补充，这些都需要你来操心。" targettag="triggerer_player" eventsprite="mokoujoin" _npos="2400.003,-5.7634277">
+                <Option text="继续">
+                  <ConversationAction text="当你走在站点幽深单调的走廊中时，一抹与周围环境几乎格格不入的红白之色闯入了你的眼中。你下意识的被那个身影吸引了视线，随后便看清了那个人的样子。那是一个看起来颇具男子气概的干练女人，有着一头被几个蝴蝶结装饰起来的白色长发，身上穿着贴着众多你看不懂的符咒的红色工装背带裤和一件白色的衬衫。" targettag="triggerer_player" eventsprite="mokoujoin" _npos="3000,0">
+                    <Option text="继续">
+                      <ConversationAction text="她的身上似乎充斥着一股火热的力量，你哪怕是随意看一眼都能感觉到那股澎湃的活力。只是，就算身上有着与这幽暗逼仄的深海舱道如此格格不入的气质的她，此时似乎也像是遇到了什么难事一样靠在墙边环抱手臂蹙着眉头。 她看起来似乎有什么难事，要不要去问问？" targettag="triggerer_player" eventsprite="mokoujoin" _npos="3600,0">
+                        <Option text="去看看吧。">
+                          <SetDataAction value="true" identifier="mokou_save0" _npos="4153.884,-450.35562" />
+                          <SetDataAction value="true" identifier="mokou_caring" _npos="4556.515,-449.00845" />
+                          <GoTo name="mokou_caring" _npos="4940.624,-452.33258" />
+                        </Option>
+                        <Option text="与我无关。" endconversation="true">
+                          <ConversationAction text="你没多少闲工夫去帮路边每一个看起来有麻烦的人，你也还有自己的工作要做。" targettag="triggerer_player" eventsprite="mokoujoin" _npos="4199.874,581.2943">
+                            <Option text="这么想着，你走开了。" />
+                          </ConversationAction>
+                          <SetDataAction value="true" identifier="mokou_save0" _npos="4754.742,583.1895" />
+                          <SetDataAction value="false" identifier="mokou_save1" _npos="5177.7725,585.4769" />
+                          <GoTo name="FindAgain" _npos="5593.7944,453.40225" />
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </CheckDataAction>
+          <CheckDataAction identifier="mokou_caring" condition="eq true" _npos="2580.287,987.7055">
+            <Success>
+              <Label name="mokou_caring" _npos="3221.8103,1011.0821" />
+              <ConversationAction text="你靠近了那个女子，而每走近一点，你都能感觉到那股并不实际存在却如此真实的灼热感增强一点。直到你走到她的身边，开口询问她时这股感觉才突兀地淡了下去。" targettag="triggerer_player" eventsprite="mokoujoin" _npos="3735.826,1323.5654">
+                <Option text="“你好，小姐，请问你是遇见了什么麻烦吗？”">
+                  <ConversationAction text="“……”她似乎是对你突然的搭讪有点意外，不过还是直率地回答道：“我被我的船丢下了，那个混蛋……当初找到我的时候怎么说的，现在这么久了都不回来。”" targettag="triggerer_player" eventsprite="mokoujoin" _npos="4336.541,1327.8457">
+                    <Option text="继续">
+                      <ConversationAction text="她抱怨了几句，然后对你说道：“那么，你找我是有什么事情吗？”" targettag="triggerer_player" eventsprite="mokoujoin" _npos="4915.69,1330.9735">
+                        <Option text="“你被你的船丢下了？你也是一个水手吗？”">
+                          <ConversationAction text="“嗯，以前负责船上的机械与电气维修。”她坦然回答，然后看着你问道：“你想做什么？”" targettag="triggerer_player" eventsprite="mokoujoin" _npos="5531.058,1341.69">
+                            <Option text="“嗯……那么你需要一艘船带你吗？事实上我也是个船长。”">
+                              <SetDataAction value="false" identifier="mokou_caring" _npos="5832.4385,653.01105" />
+                              <SetDataAction value="true" identifier="mokou_taking" _npos="6243.0986,651.3672" />
+                              <Label name="mokou_taking" _npos="6706.075,652.33887" />
+                              <ConversationAction text="“载我一程？”她审视一般地将视线扫过你的全身，你赶紧拿出你的证件证明你所言非虚，但是她并没有多看一眼那个证件，而是像是想起了什么有趣的事情一样自言自语道：" targettag="triggerer_player" eventsprite="mokoujoin" _npos="6677.27,949.6593">
+                                <Option text="继续">
+                                  <ConversationAction text="“哼哼，辉夜你这王八蛋，当初你自己来找我还把我落下，这下我去别的船上看你怎么办。”" targettag="triggerer_player" eventsprite="mokoujoin" _npos="7248.359,935.0651">
+                                    <Option text="继续">
+                                      <ConversationAction text="你不知道她在说什么，但是你能感觉到她身上原本散发的压迫感突然散去，然后将手伸到了你的面前：&#xD;&#xA;　　“好吧，你可以叫我藤原妹红，蓬莱的不死鸟。我们的船在哪？我们该出发了。”" targettag="triggerer_player" eventsprite="mokoujoin" _npos="7847.1353,933.9988">
+                                        <Option text="“好吧，合作愉快，藤原小姐。”">
+                                          <ConversationAction text="藤原妹红已入组" targettag="triggerer_player" eventsprite="mokoujoin" _npos="8397.047,931.2226" />
+                                          <NPCChangeTeamAction npctag="Mokou" teamid="Team1" addtocrew="true" _npos="8816.806,964.84186" />
+                                          <SetDataAction value="false" identifier="mokou_taking" _npos="9213.233,966.84436" />
+                                          <SetDataAction value="true" identifier="Mokou_Join_Complete" _npos="9590.225,965.9047" />
+                                        </Option>
+                                      </ConversationAction>
+                                    </Option>
+                                  </ConversationAction>
+                                </Option>
+                              </ConversationAction>
+                            </Option>
+                            <Option text="“啊，这种事情的话，我也帮不上什么忙了，抱歉。”" endconversation="true">
+                              <ConversationAction text="你因为没有帮上忙对她表示了抱歉，然后离开了。" targettag="triggerer_player" eventsprite="mokoujoin" _npos="6247.204,1711.7551" />
+                              <GoTo name="MeetAgain" _npos="6771.829,1716.0947" />
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Success>
+            <Failure>
+              <CheckDataAction identifier="mokou_save1" condition="eq true" _npos="3013.8218,1357.5168">
+                <Failure>
+                  <Label name="FindAgain" _npos="3448.1306,1862.7091" />
+                  <ConversationAction text="从舱室里走出来后，你伸了伸懒腰。问题解决了一个，虽然还有很多事情要做，不过接下来的航行总归是多了点保障。&#xD;&#xA;　　就在这时，你又看见了那个白发女子。她还是一副有些为难的样子漫无目的的走在长廊之间，虽然看起来有事，不过说实话似乎也不是什么很紧急的事情。" speakertag="Mokou" eventsprite="mokoujoin" _npos="3949.4836,1863.6094" />
+                  <SetDataAction value="true" identifier="mokou_caring" _npos="4400.925,1868.2146" />
+                  <GoTo name="mokou_caring" _npos="4804.745,1875.2986" />
+                </Failure>
+              </CheckDataAction>
+              <CheckDataAction identifier="mokou_taking" condition="eq true" _npos="3392.006,2332.1833">
+                <Success>
+                  <GoTo name="mokou_taking" _npos="4000.1187,2617.7341" />
+                </Success>
+                <Failure>
+                  <Label name="MeetAgain" _npos="5540.5947,2394.4194" />
+                  <ConversationAction text="你再次遇见了那个白发女子。" speakertag="Mokou" eventsprite="mokoujoin" dialogtype="Small" _npos="6260.289,2394.026">
+                    <Option text="和她聊聊">
+                      <ConversationAction text="你走上前去，对白发女子打了个招呼。她似乎没有想到你会再来她，于是疑惑中带着一点戒备地问道：“你好……找我有什么事吗？”" targettag="triggerer_player" eventsprite="mokoujoind" _npos="6999.5806,2418.6975">
+                        <Option text="继续">
+                          <ConversationAction text="你看见她的手上似乎有火花闪过，是错觉吗？" targettag="triggerer_player" eventsprite="mokoujoin" _npos="7566.41,2420.1782">
+                            <Option text="“其实，如果你不想就在这里干等的话，我可以载你一程的，我也是个船长。”">
+                              <SetDataAction value="false" identifier="mokou_caring" _npos="8073.3135,2451.2947" />
+                              <SetDataAction value="true" identifier="mokou_taking" _npos="8481.807,2448.6548" />
+                              <GoTo name="mokou_taking" _npos="8879.852,2450.241" />
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                    <Option text="无视她" endconversation="true">
+                      <SetDataAction value="false" identifier="mokou_taking" _npos="6840.6357,3062.8755" />
+                      <GoTo name="MeetAgain" _npos="7289.8906,3061.0828" />
+                    </Option>
+                  </ConversationAction>
+                </Failure>
+              </CheckDataAction>
+            </Failure>
+          </CheckDataAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--帕秋莉入组-->
+    <ScriptedEvent identifier="patchouli_join" commonness="120">
+      <CheckDataAction identifier="Patchouli_Join_complete" condition="eq true">
+        <Success>
+          <!--Don't repeat event-->
+        </Success>
+        <Failure>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Patchouli_Knowledge" targettag="Patchouli" spawnlocation="Outpost" targetmoduletags="airlock" />
+          <TriggerAction target1tag="Patchouli" target2tag="player" applytotarget1="targetpatchouli" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" text="在人群中，你看到了一个熟悉又陌生的人影，正在角落里闲逛。你曾在某些电视节目上看到过相似的样貌，她一度因为众多发现和发明在木卫二上红极一时，但最近几个月却少听见关于她的消息，你一度以为她因为众多派系的争权夺势而主动淡出了视野，不曾想今天在这里遇到了她。\n你的好奇心油然而生,打算上前问问" eventsprite="patchoulijoin">
+            <Option text="“打扰一下，请问是帕秋莉博士吗？”">
+              <ConversationAction targettag="triggerer_player" text="“是我，你是……”她抬起头，用那双略带黑眼圈的大眼睛看着你，看起来有些疲惫。" eventsprite="patchoulijoin">
+                <Option text="“我是刚到这里的舰长。”你正色说道，“我曾听说过您的成就，可是前段时间的突然失踪让大家很是担忧，我想问问发生了什么。”">
+                  <ConversationAction targettag="triggerer_player" text="她并没有因为你的打扰而感到厌烦，甚至在对你投向了别样的目光。“唔……都是些公开的计划。他们之前看到我有一些制造火箭的经验，就请求我再做一艘，看在蕾米莉亚的份上，我没有拒绝他们。”" eventsprite="patchoulijoin">
+                    <Option text="“那您现在为何突然消失了很长一段时间，是因为这些工作太累了吗，制作一艘火箭听上去可不是一件轻松的事情。”你之前有听说过火箭计划，那是木卫二人为了回到地球做过的努力，但是自从帕秋莉失踪后就再也没有最新的消息了。">
+                      <ConversationAction targettag="triggerer_player" text="“这件事情……”少女轻轻咳嗽了两声，“能帮我拿一些哮喘药来吗，我身上剩下的不多了。”" eventsprite="patchoulijoin">
+                        <Option text="“药？”你思索片刻，在脑海里找到了哮喘药的名字，“布地奈德可以吗？”">
+                          <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Budesonide">
+                            <Success>
+                              <Label name="Check_Touhou_Budesonide" />
+                              <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Budesonide" />
+                              <ConversationAction targettag="triggerer_player" text="“谢谢你。”少女接过药物，向你表达了感激。" eventsprite="patchoulijoin">
+                                <Option text="这是你需要的药，“帕秋莉博士，能说说后续吗？”">
+                                  <ConversationAction targettag="triggerer_player" text="“火箭计划的后续，去你的潜艇上再说吧，我需要找个地方休息一下。”她意味深长地看了你一眼，“蕾米莉亚说过，她已经看到了今天的命运。”" eventsprite="patchoulijoin" />
+                                  <NPCChangeTeamAction npctag="Patchouli_Knowledge" teamid="Team1" addtocrew="true" />
+                                  <SetDataAction identifier="Patchouli_Join_complete" value="true" />
+                                </Option>
+                                <Option text="这是你需要的药，“帕秋莉博士，你还好吗？”">
+                                  <ConversationAction targettag="triggerer_player" text="“感谢你的关心。我能去你的潜艇上休息一会儿吗。”她意味深长地看了你一眼，“蕾米莉亚说过，她已经看到了今天的命运。”" eventsprite="patchoulijoin" />
+                                  <NPCChangeTeamAction npctag="Patchouli_Knowledge" teamid="Team1" addtocrew="true" />
+                                  <SetDataAction identifier="Patchouli_Join_complete" value="true" />
+                                </Option>
+                              </ConversationAction>
+                            </Success>
+                            <Failure>
+                              <ConversationAction targettag="triggerer_player" text="你身上没有携带布地奈德，也许可以去商人那里买一瓶？">
+                                <Option text="”请稍等一下，小姐，我有过印象，我现在去取一些。“">
+                                  <ConversationAction targettag="triggerer_player" text="你快步离开，希望自己身上的马克还足够。" />
+                                  <Label name="waitingforbudesonide" />
+                                  <ConversationAction text="你再次找到了那位紫发少女，一头紫色长发在人群中很醒目。" eventsprite="patchoulijoin" speakertag="Patchouli" dialogtype="Small">
+                                    <Option text="“帕秋莉博士，又见面了。”" endconversation="true">
+                                      <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Budesonide">
+                                        <Success>
+                                          <GoTo name="Check_Touhou_Budesonide" />
+                                        </Success>
+                                        <Failure>
+                                          <ConversationAction targettag="triggerer_player" waitforinteraction="false" text="“但你没能找到她需要的药，得去其它地方看看。”" eventsprite="patchoulijoin" dialogtype="Small" />
+                                          <GoTo name="waitingforbudesonide" />
+                                        </Failure>
+                                      </CheckItemAction>
+                                    </Option>
+                                    <Option text="只是路过。" endconversation="true">
+                                      <GoTo name="waitingforbudesonide" />
+                                    </Option>
+                                  </ConversationAction>
+                                </Option>
+                                <Option text="只是路过。" >
+                                  <ConversationAction targettag="triggerer_player" text="你对这种药的记忆很模糊，也许可以去药物商那里看看？" />
+                                  <GoTo name="waitingforbudesonide" />
+                                </Option>
+                              </ConversationAction>
+                            </Failure>
+                          </CheckItemAction>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--幽香入组-->
+    <ScriptedEvent identifier="yuka_join" commonness="200">
+      <CheckDataAction identifier="Yuka_Join_complete" condition="eq true">
+        <Success>
+          <!--Don't repeat event-->
+        </Success>
+        <Failure>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Kazami_Yuka" targettag="Yuka" spawnlocation="Outpost" targetmoduletags="airlock" />
+          <Label name="waitfortalk"/>
+          <TriggerAction target1tag="Yuka" target2tag="player" applytotarget1="targetyuka" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" speakertag="Yuka" text="并不是所有船长都能有幸看见花的——那是遥远的地球上，陆地人的奢侈。不过好在你还有图片可以看，图册上的那些文字曾经牵动着儿时的你的心绪。\n但是你此刻却看见了花，不是那些深海之下奇诡似花般绽放的异星生物，而是你曾经在图册上看见过的，地球上的花。你记得那叫太阳花，又或者向日葵。无论如何，为什么它会出现在这里？出现在那个绿发少女的手中？" eventsprite="yukajoin">
+            <Option text="走上去打招呼。">
+              <Label name="waitfortalk2"/>
+              <ConversationAction targettag="triggerer_player" text="你刚刚走近两步，那名少女便眼神扫了过来。一瞬间你感觉自己好像被什么可怕的东西盯上了似的。但是那种感觉只是一刹那，紧接着那位少女就像是完全没有注意到你似的将头转了回去，继续打理手中绽放的向日葵。" eventsprite="yukajoin">
+                <Option text="“你好？”">
+                  <ConversationAction targettag="triggerer_player" text="“人类？”她听见你向她打招呼时诧异地歪歪头，似乎是在奇怪你为什么会靠近她。" eventsprite="yukajoin"/>
+                  <SetDataAction identifier="meetagain" value="true"/>
+                  <ConversationAction targettag="triggerer_player" text="不过诧异也只是一会儿而已，你看见她的嘴角扬起了和善的弧度，恰到好处地对你笑着说道：“你好。”" eventsprite="yukajoin">
+                    <Option text="好奇地询问那朵向日葵。">
+                      <Label name="waitfortalk3"/>
+                      <SetDataAction identifier="meetagain2" value="true"/>
+                      <ConversationAction targettag="triggerer_player" text="“你说花吗。”她低头看了一眼手中开的灿烂的花朵" eventsprite="yukajoin">
+                        <Option text="继续">
+                          <ConversationAction targettag="triggerer_player" text="“这里确实看不见什么花呢……我听说河童在这边培育了一些奇特的花朵才过来看看，不过……”她似乎是有些为难地看着你。" eventsprite="yukajoin">
+                            <Option text="继续">
+                              <ConversationAction targettag="triggerer_player" text="“这里的交通确实很不方便，直接从海里游过去的话，我带来的种子会受不了那些盐分的……怎么办才好呢？”" eventsprite="yukajoin">
+                                <Option text="继续">
+                                  <ConversationAction targettag="triggerer_player" text="游……游过去？在这几千米深的海底？你被她的话与她轻松的态度惊的合不拢嘴。你知道前两年有很多妖怪从地球来到木卫二，他们通常有着各种强大的力量，但是这么厉害的……你还是第一次听说。你甚至没有怀疑她是不是再说大话，但是你的某种危机本能疯狂地警示着——你最好相信她说的话。" eventsprite="yukajoin">
+                                    <Option text="嗯……实际上，我有一艘自己的潜艇，小姐您是否愿意赏脸乘坐我的潜艇呢？”">
+                                      <ConversationAction targettag="triggerer_player" text="“你的船？”那个女人似乎起了点兴趣脸上的笑容扩大了几分，带上了一丝怪异。“我可以理解为，你在邀请我上船？”她似乎颇有兴致地对你问道。" eventsprite="yukajoin">
+                                        <Option text="点头">
+                                          <ConversationAction targettag="triggerer_player" text="她的表情瞬间平复下来。你完全看不明白这个女人在想什么，不过她也点点头，表示接受了你的邀请。“好吧，既然你邀请了，那接下来就麻烦你了。”" eventsprite="yukajoin">
+                                            <Option text="继续">
+                                              <ConversationAction targettag="triggerer_player" text="她将手中的向日葵递给你，你接过向日葵，然后便听见那个女人说道：“你可以叫我风见幽香。嗯，一个普普通通的花的妖怪而已。既然已经准备上你的船了，接下来就跟着你看看这海底有没有什么有趣的花吧。”" eventsprite="yukajoin"/>
+                                              <ConversationAction targettag="triggerer_player" text="普通的花妖可不敢说从几千米的深海游过去，你在心中吐槽着，倒也确实很欢迎她的加入。" eventsprite="yukajoin">
+                                                <Option text="“那还真是我的荣幸，接下来还请多多关照，风见小姐。”">
+                                                  <ConversationAction targettag="triggerer_player" text="风见幽香入组" eventsprite="yukajoin" />
+                                                  <NPCChangeTeamAction npctag="Kazami_Yuka" teamid="Team1" addtocrew="true" />
+                                                  <SetDataAction identifier="Yuka_Join_complete" value="true" />
+                                                </Option>
+                                              </ConversationAction>
+                                            </Option>
+                                          </ConversationAction>
+                                        </Option>
+                                      </ConversationAction>
+                                    </Option>
+                                  </ConversationAction>
+                                </Option>
+                              </ConversationAction>
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                    <Option text="感觉好可怕，还是远离她比较好。">
+                      <ConversationAction text="你这么想着，匆匆离开了" dialogtype="Small" targettag="triggerer_player" />
+                      <Goto name="meetagain2"/>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="感觉好可怕，还是远离她比较好。">
+                  <ConversationAction text="你这么想着，匆匆离开了" dialogtype="Small" targettag="triggerer_player" />
+                  <Goto name="meetagain"/>
+                </Option>
+              </ConversationAction>
+            </Option>
+            <Option text="无视她，这不重要。">
+              <ConversationAction text="你这么想着，匆匆离开了" dialogtype="Small" targettag="triggerer_player" />
+              <GoTo name="meetagain"/>
+            </Option>
+          </ConversationAction>
+          <CheckDataAction identifier="meetagain" condition="eq true">
+            <Success>
+              <!--Don't repeat event-->
+            </Success>
+            <Failure>
+              <Label name="meetagain"/>
+              <ConversationAction targettag="triggerer_player" text="那朵向日葵在这深邃的幽深站点里太过耀眼，你再次看见了它和那个女人。" speakertag="Yuka" eventsprite="yukajoin">
+                <Option text="走上去打招呼。">
+                  <Goto name="waitfortalk2"/>
+                </Option>
+              </ConversationAction>
+              <CheckDataAction identifier="meetagain2" condition="eq true">
+                <Success>
+                  <!--Don't repeat event-->
+                </Success>
+                <Failure>
+                  <Label name="meetagain2"/>
+                  <ConversationAction targettag="triggerer_player" text="你感到心中一阵震悚，下意识地便远离了她。只是，当你再次看见她的时候，还是忍不住多看了几眼，心中再次思考要不要过去和她聊聊。" speakertag="Yuka" eventsprite="yukajoin">
+                    <Option text="好奇地询问那朵向日葵。">
+                      <ConversationAction text="你鼓足了勇气。" dialogtype="Small" targettag="triggerer_player" />
+                      <Goto name="waitfortalk3"/>
+                    </Option>
+                  </ConversationAction>
+                </Failure>
+              </CheckDataAction>
+            </Failure>
+          </CheckDataAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--天子入组-->
+    <ScriptedEvent identifier="Tenshi_Join" commonness="200">
+      <CheckDataAction identifier="Tenshi_Join_complete" condition="eq true">
+        <Success>
+          <!--Don't repeat event-->
+        </Success>
+        <Failure>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Hinanawi_Tenshi" targettag="Tenshi" spawnlocation="Outpost" targetmoduletags="airlock" />
+          <Label name="waitfortalk"/>
+          <TriggerAction target1tag="Tenshi" target2tag="player" applytotarget1="targetTenshi" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" speakertag="Tenshi" text="天空这一概念对于木卫二的人来说无比的遥远。在那些启蒙的书籍与最初来到这里的前辈们的描述中的蔚蓝色的天幕，在你的理解里面其实不过就是光穿过云层的幻幕罢了，没什么值得看的。" eventsprite="Tenshi_Join">
+            <Option text="继续。">
+              <ConversationAction targettag="triggerer_player" text="不过，你也从未想过，自己真的能够在这阴暗逼仄的站点里面，看见一个让你一眼就联想到这个从未亲眼见过的概念的人。" eventsprite="Tenshi_Join">
+                <Option text="蓝色的头发，是那些外来的妖怪吗？">
+                  <ConversationAction targettag="triggerer_player" text="在你不远处的，是一个蓝发的少女。她身上穿的衣服显而易见不是什么普通的料子，你感觉她像是什么贵族的女儿一样。" eventsprite="Tenshi_Join"/>
+                  <ConversationAction targettag="triggerer_player" text="不过，她看起来正在为什么苦恼的样子。" eventsprite="Tenshi_Join">
+                    <Option text="“我看你似乎有什么困难，请问有什么需要帮助的吗？”">
+                      <ConversationAction targettag="triggerer_player" text="“困难？”那个少女似乎放松了一点，然后就开口抱怨道：“你们这地方治安也太差了，我才来就被一伙人把帽子偷走了。”" eventsprite="Tenshi_Join">
+                        <Option text="“帽子偷走了？”">
+                          <ConversationAction targettag="triggerer_player" text="“对啊，虽然只是帽子，不过这里可吃不到桃子，所以我还挺想找回来的。”少女这样说着，随即对你问道：“那么，你愿意帮我找回帽子吗？”" eventsprite="Tenshi_Join">
+                            <Option text="你不是很明白帽子为什么会和桃子扯上关系，不过既然她有所请求，况且只是找帽子而已，你也不吝啬帮个小忙。">
+                              <ConversationAction targettag="triggerer_player" text="“一顶黑色的，上面顶着一个桃子的帽子，加油哦，就拜托你了。”" eventsprite="Tenshi_Join">
+                                <SetDataAction identifier="Tenshi_Waiting" value="true" />
+                              </ConversationAction>
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+          <Label name="Check_Tenshi_Hat" />
+          <CheckDataAction identifier="Tenshi_Waiting" condition="eq true">
+            <Success>
+              <!--Don't repeat event-->
+            </Success>
+            <Failure>
+              <CheckItemAction targettag="triggerer_player" itemidentifiers="Tenshi_Hat">
+                <Success>
+                  <RemoveItemAction targettag="triggerer_player" itemidentifier="Tenshi_Hat" />
+                  <ConversationAction targettag="triggerer_player" text="“唔，真是谢谢你了。”那个少女惊喜地对你说道，然后把帽子上的桃子摘了下来给你，“这是天界的桃子，可好吃了，你来一个？”" eventsprite="Tenshi_Join"/>
+                  <SpawnAction itemidentifier="Touhou_Tenshi_Peach" targetinventory="triggerer_player" />
+                  <ConversationAction targettag="triggerer_player" text="你能看见帽子上一个桃子不一会又长了出来，这时候你才明白为什么之前天子会把帽子和桃子扯上关系。" eventsprite="Tenshi_Join">
+                    <Option text="“桃子就谢谢了，不过这顶帽子我拿到可花了不少，一个桃子大概不够吧？”">
+                      <ConversationAction targettag="triggerer_player" text="你的话让少女有些茫然，“是这样吗？不过我身上也没钱……”她又摘下来一个桃子，一边啃一边思索着，忽然说道：“那要不我也给你帮忙吧？我是比那名居天子，是一个天人！”" eventsprite="Tenshi_Join" >
+                        <Option text="“天人？”">
+                          <ConversationAction targettag="triggerer_player" text="“就是成佛的人啦，总之，未来多多指教啦！”她很是欢快地说道。" eventsprite="Tenshi_Join"/>
+                          <NPCChangeTeamAction npctag="Hinanawi_Tenshi" teamid="Team1" addtocrew="true" />
+                          <SetDataAction identifier="Tenshi_Join_complete" value="true" />
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="triggerer_player" text="“呀？还没有找到吗？就是一个黑色的，上面顶着一个桃子的帽子，很显眼的。”" speakertag="Tenshi" eventsprite="Tenshi_Join"/>
+                  <Goto name="Check_Tenshi_Hat"/>
+                </Failure>
+              </CheckItemAction>
+            </Failure>
+          </CheckDataAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--椛入组-->
+    <ScriptedEvent identifier="Momizi_Join" commonness="200">
+      <CheckDataAction identifier="Momizi_Join_complete" condition="eq true">
+        <Success>
+          <!--Don't repeat event-->
+        </Success>
+        <Failure>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Inubashiri_Momizi" targettag="Momizi" spawnlocation="Outpost" targetmoduletags="airlock" />
+          <Label name="waitfortalk"/>
+          <TriggerAction target1tag="Momizi" target2tag="player" applytotarget1="targetMomizi" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" speakertag="Momizi" text="那个白头发的天狗少女已经在那里徘徊许久，你注意到她似乎在找什么人。她已经找许多路人询问过了，不过看起来还是没有什么成果。" eventsprite="Momizi_Join">
+            <Option text="过去看看">
+              <Label name="Momizi_Meetagain"/>
+              <CheckDataAction identifier="Aya_Join_Complete" condition="eq true">
+                <Success>
+                  <SetDataAction identifier="Momizi_Meetagain2" value="false"/>
+                  <SetDataAction identifier="Momizi_Find_IDcard_Event_Complete" value="false"/>
+                  <SetDataAction identifier="Momizi_Find_IDcard_Event_Not_Complete" value="false"/>
+                  <ConversationAction targettag="triggerer_player" text="看见你靠近，她主动就上前来与你搭话。" eventsprite="Momizi_Join"/>
+                  <ConversationAction targettag="triggerer_player" text="“请问你有看见过一个记者打扮的鸦天狗吗？”她似乎很着急，“那是我的同伴，因为昨天的事故，我与她分开了。”" eventsprite="Momizi_Join">
+                    <Option text="“记者打扮的天狗？是叫射命丸文吗？”">
+                      <ConversationAction targettag="triggerer_player" text="“欸！你知道她？”天狗少女看起来很是惊喜，“请问她在哪里？”" eventsprite="Momizi_Join">
+                        <Option text="“在我的船上，我是一个潜艇的船长，她说要跟着我的潜艇寻找新闻就加入了我的队伍。”">
+                          <ConversationAction targettag="triggerer_player" text="“真是太过分了！”天狗少女闻言似乎有点生气，“哨站没了之后就把我丢在这里，我的证件和零花钱都在她身上呢！要不是有河童们帮忙我都快饿死了！”" eventsprite="Momizi_Join">
+                            <Option text="“哈……哈哈……”">
+                              <ConversationAction targettag="triggerer_player" text="“不过，既然她上了你的船的话，那么我也要跟着！”天狗少女这样说道，“我的名字是犬走椛，是一名白狼天狗，请多多指教哦！”" eventsprite="Momizi_Join">
+                                <Option text="你笑了笑，握手欢迎这位少女的加入" endconversation="true">
+                                  <NPCChangeTeamAction npctag="Inubashiri_Momizi" teamid="Team1" addtocrew="true" />
+                                  <SetDataAction identifier="Momizi_Join_complete" value="true" />
+                                </Option>
+                              </ConversationAction>
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Success>
+                <Failure>
+                  <ConversationAction targettag="triggerer_player" text="看见你靠近，她主动就上前来与你搭话。" eventsprite="Momizi_Join"/>
+                  <ConversationAction targettag="triggerer_player" text="“请问你有看见过一个记者打扮的鸦天狗吗？”她似乎很着急，“那是我的同伴，因为昨天的事故，我与她分开了。”" eventsprite="Momizi_Join">
+                    <Option text="“鸦天狗？不是很清楚呢。”">
+                      <ConversationAction targettag="triggerer_player" text="你的话似乎让她有些失落，不过她还是对你说道：“那么打扰了。”说罢准备继续找其他人询问。" eventsprite="Momizi_Join"/>
+                      <SetDataAction identifier="Momizi_Meetagain2" value="true"/>
+                      <Goto name="Momizi_Meetagain2"/>
+                    </Option>
+                  </ConversationAction>
+                </Failure>
+              </CheckDataAction>
+            </Option>
+            <Option text="无视她">
+              <ConversationAction targettag="triggerer_player" text="多一事不如少一事。" eventsprite="Momizi_Join"/>
+              <SetDataAction identifier="Momizi_Meetagain" value="true" />
+              <GoTo name="Momizi_Meetagain"/>
+            </Option>
+          </ConversationAction>
+          <Label name="Momizi_Meetagain"/>
+          <CheckDataAction identifier="Momizi_Meetagain" condition="eq true">
+            <Success>
+              <ConversationAction targettag="triggerer_player" text="你再次看见了那个白发天狗，她似乎还没有解决问题。" speakertag="Momizi" eventsprite="Momizi_Join">
+                <Option text="过去看看">
+                  <SetDataAction identifier="Momizi_Meetagain" value="false"/>
+                  <Goto name="Momizi_Meetagain2"/>
+                </Option>
+              </ConversationAction>
+            </Success>
+          </CheckDataAction>
+          <Label name="Momizi_Meetagain2"/>
+          <CheckDataAction identifier="Momizi_Meetagain2" condition="eq true">
+            <Success>
+              <ConversationAction targettag="triggerer_player" text="“你好，有什么事吗？”对于你的再次到来，她似乎有点意外。" speakertag="Momizi" eventsprite="Momizi_Join">
+                <Option text="“我记得，你是要找人对吧？”">
+                  <ConversationAction targettag="triggerer_player" text="“是这样的。”她点点头，然后继续说道：“一个鸦天狗，随身带着一个相机，叫射命丸文。你有什么线索吗？”" eventsprite="Momizi_Join">
+                    <Option text="“抱歉，我并不清楚她在哪里。不过，我想她应该不在这个站点里面。”">
+                      <ConversationAction targettag="triggerer_player" text="“欸……是这样吗……”她很显然有些失落，“但是我没有办法去前往其他站点欸……我的证件在我同伴身上，要补办的话，我身上也没有钱……”" eventsprite="Momizi_Join">
+                        <Option text="“这样吗，我可以帮你去办个证件，正好我也有自己的船，你不如就搭乘我的船去找人吧。”">
+                          <ConversationAction targettag="triggerer_player" text="“是吗！”她看起来很惊喜，“真是非常感谢！我的名字是犬走椛，麻烦你了！”" eventsprite="Momizi_Join"/>
+                          <TriggerEventAction identifier="Momizi_Find_IDcard_Event" />
+                          <SetDataAction identifier="Momizi_Find_IDcard" value="true"/>
+                          <SetDataAction identifier="Momizi_Find_IDcard_Event_Not_Complete" value="true"/>
+                          <SetDataAction identifier="Momizi_Find_IDcard_Event_Complete" value="false"/>
+                          <GoTo name="Wait_For_IDcard"/>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Success>
+          </CheckDataAction>
+          <Label name="Wait_For_IDcard"/>
+          <CheckDataAction identifier="Momizi_Find_IDcard_Event_Complete" condition="eq true">
+            <Success>
+              <ConversationAction targettag="triggerer_player" text="“啊！真是太感谢你了！”犬走椛看见你手中的证件后高兴地说道，“那么接下来，白狼天狗犬走椛将为您效劳！”" speakertag="Momizi" eventsprite="Momizi_Join"/>
+              <NPCChangeTeamAction npctag="Inubashiri_Momizi" teamid="Team1" addtocrew="true" />
+              <SetDataAction identifier="Momizi_Join_complete" value="true" />
+            </Success>
+            <Failure>
+              <CheckDataAction identifier="Momizi_Find_IDcard_Event_Not_Complete" condition="eq true">
+                <Success>
+                  <ConversationAction targettag="triggerer_player" text="“欸，办理证件的手续遇到麻烦了吗？真是麻烦你了。”她看起来也很不好意思，“不过，我也只能拜托你了啊！”" speakertag="Momizi" eventsprite="Momizi_Join"/>
+                  <GoTo name="Wait_For_IDcard"/>
+                </Success>
+              </CheckDataAction>
+            </Failure>
+          </CheckDataAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--补办椛的证件-->
+    <ScriptedEvent identifier="Momizi_Find_IDcard_Event" commonness="0">
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Momizi_Event_Outpost_Manager" targettag="Momizi_Event_Outpost_Manager" spawnlocation="Outpost" targetmoduletags="airlock" />
+      <Label name="waitfortalk" />
+      <NPCWaitAction npctag="Momizi_Event_Outpost_Manager" wait="true" />
+      <TriggerAction target1tag="Momizi_Event_Outpost_Manager" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" speakertag="Momizi_Event_Outpost_Manager" text="“是叫犬走椛的白狼天狗吗？”他看了你一眼，批复了手中的许可." >
+        <Option text="补办证件——50马克">
+          <CheckMoneyAction amount="50">
+            <Success>
+              <MoneyAction amount="-50" />
+              <ConversationAction text="“这些妖怪一个个棘手的很，你要是想要她上船的话，记得管好她。”" targettag="triggerer_player" />
+              <SetDataAction identifier="Momizi_Find_IDcard_Event_Complete" value="true"/>
+            </Success>
+            <Failure>
+              <ConversationAction targettag="triggerer_player" text="你摸了摸口袋，发现身上并没有那么多钱，也许可以卖一点不用的材料？" />
+              <GoTo name="waitfortalk" />
+            </Failure>
+          </CheckMoneyAction>
+        </Option>
+        <Option text="再考虑考虑" endconversation="true">
+          <GoTo name="waitfortalk" />
+        </Option>
+      </ConversationAction>
+      <NPCWaitAction npctag="Momizi_Event_Outpost_Manager" wait="false" />
+    </ScriptedEvent>
+
+    <!--文文的礼物清单事件-->
+    <ScriptedEvent identifier="Aya_Gift_List_Event" commonness="0">
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Aya_Event_Outpost_Merchant" targettag="Aya_Event_Outpost_Merchant" spawnlocation="Outpost" targetmoduletags="airlock" />
+      <Label name="waitfortalk" />
+      <NPCWaitAction npctag="Aya_Event_Outpost_Merchant" wait="true" />
+      <TriggerAction target1tag="Aya_Event_Outpost_Merchant" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" speakertag="Aya_Event_Outpost_Merchant" text="“唔……这些吗，还真是少见的要求啊……”那个商人看见清单上的东西后神色莫名地看了你一眼，然后从仓库找出一个礼物盒。" />
+      <ConversationAction targettag="triggerer_player" text="“200马克承蒙惠顾，顺带还请把射命丸小姐欠下的300马克付清谢谢。”" >
+        <Option text="支付300马克" endconversation="true">
+          <CheckMoneyAction amount="300">
+            <Success>
+              <MoneyAction amount="-300" />
+              <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Aya_Gift_List" />
+              <SetDataAction identifier="Aya_Gift_List_Event_Complete" value="true"/>
+            </Success>
+            <Failure>
+              <ConversationAction targettag="triggerer_player" text="你摸了摸口袋，发现身上并没有那么多钱，也许可以卖一点不用的材料？" />
+              <GoTo name="waitfortalk" />
+            </Failure>
+          </CheckMoneyAction>
+        </Option>
+        <Option text="再考虑考虑" endconversation="true">
+          <GoTo name="waitfortalk" />
+        </Option>
+      </ConversationAction>
+      <NPCWaitAction npctag="Aya_Event_Outpost_Merchant" wait="false" />
+    </ScriptedEvent>
+
+
+    <!--阿求入组-->
+    <ScriptedEvent identifier="Akyuu_Join" commonness="233">
+      <CheckDataAction identifier="Akyuu_Join_complete" condition="eq true">
+        <Success>
+          <!--Don't repeat event-->
+        </Success>
+        <Failure>
+          <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
+            <Success>
+              <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 40">
+                <Success>
+                  <TagAction criteria="player" tag="player" />
+                  <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Hieda_no_Akyuu" targettag="Hieda_no_Akyuu" spawnlocation="Outpost" targetmoduletags="airlock" />
+                  <Label name="waitfortalk"/>
+                  <TriggerAction target1tag="Hieda_no_Akyuu" target2tag="player" applytotarget1="Hieda_no_Akyuu" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+                  <CheckDataAction identifier="Akyuu_Meet_Again" condition="eq true">
+                    <Success>
+                      <ConversationAction targettag="triggerer_player" text="你又重新遇到了她，而她显然也认出了你。“怎么样？请问这次我可以登船一起冒险么？”她满怀期待的看向你，等候着你的答复。" eventsprite="Touhou_Akyuu_Mission">
+                        <Option text="“当然可以！欢迎你的到来！”">
+                          <ConversationAction targettag="triggerer_player" text="“非常感谢您！啊我似乎还没介绍自己呢……我叫稗田阿求，只是一位历史的记录者。那么，我就先行一步去熟悉我们的船只了，一会见哦。”你看到少女向你们的潜艇小跑过去，永远地记住了她的名字。" eventsprite="Touhou_Akyuu_Mission"/>
+                          <NPCChangeTeamAction npctag="Hieda_no_Akyuu" teamid="Team1" addtocrew="true" />
+                          <SetDataAction identifier="Akyuu_Meet_Again" value="false"/>
+                          <SetDataAction identifier="Akyuu_Join_complete" value="true" />
+                        </Option>
+                        <Option text="“潜艇上相当危险，很抱歉恐怕不行……”">
+                          <ConversationAction targettag="triggerer_player" text="“这样啊……真是可惜呢，非常抱歉打扰到您了。不过如果您回心转意了请务必再来找我。”少女的心情瞬间低落下去。你看到她又重新走了回去，隐约能听到些许细微呢喃，“明明还想再记下更多更多啊……”"/>
+                          <SetDataAction identifier="Akyuu_Meet_Again" value="true"/>
+                        </Option>
+                      </ConversationAction>
+                    </Success>
+                    <Failure>
+                      <ConversationAction targettag="triggerer_player" speakertag="Hieda_no_Akyuu" text="停泊好潜艇进入站点，你一边回忆船上各项物资的储备，盘算着这次又需要补给和卖出些什么，一边思考等会要不要对站点里面的人和物动一动不怎么受欢迎的小手段。" eventsprite="Touhou_Akyuu_Mission">
+                        <Option text="继续">
+                          <ConversationAction targettag="triggerer_player" text="为了船只的顺利航行，你要考虑的事情一向都非常多，每一次登上站点，总会有各种事项挤在你的脑海里，喧闹地吵作一团，消耗着本就所剩无几的精力。" eventsprite="Touhou_Akyuu_Mission">
+                            <Option text="继续">
+                              <ConversationAction targettag="triggerer_player" text="就在你感慨着自己不再年轻，记忆不如以往的时候，隐约一股花香袭来，一瞬间就抓住了你那常年被站点和潜艇上污浊空气浸淫良久的鼻子，甚至让你有些不太适应。">
+                                <Option text="继续">
+                                  <CheckDataAction identifier="Player_Donated" condition="eq true">
+                                    <Success>
+                                      <ConversationAction targettag="triggerer_player" text="而当你眼中不再有混沌，重新将视野聚焦在前方时，你发现了这股花香的来源——一位与木卫二格格不入的少女，和她头上别着的一朵花。">
+                                        <Option text="我好像在哪里见过你？">
+                                          <ConversationAction targettag="triggerer_player" text="“是的，您在补给站里帮上了很大的忙呢。”少女向你笑笑，“有什么需要我帮忙的吗？”" eventsprite="Touhou_Akyuu_Mission">
+                                            <Option text="我的船上还缺些人手，你能来帮一段时间的忙吗？">
+                                              <ConversationAction targettag="triggerer_player" text="“没有问题！啊，我似乎还没介绍自己呢……我叫稗田阿求，只是一位历史的记录者。这里是一点谢礼不成敬意。“少女递给了你一个小包裹，那么，我就先行一步去熟悉我们的船只了，一会见哦。”你看到少女向你们的潜艇小跑过去，永远地记住了她的名字。" eventsprite="Touhou_Akyuu_Mission"/>
+                                              <NPCChangeTeamAction npctag="Hieda_no_Akyuu" teamid="Team1" addtocrew="true" />
+                                              <SpawnAction itemidentifier="Power_Point" targetinventory="triggerer_player" amount="2" />
+                                              <SpawnAction itemidentifier="Touhou_Precious_Metal" targetinventory="triggerer_player" amount="2" />
+                                              <SetDataAction identifier="Akyuu_Meet_Again" value="false"/>
+                                              <SetDataAction identifier="Akyuu_Join_complete" value="true" />
+                                            </Option>
+                                          </ConversationAction>
+                                        </Option>
+                                      </ConversationAction>
+                                    </Success>
+                                    <Failure>
+                                      <ConversationAction targettag="triggerer_player" text="而当你眼中不再有混沌，重新将视野聚焦在前方时，你发现了这股花香的来源——一位与木卫二格格不入的少女，和她头上别着的一朵花。">
+                                        <Option text="好奇的看一眼">
+                                          <ConversationAction targettag="triggerer_player" text="在你看向她的同时，她也注意到了你。于是，她微笑着直起身朝你走来，向你行了个淑女的礼仪，然后说到：“非常冒昧打扰到您，请问您是艇员吗？”">
+                                            <Option text="是的，请问有什么需要帮助的吗？">
+                                              <ConversationAction targettag="triggerer_player" text="“那真是太好了！”她似乎非常的欣喜，“小女我有个不情之请，请问我可以跟随你们的船一起冒险吗？我非常想看到和记录下这个世界更多的事物。请放心我不会为你们带来任何困扰的！”" eventsprite="Touhou_Akyuu_Mission">
+                                                <Option text="“当然可以！欢迎你的到来！”">
+                                                  <ConversationAction targettag="triggerer_player" text="“非常感谢您！啊，我似乎还没介绍自己呢……我叫稗田阿求，只是一位历史的记录者。那么，我就先行一步去熟悉我们的船只了，一会见哦。”你看到少女向你们的潜艇小跑过去，永远地记住了她的名字。" eventsprite="Touhou_Akyuu_Mission"/>
+                                                  <NPCChangeTeamAction npctag="Hieda_no_Akyuu" teamid="Team1" addtocrew="true" />
+                                                  <SpawnAction itemidentifier="Power_Point" targetinventory="triggerer_player" amount="1" />
+                                                  <SpawnAction itemidentifier="Touhou_Precious_Metal" targetinventory="triggerer_player" amount="1" />
+                                                  <SetDataAction identifier="Akyuu_Meet_Again" value="false"/>
+                                                  <SetDataAction identifier="Akyuu_Join_complete" value="true" />
+                                                </Option>
+                                                <Option text="“潜艇上相当危险，很抱歉恐怕不行……”">
+                                                  <ConversationAction targettag="triggerer_player" text="“这样啊……真是可惜呢，非常抱歉打扰到您了。不过如果您回心转意了请务必再来找我。”少女的心情瞬间低落下去。你看到她又重新走了回去，隐约能听到些许细微呢喃，“明明还想再记下更多更多啊……”"/>
+                                                  <SetDataAction identifier="Akyuu_Meet_Again" value="true"/>
+                                                </Option>
+                                              </ConversationAction>
+                                            </Option>
+                                          </ConversationAction>
+                                        </Option>
+                                      </ConversationAction>
+                                    </Failure>
+                                  </CheckDataAction>
+                                </Option>
+                              </ConversationAction>
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                      </ConversationAction>
+                    </Failure>
+                  </CheckDataAction>
+                </Success>
+                <Failure>
+                  <!--标记-->
+                  <!--前置任务，灵异珠事件-->
+                </Failure>
+              </CheckReputationAction>
+            </Success>
+            <Failure>
+
+            </Failure>
+          </CheckDataAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <ScriptedEvent identifier="Touhou_Akyuu_Mission" commonness="100">
+      <CheckDataAction identifier="Akyuu_Join_complete" condition="eq true">
+        <Success>
+
+        </Success>
+        <Failure>
+          <CheckDataAction identifier="Touhou_UFO_Mission_ING" condition="eq true">
+            <Failure>
+              <TagAction criteria="player" tag="player" />
+              <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hieda_no_Akyuu" targettag="Mission_Hieda_no_Akyuu" spawnlocation="Outpost" targetmoduletags="airlock" />
+              <Label name="waitformission" />
+              <NPCWaitAction npctag="Mission_Hieda_no_Akyuu" wait="true" />
+              <TriggerAction target1tag="Mission_Hieda_no_Akyuu" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+              <ConversationAction targettag="triggerer_player" text="我收到了几份关于航线的传言，要看看吗" eventsprite="Touhou_Akyuu_Mission">
+                <Option text="魔法物质运输">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="委托人说……小心兔子">
+                    <Option text="同意">
+                      <ConversationAction text="一路平安" dialogtype="Small" targettag="triggerer_player" />
+                      <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                      <MissionAction missiontag="cargoMagicItems" />
+                    </Option>
+                    <Option text="再考虑考虑">
+                      <ConversationAction text="天气太冷了，下次再说吧" dialogtype="Small" targettag="triggerer_player" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <GoTo name="waitformission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="清理毛玉">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="毛玉的外壳是很有价值的材料，有机会记得多留一些">
+                    <Option text="同意">
+                      <ConversationAction text="一路愉快" dialogtype="Small" targettag="triggerer_player" />
+                      <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                      <MissionAction missiontag="killMaoyu" />
+                    </Option>
+                    <Option text="再考虑考虑">
+                      <ConversationAction text="这种简单的事情，还是交给别人好了" dialogtype="Small" targettag="triggerer_player" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <GoTo name="waitformission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="幽灵线">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="有人说，再航线上看到疑似幽灵的存在，也许与这附近频繁花开有关系">
+                    <Option text="同意">
+                      <ConversationAction text="武运昌隆" dialogtype="Small" targettag="triggerer_player" />
+                      <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                      <MissionAction missiontag="killghost" />
+                    </Option>
+                    <Option text="再考虑考虑">
+                      <ConversationAction text="我们中有人对幽灵比较害……敏感，下次吧" dialogtype="Small" targettag="triggerer_player" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <GoTo name="waitformission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="长眠不醒的噩梦">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="有一群正体不明的存在在附近游荡，严重影响到了站点间的航行">
+                    <Option text="同意">
+                      <ConversationAction text="注意安全" dialogtype="Small" targettag="triggerer_player" />
+                      <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                      <MissionAction missiontag="killphotosphere" />
+                    </Option>
+                    <Option text="再考虑考虑">
+                      <ConversationAction text="等查明本体再去看看吧" dialogtype="Small" targettag="triggerer_player" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <GoTo name="waitformission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="特别委托">
+                  <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 60">
+                    <Success>
+                      <ConversationAction targettag="triggerer_player" dialogtype="Small" text="”有人说最近能看到一群颜色各异的UFO汇集在附近，他们愿意出高价请人解决这些UFO“（完成第一个UFO任务后无法接取其他任务，直到完成整个UFO任务线。推荐尽快完成三种UFO任务）">
+                        <Option text="同意">
+                          <ConversationAction text="旅途凶险，注意安全，我给你们准备了一些药物，希望能帮上忙" dialogtype="Small" targettag="triggerer_player" />
+                          <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="3" />
+                          <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="3" />
+                          <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                          <MissionAction missiontag="killgreenufo" />
+                          <MissionAction missiontag="killredufo" />
+                          <MissionAction missiontag="killblueufo" />
+                        </Option>
+                        <Option text="再考虑考虑">
+                          <ConversationAction text="这些UFO竟然还没有消失吗，还是下次去命莲寺讨个说法吧" dialogtype="Small" targettag="triggerer_player" />
+                          <ClearTagAction tag="triggerer_player" />
+                          <GoTo name="waitformission" />
+                        </Option>
+                      </ConversationAction>
+                    </Success>
+                    <Failure>
+                      <ConversationAction targettag="triggerer_player" dialogtype="Small" text="似乎是很紧急状况，有人说在附近看到了绿色的……飞碟，愿意付高额赏金寻找解决它们的人（完成第一个UFO任务后无法接取其他任务，直到完成整个UFO任务线）">
+                        <Option text="同意">
+                          <ConversationAction text="旅途凶险，注意安全，我给你们准备了一些药物，希望能帮上忙" dialogtype="Small" targettag="triggerer_player" />
+                          <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                          <SpawnAction itemidentifier="antidama1" targetinventory="triggerer_player" />
+                          <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                          <MissionAction missiontag="killgreenufo" />
+                        </Option>
+                        <Option text="再考虑考虑">
+                          <ConversationAction text="听上去就很奇怪……也许是他看错了" dialogtype="Small" targettag="triggerer_player" />
+                          <ClearTagAction tag="triggerer_player" />
+                          <GoTo name="waitformission" />
+                        </Option>
+                      </ConversationAction>
+                      <!--                              <ConversationAction targettag="triggerer_player" dialogtype="Small" text="阿吽说她在航线上看到了很多红色的UFO，它们激进的举动给周围的居民带来了不小的困扰，因此愿意出高价解决它们（完成第一个UFO任务后无法接取其他任务，直到完成整个UFO任务线）">
+                                                      <Option text="同意">
+                                                        <ConversationAction text="旅途凶险，注意安全，我给你们准备了一些药物，希望能帮上忙" dialogtype="Small" targettag="triggerer_player" />
+                                                        <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                                                        <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="2" />
+                                                        <MissionAction missiontag="killredufo" />
+                                                      </Option>
+                                                      <Option text="再考虑考虑">
+                                                        <ConversationAction text="一定是阿吽看错了吧，这种地方怎么会有UFO呢" dialogtype="Small" targettag="triggerer_player" />
+                                                        <ClearTagAction tag="triggerer_player" />
+                                                        <GoTo name="waitformission" />
+                                                      </Option>
+                                                    </ConversationAction>-->
+                    </Failure>
+                  </CheckReputationAction>
+                </Option>
+                <!--        <Option text="真相不明-忠义绿色UFO">
+                          <ConversationAction targettag="triggerer_player" dialogtype="Small" text="似乎是很紧急状况，有人说在附近看到了绿色的……飞碟，愿意付高额赏金寻找解决它们的人">
+                            <Option text="同意">
+                              <ConversationAction text="旅途凶险，注意安全，我给你们准备了一些药物，希望能帮上忙" dialogtype="Small" targettag="triggerer_player" />
+                              <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                              <SpawnAction itemidentifier="antidama1" targetinventory="triggerer_player" />
+                              <MissionAction missiontag="killgreenufo" />
+                            </Option>
+                            <Option text="再考虑考虑">
+                              <ConversationAction text="听上去就很奇怪……也许是他看错了" dialogtype="Small" targettag="triggerer_player" />
+                              <ClearTagAction tag="triggerer_player" />
+                              <GoTo name="waitformission" />
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                        <Option text="真相不明-愤怒红色UFO">
+                          <ConversationAction targettag="triggerer_player" dialogtype="Small" text="阿吽说她在航线上看到了很多红色的UFO，它们激进的举动给周围的居民带来了不小的困扰，因此愿意出高价解决它们">
+                            <Option text="同意">
+                              <ConversationAction text="旅途凶险，注意安全，我给你们准备了一些药物，希望能帮上忙" dialogtype="Small" targettag="triggerer_player" />
+                              <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                              <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" />
+                              <MissionAction missiontag="killredufo" />
+                            </Option>
+                            <Option text="再考虑考虑">
+                              <ConversationAction text="一定是阿吽看错了吧，这种地方怎么会有UFO呢" dialogtype="Small" targettag="triggerer_player" />
+                              <ClearTagAction tag="triggerer_player" />
+                              <GoTo name="waitformission" />
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                        <Option text="真相不明-哀愁蓝色UFO">
+                          <ConversationAction targettag="triggerer_player" dialogtype="Small" text="最近有相当多的居民说看到了蓝色UFO在远处游荡，这件事在当地造成了一定恐慌，危险度超过了其他两种UFO，他们愿意高价悬赏这些蓝色UFO">
+                            <Option text="同意">
+                              <ConversationAction text="这次事态相当严重，我准备了一些药物，希望你们平安归来" dialogtype="Small" targettag="triggerer_player" />
+                              <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="2" />
+                              <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="4" />
+                              <SpawnAction itemidentifier="Cinnamon_Incense" targetinventory="triggerer_player" />
+                              <MissionAction missiontag="killblueufo" />
+                            </Option>
+                            <Option text="再考虑考虑">
+                              <ConversationAction text="看上去有点危险，而且太麻烦了……下次再来吧" dialogtype="Small" targettag="triggerer_player" />
+                              <ClearTagAction tag="triggerer_player" />
+                              <GoTo name="waitformission" />
+                            </Option>
+                          </ConversationAction>
+                        </Option>-->
+                <!--        <Option text="真相不明的黑暗">
+                          <ConversationAction targettag="triggerer_player" dialogtype="Small" text="测试文本">
+                            <Option text="同意">
+                              <ConversationAction text="这趟旅程会很危险，我准备了一些药物，希望你们平安归来" dialogtype="Small" targettag="triggerer_player" />
+                              <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="4" />
+                              <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="4" />
+                              <MissionAction missiontag="FindHoujuuNue" />
+                            </Option>
+                            <Option text="再考虑考虑">
+                              <ConversationAction text="现在来看还是太早了呢" dialogtype="Small" targettag="triggerer_player" />
+                              <ClearTagAction tag="triggerer_player" />
+                              <GoTo name="waitformission" />
+                            </Option>
+                          </ConversationAction>
+                        </Option>-->
+                <Option text="秘密委托（需要优先完成整个UFO任务线）">
+                  <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 36">
+                    <Success>
+                      <CheckDataAction identifier="Salvage_Mysterious_Pearl_Completed" condition="eq true">
+                        <Success>
+                          <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“多亏了你的帮助，灵异珠已经成功回收了。”少女向你表达了感激"/>
+                        </Success>
+                        <Failure>
+                          <CheckDataAction identifier="Salvage_Mysterious_Pearl_Completed" condition="eq true">
+                            <Success>
+                              <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“多亏了你的帮助，灵异珠已经成功回收了。”">
+                                <Option text="提交凭证">
+                                  <CheckItemAction itemidentifiers="Salvage_Mysterious_Pearl_Mission_Completed" targettag="triggerer_player">
+                                    <Success>
+                                      <ConversationAction text="“这是很宝贵的信息!作为谢礼，请收下这个吧，虽然只是仿制品，但其精巧的工艺让它和正品无异。”" dialogtype="Small" targettag="triggerer_player" />
+                                      <RemoveItemAction itemidentifier="Salvage_Mysterious_Pearl_Mission_Completed" targettag="triggerer_player"/>
+                                      <SpawnAction itemidentifier="Touhou_Mysterious_Pearl_Rippling" targetinventory="triggerer_player" />
+                                      <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                                      <SetDataAction identifier="Touhou_Mysterious_Pearl_Rippling_Completed" value="true"/>
+                                    </Success>
+                                    <Failure>
+                                      <ConversationAction text="你似乎忘了带上凭证……" dialogtype="Small" targettag="triggerer_player" />
+                                      <ClearTagAction tag="triggerer_player" />
+                                      <GoTo name="waitformission" />
+                                    </Failure>
+                                  </CheckItemAction>
+                                </Option>
+                              </ConversationAction>
+                            </Success>
+                            <Failure>
+                              <ConversationAction targettag="triggerer_player" dialogtype="Small" text="之前的一次运输事故导致一些重要物品遗失，其中包括一颗疑似灵异珠的不稳定物体，委托人愿意出重金请你秘密回收灵异珠。">
+                                <Option text="同意">
+                                  <ConversationAction text="“过程一定要保密，灵异珠的如果被有心人拿到会造成很严重的后果。”" dialogtype="Small" targettag="triggerer_player" />
+                                  <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="4" />
+                                  <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="4" />
+                                  <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                                  <MissionAction missiontag="Salvage_Mysterious_Pearl" />
+                                </Option>
+                                <Option text="再考虑考虑" endconversation="true">
+                                  <ClearTagAction tag="triggerer_player" />
+                                  <GoTo name="waitformission" />
+                                </Option>
+                              </ConversationAction>
+                            </Failure>
+                          </CheckDataAction>
+                        </Failure>
+                      </CheckDataAction>
+                    </Success>
+                    <Failure>
+                      <ConversationAction text="“我还不能把这件事完全交给你。”" dialogtype="Small" targettag="triggerer_player" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <GoTo name="waitformission" />
+                    </Failure>
+                  </CheckReputationAction>
+                </Option>
+                <Option text="以后再说">
+                  <ConversationAction text="忙了一天，想先喝一口热茶呢" dialogtype="Small" targettag="triggerer_player" />
+                  <ClearTagAction tag="triggerer_player" />
+                  <GoTo name="waitformission" />
+                </Option>
+              </ConversationAction>
+              <NPCWaitAction npctag="Mission_Hieda_no_Akyuu" wait="false" />
+            </Failure>
+            <Success>
+
+            </Success>
+          </CheckDataAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--已击败绿UFO-->
+    <ScriptedEvent identifier="Touhou_Akyuu_UFO_Mission01" commonness="0">
+      <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
+        <Success>
+
+        </Success>
+        <Failure>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hieda_no_Akyuu" targettag="Mission_Hieda_no_Akyuu" spawnlocation="MainSub" targetmoduletags="airlock" />
+          <Label name="waitformission" />
+          <TriggerAction target1tag="Mission_Hieda_no_Akyuu" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <CheckDataAction identifier="Touhou_Akyuu_UFO_Mission01_Agree" condition="eq true">
+            <Success>
+              <ConversationAction targettag="triggerer_player" text="我收到了几份关于航线的传言，要看看吗" eventsprite="Touhou_Akyuu_Mission">
+                <Option text="真相不明-忠义绿色UFO">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“这份日志记录了你们的作战记录，如果想回忆并练习的话，可以多看看日志。”">
+                    <Option text="收下日志" endconversation="true">
+                      <SpawnAction itemidentifier="Touhou_Missions_Collection_Green_UFO" targetinventory="triggerer_player" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="以后再说">
+                  <ConversationAction text="忙了一天，想先喝一口热茶呢" dialogtype="Small" targettag="triggerer_player" />
+                  <ClearTagAction tag="triggerer_player" />
+                  <GoTo name="waitformission" />
+                </Option>
+              </ConversationAction>
+            </Success>
+            <Failure>
+              <ConversationAction targettag="triggerer_player" text="我收到了几份关于航线的传言，要看看吗" eventsprite="Touhou_Akyuu_Mission">
+                <Option text="特别委托">
+                  <CheckDataAction identifier="Touhou_Green_UFO_Mission" condition="eq true">
+                    <Success>
+                      <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“好消息，航线上的绿色UFO已经消失了。”">
+                        <Option text="“接下来还有哪里有UFO的影子？”">
+                          <ConversationAction text="“我已经把任务发到你的终端上了，附近居民们出行的安全就拜托您了。”，阿求把任务发放到你的终端上，“下个巡回结束之后，我会在您的船上等你。”" targettag="triggerer_player" />
+                          <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                          <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="2" />
+                          <ClearTagAction tag="triggerer_player" />
+                          <MissionAction missiontag="killredufo" />
+                          <SetDataAction identifier="Touhou_Akyuu_UFO_Mission01_Agree" value="true"/>
+                          <SetDataAction identifier="Touhou_Green_UFO_Mission" value="false"/>
+                          <SetDataAction identifier="Touhou_UFO_Mission_ING" value="true"/>
+                          <GoTo name="waitformission" />
+                        </Option>
+                        <Option text="我想先休息会儿">
+                          <ConversationAction text="辛苦你这些天的付出了，去好好休息放松一下吧" dialogtype="Small" targettag="triggerer_player" />
+                          <ClearTagAction tag="triggerer_player" />
+                          <GoTo name="waitformission" />
+                        </Option>
+                      </ConversationAction>
+                    </Success>
+                    <Failure>
+                      <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“我想你还没有准备好……”"/>
+                      <GoTo name="waitformission" />
+                    </Failure>
+                  </CheckDataAction>
+                </Option>
+                <Option text="真相不明-忠义绿色UFO">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“这份日志记录了你们的作战记录，如果想回忆并练习的话，可以多看看日志。”">
+                    <Option text="收下日志" endconversation="true">
+                      <SpawnAction itemidentifier="Touhou_Missions_Collection_Green_UFO" targetinventory="triggerer_player" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <GoTo name="waitformission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="以后再说">
+                  <ConversationAction text="忙了一天，想先喝一口热茶呢" dialogtype="Small" targettag="triggerer_player" />
+                  <ClearTagAction tag="triggerer_player" />
+                  <GoTo name="waitformission" />
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </CheckDataAction>
+          <NPCWaitAction npctag="Mission_Hieda_no_Akyuu" wait="false" />
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--已击败红UFO-->
+    <ScriptedEvent identifier="Touhou_Akyuu_UFO_Mission02" commonness="0">
+      <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
+        <Success>
+
+        </Success>
+        <Failure>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hieda_no_Akyuu" targettag="Mission_Hieda_no_Akyuu" spawnlocation="MainSub" targetmoduletags="airlock" />
+          <Label name="waitformission" />
+          <TriggerAction target1tag="Mission_Hieda_no_Akyuu" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <CheckDataAction identifier="Touhou_Akyuu_UFO_Mission02_Agree" condition="eq true">
+            <Success>
+              <ConversationAction targettag="triggerer_player" text="我收到了几份关于航线的传言，要看看吗" eventsprite="Touhou_Akyuu_Mission">
+                <Option text="真相不明-愤怒红色UFO">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“这份日志记录了你们的作战记录，如果想回忆并练习的话，可以多看看日志。”">
+                    <Option text="收下日志" endconversation="true">
+                      <SpawnAction itemidentifier="Touhou_Missions_Collection_Red_UFO" targetinventory="triggerer_player" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="以后再说">
+                  <ConversationAction text="忙了一天，想先喝一口热茶呢" dialogtype="Small" targettag="triggerer_player" />
+                  <ClearTagAction tag="triggerer_player" />
+                  <GoTo name="waitformission" />
+                </Option>
+              </ConversationAction>
+            </Success>
+            <Failure>
+              <ConversationAction targettag="triggerer_player" text="我收到了几份关于航线的传言，要看看吗" eventsprite="Touhou_Akyuu_Mission">
+                <Option text="特别委托">
+                  <CheckDataAction identifier="Touhou_Red_UFO_Mission" condition="eq true">
+                    <Success>
+                      <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“辛苦你们了，多亏了你们的努力，那些红色UFO也销声匿迹了”">
+                        <Option text="“接下来还有哪里有UFO的影子？”">
+                          <ConversationAction text="“我已经把任务发到你的终端上了，前哨站居民的安全就拜托您了”，阿求把任务发放到你的终端上，“下个巡回结束之后，我会在您的船上等你。”" targettag="triggerer_player" />
+                          <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
+                          <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="2" />
+                          <ClearTagAction tag="triggerer_player" />
+                          <MissionAction missiontag="killblueufo" />
+                          <SetDataAction identifier="Touhou_Akyuu_UFO_Mission02_Agree" value="true"/>
+                          <SetDataAction identifier="Touhou_Red_UFO_Mission" value="false"/>
+                          <GoTo name="waitformission" />
+                        </Option>
+                        <Option text="我想先休息会儿">
+                          <ConversationAction text="辛苦你这些天的付出了，去好好休息放松一下吧" dialogtype="Small" targettag="triggerer_player" />
+                          <ClearTagAction tag="triggerer_player" />
+                          <GoTo name="waitformission" />
+                        </Option>
+                      </ConversationAction>
+                    </Success>
+                    <Failure>
+                      <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“我想你还没有准备好……”"/>
+                      <GoTo name="waitformission" />
+                    </Failure>
+                  </CheckDataAction>
+                </Option>
+                <Option text="真相不明-愤怒红色UFO">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“这份日志记录了你们的作战记录，如果想回忆并练习的话，可以多看看日志。”">
+                    <Option text="收下日志" endconversation="true">
+                      <SpawnAction itemidentifier="Touhou_Missions_Collection_Red_UFO" targetinventory="triggerer_player" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <GoTo name="waitformission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="以后再说">
+                  <ConversationAction text="忙了一天，想先喝一口热茶呢" dialogtype="Small" targettag="triggerer_player" />
+                  <ClearTagAction tag="triggerer_player" />
+                  <GoTo name="waitformission" />
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </CheckDataAction>
+          <NPCWaitAction npctag="Mission_Hieda_no_Akyuu" wait="false" />
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--已击败蓝UFO-->
+    <ScriptedEvent identifier="Touhou_Akyuu_UFO_Mission03" commonness="0">
+      <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
+        <Success>
+
+        </Success>
+        <Failure>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hieda_no_Akyuu" targettag="Mission_Hieda_no_Akyuu" spawnlocation="MainSub" targetmoduletags="airlock" />
+          <Label name="waitformission" />
+          <TriggerAction target1tag="Mission_Hieda_no_Akyuu" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <CheckDataAction identifier="Touhou_Akyuu_UFO_Mission03_Agree" condition="eq true">
+            <Success>
+              <ConversationAction targettag="triggerer_player" text="我收到了几份关于航线的传言，要看看吗" eventsprite="Touhou_Akyuu_Mission">
+                <Option text="真相不明-哀愁蓝色UFO">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“这份日志记录了你们的作战记录，如果想回忆并练习的话，可以多看看日志。”">
+                    <Option text="收下日志" endconversation="true">
+                      <SpawnAction itemidentifier="Touhou_Missions_Collection_Blue_UFO" targetinventory="triggerer_player" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="以后再说">
+                  <ConversationAction text="忙了一天，想先喝一口热茶呢" dialogtype="Small" targettag="triggerer_player" />
+                  <ClearTagAction tag="triggerer_player" />
+                  <GoTo name="waitformission" />
+                </Option>
+              </ConversationAction>
+            </Success>
+            <Failure>
+              <ConversationAction targettag="triggerer_player" text="我收到了几份关于航线的传言，要看看吗" eventsprite="Touhou_Akyuu_Mission">
+                <Option text="特别委托">
+                  <CheckDataAction identifier="Touhou_Blue_UFO_Mission" condition="eq true">
+                    <Success>
+                      <ConversationAction targettag="triggerer_player" dialogtype="Small" text="少女见你走来，低头翻了翻手上的日志：“一个好消息和坏消息。”">
+                        <Option text="“先听好消息，希望它足够好。”">
+                          <ConversationAction text="“因为你的努力，之前那些游荡的UFO全部被解决掉了。”" targettag="triggerer_player" >
+                            <Option text="那坏消息呢">
+                              <ConversationAction text="“现在航线出现了更多UFO，之前几近消失的它们又回来了。”少女看上去有些忧虑，“不仅如此，还有很多人说自己看到了奇怪的生物混在UFO中间，有人说是彩色虎尾鲨，有人说是巨大的蛇，还有人说是彩色的UFO，我们需要你去调查事件的真相。”" targettag="triggerer_player" >
+                                <Option text="“现在就去吧”">
+                                  <ConversationAction text="“这次的情况可能很危险，我为你们准备了一些药物，一定要平安归来。”，阿求把任务发放到你的终端上，“下个巡回结束之后，我会在您的船上等你。”" targettag="triggerer_player" />
+                                  <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="4" />
+                                  <SpawnAction itemidentifier="antibleeding3" targetinventory="triggerer_player" />
+                                  <ClearTagAction tag="triggerer_player" />
+                                  <MissionAction missiontag="FindHoujuuNue" />
+                                  <SetDataAction identifier="Touhou_Akyuu_UFO_Mission03_Agree" value="true"/>
+                                  <SetDataAction identifier="Touhou_Blue_UFO_Mission" value="false"/>
+                                  <GoTo name="waitformission" />
+                                </Option>
+                                <Option text="我得再考虑考虑">
+                                  <ConversationAction text="“好吧，请您多注意身体。”少女看上去有些失落。" dialogtype="Small" targettag="triggerer_player" />
+                                  <ClearTagAction tag="triggerer_player" />
+                                  <GoTo name="waitformission" />
+                                </Option>
+                              </ConversationAction>
+                            </Option>
+                          </ConversationAction>
+                          <MissionAction missiontag="killblueufo" />
+                        </Option>
+                        <Option text="“先听坏消息，坏的不去好的不来。”">
+                          <ConversationAction text="“现在航线出现了更多UFO，之前几近消失的它们又回来了。”少女看上去有些忧虑，“不仅如此，还有很多人说自己看到了奇怪的生物混在UFO中间，有人说是彩色虎尾鲨，有人说是巨大的蛇，还有人说是彩色的UFO，我们需要你去调查事件的真相。”" targettag="triggerer_player" >
+                            <Option text="“看来顾不上所谓的好消息了，现在就去解决它们吧”">
+                              <ConversationAction text="“这次的情况可能很危险，我为你们准备了一些药物，一定要平安归来。”" targettag="triggerer_player" />
+                              <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="4" />
+                              <SpawnAction itemidentifier="antibleeding3" targetinventory="triggerer_player" />
+                              <ClearTagAction tag="triggerer_player" />
+                              <MissionAction missiontag="FindHoujuuNue" />
+                            </Option>
+                            <Option text="那好消息呢？">
+                              <ConversationAction text="“因为你的努力，之前那些游荡的UFO全部被解决掉了。”少女微微鞠躬向你表达谢意。" dialogtype="Small" targettag="triggerer_player" >
+                                <Option text="“现在就去解决它们吧”">
+                                  <ConversationAction text="“这次的情况可能很危险，我为你们准备了一些药物，一定要平安归来。”，阿求把任务发放到你的终端上，“下个巡回结束之后，我会在您的船上等你。”" targettag="triggerer_player" />
+                                  <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="4" />
+                                  <SpawnAction itemidentifier="antibleeding3" targetinventory="triggerer_player" />
+                                  <ClearTagAction tag="triggerer_player" />
+                                  <MissionAction missiontag="FindHoujuuNue" />
+                                  <GoTo name="waitformission" />
+                                </Option>
+                                <Option text="我得再考虑考虑">
+                                  <ConversationAction text="“好吧，请您多注意身体。”少女看上去有些失落。" dialogtype="Small" targettag="triggerer_player" />
+                                  <ClearTagAction tag="triggerer_player" />
+                                  <GoTo name="waitformission" />
+                                </Option>
+                              </ConversationAction>
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                        <Option text="我想先休息会儿">
+                          <ConversationAction text="辛苦你这些天的付出了，去好好休息放松一下吧" dialogtype="Small" targettag="triggerer_player" />
+                          <ClearTagAction tag="triggerer_player" />
+                          <GoTo name="waitformission" />
+                        </Option>
+                      </ConversationAction>
+                    </Success>
+                    <Failure>
+                      <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“我想你还没有准备好……”"/>
+                      <GoTo name="waitformission" />
+                    </Failure>
+                  </CheckDataAction>
+                </Option>
+                <Option text="真相不明-哀愁蓝色UFO">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“这份日志记录了你们的作战记录，如果想回忆并练习的话，可以多看看日志。”">
+                    <Option text="收下日志" endconversation="true">
+                      <SpawnAction itemidentifier="Touhou_Missions_Collection_Blue_UFO" targetinventory="triggerer_player" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <GoTo name="waitformission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="以后再说">
+                  <ConversationAction text="忙了一天，想先喝一口热茶呢" dialogtype="Small" targettag="triggerer_player" />
+                  <ClearTagAction tag="triggerer_player" />
+                  <GoTo name="waitformission" />
+                </Option>
+              </ConversationAction>
+            </Failure>
+          </CheckDataAction>
+          <NPCWaitAction npctag="Mission_Hieda_no_Akyuu" wait="false" />
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+    <!--已击败封兽鵺-->
+    <ScriptedEvent identifier="Touhou_Akyuu_UFO_Mission04" commonness="0">
+      <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
+        <Success>
+
+        </Success>
+        <Failure>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hieda_no_Akyuu" targettag="Mission_Hieda_no_Akyuu" spawnlocation="MainSub" targetmoduletags="airlock" />
+          <Label name="waitformission" />
+          <TriggerAction target1tag="Mission_Hieda_no_Akyuu" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" text="少女见到你，很是惊喜：“你们成功了？”" eventsprite="Touhou_Akyuu_Mission">
+            <Option text="”是的，我们发现那是一名自称封兽鵺的少女，她醒来后就自顾自地离开了。“">
+              <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“我们已经接到命莲寺的消息了，鵺似乎是受到某种波动的干扰，之前一段时间都失去了意识。”">
+                <Option text="“失去意识？”" >
+                  <ConversationAction targettag="triggerer_player" text="“是的，不过不必担心，她的身体暂无大碍，只是有些虚弱，需要静养一段时间。”阿求翻了翻手里的日志，“我们推测是这种特殊的波动干扰了鵺的精神，之后需要一点时间去调查干扰的原因。”" eventsprite="Touhou_Akyuu_Mission">
+                    <Option text="“有什么我能帮忙的？”" >
+                      <ConversationAction targettag="triggerer_player" text="“目前的初步推测是，一种叫做‘灵异珠’的存在干扰了鵺的精神，因此我们需要去找到它的确切位置。最近有传闻，说在遗迹和洞穴里看到过异样的闪光，能请你去调查一下吗？”" eventsprite="Touhou_Akyuu_Mission">
+                        <Option text="没有问题">
+                          <ConversationAction targettag="triggerer_player" text="“有劳了。”" eventsprite="Touhou_Akyuu_Mission"/>
+                          <ConversationAction targettag="triggerer_player" text="UFO任务线已完成" eventsprite="Touhou_Akyuu_Mission"/>
+                          <SpawnAction itemidentifier="Touhou_Missions_Collection_Nue" targetinventory="triggerer_player" />
+                          <MissionAction missiontag="Salvage_Mysterious_Pearl" />
+                          <SetDataAction value="true" identifier="Touhou_Find_Nue_Mission_End" />
+                          <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                          <ClearTagAction tag="triggerer_player" />
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Option>
+            <Option text="“是的，那位少女可真是给我们不小的压力。”">
+              <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“辛苦你们了。”少女微微鞠躬向你表示感谢，“我们已经接到命莲寺的消息了，鵺似乎是受到某种波动的干扰，之前一段时间都失去了意识。”">
+                <Option text="“失去意识？”" >
+                  <ConversationAction targettag="triggerer_player" text="“是的，不过不必担心，她的身体暂无大碍，只是有些虚弱，需要静养一段时间。”阿求翻了翻手里的日志，“我们推测是这种特殊的波动干扰了鵺的精神，之后需要一点时间去调查干扰的原因。”" eventsprite="Touhou_Akyuu_Mission">
+                    <Option text="“有什么我能帮忙的？”" >
+                      <ConversationAction targettag="triggerer_player" text="“目前的初步推测是，一种叫做‘灵异珠’的存在干扰了鵺的精神，因此我们需要去找到它的确切位置。最近有传闻，说在遗迹和洞穴里看到过异样的闪光，能请你去调查一下吗？”" eventsprite="Touhou_Akyuu_Mission">
+                        <Option text="没有问题">
+                          <ConversationAction targettag="triggerer_player" text="“有劳了。”" eventsprite="Touhou_Akyuu_Mission"/>
+                          <ConversationAction targettag="triggerer_player" text="UFO任务线已完成" eventsprite="Touhou_Akyuu_Mission"/>
+                          <SpawnAction itemidentifier="Touhou_Missions_Collection_Nue" targetinventory="triggerer_player" />
+                          <MissionAction missiontag="Salvage_Mysterious_Pearl" />
+                          <SetDataAction value="true" identifier="Touhou_Find_Nue_Mission_End" />
+                          <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                          <ClearTagAction tag="triggerer_player" />
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
+
+
+    <!--下一个任务线留给皮丝-->
+  </EventPrefabs>
+
+  <EventSet identifier="Touhou_Mission" leveltype="outpost" locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" campaign="true" additive="true" ignorecooldown="true" commonness="120" eventcount="2">
+    <EventSet identifier="Touhou_Join_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="2">
+      <ScriptedEvent identifier="youmujoin" commonness="200" triggercooldown="false" />
+      <ScriptedEvent identifier="aya_join" commonness="200" triggercooldown="false" />
+      <ScriptedEvent identifier="Aya_Gift_List_Event" commonness="0" triggercooldown="false" />
+      <ScriptedEvent identifier="mokou_join" commonness="200" triggercooldown="false" />
+      <ScriptedEvent identifier="patchouli_join" commonness="200" triggercooldown="false" />
+      <ScriptedEvent identifier="yuka_join" commonness="200" triggercooldown="false" />
+      <ScriptedEvent identifier="Tenshi_Join" commonness="200" triggercooldown="false" />
+      <ScriptedEvent identifier="Momizi_Join" commonness="200" triggercooldown="false" />
+      <ScriptedEvent identifier="Momizi_Find_IDcard_Event" commonness="0" triggercooldown="false" />
+      <ScriptedEvent identifier="Akyuu_Join" commonness="300" triggercooldown="false" />
+    </EventSet>
+    <EventSet identifier="Touhou_Mission_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true">
+      <ScriptedEvent identifier="Touhou_Akyuu_Mission" commonness="100" triggercooldown="false" />
+    </EventSet>
+  </EventSet>
+</Randomevents>

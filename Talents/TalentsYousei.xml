@@ -1,0 +1,718 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+
+    <!--旅途收获 巡回完成任意任务后，额外获得10%的经验值和一块妖精糖果（苹果味）-->
+    <Talent identifier="Talents_Yousei_Primary01">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Talents_Yousei_Primary01"/>
+        <AbilityGroupEffect abilityeffecttype="OnGainMissionExperience">
+            <Abilities>
+                <CharacterAbilityModifyValue multiplyvalue="1.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Abilities>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Apple" amount="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--寺子屋进修 增加25%的技能获取速度，移动速度增加5%，周围有其他船员时，这些效果翻倍-->
+    <Talent identifier="Talents_Yousei_Primary02">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Talents_Yousei_Primary02"/>
+        <AbilityGroupInterval>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="SkillGainSpeed" value="0.25" />
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="MovementSpeed" value="0.05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionAllyNearby distance="1000" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Talents_Yousei_Primary02_Effect" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--自然友谊 周围的船员获得10%移动速度加成和对缺氧25%的抗性，且造成的友伤下降20%-->
+    <Talent identifier="Talents_Yousei_Primary03">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Talents_Yousei_Primary03"/>
+        <AbilityGroupInterval interval="2.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies maxdistance="600" allowself="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Talents_Yousei_Primary03_Effect" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--白日梦 生命值高于50%时，修复速度增加10%，且巡回完成任务后额外获得妖精糖果（蜜桃味）-->
+    <Talent identifier="Talents_Yousei_Primary04">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Talents_Yousei_Primary04"/>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionAboveVitality vitalitypercentage="0.5"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="RepairSpeed" value="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Abilities>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Peach" amount="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--轻飘飘 增加20%的游泳速度，增加15%获取的经验值-->
+    <Talent identifier="Talents_Yousei_Primary05">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Talents_Yousei_Primary05"/>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="SwimmingSpeed" value="0.2"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="ExperienceGainMultiplier" value="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--自然躲避 所在潜艇遭到攻击后，会让自己在6秒内提高15%的物理伤害抗性和10%的移动速度。-->
+    <Talent identifier="Talents_Yousei_Primary06">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Talents_Yousei_Primary06"/>
+        <AbilityGroupEffect abilityeffecttype="AfterSubmarineAttacked">
+            <Conditions>
+                <AbilityConditionEvasiveManeuvers/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="This" multiplyafflictionsbymaxvitality="true" disabledeltatime="true">
+                            <Affliction identifier="Talents_Yousei_Primary06_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--悠哉悠哉 巡回结束完成任意任务，获得妖精糖果（柠檬味），解锁配方：糖衣炮弹，糖果炮-->
+    <Talent identifier="Talents_Yousei_Primary07">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Talents_Yousei_Primary07"/>
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Abilities>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Lemon" amount="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AddedRecipe itemidentifier="Touhou_Sugar_Coated_Cannonball" />
+        <AddedRecipe itemidentifier="Touhou_Candy_Cannon" />
+    </Talent>
+
+    <!--小小异变 每次巡回完成任务，都会获得异变能量，异变能量能提供最多10%的攻击速度和攻击伤害加成。解锁配方：异变糖果-->
+    <Talent identifier="Talents_Yousei_Primary08">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Talents_Yousei_Primary08"/>
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Yousei_Power" amount="20" setvalue="true" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AddedRecipe itemidentifier="Touhou_Mutation_Candy" />
+    </Talent>
+
+    <!--自然生长 技能水平两两取均值，根据平均值的8%获得对应加成：驾驶水平+武器操作：最大生命值；机械水平+电器工程：修理速度；医疗水平+魔法能力：攻击伤害-->
+    <Talent identifier="Talents_Yousei_Primary09">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Talents_Yousei_Primary09"/>
+        <AbilityGroupInterval interval="0.5">
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="MaximumHealthMultiplier" maxvalue="0.04" skillidentifier="helm" />
+                <CharacterAbilityModifyStatToSkill stattype="MaximumHealthMultiplier" maxvalue="0.04" skillidentifier="weapons" />
+                <CharacterAbilityModifyStatToSkill stattype="RepairSpeed" maxvalue="0.04" skillidentifier="mechanical" />
+                <CharacterAbilityModifyStatToSkill stattype="RepairSpeed" maxvalue="0.04" skillidentifier="electrical" />
+                <CharacterAbilityModifyStatToSkill stattype="AttackMultiplier" maxvalue="0.04" skillidentifier="medical" />
+                <CharacterAbilityModifyStatToSkill stattype="AttackMultiplier" maxvalue="0.04" skillidentifier="Touhou_Magic" />
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--鹑居鷇食-->
+
+    <!--糖果乐事 巡回结束完成任意任务，获得妖精糖果（柚子味），在医疗界面使用不同的糖果可以获得不同的额外增益：苹果味：极速；蜜桃味：最大生命值提升；柠檬味:攻击速度；柚子味：攻击伤害。-->
+    <Talent identifier="Touhou_Candy_Fun">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Candy_Fun"/>
+        <AbilityGroupInterval interval="4.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Candy_Fun_Effect" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Abilities>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Pomelo" amount="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--无忧无虑 如果附近没有敌对生物，加速物理伤害、烧伤和出血的恢复-->
+    <Talent identifier="Touhou_Insouciance">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Insouciance"/>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionNearbyCharacterCount distance="1000" targettypes="Enemy,Alive" count="0"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" >
+                            <Affliction identifier="Touhou_Insouciance_Effect" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--紧急避险 如果附近有超过3只敌对生物且自身血量低于50%，移动速度增加20%，眩晕抗性提高15%-->
+    <Talent identifier="Touhou_Emergency_Avoidance">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Emergency_Avoidance"/>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionNearbyCharacterCount distance="1000" targettypes="Enemy,Alive" count="4"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0.5" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" >
+                            <Affliction identifier="Touhou_Emergency_Avoidance_Effect" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--孓然一身 如果附近没有其它船员，自己使用医疗物品的效果提高20%，对debuff的抗性提高30%-->
+    <Talent identifier="Touhou_Lone_Yousei">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Lone_Yousei"/>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionAllyNearby distance="1500" truthywhen="NoCharacterMatches"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Lone_Yousei_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--糖果世界 制造物品的质量提升1，巡回结束完成任意任务再获得四种糖果各一个，解锁配方：糖果炮Plus，糖衣大炮弹，超级糖果-->
+    <Talent identifier="Touhou_Candy_World">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Candy_World"/>
+        <AbilityGroupInterval interval="0.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Candy_World_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Abilities>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Apple" amount="1"/>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Peach" amount="1"/>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Lemon" amount="1"/>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Pomelo" amount="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AddedRecipe itemidentifier="Touhou_Candy_Cannon_Plus" />
+        <AddedRecipe itemidentifier="Touhou_Huge_Sugar_Coated_Cannonball" />
+        <AddedRecipe itemidentifier="Touhou_Super_Candy" />
+    </Talent>
+
+    <!--自然化身-->
+
+    <!--妖精联盟 当你身穿妖精装束+时，提高50%对应装束效果-->
+    <Talent identifier="Touhou_Yousei_Alliance">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Yousei_Alliance"/>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Fairy_Of_Hell" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Yousei_Alliance_Effect01" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Fairy_Of_Ice" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Yousei_Alliance_Effect02" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--异变幕后 每次击杀生物都有50%概率为自己增加2点异变能量，当异变能量大于10时，获得额外50%技能获取速度；异变能量大于20时，获得20%的烧伤抗性和眩晕抗性。-->
+    <Talent identifier="Behind_The_Mutation">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Behind_The_Mutation"/>
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Abilities>
+                <CharacterAbilityResetPermanentStat statidentifier="Yousei_Kill" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Yousei_Kill" value="0" setvalue="true" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="1.0">
+            <Conditions>
+                <AbilityConditionHasPermanentStat statidentifier="Yousei_Kill" min="1" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Yousei_Power" amount="2" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Yousei_Kill" value="-1" />
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionServerRandom randomchance="0.50" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Yousei_Kill" value="1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yousei_Power" minimumPercentage="0.1" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="SkillGainSpeed" value="0.5" />
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yousei_Power" minimumPercentage="0.2" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Behind_The_Mutation_Effect" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--小小的恶作剧 每次击杀生物都有50%概率为自己增加2点异变能量，当异变能量大于30时，增加15%最大生命值，操控的炮塔的射速提高10%-->
+    <Talent identifier="Touhou_Cute_Prank">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Cute_Prank"/>
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionServerRandom randomchance="0.50" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Yousei_Kill" value="1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yousei_Power" minimumPercentage="0.3" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.15" />
+                <CharacterAbilityModifyStat stattype="TurretAttackSpeed" value="0.1" />
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--妖精大战争 异变能量大于40%时，提高10%的攻击伤害，减少10%受到的物理伤害，给予15所有技能加成。解锁配方：冰之勇者剑，地狱火炬。-->
+    <Talent identifier="Eastern_And_Little_Nature_Deity">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Eastern_And_Little_Nature_Deity"/>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yousei_Power" minimumPercentage="0.4" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Eastern_And_Little_Nature_Deity_Effect" amount="1" setvalue="true" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yousei_Power" minimumPercentage="0.8" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="ElectricalSkillBonus" value="15"/>
+                <CharacterAbilityGiveStat stattype="HelmSkillBonus" value="15"/>
+                <CharacterAbilityGiveStat stattype="MechanicalSkillBonus" value="15"/>
+                <CharacterAbilityGiveStat stattype="MedicalSkillBonus" value="15"/>
+                <CharacterAbilityGiveStat stattype="WeaponsSkillBonus" value="15"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AddedRecipe itemidentifier="Touhou_Baka_Sword" />
+        <AddedRecipe itemidentifier="Touhou_Hellfire_Torch" />
+    </Talent>
+
+    <!--稚气未脱-->
+
+    <!--魔法助理 如果船上有魔法使，则为其提供25%技能获取速度，每个巡回获得额外10%金钱-->
+    <Talent identifier="Touhou_Magical_Assistant">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Magical_Assistant"/>
+        <AbilityGroupInterval interval="30.0">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies allowself="false" jobs="Magician" insameroom="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Magical_Assistant_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--自学成才 每个巡回完成任意任务，可以获得一块以太层金属，若无人死亡，还将额外获得10%的经验-->
+    <Talent identifier="Touhou_Self_Made">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Self_Made"/>
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Abilities>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Base_Metal" amount="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnGainMissionExperience">
+            <Conditions>
+                <AbilityConditionNoCrewDied assistantsdontcount="false"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyValue multiplyvalue="1.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--安静乖巧 增加15%的修理速度和10%最大生命值，这个加成对船上的魔法使也生效-->
+    <Talent identifier="Quiet_And_Well_Behaved">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Quiet_And_Well_Behaved"/>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="MaximumHealthMultiplier" value="0.1"/>
+                <CharacterAbilityGiveStat stattype="RepairSpeed" value="0.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="30.0">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies allowself="false" jobs="Magician" insameroom="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Quiet_And_Well_Behaved_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--活力四射 与船上的魔法使在同一个房间里时，不会因为伤痛而死亡-->
+    <Talent identifier="Touhou_Vibrant">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Vibrant"/>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies allowself="false" jobs="Magician" insameroom="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Vibrant_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--寺子屋深造 加工台、解构仪的使用速度增加50%，药物制造的速度增加50%-->
+    <Talent identifier="Touhou_Further_Study">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Further_Study"/>
+        <AbilityGroupInterval interval="0.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies allowself="false" jobs="Magician" insameroom="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Further_Study_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="medical" stattype="FabricationSpeed" value="0.5" setvalue="true"/>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--自然之子 每个巡回额外获得每种糖果各一个，异变能量大于60时，免疫水压。解锁配方：糖果精华。糖果精华允许妖精职业获得魔法使五个天赋（包含三个最终天赋）的弱化版。-->
+    <Talent identifier="Touhou_Child_Of_Nature">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_Child_Of_Nature"/>
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Abilities>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Apple" amount="1"/>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Peach" amount="1"/>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Lemon" amount="1"/>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Pomelo" amount="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yousei_Power" minimumPercentage="0.6" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Mana_Release_Effect" amount="1" setvalue="true" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AddedRecipe itemidentifier="Touhou_Candy_Essence" />
+    </Talent>
+
+    <!--五个弱化版天赋-->
+
+
+    <!--幻想入 巡回结束时获得所有技能和魔法能力2点。-->
+    <Talent identifier="Gensokyo_Divinggear_Unlocked_Yousei">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Gensokyo_Divinggear_Unlocked_Yousei"/>
+        <AbilityGroupEffect abilityeffecttype="OnAllMissionsCompleted">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies requiresalive="true" allowself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <GiveSkill skillidentifier="electrical" amount="2" triggertalents="false" />
+                            <GiveSkill skillidentifier="helm" amount="2" triggertalents="false"/>
+                            <GiveSkill skillidentifier="mechanical" amount="2" triggertalents="false"/>
+                            <GiveSkill skillidentifier="medical" amount="2" triggertalents="false"/>
+                            <GiveSkill skillidentifier="weapons" amount="2" triggertalents="false"/>
+                            <GiveSkill skillidentifier="Touhou_Magic" amount="2" triggertalents="false"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--三重伟大 解锁配方：贤者之石-->
+    <Talent identifier="Hermes_Yousei">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Hermes_Yousei"/>
+        <AddedRecipe itemidentifier="Seven_Elements_Alchemical" />
+    </Talent>
+
+    <!--魔法天才 周围的敌人越多，造成的伤害越高，自身的抗性越高，伤害最高至30%，抗性最高至6%，解锁配方：聚能电弧发射器和闪电要石-->
+    <Talent identifier="MEID_Unlocked_Yousei">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.MEID_Unlocked_Yousei"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="2"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval>
+            <Conditions>
+                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="2"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="damage" multiplier="0.98"/>
+                <CharacterAbilityModifyResistance resistanceid="Phoenix_Burn" multiplier="0.98"/>
+                <CharacterAbilityModifyResistance resistanceid="burn" multiplier="0.98"/>
+                <CharacterAbilityModifyResistance resistanceid="gaze" multiplier="0.98"/>
+                <CharacterAbilityModifyResistance resistanceid="debuff" multiplier="0.98"/>
+                <CharacterAbilityModifyResistance resistanceid="bleeding" multiplier="0.98"/>
+                <CharacterAbilityModifyResistance resistanceid="bloodloss" multiplier="0.98"/>
+                <CharacterAbilityModifyResistance resistanceid="stun" multiplier="0.98"/>
+                <CharacterAbilityModifyResistance resistanceid="poison" multiplier="0.98"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="4"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval>
+            <Conditions>
+                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="4"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="damage" multiplier="0.96"/>
+                <CharacterAbilityModifyResistance resistanceid="Phoenix_Burn" multiplier="0.96"/>
+                <CharacterAbilityModifyResistance resistanceid="burn" multiplier="0.96"/>
+                <CharacterAbilityModifyResistance resistanceid="gaze" multiplier="0.96"/>
+                <CharacterAbilityModifyResistance resistanceid="debuff" multiplier="0.96"/>
+                <CharacterAbilityModifyResistance resistanceid="bleeding" multiplier="0.96"/>
+                <CharacterAbilityModifyResistance resistanceid="bloodloss" multiplier="0.96"/>
+                <CharacterAbilityModifyResistance resistanceid="stun" multiplier="0.96"/>
+                <CharacterAbilityModifyResistance resistanceid="poison" multiplier="0.96"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="6"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval>
+            <Conditions>
+                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="6"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="damage" multiplier="0.94"/>
+                <CharacterAbilityModifyResistance resistanceid="Phoenix_Burn" multiplier="0.94"/>
+                <CharacterAbilityModifyResistance resistanceid="burn" multiplier="0.94"/>
+                <CharacterAbilityModifyResistance resistanceid="gaze" multiplier="0.94"/>
+                <CharacterAbilityModifyResistance resistanceid="debuff" multiplier="0.94"/>
+                <CharacterAbilityModifyResistance resistanceid="bleeding" multiplier="0.94"/>
+                <CharacterAbilityModifyResistance resistanceid="bloodloss" multiplier="0.94"/>
+                <CharacterAbilityModifyResistance resistanceid="stun" multiplier="0.94"/>
+                <CharacterAbilityModifyResistance resistanceid="poison" multiplier="0.94"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AddedRecipe itemidentifier="Touhou_Concentrated_Energy_Arc_Emitter" />
+        <AddedRecipe itemidentifier="Lightning_Kanameishi" />
+    </Talent>
+
+    <!--宴会 每次巡回结束后，如果没有人死亡，则恢复所有人些许的物理伤害、烧伤、出血、失血和死神之税-->
+    <Talent identifier="Gensokyo_Banquet_Yousei">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Gensokyo_Banquet_Yousei"/>
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Conditions>
+                <AbilityConditionNoCrewDied assistantsdontcount="false"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies requiresalive="true" allowself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="Gensokyo_Banquet_Effect" amount="5"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--还有谁不会飞？ 在水中的行动速度加快5%，同时受到的物理伤害降低5%-->
+    <Talent identifier="Talents_Magician_Primary03_Yousei">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Talents_Magician_Primary03_Yousei"/>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionInWater/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="SwimmingSpeed" value="0.05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval>
+            <Conditions>
+                <AbilityConditionInWater/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="damage" multiplier="0.95"/>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+</Talents>
