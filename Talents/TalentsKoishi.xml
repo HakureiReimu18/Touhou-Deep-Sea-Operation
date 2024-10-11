@@ -22,13 +22,16 @@
                 <CharacterAbilityApplyStatusEffects>
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
-                            <SpawnCharacter speciesname="Touhou_Koishi_Phantom" count="1" />
+                            <SpawnCharacter speciesname="Touhou_Koishi_Phantom" count="1" TransferControl="true" />
                             <ParticleEmitter particle="Touhou_Koishi_Phantom" DistanceMin="-20" DistanceMax="20" VelocityMin="-3" VelocityMax="3"
                                              ScaleMultiplier="1,1" EmitInterval="1" ParticleAmount="1" ColorMultiplier="255,255,255,255" Distance="-20"
                                              Velocity="-3" />
                             <Affliction identifier="Koishi_Dodge_CD" strength="10" />
                             <Affliction identifier="Koishi_Unconscious03" strength="100" />
                             <Affliction identifier="Koishi_Unconscious_Flag" strength="100" />
+                        </StatusEffect>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <LuaHook name="Alice.Doll.Controller" />
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
@@ -65,10 +68,22 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+
+        <!--击杀叠加无意识效果-->
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Abilities>
+                <CharacterAbilityResetPermanentStat statidentifier="Koishi_Kill" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Koishi_Kill" value="0" setvalue="true" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="0.9">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
-                <AbilityConditionHasAffliction afflictionidentifier="Koishi_Weapons" />
+                <AbilityConditionHasPermanentStat statidentifier="Koishi_Kill" min="1" />
             </Conditions>
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
@@ -97,8 +112,10 @@
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Koishi_Kill" value="-1" />
             </Abilities>
-        </AbilityGroupEffect>
+        </AbilityGroupInterval>
+
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />

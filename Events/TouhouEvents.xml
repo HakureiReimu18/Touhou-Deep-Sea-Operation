@@ -1102,50 +1102,43 @@
                           </ConversationAction>
                         </Option>-->
                 <Option text="秘密委托（需要优先完成整个UFO任务线）">
-                  <CheckReputationAction targettype="faction" identifier="Touhou_Gensokyo" condition="gte 36">
+                  <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
                     <Success>
                       <CheckDataAction identifier="Salvage_Mysterious_Pearl_Completed" condition="eq true">
                         <Success>
-                          <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“多亏了你的帮助，灵异珠已经成功回收了。”少女向你表达了感激"/>
-                        </Success>
-                        <Failure>
-                          <CheckDataAction identifier="Salvage_Mysterious_Pearl_Completed" condition="eq true">
-                            <Success>
-                              <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“多亏了你的帮助，灵异珠已经成功回收了。”">
-                                <Option text="提交凭证">
-                                  <CheckItemAction itemidentifiers="Salvage_Mysterious_Pearl_Mission_Completed" targettag="triggerer_player">
-                                    <Success>
-                                      <ConversationAction text="“这是很宝贵的信息!作为谢礼，请收下这个吧，虽然只是仿制品，但其精巧的工艺让它和正品无异。”" dialogtype="Small" targettag="triggerer_player" />
-                                      <RemoveItemAction itemidentifier="Salvage_Mysterious_Pearl_Mission_Completed" targettag="triggerer_player"/>
-                                      <SpawnAction itemidentifier="Touhou_Mysterious_Pearl_Rippling" targetinventory="triggerer_player" />
-                                      <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
-                                      <SetDataAction identifier="Touhou_Mysterious_Pearl_Rippling_Completed" value="true"/>
-                                    </Success>
-                                    <Failure>
-                                      <ConversationAction text="你似乎忘了带上凭证……" dialogtype="Small" targettag="triggerer_player" />
-                                      <ClearTagAction tag="triggerer_player" />
-                                      <GoTo name="waitformission" />
-                                    </Failure>
-                                  </CheckItemAction>
-                                </Option>
-                              </ConversationAction>
-                            </Success>
-                            <Failure>
-                              <ConversationAction targettag="triggerer_player" dialogtype="Small" text="之前的一次运输事故导致一些重要物品遗失，其中包括一颗疑似灵异珠的不稳定物体，委托人愿意出重金请你秘密回收灵异珠。">
-                                <Option text="同意">
-                                  <ConversationAction text="“过程一定要保密，灵异珠的如果被有心人拿到会造成很严重的后果。”" dialogtype="Small" targettag="triggerer_player" />
-                                  <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="4" />
-                                  <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="4" />
+                          <ConversationAction targettag="triggerer_player" dialogtype="Small" text="“多亏了你的帮助，灵异珠已经成功回收了。”">
+                            <Option text="提交凭证">
+                              <CheckItemAction itemidentifiers="Touhou_Mysterious_Pearl_Rippling_Completed" targettag="triggerer_player">
+                                <Success>
+                                  <ConversationAction text="“这是很宝贵的信息!作为谢礼，请收下这个吧，虽然只是仿制品，但其精巧的工艺让它和正品无异。”" dialogtype="Small" targettag="triggerer_player" />
+                                  <RemoveItemAction itemidentifier="Salvage_Mysterious_Pearl_Mission_Completed" targettag="triggerer_player"/>
+                                  <SpawnAction itemidentifier="Touhou_Mysterious_Pearl_Rippling" targetinventory="triggerer_player" />
                                   <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
-                                  <MissionAction missiontag="Salvage_Mysterious_Pearl" />
-                                </Option>
-                                <Option text="再考虑考虑" endconversation="true">
+                                  <SetDataAction identifier="Touhou_Mysterious_Pearl_Rippling_Completed" value="true"/>
+                                </Success>
+                                <Failure>
+                                  <ConversationAction text="你似乎忘了带上凭证……" dialogtype="Small" targettag="triggerer_player" />
                                   <ClearTagAction tag="triggerer_player" />
                                   <GoTo name="waitformission" />
-                                </Option>
-                              </ConversationAction>
-                            </Failure>
-                          </CheckDataAction>
+                                </Failure>
+                              </CheckItemAction>
+                            </Option>
+                          </ConversationAction>
+                        </Success>
+                        <Failure>
+                          <ConversationAction targettag="triggerer_player" dialogtype="Small" text="之前的一次运输事故导致一些重要物品遗失，其中包括一颗疑似灵异珠的不稳定物体，委托人愿意出重金请你秘密回收灵异珠。">
+                            <Option text="同意">
+                              <ConversationAction text="“过程一定要保密，灵异珠的如果被有心人拿到会造成很严重的后果。”" dialogtype="Small" targettag="triggerer_player" />
+                              <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="4" />
+                              <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="4" />
+                              <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                              <MissionAction missiontag="Salvage_Mysterious_Pearl" />
+                            </Option>
+                            <Option text="再考虑考虑" endconversation="true">
+                              <ClearTagAction tag="triggerer_player" />
+                              <GoTo name="waitformission" />
+                            </Option>
+                          </ConversationAction>
                         </Failure>
                       </CheckDataAction>
                     </Success>
@@ -1154,7 +1147,7 @@
                       <ClearTagAction tag="triggerer_player" />
                       <GoTo name="waitformission" />
                     </Failure>
-                  </CheckReputationAction>
+                  </CheckDataAction>
                 </Option>
                 <Option text="以后再说">
                   <ConversationAction text="忙了一天，想先喝一口热茶呢" dialogtype="Small" targettag="triggerer_player" />

@@ -150,7 +150,7 @@
         <AddedRecipe itemidentifier="Touhou_Mutation_Candy" />
     </Talent>
 
-    <!--自然生长 技能水平两两取均值，根据平均值的8%获得对应加成：驾驶水平+武器操作：最大生命值；机械水平+电器工程：修理速度；医疗水平+魔法能力：攻击伤害-->
+    <!--自然生长 技能水平两两取均值，根据平均值的8%获得对应加成：驾驶水平+武器操作：最大生命值；机械水平+电器工程：修理速度；医疗水平+魔法能力：攻击伤害。魔法能力给予的增幅在技能水平400时停止增长-->
     <Talent identifier="Talents_Yousei_Primary09">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Talents_Yousei_Primary09"/>
@@ -163,6 +163,17 @@
                 <CharacterAbilityModifyStatToSkill stattype="AttackMultiplier" maxvalue="0.04" skillidentifier="medical" />
                 <CharacterAbilityModifyStatToSkill stattype="AttackMultiplier" maxvalue="0.04" skillidentifier="Touhou_Magic" />
             </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="0.5">
+            <Conditions>
+                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="400" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="AttackMultiplier" maxvalue="0.04" skillidentifier="Touhou_Magic" />
+            </Abilities>
+            <FallbackAbilities>
+                <CharacterAbilityModifyStat stattype="AttackMultiplier" value="0.16" />
+            </FallbackAbilities>
         </AbilityGroupInterval>
     </Talent>
 
