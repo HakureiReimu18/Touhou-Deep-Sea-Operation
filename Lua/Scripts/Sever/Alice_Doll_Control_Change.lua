@@ -28,3 +28,31 @@ Hook.Add("Alice.Doll.Controller", "Player.Control.Change", function (client, del
 
     return true
 end)
+
+
+local function ClientFromName(name)
+
+    if not SERVER then return nil end
+
+    for key,client in pairs(Client.ClientList) do
+        if client.Name == name then
+            return client
+        end
+    end
+
+    return nil
+end
+
+TLE.ItemMethods.Touhou_Elixir_Of_Penglai = function(item, targetCharacter)
+
+        if SERVER then
+            local Deadclient = item.Description
+            local client = ClientFromName(Deadclient)
+            if client ~= nil then
+                client.SetClientCharacter(targetCharacter)
+            end
+        end
+
+        HF.RemoveItem(item)
+end
+
