@@ -119,7 +119,7 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--悠哉悠哉 巡回结束完成任意任务，获得妖精糖果（柠檬味），解锁配方：糖衣炮弹，糖果炮-->
+    <!--悠哉悠哉 巡回结束完成任意任务，获得妖精糖果（柠檬味），双手部位的物理伤害抗性提高10%，解锁配方：糖衣炮弹，糖果炮-->
     <Talent identifier="Talents_Yousei_Primary07">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Talents_Yousei_Primary07"/>
@@ -128,6 +128,17 @@
                 <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Lemon" amount="1"/>
             </Abilities>
         </AbilityGroupEffect>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Talents_Yousei_Primary07_Effect" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
         <AddedRecipe itemidentifier="Touhou_Sugar_Coated_Cannonball" />
         <AddedRecipe itemidentifier="Touhou_Candy_Cannon" />
     </Talent>
@@ -179,7 +190,7 @@
 
     <!--鹑居鷇食-->
 
-    <!--糖果乐事 巡回结束完成任意任务，获得妖精糖果（柚子味），在医疗界面使用不同的糖果可以获得不同的额外增益：苹果味：极速；蜜桃味：最大生命值提升；柠檬味:攻击速度；柚子味：攻击伤害。-->
+    <!--糖果乐事 增加10%最大生命值。巡回结束完成任意任务，获得妖精糖果（柚子味），在医疗界面使用不同的糖果可以获得不同的额外增益：苹果味：极速；蜜桃味：最大生命值提升；柠檬味:攻击速度；柚子味：攻击伤害。-->
     <Talent identifier="Touhou_Candy_Fun">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Touhou_Candy_Fun"/>
@@ -410,7 +421,7 @@
         </AbilityGroupInterval>
     </Talent>
 
-    <!--妖精大战争 异变能量大于40%时，提高10%的攻击伤害，减少10%受到的物理伤害，给予15所有技能加成。解锁配方：冰之勇者剑，地狱火炬。-->
+    <!--妖精大战争 异变能量大于40%时，提高10%的攻击伤害，减少10%受到的物理伤害，提高15%技能水平。解锁配方：冰之勇者剑，地狱火炬。-->
     <Talent identifier="Eastern_And_Little_Nature_Deity">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Eastern_And_Little_Nature_Deity"/>
@@ -428,18 +439,6 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
-        <AbilityGroupEffect abilityeffecttype="None">
-            <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yousei_Power" minimumPercentage="0.8" />
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityGiveStat stattype="ElectricalSkillBonus" value="15"/>
-                <CharacterAbilityGiveStat stattype="HelmSkillBonus" value="15"/>
-                <CharacterAbilityGiveStat stattype="MechanicalSkillBonus" value="15"/>
-                <CharacterAbilityGiveStat stattype="MedicalSkillBonus" value="15"/>
-                <CharacterAbilityGiveStat stattype="WeaponsSkillBonus" value="15"/>
-            </Abilities>
-        </AbilityGroupEffect>
         <AddedRecipe itemidentifier="Touhou_Baka_Sword" />
         <AddedRecipe itemidentifier="Touhou_Hellfire_Torch" />
     </Talent>
@@ -511,7 +510,7 @@
         <Description tag="talentdescription.Touhou_Vibrant"/>
         <AbilityGroupInterval interval="9.9">
             <Abilities>
-                <CharacterAbilityApplyStatusEffectsToAllies allowself="false" jobs="Magician" insameroom="true">
+                <CharacterAbilityApplyStatusEffectsToAllies allowself="true" jobs="Magician" insameroom="true">
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
                             <Affliction identifier="Touhou_Vibrant_Effect" amount="1.0"/>
@@ -565,6 +564,24 @@
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
                             <Affliction identifier="Mana_Release_Effect" amount="1" setvalue="true" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="9.9">
+            <Conditions>
+                <AbilityConditionHasTalent identifier="Gensokyo_Divinggear_Unlocked_Yousei" />
+                <AbilityConditionHasTalent identifier="Hermes_Yousei" />
+                <AbilityConditionHasTalent identifier="MEID_Unlocked_Yousei" />
+                <AbilityConditionHasTalent identifier="Gensokyo_Banquet_Yousei" />
+                <AbilityConditionHasTalent identifier="Talents_Magician_Primary03_Yousei" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Child_Of_Nature_Effect" amount="1" setvalue="true" />
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>

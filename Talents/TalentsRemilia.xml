@@ -3,7 +3,7 @@
   <Talent identifier="demonkingcradle">
     <Icon texture="%ModDir%/Images/TalentsIcon/Remilia/TalentsIcons_Remilia.png" sheetindex="0,0" sheetelementsize="128,128" />
     <Description tag="talentdescription.demonkingcradle"/>
-    <AbilityGroupInterval abilityeffecttype="None" Interval="0.1">
+    <AbilityGroupInterval Interval="0.1">
       <Conditions>
         <AbilityConditionHasAffliction afflictionidentifier="bloodpackB" />
         <AbilityConditionHasAffliction afflictionidentifier="scarletdevil" />
@@ -11,7 +11,7 @@
       <Abilities>
         <CharacterAbilityApplyStatusEffects>
           <StatusEffects>
-            <StatusEffect type="OnAbility" target="Character">
+            <StatusEffect type="OnAbility" target="Character" multiplyafflictionsbymaxvitality="true">
               <Affliction identifier="Demon_King_Cradle" amount="1000" />
               <Affliction identifier="strengthen" amount="10" />
               <Affliction identifier="haste" amount="30" />
@@ -67,7 +67,7 @@
         <AbilityConditionServerRandom randomchance="0.5" />
       </Conditions>
       <Abilities>
-        <CharacterAbilityModifyAffliction afflictionidentifiers="bleeding" replacewith="bloodloss" addedmultiplier="-0.5" />
+        <CharacterAbilityModifyAffliction afflictionidentifiers="bleeding" replacewith="bloodloss" addedmultiplier="-0.9" />
       </Abilities>
     </AbilityGroupEffect>
     <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
@@ -85,21 +85,11 @@
         <AbilityConditionServerRandom randomchance="0.5" />
       </Conditions>
       <Abilities>
-        <CharacterAbilityModifyAffliction afflictionidentifiers="bleeding" replacewith="Touhou_Bite" addedmultiplier="-0.334" />
+        <CharacterAbilityModifyAffliction afflictionidentifiers="bleeding" replacewith="Touhou_Bite" addedmultiplier="-0.667" />
       </Abilities>
     </AbilityGroupEffect>
 
-    <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
-      <Conditions>
-        <AbilityConditionHasAffliction afflictionidentifier="scarletdevil" />
-        <AbilityConditionHasAffliction afflictionidentifier="Demon_King_Cradle" />
-      </Conditions>
-      <Abilities>
-        <CharacterAbilityModifyAffliction afflictionidentifiers="bleeding" addedmultiplier="0.666" />
-      </Abilities>
-    </AbilityGroupEffect>
-
-    <!--过度放学拮抗-->
+    <!--过度放血拮抗-->
     <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
       <Conditions>
         <AbilityConditionHasTalent identifier="inordinateexsanguination" />

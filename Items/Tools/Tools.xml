@@ -722,7 +722,7 @@
                 <Affliction identifier="Touhou_Magic_Boost" amount="2" />
             </StatusEffect>
 
-            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.65" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.75" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.8" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.5" probabilitymultiplier="0.5" damagesound="LimbArmor" />
             <SkillModifier skillidentifier="mechanical" skillvalue="5" />
@@ -743,7 +743,7 @@
                 <TriggerEvent identifier="Aya_Press_Card_Select_Event" />
                 <RemoveItem />
             </StatusEffect>
-            <StatusEffect type="Always" target="This" condition="3.0" >
+            <StatusEffect type="OnContained" target="This" condition="3.0" >
                 <Conditional condition="gt 10"/>
             </StatusEffect>
         </Holdable>
@@ -754,7 +754,7 @@
     <Item name="文文的信物" identifier="Touhou_Aya_Token" category="Misc" subcategory="Touhou" maxstacksize="32" tags="smallitem" scale="0.35" cargocontaineridentifier="metalcrate" description="">
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Aya_Token.png" sourcerect="0,0,108,108" depth="0.55" />
         <Body width="96" height="96" density="10" />
-        <Fabricate suitablefabricators="fabricator" requiredtime="4" >
+        <Fabricate suitablefabricators="fabricator" requiredtime="4" requiresrecipe="true" >
             <RequiredItem identifier="Aya_Press_Card" />
             <RequiredItem identifier="Aya_News" />
             <RequiredItem identifier="Aya_Maple_Leaves" />
@@ -983,7 +983,7 @@
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100" />
             </StatusEffect>
         </Holdable>
-        <RepairTool firedamage="10.0" structurefixamount="3.5" range="200" barrelpos="25,5" particles="weld" repairmultiple="true" repairthroughwalls="false" combatpriority="20" levelwallfixamount="-0.8" targetforce="10">
+        <RepairTool firedamage="10.0" structurefixamount="3.5" range="200" barrelpos="25,5" particles="weld" repairmultiple="true" repairthroughwalls="false" levelwallfixamount="-0.8" targetforce="10">
             <!-- the item must contain a welding fuel tank for it to work -->
             <RequiredItems items="weldingtoolfuel,Touhou_Fix_Foamg_Tank" type="Contained" />
             <RequiredItems items="Welding_Mode" type="Contained" />
@@ -1466,8 +1466,8 @@
                 <Affliction identifier="Touhou_Kappa_Multi_Functional_Tool_Effect02" amount="100" />
             </StatusEffect>
             <Attack structuredamage="0" itemdamage="4" targetimpulse="5">
-                <Affliction identifier="blunttrauma" strength="5" />
-                <Affliction identifier="lacerations" strength="5" />
+                <Affliction identifier="blunttrauma" strength="7" />
+                <Affliction identifier="lacerations" strength="3" />
                 <Affliction identifier="stun" strength="0.2" />
                 <StatusEffect type="OnUse" target="UseTarget">
                     <Conditional entitytype="eq Character"/>
@@ -1510,6 +1510,7 @@
                 <Containable items="Touhou_Nuclear_Battery">
                     <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" />
                     <StatusEffect type="OnWearing" target="Contained" Condition="-0.01" comparison="And">
+                        <Conditional HasTag="eq Tactical_Open" TargetContainer="true"/>
                         <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
                         <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
                         <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
@@ -1518,27 +1519,30 @@
                         <Conditional condition="lt 5.0" />
                         <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true"/>
                     </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Contained,Character" Interval="5.0" Duration="5.0" targetslot="0">
+                    <StatusEffect type="OnWearing" target="This,Contained,Character" Interval="5.0" Duration="5.0" targetslot="0" comparison="And">
                         <RequiredItem items="Touhou_Nuclear_Battery" type="Contained" />
                         <Conditional condition="gt 0"/>
+                        <Conditional HasTag="eq Tactical_Open"/>
                         <Affliction identifier="Nitori_Backpack_Tactical_Expansion_Effect02" amount="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Nuclear_Energy_Capacitor_Magazine">
                     <StatusEffect type="OnWearing" target="Contained" Condition="-0.02" comparison="And">
+                        <Conditional HasTag="eq Tactical_Open" TargetContainer="true"/>
                         <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
                         <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
                         <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
                     </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Contained,Character" Interval="5.0" Duration="5.0" targetslot="0">
+                    <StatusEffect type="OnWearing" target="This,Contained,Character" Interval="5.0" Duration="5.0" targetslot="0" comparison="And">
                         <RequiredItem items="Touhou_Nuclear_Energy_Capacitor_Magazine" type="Contained" />
                         <Conditional condition="gt 0"/>
+                        <Conditional HasTag="eq Tactical_Open"/>
                         <Affliction identifier="Nitori_Backpack_Tactical_Expansion_Effect" amount="10" />
                     </StatusEffect>
                 </Containable>
             </SubContainer>
             <SubContainer capacity="15" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,mediumitem,bigitem,mountableweapon,tsm_gun" excludeditems="backpack,crate"/>
+                <Containable items="smallitem,mediumitem,mountableweapon,tsm_gun" excludeditems="backpack,crate"/>
             </SubContainer>
         </ItemContainer>
 
@@ -1552,6 +1556,13 @@
 
             <StatusEffect type="OnWearing" target="Character" PressureProtection="4200.0" SpeedMultiplier="0.95" setvalue="true" disabledeltatime="true" />
 
+            <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+                <GuiFrame relativesize="0.1,0.06" anchor="BottomRight" absoluteoffset="0,0" relativeoffset="0.19,0.0" style="ItemUI" />
+                <TickBox text="战术效果" >
+                    <StatusEffect type="OnUse" target="This" tags="Tactical_Open" setvalue="true" />
+                    <StatusEffect type="OnSecondaryUse" target="This" tags="Tactical_False" setvalue="true" />
+                </TickBox>
+            </CustomInterface>
 
             <StatusEffect type="OnWearing" target="Character" >
                 <Conditional Candid_Friend="gt 0"/>
@@ -1619,7 +1630,7 @@
                 <Affliction identifier="Touhou_Pendulum_Magic" amount="50" />
             </StatusEffect>
             <StatusEffect type="OnWearing" target="Character" comparison="And" >
-                <Conditional skillrequirement="true" Touhou_Magic="gt 80" />
+                <Conditional skillrequirement="true" Touhou_Magic="gt 120" />
                 <Affliction identifier="Touhou_Pendulum_Magic_Effect" amount="50" />
             </StatusEffect>
             <SkillModifier skillidentifier="Touhou_Magic" skillvalue="15" />
@@ -1627,5 +1638,38 @@
         <Quality>
             <QualityStat stattype="Condition" value="0.334" />
         </Quality>
+    </Item>
+
+    <!--人偶手提箱-->
+    <Item name="人偶手提箱" identifier="Touhou_Alice_Puppet_Suitcase" subcategory="Touhou" category="Equipment" tags="smallitem,Touhou_Alice_Puppet_Suitcase,backpack" scale="0.4" cargocontaineridentifier="metalcrate" description="HONK">
+        <PreferredContainer primary="crewcab" notcampaign="true"/>
+        <Price baseprice="1000" >
+            <Price storeidentifier="merchantoutpost" sold="false"/>
+            <Price storeidentifier="merchantcity" maxavailable="1"/>
+            <Price storeidentifier="merchantresearch" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" maxavailable="1"/>
+            <Price storeidentifier="merchantmine" maxavailable="1" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="steel" amount="3" />
+            <Item identifier="organicfiber" amount="3" />
+            <Item identifier="plastic" amount="3" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="10" >
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
+            <RequiredItem identifier="steel" amount="3"/>
+            <RequiredItem identifier="organicfiber" amount="3"/>
+            <RequiredItem identifier="plastic" amount="3"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Alice_Puppet_Suitcase.png" sourcerect="0,0,140,120" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Alice_Puppet_Suitcase.png" sourcerect="0,0,140,120" depth="0.55" origin="0.5,0.5" />
+        <Body width="50" height="20" density="10" />
+        <Holdable slots="RightHand+LeftHand,Any" msg="ItemMsgPickUpSelect" />
+        <ItemContainer autofill="False" capacity="12" maxstacksize="64" slotsperrow="3">
+            <Containable identifiers="smallitem" excludeditems="backpack,crate" />
+            <!--            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />-->
+        </ItemContainer>
+        <aitarget soundrange="1" fadeouttime="5" />
     </Item>
 </Items>

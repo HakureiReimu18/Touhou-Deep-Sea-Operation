@@ -356,13 +356,30 @@
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="0.5">
+            <Conditions>
+                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="300" invert="true" />
+                <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
+            </Conditions>
+            <Abilities>
                 <CharacterAbilityModifyStatToSkill stattype="MaximumHealthMultiplier" maxvalue="0.1" skillidentifier="Touhou_Magic" />
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="0.5">
+            <Conditions>
+                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="300" />
+                <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.3" />
             </Abilities>
         </AbilityGroupInterval>
         <AddedRecipe itemidentifier="gensokyo_divinggear" />
     </Talent>
 
-    <!--炼金无限 瓶装元素的出售价格增加至75%，解锁配方：回收日、月符卡-->
+    <!--炼金无限 瓶装元素的出售价格增加至75%，双手部位的物理伤害抗性和烧伤抗性提高15%，解锁配方：回收日、月符卡-->
     <Talent identifier="Spell_Card_Recycle_Unlocked">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Spell_Card_Recycle_Unlocked"/>
@@ -375,11 +392,22 @@
                 <CharacterAbilityGivePermanentStat statidentifier="Shui_Alchemical" stattype="StoreSellMultiplier" value="0.75" targetallies="true" setvalue="true" />
             </Abilities>
         </AbilityGroupEffect>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Spell_Card_Recycle_Unlocked_Effect" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
         <AddedRecipe itemidentifier="Touhou_Royal_Flare" />
         <AddedRecipe itemidentifier="Touhou_Silent_Selene_Ammo" />
     </Talent>
 
-    <!--魔法突破 制造所有物品时质量提升1，如果是帕秋莉/魔理沙装束，则质量再提升1-->
+    <!--魔法突破 制造所有物品时质量提升1，如果是帕秋莉+/魔理沙+/芙兰朵露+/爱丽丝+装束，则质量再提升1-->
     <Talent identifier="Magic_Breakthrough">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Magic_Breakthrough"/>
@@ -436,16 +464,34 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Puppeteer_Of_Seven_Colors" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Magic_Breakthrough_Effect02" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
     </Talent>
 
-    <!--逆位隐士 造成的减益持续时间延长20%，造成的毒药效果提高20%，解锁配方：污秽药剂-->
+    <!--逆位隐士 魔法材料的制造速度增加50%，造成的毒药效果提高20%，解锁配方：污秽药剂-->
     <Talent identifier="Foul_Potion_Unlocked">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Foul_Potion_Unlocked"/>
         <AbilityGroupEffect abilityeffecttype="None">
             <Abilities>
-                <CharacterAbilityGiveStat stattype="DebuffDurationMultiplier" value="0.2"/>
                 <CharacterAbilityGiveStat stattype="PoisonMultiplier" value="0.2"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Magic_Item" stattype="FabricationSpeed" value="0.5" setvalue="true"/>
             </Abilities>
         </AbilityGroupEffect>
         <AddedRecipe itemidentifier="Touhou_Foul_Potion" />
