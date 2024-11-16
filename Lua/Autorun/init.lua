@@ -4,8 +4,6 @@ TLE.Version = "1.0"
 TLE.VersionNum = 01000000
 TLE.Path = table.pack(...)[1]
 
-dofile(TLE.Path.."/Lua/Scripts/Sever/Alice_Doll_Control_Change.lua")
-
 if CLIENT then
 	Timer.Wait(function()
 		local runstring = "\n/// Touhou Lua Expansion"..TLE.Version.." ///\n"

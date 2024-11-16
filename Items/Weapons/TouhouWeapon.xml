@@ -4442,7 +4442,7 @@
             </StatusEffect>
 
             <Attack targetimpulse="6" severlimbsprobability="0.4" itemdamage="60" structuresoundtype="StructureSlash" penetration="0.4">
-                <Affliction identifier="Reiki_Pressure" strength="5" />
+                <Affliction identifier="Reiki_Pressure" strength="2" />
                 <Affliction identifier="lacerations" strength="51.4" />
                 <Affliction identifier="slow" strength="50" />
                 <Affliction identifier="bleeding" strength="25" />
@@ -4815,190 +4815,9 @@
         <SkillRequirementHint identifier="Touhou_Magic" level="40" />
     </Item>
 
-    <!--七曜魔导书-->
-    <Item name="七曜魔导书" identifier="Touhou_Alice_Magic_Book" subcategory="Touhou" category="Equipment,Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,High_Alchemical_Metal,Touhou_Cam_Offset_Normal" Scale="0.4" impactsoundtag="impact_metal_light">
-        <PreferredContainer secondary="abandonedmedcab" spawnprobability="0.01"/>
-        <Price baseprice="12000" minleveldifficulty="25" >
-            <Price storeidentifier="merchantoutpost" minavailable="1" sold="false"/>
-            <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
-            <Price storeidentifier="merchantresearch" minavailable="1.4" />
-            <Price storeidentifier="merchantmilitary" minavailable="1" sold="false" />
-            <Price storeidentifier="merchantmine" minavailable="1" sold="false"/>
-        </Price>
-        <Deconstruct time="5">
-            <Item identifier="Magic_Material" />
-            <Item identifier="Score_Point" amount="2" />
-        </Deconstruct>
-        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
-            <RequiredSkill identifier="weapons" level="40" />
-            <RequiredSkill identifier="Touhou_Magic" level="100" />
-            <RequiredItem identifier="organicfiber" amount="4"/>
-            <RequiredItem identifier="Seven_Elements_Alchemical_Fake" />
-            <RequiredItem identifier="Score_Point" amount="2" />
-        </Fabricate>
-        <InventoryIcon name="" texture="%ModDir%/Images/OtherWeapons/Touhou_Alice_Magic_Book.png" sourcerect="0,0,80,64" origin="0.5,0.5" />
-        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Alice_Magic_Book.png" sourcerect="80,0,164,112" depth="0.3" origin="0.5,0.5" />
-
-        <Body width="72" height="72" density="10" />
-        <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="40,-10" handle1="-26,-11" msg="ItemMsgPickUpSelect" >
-            <StatusEffect type="OnActive" target="Character">
-                <Conditional The_Still_Library="gt 0"/>
-                <Affliction identifier="Patchouli_Weapons" strength="50" />
-            </StatusEffect>
-            <StatusEffect type="OnActive" target="Character">
-                <Conditional The_Still_Library="eq 0"/>
-                <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100" />
-            </StatusEffect>
-            <StatusEffect type="OnActive" target="Character" comparison="And">
-                <Conditional skillrequirement="true" Touhou_Magic="gte 40"/>
-                <Conditional skillrequirement="true" Touhou_Magic="lt 70"/>
-                <Affliction identifier="Touhou_Magic_Attack_Multiply_Effect01" strength="100" />
-            </StatusEffect>
-            <StatusEffect type="OnActive" target="Character" comparison="And">
-                <Conditional skillrequirement="true" Touhou_Magic="gte 70"/>
-                <Conditional skillrequirement="true" Touhou_Magic="lt 100"/>
-                <Affliction identifier="Touhou_Magic_Attack_Multiply_Effect02" strength="100" />
-            </StatusEffect>
-            <StatusEffect type="OnActive" target="Character" >
-                <Conditional skillrequirement="true" Touhou_Magic="gte 100"/>
-                <Affliction identifier="Touhou_Magic_Attack_Multiply_Effect03" strength="100" />
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="This" Condition="-7" />
-            <StatusEffect type="Always" target="This" Condition="2.5">
-                <Conditional condition="gt 0" />
-            </StatusEffect>
-            <StatusEffect type="OnBroken" target="This" Condition="17" disabledeltatime="true" delay="7" stackable="false" />
-            <StatusEffect type="OnBroken" target="This">
-                <sound file="%ModDir%/Sounds/Tools/Overheating_Restart02.ogg" type="OnUse" range="500.0" loop="false" />
-            </StatusEffect>
-        </Holdable>
-        <!--武器参数-->
-        <RangedWeapon weapondamagemodifier="1.0" barrelpos="77,20" spread="7" unskilledspread="28" reload="0.4" combatPriority="50" drawhudwhenequipped="true" crosshairscale="0.4" DualWieldReloadTimePenaltyMultiplier="1.5" DualWieldAccuracyPenalty="12">
-            <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
-            <CrosshairPointer texture="%ModDir%/Images/Marisa_Items/Hakkero.png" sourcerect="91,0,210,210" scale="2.5"/>
-            <StatusEffect type="OnUse" target="This">
-                <Explosion range="150.0" force="1.0" flash="false" shockwave="false" smoke="false" flames="false" sparks="false" underwaterbubble="false" camerashake="3.0" />
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="This" forceplaysounds="true">
-                <Sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Projectile01.ogg" type="OnUse" volume="1.4" range="1000" selectionmode="Random" />
-                <Sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Projectile02.ogg" type="OnUse" volume="1.4" range="1000" />
-                <Sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Projectile03.ogg" type="OnUse" volume="1.4" range="1000" />
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" >
-                <RequiredItems items="Elements_Book_Ammo" type="Contained" />
-                <Use />
-            </StatusEffect>
-            <RequiredSkill identifier="Touhou_Magic" level="100" />
-            <RequiredItems items="Elements_Book_Ammo" type="Contained" />
-        </RangedWeapon>
-
-        <ItemContainer autofill="false" itempos="27,10" iteminterval="0,-4" capacity="1" maxstacksize="1" hideitems="true" containedstateindicatorslot="0" removecontaineditemsondeconstruct="true" >
-            <Containable items="Elements_Book_Ammo" />
-            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
-            <SlotIcon slotindex="0" texture="%ModDir%/Images/Tools/Element_In_Bottle_Indicator.png" sourcerect="0,0,108,288" origin="0.5,0.5" />
-            <SubContainer capacity="1" maxstacksize="1">
-                <Containable items="Seven_Elements_Alchemical" hide="true" />
-            </SubContainer>
-        </ItemContainer>
-        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
-            <GuiFrame relativesize="0.08,0.32" anchor="BottomLeft" absoluteoffset="20,95" style="ItemUI" />
-            <Button text="木元素生成">
-                <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true">
-                    <Remove />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                    <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="2" range="500.0" loop="false" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" targetslot="0" disabledeltatime="true" delay="0.1">
-                    <SpawnItem identifier="Mu_Alchemical_Locked" spawnposition="ThisInventory" />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="Contained" targetslot="1" disabledeltatime="true" delay="0.1" Condition="-1" />
-            </Button>
-            <Button text="火元素生成">
-                <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true">
-                    <Remove />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                    <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="2" range="500.0" loop="false" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" targetslot="0" disabledeltatime="true" delay="0.1">
-                    <SpawnItem identifier="Huo_Alchemical_Locked" spawnposition="ThisInventory" />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="Contained" targetslot="1" disabledeltatime="true" delay="0.1" Condition="-1" />
-            </Button>
-            <Button text="土元素生成">
-                <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true">
-                    <Remove />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                    <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="2" range="500.0" loop="false" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" targetslot="0" disabledeltatime="true" delay="0.1">
-                    <SpawnItem identifier="Tu_Alchemical_Locked" spawnposition="ThisInventory" />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="Contained" targetslot="1" disabledeltatime="true" delay="0.1" Condition="-1" />
-            </Button>
-            <Button text="金元素生成">
-                <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true">
-                    <Remove />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                    <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="2" range="500.0" loop="false" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" targetslot="0" disabledeltatime="true" delay="0.1">
-                    <SpawnItem identifier="Jin_Alchemical_Locked" spawnposition="ThisInventory" />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="Contained" targetslot="1" disabledeltatime="true" delay="0.1" Condition="-1" />
-            </Button>
-            <Button text="水元素生成">
-                <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true">
-                    <Remove />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                    <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="2" range="500.0" loop="false" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" targetslot="0" disabledeltatime="true" delay="0.1">
-                    <SpawnItem identifier="Shui_Alchemical_Locked" spawnposition="ThisInventory" />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="Contained" targetslot="1" disabledeltatime="true" delay="0.1" Condition="-1" />
-            </Button>
-            <Button text="烈阳生成">
-                <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true">
-                    <Remove />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                    <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="2" range="500.0" loop="false" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" targetslot="0" disabledeltatime="true" delay="0.1">
-                    <SpawnItem identifier="Yang_Alchemical_Locked" spawnposition="ThisInventory" />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="Contained" targetslot="1" disabledeltatime="true" delay="0.1" Condition="-7" />
-            </Button>
-            <Button text="皓月生成">
-                <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true">
-                    <Remove />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                    <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="2" range="500.0" loop="false" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" targetslot="0" disabledeltatime="true" delay="0.1">
-                    <SpawnItem identifier="Yin_Alchemical_Locked" spawnposition="ThisInventory" />
-                    <RequiredItems items="Seven_Elements_Alchemical" type="Contained" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="Contained" targetslot="1" disabledeltatime="true" delay="0.1" Condition="-7" />
-            </Button>
-
-        </CustomInterface>
-        <Quality>
-            <QualityStat stattype="Condition" value="0.257" />
-        </Quality>
-        <SkillRequirementHint identifier="Touhou_Magic" level="100" />
-    </Item>
-
-
-    <!--深红幻想乡-->
-    <Item name="深红幻想乡" identifier="Touhou_Scarlet_Gensokyo" subcategory="Touhou" category="Weapon"
-          Tags="smallitem,weapon,High_Alchemical_Metal,Touhou_Cam_Offset_High" cargocontaineridentifier="metalcrate" scale="0.8" impactsoundtag="impact_metal_light" >
+    <!--绯色命运-->
+    <Item name="绯色命运" identifier="Touhou_Scarlet_Gensokyo" subcategory="Touhou" category="Weapon"
+          Tags="smallitem,weapon,Normal_Alchemical_Metal,Touhou_Cam_Offset_High" cargocontaineridentifier="metalcrate" scale="0.8" impactsoundtag="impact_metal_light" >
         <PreferredContainer primary="secarmcab" secondary="armcab" />
         <Price baseprice="16000" sold="false" >
             <Price storeidentifier="merchantoutpost" minavailable="2"/>
@@ -5024,81 +4843,90 @@
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Scarlet_Gensokyo.png" sourcerect="0,0,126,148" origin="0.5,0.5" />
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Scarlet_Gensokyo.png" sourcerect="134,0,307,76" depth="0.55" origin="0.5,0.5" />
         <Body width="307" height="50" density="10" />
-<!--        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
-            <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" relativeoffset="0.0,0.5" style="ItemUI" />
-            <TickBox text="ScarletMode.Tickbox" >
-                <StatusEffect type="OnUse" target="This" tags="ScarletMode_Open" setvalue="true" />
-                <StatusEffect type="OnSecondaryUse" target="This" tags="ScarletMode_Open_False" setvalue="true" />
-            </TickBox>
-        </CustomInterface>-->
-        <MeleeWeapon slots="Any,RightHand+LeftHand" aimpos="35,10" handle1="-10,6" handle2="-20,3" holdangle="40" aimangle="-20" reload="1.4" range="150" combatPriority="50"
-                     SwingForce="5.0,-0.5" allowhitmultiple="true" msg="ItemMsgPickUpSelect" >
-            <StatusEffect type="OnActive" target="Character" AllowWhenBroken="true">
+        <MeleeWeapon slots="Any,RightHand+LeftHand" aimpos="50,-20" handle1="-20,12" handle2="10,14" holdangle="60" aimangle="-80" reload="1.6" range="150" combatPriority="50"
+                     SwingPos="3.0,0.0" SwingForce="5.0,0.0" allowhitmultiple="true" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnActive" target="Character" >
                 <Conditional scarletdevil="gt 0"/>
                 <Affliction identifier="Reimilia_Weapons" strength="50" />
             </StatusEffect>
-            <StatusEffect type="OnActive" target="Character" AllowWhenBroken="true">
+            <StatusEffect type="OnActive" target="Character"  >
                 <Conditional scarletdevil="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100" />
             </StatusEffect>
-            <StatusEffect type="OnActive" target="Character" comparison="And" AllowWhenBroken="true">
+            <StatusEffect type="OnActive" target="Character" Interval="2.0" Duration="2.0">
+                <Conditional increasedmeleedamage="gte 50"/>
+                <Affliction identifier="Touhou_Decreased_Meleedamage_Effect01" strength="100" />
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="Character" Interval="2.0" Duration="2.0">
+                <Conditional increasedmeleedamage_temporary="gt 0"/>
+                <Affliction identifier="Touhou_Decreased_Meleedamage_Effect02" strength="100" />
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="Character" comparison="And" >
                 <Conditional skillrequirement="true" Touhou_Magic="gte 70"/>
                 <Conditional skillrequirement="true" Touhou_Magic="lt 100"/>
                 <Affliction identifier="Touhou_Magic_Attack_Multiply_Effect01" strength="100" />
             </StatusEffect>
-            <StatusEffect type="OnActive" target="Character" AllowWhenBroken="true" >
+            <StatusEffect type="OnActive" target="Character" >
                 <Conditional skillrequirement="true" Touhou_Magic="gte 100"/>
                 <Affliction identifier="Touhou_Magic_Attack_Multiply_Effect02" strength="100" />
             </StatusEffect>
 
             <StatusEffect type="OnActive" target="This,Character" disabledeltatime="true" >
-                <Conditional Voltage="gt 0.5"/>
+                <Conditional HasTag="ScarletMode_Open"/>
                 <Affliction identifier="Touhou_Scarlet_Gensokyo_Effect" strength="100" />
             </StatusEffect>
-            <StatusEffect type="OnActive" target="This" IsOn="true" disabledeltatime="true" setvalue="true" >
-                <Conditional Voltage="gt 0.5"/>
-            </StatusEffect>
-            <StatusEffect type="OnActive" target="This" IsOn="false" disabledeltatime="true" setvalue="true" >
-                <Conditional Voltage="lt 0.5"/>
-            </StatusEffect>
 
-<!--            <StatusEffect type="OnActive" target="This,Character" disabledeltatime="true" comparison="And">
+            <StatusEffect type="OnActive" target="This"  >
                 <Conditional HasTag="ScarletMode_Open"/>
-                <Conditional Voltage="gt 0.5"/>
-                <Affliction identifier="Touhou_Scarlet_Gensokyo_Effect" strength="100" />
+                <ParticleEmitter particle="blooddrop" AngleMax="360" ScaleMultiplier="2,2" ParticlesPerSecond="2" ColorMultiplier="255,255,255,255" />
+                <ParticleEmitter particle="blooddrop" Distance="30" AngleMax="360" ScaleMultiplier="2,2" ParticlesPerSecond="2" ColorMultiplier="255,255,255,255" />
+                <ParticleEmitter particle="blooddrop" Distance="60" AngleMax="360" ScaleMultiplier="2,2" ParticlesPerSecond="2" ColorMultiplier="255,255,255,255" />
+                <ParticleEmitter particle="blooddrop" Distance="90" AngleMax="360" ScaleMultiplier="2,2" ParticlesPerSecond="2" ColorMultiplier="255,255,255,255" />
+                <ParticleEmitter particle="blooddrop" Distance="120" AngleMax="360" ScaleMultiplier="2,2" ParticlesPerSecond="2" ColorMultiplier="255,255,255,255" />
+                <ParticleEmitter particle="waterblood" Distance="30" AngleMax="360" ScaleMin="0.5" ScaleMax="0.5" ParticlesPerSecond="1" ColorMultiplier="255,255,255,255" />
+                <ParticleEmitter particle="waterblood" AngleMax="-60" ScaleMin="0.5" ScaleMax="0.5" ParticlesPerSecond="1" ColorMultiplier="255,255,255,255" />
+                <ParticleEmitter particle="waterblood" AngleMax="90" ScaleMin="0.5" ScaleMax="0.5" ParticlesPerSecond="1" ColorMultiplier="255,255,255,255" />
             </StatusEffect>
-            <StatusEffect type="OnActive" target="This" IsOn="true" disabledeltatime="true" comparison="And" setvalue="true">
+            <StatusEffect type="OnActive" target="This,Character" Interval="5.0" >
                 <Conditional HasTag="ScarletMode_Open"/>
-                <Conditional Voltage="gt 0.5"/>
-            </StatusEffect>
-            <StatusEffect type="OnActive" target="This" IsOn="false" disabledeltatime="true" setvalue="true" >
-                <Conditional HasTag="ScarletMode_False"/>
-                <Conditional Voltage="lt 0.5"/>
-            </StatusEffect>-->
-
-            <StatusEffect type="OnUse" target="Contained" targetslot="0" condtion="-4" >
-                <Conditional qualitylevel="eq 0"/>
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" targetslot="0" condtion="-3" >
-                <Conditional qualitylevel="eq 1"/>
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" targetslot="0" condtion="-2" >
-                <Conditional qualitylevel="eq 2"/>
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" targetslot="0" condtion="-1" >
-                <Conditional qualitylevel="eq 3"/>
+                <Affliction identifier="bleeding" strength="30.0" />
+                <Affliction identifier="bloodloss" strength="5.0" />
             </StatusEffect>
 
-            <Attack targetimpulse="6" severlimbsprobability="0.8" itemdamage="80" structuresoundtype="StructureSlash" penetration="0.3">
-                <Affliction identifier="Reiki_Pressure" strength="5" />
-                <Affliction identifier="internaldamage" strength="10" />
-                <Affliction identifier="burn" strength="10" />
-                <Affliction identifier="Touhou_Bite" strength="10" />
-                <Affliction identifier="bleeding" strength="66" />
-                <Affliction identifier="bleeding" strength="66" probability="0.1" />
+            <!--            <StatusEffect type="OnUse" target="Contained" targetslot="0" condtion="-4" >
+                            <Conditional qualitylevel="eq 0"/>
+                        </StatusEffect>
+                        <StatusEffect type="OnUse" target="Contained" targetslot="0" condtion="-3" >
+                            <Conditional qualitylevel="eq 1"/>
+                        </StatusEffect>
+                        <StatusEffect type="OnUse" target="Contained" targetslot="0" condtion="-2" >
+                            <Conditional qualitylevel="eq 2"/>
+                        </StatusEffect>
+                        <StatusEffect type="OnUse" target="Contained" targetslot="0" condtion="-1" >
+                            <Conditional qualitylevel="eq 3"/>
+                        </StatusEffect>-->
+
+            <Attack targetimpulse="6" severlimbsprobability="0.8" itemdamage="80" structuresoundtype="StructureSlash" penetration="0.25">
+                <Affliction identifier="Reiki_Pressure" strength="2" />
+                <Affliction identifier="lacerations" strength="10" />
+                <Affliction identifier="burn" strength="8" />
+                <Affliction identifier="Touhou_Bite" strength="8" />
+                <Affliction identifier="bleeding" strength="33" />
+                <Affliction identifier="bleeding" strength="33" probability="0.1" />
                 <Affliction identifier="stun" strength="0.2" />
-                <Affliction identifier="stun" strength="0.6" probability="0.3" />
+                <Affliction identifier="stun" strength="0.5" probability="0.3" />
             </Attack>
+            <StatusEffect type="OnUse" target="UseTarget" multiplyafflictionsbymaxvitality="true" >
+                <ParticleEmitter particle="weldspark" particleamount="2" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.8" scalemax="2.2" drawontop="true" colormultiplier="255,10,10,200" />
+                <Affliction identifier="Touhou_Lost_Dream" strength="5" probability="0.5" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This,Limb" >
+                <Conditional HasTag="eq ScarletMode_Open"/>
+                <Affliction identifier="bleeding" strength="33" />
+                <Affliction identifier="bleeding" strength="33" probability="0.5" />
+                <Affliction identifier="internaldamage" strength="3" />
+                <Affliction identifier="Touhou_Bite" strength="6" />
+            </StatusEffect>
             <StatusEffect type="OnUse" target="UseTarget">
                 <ParticleEmitter particle="StarDanmuBoom" copyentityangle="false" anglemin="30" anglemax="240" particleamount="3" velocitymin="100" velocitymax="150" scalemin="0.15" scalemax="0.25" colormultiplier="255,72,36,180" />
                 <Sound file="%ModDir%/Sounds/Weapons/Hisou_Sword_Attack01.ogg" selectionmode="random" range="300" />
@@ -5110,48 +4938,77 @@
             <StatusEffect type="OnFailure" target="This" reload="2.0" setvalue="true" AllowWhenBroken="true" />
             <RequiredSkill identifier="Touhou_Magic" level="66" />
             <!--Reset the reload speed-->
-            <StatusEffect type="OnUse" target="This" reload="1.4" setvalue="true" delay="2.0" AllowWhenBroken="true" />
+            <StatusEffect type="OnUse" target="This" reload="1.6" setvalue="true" delay="2.0" AllowWhenBroken="true" />
         </MeleeWeapon>
-        <ItemContainer capacity="1" maxstacksize="1" itempos="10,-5" containedspritedepths="0.562,0.561" containedstateindicatorstyle="default" containedstateindicatorslot="0">
-            <Containable items="bloodpackB" rotation="90"/>
-            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="192,448,64,64" origin="0.5,0.5" />
-            <SubContainer capacity="1" maxstacksize="1">
-                <Containable items="bloodpackB" setactive="true" >
-                    <StatusEffect type="OnContaining" target="This" Voltage="1.0" setvalue="true">
-                        <Conditional condition="gt 0" />
+        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" relativeoffset="0.0,0.4" style="ItemUI" />
+            <TickBox text="ScarletMode.Tickbox" >
+                <StatusEffect type="OnUse" target="This" tags="ScarletMode_Open" setvalue="true" />
+                <StatusEffect type="OnUse" target="This" targetitemcomponent="LightComponent" IsOn="true" setvalue="true" />
+                <StatusEffect type="OnSecondaryUse" target="This" tags="ScarletMode_Open_False" setvalue="true" />
+                <StatusEffect type="OnSecondaryUse" target="This" targetitemcomponent="LightComponent" IsOn="False" setvalue="true" />
+            </TickBox>
+        </CustomInterface>
+        <ItemComponent>
+            <StatusEffect type="OnUse" target="This" targetitemcomponent="ElectricalDischarger" Interval="0.21">
+                <Use/>
+            </StatusEffect>
+        </ItemComponent>
+        <ElectricalDischarger duration="0.1" reload="0.1" ignoreuser="true" characterusable="true" raycastrange="100" range="400" rangemultiplierinwalls="0.1" outdoorsonly="false" powerconsumption="0" pickkey="Select">
+            <Attack targetimpulse="-10" targetforce="-10" penetration="0.25" >
+                <Affliction identifier="stun" strength="0.5" probability="0.5" />
+                <Affliction identifier="internaldamage" strength="6" />
+                <Affliction identifier="burn" strength="6" />
+            </Attack>
+            <StatusEffect type="OnUse" target="This" forceplaysounds="true">
+                <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge1.ogg" range="500" selectionmode="random" />
+                <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge2.ogg" range="500" />
+                <Explosion range="100.0" camerashake="10" stun="0" force="0.5" flames="false" shockwave="false" sparks="true" underwaterbubble="false" />
+            </StatusEffect>
+        </ElectricalDischarger>
+        <!--        <PowerContainer capacity="30" Charge="15" canbeselected="false">
+                    <StatusEffect type="OnActive" target="This" capacity="30" setvalue="true" >
+                        <Conditional qualitylevel="eq 0"/>
                     </StatusEffect>
-                </Containable>
-            </SubContainer>
-        </ItemContainer>
-        <Propulsion force="40" usablein="both">
-            <RequiredItems items="bloodpackB" type="Contained" />
-            <StatusEffect type="OnActive" target="This" force="40" setvalue="true" >
-                <Conditional Voltage="gt 0.5"/>
-            </StatusEffect>
-            <StatusEffect type="OnActive" target="This" force="0" setvalue="true" >
-                <Conditional Voltage="lt 0.5"/>
-            </StatusEffect>
-        </Propulsion>
-<!--        <Propulsion force="40" usablein="both">
-            <RequiredItems items="bloodpackB" type="Contained" />
-            <StatusEffect type="OnActive" target="This" force="40" setvalue="true" comparison="And" >
-                <Conditional HasTag="ScarletMode_Open"/>
-                <Conditional Voltage="gt 0.5"/>
-            </StatusEffect>
-            <StatusEffect type="OnActive" target="This" force="0" setvalue="true" comparison="And" >
-                <Conditional HasTag="ScarletMode_False"/>
-                <Conditional Voltage="lt 0.5"/>
-            </StatusEffect>
-        </Propulsion>-->
-        <LightComponent LightColor="255,100,100,160" Flicker="0.2" Range="700" IsOn="true" >
+                    <StatusEffect type="OnActive" target="This" capacity="40" setvalue="true" >
+                        <Conditional qualitylevel="eq 1"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnActive" target="This" capacity="50" setvalue="true" >
+                        <Conditional qualitylevel="eq 2"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnActive" target="This" capacity="60" setvalue="true" >
+                        <Conditional qualitylevel="eq 3"/>
+                    </StatusEffect>
+                </PowerContainer>
+                <LightComponent LightColor="255,80,80,80" range="700" powerconsumption="0" IsOn="false" blinkfrequency="0.0" offset="13,0" castshadows="true" allowingameediting="false">
+                    <sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Scarlet_Gensokyo.png" sourcerect="134,,307,76" origin="0.5,0.5" />
+                    <StatusEffect type="OnActive" target="This" targetitemcomponent="PowerContainer" Charge="-1.0" interval="1" disabledeltatime="true" />
+                    <StatusEffect type="OnActive" target="This,Contained,Character" interval="1" disabledeltatime="true">
+                        <Conditional Charge="gt 0.0" targetitemcomponentname="PowerContainer" />
+                        <Affliction identifier="bleeding" strength="3.6" />
+                    </StatusEffect>
+                    <StatusEffect type="OnActive" target="This,Contained,Character" IsOn="false" checkconditionalalways="true" blinkfrequency="1.0" setvalue="true">
+                        <Conditional Charge="lte 0.0" targetitemcomponentname="PowerContainer" />
+                        <Affliction identifier="bleeding" strength="24" />
+                    </StatusEffect>
+                </LightComponent>
+                <CustomInterface canbeselected="true" drawhudwhenequipped="true" allowuioverlap="false" ElementStates="8, false">
+                    <GuiFrame relativesize="0.15,0.1" anchor="CenterLeft" pivot="TopLeft" relativeoffset="0.006,0.006" style="ItemUI" />
+                    <IntegerInput text="ScarletMode.Timer" targetitemcomponent="PowerContainer" propertyname="Charge" min="0" max="60" step="1" GetValueInterval="1"/>
+                    <TickBox text="ScarletMode.Tickbox" targetitemcomponent="LightComponent" propertyname="IsOn" ContinuousSignal="false" GetValueInterval="1" >
+                        <StatusEffect type="OnUse" target="This" tags="ScarletMode_Open" setvalue="true" />
+                        <StatusEffect type="OnSecondaryUse" target="This" tags="ScarletMode_Open_False" setvalue="true" />
+                    </TickBox>
+                </CustomInterface>-->
+        <LightComponent LightColor="255,100,100,160" Flicker="0.2" Range="700" IsOn="False" >
             <sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Scarlet_Gensokyo.png" sourcerect="0,134,307,76" origin="0.5,0.5" />
         </LightComponent>
-        <LightComponent LightColor="255,100,100,160" Flicker="0.2" Range="700" IsOn="true" >
+        <LightComponent LightColor="255,100,100,160" Flicker="0.2" Range="700" IsOn="False" >
             <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
         </LightComponent>
         <Quality>
             <QualityStat stattype="strikingspeedmultiplier" value="0.05" />
-            <QualityStat stattype="StrikingPowerMultiplier" value="0.05" />
+            <QualityStat stattype="StrikingPowerMultiplier" value="0.1" />
         </Quality>
         <aitarget sightrange="500" soundrange="250" fadeouttime="1" />
         <SkillRequirementHint identifier="Touhou_Magic" level="66" />
