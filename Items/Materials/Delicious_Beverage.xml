@@ -46,7 +46,7 @@
                 <Sound file="%ModDir%/Sounds/Tools/Minecraft_Eat.ogg" selectionmode="random" range="300"  />
             </StatusEffect>
             <StatusEffect type="OnSecondaryUse" target="Character" delay="0.5" disabledeltatime="true" comparison="Or">
-                <Conditional Hyouibana_Tenshi_Effect="gt 0"/>
+                <Conditional Hyouibana_Effect_Prefect_Tenshi="gt 0"/>
                 <Conditional The_Daughter_Of_Heaven="gt 0"/>
                 <Affliction identifier="Tenshi_Peach" amount="100" />
             </StatusEffect>
@@ -244,7 +244,7 @@
             </StatusEffect>
             <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
                 <RemoveItem />
-                <SpawnItem identifier="Spiritual_Water" spawnposition="SameInventory" Condition="0.0" />
+                <SpawnItem identifier="Spiritual_Water" spawnposition="SameInventory" SpawnIfInventoryFull="true" Condition="0.0" />
             </StatusEffect>
         </Holdable>
         <AiTarget sightrange="1000" static="true" />
@@ -286,7 +286,7 @@
             </StatusEffect>
             <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
                 <RemoveItem />
-                <SpawnItem identifier="Spiritual_Water" spawnposition="SameInventory" Condition="0.0" />
+                <SpawnItem identifier="Spiritual_Water" spawnposition="SameInventory" SpawnIfInventoryFull="true" Condition="0.0" />
             </StatusEffect>
         </Holdable>
         <AiTarget sightrange="1000" static="true" />
@@ -569,7 +569,7 @@
             <StatusEffect type="OnSecondaryUse" target="Character" >
                 <Sound file="%ModDir%/Sounds/Tools/Minecraft_Drink.ogg" selectionmode="random" range="300"  />
             </StatusEffect>
-            <StatusEffect type="OnSecondaryUse" target="This,UseTarget" delay="10" duration="10" stackable="false">
+            <StatusEffect type="OnSecondaryUse" target="This,UseTarget" delay="0.1" duration="10" stackable="false">
                 <Conditional Condition="lte 1" />
                 <ReduceAffliction identifier="bloodloss" amount="7.5" />
                 <ReduceAffliction identifier="poison" amount="7.5" />
@@ -583,7 +583,60 @@
             </StatusEffect>
             <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
                 <RemoveItem />
-                <SpawnItem identifier="Spiritual_Water" spawnposition="SameInventory" Condition="0.0" />
+                <SpawnItem identifier="Spiritual_Water" spawnposition="SameInventory" SpawnIfInventoryFull="true" Condition="0.0" />
+            </StatusEffect>
+        </Holdable>
+        <AiTarget sightrange="1000" static="true" />
+        <PreferredContainer primary="medcab" />
+    </Item>
+
+    <!--天狗踊-->
+    <Item name="天狗踊" identifier="Touhou_Tengu_Dance" subcategory="Touhou" category="Misc,medical" Tags="smallitem" RequireAimToUse="True"
+          cargocontaineridentifier="metalcrate" scale="0.15" impactsoundtag="impact_soft" impacttolerance="5.5">
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Tengu_Dance.png" depth="0.2" sourcerect="0,0,288,288" origin="0.5,0.5" />
+        <Body width="288" height="220" density="10" />
+        <Price baseprice="200" sold="false">
+            <Price storeidentifier="merchantoutpost" />
+            <Price storeidentifier="merchantcity" multiplier="1.2" />
+            <Price storeidentifier="merchantresearch" multiplier="1.1" />
+            <Price storeidentifier="merchantmilitary" multiplier="0.8" />
+            <Price storeidentifier="merchantmine" multiplier="0.75" />
+        </Price>
+        <Deconstruct time="5">
+            <Item identifier="carbon"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiresrecipe="true" requiredtime="10" amount="2">
+            <RequiredSkill identifier="medical" level="30" />
+            <RequiredItem identifier="Touhou_Fear_Item" />
+            <RequiredItem identifier="stabilozine" />
+            <RequiredItem identifier="antibiotics" />
+            <RequiredItem identifier="Touhou_Flour" />
+            <RequiredItem identifier="Spiritual_Water" amount="2" />
+        </Fabricate>
+        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="32,18" holdpos="40,-15" handle1="5,0" aimangle="80" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnSecondaryUse" target="This" Condition="-10.0" />
+            <StatusEffect type="OnSecondaryUse" target="Character" >
+                <Conditional jobidentifier="neq Yokai"/>
+                <Affliction identifier="drunk" amount="10" />
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="Character" >
+                <Sound file="%ModDir%/Sounds/Tools/Minecraft_Drink.ogg" selectionmode="random" range="300"  />
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="This,UseTarget" delay="1" duration="10" stackable="false">
+                <Conditional Condition="lte 1" />
+                <ReduceAffliction identifier="strengthen" amount="12" />
+                <ReduceAffliction identifier="poison" amount="7.5" />
+                <ReduceAffliction identifier="psychosis" amount="5" />
+                <ReduceAffliction identifier="hallucinating" amount="5" />
+                <Affliction identifier="drunk" amount="1.5" />
+                <Affliction identifier="psychosisresistance" amount="15" />
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="This" >
+                <ParticleEmitter particle="waterdrop" particlespersecond="40" scalemin="1" scalemax="1.5" distancemin="20" distancemax="25" anglemin="80" anglemax="100" velocitymin="40" velocitymax="60" copyentityangle="true" lifetimemultiplier="0.10" />
+            </StatusEffect>
+            <StatusEffect type="OnBroken" target="This" disabledeltatime="true">
+                <RemoveItem />
+                <SpawnItem identifier="Spiritual_Water" spawnposition="SameInventory" SpawnIfInventoryFull="true" Condition="0.0" />
             </StatusEffect>
         </Holdable>
         <AiTarget sightrange="1000" static="true" />

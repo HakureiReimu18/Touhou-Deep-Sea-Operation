@@ -15,7 +15,6 @@ Hook.Patch("Barotrauma.Character", "ControlLocalPlayer", function(instance)
     local character = instance
 
     if not character then return end
-    if Game.GameSession.IsTabMenuOpen then return end
     if GUI.GUI.PauseMenuOpen then return end
     if GUI.KeyboardDispatcher.Subscriber then return end
     --[[slottype中2代表右手，4代表左手]]

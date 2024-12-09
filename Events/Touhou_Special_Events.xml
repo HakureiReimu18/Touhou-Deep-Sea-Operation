@@ -372,6 +372,101 @@
             </CheckAfflictionAction>
         </ScriptedEvent>
 
+        <!--斯塔的出血效应概率事件-->
+        <!--概率：15*2,14*5-->
+        <ScriptedEvent identifier="MRE_Star_Talent_Attacked" commonness="0">
+            <RNGAction chance="0.7">
+                <!--另外五项-->
+                <Success>
+                    <RNGAction chance="0.5">
+                        <!--另外三项-->
+                        <Success>
+                            <RNGAction chance="0.666">
+                                <!--另外两项-->
+                                <Success>
+                                    <RNGAction chance="0.5">
+                                        <!--短时间增加攻击伤害-->
+                                        <Success>
+                                            <StatusEffectAction targettag="statuseffectuser">
+                                                <StatusEffect target="Character" disabledeltatime="true" >
+                                                    <Conditional MRE_Effect_Flag="gt 0"/>
+                                                    <Affliction identifier="MRE_Star_Talent_Attacked01" strength="10"/>
+                                                </StatusEffect>
+                                            </StatusEffectAction>
+                                        </Success>
+                                        <!--短时间增加眩晕抗性-->
+                                        <Failure>
+                                            <StatusEffectAction targettag="statuseffectuser">
+                                                <StatusEffect target="Character" disabledeltatime="true" >
+                                                    <Conditional MRE_Effect_Flag="gt 0"/>
+                                                    <Affliction identifier="MRE_Star_Talent_Attacked02" strength="10"/>
+                                                </StatusEffect>
+                                            </StatusEffectAction>
+                                        </Failure>
+                                    </RNGAction>
+                                </Success>
+                                <!--短时间避免被敌人发现-->
+                                <Failure>
+                                    <StatusEffectAction targettag="statuseffectuser">
+                                        <StatusEffect target="Character" disabledeltatime="true" >
+                                            <Conditional MRE_Effect_Flag="gt 0"/>
+                                            <Affliction identifier="MRE_Star_Talent_Attacked03" strength="10"/>
+                                        </StatusEffect>
+                                    </StatusEffectAction>
+                                </Failure>
+                            </RNGAction>
+                        </Success>
+                        <!--另外两项-->
+                        <Failure>
+                            <RNGAction chance="0.5">
+                                <!--大幅增加移动速度-->
+                                <Success>
+                                    <StatusEffectAction targettag="statuseffectuser">
+                                        <StatusEffect target="Character" disabledeltatime="true" >
+                                            <Conditional MRE_Effect_Flag="gt 0"/>
+                                            <Affliction identifier="MRE_Star_Talent_Attacked04" strength="10"/>
+                                        </StatusEffect>
+                                    </StatusEffectAction>
+                                </Success>
+                                <!--对周围的敌人造成一次伤害并发生小范围爆炸-->
+                                <Failure>
+                                    <StatusEffectAction targettag="statuseffectuser">
+                                        <StatusEffect target="Character" disabledeltatime="true" >
+                                            <Conditional MRE_Effect_Flag="gt 0"/>
+                                            <Affliction identifier="MRE_Star_Talent_Attacked05" strength="10"/>
+                                        </StatusEffect>
+                                    </StatusEffectAction>
+                                </Failure>
+                            </RNGAction>
+                        </Failure>
+                    </RNGAction>
+                </Success>
+                <!--另外两项-->
+                <Failure>
+                    <RNGAction chance="0.5">
+                        <!--短时间增加自身和所有穿戴妖精装束+的船员物理伤害抗性和烧伤抗性-->
+                        <Success>
+                            <StatusEffectAction targettag="statuseffectuser">
+                                <StatusEffect target="Character" disabledeltatime="true" >
+                                    <Conditional MRE_Effect_Flag="gt 0"/>
+                                    <Affliction identifier="MRE_Star_Talent_Attacked06" strength="10"/>
+                                </StatusEffect>
+                            </StatusEffectAction>
+                        </Success>
+                        <!--在原地留下一个星光陷阱，对周围目标造成持续伤害，持续10秒-->
+                        <Failure>
+                            <StatusEffectAction targettag="statuseffectuser">
+                                <StatusEffect target="Character" disabledeltatime="true" >
+                                    <Conditional MRE_Effect_Flag="gt 0"/>
+                                    <Affliction identifier="MRE_Star_Talent_Attacked07" strength="10"/>
+                                </StatusEffect>
+                            </StatusEffectAction>
+                        </Failure>
+                    </RNGAction>
+                </Failure>
+            </RNGAction>
+        </ScriptedEvent>
+
         <!--补给站事件01-->
         <ScriptedEvent identifier="Touhou_Supply_Station01" commonness="0">
             <!--声望检测部分也许不应该放在spawnNPC前-->

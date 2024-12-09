@@ -12,14 +12,72 @@
                 <CharacterAbilityModifyValue multiplyvalue="1.15"/>
             </Abilities>
         </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+                <AbilityConditionAttackData weapontype="Ranged,HandheldRanged" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
                 <AbilityConditionHasAffliction afflictionidentifier="Koishi_Dodge_CD" invert="true" />
-                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="NoWeapon,Melee,Ranged"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Any"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0.8"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <SpawnCharacter speciesname="Touhou_Koishi_Phantom" count="1" />
+                            <ParticleEmitter particle="Touhou_Koishi_Phantom" DistanceMin="-20" DistanceMax="20" VelocityMin="-3" VelocityMax="3"
+                                             ScaleMultiplier="1,1" EmitInterval="1" ParticleAmount="1" ColorMultiplier="255,255,255,255" Distance="-20"
+                                             Velocity="-3" />
+                            <Affliction identifier="Koishi_Dodge_CD" strength="10" />
+                            <Affliction identifier="Koishi_Unconscious01" strength="100" />
+                            <Affliction identifier="Koishi_Unconscious_Flag" strength="100" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+                <AbilityConditionHasAffliction afflictionidentifier="Koishi_Dodge_CD" invert="true" />
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Any"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0.4"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0.8" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <SpawnCharacter speciesname="Touhou_Koishi_Phantom" count="1" />
+                            <ParticleEmitter particle="Touhou_Koishi_Phantom" DistanceMin="-20" DistanceMax="20" VelocityMin="-3" VelocityMax="3"
+                                             ScaleMultiplier="1,1" EmitInterval="1" ParticleAmount="1" ColorMultiplier="255,255,255,255" Distance="-20"
+                                             Velocity="-3" />
+                            <Affliction identifier="Koishi_Dodge_CD" strength="10" />
+                            <Affliction identifier="Koishi_Unconscious02" strength="100" />
+                            <Affliction identifier="Koishi_Unconscious_Flag" strength="100" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
+                <AbilityConditionHasAffliction afflictionidentifier="Koishi_Dodge_CD" invert="true" />
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Any"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0.4" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
                             <SpawnCharacter speciesname="Touhou_Koishi_Phantom" count="1" />
@@ -34,7 +92,8 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupEffect>
-<!--        <AbilityGroupInterval interval="15.0">
+
+        <AbilityGroupInterval interval="15.0">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
                 <AbilityConditionHasAffliction afflictionidentifier="Koishi_Unconscious_Flag" invert="true" />
@@ -49,9 +108,9 @@
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
-        </AbilityGroupInterval>-->
+        </AbilityGroupInterval>
 
-        <AbilityGroupInterval interval="15.0">
+<!--        <AbilityGroupInterval interval="15.0">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Closed_Eyes_Of_Koishi" />
                 <AbilityConditionHasAffliction afflictionidentifier="Koishi_Unconscious_Flag" invert="true" />
@@ -152,7 +211,7 @@
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
-        </AbilityGroupInterval>
+        </AbilityGroupInterval>-->
 
         <AbilityGroupEffect abilityeffecttype="OnAttackResult">
             <Conditions>
@@ -189,7 +248,7 @@
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
                     <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" comparison="And" >
                             <Conditional Koishi_Unconscious01="lte 0"/>
                             <Conditional Koishi_Unconscious02="lte 0"/>
                             <Conditional Koishi_Unconscious03="lte 0"/>

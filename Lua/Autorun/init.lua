@@ -4,6 +4,7 @@ TLE.Version = "1.0"
 TLE.VersionNum = 01000000
 TLE.Path = table.pack(...)[1]
 
+
 if CLIENT then
 	Timer.Wait(function()
 		local runstring = "\n/// Touhou Lua Expansion"..TLE.Version.." ///\n"

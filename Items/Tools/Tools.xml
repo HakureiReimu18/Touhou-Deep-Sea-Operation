@@ -51,7 +51,7 @@
             </StatusEffect>
         </Propulsion>
         <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true">
-            <Containable items="smallitem,mediumitem" excludeditems="Marisa_Broom,Kappa_Backpack,backpack,toolbelt"/>
+            <Containable items="smallitem,mediumitem" excludeditems="Marisa_Broom,Kappa_Backpack,backpack,toolbelt,gun"/>
         </ItemContainer>
         <AiTarget soundrange="2000" />
     </Item>
@@ -79,13 +79,23 @@
         <Sprite texture="%ModDir%/Images/Tools/Power_Bank.png" sourcerect="0,0,72,76" depth="0.15" scale="0.5" origin="0.5,0.5" />
         <Body width="50" height="50" density="10" />
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="63,0" handle1="-26,-11" msg="ItemMsgPickUpSelect" >
-            <StatusEffect type="Always" target="Contained" Condition="2.5" >
+            <StatusEffect type="Always" target="Contained" Condition="2.5" Interval="1.0" Duration="1.0" >
                 <Conditional TargetContainer="true" condition="gt 0" />
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" targetslot="0" Condition="-0.15" Interval="1.0" >
+                <RequiredItems items="loadable,battery" type="Contained" />
+                <Conditional condition="lt 100" TargetContainedItem="true" />
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" targetslot="1" Condition="-0.15" Interval="1.0"  >
+                <RequiredItems items="loadable,battery" type="Contained" />
+                <Conditional condition="lt 100" TargetContainedItem="true" />
             </StatusEffect>
         </Holdable>
         <ItemContainer capacity="2" maxstacksize="1" canbeselected="true" hideitems="true" >
-            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
             <Containable items="loadable,battery" excludeditems="Power_Bank"/>
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+            <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
         </ItemContainer>
     </Item>
 
@@ -119,7 +129,7 @@
             <Containable identifiers="oxygentank,oxygensource" />
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
             <SubContainer capacity="19" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,mediumitem,mountableweapon" excludeditems="backpack,crate,toolbelt"/>
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,bigitem"/>
             </SubContainer>
         </ItemContainer>
 
@@ -195,7 +205,7 @@
             <Containable identifiers="oxygentank,oxygensource" />
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
             <SubContainer capacity="19" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,mediumitem,mountableweapon" excludeditems="backpack,crate,toolbelt"/>
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt"/>
             </SubContainer>
         </ItemContainer>
 
@@ -263,6 +273,12 @@
                 <Affliction identifier="Nitori_Tools" amount="50" />
             </StatusEffect>
 
+            <StatusEffect type="OnWearing" target="Character" comparison="And" >
+                <Conditional IsDead="false" />
+                <Conditional Hyouibana_Effect_Prefect_Nitori="gt 0"/>
+                <Affliction identifier="Nitori_Tools" amount="50" />
+            </StatusEffect>
+
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.8" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.5" damagesound="LimbArmor" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="paralysis" damagemultiplier="0.8" damagesound="LimbArmor" />
@@ -290,7 +306,6 @@
         </Price>
         <Deconstruct time="10">
             <Item identifier="steel" />
-            <Item identifier="titanium" />
             <Item identifier="plastic" />
             <Item identifier="Reiki_Stone" />
         </Deconstruct>
@@ -321,7 +336,7 @@
             <StatusEffect type="OnUse" targettype="Contained" targets="Spiritual_Water" Condition="-2" />
             <StatusEffect type="OnUse" targettype="Contained" targets="batterycell" Condition="-2.5" />
             <StatusEffect type="OnUse" targettype="Contained" targets="fulguriumbatterycell" Condition="-1.0" />
-            <StatusEffect type="OnUse" target="UseTarget" targetidentifiers="door,windoweddoor,hatch,ductblock,aliendoor,alienhatch" Stuck="-20.0" Condition="-46.0" />
+            <StatusEffect type="OnUse" target="UseTarget" targetidentifiers="door,windoweddoor,hatch,ductblock,aliendoor,alienhatch" Stuck="-30.0" Condition="-60.0" />
             <StatusEffect type="OnUse" target="UseTarget" targetidentifiers="ore" DeattachTimer="0.25" Condition="-75.0" />
             <StatusEffect type="OnUse" target="Limb" >
                 <Conditional EntityType="eq Limb" />
@@ -348,11 +363,17 @@
             </LightComponent>
             <Fixable identifier="structure" />
         </RepairTool>
-        <ItemContainer autofill="True" capacity="1" maxstacksize="1" hideitems="true">
+        <ItemContainer autofill="True" capacity="1" maxstacksize="1" hideitems="true" slotsperrow="2" containedstateindicatorslot="0">
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
-            <Containable items="Spiritual_Water" />
-            <Containable items="batterycell" />
-            <Containable items="fulguriumbatterycell" />
+            <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Kappa_Miningdrill_Ore_Indicator.png" sourcerect="0,0,56,56" origin="0.5,0.5" />
+            <SlotIcon slotindex="2" texture="%ModDir%/Images/Tools/Kappa_Miningdrill_Ore_Indicator.png" sourcerect="0,0,56,56" origin="0.5,0.5" />
+            <SlotIcon slotindex="3" texture="%ModDir%/Images/Tools/Kappa_Miningdrill_Ore_Indicator.png" sourcerect="0,0,56,56" origin="0.5,0.5" />
+            <SlotIcon slotindex="4" texture="%ModDir%/Images/Tools/Kappa_Miningdrill_Ore_Indicator.png" sourcerect="0,0,56,56" origin="0.5,0.5" />
+            <SlotIcon slotindex="5" texture="%ModDir%/Images/Tools/Kappa_Miningdrill_Ore_Indicator.png" sourcerect="0,0,56,56" origin="0.5,0.5" />
+            <Containable items="Spiritual_Water,batterycell,fulguriumbatterycell" />
+            <SubContainer capacity="5" maxstacksize="64">
+                <Containable items="ore" />
+            </SubContainer>
         </ItemContainer>
         <Quality>
             <QualityStat stattype="RepairToolStructureDamageMultiplier" value="0.3" />
@@ -763,6 +784,7 @@
             <StatusEffect type="OnSecondaryUse" target="This,Character" delay="0.2" Condition="-90" >
                 <Conditional Grunt_Security_Tengu="gt 2"/>
                 <Conditional Wind_God_Girl="gt 2"/>
+                <Conditional Hyouibana_Effect_Prefect_Aya="gt 2"/>
                 <Affliction identifier="Touhou_Aya_Token_Effect" strength="100" />
             </StatusEffect>
             <StatusEffect type="OnBroken" target="This" disabledeltatime="true" >
@@ -927,6 +949,11 @@
         <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
                   canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
         <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
+            <StatusEffect type="OnWearing" target="Character" comparison="And" >
+                <Conditional skillrequirement="true" Touhou_Magic="gt 60" />
+                <Conditional Touhou_Magic_Boost="lte 149" />
+                <Affliction identifier="Touhou_Magic_Boost" amount="2" />
+            </StatusEffect>
 
             <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Magic_Pouch.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
                     inherittexturescale="false" hideotherwearables="false" sourcerect="0,0,160,136" origin="0.6,0.0" scale="0.23" />
@@ -967,6 +994,7 @@
             <RequiredSkill identifier="mechanical" level="30" />
             <RequiredItem identifier="steel" amount="6" />
             <RequiredItem identifier="plastic" amount="4" />
+            <RequiredItem identifier="fpgacircuit" amount="4" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="2" />
             <RequiredItem identifier="Score_Point" />
         </Fabricate>
@@ -976,10 +1004,12 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="30,0" handle1="-15,-16" handle2="-10,-6" msg="ItemMsgPickUpSelect" >
             <StatusEffect type="OnActive" target="Character">
                 <Conditional Candid_Friend="gt 0"/>
+                <Conditional Hyouibana_Effect_Prefect_Nitori="gt 0"/>
                 <Affliction identifier="Nitori_Weapons" strength="50" />
             </StatusEffect>
-            <StatusEffect type="OnActive" target="Character">
+            <StatusEffect type="OnActive" target="Character" comparison="And">
                 <Conditional Candid_Friend="eq 0"/>
+                <Conditional Hyouibana_Effect_Prefect_Nitori="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100" />
             </StatusEffect>
         </Holdable>
@@ -1337,7 +1367,7 @@
 
 
     <!--核能电容弹匣-->
-    <Item name="“核能电容弹匣”" identifier="Touhou_Nuclear_Energy_Capacitor_Magazine" scale="0.32" subcategory="Touhou" category="Weapon"
+    <Item name="“核能电容弹匣”" identifier="Touhou_Nuclear_Energy_Capacitor_Magazine" scale="0.17" subcategory="Touhou" category="Weapon"
           maxstacksize="16" maxstacksizecharacterinventory="4" cargocontaineridentifier="metalcrate"
           tags="smallitem,Touhou_Kappa_Welding_Tool_Ammo" impactsoundtag="impact_metal_light" >
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.08" />
@@ -1384,7 +1414,7 @@
                        drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
             <Containable items="Touhou_Nuclear_Energy_Burn_Light" />
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
-            <StatusEffect type="OnUse" target="This" condition="-0.8" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="This" condition="-1.0" disabledeltatime="true" >
                 <SpawnItem identifiers="Touhou_Nuclear_Energy_Burn_Light" spawnposition="ThisInventory" />
             </StatusEffect>
         </ItemContainer>
@@ -1451,6 +1481,7 @@
             <RequiredItem identifier="Reiki_Stone" amount="2"/>
             <RequiredItem identifier="Touhou_Precision_Parts" />
             <RequiredItem identifier="Touhou_Simple_Parts" />
+            <RequiredItem identifier="fpgacircuit" amount="6" />
             <RequiredItem identifier="Magic_Material" amount="3" />
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Kappa_Multi_Functional_Tool.png" sourcerect="0,0,110,100" origin="0.5,0.5" />
@@ -1495,20 +1526,23 @@
             <RequiredSkill identifier="medical" level="20" />
             <RequiredItem identifier="Nitori_Backpack" />
             <RequiredItem identifier="Touhou_Precision_Parts" amount="2" />
+            <RequiredItem identifier="fpgacircuit" amount="6" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="6" />
             <RequiredItem identifier="Reiki_Stone" amount="4" />
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/Tools/Nitori_Backpack_Tactical_Expansion.png" sourcerect="0,0,100,132" origin="0.5,0.5" />
         <Sprite texture="%ModDir%/Images/Tools/Kappa_Backpack.png" depth="0.7" sourcerect="0,0,88,126" origin="0.5,0.5" />
         <Body width="88" height="126" density="10" />
-        <ItemContainer autofill="False" capacity="0" maxstacksize="0" containedstateindicatorslot="0">
+        <ItemContainer autofill="False" capacity="0" maxstacksize="0" containedstateindicatorslot="0" >
             <Containable identifiers="Touhou_Nuclear_Energy_Capacitor_Magazine,Touhou_Nuclear_Battery" />
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
             <SlotIcon slotindex="0" texture="%ModDir%/Images/Tools/Nitori_Backpack_Tactical_Expansion_Indicator.png" sourcerect="0,0,80,116" origin="0.5,0.45" />
             <SubContainer capacity="1" maxstacksize="1">
                 <Containable items="Touhou_Nuclear_Battery,Touhou_Nuclear_Energy_Capacitor_Magazine" />
                 <Containable items="Touhou_Nuclear_Battery">
-                    <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" />
+                    <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" >
+                        <RequiredItem items="Touhou_Nuclear_Battery" type="Contained" />
+                    </StatusEffect>
                     <StatusEffect type="OnWearing" target="Contained" Condition="-0.01" comparison="And">
                         <Conditional HasTag="eq Tactical_Open" TargetContainer="true"/>
                         <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
@@ -1566,6 +1600,7 @@
 
             <StatusEffect type="OnWearing" target="Character" >
                 <Conditional Candid_Friend="gt 0"/>
+                <Conditional Hyouibana_Effect_Prefect_Nitori="gt 0"/>
                 <Affliction identifier="Nitori_Tools" amount="50" />
             </StatusEffect>
 
@@ -1643,7 +1678,7 @@
     <!--人偶手提箱-->
     <Item name="人偶手提箱" identifier="Touhou_Alice_Puppet_Suitcase" subcategory="Touhou" category="Equipment" tags="smallitem,Touhou_Alice_Puppet_Suitcase,backpack" scale="0.4" cargocontaineridentifier="metalcrate" description="HONK">
         <PreferredContainer primary="crewcab" notcampaign="true"/>
-        <Price baseprice="1000" >
+        <Price baseprice="800" >
             <Price storeidentifier="merchantoutpost" sold="false"/>
             <Price storeidentifier="merchantcity" maxavailable="1"/>
             <Price storeidentifier="merchantresearch" maxavailable="1" />
@@ -1657,7 +1692,7 @@
         </Deconstruct>
         <Fabricate suitablefabricators="fabricator" requiredtime="10" >
             <RequiredSkill identifier="Touhou_Magic" level="50" />
-            <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
+            <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
             <RequiredItem identifier="steel" amount="3"/>
             <RequiredItem identifier="organicfiber" amount="3"/>
             <RequiredItem identifier="plastic" amount="3"/>
@@ -1665,11 +1700,484 @@
         <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Alice_Puppet_Suitcase.png" sourcerect="0,0,140,120" origin="0.5,0.5" />
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Alice_Puppet_Suitcase.png" sourcerect="0,0,140,120" depth="0.55" origin="0.5,0.5" />
         <Body width="50" height="20" density="10" />
-        <Holdable slots="RightHand+LeftHand,Any" msg="ItemMsgPickUpSelect" />
+        <Holdable slots="RightHand+LeftHand,Any" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnContained" target="This,Character" Interval="5.0" Duration="5.0" multiplyafflictionsbymaxvitality="true" >
+                <Conditional Puppeteer_Of_Seven_Colors="gt 0" />
+                <Affliction identifier="Touhou_Alice_Puppet_Suitcase_Effect" amount="1" />
+            </StatusEffect>
+        </Holdable>
         <ItemContainer autofill="False" capacity="12" maxstacksize="64" slotsperrow="3">
-            <Containable identifiers="smallitem" excludeditems="backpack,crate" />
-            <!--            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />-->
+            <Containable identifiers="smallitem" excludeditems="backpack,crate,gun,toolbox,mobilecontainer" />
         </ItemContainer>
         <aitarget soundrange="1" fadeouttime="5" />
+    </Item>
+
+    <!--宁静的勾玉-->
+    <!--提供眩晕抗性和光照-->
+    <Item
+            name="宁静的勾玉"
+            identifier="Touhou_Peace_Hooked_Jade"
+            category="Equipment"
+            subcategory="Touhou"
+            maxstacksize="32"
+            tags="smallitem,Touhou_Hooked_Jade,Touhou_Peace_Hooked_Jade"
+            cargocontaineridentifier="mediccrate"
+            description=""
+            scale="0.5"
+            impactsoundtag="impact_soft">
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="400" minavailable="2" sold="false" >
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
+            <Price locationtype="city" multiplier="1" maxavailable="16" />
+            <Price locationtype="research" multiplier="1" maxavailable="12" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="8" />
+            <Price locationtype="mine" multiplier="0.8" maxavailable="8" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Reiki_Stone" amount="3" />
+            <Item identifier="silicon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="15" >
+            <RequiredSkill identifier="Touhou_Magic" level="10" />
+            <RequiredItem identifier="Reiki_Stone" amount="3"/>
+            <RequiredItem identifier="silicon" />
+            <RequiredItem identifier="Tu_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Shui_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Touhou_Base_Metal" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Peace_Hooked_Jade.png" sourcerect="0,0,68,68" depth="0.5" origin="0.5,0.5" />
+        <Body width="28" radius="25" density="10" />
+        <LightComponent lightcolor="255,255,255,200" range="30" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+        </LightComponent>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--坚硬的勾玉-->
+    <!--提供四肢的额外抗性-->
+    <Item
+            name="坚硬的勾玉"
+            identifier="Touhou_Hard_Hooked_Jade"
+            category="Equipment"
+            subcategory="Touhou"
+            maxstacksize="32"
+            tags="smallitem,Touhou_Hooked_Jade,Touhou_Hard_Hooked_Jade"
+            cargocontaineridentifier="mediccrate"
+            description=""
+            scale="0.5"
+            impactsoundtag="impact_soft">
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="400" minavailable="2" sold="false" >
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
+            <Price locationtype="city" multiplier="1" maxavailable="16" />
+            <Price locationtype="research" multiplier="1" maxavailable="12" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="8" />
+            <Price locationtype="mine" multiplier="0.8" maxavailable="8" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Reiki_Stone" amount="3" />
+            <Item identifier="silicon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="15" >
+            <RequiredSkill identifier="Touhou_Magic" level="10" />
+            <RequiredItem identifier="Reiki_Stone" amount="3"/>
+            <RequiredItem identifier="silicon" />
+            <RequiredItem identifier="Tu_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Jin_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Touhou_Base_Metal" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Hard_Hooked_Jade.png" sourcerect="0,0,68,68" depth="0.5" origin="0.5,0.5" />
+        <Body width="28" radius="25" density="10" />
+        <LightComponent lightcolor="255,255,255,200" range="30" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+        </LightComponent>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--柔软的勾玉-->
+    <!--提供头部和躯干的出血和感染伤口的抗性-->
+    <Item
+            name="柔软的勾玉"
+            identifier="Touhou_Soft_Hooked_Jade"
+            category="Equipment"
+            subcategory="Touhou"
+            maxstacksize="32"
+            tags="smallitem,Touhou_Hooked_Jade,Touhou_Soft_Hooked_Jade"
+            cargocontaineridentifier="mediccrate"
+            description=""
+            scale="0.5"
+            impactsoundtag="impact_soft">
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="400" minavailable="2" sold="false" >
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
+            <Price locationtype="city" multiplier="1" maxavailable="16" />
+            <Price locationtype="research" multiplier="1" maxavailable="12" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="8" />
+            <Price locationtype="mine" multiplier="0.8" maxavailable="8" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Reiki_Stone" amount="3" />
+            <Item identifier="silicon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="15" >
+            <RequiredSkill identifier="Touhou_Magic" level="10" />
+            <RequiredItem identifier="Reiki_Stone" amount="3"/>
+            <RequiredItem identifier="silicon" />
+            <RequiredItem identifier="Mu_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Shui_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Touhou_Base_Metal" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Soft_Hooked_Jade.png" sourcerect="0,0,68,68" depth="0.5" origin="0.5,0.5" />
+        <Body width="28" radius="25" density="10" />
+        <LightComponent lightcolor="255,255,255,200" range="30" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+        </LightComponent>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--温暖的勾玉-->
+    <!--提供头部和躯干的物理伤害和烧伤的抗性-->
+    <Item
+            name="温暖的勾玉"
+            identifier="Touhou_Warm_Hooked_Jade"
+            category="Equipment"
+            subcategory="Touhou"
+            maxstacksize="32"
+            tags="smallitem,Touhou_Hooked_Jade,Touhou_Warm_Hooked_Jade"
+            cargocontaineridentifier="mediccrate"
+            description=""
+            scale="0.5"
+            impactsoundtag="impact_soft">
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="400" minavailable="2" sold="false" >
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
+            <Price locationtype="city" multiplier="1" maxavailable="16" />
+            <Price locationtype="research" multiplier="1" maxavailable="12" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="8" />
+            <Price locationtype="mine" multiplier="0.8" maxavailable="8" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Reiki_Stone" amount="3" />
+            <Item identifier="silicon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="15" >
+            <RequiredSkill identifier="Touhou_Magic" level="10" />
+            <RequiredItem identifier="Reiki_Stone" amount="3"/>
+            <RequiredItem identifier="silicon" />
+            <RequiredItem identifier="Huo_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Tu_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Touhou_Base_Metal" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Warm_Hooked_Jade.png" sourcerect="0,0,68,68" depth="0.5" origin="0.5,0.5" />
+        <Body width="28" radius="25" density="10" />
+        <LightComponent lightcolor="255,255,255,200" range="30" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+        </LightComponent>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--沸腾的勾玉-->
+    <!--提供少量的移动速度和攻击伤害-->
+    <Item
+            name="沸腾的勾玉"
+            identifier="Touhou_Boiling_Hooked_Jade"
+            category="Equipment"
+            subcategory="Touhou"
+            maxstacksize="32"
+            tags="smallitem,Touhou_Hooked_Jade,Touhou_Boiling_Hooked_Jade"
+            cargocontaineridentifier="mediccrate"
+            description=""
+            scale="0.5"
+            impactsoundtag="impact_soft">
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="400" minavailable="2" sold="false" >
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
+            <Price locationtype="city" multiplier="1" maxavailable="16" />
+            <Price locationtype="research" multiplier="1" maxavailable="12" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="8" />
+            <Price locationtype="mine" multiplier="0.8" maxavailable="8" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Reiki_Stone" amount="3" />
+            <Item identifier="silicon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="15" >
+            <RequiredSkill identifier="Touhou_Magic" level="10" />
+            <RequiredItem identifier="Reiki_Stone" amount="3"/>
+            <RequiredItem identifier="silicon" />
+            <RequiredItem identifier="Huo_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Yang_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Touhou_Base_Metal" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Boiling_Hooked_Jade.png" sourcerect="0,0,68,68" depth="0.5" origin="0.5,0.5" />
+        <Body width="28" radius="25" density="10" />
+        <LightComponent lightcolor="255,255,255,200" range="30" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+        </LightComponent>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--冰冷的勾玉-->
+    <!--提供些许治疗效果，这个效果在水中翻倍-->
+    <Item
+            name="冰冷的勾玉"
+            identifier="Touhou_Icy_Hooked_Jade"
+            category="Equipment"
+            subcategory="Touhou"
+            maxstacksize="32"
+            tags="smallitem,Touhou_Hooked_Jade,Touhou_Icy_Hooked_Jade"
+            cargocontaineridentifier="mediccrate"
+            description=""
+            scale="0.5"
+            impactsoundtag="impact_soft">
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="400" minavailable="2" sold="false" >
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
+            <Price locationtype="city" multiplier="1" maxavailable="16" />
+            <Price locationtype="research" multiplier="1" maxavailable="12" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="8" />
+            <Price locationtype="mine" multiplier="0.8" maxavailable="8" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Reiki_Stone" amount="3" />
+            <Item identifier="silicon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="15" >
+            <RequiredSkill identifier="Touhou_Magic" level="10" />
+            <RequiredItem identifier="Reiki_Stone" amount="3"/>
+            <RequiredItem identifier="silicon" />
+            <RequiredItem identifier="Shui_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Yin_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Touhou_Base_Metal" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Icy_Hooked_Jade.png" sourcerect="0,0,68,68" depth="0.5" origin="0.5,0.5" />
+        <Body width="28" radius="25" density="10" />
+        <LightComponent lightcolor="255,255,255,200" range="30" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+        </LightComponent>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--平滑的勾玉-->
+    <!--增加1000米潜水服抗压-->
+    <Item
+            name="平滑的勾玉"
+            identifier="Touhou_Smooth_Hooked_Jade"
+            category="Equipment"
+            subcategory="Touhou"
+            maxstacksize="32"
+            tags="smallitem,Touhou_Hooked_Jade,Touhou_Smooth_Hooked_Jade"
+            cargocontaineridentifier="mediccrate"
+            description=""
+            scale="0.5"
+            impactsoundtag="impact_soft">
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="400" minavailable="2" sold="false" >
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
+            <Price locationtype="city" multiplier="1" maxavailable="16" />
+            <Price locationtype="research" multiplier="1" maxavailable="12" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="8" />
+            <Price locationtype="mine" multiplier="0.8" maxavailable="8" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Reiki_Stone" amount="3" />
+            <Item identifier="silicon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="15" >
+            <RequiredSkill identifier="Touhou_Magic" level="10" />
+            <RequiredItem identifier="Reiki_Stone" amount="3"/>
+            <RequiredItem identifier="silicon" />
+            <RequiredItem identifier="Jin_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Tu_Alchemical" mincondition="0.5" usecondition="false" />
+            <RequiredItem identifier="Touhou_Base_Metal" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Smooth_Hooked_Jade.png" sourcerect="0,0,68,68" depth="0.5" origin="0.5,0.5" />
+        <Body width="28" radius="25" density="10" />
+        <LightComponent lightcolor="255,255,255,200" range="30" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+        </LightComponent>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--太古的勾玉-白-->
+    <!--提供光照效果，与太古的勾玉-黑同时装配时，触发额外效果-->
+    <Item
+            name="太古的勾玉-白"
+            identifier="Touhou_White_Hooked_Jade"
+            category="Equipment"
+            subcategory="Touhou"
+            maxstacksize="32"
+            tags="smallitem,Touhou_Hooked_Jade,Touhou_White_Hooked_Jade"
+            cargocontaineridentifier="mediccrate"
+            description=""
+            scale="0.5"
+            health="400"
+            impactsoundtag="impact_soft">
+        <PreferredContainer primary="medfabcab" />
+        <PreferredContainer secondary="abandonedmedcab,wreckmedcab,outpostmedcab" spawnprobability="0.03"/>
+        <PreferredContainer primary="ruinstorage,ruinstoragesmall" minamount="1" maxamount="2" spawnprobability="0.04" />
+        <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.08" />
+        <PreferredContainer primary="wreckstoragecab" minamount="0" maxamount="2" spawnprobability="0.075" />
+        <PreferredContainer primary="outpostcrewcabinet" minamount="0" maxamount="1" spawnprobability="0.075" />
+        <Price baseprice="400" minavailable="2" sold="false" >
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
+            <Price locationtype="city" multiplier="1" maxavailable="16" />
+            <Price locationtype="research" multiplier="1" maxavailable="12" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="8" />
+            <Price locationtype="mine" multiplier="0.8" maxavailable="8" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Reiki_Stone" amount="3" />
+            <Item identifier="silicon" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_White_Hooked_Jade.png" sourcerect="0,0,68,68" depth="0.5" origin="0.5,0.5" />
+        <Body width="28" radius="25" density="10" />
+        <LightComponent lightcolor="255,255,255,200" range="30" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+        </LightComponent>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--太古的勾玉-黑-->
+    <!--提供移速加成和头部与躯干的抗性，与太古的勾玉-白同时装配时，触发额外效果-->
+    <Item
+            name="太古的勾玉-黑"
+            identifier="Touhou_Black_Hooked_Jade"
+            category="Equipment"
+            subcategory="Touhou"
+            maxstacksize="32"
+            tags="smallitem,Touhou_Hooked_Jade,Touhou_Black_Hooked_Jade"
+            cargocontaineridentifier="mediccrate"
+            description=""
+            scale="0.5"
+            health="400"
+            impactsoundtag="impact_soft">
+        <PreferredContainer primary="medfabcab" />
+        <PreferredContainer secondary="abandonedmedcab,wreckmedcab,outpostmedcab" spawnprobability="0.03"/>
+        <PreferredContainer primary="ruinstorage,ruinstoragesmall" minamount="1" maxamount="2" spawnprobability="0.04" />
+        <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.08" />
+        <PreferredContainer primary="wreckstoragecab" minamount="0" maxamount="2" spawnprobability="0.075" />
+        <PreferredContainer primary="outpostcrewcabinet" minamount="0" maxamount="1" spawnprobability="0.075" />
+        <Price baseprice="400" minavailable="2" sold="false" >
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
+            <Price locationtype="city" multiplier="1" maxavailable="16" />
+            <Price locationtype="research" multiplier="1" maxavailable="12" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="8" />
+            <Price locationtype="mine" multiplier="0.8" maxavailable="8" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Reiki_Stone" amount="3" />
+            <Item identifier="silicon" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Black_Hooked_Jade.png" sourcerect="0,0,68,68" depth="0.5" origin="0.5,0.5" />
+        <Body width="28" radius="25" density="10" />
+        <LightComponent lightcolor="255,255,255,200" range="30" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+        </LightComponent>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--星光陷阱-->
+    <Item
+            name="星光陷阱"
+            identifier="MRE_Star_Talent_Attacked07_Spawn"
+            category="Weapons"
+            subcategory="Touhou"
+            tags="smallitem"
+            description=""
+            scale="0.1"
+            hideinmenus="true"
+            impactsoundtag="impact_soft">
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Magic_Bolt_Normal.png" sourcerect="0,0,72,72" depth="0.45" />
+        <Body width="1" height="1" density="10" />
+        <Holdable slots="Any,RightHand,LeftHand" handle1="0,0" />
+        <ItemComponent>
+            <StatusEffect type="OnNotContained" target="This">
+                <Use/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="NearbyCharacters" range="500" Interval="0.5" comparison="And" >
+                <Conditional IsDead="eq false"/>
+                <Conditional speciesgroup="neq human" />
+                <Affliction identifier="burn" strength="3.5" />
+                <Affliction identifier="explosiondamage" strength="3.5" />
+                <Affliction identifier="Reiki_Pressure" strength="3.5" />
+                <Affliction identifier="Touhou_Lost_Dream" strength="5" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" delay="9.5">
+                <Remove />
+            </StatusEffect>
+        </ItemComponent>
+        <LightComponent lightcolor="120,120,255,130" range="500" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+        </LightComponent>
+    </Item>
+
+    <!--基因拓展器-->
+    <Item identifier="Touhou_Gene_Splicer" subcategory="Touhou" category="Equipment" scale="0.5" tags="smallitem,geneticdevice" allowasextracargo="true" >
+        <PreferredContainer primary="medcab" secondary="medcab"/>
+        <Price baseprice="2000" sold="true" minleveldifficulty="40">
+            <Price storeidentifier="merchantoutpost" />
+            <Price storeidentifier="merchantcity" multiplier="0.9" />
+            <Price storeidentifier="merchantresearch" multiplier="1.1" sold="true" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.1" />
+            <Price storeidentifier="merchantmine" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="fulgurium" amount="1" />
+            <Item identifier="copper" amount="2" />
+            <Item identifier="rubber" />
+            <Item identifier="silicon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="20" >
+            <RequiredSkill identifier="medical" level="60" />
+            <RequiredItem identifier="fulgurium" />
+            <RequiredItem identifier="advancedgenesplicer" />
+            <RequiredItem identifier="thermalgoggles" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Gene_Splicer.png" sourcerect="0,0,74,68" depth="0.45" />
+        <Body radius="8" width="48" density="10" />
+        <ItemContainer capacity="2" maxstacksize="1" autoinject="true" autoinjectthreshold="Infinity" allowswappingcontaineditems="false">
+            <Containable items="geneticmaterial" />
+        </ItemContainer>
+        <Wearable limbtype="Head" slots="Any,HealthInterface" msg="ItemMsgPickUpSelect" displaycontainedstatus="true">
+            <sprite name="Gene Splicer Wearable" texture="Content/Items/Genetic/Genetic.png" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.5" hideotherwearables="false" sourcerect="258,131,1,1" origin="0.6,0.0" />
+        </Wearable>
+        <StatusHUD drawhudwhenequipped="true" overlaycolor="150,0,0,120" range="3000" thermalgoggles="true" showdeadcharacters="false" showtexts="false" />
     </Item>
 </Items>

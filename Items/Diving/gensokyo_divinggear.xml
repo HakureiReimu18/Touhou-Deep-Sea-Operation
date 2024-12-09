@@ -19,12 +19,12 @@
             <RequiredSkill identifier="mechanical" level="90" />
             <RequiredSkill identifier="electrical" level="90" />
             <RequiredSkill identifier="medical" level="90" />
-            <RequiredItem identifier="Touhou_Precious_Metal" amount="8" />
+            <RequiredItem identifier="Touhou_Precious_Metal" amount="6" />
             <RequiredItem identifier="Power_Point" amount="4" />
             <RequiredItem identifier="organicfiber" amount="4" />
             <RequiredItem identifier="Score_Point" amount="4" />
         </Fabricate>
-        <InventoryIcon texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb.png" sourcerect="0,0,32,32" origin="0.5,0.5" />
+        <InventoryIcon texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_3.png" sourcerect="0,0,64,64" origin="0.5,0.5" />
         <!--
       <Sprite name="Diving Suit" texture="DivingSuit_Item.png" sourcerect="157,0,90,307" depth="0.55" origin="0.4888889,0.5439739" />
       -->
@@ -34,14 +34,16 @@
         <CustomInterface canbeselected="false" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
             <TickBox text="Light" IsOn="true">
-                <StatusEffect type="OnUse" target="This" IsOn="true" />
+                <StatusEffect type="OnUse" target="This" IsOn="true" >
+                    <RequiredItem items="Touhou_White_Hooked_Jade,Touhou_Peace_Hooked_Jade" type="Contained" />
+                </StatusEffect>
                 <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
             </TickBox>
         </CustomInterface>
         <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
             <sprite name="Combat Diving Suit Helmet Wearable" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hidelimb="false" alphaclipotherwearables="false" sourcerect="32,32,32,32" origin="0.5,0.5">
-                <LightComponent range="1600.0" lightcolor="250,244,255,165" powerconsumption="10" IsOn="true">
-                    <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
+                <LightComponent range="1600.0" lightcolor="200,200,200,165" powerconsumption="0" IsOn="false">
+                    <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" Interval="0.1" setvalue="true">
                         <Conditional IsDead="false" />
                     </StatusEffect>
                     <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
@@ -61,7 +63,7 @@
             <sprite name="Combat Diving Suit Left Leg" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftLeg" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
             <sprite name="Combat Diving Suit Left Shoe" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftFoot" sound="footstep_armor_heavy" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
             <sprite name="Combat Diving Suit Right Shoe" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="RightFoot" sound="footstep_armor_heavy" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
-            <StatusEffect type="OnWearing" target="Character" HideFace="true" ObstructVision="false" PressureProtection="36000.0" SpeedMultiplier="1.1"
+            <StatusEffect type="OnWearing" target="Character" HideFace="true" ObstructVision="false" PressureProtection="36000.0"
                           LowPassMultiplier="0.9" setvalue="true" disabledeltatime="true">
             </StatusEffect>
             <StatusEffect type="OnWearing" target="Character" >
@@ -121,37 +123,35 @@
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
 
-            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.3" damagesound="LimbArmor" deflectprojectiles="true" />
+            <!--幻想潜水服效果-->
+            <StatusEffect type="OnWearing" target="Character" Interval="3.0" Duraation="3.0" >
+                <Affliction identifier="Gensokyo_Divinggear_Effect01" strength="10" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Gensokyo_Divinggear_Talent" />
+            </StatusEffect>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.36" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.0" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="Phoenix_Burn" damagemultiplier="0.2" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="Reiki_Pressure" damagemultiplier="0.2" damagesound="LimbArmor" deflectprojectiles="true" />
-            <damagemodifier armorsector="0.0,360.0" afflictiontypes="bleeding,infection" damagemultiplier="0.1" damagesound="LimbArmor" deflectprojectiles="true" />
-            <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.3" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="bleeding,infection" damagemultiplier="0.3" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="paralysis" damagemultiplier="0.1" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.0" damagesound="LimbArmor" />
-            <damagemodifier armorsector="0.0,360.0" afflictiontypes="poison,paralysis" damagemultiplier="0.1" damagesound="LimbArmor" />
             <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="No_Effects02" damagemultiplier="0.01" damagesound="LimbArmor" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="alieninfection" damagemultiplier="1" probabilitymultiplier="0.01" damagesound="LimbArmor" />
-            <damagemodifier armorsector="0.0,360.0" afflictiontypes="consumed" damagemultiplier="0.0" damagesound="LimbArmor" />
-            <SkillModifier skillidentifier="mechanical" skillvalue="10" />
-            <SkillModifier skillidentifier="electrical" skillvalue="10" />
-            <SkillModifier skillidentifier="medical" skillvalue="10" />
-            <SkillModifier skillidentifier="weapons" skillvalue="10" />
-            <SkillModifier skillidentifier="helm" skillvalue="10" />
             <SkillModifier skillidentifier="Touhou_Magic" skillvalue="10" />
         </Wearable>
         <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgPickUpUse" canbeselected="false" canbepicked="true" pickkey="Use" />
-        <ItemContainer capacity="0" hideitems="true" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
+        <ItemContainer capacity="0" hideitems="true" containedstateindicatorstyle="tank" containedstateindicatorslot="0" slotsperrow="2">
             <Containable identifiers="oxygentank,weldingfueltank,oxygeniteshard,oxygenitetank,incendiumfueltank,oxygensource" />
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
             <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
-            <StatusEffect type="OnWearing" target="Contained">
-                <Conditional condition="lt 5.0" />
-                <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" loop="true" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
-                <Conditional condition="lte 0.0" />
-                <Sound file="Content/Items/WarningBeep.ogg" range="500" loop="true" />
-            </StatusEffect>
+            <SlotIcon slotindex="2" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="3" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="4" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="5" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
             <SubContainer capacity="1" maxstacksize="1">
                 <Containable items="oxygensource,weldingtoolfuel,Mu_Alchemical" excludeditems="oxygenitetank" />
                 <Containable items="oxygenitetank">
@@ -160,6 +160,14 @@
                         <Conditional HullOxygenPercentage="lt 50" />
                         <Conditional DecreasedOxygenConsumption="lt 99" />
                         <Conditional NeedsAir="true" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained">
+                        <Conditional condition="lt 5.0" />
+                        <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" loop="true" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
+                        <Conditional condition="lte 0.0" />
+                        <Sound file="Content/Items/WarningBeep.ogg" range="500" loop="true" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="weldingfueltank" blameequipperfordeath="true">
@@ -191,8 +199,305 @@
             <SubContainer capacity="1" maxstacksize="1" autoinject="true" >
                 <Containable items="chem,syringe" />
             </SubContainer>
+            <SubContainer capacity="4" maxstacksize="1" >
+                <Containable items="Touhou_Hooked_Jade">
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect03" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect04" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect05" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect06" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect07" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" interval="5" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect08" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" interval="5" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect09" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.01">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 0" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.01">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 20" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 40" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 60" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
             <SubContainer capacity="2" maxstacksize="64">
-                <Containable items="smallitem,mediumitem" excludeditems="toolbelt,toolbox,backpack,scooter,chem,syringe,medical" />
+                <Containable items="smallitem,mediumitem" excludeditems="toolbelt,toolbox,backpack,scooter,Touhou_Hooked_Jade" />
+            </SubContainer>
+        </ItemContainer>
+        <aitarget maxsightrange="1500" />
+    </Item>
+
+    <!--境界潜水服-->
+    <Item name="" identifier="Touhou_Boudary_Divinggear" subcategory="Touhou" category="Diving,Equipment" tags="diving,deepdiving,divinggear_wearableindoors,provocative" scale="0.5" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy">
+        <Price baseprice="8000" minleveldifficulty="25">
+            <Price storeidentifier="merchantoutpost" multiplier="0.95" sold="false"/>
+            <Price storeidentifier="merchantcity" multiplier="0.95" minavailable="1"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.3" minavailable="1"/>
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" />
+            <Price storeidentifier="merchantmine" multiplier="1.25" sold="false"/>
+        </Price>
+        <Deconstruct time="15">
+            <Item identifier="Power_Point" amount="3"/>
+            <Item identifier="Score_Point" amount="3"/>
+            <Item identifier="Magic_Material" amount="3"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="30">
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredSkill identifier="medical" level="50" />
+            <RequiredItem identifier="Power_Point" amount="2" />
+            <RequiredItem identifier="Seven_Elements_Alchemical" />
+            <RequiredItem identifier="organicfiber" amount="4" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_6.png" sourcerect="0,0,64,64" origin="0.5,0.5" />
+        <!--
+      <Sprite name="Diving Suit" texture="DivingSuit_Item.png" sourcerect="157,0,90,307" depth="0.55" origin="0.4888889,0.5439739" />
+      -->
+        <Sprite name="Combat Diving Suit Item" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_6.png" sourcerect="0,0,64,64" depth="0.45" origin="0.5,0.5" />
+        <ContainedSprite name="Combat Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_7.png" sourcerect="0,0,77,209" depth="0.55" origin="-0.12,-0.14" />
+        <Body radius="45" width="34" density="10" />
+        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+            <StatusEffect type="Always" target="This" IsOn="true" >
+                <RequiredItem items="Touhou_White_Hooked_Jade,Touhou_Peace_Hooked_Jade" type="Contained" />
+            </StatusEffect>
+            <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
+            <TickBox text="Light" IsOn="true">
+                <StatusEffect type="OnUse" target="This" IsOn="true" >
+                    <RequiredItem items="Touhou_White_Hooked_Jade,Touhou_Peace_Hooked_Jade" type="Contained" />
+                </StatusEffect>
+                <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
+            </TickBox>
+        </CustomInterface>
+        <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
+            <sprite name="Combat Diving Suit Helmet Wearable" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hidelimb="false" alphaclipotherwearables="false" sourcerect="32,32,32,32" origin="0.5,0.5">
+                <LightComponent range="1600.0" lightcolor="180,180,180,150" powerconsumption="0" IsOn="false">
+                    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+                </LightComponent>
+            </sprite>
+            <sprite name="Combat Diving Suit Torso" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="Torso" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Right Hand" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="RightHand" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Left Hand" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftHand" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Right Lower Arm" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="RightArm" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Left Lower Arm" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftArm" hidelimb="true" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Right Upper Arm" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="RightForearm" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Left Upper Arm" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftForearm" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Waist" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="Waist" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Right Thigh" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="RightThigh" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Left Thigh" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftThigh" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Right Leg" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="RightLeg" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Left Leg" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftLeg" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Left Shoe" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftFoot" sound="footstep_armor_heavy" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Combat Diving Suit Right Shoe" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="RightFoot" sound="footstep_armor_heavy" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
+            <StatusEffect type="OnWearing" target="Character" HideFace="true" ObstructVision="false" PressureProtection="6000.0"
+                          LowPassMultiplier="0.9" setvalue="true" disabledeltatime="true">
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" PressureProtection="7000.0" setvalue="true" >
+                <RequiredItem items="Touhou_Smooth_Hooked_Jade" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" >
+                <TriggerAnimation Type="Walk" filename="HumanWalk" priority="10" ExpectedSpecies="Human" />
+            </StatusEffect>
+            <StatValue stattype="FlowResistance" value="0.6" />
+
+            <!--使用元素瓶-->
+            <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.02" OxygenAvailable="1000.0" targetslot="0">
+                <RequiredItem items="Mu_Alchemical" type="Contained" />
+                <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
+                <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true" />
+                <Conditional InWater="true" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Contained,Character" Condition="0.01" OxygenAvailable="1000.0" targetslot="0">
+                <RequiredItem items="Mu_Alchemical" type="Contained" />
+                <Conditional HullOxygenPercentage="gt 50" />
+                <Conditional InWater="false" />
+            </StatusEffect>
+
+            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="0.0" UseHullOxygen="true" />
+            <StatusEffect type="Always" target="Contained" Condition="0.2" targetslot="0" comparison="And">
+                <RequiredItem items="oxygentank" type="Contained" excludebroken="false" />
+                <Conditional HullOxygenPercentage="gt 50" />
+                <Conditional InWater="false" />
+            </StatusEffect>
+            <!-- Refill oxygen when the suit is contained. -->
+            <StatusEffect type="OnContained" target="Contained" Condition="1.0" targetslot="0" interval="1" disabledeltatime="true">
+                <Conditional Voltage="gt 0.01" targetcontainer="true" targetgrandparent="true" targetitemcomponent="Powered" />
+                <RequiredItem items="refillableoxygensource" type="Contained" excludebroken="false" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" comparison="And" targetslot="0">
+                <RequiredItem items="oxygensource" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="0.04" comparison="And" targetslot="0">
+                <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
+                <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="gt 50" />
+                <Conditional InWater="false" />
+                <RequiredItem items="oxygensource" type="Contained" />
+            </StatusEffect>
+            <!-- consume oxygen if not in water and there's not enough oxygen in the hull -->
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.06" comparison="And" targetslot="0">
+                <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
+                <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="lt 50" />
+                <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true" />
+                <Conditional InWater="false" />
+                <RequiredItem items="oxygensource" type="Contained" />
+            </StatusEffect>
+            <!-- consume oxygen if in water -->
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.09" comparison="And" targetslot="0">
+                <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
+                <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true" />
+                <Conditional InWater="true" />
+                <RequiredItem items="oxygensource" type="Contained" />
+            </StatusEffect>
+
+            <!--境界潜水服效果-->
+            <StatusEffect type="OnWearing" target="Character" Interval="3.0" Duraation="3.0" >
+                <Affliction identifier="Boudary_Divinggear_Effect01" strength="10" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Gensokyo_Divinggear_Talent" />
+            </StatusEffect>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.55" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.35" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="Phoenix_Burn" damagemultiplier="0.4" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="bleeding,infection" damagemultiplier="0.3" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.6" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="paralysis" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="No_Effects02" damagemultiplier="0.25" damagesound="LimbArmor" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="alieninfection" damagemultiplier="1" probabilitymultiplier="0.25" damagesound="LimbArmor" />
+            <SkillModifier skillidentifier="mechanical" skillvalue="5" />
+            <SkillModifier skillidentifier="electrical" skillvalue="5" />
+            <SkillModifier skillidentifier="weapons" skillvalue="5" />
+            <SkillModifier skillidentifier="medical" skillvalue="5" />
+            <SkillModifier skillidentifier="helm" skillvalue="5" />
+            <SkillModifier skillidentifier="Touhou_Magic" skillvalue="5" />
+        </Wearable>
+        <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgPickUpUse" canbeselected="false" canbepicked="true" pickkey="Use" />
+        <ItemContainer capacity="0" hideitems="true" containedstateindicatorstyle="tank" containedstateindicatorslot="0" slotsperrow="2">
+            <Containable identifiers="oxygentank,weldingfueltank,oxygeniteshard,oxygenitetank,incendiumfueltank,oxygensource" />
+            <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
+            <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="2" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="3" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="oxygensource,weldingtoolfuel,Mu_Alchemical" excludeditems="oxygenitetank" />
+                <Containable items="oxygenitetank">
+                    <StatusEffect type="OnWearing" target="Character" comparison="And" targetslot="0">
+                        <Conditional IsDead="false" />
+                        <Conditional HullOxygenPercentage="lt 50" />
+                        <Conditional DecreasedOxygenConsumption="lt 99" />
+                        <Conditional NeedsAir="true" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained">
+                        <Conditional condition="lt 5.0" />
+                        <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" loop="true" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
+                        <Conditional condition="lte 0.0" />
+                        <Sound file="Content/Items/WarningBeep.ogg" range="500" loop="true" />
+                    </StatusEffect>
+                </Containable>
+                <Containable items="weldingfueltank" blameequipperfordeath="true">
+                    <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+                        <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+                        <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                        <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-10.0" Oxygen="-1.0" comparison="And">
+                        <Conditional IsDead="false" />
+                        <Conditional DecreasedOxygenConsumption="lt 99" />
+                        <Conditional NeedsAir="true" />
+                    </StatusEffect>
+                </Containable>
+                <Containable items="incendiumfueltank" blameequipperfordeath="true">
+                    <StatusEffect type="OnWearing" target="Contained" Condition="-0.5" comparison="And">
+                        <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+                        <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                        <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character" OxygenAvailable="-10.0" comparison="And" targetlimb="Torso">
+                        <Affliction identifier="burn" amount="2.0"  />
+                        <Conditional IsDead="false" />
+                        <Conditional DecreasedOxygenConsumption="lt 99" />
+                        <Conditional NeedsAir="true" />
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+            <SubContainer capacity="3" maxstacksize="1" >
+                <Containable items="Touhou_Hooked_Jade">
+                    <StatusEffect type="OnWearing" target="Character,Contained,This" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
+                        <Affliction identifier="Boudary_Divinggear_Effect02" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
+                        <Affliction identifier="Boudary_Divinggear_Effect03" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
+                        <Affliction identifier="Boudary_Divinggear_Effect04" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
+                        <Affliction identifier="Boudary_Divinggear_Effect05" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
+                        <Affliction identifier="Boudary_Divinggear_Effect06" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
+                        <Affliction identifier="Boudary_Divinggear_Effect07" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained,This" interval="5" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
+                        <Affliction identifier="Boudary_Divinggear_Effect08" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" interval="5" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
+                        <Affliction identifier="Boudary_Divinggear_Effect09" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.01">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 0" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.01">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 20" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 40" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 60" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                </Containable>
             </SubContainer>
         </ItemContainer>
         <aitarget maxsightrange="1500" />
@@ -203,7 +508,7 @@
         <PreferredContainer primary="divingsuitcontainer" />
         <PreferredContainer primary="piratedivingsuitcontainer" spawnprobability="0.4" minleveldifficulty="5" />
         <PreferredContainer primary="wreckdivingsuitcontainer" spawnprobability="0.2" minleveldifficulty="5"/>
-        <Price baseprice="1600" >
+        <Price baseprice="1500" >
             <Price storeidentifier="merchantoutpost" multiplier="0.95" sold="false"/>
             <Price storeidentifier="merchantcity" multiplier="0.95" minavailable="1"/>
             <Price storeidentifier="merchantresearch" multiplier="1.3" minavailable="1"/>
@@ -230,16 +535,15 @@
         <CustomInterface canbeselected="false" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
             <TickBox text="Light" IsOn="true">
-                <StatusEffect type="OnUse" target="This" IsOn="true" />
+                <StatusEffect type="OnUse" target="This" IsOn="true" >
+                    <RequiredItem items="Touhou_White_Hooked_Jade,Touhou_Peace_Hooked_Jade" type="Contained" />
+                </StatusEffect>
                 <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
             </TickBox>
         </CustomInterface>
         <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
             <sprite name="Combat Diving Suit Helmet Wearable" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hidelimb="false" alphaclipotherwearables="false" sourcerect="32,32,32,32" origin="0.5,0.5">
-                <LightComponent range="1000.0" lightcolor="250,244,255,165" powerconsumption="10" IsOn="true">
-                    <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
-                        <Conditional IsDead="false" />
-                    </StatusEffect>
+                <LightComponent range="1000.0" lightcolor="160,160,160,140" powerconsumption="0" IsOn="true">
                     <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
                 </LightComponent>
             </sprite>
@@ -257,8 +561,11 @@
             <sprite name="Combat Diving Suit Left Leg" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftLeg" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
             <sprite name="Combat Diving Suit Left Shoe" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftFoot" sound="footstep_armor_heavy" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
             <sprite name="Combat Diving Suit Right Shoe" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="RightFoot" sound="footstep_armor_heavy" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true" />
-            <StatusEffect type="OnWearing" target="Character" HideFace="true" ObstructVision="false" PressureProtection="7000.0" SpeedMultiplier="1.05"
+            <StatusEffect type="OnWearing" target="Character" HideFace="true" ObstructVision="false" PressureProtection="4800.0" SpeedMultiplier="1.05"
                           LowPassMultiplier="0.9" setvalue="true" disabledeltatime="true">
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" PressureProtection="5800.0" setvalue="true" >
+                <RequiredItem items="Touhou_Smooth_Hooked_Jade" type="Contained" />
             </StatusEffect>
             <StatusEffect type="OnWearing" target="Character" >
                 <TriggerAnimation Type="Walk" filename="HumanWalk" priority="10" ExpectedSpecies="Human" />
@@ -311,33 +618,34 @@
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
 
-            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.64" damagesound="LimbArmor" deflectprojectiles="true" />
-            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="Reiki_Pressure" damagemultiplier="0.4" damagesound="LimbArmor" deflectprojectiles="true" />
+            <!--秘境潜水服效果-->
+            <StatusEffect type="OnWearing" target="Character" Interval="3.0" Duraation="3.0" >
+                <Affliction identifier="Ether_Divinggear_Effect01" strength="10" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Gensokyo_Divinggear_Talent" />
+            </StatusEffect>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.7" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="Reiki_Pressure" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="Phoenix_Burn" damagemultiplier="0.7" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="bleeding,infection" damagemultiplier="0.6" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.75" damagesound="LimbArmor" deflectprojectiles="true" />
-            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.4" damagesound="LimbArmor" />
-            <damagemodifier armorsector="0.0,360.0" afflictiontypes="poison,paralysis" damagemultiplier="0.5" damagesound="LimbArmor" />
-            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="No_Effects02" damagemultiplier="0.4" damagesound="LimbArmor" />
-            <damagemodifier armorsector="0.0,360.0" afflictiontypes="alieninfection" damagemultiplier="1" probabilitymultiplier="0.4" damagesound="LimbArmor" />
+            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.5" damagesound="LimbArmor" />
+            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="No_Effects02" damagemultiplier="0.55" damagesound="LimbArmor" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="alieninfection" damagemultiplier="1" probabilitymultiplier="0.55" damagesound="LimbArmor" />
             <SkillModifier skillidentifier="mechanical" skillvalue="5" />
             <SkillModifier skillidentifier="electrical" skillvalue="5" />
             <SkillModifier skillidentifier="weapons" skillvalue="5" />
             <SkillModifier skillidentifier="Touhou_Magic" skillvalue="5" />
         </Wearable>
         <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgPickUpUse" canbeselected="false" canbepicked="true" pickkey="Use" />
-        <ItemContainer capacity="0" hideitems="true" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
+        <ItemContainer capacity="0" hideitems="true" containedstateindicatorstyle="tank" containedstateindicatorslot="0" slotsperrow="1">
             <Containable identifiers="oxygentank,weldingfueltank,oxygeniteshard,oxygenitetank,incendiumfueltank,oxygensource" />
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
-            <StatusEffect type="OnWearing" target="Contained">
-                <Conditional condition="lt 5.0" />
-                <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" loop="true" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
-                <Conditional condition="lte 0.0" />
-                <Sound file="Content/Items/WarningBeep.ogg" range="500" loop="true" />
-            </StatusEffect>
+            <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="2" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
             <SubContainer capacity="1" maxstacksize="1">
                 <Containable items="oxygensource,weldingtoolfuel,Mu_Alchemical" excludeditems="oxygenitetank" />
                 <Containable items="oxygenitetank">
@@ -346,6 +654,14 @@
                         <Conditional HullOxygenPercentage="lt 50" />
                         <Conditional DecreasedOxygenConsumption="lt 99" />
                         <Conditional NeedsAir="true" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained">
+                        <Conditional condition="lt 5.0" />
+                        <Sound file="Content/Items/WarningBeepSlow.ogg" range="500" loop="true" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" playsoundonrequireditemfailure="true">
+                        <Conditional condition="lte 0.0" />
+                        <Sound file="Content/Items/WarningBeep.ogg" range="500" loop="true" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="weldingfueltank" blameequipperfordeath="true">
@@ -371,6 +687,54 @@
                         <Conditional IsDead="false" />
                         <Conditional DecreasedOxygenConsumption="lt 99" />
                         <Conditional NeedsAir="true" />
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+            <SubContainer capacity="2" maxstacksize="1" >
+                <Containable items="Touhou_Hooked_Jade">
+                    <StatusEffect type="OnWearing" target="Character,Contained,This" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
+                        <Affliction identifier="Ether_Divinggear_Effect02" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
+                        <Affliction identifier="Ether_Divinggear_Effect03" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
+                        <Affliction identifier="Ether_Divinggear_Effect04" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
+                        <Affliction identifier="Ether_Divinggear_Effect05" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
+                        <Affliction identifier="Ether_Divinggear_Effect06" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
+                        <Affliction identifier="Ether_Divinggear_Effect07" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained,This" interval="5" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
+                        <Affliction identifier="Ether_Divinggear_Effect08" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" interval="5" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
+                        <Affliction identifier="Ether_Divinggear_Effect09" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.01">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 0" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.01">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 20" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 40" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 60" TargetContainer="true" TargetGrandparent="true"/>
                     </StatusEffect>
                 </Containable>
             </SubContainer>
@@ -413,16 +777,15 @@
         <CustomInterface canbeselected="false" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
             <TickBox text="Light" IsOn="true">
-                <StatusEffect type="OnUse" target="This" IsOn="true" />
+                <StatusEffect type="OnUse" target="This" IsOn="true" >
+                    <RequiredItem items="Touhou_White_Hooked_Jade,Touhou_Peace_Hooked_Jade" type="Contained" />
+                </StatusEffect>
                 <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
             </TickBox>
         </CustomInterface>
         <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
             <sprite name="Combat Diving Suit Helmet Wearable" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hidelimb="false" alphaclipotherwearables="false" sourcerect="32,32,32,32" origin="0.5,0.5">
-                <LightComponent range="1600.0" lightcolor="250,244,255,148" powerconsumption="10" IsOn="true">
-                    <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
-                        <Conditional IsDead="false" />
-                    </StatusEffect>
+                <LightComponent range="1600.0" lightcolor="180,180,180,150" powerconsumption="0" IsOn="true">
                     <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
                 </LightComponent>
             </sprite>
@@ -473,6 +836,14 @@
                 <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true"/>
             </StatusEffect>
 
+            <!--魔力披纱效果-->
+            <StatusEffect type="OnWearing" target="Character" Interval="3.0" Duraation="3.0" >
+                <Affliction identifier="Magic_Veil_Effect01" strength="10" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Gensokyo_Divinggear_Talent" />
+            </StatusEffect>
+
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="bleeding,infection" damagemultiplier="0.3" probabilitymultiplier="0.6" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="Reiki_Pressure" damagemultiplier="0.1" probabilitymultiplier="0.7" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="Phoenix_Burn" damagemultiplier="0.1" probabilitymultiplier="0.7" damagesound="LimbArmor" deflectprojectiles="true" />
@@ -485,6 +856,63 @@
             <SkillModifier skillidentifier="medical" skillvalue="20" />
             <SkillModifier skillidentifier="Touhou_Magic" skillvalue="35" />
         </Wearable>
+        <ItemContainer capacity="0" hideitems="true" slotsperrow="2">
+            <Containable identifiers="oxygentank,weldingfueltank,oxygeniteshard,oxygenitetank,incendiumfueltank,oxygensource" />
+            <SlotIcon slotindex="0" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="2" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="3" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="4" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="5" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SubContainer capacity="6" maxstacksize="1" >
+                <Containable items="Touhou_Hooked_Jade">
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect03" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect04" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect05" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect06" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect07" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" interval="5" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect08" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" interval="5" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect09" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.01">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 0" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.01">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 20" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 40" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 60" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+        </ItemContainer>
         <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgPickUpUse" canbeselected="false" canbepicked="true" pickkey="Use" />
         <aitarget maxsightrange="1500" />
     </Item>
@@ -524,16 +952,15 @@
         <CustomInterface canbeselected="false" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
             <TickBox text="Light" IsOn="true">
-                <StatusEffect type="OnUse" target="This" IsOn="true" />
+                <StatusEffect type="OnUse" target="This" IsOn="true" >
+                    <RequiredItem items="Touhou_White_Hooked_Jade,Touhou_Peace_Hooked_Jade" type="Contained" />
+                </StatusEffect>
                 <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
             </TickBox>
         </CustomInterface>
         <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
             <sprite name="Combat Diving Suit Helmet Wearable" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" limb="Head" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hidelimb="false" alphaclipotherwearables="false" sourcerect="32,32,32,32" origin="0.5,0.5">
-                <LightComponent range="1600.0" lightcolor="250,244,255,148" powerconsumption="10" IsOn="true">
-                    <StatusEffect type="OnWearing" target="This,Character" Voltage="1.0" setvalue="true" comparison="Or">
-                        <Conditional IsDead="false" />
-                    </StatusEffect>
+                <LightComponent range="1600.0" lightcolor="180,180,180,150" powerconsumption="0" IsOn="true">
                     <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
                 </LightComponent>
             </sprite>
@@ -584,6 +1011,14 @@
                 <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true"/>
             </StatusEffect>
 
+            <!--魔力披纱效果-->
+            <StatusEffect type="OnWearing" target="Character" Interval="3.0" Duraation="3.0" >
+                <Affliction identifier="Magic_Veil_Effect01" strength="10" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Gensokyo_Divinggear_Talent" />
+            </StatusEffect>
+
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="bleeding,infection" damagemultiplier="0.3" probabilitymultiplier="0.6" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="Reiki_Pressure" damagemultiplier="0.1" probabilitymultiplier="0.7" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="Phoenix_Burn" damagemultiplier="0.1" probabilitymultiplier="0.7" damagesound="LimbArmor" deflectprojectiles="true" />
@@ -595,6 +1030,158 @@
             <SkillModifier skillidentifier="weapons" skillvalue="15" />
             <SkillModifier skillidentifier="medical" skillvalue="20" />
             <SkillModifier skillidentifier="Touhou_Magic" skillvalue="35" />
+        </Wearable>
+        <ItemContainer capacity="0" hideitems="true" slotsperrow="2">
+            <Containable identifiers="oxygentank,weldingfueltank,oxygeniteshard,oxygenitetank,incendiumfueltank,oxygensource" />
+            <SlotIcon slotindex="0" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="2" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="3" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="4" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="5" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SubContainer capacity="6" maxstacksize="1" >
+                <Containable items="Touhou_Hooked_Jade">
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect03" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect04" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect05" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect06" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect07" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" interval="5" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect08" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Character,Contained" interval="5" Duraation="5.0">
+                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
+                        <Affliction identifier="Gensokyo_Divinggear_Effect09" strength="10" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.01">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 0" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.01">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 20" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 40" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" Interval="1.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 60" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+        </ItemContainer>
+        <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgPickUpUse" canbeselected="false" canbepicked="true" pickkey="Use" />
+        <aitarget maxsightrange="1500" />
+    </Item>
+
+    <!--非想天则-->
+    <Item name="非想天则" identifier="Touhou_Hisoutensoku" subcategory="Touhou" category="Diving,Equipment" tags="smallitem,diving,deepdiving,divinggear_wearableindoors,provocative,Magic_Veil" scale="0.25" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy">
+        <Deconstruct time="15">
+            <Item identifier="Touhou_Base_Metal" amount="4"/>
+            <Item identifier="organicfiber" amount="4"/>
+            <Item identifier="Seven_Elements_Alchemical_Fake"/>
+            <Item identifier="Power_Point"/>
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Divinggear/Magic_Veil02.png" sourcerect="0,0,196,244" origin="0.5,0.5" />
+        <!--
+      <Sprite name="Diving Suit" texture="DivingSuit_Item.png" sourcerect="157,0,90,307" depth="0.55" origin="0.4888889,0.5439739" />
+      -->
+        <Sprite name="Combat Diving Suit Item" texture="%ModDir%/Images/Divinggear/Magic_Veil02.png" sourcerect="0,0,196,244" depth="0.45" origin="0.5,0.5" />
+        <Body radius="40" width="34" density="11" />
+        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
+            <TickBox text="Light" IsOn="true">
+                <StatusEffect type="OnUse" target="This" IsOn="true" >
+                    <RequiredItem items="Touhou_White_Hooked_Jade,Touhou_Peace_Hooked_Jade" type="Contained" />
+                </StatusEffect>
+                <StatusEffect type="OnSecondaryUse" target="This" IsOn="false" />
+            </TickBox>
+        </CustomInterface>
+        <Wearable slots="OuterClothes" msg="ItemMsgEquipSelect" displaycontainedstatus="true" canbeselected="false" canbepicked="true" pickkey="Select">
+            <sprite name="Exosuit Helmet Wearable" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="Head" hidelimb="true" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.65" hideotherwearables="true" hidewearablesoftype="" sourcerect="0,0,1,1" origin="0.5,0.5" />
+            <sprite name="Exosuit Torso" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="Torso" scale="1.2" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.8" inheritlimbdepth="true" inheritsourcerect="false" sourcerect="167,1,203,193">
+                <LightComponent range="1600.0" lightcolor="180,180,180,150" powerconsumption="0" IsOn="true">
+                    <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+                </LightComponent>
+            </sprite>
+            <sprite name="Exosuit Right Hand" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="RightHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" inheritlimbdepth="true" SourceRect="383,160,64,48" />
+            <sprite name="Exosuit Left Hand" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="LeftHand" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" SourceRect="447,160,64,48" />
+            <sprite name="Exosuit Right Upper Arm" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="RightArm" depthlimb="Head" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" inheritlimbdepth="true" SourceRect="383,0,64,96" />
+            <sprite name="Exosuit Left Upper Arm" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="LeftArm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" SourceRect="447,0,64,96" />
+            <sprite name="Exosuit Right Forearm" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="RightForearm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" inheritlimbdepth="true" SourceRect="383,96,64,64" />
+            <sprite name="Exosuit Left Forearm" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="LeftForearm" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="false" SourceRect="447,96,64,64"  />
+            <sprite name="Exosuit Waist" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="Waist" hidelimb="true" scale="1.2" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.5" inheritsourcerect="false" inheritlimbdepth="true" sourcerect="182,196,178,53" />
+            <sprite name="Exosuit Right Thigh" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="RightThigh" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.5" inheritsourcerect="false" inheritlimbdepth="true" sourcerect="0,0,96,112" />
+            <sprite name="Exosuit Left Thigh" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="LeftThigh" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.5,0.5" inheritsourcerect="false" sourcerect="0,0,96,112" />
+            <sprite name="Exosuit Right Leg" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="RightLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritlimbdepth="true" inheritsourcerect="true" />
+            <sprite name="Exosuit Left Leg" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="LeftLeg" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="true" inheritsourcerect="true" />
+            <sprite name="Exosuit Left Shoe" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="LeftFoot" sound="footstep_armor_heavy" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.2,0.5" inheritsourcerect="false" sourcerect="371,211,133,37" />
+            <sprite name="Exosuit Right Shoe" texture="Content/Items/Jobgear/Mechanic/Exosuit.png" limb="RightFoot" sound="footstep_armor_heavy" hidelimb="true" inherittexturescale="true" hideotherwearables="true" inheritorigin="false" origin="0.2,0.5" inheritsourcerect="false" sourcerect="371,211,133,37" />
+            <StatusEffect type="OnWearing" target="Character" HideFace="true" ObstructVision="false" PressureProtection="8000.0" SpeedMultiplier="0.75"
+                          LowPassMultiplier="0.7" setvalue="true" disabledeltatime="true">
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" >
+                <TriggerAnimation Type="Walk" filename="HumanWalk" priority="10" ExpectedSpecies="Human" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" comparison="And">
+                <Conditional skillrequirement="true" Touhou_Magic="gt 120" />
+                <Conditional Touhou_Magic_Boost="gte 149" />
+                <Affliction identifier="Touhou_Magic_Boost" amount="2" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" comparison="And">
+                <Conditional skillrequirement="true" Touhou_Magic="gt 60" />
+                <Conditional Touhou_Magic_Boost="lte 100" />
+                <Affliction identifier="Touhou_Magic_Boost" amount="2" />
+            </StatusEffect>
+            <StatValue stattype="FlowResistance" value="0.5" />
+            <!--自动填满氧气 -->
+            <StatusEffect type="OnWearing" target="This" OxygenAvailable="0.0" UseHullOxygen="true" />
+            <StatusEffect type="Always" target="This" Condition="0.4" targetslot="0" comparison="And">
+                <Conditional HullOxygenPercentage="gt 50" />
+                <Conditional InWater="false" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" OxygenAvailable="1000.0" Condition="-0.04" comparison="and">
+                <Conditional IsDead="false" />
+                <Conditional condition="gt 0.0" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This" comparison="and">
+                <Conditional condition="lt 5.0" />
+                <Conditional condition="gte 0.0" />
+                <Sound file="Content/Items/WarningBeepSlow.ogg" range="250" loop="true"/>
+            </StatusEffect>
+
+            <!--魔力披纱效果-->
+            <StatusEffect type="OnWearing" target="Character" Interval="3.0" Duraation="3.0" >
+                <Affliction identifier="Magic_Veil_Effect01" strength="10" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Gensokyo_Divinggear_Talent" />
+            </StatusEffect>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="bleeding,infection" damagemultiplier="0.3" probabilitymultiplier="0.6" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="Reiki_Pressure" damagemultiplier="0.1" probabilitymultiplier="0.7" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="Phoenix_Burn" damagemultiplier="0.1" probabilitymultiplier="0.7" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.15" probabilitymultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="debuff" damagemultiplier="0.65" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="stun" damagemultiplier="0.45" damagesound="LimbArmor" deflectprojectiles="true" />
         </Wearable>
         <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="0,-50" handle1="-10,-20" handle2="10,-20" holdangle="45" msg="ItemMsgPickUpUse" canbeselected="false" canbepicked="true" pickkey="Use" />
         <aitarget maxsightrange="1500" />

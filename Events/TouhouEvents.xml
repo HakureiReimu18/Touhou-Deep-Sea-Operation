@@ -8,6 +8,7 @@
     <Sprite identifier="yukajoin" texture="%ModDir%/Images/Missions/yukajoin.png" sourcerect="0,0,504,712" origin="0.7,0.7" />
     <Sprite identifier="Tenshi_Join" texture="%ModDir%/Images/Missions/Tenshi_Join.png" sourcerect="0,0,504,712" origin="0.7,0.7" />
     <Sprite identifier="Momizi_Join" texture="%ModDir%/Images/Missions/Momizi_Join.png" sourcerect="0,0,504,656" origin="0.7,0.7" />
+    <Sprite identifier="Cirno_Join" texture="%ModDir%/Images/Missions/Cirno_Join.png" sourcerect="0,0,504,610" origin="0.7,0.7" />
     <Sprite identifier="Touhou_Akyuu_Mission" texture="%ModDir%/Images/Missions/Touhou_Akyuu_Mission.png" sourcerect="0,0,504,712" origin="0.7,0.7" />
   </EventSprites>
 
@@ -1175,6 +1176,7 @@
           <TagAction criteria="player" tag="player" />
           <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hieda_no_Akyuu" targettag="Mission_Hieda_no_Akyuu" spawnlocation="MainSub" targetmoduletags="airlock" />
           <Label name="waitformission" />
+          <NPCWaitAction npctag="Mission_Hieda_no_Akyuu" wait="true" />
           <TriggerAction target1tag="Mission_Hieda_no_Akyuu" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
           <CheckDataAction identifier="Touhou_Akyuu_UFO_Mission01_Agree" condition="eq true">
             <Success>
@@ -1255,6 +1257,7 @@
           <TagAction criteria="player" tag="player" />
           <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hieda_no_Akyuu" targettag="Mission_Hieda_no_Akyuu" spawnlocation="MainSub" targetmoduletags="airlock" />
           <Label name="waitformission" />
+          <NPCWaitAction npctag="Mission_Hieda_no_Akyuu" wait="true" />
           <TriggerAction target1tag="Mission_Hieda_no_Akyuu" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
           <CheckDataAction identifier="Touhou_Akyuu_UFO_Mission02_Agree" condition="eq true">
             <Success>
@@ -1334,6 +1337,7 @@
           <TagAction criteria="player" tag="player" />
           <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hieda_no_Akyuu" targettag="Mission_Hieda_no_Akyuu" spawnlocation="MainSub" targetmoduletags="airlock" />
           <Label name="waitformission" />
+          <NPCWaitAction npctag="Mission_Hieda_no_Akyuu" wait="true" />
           <TriggerAction target1tag="Mission_Hieda_no_Akyuu" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
           <CheckDataAction identifier="Touhou_Akyuu_UFO_Mission03_Agree" condition="eq true">
             <Success>
@@ -1390,6 +1394,8 @@
                               <SpawnAction itemidentifier="antibleeding3" targetinventory="triggerer_player" />
                               <ClearTagAction tag="triggerer_player" />
                               <MissionAction missiontag="FindHoujuuNue" />
+                              <SetDataAction identifier="Touhou_Akyuu_UFO_Mission03_Agree" value="true"/>
+                              <GoTo name="waitformission" />
                             </Option>
                             <Option text="那好消息呢？">
                               <ConversationAction text="“因为你的努力，之前那些游荡的UFO全部被解决掉了。”少女微微鞠躬向你表达谢意。" dialogtype="Small" targettag="triggerer_player" >
@@ -1399,6 +1405,7 @@
                                   <SpawnAction itemidentifier="antibleeding3" targetinventory="triggerer_player" />
                                   <ClearTagAction tag="triggerer_player" />
                                   <MissionAction missiontag="FindHoujuuNue" />
+                                  <SetDataAction identifier="Touhou_Akyuu_UFO_Mission03_Agree" value="true"/>
                                   <GoTo name="waitformission" />
                                 </Option>
                                 <Option text="我得再考虑考虑">
@@ -1455,6 +1462,7 @@
           <TagAction criteria="player" tag="player" />
           <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hieda_no_Akyuu" targettag="Mission_Hieda_no_Akyuu" spawnlocation="MainSub" targetmoduletags="airlock" />
           <Label name="waitformission" />
+          <NPCWaitAction npctag="Mission_Hieda_no_Akyuu" wait="true" />
           <TriggerAction target1tag="Mission_Hieda_no_Akyuu" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
           <ConversationAction targettag="triggerer_player" text="少女见到你，很是惊喜：“你们成功了？”" eventsprite="Touhou_Akyuu_Mission">
             <Option text="”是的，我们发现那是一名自称封兽鵺的少女，她醒来后就自顾自地离开了。“">
@@ -1506,23 +1514,77 @@
 
 
     <!--下一个任务线留给皮丝-->
+
+    <!--琪露诺入组-->
+    <ScriptedEvent identifier="Cirno_Join" commonness="200">
+      <CheckDataAction identifier="Cirno_Join_complete" condition="eq true">
+        <Success>
+          <!--Don't repeat event-->
+        </Success>
+        <Failure>
+          <TagAction criteria="player" tag="player" />
+          <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Cirno" targettag="Cirno" spawnlocation="Outpost" targetmoduletags="airlock" />
+          <Label name="waitfortalk"/>
+          <TriggerAction target1tag="Cirno" target2tag="player" applytotarget1="targetCirno" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+          <ConversationAction targettag="triggerer_player" speakertag="Tenshi" text="欧罗巴的色调多数时候都是昏暗的，灰蒙蒙的，就算是偶尔的亮色，也不过照明弹刺眼的红光，或小丑们歇斯底里的演出" eventsprite="Cirno_Join">
+            <Option text="继续">
+              <ConversationAction targettag="triggerer_player" text="然而，现在在你眼前的却是一只亮蓝色的存在" eventsprite="Cirno_Join">
+                <Option text="蓝色的头发，还有一对水晶般的翅膀，光是看过去就让你身体感到一阵寒意">
+                  <ConversationAction targettag="triggerer_player" text="不过，她看起来正在苦苦思考什么，似乎遇到了什么大麻烦。" eventsprite="Cirno_Join">
+                    <Option text="“我看你似乎有什么困难，请问有什么需要帮助的吗？”">
+                      <ConversationAction targettag="triggerer_player" text="“困难？对咱来说都是小菜一碟。”少女一转愁眉苦脸的样子，换了张自信满满的脸说道：“不过再厉害的妖精也会遇到麻烦，咱只是去帮一个人类的小忙，就被这个难题困住了。”说完，她递给你一张纸" eventsprite="Cirno_Join">
+                        <Option text="检视纸张">
+                          <ConversationAction targettag="triggerer_player" text="那张纸上写着一串未结清的账单，空白处写着几行歪歪扭扭的公式，试图把账单合计结果算出来，但很明显是失败了。你似乎明白了为何眼前的少女的烦恼" eventsprite="Cirno_Join">
+                            <Option text="帮他算出结果">
+                              <ConversationAction targettag="triggerer_player" text="少女接过你的纸条，看过结果后，开心地笑了起来：“不愧是我选中的人类，脑子就是灵光！”" eventsprite="Cirno_Join">
+                                <Option text="选中我？">
+                                  <ConversationAction targettag="triggerer_player" text="“听说你有一艘精干的船队，咱就勉为其难地帮你打理一下好了，不用谢我，我每天都会受到别人的感谢哦。”" eventsprite="Cirno_Join"/>
+                                  <ConversationAction targettag="triggerer_player" text="你有些无奈，但出于好心，你还是接受了这只冰妖精" eventsprite="Cirno_Join">
+                                    <Option text="带她上潜艇">
+                                      <ConversationAction targettag="triggerer_player" text="“以后就由我来帮你消灭那些讨厌的家伙吧！”" eventsprite="Cirno_Join"/>
+                                      <ConversationAction targettag="triggerer_player" text="琪露诺入组" eventsprite="Cirno_Join">
+                                        <NPCChangeTeamAction npctag="Cirno" teamid="Team1" addtocrew="true" />
+                                        <SetDataAction identifier="Cirno_Join_complete" value="true" />
+                                      </ConversationAction>
+                                    </Option>
+                                  </ConversationAction>
+                                </Option>
+                              </ConversationAction>
+                            </Option>
+                          </ConversationAction>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+              </ConversationAction>
+            </Option>
+          </ConversationAction>
+        </Failure>
+      </CheckDataAction>
+    </ScriptedEvent>
   </EventPrefabs>
 
-  <EventSet identifier="Touhou_Mission" leveltype="outpost" locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" campaign="true" additive="true" ignorecooldown="true" commonness="120" eventcount="2">
-    <EventSet identifier="Touhou_Join_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="2">
-      <ScriptedEvent identifier="youmujoin" commonness="200" triggercooldown="false" />
-      <ScriptedEvent identifier="aya_join" commonness="200" triggercooldown="false" />
-      <ScriptedEvent identifier="Aya_Gift_List_Event" commonness="0" triggercooldown="false" />
-      <ScriptedEvent identifier="mokou_join" commonness="200" triggercooldown="false" />
-      <ScriptedEvent identifier="patchouli_join" commonness="200" triggercooldown="false" />
-      <ScriptedEvent identifier="yuka_join" commonness="200" triggercooldown="false" />
-      <ScriptedEvent identifier="Tenshi_Join" commonness="200" triggercooldown="false" />
-      <ScriptedEvent identifier="Momizi_Join" commonness="200" triggercooldown="false" />
-      <ScriptedEvent identifier="Momizi_Find_IDcard_Event" commonness="0" triggercooldown="false" />
-      <ScriptedEvent identifier="Akyuu_Join" commonness="300" triggercooldown="false" />
+  <EventSet identifier="Touhou_Mission" leveltype="outpost" locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion,tsm_city,tsm_military,tsm_mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" campaign="true" additive="true" selectalways="true" ignorecooldown="true" commonness="120" eventcount="2">
+    <EventSet identifier="Touhou_All_Join_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="2">
+      <EventSet identifier="Touhou_Join_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1">
+        <ScriptedEvent identifier="aya_join" commonness="200" triggercooldown="false" />
+        <ScriptedEvent identifier="Aya_Gift_List_Event" commonness="0" triggercooldown="false" />
+        <ScriptedEvent identifier="mokou_join" commonness="200" triggercooldown="false" />
+        <ScriptedEvent identifier="Momizi_Join" commonness="200" triggercooldown="false" />
+        <ScriptedEvent identifier="Momizi_Find_IDcard_Event" commonness="0" triggercooldown="false" />
+        <ScriptedEvent identifier="Cirno_Join" commonness="200" triggercooldown="false" />
+      </EventSet>
+      <EventSet identifier="Touhou_Join_Events" minleveldifficulty="15" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1">
+        <ScriptedEvent identifier="patchouli_join" commonness="200" triggercooldown="false" />
+        <ScriptedEvent identifier="yuka_join" commonness="200" triggercooldown="false" />
+        <ScriptedEvent identifier="Tenshi_Join" commonness="200" triggercooldown="false" />
+        <ScriptedEvent identifier="youmujoin" commonness="200" triggercooldown="false" />
+      </EventSet>
     </EventSet>
     <EventSet identifier="Touhou_Mission_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true">
       <ScriptedEvent identifier="Touhou_Akyuu_Mission" commonness="100" triggercooldown="false" />
+      <ScriptedEvent identifier="Akyuu_Join" commonness="300" triggercooldown="false" />
     </EventSet>
   </EventSet>
 </Randomevents>
