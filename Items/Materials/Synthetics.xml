@@ -111,7 +111,6 @@
             <RequiredItem identifier="Reiki_Dust" />
             <RequiredItem identifier="Plant_Essential_Oil" />
             <RequiredItem identifier="aluminium" />
-            <RequiredItem identifier="Spiritual_Water" mincondition="0.0099" usecondition="true"/>
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/Materials/Reiki_Stone.png" sourcerect="0,0,80,100" />
         <Sprite texture="%ModDir%/Images/Materials/Reiki_Stone.png" depth="0.4" sourcerect="0,0,80,100" />
@@ -145,8 +144,11 @@
         <Sprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" depth="0.4" sourcerect="0,0,100,139" scale="0.4"/>
         <Body width="80" height="80" density="10.1" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
-            <StatusEffect type="Always" target="This" Condition="1.5">
-                <Conditional InWater="true" />
+            <StatusEffect type="InWater" target="This" Condition="1.5" >
+                <Conditional HasTag="neq Touhou_Waterwheel_Gun" TargetContainer="true" />
+            </StatusEffect>
+            <StatusEffect type="OnContained" target="This" Condition="1.5" Interval="5.0" >
+                <Conditional HasTag="eq Touhou_Waterwheel_Gun" TargetContainer="true" />
             </StatusEffect>
         </Holdable>
 
@@ -1047,11 +1049,34 @@
         <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" />
         <CustomInterface canbeselected="true" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.08,0.32" anchor="BottomLeft" absoluteoffset="20,95" style="ItemUI" />
-            <Button text="uilabel.Touhou_Maoyu_Pet_Spawn">
+            <Button text="uilabel.Touhou_Open">
                 <StatusEffect type="OnUse" target="Character" delay="0.25" >
                     <SpawnCharacter speciesname="Touhou_Maoyu_Pet" count="1" spread="10" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" delay="0.5" >
+                    <RemoveItem/>
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--新年礼物-->
+    <Item name="新年礼物" identifier="Touhou_New_Year_Gift_Box" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" cargocontaineridentifier="metalcrate" description="">
+        <Body width="63" height="55" density="10" />
+        <InventoryIcon Texture="%ModDir%/Images/Materials/Touhou_New_Year_Gift_Box.png" sourcerect="0,0,64,56" origin="0.5,0.5" />
+        <Sprite Texture="%ModDir%/Images/Materials/Touhou_New_Year_Gift_Box.png" depth="0.5" sourcerect="66,0,63,55" />
+        <Holdable slots="Any,RightHand+LeftHand" aimpos="30,0" handle1="-5,-10" msg="ItemMsgPickUpSelect" />
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.08,0.2" anchor="Center" absoluteoffset="0,-95" style="ItemUI" />
+            <Button text="uilabel.Touhou_Open">
+                <StatusEffect type="OnUse" target="Character" delay="0.1" >
+                    <TriggerEvent identifier="Touhou_Gift_Box_Open" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true">
+                    <sound file="%ModDir%/Sounds/Tools/Touhou_Open_Box_Sound.ogg" Volmue="8.0" range="500.0" loop="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.2" >
                     <RemoveItem/>
                 </StatusEffect>
             </Button>

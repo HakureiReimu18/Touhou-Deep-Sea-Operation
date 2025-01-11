@@ -602,9 +602,30 @@
                         <Option text="“帽子偷走了？”">
                           <ConversationAction targettag="triggerer_player" text="“对啊，虽然只是帽子，不过这里可吃不到桃子，所以我还挺想找回来的。”少女这样说着，随即对你问道：“那么，你愿意帮我找回帽子吗？”" eventsprite="Tenshi_Join">
                             <Option text="你不是很明白帽子为什么会和桃子扯上关系，不过既然她有所请求，况且只是找帽子而已，你也不吝啬帮个小忙。">
-                              <ConversationAction targettag="triggerer_player" text="“一顶黑色的，上面顶着一个桃子的帽子，加油哦，就拜托你了。”" eventsprite="Tenshi_Join">
-                                <SetDataAction identifier="Tenshi_Waiting" value="true" />
-                              </ConversationAction>
+                              <ConversationAction targettag="triggerer_player" text="“一顶黑色的，上面顶着一个桃子的帽子，加油哦，就拜托你了。”" eventsprite="Tenshi_Join"/>
+                              <Label name="Check_Tenshi_Hat" />
+                              <CheckItemAction targettag="triggerer_player" itemidentifiers="Tenshi_Hat">
+                                <Success>
+                                  <RemoveItemAction targettag="triggerer_player" itemidentifier="Tenshi_Hat" />
+                                  <ConversationAction targettag="triggerer_player" text="“唔，真是谢谢你了。”那个少女惊喜地对你说道，然后把帽子上的桃子摘了下来给你，“这是天界的桃子，可好吃了，你来一个？”" eventsprite="Tenshi_Join"/>
+                                  <SpawnAction itemidentifier="Touhou_Tenshi_Peach" targetinventory="triggerer_player" />
+                                  <ConversationAction targettag="triggerer_player" text="你能看见帽子上一个桃子不一会又长了出来，这时候你才明白为什么之前天子会把帽子和桃子扯上关系。" eventsprite="Tenshi_Join">
+                                    <Option text="“桃子就谢谢了，不过这顶帽子我拿到可花了不少，一个桃子大概不够吧？”">
+                                      <ConversationAction targettag="triggerer_player" text="你的话让少女有些茫然，“是这样吗？不过我身上也没钱……”她又摘下来一个桃子，一边啃一边思索着，忽然说道：“那要不我也给你帮忙吧？我是比那名居天子，是一个天人！”" eventsprite="Tenshi_Join" >
+                                        <Option text="“天人？”">
+                                          <ConversationAction targettag="triggerer_player" text="“就是成佛的人啦，总之，未来多多指教啦！”她很是欢快地说道。" eventsprite="Tenshi_Join"/>
+                                          <NPCChangeTeamAction npctag="Hinanawi_Tenshi" teamid="Team1" addtocrew="true" />
+                                          <SetDataAction identifier="Tenshi_Join_complete" value="true" />
+                                        </Option>
+                                      </ConversationAction>
+                                    </Option>
+                                  </ConversationAction>
+                                </Success>
+                                <Failure>
+                                  <ConversationAction targettag="triggerer_player" text="“呀？还没有找到吗？就是一个黑色的，上面顶着一个桃子的帽子，很显眼的。”" speakertag="Tenshi" eventsprite="Tenshi_Join"/>
+                                  <Goto name="Check_Tenshi_Hat"/>
+                                </Failure>
+                              </CheckItemAction>
                             </Option>
                           </ConversationAction>
                         </Option>
@@ -615,36 +636,6 @@
               </ConversationAction>
             </Option>
           </ConversationAction>
-          <Label name="Check_Tenshi_Hat" />
-          <CheckDataAction identifier="Tenshi_Waiting" condition="eq true">
-            <Success>
-              <!--Don't repeat event-->
-            </Success>
-            <Failure>
-              <CheckItemAction targettag="triggerer_player" itemidentifiers="Tenshi_Hat">
-                <Success>
-                  <RemoveItemAction targettag="triggerer_player" itemidentifier="Tenshi_Hat" />
-                  <ConversationAction targettag="triggerer_player" text="“唔，真是谢谢你了。”那个少女惊喜地对你说道，然后把帽子上的桃子摘了下来给你，“这是天界的桃子，可好吃了，你来一个？”" eventsprite="Tenshi_Join"/>
-                  <SpawnAction itemidentifier="Touhou_Tenshi_Peach" targetinventory="triggerer_player" />
-                  <ConversationAction targettag="triggerer_player" text="你能看见帽子上一个桃子不一会又长了出来，这时候你才明白为什么之前天子会把帽子和桃子扯上关系。" eventsprite="Tenshi_Join">
-                    <Option text="“桃子就谢谢了，不过这顶帽子我拿到可花了不少，一个桃子大概不够吧？”">
-                      <ConversationAction targettag="triggerer_player" text="你的话让少女有些茫然，“是这样吗？不过我身上也没钱……”她又摘下来一个桃子，一边啃一边思索着，忽然说道：“那要不我也给你帮忙吧？我是比那名居天子，是一个天人！”" eventsprite="Tenshi_Join" >
-                        <Option text="“天人？”">
-                          <ConversationAction targettag="triggerer_player" text="“就是成佛的人啦，总之，未来多多指教啦！”她很是欢快地说道。" eventsprite="Tenshi_Join"/>
-                          <NPCChangeTeamAction npctag="Hinanawi_Tenshi" teamid="Team1" addtocrew="true" />
-                          <SetDataAction identifier="Tenshi_Join_complete" value="true" />
-                        </Option>
-                      </ConversationAction>
-                    </Option>
-                  </ConversationAction>
-                </Success>
-                <Failure>
-                  <ConversationAction targettag="triggerer_player" text="“呀？还没有找到吗？就是一个黑色的，上面顶着一个桃子的帽子，很显眼的。”" speakertag="Tenshi" eventsprite="Tenshi_Join"/>
-                  <Goto name="Check_Tenshi_Hat"/>
-                </Failure>
-              </CheckItemAction>
-            </Failure>
-          </CheckDataAction>
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
@@ -948,6 +939,20 @@
                     </Option>
                   </ConversationAction>
                 </Option>
+                <Option text="新年礼物运输">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="路上小心">
+                    <Option text="同意">
+                      <ConversationAction text="新年快乐" dialogtype="Small" targettag="triggerer_player" />
+                      <SetDataAction identifier="Touhou_UFO_Mission_ING" value="false"/>
+                      <MissionAction missiontag="Touhou_Cargo_New_Year_Gift" />
+                    </Option>
+                    <Option text="再考虑考虑">
+                      <ConversationAction text="过一会儿再来" dialogtype="Small" targettag="triggerer_player" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <GoTo name="waitformission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
                 <Option text="清理毛玉">
                   <ConversationAction targettag="triggerer_player" dialogtype="Small" text="毛玉的外壳是很有价值的材料，有机会记得多留一些">
                     <Option text="同意">
@@ -1205,6 +1210,7 @@
                           <ConversationAction text="“我已经把任务发到你的终端上了，附近居民们出行的安全就拜托您了。”，阿求把任务发放到你的终端上，“下个巡回结束之后，我会在您的船上等你。”" targettag="triggerer_player" />
                           <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
                           <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="2" />
+                          <SpawnAction itemidentifier="Touhou_Missions_Collection_Green_UFO" targetinventory="triggerer_player" />
                           <ClearTagAction tag="triggerer_player" />
                           <MissionAction missiontag="killredufo" />
                           <SetDataAction identifier="Touhou_Akyuu_UFO_Mission01_Agree" value="true"/>
@@ -1286,6 +1292,7 @@
                           <ConversationAction text="“我已经把任务发到你的终端上了，前哨站居民的安全就拜托您了”，阿求把任务发放到你的终端上，“下个巡回结束之后，我会在您的船上等你。”" targettag="triggerer_player" />
                           <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" />
                           <SpawnAction itemidentifier="antibleeding1" targetinventory="triggerer_player" amount="2" />
+                          <SpawnAction itemidentifier="Touhou_Missions_Collection_Red_UFO" targetinventory="triggerer_player" />
                           <ClearTagAction tag="triggerer_player" />
                           <MissionAction missiontag="killblueufo" />
                           <SetDataAction identifier="Touhou_Akyuu_UFO_Mission02_Agree" value="true"/>
@@ -1392,6 +1399,7 @@
                               <ConversationAction text="“这次的情况可能很危险，我为你们准备了一些药物，一定要平安归来。”" targettag="triggerer_player" />
                               <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="4" />
                               <SpawnAction itemidentifier="antibleeding3" targetinventory="triggerer_player" />
+                              <SpawnAction itemidentifier="Touhou_Missions_Collection_Blue_UFO" targetinventory="triggerer_player" />
                               <ClearTagAction tag="triggerer_player" />
                               <MissionAction missiontag="FindHoujuuNue" />
                               <SetDataAction identifier="Touhou_Akyuu_UFO_Mission03_Agree" value="true"/>
@@ -1403,6 +1411,7 @@
                                   <ConversationAction text="“这次的情况可能很危险，我为你们准备了一些药物，一定要平安归来。”，阿求把任务发放到你的终端上，“下个巡回结束之后，我会在您的船上等你。”" targettag="triggerer_player" />
                                   <SpawnAction itemidentifier="Europa_Infusion" targetinventory="triggerer_player" amount="4" />
                                   <SpawnAction itemidentifier="antibleeding3" targetinventory="triggerer_player" />
+                                  <SpawnAction itemidentifier="Touhou_Missions_Collection_Blue_UFO" targetinventory="triggerer_player" />
                                   <ClearTagAction tag="triggerer_player" />
                                   <MissionAction missiontag="FindHoujuuNue" />
                                   <SetDataAction identifier="Touhou_Akyuu_UFO_Mission03_Agree" value="true"/>
@@ -1545,6 +1554,7 @@
                                       <ConversationAction targettag="triggerer_player" text="琪露诺入组" eventsprite="Cirno_Join"/>
                                       <NPCChangeTeamAction npctag="Yousei_Cirno" teamid="Team1" addtocrew="true" />
                                       <SetDataAction identifier="Cirno_Join_complete" value="true" />
+                                      <ClearTagAction tag="triggerer_player" />
                                     </Option>
                                   </ConversationAction>
                                 </Option>
@@ -1565,7 +1575,7 @@
   </EventPrefabs>
 
   <EventSet identifier="Touhou_Mission" leveltype="outpost" locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion,tsm_city,tsm_military,tsm_mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" campaign="true" additive="true" selectalways="true" ignorecooldown="true" commonness="120" eventcount="2">
-    <EventSet identifier="Touhou_All_Join_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="2">
+    <EventSet identifier="Touhou_All_Join_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="3">
       <EventSet identifier="Touhou_Join_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1">
         <ScriptedEvent identifier="aya_join" commonness="200" triggercooldown="false" />
         <ScriptedEvent identifier="Aya_Gift_List_Event" commonness="0" triggercooldown="false" />
@@ -1581,8 +1591,8 @@
         <ScriptedEvent identifier="youmujoin" commonness="200" triggercooldown="false" />
       </EventSet>
     </EventSet>
-    <EventSet identifier="Touhou_Mission_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true">
-      <ScriptedEvent identifier="Touhou_Akyuu_Mission" commonness="100" triggercooldown="false" />
+    <EventSet identifier="Touhou_Mission_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1">
+      <ScriptedEvent identifier="Touhou_Akyuu_Mission" commonness="300" triggercooldown="false" />
       <ScriptedEvent identifier="Akyuu_Join" commonness="300" triggercooldown="false" />
     </EventSet>
   </EventSet>

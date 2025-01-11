@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="SakuyaTalent">
+        <Icon texture="%ModDir%/Images/Talents/SakuyaTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.SakuyaTalent"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionAttackData tags="Sakuya_Knife" ignorenonharmfulattacks="true" weapontype="Ranged,Melee"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.25" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Vampire_Fang_Sword_Effect" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Dream_Luna_Sword_Effect" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="AttackMultiplier" value="0.25"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionServerRandom randomchance="0.35" />
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional IsDead="false"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="Touhou_Blood_Clock_Time" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+
+
+        <!--击杀治疗出血和失血-->
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Abilities>
+                <CharacterAbilityResetPermanentStat statidentifier="Sakuya_Kill" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Sakuya_Kill" value="0" setvalue="true" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionHasPermanentStat statidentifier="Sakuya_Kill" min="1" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Sakuya_Kill_Treat_Blood_Clock_Effect" amount="10" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Sakuya_Kill" value="-1" />
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Sakuya_Kill" value="1" />
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnGainMissionExperience">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Blood_Clock_Time" minimumPercentage="0.999" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyValue multiplyvalue="0"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionAttackData tags="Sakuya_Knife" ignorenonharmfulattacks="true" weapontype="Ranged,Melee"/>
+                <AbilityConditionServerRandom randomchance="0.15" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Luna_Clock_Time" strength="5.0" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionAttackData tags="Sakuya_Knife" ignorenonharmfulattacks="true" weapontype="Ranged,Melee"/>
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional Touhou_Luna_Clock_Time="gt 0"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupInterval interval="9.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionHasLevel minlevel="4" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="ExperienceGainMultiplier" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="FabricationSpeed" value="0.25"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="9.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionHasLevel minlevel="8" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="MovementSpeed" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="MedicalItemApplyingMultiplier" value="0.1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="9.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionHasLevel minlevel="12" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="AttackMultiplier" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackSpeed" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="TeamAttackMultiplier" value="-0.1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionHasLevel minlevel="16" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Blood_Clock_Time" minimumPercentage="0.5" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="Touhou_Blood_Clock_Time_Lower" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionHasLevel minlevel="16" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Blood_Clock_Time" minimumPercentage="0.5" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="Touhou_Blood_Clock_Time_Upper" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+                <AbilityConditionHasLevel minlevel="16" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Blood_Clock_Time" minimumPercentage="0.5" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveResistance resistanceid="Touhou_Luna_Clock_Effect" multiplier="0" />
+                <CharacterAbilityGiveResistance resistanceid="Touhou_Luna_Clock_Effect_Debuff" multiplier="0" />
+            </Abilities>
+        </AbilityGroupEffect>
+
+    </Talent>
+</Talents>

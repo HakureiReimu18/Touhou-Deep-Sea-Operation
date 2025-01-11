@@ -294,7 +294,7 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Ancient_Temple" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityGiveStat stattype="MeleeAttackSpeed" value="0.1"/>
+                <CharacterAbilityGiveStat stattype="MeleeAttackSpeed" value="0.2"/>
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
@@ -474,7 +474,7 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Patchouli_Weapons" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1" />
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15" />
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
@@ -483,7 +483,7 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Magic_Boost" minimumPercentage="0.98" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1" />
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15" />
             </Abilities>
         </AbilityGroupEffect>
     </Talent>
@@ -1297,9 +1297,11 @@
             <Abilities>
                 <CharacterAbilityApplyStatusEffects applytoself="true">
                     <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <Affliction identifier="MRE_Effect_Star" amount="10.0"/>
+                        </StatusEffect>
                         <StatusEffect type="OnAbility" target="Character" delay="0.01" disabledeltatime="true" >
                             <TriggerEvent identifier="MRE_Star_Talent_Attacked" />
-                            <Affliction identifier="MRE_Effect_Star" amount="10.0"/>
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
@@ -1352,5 +1354,173 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
+    </Talent>
+
+    <!-- 出血效应-十六夜咲夜 -->
+    <Talent identifier="MRE_Sakuya">
+        <Icon texture="%ModDir%/Images/Talents/MRE_Talent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.MRE_Sakuya"/>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="MRE_Effect_Flag" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Blood_Clock_Time" minimumPercentage="0.5" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="MRE_Effect_Sakuya" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Blood_Clock_Time" minimumPercentage="0.5"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="AttackMultiplier" value="0.15"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional Touhou_Luna_Clock_Time="lt 50"/>
+                </AbilityConditionCharacter>
+                <AbilityConditionServerRandom randomchance="0.3"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="bleeding" replacewith="Reiki_Pressure" addedmultiplier="-0.5"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional HealthPercentage="lt 50"/>
+                    <Conditional Touhou_Luna_Clock_Time="gt 50"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--出血效应-东风谷早苗-->
+    <Talent identifier="MRE_Sanae">
+        <Icon texture="%ModDir%/Images/Talents/MRE_Talent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.MRE_Sanae"/>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="MRE_Effect_Flag" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="SanaeTalent_Effect_Flag" />
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional speciesname="neq human"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.25" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="SanaeTalent_Effect_Flag" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.3"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="SanaeTalent_Effect_Flag" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--出血效应-铃仙·优昙华院·因幡-->
+    <Talent identifier="MRE_Reisen">
+        <Icon texture="%ModDir%/Images/Talents/MRE_Talent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.MRE_Reisen"/>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="MRE_Effect_Flag" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lunatic_Moon_Rabbit" />
+                <AbilityConditionIsAiming weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="MovementSpeed" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="RangedSpreadReduction" value="0.25"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lunatic_Moon_Rabbit" />
+                <AbilityConditionIsAiming weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.2" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="scarletdevil" />
+                <AbilityConditionServerRandom randomchance="0.5" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="gunshotwound" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttackResult">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lunatic_Moon_Rabbit" />
+                <AbilityConditionAttackResult targettypes="Enemy" afflictions="gunshotwound"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="psychosis" strength="5.0" />
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 </Talents>

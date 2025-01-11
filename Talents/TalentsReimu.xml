@@ -3,20 +3,28 @@
     <Talent identifier="Innocent_Treasures">
         <Icon texture="%ModDir%/Images/Talents/Innocent_Treasures.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Innocent_Treasures"/>
-        <AbilityGroupInterval interval="0.9">
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="RedAndWhite" />
-                <AbilityConditionNoCrewDied invert="true"/>
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional speciesname="neq human" />
+                    <Conditional speciesname="neq HumanTouhou_Tail" />
+                </AbilityConditionCharacter>
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character">
-                            <Affliction identifier="Touhou_Innocent_Treasures" amount="10" />
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.15"/>
+                <CharacterAbilityModifyAttackData addedpenetration="0.05"/>
             </Abilities>
-        </AbilityGroupInterval>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="RedAndWhite" />
+                <AbilityConditionServerRandom randomchance="0.15" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="internaldamage,blunttrauma,lacerations,bitewounds,gunshotwound,organdamage,explosiondamage" replacewith="Reiki_Pressure" />
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 </Talents>

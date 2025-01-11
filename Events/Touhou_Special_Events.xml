@@ -467,6 +467,319 @@
             </RNGAction>
         </ScriptedEvent>
 
+        <!--早苗的巡回开始降下奇迹概率事件-->
+        <!--概率：15*2,14*5-->
+        <ScriptedEvent identifier="SanaeTalent_Effect" commonness="0">
+            <TagAction Criteria="crew" Tag="SanaeTalent_Target" IgnoreIncapacitatedCharacters="true" ChooseRandom="true"/>
+            <RNGAction chance="0.7">
+                <!--另外五项-->
+                <Success>
+                    <RNGAction chance="0.5">
+                        <!--另外三项-->
+                        <Success>
+                            <RNGAction chance="0.666">
+                                <!--另外两项-->
+                                <Success>
+                                    <RNGAction chance="0.5">
+                                        <!--星之奇迹：增加50%技能获取速度，技能水平提高10%-->
+                                        <Success>
+                                            <StatusEffectAction targettag="SanaeTalent_Target">
+                                                <StatusEffect target="Character" disabledeltatime="true" >
+                                                    <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                                    <Affliction identifier="SanaeTalent_Effect01" strength="10"/>
+                                                </StatusEffect>
+                                            </StatusEffectAction>
+                                        </Success>
+                                        <!--月之奇迹：修复速度和船体修复速度提高50%，提高15%眩晕抗性-->
+                                        <Failure>
+                                            <StatusEffectAction targettag="SanaeTalent_Target">
+                                                <StatusEffect target="Character" disabledeltatime="true" >
+                                                    <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                                    <Affliction identifier="SanaeTalent_Effect02" strength="10"/>
+                                                </StatusEffect>
+                                            </StatusEffectAction>
+                                        </Failure>
+                                    </RNGAction>
+                                </Success>
+                                <!--日之奇迹：每次攻击有35%概率额外造成15%的伤害-->
+                                <Failure>
+                                    <StatusEffectAction targettag="SanaeTalent_Target">
+                                        <StatusEffect target="Character" disabledeltatime="true" >
+                                            <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                            <Affliction identifier="SanaeTalent_Effect03" strength="10"/>
+                                        </StatusEffect>
+                                    </StatusEffectAction>
+                                </Failure>
+                            </RNGAction>
+                        </Success>
+                        <!--另外两项-->
+                        <Failure>
+                            <RNGAction chance="0.5">
+                                <!--山之奇迹：增加20%最大生命值，双腿的物理伤害抗性提高20%-->
+                                <Success>
+                                    <StatusEffectAction targettag="SanaeTalent_Target">
+                                        <StatusEffect target="Character" disabledeltatime="true" >
+                                            <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                            <Affliction identifier="SanaeTalent_Effect04" strength="10"/>
+                                        </StatusEffect>
+                                    </StatusEffectAction>
+                                </Success>
+                                <!--海之奇迹：增加40%游泳速度，烧伤抗性提高10%-->
+                                <Failure>
+                                    <StatusEffectAction targettag="SanaeTalent_Target">
+                                        <StatusEffect target="Character" disabledeltatime="true" >
+                                            <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                            <Affliction identifier="SanaeTalent_Effect05" strength="10"/>
+                                        </StatusEffect>
+                                    </StatusEffectAction>
+                                </Failure>
+                            </RNGAction>
+                        </Failure>
+                    </RNGAction>
+                </Success>
+                <!--另外两项-->
+                <Failure>
+                    <RNGAction chance="0.5">
+                        <!--空之奇迹：获得随机技能7点，经验获取速度提高20%-->
+                        <Success>
+                            <StatusEffectAction targettag="SanaeTalent_Target">
+                                <StatusEffect target="Character" disabledeltatime="true" >
+                                    <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                    <Affliction identifier="SanaeTalent_Effect06" strength="10"/>
+                                    <GiveSkill skillidentifier="randomskill" amount="7" triggertalents="false"/>
+                                </StatusEffect>
+                            </StatusEffectAction>
+                        </Success>
+                        <!--风之奇迹：移动速度提高15%，攻击速度提高10%，降低50%友军伤害-->
+                        <Failure>
+                            <StatusEffectAction targettag="SanaeTalent_Target">
+                                <StatusEffect target="Character" disabledeltatime="true" >
+                                    <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                    <Affliction identifier="SanaeTalent_Effect07" strength="10"/>
+                                </StatusEffect>
+                            </StatusEffectAction>
+                        </Failure>
+                    </RNGAction>
+                </Failure>
+            </RNGAction>
+            <ClearTagAction tag="SanaeTalent_Target" />
+        </ScriptedEvent>
+
+        <!--早苗的巡回开始降下奇迹概率事件-对自己生效-->
+        <!--概率：15*2,14*5-->
+        <ScriptedEvent identifier="SanaeTalent_Effect_Self" commonness="0">
+            <RNGAction chance="0.7">
+                <!--另外五项-->
+                <Success>
+                    <RNGAction chance="0.5">
+                        <!--另外三项-->
+                        <Success>
+                            <RNGAction chance="0.666">
+                                <!--另外两项-->
+                                <Success>
+                                    <RNGAction chance="0.5">
+                                        <!--星之奇迹：增加50%技能获取速度，技能水平提高10%-->
+                                        <Success>
+                                            <StatusEffectAction targettag="statuseffectuser">
+                                                <StatusEffect target="Character" disabledeltatime="true" >
+                                                    <Affliction identifier="SanaeTalent_Effect01" strength="10"/>
+                                                    <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
+                                                </StatusEffect>
+                                            </StatusEffectAction>
+                                        </Success>
+                                        <!--月之奇迹：修复速度和船体修复速度提高50%，提高15%眩晕抗性-->
+                                        <Failure>
+                                            <StatusEffectAction targettag="statuseffectuser">
+                                                <StatusEffect target="Character" disabledeltatime="true" >
+                                                    <Affliction identifier="SanaeTalent_Effect02" strength="10"/>
+                                                    <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
+                                                </StatusEffect>
+                                            </StatusEffectAction>
+                                        </Failure>
+                                    </RNGAction>
+                                </Success>
+                                <!--日之奇迹：每次攻击有35%概率额外造成15%的伤害-->
+                                <Failure>
+                                    <StatusEffectAction targettag="statuseffectuser">
+                                        <StatusEffect target="Character" disabledeltatime="true" >
+                                            <Affliction identifier="SanaeTalent_Effect03" strength="10"/>
+                                            <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
+                                        </StatusEffect>
+                                    </StatusEffectAction>
+                                </Failure>
+                            </RNGAction>
+                        </Success>
+                        <!--另外两项-->
+                        <Failure>
+                            <RNGAction chance="0.5">
+                                <!--山之奇迹：增加20%最大生命值，双腿的物理伤害抗性提高20%-->
+                                <Success>
+                                    <StatusEffectAction targettag="statuseffectuser">
+                                        <StatusEffect target="Character" disabledeltatime="true" >
+                                            <Affliction identifier="SanaeTalent_Effect04" strength="10"/>
+                                            <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
+                                        </StatusEffect>
+                                    </StatusEffectAction>
+                                </Success>
+                                <!--海之奇迹：增加40%游泳速度，烧伤抗性提高10%-->
+                                <Failure>
+                                    <StatusEffectAction targettag="statuseffectuser">
+                                        <StatusEffect target="Character" disabledeltatime="true" >
+                                            <Affliction identifier="SanaeTalent_Effect05" strength="10"/>
+                                            <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
+                                        </StatusEffect>
+                                    </StatusEffectAction>
+                                </Failure>
+                            </RNGAction>
+                        </Failure>
+                    </RNGAction>
+                </Success>
+                <!--另外两项-->
+                <Failure>
+                    <RNGAction chance="0.5">
+                        <!--空之奇迹：获得随机技能7点，经验获取速度提高20%-->
+                        <Success>
+                            <StatusEffectAction targettag="statuseffectuser">
+                                <StatusEffect target="Character" disabledeltatime="true" >
+                                    <Affliction identifier="SanaeTalent_Effect06" strength="10"/>
+                                    <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
+                                    <GiveSkill skillidentifier="randomskill" amount="7" triggertalents="false"/>
+                                </StatusEffect>
+                            </StatusEffectAction>
+                        </Success>
+                        <!--风之奇迹：移动速度提高15%，攻击速度提高10%，降低50%友军伤害-->
+                        <Failure>
+                            <StatusEffectAction targettag="statuseffectuser">
+                                <StatusEffect target="Character" disabledeltatime="true" >
+                                    <Affliction identifier="SanaeTalent_Effect07" strength="10"/>
+                                    <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
+                                </StatusEffect>
+                            </StatusEffectAction>
+                        </Failure>
+                    </RNGAction>
+                </Failure>
+            </RNGAction>
+        </ScriptedEvent>
+
+        <!--新年礼物随机事件-->
+        <ScriptedEvent identifier="Touhou_Gift_Box_Open">
+            <TagAction Criteria="player" Tag="Open_player" IgnoreIncapacitatedCharacters="false" />
+            <RNGAction Chance="0.5">
+                <Success>
+                    <RNGAction Chance="0.5">
+                        <Success>
+                            <RNGAction Chance="0.5">
+                                <Success>
+                                    <RNGAction Chance="0.5">
+                                        <Success>
+                                            <SpawnAction ItemTag="Touhou_Magic_Item" targetinventory="Open_player" amount="4" />
+                                        </Success>
+                                        <Failure>
+                                            <SpawnAction ItemIdentifier="Power_Point" targetinventory="Open_player" />
+                                        </Failure>
+                                    </RNGAction>
+                                </Success>
+                                <Failure>
+                                    <RNGAction Chance="0.5">
+                                        <Success>
+                                            <SpawnAction ItemIdentifier="Score_Point" targetinventory="Open_player" amount="3" />
+                                        </Success>
+                                        <Failure>
+                                            <SpawnAction ItemIdentifier="Touhou_Base_Metal" targetinventory="Open_player" amount="4" />
+                                        </Failure>
+                                    </RNGAction>
+                                </Failure>
+                            </RNGAction>
+                        </Success>
+                        <Failure>
+                            <RNGAction Chance="0.75">
+                                <Success>
+                                    <RNGAction Chance="0.5">
+                                        <Success>
+                                            <SpawnAction ItemTag="Touhou_Precious_Metal" targetinventory="Open_player" />
+                                        </Success>
+                                        <Failure>
+                                            <SpawnAction ItemTag="Alchemical" targetinventory="Open_player" amount="4" />
+                                        </Failure>
+                                    </RNGAction>
+                                </Success>
+                                <Failure>
+                                    <RNGAction Chance="0.5">
+                                        <Success>
+                                            <SpawnAction ItemTag="MRE_Material" targetinventory="Open_player" />
+                                        </Success>
+                                        <Failure>
+                                            <SpawnAction ItemIdentifier="Hyouibana_Dream" targetinventory="Open_player" />
+                                        </Failure>
+                                    </RNGAction>
+                                </Failure>
+                            </RNGAction>
+                        </Failure>
+                    </RNGAction>
+                </Success>
+                <Failure>
+                    <RNGAction Chance="0.5">
+                        <Success>
+                            <RNGAction Chance="0.5">
+                                <Success>
+                                    <RNGAction Chance="0.5">
+                                        <Success>
+                                            <SpawnAction ItemTag="Low_Alchemical_Metal" targetinventory="Open_player" />
+                                        </Success>
+                                        <Failure>
+                                            <SpawnAction ItemIdentifier="Ether_Divinggear" targetinventory="Open_player" />
+                                        </Failure>
+                                    </RNGAction>
+                                </Success>
+                                <Failure>
+                                    <RNGAction Chance="0.2">
+                                        <Success>
+                                            <SpawnAction ItemTag="Normal_Alchemical_Metal" targetinventory="Open_player" />
+                                        </Success>
+                                        <Failure>
+                                            <SpawnAction ItemIdentifier="Touhou_Gene_Splicer" targetinventory="Open_player" />
+                                        </Failure>
+                                    </RNGAction>
+                                </Failure>
+                            </RNGAction>
+                        </Success>
+                        <Failure>
+                            <RNGAction Chance="0.5">
+                                <Success>
+                                    <RNGAction Chance="0.5">
+                                        <Success>
+                                            <SpawnAction ItemTag="Touhou_Hooked_Jade" targetinventory="Open_player" amount="4" />
+                                        </Success>
+                                        <Failure>
+                                            <SpawnAction ItemTag="Nitori_Backpack" targetinventory="Open_player" />
+                                        </Failure>
+                                    </RNGAction>
+                                </Success>
+                                <Failure>
+                                    <RNGAction Chance="0.5">
+                                        <Success>
+                                            <SpawnAction ItemTag="Touhou_Rapidly_Spell_Card_Ammo" targetinventory="Open_player" amount="2" />
+                                        </Success>
+                                        <Failure>
+                                            <SpawnAction ItemTag="Touhou_Small_Spell_Card_Ammo" targetinventory="Open_player" amount="2" />
+                                        </Failure>
+                                    </RNGAction>
+                                </Failure>
+                            </RNGAction>
+                        </Failure>
+                    </RNGAction>
+                </Failure>
+            </RNGAction>
+        </ScriptedEvent>
+
+        <!--在船上刷新新年礼物-->
+        <ScriptedEvent identifier="Touhou_Spawn_Gift">
+            <TriggerEventAction identifier="Touhou_Spawn_Gift_Delay" nextround="true" />
+        </ScriptedEvent>
+        <ScriptedEvent identifier="Touhou_Spawn_Gift_Delay">
+            <SpawnAction ItemIdentifier="Touhou_New_Year_Gift_Box" SpawnLocation="MainSub" />
+        </ScriptedEvent>
+
         <!--补给站事件01-->
         <ScriptedEvent identifier="Touhou_Supply_Station01" commonness="0">
             <!--声望检测部分也许不应该放在spawnNPC前-->
@@ -703,7 +1016,7 @@
                         <Option text="赠送">
                             <CheckDataAction identifier="Player_Donated" condition="eq true" >
                                 <Success>
-                                    <ConversationAction text="“我还没什么需要的……”" eventsprite="Touhou_Supply_Station02"/>
+                                    <ConversationAction text="“我还没什么需要的……”" targettag="triggerer_player" eventsprite="Touhou_Supply_Station02"/>
                                     <GoTo name="waitfortalk_Aunn" />
                                 </Success>
                                 <Failure>
