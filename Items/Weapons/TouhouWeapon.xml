@@ -1034,7 +1034,13 @@
             <RequiredSkill identifier="weapons" level="50" />
         </RangedWeapon>
         <ItemContainer capacity="1" maxstacksize="1" hideitems="false" containedstateindicatorslot="0" containedstateindicatorstyle="bullet" containedspritedepth="0.56">
-            <Containable items="smgammo,Youmu_Smgmagazine" hide="false" itempos="4,-10" rotation="-30" />
+            <Containable items="smgammo,Youmu_Smgmagazine" hide="false" itempos="4,-10" rotation="-30" >
+                <StatusEffect type="OnInserted" target="This" setvalue="true">
+                    <Conditional isActive="eq true"/>
+                    <Sound file="Content/Items/Weapons/WEAPON_rifleReload50-_1.ogg" type="OnUse" range="500" selectionmode="Random"/>
+                    <Sound file="Content/Items/Weapons/WEAPON_rifleReload50-_2.ogg" type="OnUse" range="500" selectionmode="Random"/>
+                </StatusEffect>
+            </Containable>
             <SlotIcon slotindex="1" texture="Content/UI/CampaignUIAtlas2.png" sourcerect="896,536,128,64" origin="0.45,0.5" />
             <SubContainer capacity="1" maxstacksize="1">
                 <Containable items="flashlight" hide="false" itempos="22,-1" setactive="true" />
@@ -1089,21 +1095,7 @@
             </StatusEffect>
         </ItemContainer>
         <!--Magazines can be combined to raise condition.-->
-        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" msg="ItemMsgPickUpSelect" >
-            <StatusEffect type="OnContained" target="This" tags="weaponreload" duration="0.6" interval="0.5" delay="0.1" AllowWhenBroken="true">
-                <Conditional hastag="weapon" targetcontainer="true" />
-            </StatusEffect>
-            <StatusEffect type="Always" target="This" comparison="And" interval="2" AllowWhenBroken="true">
-                <Conditional hasstatustag="weaponreload" />
-                <Conditional hastag="neq weapon" targetcontainer="true" />
-                <Sound file="Content/Items/Weapons/WEAPON_rifleReload50-_1.ogg" type="OnUse" range="500" selectionmode="Random" />
-            </StatusEffect>
-            <StatusEffect type="Always" target="This" comparison="And" interval="2" AllowWhenBroken="true">
-                <Conditional hasstatustag="neq weaponreload" />
-                <Conditional hastag="weapon" targetcontainer="true" />
-                <Sound file="Content/Items/Weapons/WEAPON_rifleReload50-_2.ogg" type="OnUse" range="500" />
-            </StatusEffect>
-        </Holdable>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" msg="ItemMsgPickUpSelect" />
     </Item>
 
 
@@ -1415,9 +1407,9 @@
             </StatusEffect>
             <!-- do burn damage to characters -->
             <StatusEffect type="OnSuccess" target="UseTarget">
-                <Affliction identifier="burn" amount="2.0" />
+                <Affliction identifier="burn" amount="2.1" />
                 <Affliction identifier="Phoenix_Burn" amount="6.0" />
-                <Affliction identifier="Reiki_Pressure" amount="1.7" />
+                <Affliction identifier="Reiki_Pressure" amount="1.9" />
             </StatusEffect>
 
             <StatusEffect type="OnUse" target="Character">
@@ -4553,7 +4545,7 @@
                 <ReduceAffliction identifier="Koishi_Unconscious03" amount="0.5" />
             </StatusEffect>
 
-            <Attack targetimpulse="6" severlimbsprobability="0.8" itemdamage="60" structuresoundtype="StructureSlash" penetration="0.35">
+            <Attack targetimpulse="6" severlimbsprobability="0.8" itemdamage="60" structuresoundtype="StructureSlash" penetration="0.5">
                 <Affliction identifier="lacerations" strength="25.7" />
                 <Affliction identifier="slow" strength="50" />
                 <Affliction identifier="bleeding" strength="25" />
@@ -4675,6 +4667,10 @@
         <Body width="110" height="30" density="10" />
         <MeleeWeapon slots="Any,RightHand+LeftHand" aimpos="50,0" handle1="-42,22" handle2="-2,20" holdangle="30" aimangle="10" reload="1.2" range="125"
                      allowhitmultiple="true" combatPriority="40" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnActive" target="Character">
+                <Conditional MRE_Effect_Reimu="gt 0"/>
+                <Affliction identifier="Reimu_Weapons" strength="10" />
+            </StatusEffect>
             <Attack targetimpulse="5" severlimbsprobability="7.5" itemdamage="60" penetration="0.15">
                 <Affliction identifier="blunttrauma" strength="25" />
                 <Affliction identifier="Touhou_Lost_Dream" strength="5" />
@@ -6684,7 +6680,12 @@
             <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
             <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="320,448,64,64" origin="0.5,0.5" />
             <SubContainer capacity="1" maxstacksize="12">
-                <Containable items="Blunderbussround,riflebullet" hide="true" />
+                <Containable items="Blunderbussround,riflebullet" hide="true" >
+                    <StatusEffect type="OnInserted" target="This" setvalue="true">
+                        <Conditional isActive="eq true"/>
+                        <Sound file="Content/Items/Weapons/WEAPON_rifleReload50-_2.ogg" type="OnUse" range="500" selectionmode="Random"/>
+                    </StatusEffect>
+                </Containable>
             </SubContainer>
         </ItemContainer>
         <Quality>
@@ -6722,17 +6723,7 @@
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Blunderbuss_Bullet.png" sourcerect="0,0,80,70" origin="0.5,0.5" />
         <Sprite texture="%ModDir%/Images/OtherWeapons/Blunderbuss_Bullet.png" sourcerect="0,0,80,70" depth="0.45" origin="0.5,0.5" scale="0.3"/>
         <Body width="20" height="20" density="10" />
-        <Pickable slots="Any" msg="ItemMsgPickUpSelect" >
-            <StatusEffect type="OnContained" target="This" tags="weaponreload" duration="0.6" interval="0.5" delay="0.1" >
-                <Conditional hastag="weapon" targetcontainer="true" />
-            </StatusEffect>
-            <StatusEffect type="Always" target="This" comparison="And" interval="2" AllowWhenBroken="true">
-                <Conditional hasstatustag="neq weaponreload" />
-                <Conditional hastag="weapon" targetcontainer="true" />
-                <Sound file="Content/Items/Weapons/WEAPON_rifleReload50-_1.ogg" type="OnUse" range="500" selectionmode="Random" />
-                <Sound file="Content/Items/Weapons/WEAPON_rifleReload50-_2.ogg" type="OnUse" range="500" />
-            </StatusEffect>
-        </Pickable>
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
 
         <Projectile characterusable="false" hitscan="true" removeonhit="true" >
             <ParticleEmitter particle="tracerfirearm" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="255,200,115,175" scalemultiplier="1,0.6" />
@@ -6786,17 +6777,7 @@
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Blunderbuss_Bullet.png" sourcerect="85,0,80,70" origin="0.5,0.5" />
         <Sprite texture="%ModDir%/Images/OtherWeapons/Blunderbuss_Bullet.png" sourcerect="85,0,80,70" depth="0.45" origin="0.5,0.5" scale="0.3"/>
         <Body width="20" height="20" density="10" />
-        <Pickable slots="Any" msg="ItemMsgPickUpSelect" >
-            <StatusEffect type="OnContained" target="This" tags="weaponreload" duration="0.6" interval="0.5" delay="0.1" >
-                <Conditional hastag="weapon" targetcontainer="true" />
-            </StatusEffect>
-            <StatusEffect type="Always" target="This" comparison="And" interval="2" AllowWhenBroken="true">
-                <Conditional hasstatustag="neq weaponreload" />
-                <Conditional hastag="weapon" targetcontainer="true" />
-                <Sound file="Content/Items/Weapons/WEAPON_rifleReload50-_1.ogg" type="OnUse" range="500" selectionmode="Random" />
-                <Sound file="Content/Items/Weapons/WEAPON_rifleReload50-_2.ogg" type="OnUse" range="500" />
-            </StatusEffect>
-        </Pickable>
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
 
         <!--        <ParticleEmitter particle="LunaticBulletTracer" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="255,255,115,175" scalemultiplier="0.4,0.4" />-->
         <Projectile characterusable="false" hitscan="true" removeonhit="true" friendlyfire="true">

@@ -19,15 +19,45 @@
                 </CharacterAbilitySpawnItemsToContainer>
             </Abilities>
         </AbilityGroupEffect>
-<!--        <AbilityGroupInterval interval="0.5">
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician" />
+            </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStatToSkill stattype="MovementSpeed" maxvalue="0.0176" skillidentifier="helm" />
-                <CharacterAbilityModifyStatToSkill stattype="MovementSpeed" maxvalue="0.0176" skillidentifier="weapons" />
-                <CharacterAbilityModifyStatToSkill stattype="MovementSpeed" maxvalue="0.0176" skillidentifier="mechanical," />
-                <CharacterAbilityModifyStatToSkill stattype="MovementSpeed" maxvalue="0.0176" skillidentifier="electrical" />
-                <CharacterAbilityModifyStatToSkill stattype="MovementSpeed" maxvalue="0.0176" skillidentifier="medical" />
-                <CharacterAbilityModifyStatToSkill stattype="MovementSpeed" maxvalue="0.0176" skillidentifier="Touhou_Magic" />
+                <CharacterAbilityModifyAffliction afflictionidentifiers="burn,acidburn" addedmultiplier="0.04" />
             </Abilities>
-        </AbilityGroupInterval>-->
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician" />
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.04" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician" />
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional speciesname="neq human" />
+                    <Conditional speciesname="neq HumanTouhou_Tail" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.04"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttackResult">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician" />
+                <AbilityConditionAttackResult targettypes="Enemy" afflictions="burn,acidburn"/>
+                <AbilityConditionServerRandom randomchance="0.25" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Lost_Dream" strength="5.0" />
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 </Talents>
