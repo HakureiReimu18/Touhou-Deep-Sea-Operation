@@ -214,10 +214,10 @@
 
         <CustomInterface canbeselected="true" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.1,0.1" anchor="BottomRight" relativeoffset="0,0.7" style="ItemUI" />
-            <Button text="声呐显示开启">
+            <Button text="Text.Sonar_Open">
                 <StatusEffect type="OnUse" target="This" TargetItemComponent="Sonar" drawhudwhenequipped="true" setvalue="true" />
             </Button>
-            <Button text="声呐显示关闭">
+            <Button text="Text.Sonar_Close">
                 <StatusEffect type="OnUse" target="This" TargetItemComponent="Sonar" currentmode="Passive" drawhudwhenequipped="false" setvalue="true" />
             </Button>
         </CustomInterface>
@@ -1046,12 +1046,12 @@
         <Body width="120" height="60" density="10" />
         <!-- the character will hold the item 50 pixels in front of him, with his hands at the handle1 and handle2 positions -->
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="30,0" handle1="-15,-16" handle2="-10,-6" msg="ItemMsgPickUpSelect" >
-            <StatusEffect type="OnActive" target="Character">
+            <StatusEffect type="OnActive" target="Character" Interval="0.5">
                 <Conditional Candid_Friend="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nitori="gt 0"/>
                 <Affliction identifier="Nitori_Weapons" strength="50" />
             </StatusEffect>
-            <StatusEffect type="OnActive" target="Character" comparison="And">
+            <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
                 <Conditional Candid_Friend="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nitori="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100" />
@@ -2260,4 +2260,57 @@
             <Containable items="Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" />
         </ItemContainer>
     </Item>-->
+
+
+    <!--表里一体之钥-->
+    <Item name="" identifier="Touhou_The_Key_Of_Duality" subcategory="Touhou" category="Misc" maxstacksize="1" Tags="Doll,smallitem" allowasextracargo="true" description="" scale="0.5" impactsoundtag="impact_metal_light">
+        <Fabricate suitablefabricators="fabricator" requiredtime="5">
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredItem identifier="Score_Point" />
+            <RequiredItem identifier="organicfiber" amount="2" />
+        </Fabricate>
+        <Deconstruct time="15"/>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_The_Key_Of_Duality.png" depth="0.54" sourcerect="0,0,100,120" origin="0.5,0.5" />
+        <Body width="56" height="72" density="9" />
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimable="false" aimpos="40,-20" handle1="5,-15" aimangle="350" holdangle="-35" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true"  msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.1,0.09" anchor="BottomLeft" absoluteoffset="0,-10" relativeoffset="0.5,0.25" style="ItemUI" />
+            <Button text="Text.Touhou_The_Key_Of_Duality_Open">
+                <StatusEffect type="OnUse" target="This,Character" disabledeltatime="true" condition="-25" >
+                    <Conditional Realm_Of_Fantasy="gt 0"/>
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="Character" disabledeltatime="true" comparison="And" >
+                    <Conditional Realm_Of_Fantasy="gt 0"/>
+                    <Conditional Touhou_The_Key_Of_Duality_Outside="eq 0"/>
+                    <Conditional Touhou_The_Key_Of_Duality_Intside="eq 0"/>
+                    <GiveTalentInfo giverandom="true" talentidentifiers="Touhou_The_Key_Of_Duality_Talent" />
+                    <Affliction identifier="Touhou_The_Key_Of_Duality_Outside" amount="10"/>
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="Character" delay="0.5" disabledeltatime="true" comparison="And" >
+                    <Conditional Touhou_The_Key_Of_Duality_Outside="eq 0"/>
+                    <Conditional Touhou_The_Key_Of_Duality_Intside="gt 0"/>
+                    <Affliction identifier="Touhou_The_Key_Of_Duality_Outside" amount="10"/>
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="Character" duration="0.5" disabledeltatime="true" comparison="And" >
+                    <Conditional Touhou_The_Key_Of_Duality_Outside="eq 0"/>
+                    <Conditional Touhou_The_Key_Of_Duality_Intside="gt 0"/>
+                    <ReduceAffliction identifier="Touhou_The_Key_Of_Duality_Intside" amount="100"/>
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="Character" delay="0.5" disabledeltatime="true" comparison="And" >
+                    <Conditional Touhou_The_Key_Of_Duality_Intside="eq 0"/>
+                    <Conditional Touhou_The_Key_Of_Duality_Outside="gt 0"/>
+                    <Affliction identifier="Touhou_The_Key_Of_Duality_Intside" amount="10"/>
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="Character" duration="0.5" disabledeltatime="true" comparison="And" >
+                    <Conditional Touhou_The_Key_Of_Duality_Intside="eq 0"/>
+                    <Conditional Touhou_The_Key_Of_Duality_Outside="gt 0"/>
+                    <ReduceAffliction identifier="Touhou_The_Key_Of_Duality_Outside" amount="100"/>
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
 </Items>

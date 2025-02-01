@@ -1070,7 +1070,8 @@
     穿着幽香装束+时：增加15%最大生命值，弱小的生物会主动远离你
     穿着鵺 装束+时：攻击额外附加长眠不醒的噩梦。杀死目标时，会在目标的尸体上发生一次爆炸，让小范围内的所有生物受到长眠不醒的噩梦影响
     穿着荷取装束+时：加快水中恢复伤势的速度，在水中时额外增加10%的出血抗性和烧伤抗性
-    穿着恋 装束+时：增加15%移动速度。如果并未处于无意识状态，增加10%物理伤害抗性-->
+    穿着恋 装束+时：增加15%移动速度。如果并未处于无意识状态，增加10%物理伤害抗性
+    穿着紫 装束+时：获得常驻50%（300/600）极速。每次受击都有25%概率减少25%受到的伤害-->
     <Talent identifier="Touhou_Yaoguai05">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400" />
         <Description tag="talentdescription.Touhou_Yaoguai05"/>
@@ -1172,13 +1173,39 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
+        <!--紫-->
+        <AbilityGroupInterval interval="0.5">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="haste" minimumPercentage="0.5" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="haste" amount="5" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionServerRandom randomchance="0.25" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.25" />
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 
     <!--“魑魅魍魉” 缓慢治愈自身的精神病。奔跑一定时间后，些许增加下一次攻击的伤害。那之后有5秒冷却。
     穿着幽香装束+时：大大增幅每种花瓣的效果
     穿着鵺 装束+时：当你完成四个阶段的计数后，增加10%攻击速度。免疫长眠不醒的噩梦和古老的哀愁与恐怖。制造物品的质量+1
     穿着荷取装束+时：额外增加30%的修复速度和船体修复速度。生命值大于50%时，增加10%物理伤害抗性，否则增加20%攻击伤害。
-    穿着恋 装束+时：增加15%技能水平。不会受到水流冲击的影响，游泳速度增加50%-->
+    穿着恋 装束+时：增加15%技能水平。不会受到水流冲击的影响，游泳速度增加50%
+    穿着紫 装束+时：游泳速度增加50%，完成巡回后如果没有船员死亡，获得一巡回的增幅：增加10%攻击伤害-->
     <Talent identifier="Touhou_Yaoguai06">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Direct_Damage.png" sheetindex="0,0" sheetelementsize="400,400" />
         <Description tag="talentdescription.Touhou_Yaoguai06"/>
@@ -1333,13 +1360,38 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
+        <!--紫-->
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="SwimmingSpeed" value="0.5"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionNoCrewDied assistantsdontcount="false"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="Touhou_Yaoguai06_Yukari" amount="10" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 
     <!--巫山云雨
     穿着幽香装束+时：大大增加出血的恢复速度，根据当前魔法能力水平的10%提高攻击伤害，近战攻击速度、移动速度。这个效果在魔法能力超过300时达到上限
     穿着鵺 装束+时：魔法能力大于80后，增加20%最大生命值。对血量低于一半的敌人造成额外30%的伤害
     穿着荷取装束+时：减少20%反应堆燃料消耗。机械工程大于80后，增加10%炮塔伤害，减少10%炮塔能耗，增加10%反应堆最大功率和水泵效率
-    穿着恋 装束+时：根据魔法能力水平的20%提高近战攻击速度。这个效果在魔法能力超过300时达到上限。对剩余血量大于70%的敌人造成额外25.7%的伤害-->
+    穿着恋 装束+时：根据魔法能力水平的20%提高近战攻击速度。这个效果在魔法能力超过300时达到上限。对剩余血量大于70%的敌人造成额外25.7%的伤害
+    穿着紫 装束+时：120秒内没有受到攻击，且生命值大于90%时，进入隐匿状态。隐匿状态将降低被敌人察觉的概率。解锁配方：表里一体之钥-->
     <Talent identifier="Touhou_Yaoguai07">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400" />
         <Description tag="talentdescription.Touhou_Yaoguai07"/>
@@ -1488,6 +1540,38 @@
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="0.257"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--紫-->
+        <AbilityGroupInterval interval="1.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yaoguai07_Yukari_Removed" invert="true" />
+                <AbilityConditionAboveVitality vitalitypercentage="0.9"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Yaoguai07_Yukari" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttackedResult">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" >
+                            <Affliction identifier="Touhou_Yaoguai07_Yukari_Removed" amount="100" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupEffect>
     </Talent>

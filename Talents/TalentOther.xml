@@ -107,6 +107,73 @@
         </AbilityGroupInterval>
     </Talent>
 
+    <!--星火霰弹枪天赋-->
+    <Talent identifier="Touhou_Sparkfire_Shotgun_Talent" IsHiddenExtraTalent="true">
+        <Icon texture="%ModDir%/Images/Afflictions/Gensokyo_Divinggear_Effect.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Gensokyo_Divinggear_Talent"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Sparkfire_Shotgun"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Turret" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="burn" strength="0.45" />
+                <CharacterAbilityGiveAffliction affliction="Touhou_Sparkfire_Shotgun_Effect" strength="0.06" multiplystrengthbyskill="Touhou_Magic" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--谎言天赋-->
+    <Talent identifier="Touhou_Deceit_Talent" IsHiddenExtraTalent="true">
+        <Icon texture="%ModDir%/Images/Afflictions/Gensokyo_Divinggear_Effect.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Gensokyo_Divinggear_Talent"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Deceit_Mod_Effect" />
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+                <AbilityConditionServerRandom randomchance="0.3" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Deceit_Mod_Mark_Effect" strength="100" setvalue="true" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Deceit_Mod_Effect" />
+                <AbilityConditionAttackData weapontype="Melee" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Deceit_Mod_Mark_Effect" strength="100" setvalue="true" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Deceit"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Turret" invert="true"/>
+                <AbilityConditionCharacter>
+                    <Conditional Touhou_Deceit_Mod_Mark_Effect="gt 0" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.9" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+<!--    &lt;!&ndash;单轨天赋&ndash;&gt;
+    <Talent identifier="Touhou_Monorail_Talent" IsHiddenExtraTalent="true">
+        <Icon texture="%ModDir%/Images/Afflictions/Gensokyo_Divinggear_Effect.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Gensokyo_Divinggear_Talent"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Monorail"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Turret" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.3" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>-->
+
     <!--出血效应-博丽灵梦-->
     <Talent identifier="MRE_Reimu">
         <Icon texture="%ModDir%/Images/Talents/MRE_Talent.png" sheetindex="0,0" sheetelementsize="128,128" />
@@ -1520,6 +1587,128 @@
             </Conditions>
             <Abilities>
                 <CharacterAbilityGiveAffliction affliction="psychosis" strength="5.0" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--出血效应-八云紫-->
+    <Talent identifier="MRE_Yukari">
+        <Icon texture="%ModDir%/Images/Talents/MRE_Talent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.MRE_Yukari"/>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="MRE_Effect_Flag" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupInterval interval="0.1">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="MRE_Effect_Yukari" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="MRE_Effect_Yukari_blunttrauma" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="blunttrauma" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="MRE_Effect_Yukari_lacerations" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="lacerations" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="MRE_Effect_Yukari_bitewounds_Touhou_Bite" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="bitewounds,Touhou_Bite" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="MRE_Effect_Yukari_gunshotwound" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="gunshotwound" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="MRE_Effect_Yukari_explosiondamage" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="explosiondamage" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="MRE_Effect_Yukari_internaldamage" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="internaldamage" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="MRE_Effect_Yukari_organdamage" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="organdamage" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="MRE_Effect_Yukari_burn_Touhou_Freeze" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="burn,Touhou_Freeze" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="MRE_Effect_Yukari_Reiki_Pressure" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="Reiki_Pressure" addedmultiplier="0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="MRE_Effect_Yukari_Phoenix_Burn" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="Phoenix_Burn" addedmultiplier="0.15" />
             </Abilities>
         </AbilityGroupEffect>
     </Talent>

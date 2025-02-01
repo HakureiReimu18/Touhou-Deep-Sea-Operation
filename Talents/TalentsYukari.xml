@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="YukariTalent">
+        <Icon texture="%ModDir%/Images/Talents/YukariTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.YukariTalent"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.08" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval>
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="infection,debuff,poison" multiplier="0.92"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="1.0" >
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionAboveVitality vitalitypercentage="0"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityReplaceAffliction affliction="blunttrauma" newaffliction="lacerations"/>
+                <CharacterAbilityReplaceAffliction affliction="gunshotwound" newaffliction="bitewounds"/>
+                <CharacterAbilityReplaceAffliction affliction="explosiondamage" newaffliction="internaldamage"/>
+                <CharacterAbilityReplaceAffliction affliction="organdamage" newaffliction="Reiki_Pressure"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="1.0" >
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityReplaceAffliction affliction="lacerations" newaffliction="blunttrauma"/>
+                <CharacterAbilityReplaceAffliction affliction="bitewounds" newaffliction="gunshotwound"/>
+                <CharacterAbilityReplaceAffliction affliction="internaldamage" newaffliction="explosiondamage"/>
+                <CharacterAbilityReplaceAffliction affliction="Reiki_Pressure" newaffliction="organdamage"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="240.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies maxdistance="500" allowself="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="YukariTalent_120CD" amount="120"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="YukariTalent_120CD" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="blunttrauma" replacewith="lacerations" />
+                <CharacterAbilityModifyAffliction afflictionidentifiers="gunshotwound" replacewith="bitewounds" />
+                <CharacterAbilityModifyAffliction afflictionidentifiers="explosiondamage" replacewith="internaldamage" />
+                <CharacterAbilityModifyAffliction afflictionidentifiers="organdamage" replacewith="Reiki_Pressure" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="YukariTalent_120CD" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="lacerations" replacewith="blunttrauma" />
+                <CharacterAbilityModifyAffliction afflictionidentifiers="bitewounds" replacewith="gunshotwound" />
+                <CharacterAbilityModifyAffliction afflictionidentifiers="internaldamage" replacewith="explosiondamage" />
+                <CharacterAbilityModifyAffliction afflictionidentifiers="Reiki_Pressure" replacewith="organdamage" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="YukariTalent_120CD" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="AttackMultiplier" value="0.1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="YukariTalent_120CD" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <Talent identifier="Touhou_The_Key_Of_Duality_Talent">
+        <Icon texture="%ModDir%/Images/Talents/YukariTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Touhou_The_Key_Of_Duality_Talent"/>
+        <AbilityGroupEffect abilityeffecttype="OnGiveOrder">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_The_Key_Of_Duality_Outside" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToLastOrderedCharacter>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character,This,UseTarget" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_The_Key_Of_Duality_Outside_Order" amount="1.0" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToLastOrderedCharacter>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_The_Key_Of_Duality_Outside" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToLastOrderedCharacter>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character,This,UseTarget" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_The_Key_Of_Duality_Outside_Order" amount="1.0" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToLastOrderedCharacter>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Realm_Of_Fantasy" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_The_Key_Of_Duality_Intside" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.2" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+</Talents>

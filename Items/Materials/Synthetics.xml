@@ -9,7 +9,7 @@
         <PreferredContainer secondary="outpostmedcompartment" amount="3" spawnprobability="0.1" />
         <PreferredContainer secondary="supplycab,wreckstoragecab" minamount="1" maxamount="4" spawnprobability="0.05" />
         <PreferredContainer secondary="abandonedstoragecab" minamount="1" maxamount="4" spawnprobability="0.1" />
-        <Price baseprice="800"  minleveldifficulty="12">
+        <Price baseprice="500"  minleveldifficulty="12">
             <Price locationtype="outpost" multiplier="1.1" minavailable="6" />
             <Price locationtype="city" multiplier="0.9" minavailable="14" />
             <Price locationtype="research" multiplier="0.85" maxavailable="16" />
@@ -41,7 +41,7 @@
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
 
         <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Amulet" removecontaineditemsondeconstruct="true"
-                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="false">
             <Containable items="Amulet" />
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
             <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
@@ -90,7 +90,7 @@
         <PreferredContainer secondary="outpostmedcompartment" minamount="4" maxamount="18" spawnprobability="0.2" />
         <PreferredContainer secondary="supplycab,wreckstoragecab" minamount="10" maxamount="20" spawnprobability="0.05" notcampaign="true"/>
         <PreferredContainer secondary="abandonedstoragecab" minamount="4" maxamount="18" spawnprobability="0.18" />
-        <Price baseprice="90" >
+        <Price baseprice="50" >
             <Price storeidentifier="merchantoutpost" minavailable="24" maxavailable="64"/>
             <Price storeidentifier="merchantcity" minavailable="60" maxavailable="64" />
             <Price storeidentifier="merchantresearch" minavailable="48" maxavailable="64" />
@@ -144,9 +144,7 @@
         <Sprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" depth="0.4" sourcerect="0,0,100,139" scale="0.4"/>
         <Body width="80" height="80" density="10.1" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
-            <StatusEffect type="Always" target="This" Condition="0.5" >
-                <Conditional InWater="true" />
-            </StatusEffect>
+            <StatusEffect type="InWater" target="This" Condition="0.5" />
             <StatusEffect type="InWater" target="This" Condition="1.0" >
                 <Conditional HasTag="neq Touhou_Waterwheel_Gun" TargetContainer="true" />
             </StatusEffect>
@@ -168,7 +166,7 @@
         <PreferredContainer secondary="outpostmedcompartment" amount="12" spawnprobability="0.06" />
         <PreferredContainer secondary="supplycab" minamount="6" maxamount="12" spawnprobability="0.15" notcampaign="true"/>
         <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab" minamount="8" maxamount="16" spawnprobability="0.25" />
-        <Price baseprice="24" >
+        <Price baseprice="20" >
             <Price storeidentifier="merchantoutpost" minavailable="48"/>
             <Price storeidentifier="merchantcity" minavailable="80" />
             <Price storeidentifier="merchantresearch" minavailable="60" />
@@ -197,7 +195,7 @@
         <PreferredContainer secondary="outpostmedcompartment" amount="8" spawnprobability="0.08" />
         <PreferredContainer secondary="supplycab" minamount="8" maxamount="12" spawnprobability="0.1" notcampaign="true"/>
         <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab" minamount="12" maxamount="24" spawnprobability="0.2" />
-        <Price baseprice="70" >
+        <Price baseprice="20" >
             <Price storeidentifier="merchantoutpost" minavailable="36"/>
             <Price storeidentifier="merchantcity" minavailable="72" />
             <Price storeidentifier="merchantresearch" minavailable="64" />
@@ -309,6 +307,7 @@
         <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="-20" handangle="0" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnSecondaryUse" target="This" Condition="-7" />
             <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And" >
+                <Conditional skillrequirement="true" Touhou_Magic="lt 80" />
                 <Conditional Condition="lte 0" />
                 <GiveSkill skillidentifier="electrical" amount="4" triggertalents="false" />
                 <GiveSkill skillidentifier="helm" amount="4" triggertalents="false"/>
@@ -316,6 +315,18 @@
                 <GiveSkill skillidentifier="medical" amount="4" triggertalents="false"/>
                 <GiveSkill skillidentifier="weapons" amount="4" triggertalents="false"/>
                 <GiveSkill skillidentifier="Touhou_Magic" amount="4" triggertalents="false"/>
+                <GiveExperience amount="800" />
+                <RemoveItem />
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And" >
+                <Conditional skillrequirement="true" Touhou_Magic="gte 80" />
+                <Conditional Condition="lte 0" />
+                <GiveSkill skillidentifier="electrical" amount="2" triggertalents="false" />
+                <GiveSkill skillidentifier="helm" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="mechanical" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="medical" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="weapons" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="Touhou_Magic" amount="2" triggertalents="false"/>
                 <GiveExperience amount="500" />
                 <RemoveItem />
             </StatusEffect>
@@ -379,7 +390,24 @@
         <Body width="28" height="36" density="14" />
         <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="340" handangle="300" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnSecondaryUse" target="This" Condition="-22" />
-            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true">
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And">
+                <Conditional skillrequirement="true" Touhou_Magic="lt 40" />
+                <Conditional skillrequirement="true" Touhou_Magic="gte 0" />
+                <Conditional Condition="lte 0" />
+                <GiveSkill skillidentifier="Touhou_Magic" amount="5" triggertalents="false"/>
+                <GiveExperience amount="150" />
+                <RemoveItem />
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And">
+                <Conditional skillrequirement="true" Touhou_Magic="lt 80" />
+                <Conditional skillrequirement="true" Touhou_Magic="gte 40" />
+                <Conditional Condition="lte 0" />
+                <GiveSkill skillidentifier="Touhou_Magic" amount="4" triggertalents="false"/>
+                <GiveExperience amount="100" />
+                <RemoveItem />
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And">
+                <Conditional skillrequirement="true" Touhou_Magic="gte 80" />
                 <Conditional Condition="lte 0" />
                 <GiveSkill skillidentifier="Touhou_Magic" amount="3" triggertalents="false"/>
                 <GiveExperience amount="50" />
@@ -1087,8 +1115,8 @@
         <aitarget soundrange="800" fadeouttime="5" />
     </Item>
 
-    <Item name="" identifier="Touhou_Classified_Reiki_Erode_Crawler" category="Misc" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
-        <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.01" />
+    <Item name="" identifier="Touhou_Secret_Classified_Reiki_Erode_Crawler" category="Misc" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.03" />
         <Price baseprice="2000" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="3"/>
             <Price storeidentifier="merchantcity" minavailable="3" />
@@ -1103,7 +1131,49 @@
         <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
         <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" readonly="true" autoscrolltobottom="false"
                   AutoHideScrollbar="true" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true"
-                  welcomemessage="Touhou_Classified_Reiki_Erode_Crawler_Msg" textcolor="50,50,50,255">
+                  welcomemessage="Touhou_Secret_Classified_Reiki_Erode_Crawler_Msg" textcolor="50,50,50,255">
+            <GuiFrame relativesize="0.3,0.5" anchor="Center" style="Parchment" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+    <Item name="" identifier="Touhou_Confidential_Classified_Reiki_Erode_Crawler" category="Misc" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.03" />
+        <Price baseprice="2000" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="3"/>
+            <Price storeidentifier="merchantcity" minavailable="3" />
+            <Price storeidentifier="merchantresearch" minavailable="3" />
+            <Price storeidentifier="merchantmilitary" minavailable="3" />
+            <Price storeidentifier="merchantmine" minavailable="3"/>
+        </Price>
+        <PreferredContainer primary="secarmcab" />
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" readonly="true" autoscrolltobottom="false"
+                  AutoHideScrollbar="true" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true"
+                  welcomemessage="Touhou_Confidential_Classified_Reiki_Erode_Crawler_Msg" textcolor="50,50,50,255">
+            <GuiFrame relativesize="0.3,0.5" anchor="Center" style="Parchment" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+    <Item name="" identifier="Touhou_Top_Secret_Classified_Reiki_Erode_Crawler" category="Misc" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.03" />
+        <Price baseprice="2000" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="3"/>
+            <Price storeidentifier="merchantcity" minavailable="3" />
+            <Price storeidentifier="merchantresearch" minavailable="3" />
+            <Price storeidentifier="merchantmilitary" minavailable="3" />
+            <Price storeidentifier="merchantmine" minavailable="3"/>
+        </Price>
+        <PreferredContainer primary="secarmcab" />
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" readonly="true" autoscrolltobottom="false"
+                  AutoHideScrollbar="true" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true"
+                  welcomemessage="Touhou_Top_Secret_Classified_Reiki_Erode_Crawler_Msg" textcolor="50,50,50,255">
             <GuiFrame relativesize="0.3,0.5" anchor="Center" style="Parchment" hidedragicons="true" />
         </Terminal>
     </Item>

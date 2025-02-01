@@ -522,7 +522,7 @@
         <Body width="110" height="30" density="10" />
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
         <Projectile characterusable="false" launchimpulse="60" maxtargetstohit="2" damagedoors="true" friendlyfire="false" >
-            <Attack structuredamage="10" itemdamage="20" targetforce="8" targetimpulse="8" penetration="0.25">
+            <Attack structuredamage="10" itemdamage="20" targetforce="4" targetimpulse="4" penetration="0.25">
                 <Affliction identifier="burn" strength="7" />
                 <Affliction identifier="lacerations" strength="13" />
                 <Affliction identifier="bleeding" strength="8" />
@@ -552,21 +552,21 @@
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
         <Projectile characterusable="false" launchimpulse="60" maxtargetstohit="4" damagedoors="true" friendlyfire="false" >
             <Attack structuredamage="10" itemdamage="50" targetforce="5" targetimpulse="5" penetration="0.2">
-                <Affliction identifier="blunttrauma" strength="7" />
-                <Affliction identifier="burn" strength="7" />
-                <Affliction identifier="Reiki_Pressure" strength="6" />
+                <Affliction identifier="blunttrauma" strength="6" />
+                <Affliction identifier="burn" strength="6" />
+                <Affliction identifier="Reiki_Pressure" strength="5" />
                 <Affliction identifier="slow" strength="15" />
                 <Affliction identifier="Sleepless_Nightmare" strength="10" />
                 <Affliction identifier="Touhou_Rippling_Effect" strength="5" />
-                <Affliction identifier="stun" strength="1" />
-                <Affliction identifier="stun" strength="1" probability="0.5" />
+                <Affliction identifier="stun" strength="0.5" />
+                <Affliction identifier="stun" strength="0.5" probability="0.5" />
             </Attack>
             <StatusEffect type="OnNotContained" target="This" lifetime="3.0">
                 <ParticleEmitter particle="GlowDot" scalemin="2.0" scalemax="4.0" particlespersecond="160" anglemin="0" anglemax="360" colormultiplier="135,50,105,220" />
             </StatusEffect>
             <StatusEffect type="OnImpact" target="This">
                 <SpawnItem identifier="Touhou_Rippling_Bolt_Spawn_Force" spawnposition="This" aimspread="360" rotationtype="Collider" rotation="0" />
-                <Explosion range="400.0" sparks="false" underwaterbubble="false" flash="false" flames="false" force="10.0" camerashake="120" camerashakerange="2000">
+                <Explosion range="300.0" sparks="false" underwaterbubble="false" flash="false" flames="false" force="10.0" camerashake="100" camerashakerange="2000">
                     <Affliction identifier="Reiki_Pressure" strength="2" />
                     <Affliction identifier="burn" strength="2" />
                     <Affliction identifier="Sleepless_Nightmare" strength="10" />
@@ -635,7 +635,7 @@
         <TriggerComponent triggeredby="Creature" force="150" radius="1500" distancebasedforce="true"/>
         <ElectricalDischarger duration="0.4" reload="0.1" ignoreuser="true" characterusable="true" raycastrange="100" range="500" rangemultiplierinwalls="0.2" outdoorsonly="false" powerconsumption="0" pickkey="Select">
             <Attack targetimpulse="-10" targetforce="-10" penetration="0.6" >
-                <Affliction identifier="stun" strength="2.0" probability="0.3" />
+                <Affliction identifier="stun" strength="1.0" probability="0.3" />
                 <Affliction identifier="burn" strength="10" />
                 <Affliction identifier="Reiki_Pressure" strength="3" />
             </Attack>
@@ -657,10 +657,10 @@
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
         <Projectile characterusable="false" launchimpulse="80" maxtargetstohit="6" damagedoors="true" friendlyfire="false" >
             <Attack structuredamage="15" itemdamage="15" targetforce="5" targetimpulse="5" penetration="0.35">
-                <Affliction identifier="burn" strength="30" />
-                <Affliction identifier="Reiki_Pressure" strength="10" />
+                <Affliction identifier="burn" strength="15" />
+                <Affliction identifier="Reiki_Pressure" strength="5" />
                 <Affliction identifier="Sleepless_Nightmare" strength="10" />
-                <Affliction identifier="stun" strength="1" probability="0.5" />
+                <Affliction identifier="stun" strength="0.5" probability="0.5" />
             </Attack>
             <StatusEffect type="OnNotContained" target="This" lifetime="3.0">
                 <ParticleEmitter particle="GlowDot" scalemin="2.0" scalemax="4.0" particlespersecond="160" anglemin="0" anglemax="360" colormultiplier="135,50,105,220" />
@@ -868,7 +868,7 @@
 
     <!--魔术霰弹-->
     <Item name="魔术霰弹" identifier="Touhou_Magic_Automatic_Shotgun_Bullet" category="Weapon" subcategory="Touhou" maxstacksize="36" hideinmenus="true"
-          maxstacksizecharacterinventory="56" interactthroughwalls="true" tags="smallitem,Exorcism_Bullet" Scale="0.5" impactsoundtag="impact_metal_light" spritecolor="100,255,100,255">
+          maxstacksizecharacterinventory="36" interactthroughwalls="true" tags="smallitem,Exorcism_Bullet" Scale="0.5" impactsoundtag="impact_metal_light" spritecolor="100,255,100,255">
         <PreferredContainer primary="armcab" secondary="secarmcab"/>
         <Deconstruct time="0.5">
             <Item identifier="Reiki_Dust" />
@@ -896,6 +896,42 @@
                 <Explosion range="40.0" applyFireEffects="false" ballastfloradamage="50" severlimbsprobability="0.5" structuredamage="8" levelwalldamage="40" itemdamage="10" force="3.0" flames="false" smoke="false" sparks="false" underwaterbubble="false" flashcolor="255,115,95,150">
                     <Affliction identifier="burn" strength="3" />
                 </Explosion>
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
+    <!--污染霰弹-->
+    <Item name="污染霰弹" identifier="Touhou_Magic_Pollution_Shotgun_Bullet" category="Weapon" subcategory="Touhou" maxstacksize="36" hideinmenus="true"
+          maxstacksizecharacterinventory="36" interactthroughwalls="true" tags="smallitem,Touhou_Magic_Automatic_Shotgun_Bullet" Scale="0.5" impactsoundtag="impact_metal_light" spritecolor="100,255,100,255">
+        <PreferredContainer primary="armcab" secondary="secarmcab"/>
+        <Deconstruct time="0.5">
+            <Item identifier="Reiki_Dust" amount="2" />
+        </Deconstruct>
+        <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="189,299,23,11" depth="0.55" origin="0.5,0.5" />
+        <Body width="23" height="10" density="15" />
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
+        <Projectile characterusable="false" hitscan="true" hitscancount="5" removeonhit="true" spread="10">
+            <ParticleEmitter particle="tracerfirearm" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="55,255,55,200" scalemultiplier="1,0.9" />
+            <Attack structuredamage="2" targetforce="6" itemdamage="50" severlimbsprobability="0.4" penetration="0.2">
+                <Affliction identifier="gunshotwound" strength="9" />
+                <Affliction identifier="bleeding" strength="8" />
+                <Affliction identifier="Touhou_Lost_Dream" strength="2" />
+                <Affliction identifier="stun" strength="0.15" probability="0.25" />
+            </Attack>
+            <StatusEffect type="OnImpact" target="UseTarget">
+                <ParticleEmitter particle="impactfirearm" anglemin="0" anglemax="360" particleamount="10" velocitymin="0" scalemin="0.5" scalemax="0.8" scalemultiplier="7,7" colormultiplier="255,115,95,150" lifetimemultiplier="0.5"/>
+                <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,225,180" />
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="This" >
+                <sound file="Content/Items/Weapons/ExplosionLarge1.ogg" volume="0.5" range="500" />
+                <sound file="Content/Items/Weapons/ExplosionLarge2.ogg" volume="0.5" range="500" />
+                <Explosion range="150.0" force="2.0" severlimbsprobability="0.3" showeffects="false" camerashake="15" penetration="0.35">
+                    <Affliction identifier="Touhou_Freeze" strength="2" />
+                    <Affliction identifier="acidburn" strength="2" />
+                    <Affliction identifier="burn" strength="4" />
+                </Explosion>
+                <ParticleEmitter particle="Touhou_Blue_Explosion_Underwater" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" scalemin="2.5" scalemax="2.5" colormultiplier="255,72,36,150" />
+                <RemoveItem/>
             </StatusEffect>
         </Projectile>
     </Item>
@@ -1045,14 +1081,14 @@
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
         <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.6" colormultiplier="20,20,120,255"/>
-            <Attack itemdamage="20" levelwalldamage="20" targetforce="2" targetimpulse="2" penetration="0.2" severlimbsprobability="0.3">
-                <Affliction identifier="explosiondamage" strength="3" />
-                <Affliction identifier="Reiki_Pressure" strength="3" />
-                <Affliction identifier="burn" strength="3" />
-                <Affliction identifier="Touhou_Freeze" strength="3" />
-                <Affliction identifier="Sleepless_Nightmare" strength="5" />
-                <Affliction identifier="stun" strength="0.1" />
-                <Affliction identifier="stun" strength="0.1" probability="0.4"/>
+            <Attack itemdamage="40" levelwalldamage="20" targetforce="2" targetimpulse="2" penetration="0.15" severlimbsprobability="0.3">
+                <Affliction identifier="explosiondamage" strength="3.5" />
+                <Affliction identifier="Reiki_Pressure" strength="3.5" />
+                <Affliction identifier="burn" strength="3.5" />
+                <Affliction identifier="Touhou_Freeze" strength="3.5" />
+                <Affliction identifier="Sleepless_Nightmare" strength="3" />
+                <Affliction identifier="stun" strength="0.07" />
+                <Affliction identifier="stun" strength="0.07" probability="0.4"/>
             </Attack>
             <StatusEffect type="OnImpact" target="UseTarget" >
                 <Conditional entitytype="eq Structure"/>
@@ -1064,6 +1100,29 @@
                 <Remove />
             </StatusEffect>
         </Projectile>
+    </Item>
+
+    <!--污染月震中心-->
+    <Item name="仿制月震中心" identifier="Touhou_Pollution_Lunar_Center_Fake" scale="0.32" subcategory="Touhou" category="Weapon"
+          maxstacksize="16" maxstacksizecharacterinventory="6" cargocontaineridentifier="metalcrate" hideinmenus="true" spritecolor="255,155,155,255"
+          tags="smallitem,Touhou_Lunar_Center" impactsoundtag="impact_metal_light" >
+        <PreferredContainer secondary="armcab" />
+        <Deconstruct time="6">
+            <Item identifier="uranium" amount="2" />
+            <Item identifier="titaniumaluminiumalloy" amount="2" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Scorching_Ray_Gun_Ammo.png" sourcerect="0,0,120,120" depth="0.45" origin="0.5,0.5" />
+        <Body width="28" height="40" density="10" />
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
+        <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Touhou_Lnuar_Bolt_Spawn" removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="Touhou_Lnuar_Bolt_Spawn" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <StatusEffect type="OnUse" target="This" condition="-2.0" disabledeltatime="true" >
+                <SpawnItem identifiers="Touhou_Lnuar_Bolt_Spawn" count="3" spawnposition="ThisInventory" />
+            </StatusEffect>
+        </ItemContainer>
     </Item>
 
     <!--人偶用涟漪-普通-->
@@ -1210,4 +1269,304 @@
             </StatusEffect>
         </Projectile>
     </Item>
+
+
+    <!--污染霰弹枪-->
+    <Item name="污染霰弹枪" identifier="Touhou_Pollution_Shotgun" category="Weapon" cargocontaineridentifier="metalcrate" hideinmenus="true"
+          tags="mediumitem,weapon,gun,gunsmith,mountableweapon" Scale="0.45" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
+        <Deconstruct time="3">
+            <Item identifier="ballisticfiber" />
+            <Item identifier="Reiki_Stone" amount="12" />
+            <Item identifier="titaniumaluminiumalloy" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Pollution_Shotgun.png" sourcerect="340,0,172,132" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Pollution_Shotgun.png" depth="0.4" sourcerect="0,0,318,100" />
+        <Body width="318" height="100" density="10" />
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-20" aimpos="48,-5" handle1="-12,-15" handle2="20,5" holdangle="-20" msg="ItemMsgPickUpSelect"/>
+        <RangedWeapon barrelpos="68,10" weapondamagemodifier="2.0" penetration="0.6" penetrationmodifier="1.0" spread="8" unskilledspread="16" combatPriority="80" reload="0.2" holdtrigger="true" drawhudwhenequipped="true" crosshairscale="0.2">
+            <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+            <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+            <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="55,255,55,255" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun.ogg" type="OnUse" range="3000" volume="2" selectionmode="Random" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_1.ogg" type="OnUse" range="3000" volume="2" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_2.ogg" type="OnUse" range="3000" volume="2" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_3.ogg" type="OnUse" range="3000" volume="2" />
+            <StatusEffect type="OnUse" target="This">
+                <ParticleEmitter particle="casingfirearm" particleamount="1" colormultiplier="55,255,55,255" ScaleMultiplier="1.5,1.5" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
+                <Explosion range="150.0" force="2" shockwave="false" smoke="false" flash="true" sparks="false" flames="false" underwaterbubble="false" camerashake="6.0" />
+            </StatusEffect>
+            <RequiredItems items="Touhou_Magic_Automatic_Shotgun_Bullet,shotgunammo" type="Contained" msg="ItemMsgAmmoRequired" />
+            <RequiredSkill identifier="weapons" level="75" />
+            <StatusEffect type="OnUse" target="Character" disabledeltatime="true" >
+                <Conditional jobidentifier="neq Magician_Enemy"/>
+                <Affliction identifier="Reiki_Side_Effect" amount="20" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" reload="0.8" setvalue="true" delay="0.4" disabledeltatime="true" />
+            <StatusEffect type="OnUse" target="This" reload="0.2" setvalue="true" delay="1.2" disabledeltatime="true" />
+        </RangedWeapon>
+        <ItemContainer capacity="1" maxstacksize="12" hideitems="false" containedstateindicatorstyle="bullet" ShowTotalStackCapacityInContainedStateIndicator="true" containedstateindicatorslot="0" containedspritedepth="0.56">
+            <Containable items="Touhou_Magic_Automatic_Shotgun_Bullet,shotgunammo" hide="true"/>
+            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+        </ItemContainer>
+        <aitarget sightrange="3000" soundrange="5000" fadeouttime="5" />
+        <SkillRequirementHint identifier="weapons" level="75" />
+    </Item>
+
+    <!--污染步枪-->
+    <Item name="污染步枪" identifier="Touhou_Pollution_Rifle" category="Weapon" cargocontaineridentifier="metalcrate" hideinmenus="true"
+          tags="mediumitem,weapon,gun,gunsmith,mountableweapon" Scale="0.45" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
+        <Deconstruct time="3">
+            <Item identifier="ballisticfiber" />
+            <Item identifier="Reiki_Stone" amount="12" />
+            <Item identifier="titaniumaluminiumalloy" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Pollution_Rifle.png" sourcerect="318,0,130,74\6" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Pollution_Rifle.png" depth="0.4" sourcerect="0,0,310,71" />
+        <Body width="318" height="100" density="10" />
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-20" aimpos="48,-5" handle1="-12,-15" handle2="20,5" holdangle="-20" msg="ItemMsgPickUpSelect"/>
+        <RangedWeapon barrelpos="68,10" weapondamagemodifier="2.4" penetration="0.3" penetrationmodifier="1.0" spread="8" unskilledspread="16" combatPriority="80" reload="1.5" holdtrigger="true" drawhudwhenequipped="true" crosshairscale="0.2">
+            <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+            <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+            <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="55,255,55,255" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun.ogg" type="OnUse" range="3000" volume="2" selectionmode="Random" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_1.ogg" type="OnUse" range="3000" volume="2" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_2.ogg" type="OnUse" range="3000" volume="2" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_3.ogg" type="OnUse" range="3000" volume="2" />
+            <StatusEffect type="OnUse" target="This">
+                <ParticleEmitter particle="casingfirearm" particleamount="1" colormultiplier="55,255,55,255" ScaleMultiplier="1.5,1.5" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
+                <Explosion range="150.0" force="2" shockwave="false" smoke="false" flash="true" sparks="false" flames="false" underwaterbubble="false" camerashake="6.0" />
+            </StatusEffect>
+            <RequiredItems items="riflebullet" type="Contained" msg="ItemMsgAmmoRequired" />
+            <RequiredSkill identifier="weapons" level="75" />
+            <StatusEffect type="OnUse" target="Character" disabledeltatime="true" >
+                <Conditional jobidentifier="neq Magician_Enemy"/>
+                <Affliction identifier="Reiki_Side_Effect" amount="20" />
+            </StatusEffect>
+        </RangedWeapon>
+        <ItemContainer capacity="1" maxstacksize="12" hideitems="false" containedstateindicatorstyle="bullet" ShowTotalStackCapacityInContainedStateIndicator="true" containedstateindicatorslot="0" containedspritedepth="0.56">
+            <Containable items="riflebullet" hide="true"/>
+            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+        </ItemContainer>
+        <aitarget sightrange="3000" soundrange="5000" fadeouttime="5" />
+        <SkillRequirementHint identifier="weapons" level="75" />
+    </Item>
+
+
+    <!--电弧礼炮-->
+    <Item name="电弧礼炮" identifier="Touhou_Arc_Salute_Cannon" category="Weapon" cargocontaineridentifier="metalcrate" hideinmenus="true"
+          tags="mediumitem,weapon,gun,gunsmith,mountableweapon,provocativetohumanai" Scale="0.5" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
+        <Deconstruct time="3">
+            <Item identifier="Reiki_Stone" amount="20" />
+            <Item identifier="Score_Point" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Arc_Salute_Cannon.png" sourcerect="0,0,200,92" depth="0.55" origin="0.5,0.5" />
+        <Body width="200" height="92" density="10" />
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-20" aimpos="48,-5" handle1="-12,-15" handle2="20,5" holdangle="-20" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.9" setvalue="true" />
+        </Holdable>
+        <RangedWeapon barrelpos="78,10" weapondamagemodifier="1.0" spread="5" unskilledspread="15" combatPriority="80" reload="1.0" holdtrigger="true" drawhudwhenequipped="true" crosshairscale="0.2">
+            <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+            <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+            <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="55,255,55,255" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun.ogg" type="OnUse" range="3000" volume="2" selectionmode="Random" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_1.ogg" type="OnUse" range="3000" volume="2" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_2.ogg" type="OnUse" range="3000" volume="2" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_3.ogg" type="OnUse" range="3000" volume="2" />
+            <StatusEffect type="OnUse" target="This">
+                <ParticleEmitter particle="casingfirearm" particleamount="1" colormultiplier="55,255,55,255" ScaleMultiplier="1.5,1.5" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
+                <Explosion range="150.0" force="2" shockwave="false" smoke="false" flash="true" sparks="false" flames="false" underwaterbubble="false" camerashake="6.0" />
+            </StatusEffect>
+            <RequiredItems items="Touhou_Arc_Salute_Cannon_Ammo" type="Contained" msg="ItemMsgAmmoRequired" />
+            <StatusEffect type="OnUse" target="Contained" >
+                <Use />
+            </StatusEffect>
+            <RequiredSkill identifier="weapons" level="75" />
+            <StatusEffect type="OnUse" target="Character" disabledeltatime="true" comparison="And" >
+                <Conditional Touhou_Enemy_Buff01="lte 0" />
+                <Conditional Touhou_Enemy_Buff02="lte 0" />
+                <Affliction identifier="Reiki_Side_Effect" amount="3" />
+                <Affliction identifier="Reiki_Pressure" amount="3" />
+            </StatusEffect>
+        </RangedWeapon>
+        <ItemContainer capacity="1" maxstacksize="1" hideitems="false" containedstateindicatorstyle="bullet" ShowTotalStackCapacityInContainedStateIndicator="true" containedstateindicatorslot="0" containedspritedepth="0.56">
+            <Containable items="Touhou_Arc_Salute_Cannon_Ammo" hide="true"/>
+            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+        </ItemContainer>
+        <aitarget sightrange="3000" soundrange="5000" fadeouttime="5" />
+        <SkillRequirementHint identifier="weapons" level="75" />
+    </Item>
+
+    <!--礼炮电浆罐-->
+    <Item name="礼炮电浆罐" identifier="Touhou_Arc_Salute_Cannon_Ammo" scale="0.32" subcategory="Touhou" category="Equipment,Weapon" interactthroughwalls="true"
+          cargocontaineridentifier="metalcrate" tags="smallitem" impactsoundtag="impact_metal_light" maxstacksize="4">
+        <Deconstruct time="2">
+            <Item identifier="Magic_Material" amount="4" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Arc_Salute_Cannon_Ammo.png" sourcerect="0,0,72,120" origin="0.5,0.5" />
+        <Body width="30" height="30" density="10" />
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
+        <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Touhou_Arc_Salute_Cannon_Bolt" removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="Touhou_Arc_Salute_Cannon_Bolt" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <StatusEffect type="OnUse" target="This" condition="-2" disabledeltatime="true" >
+                <SpawnItem identifiers="Touhou_Arc_Salute_Cannon_Bolt" spawnposition="ThisInventory" />
+            </StatusEffect>
+        </ItemContainer>
+    </Item>
+
+    <!--礼炮电浆罐射弹-->
+    <Item name="" identifier="Touhou_Arc_Salute_Cannon_Bolt" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.5" sonarsize="0.75" hideinmenus="true">
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Magic_Bolt_Normal.png" sourcerect="0,0,72,72" depth="0.45" />
+        <Body width="28" height="36" density="10" />
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
+        <Projectile characterusable="false" launchimpulse="25" damagedoors="true" removeonhit="true" >
+            <Attack itemdamage="150" targetforce="10" targetimpulse="10" severlimbsprobability="0.3" penetration="0.35">
+                <Affliction identifier="Reiki_Pressure" strength="10" />
+                <Affliction identifier="burn" strength="25" />
+                <Affliction identifier="burn" strength="25" probability="0.4" />
+                <Affliction identifier="stun" strength="0.4" probability="0.4" />
+            </Attack>
+            <StatusEffect type="OnActive" target="This" lifetime="1.5">
+                <ParticleEmitter particle="GlowDot" scalemin="2.0" scalemax="4.0" particlespersecond="160" anglemin="0" anglemax="360" colormultiplier="5,105,195,220" />
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="This" stackable="false" disabledeltatime="true">
+                <SpawnItem identifier="Lightning_Kanameishi_Bolt_Spawn" spawnposition="This" aimspread="360" rotationtype="Collider" rotation="0" />
+                <Explosion range="80.0" structuredamage="20" force="1.0" itemdamage="20" severlimbsprobability="0.2" decal="explosion" decalsize="0.1" camerashakerange="200" camerashake="30">
+                    <Affliction identifier="Reiki_Pressure" strength="5" />
+                    <Affliction identifier="burn" strength="20" />
+                    <Affliction identifier="stun" strength="0.25" />
+                    <sound file="Content/Items/Weapons/ExplosionLarge2.ogg" volume="1.0" selectionmode="Random" range="1000" />
+                </Explosion>
+                <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="0" anglemax="360" particleamount="3" velocitymin="50" velocitymax="1000" scalemin="0.2" scalemax="0.35" />
+                <Remove />
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
+    <!--礼炮电浆罐生成电场-->
+    <Item name="" identifier="Touhou_Arc_Salute_Cannon_Bolt_Spawn" category="Weapon" scale="0.01" sonarsize="0.75" hideinmenus="true">
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Kanameishi.png" sourcerect="96,0,1,1" depth="0.45" />
+        <Body width="1" height="1" density="10" />
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
+        <ItemComponent>
+            <StatusEffect type="OnNotContained" target="This">
+                <Use/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" delay="0.3">
+                <Remove />
+            </StatusEffect>
+        </ItemComponent>
+        <ElectricalDischarger duration="0.3" reload="0.2" ignoreuser="true" characterusable="true" raycastrange="300" range="400" rangemultiplierinwalls="0.2" outdoorsonly="true" powerconsumption="0" pickkey="Select">
+            <Attack targetimpulse="10" penetration="0.3" structuredamage="10" itemdamage="10">
+                <Affliction identifier="burn" strength="20" />
+                <Affliction identifier="Sleepless_Nightmare" strength="10" />
+            </Attack>
+            <StatusEffect type="OnUse" target="This" forceplaysounds="true">
+                <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge1.ogg" range="20000" selectionmode="random" />
+                <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge2.ogg" range="20000" />
+                <Explosion range="500.0" camerashake="0" stun="0" force="0.0" flames="false" shockwave="false" sparks="true" underwaterbubble="false" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" delay="0.3">
+                <Remove />
+            </StatusEffect>
+        </ElectricalDischarger>
+    </Item>
+
+    <!--钉头书-->
+    <Item name="钉头书" identifier="Touhou_Nail_Head_Book" category="Weapon" cargocontaineridentifier="metalcrate" hideinmenus="true"
+          tags="mediumitem,weapon,gun,gunsmith,mountableweapon,provocativetohumanai" Scale="0.35" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
+        <Deconstruct time="3">
+            <Item identifier="Reiki_Stone" amount="20" />
+            <Item identifier="Score_Point" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Nail_Head_Book.png" sourcerect="0,0,200,60" depth="0.55" origin="0.5,0.5" />
+        <Body width="200" height="60" density="10" />
+        <Holdable slots="Any,RightHand,LeftHand" controlpose="true" holdpos="40,-20" aimpos="48,-5" handle1="-12,-15" handle2="20,5" holdangle="-20" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.9" setvalue="true" />
+        </Holdable>
+        <RangedWeapon barrelpos="78,10" weapondamagemodifier="1.0" spread="5" unskilledspread="15" combatPriority="80" reload="0.35" holdtrigger="true" drawhudwhenequipped="true" crosshairscale="0.2">
+            <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
+            <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
+            <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="55,255,55,255" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun.ogg" type="OnUse" range="3000" volume="2" selectionmode="Random" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_1.ogg" type="OnUse" range="3000" volume="2" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_2.ogg" type="OnUse" range="3000" volume="2" />
+            <Sound file="Content/Items/JobGear/Security/WEAPONS_autoShotgun_3.ogg" type="OnUse" range="3000" volume="2" />
+            <StatusEffect type="OnUse" target="This">
+                <ParticleEmitter particle="casingfirearm" particleamount="1" colormultiplier="55,255,55,255" ScaleMultiplier="1.5,1.5" anglemin="90" anglemax="150" velocitymin="50" velocitymax="250" CopyEntityAngle="true" />
+                <Explosion range="150.0" force="2" shockwave="false" smoke="false" flash="true" sparks="false" flames="false" underwaterbubble="false" camerashake="6.0" />
+            </StatusEffect>
+            <RequiredItems items="Touhou_Nail_Head_Book_Ammo" type="Contained" msg="ItemMsgAmmoRequired" />
+            <StatusEffect type="OnUse" target="Contained" >
+                <Use />
+            </StatusEffect>
+            <RequiredSkill identifier="weapons" level="75" />
+            <StatusEffect type="OnUse" target="Character" disabledeltatime="true" comparison="And" >
+                <Conditional Touhou_Enemy_Buff01="lte 0" />
+                <Conditional Touhou_Enemy_Buff02="lte 0" />
+                <Affliction identifier="Reiki_Side_Effect" amount="3" />
+                <Affliction identifier="Reiki_Pressure" amount="3" />
+            </StatusEffect>
+        </RangedWeapon>
+        <ItemContainer capacity="1" maxstacksize="1" hideitems="false" containedstateindicatorstyle="bullet" ShowTotalStackCapacityInContainedStateIndicator="true" containedstateindicatorslot="0" containedspritedepth="0.56">
+            <Containable items="Touhou_Nail_Head_Book_Ammo" hide="true"/>
+            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5" />
+        </ItemContainer>
+        <aitarget sightrange="3000" soundrange="5000" fadeouttime="5" />
+        <SkillRequirementHint identifier="weapons" level="75" />
+    </Item>
+
+
+    <!--钉头电池-->
+    <Item name="钉头电池" identifier="Touhou_Nail_Head_Book_Ammo" scale="0.2" subcategory="Touhou" category="Equipment,Weapon" interactthroughwalls="true"
+          cargocontaineridentifier="metalcrate" tags="smallitem" impactsoundtag="impact_metal_light" maxstacksize="4">
+        <Deconstruct time="2">
+            <Item identifier="Magic_Material" amount="4" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Nail_Head_Book_Ammo.png" sourcerect="0,0,48,168" origin="0.5,0.5" />
+        <Body width="48" height="168" density="10" />
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
+        <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Touhou_Nail_Head_Book_Bolt" removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="Touhou_Nail_Head_Book_Bolt" />
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
+            <StatusEffect type="OnUse" target="This" condition="-1" disabledeltatime="true" >
+                <SpawnItem identifiers="Touhou_Nail_Head_Book_Bolt" spawnposition="ThisInventory" />
+            </StatusEffect>
+        </ItemContainer>
+    </Item>
+
+    <!--钉头电池射弹-->
+    <Item name="" identifier="Touhou_Nail_Head_Book_Bolt" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.5" sonarsize="0.75" hideinmenus="true">
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Magic_Bolt_Normal.png" sourcerect="0,0,72,72" depth="0.45" />
+        <Body width="28" height="36" density="10" />
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
+        <Projectile characterusable="false" hitscan="true" maxtargetstohit="4" damagedoors="true" removeonhit="true" >
+            <Attack itemdamage="50" targetforce="2" targetimpulse="2" severlimbsprobability="0.3" penetration="0.2">
+                <Affliction identifier="explosiondamage" strength="3" />
+                <Affliction identifier="lacerations" strength="5" />
+                <Affliction identifier="Sleepless_Nightmare" strength="1" />
+                <Affliction identifier="burn" strength="3" />
+                <Affliction identifier="burn" strength="5" probability="0.2" />
+                <Affliction identifier="stun" strength="0.4" probability="0.4" />
+            </Attack>
+            <StatusEffect type="OnImpact" target="This" stackable="false" disabledeltatime="true">
+                <Explosion range="80.0" structuredamage="20" force="1.0" itemdamage="20" severlimbsprobability="0.2" decal="explosion" decalsize="0.1" camerashakerange="200" camerashake="30">
+                    <Affliction identifier="Reiki_Pressure" strength="2" />
+                    <Affliction identifier="burn" strength="2" />
+                    <Affliction identifier="stun" strength="0.05" />
+                    <sound file="Content/Items/Weapons/ExplosionLarge2.ogg" volume="1.0" selectionmode="Random" range="1000" />
+                </Explosion>
+                <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="0" anglemax="360" particleamount="3" velocitymin="50" velocitymax="1000" scalemin="0.2" scalemax="0.35" />
+                <Remove />
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
+
 </Items>
