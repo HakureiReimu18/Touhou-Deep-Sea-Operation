@@ -32,6 +32,7 @@
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="1.5" >
             <RequiredSkill identifier="Touhou_Magic" level="60" />
+            <RequiredItem identifier="Plant_Essential_Oil" amount="2"/>
             <RequiredItem identifier="Reiki_Dust_Caking" amount="2"/>
             <RequiredItem identifier="Reiki_Stone" amount="2"/>
         </Fabricate>
@@ -144,12 +145,13 @@
         <Sprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" depth="0.4" sourcerect="0,0,100,139" scale="0.4"/>
         <Body width="80" height="80" density="10.1" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
-            <StatusEffect type="InWater" target="This" Condition="0.5" />
-            <StatusEffect type="InWater" target="This" Condition="1.0" >
-                <Conditional HasTag="neq Touhou_Waterwheel_Gun" TargetContainer="true" />
+            <StatusEffect type="Always" target="This" Condition="0.5" duration="0.5" Interval="0.5" comparison="And" >
+                <Conditional condition="gt 5"/>
+                <Conditional InWater="true"/>
             </StatusEffect>
-            <StatusEffect type="OnContained" target="This" Condition="1.5" Interval="5.0" >
-                <Conditional HasTag="eq Touhou_Waterwheel_Gun" TargetContainer="true" />
+            <StatusEffect type="Always" target="This" Condition="0.5" Duration="5" Interval="5" comparison="And" >
+                <Conditional condition="lte 5"/>
+                <Conditional InWater="true"/>
             </StatusEffect>
         </Holdable>
 

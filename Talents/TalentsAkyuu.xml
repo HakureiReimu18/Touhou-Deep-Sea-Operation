@@ -24,10 +24,39 @@
         <AbilityGroupEffect abilityeffecttype="OnGainMissionExperience">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo" />
+                <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo_Round_End" />
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyValue multiplyvalue="1.5"/>
             </Abilities>
         </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true">
+                            <Affliction identifier="Memory_Of_Gensokyo_Round_End" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval>
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo" />
+                <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo_Round_End" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="MovementSpeed" value="-0.25" />
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="-0.35" />
+                <CharacterAbilityModifyStat stattype="SkillGainSpeed" value="1" />
+                <CharacterAbilityModifyStat stattype="MedicalItemApplyingMultiplier" value="0.15" />
+                <CharacterAbilityModifyStat stattype="DeconstructorSpeedMultiplier" value="0.25" />
+                <CharacterAbilityModifyStat stattype="FabricationSpeed" value="0.25" />
+                <CharacterAbilityModifyStat stattype="MeleeAttackMultiplier" value="-0.25" />
+                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="-0.2" />
+                <CharacterAbilityModifyStat stattype="RangedAttackMultiplier" value="-0.15" />
+            </Abilities>
+        </AbilityGroupInterval>
     </Talent>
 </Talents>

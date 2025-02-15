@@ -50,7 +50,7 @@
                 <Conditional InWater="false" />
             </StatusEffect>
         </Propulsion>
-        <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true">
+        <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true" QuickUseMovesItemsInside="false">
             <Containable items="smallitem,mediumitem" excludeditems="Marisa_Broom,Kappa_Backpack,backpack,toolbelt,gun"/>
         </ItemContainer>
         <AiTarget soundrange="2000" />
@@ -82,11 +82,11 @@
             <StatusEffect type="Always" target="Contained" Condition="2.5" Interval="1.0" Duration="1.0" >
                 <Conditional TargetContainer="true" condition="gt 0" />
             </StatusEffect>
-            <StatusEffect type="Always" target="This" targetslot="0" Condition="-0.15" Interval="1.0" >
+            <StatusEffect type="Always" target="This" targetslot="0" Condition="-0.6" Interval="1.0" >
                 <RequiredItems items="loadable,battery" type="Contained" />
                 <Conditional condition="lt 100" TargetContainedItem="true" />
             </StatusEffect>
-            <StatusEffect type="Always" target="This" targetslot="1" Condition="-0.15" Interval="1.0"  >
+            <StatusEffect type="Always" target="This" targetslot="1" Condition="-0.6" Interval="1.0"  >
                 <RequiredItems items="loadable,battery" type="Contained" />
                 <Conditional condition="lt 100" TargetContainedItem="true" />
             </StatusEffect>
@@ -127,9 +127,23 @@
         <Body width="88" height="126" density="10" />
         <ItemContainer autofill="False" capacity="1" maxstacksize="1" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
             <Containable identifiers="oxygentank,oxygensource" />
+            <Containable items="oxygensource">
+                <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" UseHullOxygen="false" />
+                <StatusEffect type="OnWearing" target="Contained" Condition="-0.3" comparison="And">
+                    <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+                    <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                    <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+                </StatusEffect>
+            </Containable>
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
-            <SubContainer capacity="19" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,bigitem"/>
+            <SubContainer capacity="3" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem" excludeditems="backpack,crate,toolbelt"/>
+            </SubContainer>
+            <SubContainer capacity="4" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt"/>
+            </SubContainer>
+            <SubContainer capacity="12" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,tsm_ammobox"/>
             </SubContainer>
         </ItemContainer>
 
@@ -142,32 +156,10 @@
             <sprite name="Backpack Wearable" texture="%ModDir%/Images/Nitori_Clothes/Tools.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
                     inherittexturescale="false" hideotherwearables="false" sourcerect="17,28,102,104" origin="0.75,0.57" scale="0.5" />
 
-            <StatusEffect type="OnWearing" target="Character" PressureProtection="3600.0" SpeedMultiplier="0.88" setvalue="true" disabledeltatime="true" />
-
-            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="0.0" UseHullOxygen="true" />
-            <StatusEffect type="Always" target="Contained" Condition="0.1" targetslot="0" comparison="And">
-                <RequiredItem items="oxygentank" type="Contained" excludebroken="false" />
-                <Conditional HullOxygenPercentage="gt 50" />
-                <Conditional InWater="false" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
-                <Conditional IsDead="false" />
-                <Conditional HullOxygenPercentage="lt 50" />
-                <Conditional InWater="false" />
-                <Conditional decreasedoxygenconsumption="lt 100" />
-                <RequiredItem items="oxygentank,oxygenitetank" type="Contained" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
-                <Conditional IsDead="false" />
-                <Conditional InWater="true" />
-                <RequiredItem items="oxygentank,oxygenitetank" type="Contained" />
-            </StatusEffect>
+            <StatusEffect type="OnWearing" target="Character" SpeedMultiplier="0.88" setvalue="true" disabledeltatime="true" />
 
             <SkillModifier skillidentifier="mechanical" skillvalue="6" />
             <SkillModifier skillidentifier="electrical" skillvalue="6" />
-            <!--            <SkillModifier skillidentifier="medical" skillvalue="6" />
-                        <SkillModifier skillidentifier="weapons" skillvalue="6" />
-                        <SkillModifier skillidentifier="helm" skillvalue="6" />-->
         </Wearable>
         <aitarget maxsightrange="1500" />
     </Item>
@@ -201,11 +193,25 @@
         <InventoryIcon texture="%ModDir%/Images/Tools/Kappa_Backpack_Plus.png" sourcerect="0,0,100,132" origin="0.5,0.5" />
         <Sprite texture="%ModDir%/Images/Tools/Kappa_Backpack.png" depth="0.7" sourcerect="0,0,88,126" origin="0.5,0.5" />
         <Body width="88" height="126" density="10" />
-        <ItemContainer autofill="False" capacity="1" maxstacksize="1" containedstateindicatorstyle="tank" containedstateindicatorslot="0">
+        <ItemContainer autofill="False" capacity="1" maxstacksize="1" containedstateindicatorstyle="tank" containedstateindicatorslot="0" ExtraStackSize="8">
             <Containable identifiers="oxygentank,oxygensource" />
+            <Containable items="oxygensource">
+                <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" UseHullOxygen="false" />
+                <StatusEffect type="OnWearing" target="Contained" Condition="-0.3" comparison="And">
+                    <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+                    <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                    <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+                </StatusEffect>
+            </Containable>
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
-            <SubContainer capacity="19" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+            <SubContainer capacity="3" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem" excludeditems="backpack,crate,toolbelt"/>
+            </SubContainer>
+            <SubContainer capacity="8" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
                 <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt"/>
+            </SubContainer>
+            <SubContainer capacity="8" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,tsm_ammobox"/>
             </SubContainer>
         </ItemContainer>
 
@@ -248,32 +254,13 @@
             </Sonar>
             <StatusEffect type="OnWearing" target="Character" PressureProtection="5000.0" setvalue="true" disabledeltatime="true" />
 
-            <StatusEffect type="OnWearing" target="Character" OxygenAvailable="0.0" UseHullOxygen="true" />
-            <StatusEffect type="Always" target="Contained" Condition="0.1" targetslot="0" comparison="And">
-                <RequiredItem items="oxygentank" type="Contained" excludebroken="false" />
-                <Conditional HullOxygenPercentage="gt 50" />
-                <Conditional InWater="false" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
-                <Conditional IsDead="false" />
-                <Conditional HullOxygenPercentage="lt 50" />
-                <Conditional InWater="false" />
-                <Conditional decreasedoxygenconsumption="lt 100" />
-                <RequiredItem items="oxygentank,oxygenitetank" type="Contained" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" Condition="-0.3" comparison="And" targetslot="0">
-                <Conditional IsDead="false" />
-                <Conditional InWater="true" />
-                <RequiredItem items="oxygentank,oxygenitetank" type="Contained" />
-            </StatusEffect>
-
-            <StatusEffect type="OnWearing" target="Character" comparison="And" >
+            <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="0.5" Duration="0.5" >
                 <Conditional IsDead="false" />
                 <Conditional Candid_Friend="gt 0"/>
                 <Affliction identifier="Nitori_Tools" amount="50" />
             </StatusEffect>
 
-            <StatusEffect type="OnWearing" target="Character" comparison="And" >
+            <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="0.5" Duration="0.5" >
                 <Conditional IsDead="false" />
                 <Conditional Hyouibana_Effect_Prefect_Nitori="gt 0"/>
                 <Affliction identifier="Nitori_Tools" amount="50" />
@@ -458,12 +445,12 @@
         </Price>
         <Sprite texture="%ModDir%/Images/Tools/Illness_Recovery_Charm.png" sourcerect="0,0,128,128" depth="0.6" origin="0.5,0.5" />
         <Body width="48" height="48" density="10" />
-        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="260" swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect"/>
+        <Holdable slots="Any,RightHand+LeftHand" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnSpawn" target="This" TeamID="1" setvalue="true" TargetItemComponent="WifiComponent" />
+        </Holdable>
         <Deconstruct time="3" chooserandom="false" amount="1" requireddeconstructor="Alchemy_Table">
             <!--炼金桌内回收-->
-            <Item identifier="Mu_Alchemical" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
-            <Item identifier="organicfiber" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
-            <Item identifier="Reiki_Stone" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Illness_Recovery_Charm" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
         </Deconstruct>
         <!--如果添加新职业，也许会用到配方解锁-->
         <!--        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" requiresrecipe="true">-->
@@ -474,62 +461,16 @@
             <RequiredItem identifier="Reiki_Stone" />
         </Fabricate>
         <WifiComponent range="65000.0" LinkToChat="true" MinChatMessageInterval="0.0" />
-        <ItemContainer capacity="1" maxstacksize="1" autoinject="true">
-            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
-            <Containable items="chem,syringe" />
-        </ItemContainer>
         <Wearable limbtype="Head" slots="Any,Headset" msg="ItemMsgPickUpSelect" >
             <sprite name="Headset Wearable" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.7" hideotherwearables="false" origin="0.5,0.5" />
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.02" Interval="1.0" disabledeltatime="true" >
-                <Conditional HealthPercentage="lt 100" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="damage" amount="0.15" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="1.5" disabledeltatime="true" >
-                <Conditional burn="gte 1" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="burn" amount="0.1" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="1.0" disabledeltatime="true" >
-                <Conditional bleeding="gte 1" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="bleeding" amount="0.2" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="1.0" Duration="1.0" >
-                <Conditional oxygenlow="gte 2" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="oxygenlow" amount="2" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="1.0" Duration="1.0" >
-                <Conditional HealthPercentage="lte 2" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="oxygenlow" amount="1" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="3.0" Duration="3.0" >
-                <Conditional psychosis="gte 5" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="psychosis" amount="0.9" />
-                <ReduceAffliction type="nausea" amount="5" />
-                <Affliction identifier="psychosisresistance" amount="5" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.01" Interval="1.0" disabledeltatime="true" >
-                <Conditional Reiki_Side_Effect="gt 0" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="Reiki_Side_Effect" amount="0.03" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="3.0" disabledeltatime="true" >
-                <Conditional hallucinating="gte 10" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="hallucinating" amount="20" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" Interval="5.0" Duration="5.0" >
+            <StatusEffect type="OnWearing" target="This,Character" Interval="5.0" Duration="5.0" disabledeltatime="true" >
                 <Conditional condition="gt 0" />
                 <Affliction identifier="Touhou_Water_Heart" amount="50" />
             </StatusEffect>
+            <StatusEffect target="This,Character" Condition="-0.005" Interval="1.0" Duration="1.0" disabledeltatime="true" >
+                <Conditional HealthPercentage="lte 99" />
+            </StatusEffect>
         </Wearable>
-        <Quality>
-            <QualityStat stattype="Condition" value="0.334" />
-        </Quality>
     </Item>
 
     <!--元素腰带-->
@@ -747,7 +688,7 @@
                 </Containable>
             </SubContainer>
             <SubContainer capacity="12" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,bigitem"/>
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,bigitem,bulkyweapon"/>
             </SubContainer>
         </ItemContainer>
         <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
@@ -813,7 +754,7 @@
             <StatusEffect type="OnSecondaryUse" target="This,Character" delay="0.2" Condition="-90" >
                 <Conditional Grunt_Security_Tengu="gt 2"/>
                 <Conditional Wind_God_Girl="gt 2"/>
-                <Conditional Hyouibana_Effect_Prefect_Aya="gt 2"/>
+                <Conditional Hyouibana_Aya_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Aya_Token_Effect" strength="100" />
             </StatusEffect>
             <StatusEffect type="OnBroken" target="This" disabledeltatime="true" >
@@ -979,7 +920,7 @@
                 </Containable>
             </SubContainer>
             <SubContainer capacity="23" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,Power_Bank,chem,medical,refrigerated,stasisbag" excludeditems="backpack,toolbelt,toolbox,bandolier,organ"/>
+                <Containable items="smallitem,Power_Bank,chem,medical,refrigerated,stasisbag" excludeditems="backpack,toolbelt,toolbox,bandolier,organ,bulkyweapon"/>
             </SubContainer>
         </ItemContainer>
         <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
@@ -1278,7 +1219,7 @@
         <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55" />
         <Body width="170" height="10" density="10" />
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
-        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" friendlyfire="false" >
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.4" colormultiplier="160,200,160,160"/>
             <Attack structuredamage="-8" targetforce="1" targetimpulse="1">
                 <Affliction identifier="burn" strength="0.1" />
@@ -1312,7 +1253,7 @@
         <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55" />
         <Body width="170" height="10" density="10" />
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
-        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" friendlyfire="false" >
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.4" colormultiplier="120,200,120,160"/>
             <Attack structuredamage="-9.6" targetforce="2" targetimpulse="2">
                 <Affliction identifier="burn" strength="0.1" />
@@ -1321,7 +1262,7 @@
                 <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="0" anglemax="360" velocitymin="100" velocitymax="500" scalemin="0.1" scalemax="0.2" />
                 <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
                 <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
-                <Explosion range="295" ballastfloradamage="100" structuredamage="-52" force="1.0" flames="false" smoke="true" sparks="false"
+                <Explosion range="295" ballastfloradamage="100" structuredamage="-78" force="1.0" flames="false" smoke="true" sparks="false"
                            underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
                     <Affliction identifier="burn" strength="0.25" />
                 </Explosion>
@@ -1346,7 +1287,7 @@
         <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55" />
         <Body width="170" height="10" density="10" />
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
-        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" friendlyfire="false" >
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.4" colormultiplier="80,160,80,180"/>
             <Attack structuredamage="-11.2" targetforce="3" targetimpulse="3">
                 <Affliction identifier="burn" strength="0.1" />
@@ -1355,7 +1296,7 @@
                 <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="0" anglemax="360" velocitymin="100" velocitymax="500" scalemin="0.1" scalemax="0.2" />
                 <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
                 <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
-                <Explosion range="328" ballastfloradamage="200" structuredamage="-63" force="1.0" flames="false" smoke="true" sparks="false"
+                <Explosion range="328" ballastfloradamage="200" structuredamage="-94.5" force="1.0" flames="false" smoke="true" sparks="false"
                            underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
                     <Affliction identifier="burn" strength="0.25" />
                 </Explosion>
@@ -1380,7 +1321,7 @@
         <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55" />
         <Body width="170" height="10" density="10" />
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
-        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" friendlyfire="false" >
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.4" colormultiplier="20,150,20,200"/>
             <Attack structuredamage="-12.8" targetforce="4" targetimpulse="4">
                 <Affliction identifier="burn" strength="0.1" />
@@ -1389,7 +1330,7 @@
                 <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="0" anglemax="360" velocitymin="100" velocitymax="500" scalemin="0.1" scalemax="0.2" />
                 <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
                 <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
-                <Explosion range="361" ballastfloradamage="300" structuredamage="-72" force="1.0" flames="false" smoke="true" sparks="false"
+                <Explosion range="361" ballastfloradamage="300" structuredamage="-108" force="1.0" flames="false" smoke="true" sparks="false"
                            underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
                     <Affliction identifier="burn" strength="0.25" />
                 </Explosion>
@@ -1751,7 +1692,7 @@
             </StatusEffect>
         </Holdable>
         <ItemContainer autofill="False" capacity="12" maxstacksize="64" slotsperrow="3">
-            <Containable identifiers="smallitem" excludeditems="backpack,crate,gun,toolbox,mobilecontainer" />
+            <Containable identifiers="smallitem,Power_Bank" excludeditems="backpack,crate,gun,toolbox,mobilecontainer" />
         </ItemContainer>
         <aitarget soundrange="1" fadeouttime="5" />
     </Item>
@@ -2264,7 +2205,7 @@
 
     <!--表里一体之钥-->
     <Item name="" identifier="Touhou_The_Key_Of_Duality" subcategory="Touhou" category="Misc" maxstacksize="1" Tags="Doll,smallitem" allowasextracargo="true" description="" scale="0.5" impactsoundtag="impact_metal_light">
-        <Fabricate suitablefabricators="fabricator" requiredtime="5">
+        <Fabricate suitablefabricators="fabricator" requiresrecipe="true" requiredtime="5">
             <RequiredSkill identifier="Touhou_Magic" level="50" />
             <RequiredItem identifier="Score_Point" />
             <RequiredItem identifier="organicfiber" amount="2" />
