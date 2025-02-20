@@ -91,13 +91,23 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--天赋停摆 增加5%最大生命值。分支最后的天赋，解锁此天赋后，其他分支将无法解锁-->
+    <!--天赋停摆 增加5%最大生命值，如果异变源头的计数未满，则立刻获得100点计数。分支最后的天赋，解锁此天赋后，其他分支将无法解锁-->
     <Talent identifier="Touhou_Yokai_Talents_Locked">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Touhou_Yokai_Talents_Locked"/>
         <AbilityGroupEffect abilityeffecttype="None">
             <Abilities>
                 <CharacterAbilityGiveStat stattype="MaximumHealthMultiplier" value="0.05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="481" invert="true"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Yokai_Talents_Locked_Counter" min="1" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Yokai_Counter" value="100" removeondeath="false" />
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Yokai_Talents_Locked_Counter" value="1" removeondeath="false" />
             </Abilities>
         </AbilityGroupEffect>
     </Talent>

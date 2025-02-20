@@ -413,7 +413,7 @@
       <StatusEffect type="OnBroken" target="This" reload="0.085" condition="100" delay="6" disabledeltatime="true" setvalue="true" >
         <sound file="%ModDir%/Sounds/Tools/Overheating_Restart01.ogg" type="OnUse" range="10000.0" volume="5.0" loop="false" />
       </StatusEffect>
-      <StatusEffect type="Always" target="This" condition="100" disabledeltatime="true" setvalue="true" AllowWhenBroken="true" Inteval="30">
+      <StatusEffect type="Always" target="This" condition="100" disabledeltatime="true" setvalue="true" AllowWhenBroken="true" Interval="30">
         <Conditional condition="lte 0" />
       </StatusEffect>
 
@@ -779,4 +779,175 @@
     </LightComponent>
   </Item>
 
+  <Item
+          name="魔法材料种植柜"
+          identifier="Touhou_Plant_Machine"
+          tags="Touhou_Plant_Machine"
+          category="Machine"
+          subcategory="Touhou"
+          linkable="true"
+          allowedlinks="medcabinet,locker,toxcontainer"
+          scale="0.8">
+    <UpgradePreviewSprite texture="Content/UI/WeaponUI.png" sourcerect="384,960,64,64" origin="0.5,0.45" />
+    <sprite texture="%ModDir%/Images/General_Items/Touhou_Plant_Machine.png" sourcerect="0,0,132,120" depth="0.79" premultiplyalpha="false" origin="0.5,0.5" />
+    <Price baseprice="1500" >
+      <Price storeidentifier="merchantoutpost" multiplier="1.1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantcity" multiplier="1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantresearch" multiplier="1.1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantmilitary" multiplier="1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantmine" multiplier="1.1" sold="true" maxavailable="1" />
+    </Price>
+    <Deconstruct time="5">
+      <Item identifier="Reiki_Stone" amount="4" />
+      <Item identifier="Magic_Material" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiredtime="10">
+      <RequiredSkill identifier="medical" level="60" />
+      <RequiredSkill identifier="mechanical" level="60" />
+      <RequiredItem identifier="Reiki_Stone" amount="4"/>
+      <RequiredItem identifier="carbon" amount="4"/>
+      <RequiredItem identifier="Magic_Material" />
+      <Item identifier="Spiritual_Water" amount="4" />
+    </Fabricate>
+    <Body width="160" height="160" density="30" />
+    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="false">
+      <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.75" setvalue="true" />
+      <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Gilead_Branch_Seed_On" stackable="false" >
+        <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0" />
+        <RequiredItems items="mobilebattery" type="Contained" targetslot="1" />
+        <RequiredItems items="oxygensource" type="Contained" targetslot="2" />
+        <RequiredItems items="fertilizer" type="Contained" targetslot="3" />
+        <RequiredItems items="Gilead_Branch_Seed" type="Contained" targetslot="4" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Cinnamon_Branch_Seed_On" stackable="false" >
+        <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0" />
+        <RequiredItems items="mobilebattery" type="Contained" targetslot="1" />
+        <RequiredItems items="oxygensource" type="Contained" targetslot="2" />
+        <RequiredItems items="fertilizer" type="Contained" targetslot="3" />
+        <RequiredItems items="Cinnamon_Branch_Seed" type="Contained" targetslot="4" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Sun_Flower_Seed_On" stackable="false" >
+        <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0" />
+        <RequiredItems items="mobilebattery" type="Contained" targetslot="1" />
+        <RequiredItems items="oxygensource" type="Contained" targetslot="2" />
+        <RequiredItems items="fertilizer" type="Contained" targetslot="3" />
+        <RequiredItems items="Sun_Flower_Seed" type="Contained" targetslot="4" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Sun_Flower_Seed_False" stackable="false" >
+        <RequiredItems items="Touhou_Fake_Item" type="Contained" targetslot="0" MatchOnEmpty="true" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Sun_Flower_Seed_False" stackable="false" >
+        <RequiredItems items="Touhou_Fake_Item" type="Contained" targetslot="1" MatchOnEmpty="true" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Sun_Flower_Seed_False" stackable="false" >
+        <RequiredItems items="Touhou_Fake_Item" type="Contained" targetslot="2" MatchOnEmpty="true" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Sun_Flower_Seed_False" stackable="false" >
+        <RequiredItems items="Touhou_Fake_Item" type="Contained" targetslot="3" MatchOnEmpty="true" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Sun_Flower_Seed_False" stackable="false" >
+        <RequiredItems items="Touhou_Fake_Item" type="Contained" targetslot="4" MatchOnEmpty="true" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" Interval="180" stackable="false" >
+        <Conditional HasTag="eq Gilead_Branch_Seed_On"/>
+        <SpawnItem identifiers="Gilead_Branch" spawnposition="ThisInventory" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" Interval="360" stackable="false"  >
+        <Conditional HasTag="eq Cinnamon_Branch_Seed_On"/>
+        <SpawnItem identifiers="Cinnamon_Branch" spawnposition="ThisInventory" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" Interval="240" stackable="false" spawnItemRandomly="true" >
+        <Conditional HasTag="eq Sun_Flower_Seed_On"/>
+        <SpawnItem identifiers="Sun_Flower_Petal01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Sun_Flower_Petal02" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Sun_Flower_Petal03" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </Holdable>
+
+    <ItemContainer capacity="0" maxstacksize="1" canbeselected = "true" hideitems="true" itempos="185,-172" iteminterval="27,0" containedspritedepth="0.81">
+      <GuiFrame relativesize="0.2,0.2" anchor="Center" style="ItemUI" />
+      <SlotIcon slotindex="0" texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="100,0,100,139" origin="0.5,0.5" />
+      <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+      <SlotIcon slotindex="2" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5" />
+      <SlotIcon slotindex="3" texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="910,128,87,125" origin="0.5,0.5" />
+      <SlotIcon slotindex="4" texture="%ModDir%/Images/Gardening/Plants_Seed.png" sourcerect="0,0,68,102" origin="0.5,0.5" />
+      <SubContainer capacity="1" maxstacksize="1" >
+        <Containable items="Spiritual_Water" >
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.05" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="Contained"  Tags="Touhou_Plant_Machine_False" >
+            <Conditional condition="lte 0"/>
+          </StatusEffect>
+        </Containable>
+      </SubContainer>
+      <SubContainer capacity="1" maxstacksize="1" >
+        <Containable items="mobilebattery" setactive="true" >
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.1" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="This,Contained" Tags="Touhou_Plant_Machine_False" >
+            <Conditional condition="lte 0"/>
+          </StatusEffect>
+        </Containable>
+      </SubContainer>
+      <SubContainer capacity="1" maxstacksize="1" >
+        <Containable items="oxygensource" >
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.05" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="This,Contained" Tags="Touhou_Plant_Machine_False" >
+            <Conditional condition="lte 0"/>
+          </StatusEffect>
+        </Containable>
+      </SubContainer>
+      <SubContainer capacity="1" maxstacksize="1" >
+        <Containable items="fertilizer" >
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.1" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="This,Contained" Tags="Touhou_Plant_Machine_False" >
+            <Conditional condition="lte 0"/>
+          </StatusEffect>
+        </Containable>
+      </SubContainer>
+      <SubContainer capacity="1" maxstacksize="1" >
+        <Containable items="Gilead_Branch_Seed" >
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.05" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="This,Contained" Tags="Touhou_Plant_Machine_False" >
+            <Conditional condition="lte 0"/>
+          </StatusEffect>
+        </Containable>
+        <Containable items="Cinnamon_Branch_Seed" >
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.01" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="This,Contained" Tags="Touhou_Plant_Machine_False" >
+            <Conditional condition="lte 0"/>
+          </StatusEffect>
+        </Containable>
+        <Containable items="Sun_Flower_Seed" >
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.025" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="This,Contained" Tags="Touhou_Plant_Machine_False" >
+            <Conditional condition="lte 0"/>
+          </StatusEffect>
+        </Containable>
+      </SubContainer>
+      <SubContainer capacity="3" maxstacksize="63" >
+        <Containable items="plantitem" />
+      </SubContainer>
+    </ItemContainer>
+
+  </Item>
+
+  <!--不存在的物品，生成后立刻删掉，模拟随机-->
+  <Item name="不存在的物品" identifier="Touhou_Fake_Item" subcategory="Touhou" category="Alien" maxstacksize="60" Tags="smallitem,plantitem,Touhou_Plantitem"
+        spritecolor="255,255,255,10" cargocontaineridentifier="metalcrate" scale="0.15" impactsoundtag="impact_soft" impacttolerance="8" allowasextracargo="true">
+    <Sprite texture="%ModDir%/Images/Materials/Magics.png" depth="0.2" sourcerect="441,353,199,242" origin="0.5,0.5" />
+    <Body radius="30" density="10" waterdragcoefficient="20"/>
+    <Holdable canBeCombined="true" slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
+      <StatusEffect type="OnSpawn" target="This" Interval="0.1" disabledeltatime="true">
+        <Conditional Removed="false" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnNotContained" target="This" Interval="0.1" disabledeltatime="true">
+        <Conditional Removed="false" />
+        <Remove />
+      </StatusEffect>
+      <StatusEffect type="OnContained" target="This" Interval="0.1" disabledeltatime="true">
+        <Conditional Removed="false" />
+        <Remove />
+      </StatusEffect>
+    </Holdable>
+  </Item>
 </Items>
