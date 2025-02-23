@@ -129,10 +129,13 @@
             <Containable identifiers="oxygentank,oxygensource" />
             <Containable items="oxygensource">
                 <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" UseHullOxygen="false" />
-                <StatusEffect type="OnWearing" target="Contained" Condition="-0.3" comparison="And">
-                    <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
-                    <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
-                    <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+                <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.3" comparison="And" targetslot="0">
+                    <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
+                    <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                    <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="lt 50" />
+                    <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true" />
+                    <Conditional InWater="false" />
+                    <RequiredItem items="oxygensource" type="Contained" />
                 </StatusEffect>
             </Containable>
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
@@ -197,10 +200,13 @@
             <Containable identifiers="oxygentank,oxygensource" />
             <Containable items="oxygensource">
                 <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" UseHullOxygen="false" />
-                <StatusEffect type="OnWearing" target="Contained" Condition="-0.3" comparison="And">
-                    <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
-                    <Conditional TargetContainer="true" TargetGrandparent="true" DecreasedOxygenConsumption="lt 99" />
-                    <Conditional TargetContainer="true" TargetGrandparent="true" NeedsAir="true" />
+                <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.3" comparison="And" targetslot="0">
+                    <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
+                    <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
+                    <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="lt 50" />
+                    <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true" />
+                    <Conditional InWater="false" />
+                    <RequiredItem items="oxygensource" type="Contained" />
                 </StatusEffect>
             </Containable>
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
@@ -306,7 +312,7 @@
         <Sprite texture="%ModDir%/Images/Tools/Kappa_Miningdrill.png" sourcerect="0,85,107,56" depth="0.55" origin="0.5,0.5" />
         <Body width="200" height="100" density="10" />
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="55,-10" aimpos="50,0" handle1="-40,-14" handle2="-5,-16" holdangle="-40" msg="ItemMsgPickUpSelect" />
-        <RepairTool firedamage="10.0" structurefixamount="-0.7" range="300" barrelpos="64,16" combatpriority="23" RepairMultiple="true" RepairThroughHoles="false" levelwallfixamount="-15.0">
+        <RepairTool firedamage="10.0" structurefixamount="-0.75" range="300" barrelpos="64,16" combatpriority="23" RepairMultiple="true" RepairThroughHoles="false" levelwallfixamount="-15.0">
             <RequiredItems identifier="batterycell,Spiritual_Water,fulguriumbatterycell" type="Contained" msg="需要电池或灵水" />
             <ParticleEmitter particle="plasma" particlespersecond="50" copyentityangle="true" scalemin="1.8" scalemax="2.2"/>
             <StatusEffect type="OnUse" target="This" Condition="-18" />
@@ -363,8 +369,8 @@
             </SubContainer>
         </ItemContainer>
         <Quality>
-            <QualityStat stattype="RepairToolStructureDamageMultiplier" value="0.3" />
-            <QualityStat stattype="RepairToolDeattachTimeMultiplier" value="0.3"/>
+            <QualityStat stattype="RepairToolStructureDamageMultiplier" value="0.334" />
+            <QualityStat stattype="RepairToolDeattachTimeMultiplier" value="0.334"/>
         </Quality>
     </Item>
 <!--
@@ -445,12 +451,12 @@
         </Price>
         <Sprite texture="%ModDir%/Images/Tools/Illness_Recovery_Charm.png" sourcerect="0,0,128,128" depth="0.6" origin="0.5,0.5" />
         <Body width="48" height="48" density="10" />
-        <Holdable slots="Any,RightHand+LeftHand" msg="ItemMsgPickUpSelect">
-            <StatusEffect type="OnSpawn" target="This" TeamID="1" setvalue="true" TargetItemComponent="WifiComponent" />
-        </Holdable>
+        <Holdable slots="Any,RightHand+LeftHand" msg="ItemMsgPickUpSelect"/>
         <Deconstruct time="3" chooserandom="false" amount="1" requireddeconstructor="Alchemy_Table">
             <!--炼金桌内回收-->
-            <Item identifier="Illness_Recovery_Charm" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Mu_Alchemical" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="organicfiber" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Reiki_Stone" requiredotheritem="Mu_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
         </Deconstruct>
         <!--如果添加新职业，也许会用到配方解锁-->
         <!--        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" requiresrecipe="true">-->
@@ -467,7 +473,7 @@
                 <Conditional condition="gt 0" />
                 <Affliction identifier="Touhou_Water_Heart" amount="50" />
             </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" Condition="-0.005" Interval="1.0" Duration="1.0" disabledeltatime="true" >
+            <StatusEffect type="OnWearing" target="This,Character" Condition="-0.006" Interval="1.0" disabledeltatime="true" >
                 <Conditional HealthPercentage="lte 95" />
             </StatusEffect>
         </Wearable>
@@ -1227,9 +1233,7 @@
                 <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
                 <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
                 <Explosion range="250" ballastfloradamage="100" structuredamage="-40" force="1.0" flames="false" smoke="true" sparks="false"
-                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
-                    <Affliction identifier="burn" strength="0.25" />
-                </Explosion>
+                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" />
             </StatusEffect>
             <StatusEffect type="OnImpact" target="limb" >
                 <Conditional speciesgroup="neq human"/>
@@ -1259,9 +1263,7 @@
                 <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
                 <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
                 <Explosion range="295" ballastfloradamage="100" structuredamage="-78" force="1.0" flames="false" smoke="true" sparks="false"
-                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
-                    <Affliction identifier="burn" strength="0.25" />
-                </Explosion>
+                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" />
             </StatusEffect>
             <StatusEffect type="OnImpact" target="limb" >
                 <Conditional speciesgroup="neq human"/>
@@ -1291,9 +1293,7 @@
                 <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
                 <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
                 <Explosion range="328" ballastfloradamage="200" structuredamage="-94.5" force="1.0" flames="false" smoke="true" sparks="false"
-                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
-                    <Affliction identifier="burn" strength="0.25" />
-                </Explosion>
+                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" />
             </StatusEffect>
             <StatusEffect type="OnImpact" target="limb" >
                 <Conditional speciesgroup="neq human"/>
@@ -1323,9 +1323,7 @@
                 <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350" scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255" />
                 <ParticleEmitter particle="FlareBubbles" particleamount="3" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
                 <Explosion range="361" ballastfloradamage="300" structuredamage="-108" force="1.0" flames="false" smoke="true" sparks="false"
-                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" >
-                    <Affliction identifier="burn" strength="0.25" />
-                </Explosion>
+                           underwaterbubble="false" flashcolor="100,255,20,255" camerashake="2.0" />
             </StatusEffect>
             <StatusEffect type="OnImpact" target="limb" >
                 <Conditional speciesgroup="neq human"/>
@@ -1620,20 +1618,25 @@
         <WifiComponent range="65000.0" LinkToChat="true" MinChatMessageInterval="0.0" />
         <Wearable limbtype="Head" slots="Any,Headset" msg="ItemMsgPickUpSelect" >
             <sprite name="Headset Wearable" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.7" hideotherwearables="false" origin="0.5,0.5" />
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="1.0" Duration="1.0" >
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.05" Interval="1.0" Duration="1.0" >
                 <Conditional oxygenlow="gte 2" />
                 <Conditional condition="gt 0" />
                 <ReduceAffliction type="oxygenlow" amount="3" />
             </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.005" Interval="3.0" >
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.05" Interval="3.0" >
                 <Conditional psychosis="gte 5" />
                 <Conditional condition="gt 0" />
                 <ReduceAffliction type="psychosis" amount="1.2" />
                 <ReduceAffliction type="nausea" amount="9" />
                 <Affliction identifier="psychosisresistance" amount="15" />
             </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.01" Interval="1.0" disabledeltatime="true" >
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.05" Interval="1.0" disabledeltatime="true" >
                 <Conditional Reiki_Side_Effect="gt 0" />
+                <Conditional condition="gt 0" />
+                <ReduceAffliction type="Reiki_Side_Effect" amount="0.03" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.05" Interval="1.0" disabledeltatime="true" >
+                <Conditional Reiki_Side_Effect_NT="gt 0" />
                 <Conditional condition="gt 0" />
                 <ReduceAffliction type="Reiki_Side_Effect" amount="0.03" />
             </StatusEffect>
@@ -2155,7 +2158,7 @@
         <Wearable limbtype="Head" slots="Any,HealthInterface" msg="ItemMsgPickUpSelect" displaycontainedstatus="true">
             <sprite name="Gene Splicer Wearable" texture="Content/Items/Genetic/Genetic.png" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.5" hideotherwearables="false" sourcerect="258,131,1,1" origin="0.6,0.0" />
         </Wearable>
-        <StatusHUD drawhudwhenequipped="true" overlaycolor="150,0,0,120" range="4500" thermalgoggles="true" showdeadcharacters="false" showtexts="false" />
+        <StatusHUD drawhudwhenequipped="true" overlaycolor="150,0,0,120" range="6500" thermalgoggles="true" showdeadcharacters="false" showtexts="false" />
     </Item>
 
 <!--    &lt;!&ndash;品质升级器&ndash;&gt;
