@@ -15,9 +15,8 @@
     <Items>
       <Item identifier="mediccrate" reward="360" maxcount="8">
         <Item identifier="Touhou_Base_Metal" />
-        <Item identifier="Reiki_Stone" amount="4"/>
         <Item identifier="Reiki_Dust_Caking" amount="2"/>
-        <Item identifier="Byproduct_Alchemical" amount="2"/>
+        <Item identifier="Byproduct_Alchemical" amount="4"/>
       </Item>
     </Items>
     <Icon texture="%ModDir%/Images/Missions/Touhou_MissionIcons01.png" sourcerect="0,0,256,256" />
@@ -25,29 +24,29 @@
     <LocationType from="AnyOutpost" to="AnyOutpost" />
   </CargoMission>
 
-<!--  <CargoMission
-          name="魔法教学运输"
-          identifier="cargoMagicItems"
-          tags="cargoMagicItems"
+  <CargoMission
+          name="食材原料运输"
+          identifier="Cargo_Touhou_Food_Ingredients"
+          tags="Cargo_Touhou_Food_Ingredients"
           type="Cargo"
           difficulty="1"
           commonness="100"
           reward="800"
           achievementidentifier="cargomission"
           requireddeliveryamount="0.8">
-    <Reputation identifier="location" amount="2" />
+    <Reputation identifier="location" amount="5" />
     <Items>
-      <Item identifier="mediccrate" reward="360" maxcount="8">
-        <Item identifier="Touhou_Base_Metal" />
-        <Item identifier="Reiki_Stone" amount="4"/>
-        <Item identifier="Reiki_Dust_Caking" amount="2"/>
-        <Item identifier="Byproduct_Alchemical" amount="2"/>
+      <Item identifier="mediccrate" reward="400" maxcount="8">
+        <Item identifier="Touhou_Food_Ingredients_Random_Box_Seafood" amount="3" />
+        <Item identifier="Touhou_Food_Ingredients_Random_Box_Meat" amount="3"/>
+        <Item identifier="Touhou_Food_Ingredients_Random_Box_Vegetarian" amount="3"/>
+        <Item identifier="Touhou_Food_Ingredients_Random_Box_Other" amount="3"/>
       </Item>
     </Items>
     <Icon texture="%ModDir%/Images/Missions/Touhou_MissionIcons01.png" sourcerect="0,0,256,256" />
-    <message header="missionheader.cargoMagicItems" text="missionmessage.cargoMagicItems" />
+    <message header="missionheader.Cargo_Touhou_Food_Ingredients" text="missionmessage.Cargo_Touhou_Food_Ingredients" />
     <LocationType from="AnyOutpost" to="AnyOutpost" />
-  </CargoMission>-->
+  </CargoMission>
 
   <CargoMission
           name="新年礼物运输"
@@ -719,7 +718,7 @@
           reward="22000"
           description="诡异的黑色迷雾在此处弥漫，这恰好与前段时间的灵气污染事件现场的状况如出一辙，联盟方的炼金实验室出重金请你调查这里"
           difficulty="4"
-          commonness="150"
+          commonness="100"
           allowretry="true"
           minleveldifficulty="40"
           maxleveldifficulty="100"
@@ -754,6 +753,53 @@
       <Character identifier="Touhou_ODM05_Enemy_Human_Easy" from="Touhou_ODM5_Enemy_NPC" moduleflags="engineeringmodule" requirekill="true" />
       <Character identifier="Touhou_ODM05_Enemy_Human_Easy" from="Touhou_ODM5_Enemy_NPC" moduleflags="securitymodule" requirekill="true" asfaraspossible="true" />
       <Character identifier="Touhou_ODM05_Enemy_Human_Easy" from="Touhou_ODM5_Enemy_NPC" moduleflags="securitymodule" requirekill="true" asfaraspossible="true" />
+    </Characters>
+  </OutpostDestroyMission>
+
+  <!--ODM是摧毁废站任务的简写-->
+  <!--控制Control-->
+  <OutpostDestroyMission
+          name="控制Control"
+          identifier="Touhou_OutpostDestroyMission06"
+          tags="abandonedoutpost"
+          type="OutpostDestroy"
+          reward="16000"
+          description="一伙叛逃炼金术师的失败实验，导致毒雾笼罩这个站点。玷污魔法的毒素吸入即腐蚀骨骼，远程武器严重失准。近战是生存的唯一途径"
+          difficulty="4"
+          commonness="100"
+          allowretry="true"
+          minleveldifficulty="25"
+          maxleveldifficulty="50"
+          unhideentitysubcategories="abandonedhuman">
+    <Reputation identifier="separatists" amount="2" />
+    <Reputation identifier="coalition" amount="2" />
+    <Reputation identifier="Touhou_Gensokyo" amount="2" />
+    <Icon texture="%ModDir%/Images/Missions/Touhou_MissionIcons03.png" sourcerect="0,0,256,256" />
+    <TriggerEvent state="0" delay="5" eventidentifier="Touhou_Indestructible_Wall" campaignonly="true"/>
+    <TriggerEvent state="0" delay="5" eventidentifier="Touhou_OutpostDestroyMission06_Event" campaignonly="true"/>
+    <LocationType identifier="Abandoned" />
+    <LocationTypeChange from="Abandoned" to="Outpost" requireddurationrange="2,3" cooldownafterchange="5" />
+    <message header="missionheader.Touhou_OutpostDestroyMission06" text="missionmessage.Touhou_OutpostDestroyMission06" />
+    <Characters>
+      <Character identifier="Touhou_ODM06_Enemy_Human_Lunatic" from="Touhou_ODM6_Enemy_NPC" moduleflags="banditleader" requirekill="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Lunatic" from="Touhou_ODM6_Enemy_NPC" moduleflags="crewmodule" requirekill="true" multiplayeronly="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Hard" from="Touhou_ODM6_Enemy_NPC" moduleflags="crewmodule" requirekill="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Hard" from="Touhou_ODM6_Enemy_NPC" moduleflags="securitymodule" requirekill="true" asfaraspossible="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Hard" from="Touhou_ODM6_Enemy_NPC" moduleflags="securitymodule" requirekill="true" asfaraspossible="true" multiplayeronly="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Hard" from="Touhou_ODM6_Enemy_NPC" moduleflags="securitymodule" requirekill="true" asfaraspossible="true" multiplayeronly="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Hard" from="Touhou_ODM6_Enemy_NPC" moduleflags="securitymodule" requirekill="true" asfaraspossible="true" multiplayeronly="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Hard" from="Touhou_ODM6_Enemy_NPC" moduleflags="researchmodule" requirekill="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Normal" from="Touhou_ODM6_Enemy_NPC" moduleflags="researchmodule" asfaraspossible="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Normal" from="Touhou_ODM6_Enemy_NPC" moduleflags="researchmodule" requirekill="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Normal" from="Touhou_ODM6_Enemy_NPC" moduleflags="researchmodule" requirekill="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Normal" from="Touhou_ODM6_Enemy_NPC" moduleflags="engineeringmodule" requirekill="true" multiplayeronly="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Normal" from="Touhou_ODM6_Enemy_NPC" moduleflags="engineeringmodule" requirekill="true" multiplayeronly="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Normal" from="Touhou_ODM6_Enemy_NPC" moduleflags="engineeringmodule" requirekill="true" multiplayeronly="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Easy" from="Touhou_ODM6_Enemy_NPC" moduleflags="banditleader" requirekill="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Easy" from="Touhou_ODM6_Enemy_NPC" moduleflags="engineeringmodule" requirekill="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Easy" from="Touhou_ODM6_Enemy_NPC" moduleflags="engineeringmodule" requirekill="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Easy" from="Touhou_ODM6_Enemy_NPC" moduleflags="securitymodule" requirekill="true" asfaraspossible="true" />
+      <Character identifier="Touhou_ODM06_Enemy_Human_Easy" from="Touhou_ODM6_Enemy_NPC" moduleflags="securitymodule" requirekill="true" asfaraspossible="true" />
     </Characters>
   </OutpostDestroyMission>
 

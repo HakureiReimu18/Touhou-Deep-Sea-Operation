@@ -1,0 +1,2095 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Items>
+
+    <!--食材存储柜-->
+    <Item name="" identifier="Touhou_Ingredient_Refrigerator" tags="locker,container,cabinet,Touhou_Ingredient_Refrigerator" subcategory="Food_Ingredients"
+          linkable="true" pickdistance="150" fireproof="true" waterproof="true" scale="0.4" HideConditionBar="true" showcontentsintooltip="true">
+        <Price baseprice="500" >
+            <Price storeidentifier="merchantoutpost" multiplier="1" minavailable="1" />
+            <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="1.25" minavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.1" minavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="1.3" minavailable="1" />
+        </Price>
+        <Fabricate suitablefabricators="fabricator" requiredtime="20">
+            <RequiredSkill identifier="mechanical" level="30" />
+            <RequiredSkill identifier="electrical" level="30" />
+            <RequiredItem identifier="steel" amount="4" />
+            <RequiredItem identifier="iron" amount="6" />
+            <RequiredItem identifier="aluminium" amount="2" />
+            <RequiredItem identifier="rubber" amount="2" />
+        </Fabricate>
+        <Deconstruct time="10">
+            <RequiredItem identifier="steel" amount="2" />
+            <RequiredItem identifier="iron" amount="4" />
+            <RequiredItem identifier="aluminium" amount="2" />
+            <RequiredItem identifier="rubber" amount="2" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/General_Items/Touhou_Ingredient_Refrigerator.png" depth="0.6" sourcerect="0,0,200,360" origin="0.5,0.5" />
+        <Body width="200" height="360" density="10" />
+        <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="false">
+            <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.75" setvalue="true" />
+        </Holdable>
+        <ItemContainer autofill="False" capacity="64" slotsperrow="8" canbeselected="true" hideitems="true">
+            <GuiFrame relativesize="0.4,0.6" anchor="Center" style="ItemUI" />
+            <Containable identifiers="Touhou_Food_Ingredients,io_box"/>
+        </ItemContainer>
+    </Item>
+
+    <!--食材加工台（初级）-->
+    <Item
+            name=""
+            identifier="Touhou_Cooktop01"
+            tags="Touhou_Cooktop,donttakeitems,dontsellitems"
+            subcategory="Food_Ingredients"
+            category="Machine"
+            linkable="true"
+            allowedlinks="Touhou_Ingredient_Refrigerator,medcabinet,locker,toxcontainer"
+            scale="0.35"
+            description=""
+            damagedbyexplosions="true"
+            explosiondamagemultiplier="0.2">
+        <Price baseprice="500" >
+            <Price storeidentifier="merchantoutpost" multiplier="1.1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantcity" multiplier="1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="1.1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="1.1" sold="true" maxavailable="1" />
+        </Price>
+        <Deconstruct time="5">
+            <Item identifier="Reiki_Stone" />
+            <Item identifier="carbon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="15">
+            <RequiredSkill identifier="electrical" level="50" />
+            <RequiredSkill identifier="mechanical" level="50" />
+            <RequiredItem identifier="Reiki_Stone" amount="4"/>
+            <RequiredItem identifier="carbon" amount="4"/>
+        </Fabricate>
+        <Body width="160" height="160" density="30" />
+        <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="false">
+            <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.75" setvalue="true" />
+        </Holdable>
+
+        <UpgradePreviewSprite scale="2.5" texture="Content/UI/WeaponUI.png" sourcerect="256,960,64,64" origin="0.5,0.45" />
+        <Sprite texture="%ModDir%/Images/General_Items/Touhou_Cooktop01.png" depth="0.8" sourcerect="0,0,360,220" origin="0.5,0.5"/>
+
+        <LightComponent range="100.0" lightcolor="75,50,100,255" powerconsumption="10" IsOn="true" castshadows="false" alphablend="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="0,0,1,1" origin="0.15,0" />
+        </LightComponent>
+
+        <Fabricator canbeselected = "true" powerconsumption="1500" msg="ItemMsgInteractSelect" SkillRequirementMultiplier="2.0">
+            <GuiFrame relativesize="0.36,0.48" style="ItemUI" anchor="Center" />
+            <sound file="Content/Items/Fabricators/Fabricator.ogg" type="OnActive" range="1000.0" volumeproperty="RelativeVoltage" loop="true"/>
+            <poweronsound file="Content/Items/PowerOnLight2.ogg" range="600" loop="false" />
+            <StatusEffect type="OnContained" target="This" setvalue="true" canbeselected="false" />
+            <StatusEffect type="OnNotContained" target="This" setvalue="true" canbeselected="true" />
+        </Fabricator>
+
+        <ConnectionPanel selectkey="Action" canbeselected="true" hudpriority="10" msg="ItemMsgRewireScrewdriver">
+            <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel"/>
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredSkill identifier="electrical" level="50" />
+            <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand" AllowWhenBroken="true">
+                <Sound file="Content/Sounds/Damage/Electrocution1.ogg" range="1000" />
+                <Explosion range="100.0" force="1.0" flames="false" shockwave="false" sparks="true" underwaterbubble="false" />
+                <Affliction identifier="stun" strength="4" />
+                <Affliction identifier="burn" strength="5" />
+            </StatusEffect>
+            <RequiredItem items="screwdriver" type="Equipped"/>
+            <input name="power_in" displayname="connection.powerin"/>
+            <output name="condition_out" displayname="connection.conditionout" />
+        </ConnectionPanel>
+
+        <Repairable selectkey="Action" header="electricalrepairsheader" deteriorationspeed="0.06" mindeteriorationdelay="360" maxdeteriorationdelay="720" mindeteriorationcondition="0" RepairThreshold="80" fixDurationHighSkill="5" fixDurationLowSkill="15" msg="ItemMsgRepairScrewdriver" hudpriority="10">
+            <GuiFrame relativesize="0.2,0.16" minsize="400,180" maxsize="480,216" anchor="Center" relativeoffset="0.0,0.27" style="ItemUI" />
+            <RequiredSkill identifier="Touhou_Magic" level="55" />
+            <RequiredSkill identifier="electrical" level="55" />
+            <RequiredItem items="wrench" type="Equipped" />
+            <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand">
+                <Sound file="Content/Sounds/Damage/Electrocution1.ogg" range="1000" />
+                <Affliction identifier="stun" strength="5" />
+                <Affliction identifier="burn" strength="5" />
+            </StatusEffect>
+            <ParticleEmitter particle="damagebubbles" particleburstamount="2" particleburstinterval="2.0" particlespersecond="2" scalemin="0.5" scalemax="1.5" anglemin="0" anglemax="359" velocitymin="-10" velocitymax="10" mincondition="0.0" maxcondition="50.0" />
+            <ParticleEmitter particle="spark" particleburstamount="5" particlespersecond="5" anglemin="0" anglemax="359" velocitymin="100" velocitymax="500" particleburstinterval="2" scalemin="0.5" scalemax="1" mincondition="0.0" maxcondition="15.0" />
+            <ParticleEmitter particle="fleshsmoke" particlespersecond="2" scalemin="1" scalemax="2" mincondition="0.0" maxcondition="50.0" />
+        </Repairable>
+
+        <ItemContainer capacity="6" canbeselected="true" hideitems="true" slotsperrow="3" uilabel="" allowuioverlap="false">
+            <Containable items="Touhou_Food_Ingredients,plastic,iron,plantitem"/>
+        </ItemContainer>
+        <ItemContainer capacity="1" canbeselected="true" hideitems="true" slotsperrow="2" uilabel="" allowuioverlap="true"/>
+    </Item>
+
+    <!--食材加工台（高级）-->
+    <Item
+            name=""
+            identifier="Touhou_Cooktop02"
+            tags="Touhou_Cooktop,donttakeitems,dontsellitems"
+            subcategory="Food_Ingredients"
+            category="Machine"
+            linkable="true"
+            allowedlinks="Touhou_Ingredient_Refrigerator,medcabinet,locker,toxcontainer"
+            scale="0.35"
+            description=""
+            damagedbyexplosions="true"
+            explosiondamagemultiplier="0.2">
+        <Price baseprice="18000" >
+            <Price storeidentifier="merchantoutpost" multiplier="1.1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantcity" multiplier="1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="1.1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1" sold="true" maxavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="1.1" sold="true" maxavailable="1" />
+        </Price>
+        <Deconstruct time="5">
+            <Item identifier="Power_Point" amount="4" />
+            <Item identifier="carbon" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="fabricator" requiredtime="15">
+            <RequiredSkill identifier="electrical" level="50" />
+            <RequiredSkill identifier="mechanical" level="50" />
+            <RequiredItem identifier="Power_Point" amount="4"/>
+            <RequiredItem identifier="Touhou_Base_Metal" amount="6"/>
+            <RequiredItem identifier="carbon" amount="4"/>
+        </Fabricate>
+        <Body width="160" height="160" density="30" />
+        <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="false">
+            <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.75" setvalue="true" />
+        </Holdable>
+
+        <UpgradePreviewSprite scale="2.5" texture="Content/UI/WeaponUI.png" sourcerect="256,960,64,64" origin="0.5,0.45" />
+        <Sprite texture="%ModDir%/Images/General_Items/Touhou_Cooktop02.png" depth="0.8" sourcerect="0,0,360,220" origin="0.5,0.5"/>
+
+        <LightComponent range="100.0" lightcolor="75,50,100,255" powerconsumption="10" IsOn="true" castshadows="false" alphablend="false" allowingameediting="false">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="0,0,1,1" origin="0.15,0" />
+        </LightComponent>
+
+        <Fabricator canbeselected = "true" powerconsumption="-1" msg="ItemMsgInteractSelect" FabricationSpeed="1.66" >
+            <GuiFrame relativesize="0.36,0.48" style="ItemUI" anchor="Center" />
+            <sound file="Content/Items/Fabricators/Fabricator.ogg" type="OnActive" range="1000.0" volumeproperty="RelativeVoltage" loop="true"/>
+            <poweronsound file="Content/Items/PowerOnLight2.ogg" range="600" loop="false" />
+            <StatusEffect type="OnContained" target="This" setvalue="true" canbeselected="false" />
+            <StatusEffect type="OnNotContained" target="This" setvalue="true" canbeselected="true" />
+        </Fabricator>
+
+        <ConnectionPanel selectkey="Action" canbeselected="true" hudpriority="10" msg="ItemMsgRewireScrewdriver">
+            <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel"/>
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredSkill identifier="electrical" level="50" />
+            <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand" AllowWhenBroken="true">
+                <Sound file="Content/Sounds/Damage/Electrocution1.ogg" range="1000" />
+                <Explosion range="100.0" force="1.0" flames="false" shockwave="false" sparks="true" underwaterbubble="false" />
+                <Affliction identifier="stun" strength="4" />
+                <Affliction identifier="burn" strength="5" />
+            </StatusEffect>
+            <RequiredItem items="screwdriver" type="Equipped"/>
+<!--            <input name="power_in" displayname="connection.powerin"/>-->
+            <output name="condition_out" displayname="connection.conditionout" />
+        </ConnectionPanel>
+
+        <Repairable selectkey="Action" header="electricalrepairsheader" deteriorationspeed="0.06" mindeteriorationdelay="360" maxdeteriorationdelay="720" mindeteriorationcondition="0" RepairThreshold="80" fixDurationHighSkill="5" fixDurationLowSkill="15" msg="ItemMsgRepairScrewdriver" hudpriority="10">
+            <GuiFrame relativesize="0.2,0.16" minsize="400,180" maxsize="480,216" anchor="Center" relativeoffset="0.0,0.27" style="ItemUI" />
+            <RequiredSkill identifier="Touhou_Magic" level="55" />
+            <RequiredSkill identifier="electrical" level="55" />
+            <RequiredItem items="wrench" type="Equipped" />
+            <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand">
+                <Sound file="Content/Sounds/Damage/Electrocution1.ogg" range="1000" />
+                <Affliction identifier="stun" strength="5" />
+                <Affliction identifier="burn" strength="5" />
+            </StatusEffect>
+            <ParticleEmitter particle="damagebubbles" particleburstamount="2" particleburstinterval="2.0" particlespersecond="2" scalemin="0.5" scalemax="1.5" anglemin="0" anglemax="359" velocitymin="-10" velocitymax="10" mincondition="0.0" maxcondition="50.0" />
+            <ParticleEmitter particle="spark" particleburstamount="5" particlespersecond="5" anglemin="0" anglemax="359" velocitymin="100" velocitymax="500" particleburstinterval="2" scalemin="0.5" scalemax="1" mincondition="0.0" maxcondition="15.0" />
+            <ParticleEmitter particle="fleshsmoke" particlespersecond="2" scalemin="1" scalemax="2" mincondition="0.0" maxcondition="50.0" />
+        </Repairable>
+
+        <ItemContainer capacity="10" canbeselected="true" hideitems="true" slotsperrow="5" uilabel="" allowuioverlap="false">
+            <Containable items="Touhou_Food_Ingredients,plastic,iron,plantitem"/>
+        </ItemContainer>
+        <ItemContainer capacity="2" canbeselected="true" hideitems="true" slotsperrow="2" uilabel="" allowuioverlap="true"/>
+    </Item>
+
+    <!--随机食材箱（水产类）-->
+    <Item name="" identifier="Touhou_Food_Ingredients_Random_Box_Seafood" tags="smallitem,Touhou_Food_Ingredients_Random_Box" spritecolor="100,100,255,255" maxstacksize="32" subcategory="Food_Ingredients" scale="0.25" category="Misc" >
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <PreferredContainer secondary="outpostmedcab" minamount="0" maxamount="1" spawnprobability="0.1" />
+        <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.1" />
+        <PreferredContainer secondary="wreckmedcab,abandonedmedcab" minamount="1" maxamount="2" spawnprobability="0.2" />
+        <Price baseprice="300" >
+            <Price locationtype="outpost" multiplier="0.5" sold="false" />
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <Deconstruct time="3" amount="2" chooserandom="true">
+            <Item identifier="Touhou_Trout" amount="2" commonness="1" />
+            <Item identifier="Touhou_Lamprey" amount="2" commonness="1" />
+            <Item identifier="Touhou_Salmon" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Tuna" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Premium_Tuna" commonness="0.25" />
+            <Item identifier="Touhou_Pufferfish" commonness="0.25" />
+            <Item identifier="Touhou_Shrimp" amount="2" commonness="1" />
+            <Item identifier="Touhou_Sea_Urchin" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Crab" amount="2" commonness="0.5" />
+        </Deconstruct>
+<!--        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" sourcerect="0,0,100,60" />-->
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--随机食材箱（肉类）-->
+    <Item name="" identifier="Touhou_Food_Ingredients_Random_Box_Meat" tags="smallitem,Touhou_Food_Ingredients_Random_Box" spritecolor="255,100,100,255" maxstacksize="32" subcategory="Food_Ingredients" scale="0.25" category="Misc" >
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <PreferredContainer secondary="outpostmedcab" minamount="0" maxamount="1" spawnprobability="0.1" />
+        <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.1" />
+        <PreferredContainer secondary="wreckmedcab,abandonedmedcab" minamount="1" maxamount="2" spawnprobability="0.2" />
+        <Price baseprice="300" >
+            <Price locationtype="outpost" multiplier="0.5" sold="false" />
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <Deconstruct time="3" amount="2" chooserandom="true">
+            <Item identifier="Touhou_Pork" amount="2" commonness="1" />
+            <Item identifier="Touhou_Beef" amount="2" commonness="1" />
+            <Item identifier="Touhou_Venison" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Wild_Boar_Meat" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Black_Haired_Pork" commonness="0.5" />
+            <Item identifier="Touhou_Wagyu" commonness="0.25" />
+        </Deconstruct>
+<!--        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" sourcerect="0,0,100,60" />-->
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--随机食材箱（蔬菜类）-->
+    <Item name="" identifier="Touhou_Food_Ingredients_Random_Box_Vegetarian" tags="smallitem,Touhou_Food_Ingredients_Random_Box" spritecolor="100,255,100,255" maxstacksize="32" subcategory="Food_Ingredients" scale="0.25" category="Misc" >
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <PreferredContainer secondary="outpostmedcab" minamount="0" maxamount="1" spawnprobability="0.1" />
+        <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.1" />
+        <PreferredContainer secondary="wreckmedcab,abandonedmedcab" minamount="1" maxamount="2" spawnprobability="0.2" />
+        <Price baseprice="300" >
+            <Price locationtype="outpost" multiplier="0.5" sold="false" />
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <Deconstruct time="3" amount="2" chooserandom="true">
+            <Item identifier="Touhou_Tofu" amount="2" commonness="1" />
+            <Item identifier="Touhou_Potato" amount="2" commonness="1" />
+            <Item identifier="Touhou_Onion" amount="2" commonness="1" />
+            <Item identifier="Touhou_Pumpkin" amount="2" commonness="1" />
+            <Item identifier="Touhou_Turnip" amount="2" commonness="1" />
+            <Item identifier="Touhou_Nori" amount="2" commonness="1" />
+            <Item identifier="Touhou_Mushroom" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Truffle" commonness="0.25" />
+            <Item identifier="Touhou_Bamboo_Shoot" amount="2" commonness="1" />
+            <Item identifier="Touhou_Cucumber" amount="2" commonness="1" />
+            <Item identifier="Touhou_Chestnut" amount="2" commonness="1" />
+            <Item identifier="Touhou_Red_Toon" amount="2" commonness="1" />
+            <Item identifier="Touhou_Tomato" amount="2" commonness="1" />
+            <Item identifier="Touhou_Broccoli" amount="2" commonness="1" />
+        </Deconstruct>
+<!--        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" sourcerect="0,0,100,60" />-->
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--随机食材箱（其它类）-->
+    <Item name="" identifier="Touhou_Food_Ingredients_Random_Box_Other" tags="smallitem,Touhou_Food_Ingredients_Random_Box" spritecolor="100,100,100,255" maxstacksize="32" subcategory="Food_Ingredients" scale="0.25" category="Misc" >
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <PreferredContainer secondary="outpostmedcab" minamount="0" maxamount="1" spawnprobability="0.1" />
+        <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.1" />
+        <PreferredContainer secondary="wreckmedcab,abandonedmedcab" minamount="1" maxamount="2" spawnprobability="0.2" />
+        <Price baseprice="300" >
+            <Price locationtype="outpost" multiplier="0.5" sold="false" />
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <Deconstruct time="3" amount="2" chooserandom="true">
+            <Item identifier="Touhou_Egg" amount="2" commonness="1" />
+            <Item identifier="Touhou_Peach" amount="2" commonness="1" />
+            <Item identifier="Touhou_Ginkgo_Nut" amount="2" commonness="1" />
+            <Item identifier="Touhou_Honey" amount="2" commonness="1" />
+            <Item identifier="Touhou_Cicada_Slough" amount="2" commonness="1" />
+            <Item identifier="Touhou_Udumbara" commonness="0.25" />
+            <Item identifier="Touhou_Dew" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Butter" amount="2" commonness="1" />
+            <Item identifier="Touhou_Flour" amount="2" commonness="1" />
+            <Item identifier="Touhou_Bamboo" amount="2" commonness="1" />
+            <Item identifier="Touhou_Glutinous_Rice_Flour" amount="2" commonness="1" />
+            <Item identifier="Touhou_Moonlight_Grass" commonness="0.25" />
+            <Item identifier="Touhou_Ice_Cubes" amount="2" commonness="1" />
+            <Item identifier="Touhou_Chili_Pepper" amount="2" commonness="1" />
+            <Item identifier="Touhou_Grape" amount="2" commonness="1" />
+            <Item identifier="Touhou_Black_Salt" amount="2" commonness="1" />
+            <Item identifier="Touhou_Cream" amount="2" commonness="1" />
+            <Item identifier="Touhou_Bingdi_Lotus" commonness="0.25" />
+            <Item identifier="Touhou_Lemon" amount="2" commonness="1" />
+            <Item identifier="Touhou_Cheese" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Lotus_Seed" amount="2" commonness="1" />
+            <Item identifier="Touhou_Sweet_Photo" amount="2" commonness="1" />
+            <Item identifier="Touhou_Pine_Nut" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Plum" amount="2" commonness="1" />
+            <Item identifier="Touhou_Red_Bean" amount="2" commonness="1" />
+            <Item identifier="Touhou_Flower" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Cocoa_Bean" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Jiguru_Berry" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Creeping_Fig" amount="2" commonness="0.5" />
+            <Item identifier="Touhou_Snow_Fungus" amount="2" commonness="1" />
+            <Item identifier="Touhou_Strong_Capsaicin" amount="2" commonness="0.5" />
+        </Deconstruct>
+<!--        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" sourcerect="0,0,100,60" />-->
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+
+    <!--食材Tag:
+    肉：Meat
+    水产：Aquatic
+    素：Vegetarian
+    家常：Homecooking
+    高级：Premium
+    传奇：Legendary
+    重油：Greasy
+    清淡：Mild
+    下酒：Good_W_Alcohol
+    饱腹：Filling
+    山珍：Mountain_Delicacy
+    海味：Sea_Delicacy
+    西式：Western
+    咸：Salty
+    鲜：Fresh
+    甜：Sweet
+    生：Raw
+    招牌：Signature
+    适合拍照：Photogenic
+    凉爽：Refreshing
+    猎奇：Peculiar
+    文化底蕴：Cultural_Heritage
+    菌类：Fungus
+    不可思议：Wonderful
+    梦幻：Dreamy
+    果味：Fruity
+    辣：Spicy
+    酸：Sour
+    小巧：Small_Portion
+    毒：Poison
+    -->
+
+    <!--水产类-->
+
+    <!--鳟鱼-->
+    <Item name="鳟鱼" identifier="Touhou_Trout" tags="smallitem,Touhou_Food_Ingredients,Aquatic,Fresh" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Trout.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--八目鳗-->
+    <Item name="八目鳗" identifier="Touhou_Lamprey" tags="smallitem,Touhou_Food_Ingredients,Aquatic,Fresh,Signature" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Lamprey.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--三文鱼-->
+    <Item name="三文鱼" identifier="Touhou_Salmon" tags="smallitem,Touhou_Food_Ingredients,Aquatic,Fresh,Premium" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Salmon.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--金枪鱼-->
+    <Item name="金枪鱼" identifier="Touhou_Tuna" tags="smallitem,Touhou_Food_Ingredients,Aquatic,Fresh,Premium" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Tuna.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--极上金枪鱼-->
+    <Item name="极上金枪鱼" identifier="Touhou_Premium_Tuna" tags="smallitem,Touhou_Food_Ingredients,Aquatic,Fresh,Premium,Sea_Delicacy,Legendary" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Premium_Tuna.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--河豚-->
+    <Item name="河豚" identifier="Touhou_Pufferfish" tags="smallitem,Touhou_Food_Ingredients,Aquatic,Fresh,Sea_Delicacy" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="Touhou_Pufferfish_Deconstructed" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Pufferfish.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--虾-->
+    <Item name="虾" identifier="Touhou_Shrimp" tags="smallitem,Touhou_Food_Ingredients,Aquatic,Fresh" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Shrimp.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--章鱼-->
+    <Item name="章鱼" identifier="Touhou_Octopus" tags="smallitem,Touhou_Food_Ingredients,Aquatic,Fresh,Sea_Delicacy" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Octopus.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--海胆-->
+    <Item name="海胆" identifier="Touhou_Sea_Urchin" tags="smallitem,Touhou_Food_Ingredients,Aquatic,Fresh,Premium,Sea_Delicacy,Legendary" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Sea_Urchin.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--螃蟹-->
+    <Item name="螃蟹" identifier="Touhou_Crab" tags="smallitem,Touhou_Food_Ingredients,Aquatic,Fresh,Premium" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Crab.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--肉类-->
+
+    <!--猪肉-->
+    <Item name="猪肉" identifier="Touhou_Pork" tags="smallitem,Touhou_Food_Ingredients,Meat" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Pork.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--牛肉-->
+    <Item name="牛肉" identifier="Touhou_Beef" tags="smallitem,Touhou_Food_Ingredients,Meat" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Beef.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--鹿肉-->
+    <Item name="鹿肉" identifier="Touhou_Venison" tags="smallitem,Touhou_Food_Ingredients,Meat" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Venison.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--野猪肉-->
+    <Item name="野猪肉" identifier="Touhou_Boar_Meat" tags="smallitem,Touhou_Food_Ingredients,Meat" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Boar_Meat.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--黑毛猪肉-->
+    <Item name="黑毛猪肉" identifier="Touhou_Iberico_Pork" tags="smallitem,Touhou_Food_Ingredients,Meat,Legendary,Mountain_Delicacy" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Iberico_Pork.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--和牛-->
+    <Item name="和牛" identifier="Touhou_Wagyu_Beef" tags="smallitem,Touhou_Food_Ingredients,Meat,Legendary,Premium" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--肉类分解结果，一个钙两个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="calcium" />
+            <Item identifier="carbon" amount="2" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Wagyu_Beef.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--蔬菜类-->
+
+    <!--豆腐-->
+    <Item name="豆腐" identifier="Touhou_Tofu" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Homecooking,Mild" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Tofu.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--土豆-->
+    <Item name="土豆" identifier="Touhou_Potato" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Homecooking" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Potato.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--洋葱-->
+    <Item name="洋葱" identifier="Touhou_Onion" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Fresh" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Onion.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--南瓜-->
+    <Item name="南瓜" identifier="Touhou_Pumpkin" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Filling" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Pumpkin.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--萝卜-->
+    <Item name="萝卜" identifier="Touhou_Radish" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Good_W_Alcohol" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Radish.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--海苔-->
+    <Item name="海苔" identifier="Touhou_Seaweed" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Fresh" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Seaweed.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--蘑菇-->
+    <Item name="蘑菇" identifier="Touhou_Mushroom" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Fresh,Fungus" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Mushroom.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--松露-->
+    <Item name="松露" identifier="Touhou_Truffle" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Fresh,Fungus,Premium,Legendary,Mountain_Delicacy" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Truffle.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--竹笋-->
+    <Item name="竹笋" identifier="Touhou_Bamboo_Shoot" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Mild" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Bamboo_Shoot.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--黄瓜-->
+    <Item name="黄瓜" identifier="Touhou_Cucumber" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Mild,Homecooking" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Cucumber.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--香椿-->
+    <Item name="香椿" identifier="Touhou_Red_Toon" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Poison" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Red_Toon.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--西红柿-->
+    <Item name="西红柿" identifier="Touhou_Tomato" tags="smallitem,Touhou_Food_Ingredients,Vegetarian" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Tomato.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--西蓝花-->
+    <Item name="西蓝花" identifier="Touhou_Broccoli" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Homecooking" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Broccoli.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--其他类-->
+
+    <!--鸡蛋-->
+    <Item name="鸡蛋" identifier="Touhou_Egg" tags="smallitem,Touhou_Food_Ingredients,Raw" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Egg.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--桃子-->
+    <Item name="桃子" identifier="Touhou_Peach" tags="smallitem,Touhou_Food_Ingredients,Sweet,Fruity" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Peach.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--白果-->
+    <Item name="白果" identifier="Touhou_Ginkgo_Nut" tags="smallitem,Touhou_Food_Ingredients,Photogenic" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Ginkgo_Nut.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--蜂蜜-->
+    <Item name="蜂蜜" identifier="Touhou_Honey" tags="smallitem,Touhou_Food_Ingredients,Sweet" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Honey.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--蝉蜕-->
+    <Item name="蝉蜕" identifier="Touhou_Cicada_Slough" tags="smallitem,Touhou_Food_Ingredients,Peculiar" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Cicada_Slough.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--幻昙华-->
+    <Item name="幻昙华" identifier="Touhou_Udumbara" tags="smallitem,Touhou_Food_Ingredients,Premium,Legendary,Dreamy,Wonderful" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Udumbara.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--露水-->
+    <Item name="露水" identifier="Touhou_Dew" tags="smallitem,Touhou_Food_Ingredients,Mild" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Dew.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--黄油-->
+    <Item name="黄油" identifier="Touhou_Butter" tags="smallitem,Touhou_Food_Ingredients,Greasy" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Butter.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--面粉-->
+    <Item name="面粉" identifier="Touhou_Flour" tags="smallitem,Touhou_Food_Ingredients,Filling" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Flour.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--竹子-->
+    <Item name="竹子" identifier="Touhou_Bamboo" tags="smallitem,Touhou_Food_Ingredients,Photogenic" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Bamboo.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--糯米-->
+    <Item name="糯米" identifier="Touhou_Sticky_Rice" tags="smallitem,Touhou_Food_Ingredients" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Sticky_Rice.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--月光草-->
+    <Item name="月光草" identifier="Touhou_Lunar_Herb" tags="smallitem,Touhou_Food_Ingredients,Mild,Cultural_Heritage,Dreamy,Wonderful" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Lunar_Herb.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--冰块-->
+    <Item name="冰块" identifier="Touhou_Ice_Cube" tags="smallitem,Touhou_Food_Ingredients,Refreshing" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Ice_Cube.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--辣椒-->
+    <Item name="辣椒" identifier="Touhou_Chili" tags="smallitem,Touhou_Food_Ingredients,Spicy" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Chili.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--葡萄-->
+    <Item name="葡萄" identifier="Touhou_Grape" tags="smallitem,Touhou_Food_Ingredients,Sweet,Fruity" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Grape.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--黑盐-->
+    <Item name="黑盐" identifier="Touhou_Black_Salt" tags="smallitem,Touhou_Food_Ingredients,Salty" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Black_Salt.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--奶油-->
+    <Item name="奶油" identifier="Touhou_Cream" tags="smallitem,Touhou_Food_Ingredients,Homecooking,Sweet,Western" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Cream.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--并蒂莲-->
+    <Item name="并蒂莲" identifier="Touhou_Bingdi_Lotus" tags="smallitem,Touhou_Food_Ingredients,Cultural_Heritage,Premium,Legendary,Mild,Dreamy" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Bingdi_Lotus.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--柠檬-->
+    <Item name="柠檬" identifier="Touhou_Lemon" tags="smallitem,Touhou_Food_Ingredients,Sour,Fruity" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Lemon.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--芝士-->
+    <Item name="芝士" identifier="Touhou_Cheese" tags="smallitem,Touhou_Food_Ingredients,Premium,Salty,Fresh" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Cheese.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--莲子-->
+    <Item name="莲子" identifier="Touhou_Lotus_Seed" tags="smallitem,Touhou_Food_Ingredients,Signature,Mild,Cultural_Heritage" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Lotus_Seed.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--地瓜-->
+    <Item name="地瓜" identifier="Touhou_Sweet_Photo" tags="smallitem,Touhou_Food_Ingredients,Filling" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Sweet_Photo.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--松子-->
+    <Item name="松子" identifier="Touhou_Pine_Nut" tags="smallitem,Touhou_Food_Ingredients,Signature,Mild,Premium" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Pine_Nut.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--梅子-->
+    <Item name="梅子" identifier="Touhou_Plum" tags="smallitem,Touhou_Food_Ingredients,Salty,Small_Portion" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Plum.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--红豆-->
+    <Item name="红豆" identifier="Touhou_Red_Bean" tags="smallitem,Touhou_Food_Ingredients,Homecooking" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Red_Bean.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--鲜花-->
+    <Item name="鲜花" identifier="Touhou_Flower" tags="smallitem,Touhou_Food_Ingredients,Photogenic,Dreamy" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Flower.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--可可豆-->
+    <Item name="可可豆" identifier="Touhou_Cocoa_Bean" tags="smallitem,Touhou_Food_Ingredients,Sweet,Wonderful" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Cocoa_Bean.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--噗噗哟果-->
+    <Item name="噗噗哟果" identifier="Touhou_Jiguru_Berry" tags="smallitem,Touhou_Food_Ingredients,Divine_Punishment" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Jiguru_Berry.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--薜茘-->
+    <Item name="薜茘" identifier="Touhou_Creeping_Fig" tags="smallitem,Touhou_Food_Ingredients,Refreshing,Dreamy" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Creeping_Fig.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--银耳-->
+    <Item name="银耳" identifier="Touhou_Snow_Fungus" tags="smallitem,Touhou_Food_Ingredients,Fungus,Mild" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Snow_Fungus.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--强效辣椒素-->
+    <Item name="强效辣椒素" identifier="Touhou_Strong_Capsaicin" tags="smallitem,Touhou_Food_Ingredients,Divine_Punishment" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--其他类分解结果，按照类型推测分解产物-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Strong_Capsaicin.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+
+
+</Items>

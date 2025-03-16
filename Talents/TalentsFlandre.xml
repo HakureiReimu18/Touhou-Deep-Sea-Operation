@@ -30,8 +30,8 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyResistance resistanceid="damage" multiplier="1.4"/>
-                <CharacterAbilityModifyResistance resistanceid="burn" multiplier="1.7"/>
+                <CharacterAbilityModifyResistance resistanceid="damage" multiplier="1.25"/>
+                <CharacterAbilityModifyResistance resistanceid="burn" multiplier="1.5"/>
             </Abilities>
         </AbilityGroupInterval>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
@@ -205,7 +205,7 @@
     <Talent identifier="FlandreTalent4">
         <Icon texture="%ModDir%/Images/Talents/FlandreTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.FlandreTalent4"/>
-        <AbilityGroupInterval >
+        <AbilityGroupInterval interval="0.1" >
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
                 <AbilityConditionHasAffliction afflictionidentifier="FlandreTalent4_Effect_CD" />
@@ -217,13 +217,23 @@
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" Interval="0.05" disabledeltatime="true">
                             <Affliction identifier="FlandreTalent4_Effect" amount="100" />
-                            <SpawnItem identifier="FlandreTalent4_Spawn" spawnposition="This" />
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
-        <AbilityGroupInterval >
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
+                <AbilityConditionHasAffliction afflictionidentifier="FlandreTalent4_Effect_CD" />
+                <AbilityConditionRagdolled invert="true" />
+                <AbilityConditionCrouched/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.7" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="1.0" >
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
                 <AbilityConditionHasAffliction afflictionidentifier="FlandreTalent4_Effect_CD" />
@@ -232,14 +242,29 @@
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
                     <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" multiplyafflictionsbymaxvitality="true">
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
                             <Affliction identifier="FlandreTalent4_Effect_CD" amount="1.0" />
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
-        <AbilityGroupInterval Interval="3">
+        <AbilityGroupInterval Interval="1.0" >
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
+                <AbilityConditionCrouched />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <ReduceAffliction identifier="FlandreTalent4_Effect_CD" amount="1.0" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="1">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
                 <AbilityConditionHasAffliction afflictionidentifier="FlandreTalent4_Effect_CD" invert="true" />
@@ -249,7 +274,7 @@
                 <CharacterAbilityApplyStatusEffects>
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" delay="30" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="FlandreTalent4_Effect_CD" amount="15" />
+                            <Affliction identifier="FlandreTalent4_Effect_CD" amount="20" />
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>

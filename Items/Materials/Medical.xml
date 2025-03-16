@@ -402,7 +402,7 @@
                                 talentidentifiers="Hyouibana_Aya,Hyouibana_Marisa,Hyouibana_Mokou,Hyouibana_Remilia,Hyouibana_Youmu,Hyouibana_Nitori,Hyouibana_Patchouli,
                                 Hyouibana_Tenshi,Hyouibana_Reimu,Hyouibana_Momizi,Hyouibana_Yuka,Hyouibana_Aunn,Hyouibana_Flandre,Hyouibana_Nue,Hyouibana_Piece,
                                 Hyouibana_Cirno,Hyouibana_Koishi,Hyouibana_Alice,Hyouibana_Sunny,Hyouibana_Luna,Hyouibana_Star,Hyouibana_Sakuya,Hyouibana_Sanae，
-                                Hyouibana_Reisen,Hyouibana_Yukari" />
+                                Hyouibana_Reisen,Hyouibana_Yukari,Hyouibana_Merry" />
             </StatusEffect>
             <StatusEffect type="OnUse" target="UseTarget" >
                 <Conditional Hyouibana_Effect_Flag="gt 0"/>
@@ -425,7 +425,7 @@
         <PreferredContainer secondary="wreckmedcab,abandonedmedcab" minamount="1" maxamount="2" spawnprobability="0.1" />
         <PreferredContainer secondary="outpostmedcab" amount="1" spawnprobability="0.08" />
         <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.08" />
-        <Price baseprice="800" >
+        <Price baseprice="650" >
             <Price storeidentifier="merchantoutpost" minavailable="2" />
             <Price storeidentifier="merchantcity" minavailable="2" />
             <Price storeidentifier="merchantresearch" minavailable="2" />
@@ -866,10 +866,11 @@
     <!--永远亭医疗套件-->
     <Item name="永远亭医疗套件" identifier="Touhou_Medical_Toolkit" tags="smallitem,medical" subcategory="Touhou" category="medical"
           cargocontaineridentifier="metalcrate" scale="0.4" useinhealthinterface="true" RequireAimToUse="false">
-        <PreferredContainer primary="medcab" amount="1" spawnprobability="0.015" />
+        <PreferredContainer primary="medcab" amount="1" spawnprobability="0.025" />
         <PreferredContainer secondary="outpostmedcab" amount="1" spawnprobability="0.015" />
         <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.015" />
-        <Price baseprice="4500" minleveldifficulty="25" sold="false" >
+        <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.075" />
+        <Price baseprice="8000" minleveldifficulty="50" >
             <Price storeidentifier="merchantoutpost" minavailable="2" />
             <Price storeidentifier="merchantcity" minavailable="2" />
             <Price storeidentifier="merchantresearch" minavailable="2" />
@@ -1285,4 +1286,42 @@
             <RequiredItem identifier="antibleeding2" amount="24" />
         </Fabricate>
     </Item>
+
+
+    <!--解毒药片-->
+    <Item name="解毒药片" identifier="Touhou_Detoxificatioin_Pill" subcategory="Touhou" category="Medical" maxstacksize="32" cargocontaineridentifier="mediccrate" Tags="smallitem,medical" useinhealthinterface="true" description="" scale="0.5" impactsoundtag="impact_soft">
+        <PreferredContainer secondary="medcontainer" />
+        <Price baseprice="240" sold="false">
+            <Price storeidentifier="merchantmedical" multiplier="0.9" />
+        </Price>
+        <Deconstruct time="20">
+            <Item identifier="sodium" />
+            <Item identifier="stabilozine" />
+        </Deconstruct>
+        <SuitableTreatment type="Touhou_ODM6_Poison_Effect" suitability="120" />
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Detoxificatioin_Pill.png" sourcerect="0,0,64,52" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Detoxificatioin_Pill.png" sourcerect="0,0,64,52" depth="0.6" origin="0.5,0.5" />
+        <Body width="80" height="42" density="10." />
+        <Holdable canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" msg="ItemMsgPickUpSelect">
+            <RequiredSkill identifier="medical" level="50" />
+            <StatusEffect type="OnUse" target="This" Condition="-100.0" disabledeltatime="true">
+                <Sound file="Content/Items/Medical/Syringe.ogg" range="500" />
+            </StatusEffect>
+            <StatusEffect tags="medical" type="OnSuccess" target="UseTarget, This" duration="15">
+                <ReduceAffliction identifier="Touhou_ODM6_Poison_Effect" amount="10" />
+                <ReduceAffliction identifier="Poison" amount="10" />
+            </StatusEffect>
+            <StatusEffect tags="medical" type="OnFailure" target="UseTarget, This" duration="15">
+                <ReduceAffliction identifier="Touhou_ODM6_Poison_Effect" amount="5" />
+                <ReduceAffliction identifier="Poison" amount="5" />
+            </StatusEffect>
+            <!-- Remove the item when fully used -->
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </Holdable>
+        <AiTarget sightrange="1000" static="true" />
+        <SkillRequirementHint identifier="medical" level="50" />
+    </Item>
+
 </Items>

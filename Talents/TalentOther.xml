@@ -230,6 +230,39 @@
         </AbilityGroupEffect>
     </Talent>-->
 
+    <!--活体劈刀天赋-->
+    <Talent identifier="Touhou_Living_Cleaver_Talent" IsHiddenExtraTalent="true">
+        <Icon texture="%ModDir%/Images/Afflictions/Gensokyo_Divinggear_Effect.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Gensokyo_Divinggear_Talent"/>
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Living_Cleaver_Talent_Counter" min="101" invert="true"/>
+                <AbilityConditionInFriendlySubmarine invert="true"/>
+                <AbilityConditionHasItem tags="Touhou_Living_Cleaver"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Living_Cleaver_Talent_Counter" value="1" removeondeath="true" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Living_Cleaver_Talent_Counter" min="100"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Living_Cleaver_Talent_Counter_Done" min="1" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Living_Cleaver_Talent_Effect" amount="10" />
+                            <SpawnItem identifiers="Touhou_Sentient_Greatcleaver" spawnposition="ThisInventory" SpawnIfInventoryFull="true" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Living_Cleaver_Talent_Counter_Done" value="1" removeondeath="false" />
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
     <!--出血效应-博丽灵梦-->
     <Talent identifier="MRE_Reimu">
         <Icon texture="%ModDir%/Images/Talents/MRE_Talent.png" sheetindex="0,0" sheetelementsize="128,128" />
@@ -834,13 +867,23 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Any"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15" />
+            </Abilities>
+        </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
+                <AbilityConditionHasAffliction afflictionidentifier="Flandre_Weapons" />
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
                 <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
                 <AbilityConditionCharacter targettype="Enemy">
-                    <Conditional Touhou_MRE_Akyuu_Effect="gt 0"/>
+                    <Conditional Destruction_Of_Mu="gt 0"/>
                     <Conditional HealthPercentage="gt 50"/>
                 </AbilityConditionCharacter>
                 <AbilityConditionServerRandom randomchance="0.04" />
@@ -852,11 +895,12 @@
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
+                <AbilityConditionHasAffliction afflictionidentifier="Flandre_Weapons" />
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
                 <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
                 <AbilityConditionCharacter targettype="Enemy">
                     <Conditional HealthPercentage="lte 50"/>
-                    <Conditional Touhou_MRE_Akyuu_Effect="eq 0"/>
+                    <Conditional Destruction_Of_Mu="eq 0"/>
                 </AbilityConditionCharacter>
                 <AbilityConditionServerRandom randomchance="0.04" />
             </Conditions>
@@ -867,13 +911,14 @@
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
+                <AbilityConditionHasAffliction afflictionidentifier="Flandre_Weapons" />
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
                 <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Melee"/>
                 <AbilityConditionCharacter targettype="Enemy">
-                    <Conditional Touhou_MRE_Akyuu_Effect="gt 0"/>
+                    <Conditional Destruction_Of_Mu="gt 0"/>
                     <Conditional HealthPercentage="gt 50"/>
                 </AbilityConditionCharacter>
-                <AbilityConditionServerRandom randomchance="0.06" />
+                <AbilityConditionServerRandom randomchance="0.08" />
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAttackData implode="true" />
@@ -882,13 +927,14 @@
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
+                <AbilityConditionHasAffliction afflictionidentifier="Flandre_Weapons" />
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
                 <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Melee"/>
                 <AbilityConditionCharacter targettype="Enemy">
                     <Conditional HealthPercentage="lte 50"/>
-                    <Conditional Touhou_MRE_Akyuu_Effect="eq 0"/>
+                    <Conditional Destruction_Of_Mu="eq 0"/>
                 </AbilityConditionCharacter>
-                <AbilityConditionServerRandom randomchance="0.06" />
+                <AbilityConditionServerRandom randomchance="0.08" />
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAttackData implode="true" />

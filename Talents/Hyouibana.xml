@@ -859,9 +859,6 @@
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="None">
-            <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Perfect_And_Elegant_Servant" />
-            </Conditions>
             <Abilities>
                 <CharacterAbilityGiveResistance resistanceid="Touhou_Luna_Clock_Effect" multiplier="0" />
                 <CharacterAbilityGiveResistance resistanceid="Touhou_Luna_Clock_Effect_Debuff" multiplier="0" />
@@ -1004,6 +1001,55 @@
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--凭依梅莉-->
+    <Talent identifier="Hyouibana_Merry" >
+        <Icon texture="%ModDir%/Images/Talents/MerryTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Hyouibana_Merry"/>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="Hyouibana_Merry_Effect" amount="10.0"/>
+                            <Affliction identifier="Hyouibana_Effect_Flag" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="9.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Hyouibana_Effect_Prefect" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" Duration="10.0" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Hyouibana_Effect_Prefect_Merry" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Hyouibana_Effect_Prefect_Yukari" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionAlliesAboveVitality vitalitypercentage="0.6"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Any"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.2" />
             </Abilities>
         </AbilityGroupEffect>
     </Talent>

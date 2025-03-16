@@ -14,7 +14,6 @@
         <Deconstruct time="10">
             <Item identifier="carbon" />
             <Item identifier="organicfiber" />
-            <Item identifier="incendium" amount="2"/>
         </Deconstruct>
         <Fabricate suitablefabricators="fabricator" requiredtime="20">
             <RequiredSkill identifier="mechanical" level="30" />
@@ -140,13 +139,13 @@
             </Containable>
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
             <SubContainer capacity="3" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem" excludeditems="backpack,crate,toolbelt"/>
+                <Containable items="smallitem" excludeditems="backpack,crate,toolbelt,toolbox,Touhou_Magic_Charging_Box"/>
             </SubContainer>
             <SubContainer capacity="4" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt"/>
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,toolbox,Touhou_Magic_Charging_Box"/>
             </SubContainer>
             <SubContainer capacity="12" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,tsm_ammobox"/>
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,tsm_ammobox,toolbox,Touhou_Magic_Charging_Box"/>
             </SubContainer>
         </ItemContainer>
 
@@ -196,7 +195,7 @@
         <InventoryIcon texture="%ModDir%/Images/Tools/Kappa_Backpack_Plus.png" sourcerect="0,0,100,132" origin="0.5,0.5" />
         <Sprite texture="%ModDir%/Images/Tools/Kappa_Backpack.png" depth="0.7" sourcerect="0,0,88,126" origin="0.5,0.5" />
         <Body width="88" height="126" density="10" />
-        <ItemContainer autofill="False" capacity="1" maxstacksize="1" containedstateindicatorstyle="tank" containedstateindicatorslot="0" ExtraStackSize="8">
+        <ItemContainer autofill="False" capacity="1" maxstacksize="1" containedstateindicatorstyle="tank" containedstateindicatorslot="0" ExtraStackSize="4">
             <Containable identifiers="oxygentank,oxygensource" />
             <Containable items="oxygensource">
                 <StatusEffect type="OnWearing" target="Character" OxygenAvailable="1000.0" UseHullOxygen="false" />
@@ -211,13 +210,16 @@
             </Containable>
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
             <SubContainer capacity="3" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem" excludeditems="backpack,crate,toolbelt"/>
+                <Containable items="smallitem" excludeditems="backpack,crate,toolbelt,toolbox,Touhou_Magic_Charging_Box"/>
             </SubContainer>
             <SubContainer capacity="8" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt"/>
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,toolbox,Touhou_Magic_Charging_Box"/>
             </SubContainer>
-            <SubContainer capacity="8" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,tsm_ammobox"/>
+            <SubContainer capacity="6" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,tsm_ammobox,toolbox,Touhou_Magic_Charging_Box"/>
+            </SubContainer>
+            <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,tsm_ammobox,toolbox"/>
             </SubContainer>
         </ItemContainer>
 
@@ -473,7 +475,7 @@
                 <Conditional condition="gt 0" />
                 <Affliction identifier="Touhou_Water_Heart" amount="50" />
             </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" Condition="-0.006" Interval="1.0" disabledeltatime="true" >
+            <StatusEffect type="OnWearing" target="This,Character" Condition="-0.008" Interval="1.0" disabledeltatime="true" >
                 <Conditional HealthPercentage="lte 95" />
             </StatusEffect>
         </Wearable>
@@ -713,10 +715,10 @@
                 </TickBox>
             </CustomInterface>
 
-            <StatusEffect type="OnWearing" target="Character" comparison="And" >
+            <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="0.5" disabledeltatime="true" >
                 <Conditional skillrequirement="true" Touhou_Magic="gt 60" />
-                <Conditional Touhou_Magic_Boost="lte 149" />
-                <Affliction identifier="Touhou_Magic_Boost" amount="4" />
+                <Conditional Touhou_Magic_Boost="lte 148" />
+                <Affliction identifier="Touhou_Magic_Boost" amount="1.0" />
             </StatusEffect>
 
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.75" damagesound="LimbArmor" deflectprojectiles="true" />
@@ -932,10 +934,10 @@
         <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
                   canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
         <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
-            <StatusEffect type="OnWearing" target="Character" comparison="And" >
+            <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="0.5" disabledeltatime="true" >
                 <Conditional skillrequirement="true" Touhou_Magic="gt 60" />
-                <Conditional Touhou_Magic_Boost="lte 149" />
-                <Affliction identifier="Touhou_Magic_Boost" amount="4" />
+                <Conditional Touhou_Magic_Boost="lte 148" />
+                <Affliction identifier="Touhou_Magic_Boost" amount="1" />
             </StatusEffect>
 
             <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Magic_Pouch.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
@@ -1030,9 +1032,9 @@
             <StatusEffect type="OnUse" target="UseTarget" >
                 <Affliction identifier="burn" amount="0.1" />
             </StatusEffect>
-            <StatusEffect type="OnUse" target="Character,This" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="Character,This" Interval="0.5" duration="0.5" >
                 <RequiredItems items="Touhou_Fix_Foamg_Tank" type="Contained" />
-                <Affliction identifier="Touhou_Fix_Foamg_Tank_Effect" amount="100" />
+                <Affliction identifier="Touhou_Fix_Foamg_Tank_Effect" amount="10" />
             </StatusEffect>
             <!-- the tool can fix structures, i.e. walls and windows -->
             <Fixable identifier="structure" />
@@ -1405,7 +1407,7 @@
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
         <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.5" colormultiplier="255,100,100,220"/>
-            <Attack itemdamage="110" targetforce="12" targetimpulse="16" penetration="0.2" severlimbsprobability="0.4">
+            <Attack itemdamage="110" targetforce="2" targetimpulse="6" penetration="0.2" severlimbsprobability="0.4">
                 <Affliction identifier="lacerations" strength="5" />
                 <Affliction identifier="burn" strength="20" />
                 <Affliction identifier="gunshotwound" strength="5" />
@@ -1434,7 +1436,8 @@
     </Item>
 
     <!--河童多功能工具-->
-    <Item name="河童多功能工具" identifier="Touhou_Kappa_Multi_Functional_Tool" category="Equipment" subcategory="Touhou" Tags="smallitem,tool,Normal_Alchemical_Metal,screwdriver,wrench" cargocontaineridentifier="metalcrate" Scale="0.3" impactsoundtag="impact_metal_light" RequireAimToUse="True">
+    <Item name="河童多功能工具" identifier="Touhou_Kappa_Multi_Functional_Tool" category="Equipment" subcategory="Touhou" Tags="smallitem,tool,Normal_Alchemical_Metal,screwdriver,wrench"
+          cargocontaineridentifier="metalcrate" Scale="0.3" impactsoundtag="impact_metal_light" RequireAimToUse="True" addedrepairspeedmultiplier="0.8">
         <PreferredContainer primary="engcab"/>
         <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab,piratestoragecab" amount="1" spawnprobability="0.05"/>
         <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab" amount="1" spawnprobability="0.05"/>
@@ -1550,7 +1553,10 @@
                     </StatusEffect>
                 </Containable>
             </SubContainer>
-            <SubContainer capacity="15" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+            <SubContainer capacity="11" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem,mountableweapon" excludeditems="backpack,crate,Touhou_Magic_Charging_Box"/>
+            </SubContainer>
+            <SubContainer capacity="4" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
                 <Containable items="smallitem,mediumitem,mountableweapon,tsm_gun" excludeditems="backpack,crate"/>
             </SubContainer>
         </ItemContainer>
@@ -1618,28 +1624,6 @@
         <WifiComponent range="65000.0" LinkToChat="true" MinChatMessageInterval="0.0" />
         <Wearable limbtype="Head" slots="Any,Headset" msg="ItemMsgPickUpSelect" >
             <sprite name="Headset Wearable" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.7" hideotherwearables="false" origin="0.5,0.5" />
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.05" Interval="1.0" Duration="1.0" >
-                <Conditional oxygenlow="gte 2" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="oxygenlow" amount="3" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.05" Interval="3.0" >
-                <Conditional psychosis="gte 5" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="psychosis" amount="1.2" />
-                <ReduceAffliction type="nausea" amount="9" />
-                <Affliction identifier="psychosisresistance" amount="15" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.05" Interval="1.0" disabledeltatime="true" >
-                <Conditional Reiki_Side_Effect="gt 0" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="Reiki_Side_Effect" amount="0.03" />
-            </StatusEffect>
-            <StatusEffect type="OnWearing" target="This,Character" comparison="And" Condition="-0.05" Interval="1.0" disabledeltatime="true" >
-                <Conditional Reiki_Side_Effect_NT="gt 0" />
-                <Conditional condition="gt 0" />
-                <ReduceAffliction type="Reiki_Side_Effect" amount="0.03" />
-            </StatusEffect>
             <StatusEffect type="OnWearing" target="This,Character" Interval="5.0" Duration="5.0" >
                 <Conditional condition="gt 0" />
                 <Affliction identifier="Touhou_Pendulum_Magic" amount="50" />
@@ -1647,6 +1631,9 @@
             <StatusEffect type="OnWearing" target="Character" comparison="And" >
                 <Conditional skillrequirement="true" Touhou_Magic="gt 120" />
                 <Affliction identifier="Touhou_Pendulum_Magic_Effect" amount="50" />
+            </StatusEffect>
+            <StatusEffect type="OnWearing" target="This,Character" Condition="-0.008" Interval="1.0" disabledeltatime="true" >
+                <Conditional HealthPercentage="lte 95" />
             </StatusEffect>
             <SkillModifier skillidentifier="Touhou_Magic" skillvalue="15" />
         </Wearable>
@@ -2022,9 +2009,9 @@
             health="400"
             impactsoundtag="impact_soft">
         <PreferredContainer primary="medfabcab" />
-        <PreferredContainer secondary="abandonedmedcab,wreckmedcab,outpostmedcab" spawnprobability="0.03"/>
-        <PreferredContainer primary="ruinstorage,ruinstoragesmall" minamount="1" maxamount="2" spawnprobability="0.04" />
-        <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.08" />
+        <PreferredContainer secondary="abandonedmedcab,wreckmedcab,outpostmedcab" spawnprobability="0.04"/>
+        <PreferredContainer primary="ruinstorage,ruinstoragesmall" minamount="1" maxamount="2" spawnprobability="0.05" />
+        <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.09" />
         <PreferredContainer primary="wreckstoragecab" minamount="0" maxamount="2" spawnprobability="0.075" />
         <PreferredContainer primary="outpostcrewcabinet" minamount="0" maxamount="1" spawnprobability="0.075" />
         <Price baseprice="400" minavailable="2" sold="false" >
@@ -2065,9 +2052,9 @@
             health="400"
             impactsoundtag="impact_soft">
         <PreferredContainer primary="medfabcab" />
-        <PreferredContainer secondary="abandonedmedcab,wreckmedcab,outpostmedcab" spawnprobability="0.03"/>
-        <PreferredContainer primary="ruinstorage,ruinstoragesmall" minamount="1" maxamount="2" spawnprobability="0.04" />
-        <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.08" />
+        <PreferredContainer secondary="abandonedmedcab,wreckmedcab,outpostmedcab" spawnprobability="0.04"/>
+        <PreferredContainer primary="ruinstorage,ruinstoragesmall" minamount="1" maxamount="2" spawnprobability="0.05" />
+        <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.09" />
         <PreferredContainer primary="wreckstoragecab" minamount="0" maxamount="2" spawnprobability="0.075" />
         <PreferredContainer primary="outpostcrewcabinet" minamount="0" maxamount="1" spawnprobability="0.075" />
         <Price baseprice="400" minavailable="2" sold="false" >
@@ -2248,5 +2235,366 @@
                 </StatusEffect>
             </Button>
         </CustomInterface>
+    </Item>
+
+
+    <!--蔷薇礼物袋-->
+    <Item name="蔷薇礼物袋" identifier="Touhou_Rose_Gift_Bag" scale="0.8" subcategory="Touhou" category="Equipment" tags="mediumitem,Touhou_Rose_Gift_Bag,backpack" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="medcab" />
+        <Price baseprice="5000" minleveldifficulty="15">
+            <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
+            <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="0.9" minavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmine" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmedical" multiplier="1.2" sold="false" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="organicfiber" amount="6"/>
+            <Item identifier="Magic_Material"/>
+            <Item identifier="Power_Point"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
+            <RequiredSkill identifier="mechanical" level="20" />
+            <RequiredSkill identifier="Touhou_Magic" level="20" />
+            <RequiredItem identifier="organicfiber" amount="6" />
+            <RequiredItem identifier="Magic_Material" amount="2"/>
+            <RequiredItem identifier="Power_Point" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Rose_Gift_Bag.png" sourcerect="55,0,49,36" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Rose_Gift_Bag.png" depth="0.5" sourcerect="0,0,52,34" origin="0.5,0.5" />
+        <Body width="52" height="34" density="10" />
+        <ItemContainer autofill="False" capacity="0" maxstacksize="1" ExtraStackSize="4" slotsperrow="4">
+            <SlotIcon slotindex="0" texture="%ModDir%/Images/Materials/Touhou_Cuisine/Touhou_Cuisine.png" sheetindex="0,7" sheetelementsize="104,104" origin="0.5,0.5" />
+            <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
+            <SlotIcon slotindex="2" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
+            <SlotIcon slotindex="3" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
+            <SlotIcon slotindex="16" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6" />
+            <SlotIcon slotindex="17" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6" />
+            <SubContainer capacity="1" maxstacksize="1" >
+                <Containable items="Touhou_Unconscious_Yokai_Mousse" >
+                    <StatusEffect type="OnWearing" target="Contained" Condition="-0.01" >
+                        <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false" />
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained,Character" Interval="10.0" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" targetslot="15" >
+                        <RequiredItem items="Touhou_Cuisine" type="Contained" />
+                        <Conditional condition="gt 0"/>
+                        <Affliction identifier="Touhou_Cuisine_Effect01" amount="10" />
+                        <Affliction identifier="Touhou_Cuisine_Effect02" amount="10" />
+                        <Affliction identifier="Touhou_Cuisine_Effect03" amount="10" />
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+            <SubContainer capacity="1" maxstacksize="1" autoinject="true" AutoInjectThreshold="0.3" >
+                <Containable items="chem,syringe" />
+            </SubContainer>
+            <SubContainer capacity="1" maxstacksize="1" autoinject="true" AutoInjectThreshold="0.6" >
+                <Containable items="chem,syringe" />
+            </SubContainer>
+            <SubContainer capacity="1" maxstacksize="1" autoinject="true" AutoInjectThreshold="0.9" >
+                <Containable items="chem,syringe" />
+            </SubContainer>
+            <SubContainer capacity="8" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem" excludeditems="backpack,crate,toolbelt,Touhou_Magic_Charging_Box"/>
+            </SubContainer>
+            <SubContainer capacity="4" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,Touhou_Magic_Charging_Box"/>
+            </SubContainer>
+            <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem,Touhou_Magic_Charging_Box" excludeditems="backpack,crate,toolbelt"/>
+            </SubContainer>
+        </ItemContainer>
+
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="0,0" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
+                  canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
+
+        <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
+
+            <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Touhou_Rose_Gift_Bag.png" sourcerect="0,0,52,34" limb="Torso" hidelimb="false" inheritlimbdepth="true"
+                    inherittexturescale="false" hideotherwearables="false" origin="0.65,0.12" scale="0.8" />
+
+            <StatusEffect type="OnWearing" target="Character" Interval="0.5" disabledeltatime="true" >
+                <Affliction identifier="Touhou_Rose_Fragrance" amount="4" />
+            </StatusEffect>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="bleeding" damagemultiplier="0.5" damagesound="LimbArmor" deflectprojectiles="true" />
+            <SkillModifier skillidentifier="Touhou_Magic" skillvalue="10" />
+            <SkillModifier skillidentifier="weapons" skillvalue="10" />
+        </Wearable>
+        <aitarget maxsightrange="1500" />
+    </Item>
+
+
+    <!--魔法武器充能箱（小型）-->
+    <Item name="魔法武器充能箱（小型）" identifier="Touhou_Magic_Charging_Box_Small" subcategory="Touhou" category="Equipment" Health="60"
+          tags="smallitem,Touhou_Magic_Charging_Box,toolbox" scale="0.4" cargocontaineridentifier="metalcrate">
+        <PreferredContainer primary="crewcab" notcampaign="true"/>
+        <Price baseprice="1000" >
+            <Price storeidentifier="merchantoutpost" sold="false"/>
+            <Price storeidentifier="merchantcity" maxavailable="1"/>
+            <Price storeidentifier="merchantresearch" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" maxavailable="1"/>
+            <Price storeidentifier="merchantmine" maxavailable="1" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="steel" amount="3" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" >
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
+            <RequiredItem tag="advmunition_core" amount="3"/>
+            <RequiredItem identifier="steel" amount="3"/>
+            <RequiredItem identifier="titaniumaluminiumalloy" amount="3"/>
+            <RequiredItem identifier="organicfiber" amount="3"/>
+            <RequiredItem identifier="plastic" amount="3"/>
+            <RequiredItem identifier="ballisticfiber" amount="3"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Small.png" sourcerect="0,0,140,120" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Small.png" sourcerect="0,0,140,120" depth="0.55" origin="0.5,0.5" />
+        <Body width="50" height="20" density="10" />
+        <Holdable slots="RightHand+LeftHand" msg="ItemMsgPickUpSelect" holdpos="50,-50" aimpos="50,-40" />
+<!--        <RangedWeapon reload="1.0" drawhudwhenequipped="true" >
+            <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                <RequiredItem identifier="Star_Danmu" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
+                <RequiredItem identifier="Star_Danmu" type="Contained" ExcludeFullCondition="true" />
+            </StatusEffect>
+            <RequiredItem identifier="Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" msg="ItemMsgAmmoRequired" />
+        </RangedWeapon>-->
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.11,0.11" anchor="Center" absoluteoffset="20,196" style="ItemUI" />
+            <Button text="Text.Touhou_Magic_Charging_Box_Charge">
+                <StatusEffect type="OnUse" target="This" forceplaysounds="true">
+                    <RequiredItem identifier="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" ExcludeFullCondition="true" />
+                    <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="1" range="200.0" loop="false" />
+                </StatusEffect>
+                <!--星星弹幕，幽冥弹匣-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-0.5" disabledeltatime="true" >
+                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--灵之御扎，冰晶，文文的团扇，铁制飞刀，水轮，糖衣炮弹，电荷中继器-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
+                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
+                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
+                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--电能要石，电子御扎，完美雪花，以太飞刀，星海水晶，糖衣大炮弹，星辰法杖-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
+                    Touhou_Crystal_Pistol_Ammo,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-1.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
+                    Touhou_Crystal_Pistol_Ammo,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--冻青蛙，恋之迷宫，幽冥弹匣Plus，月面流矢，月能弹匣，折扇机关，月震中心，核能电容弹匣-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
+                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Lunar_Center,Touhou_Nuclear_Energy_Capacitor_Magazine" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-2.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
+                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Lunar_Center,Touhou_Nuclear_Energy_Capacitor_Magazine" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+        <ItemContainer autofill="False" capacity="1" maxstacksize="1" >
+            <Containable identifiers="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" />
+        </ItemContainer>
+        <aitarget soundrange="1" fadeouttime="5" />
+    </Item>
+
+    <!--魔法武器充能箱（中型）-->
+    <Item name="魔法武器充能箱（中型）" identifier="Touhou_Magic_Charging_Box_Medium" subcategory="Touhou" category="Equipment"
+          tags="mediumitem,Touhou_Magic_Charging_Box,toolbox" scale="0.4" cargocontaineridentifier="metalcrate" >
+        <PreferredContainer primary="crewcab" notcampaign="true"/>
+        <Price baseprice="2500" >
+            <Price storeidentifier="merchantoutpost" sold="false"/>
+            <Price storeidentifier="merchantcity" maxavailable="1"/>
+            <Price storeidentifier="merchantresearch" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" maxavailable="1"/>
+            <Price storeidentifier="merchantmine" maxavailable="1" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="steel" amount="3" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" >
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredItem identifier="Seven_Elements_Alchemical_Fake" mincondition="0.2" usecondition="true" />
+            <RequiredItem identifier="Reiki_Stone" amount="6"/>
+            <RequiredItem identifier="Byproduct_Alchemical" amount="6"/>
+            <RequiredItem identifier="titaniumaluminiumalloy" amount="6"/>
+            <RequiredItem identifier="plastic" amount="12"/>
+            <RequiredItem identifier="ballisticfiber" amount="6"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Medium.png" sourcerect="0,0,140,120" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Medium.png" sourcerect="0,0,140,120" depth="0.55" origin="0.5,0.5" />
+        <Body width="50" height="20" density="10" />
+        <Holdable slots="RightHand+LeftHand" msg="ItemMsgPickUpSelect" holdpos="50,-50" aimpos="50,-40" />
+<!--        <RangedWeapon reload="1.0" drawhudwhenequipped="true" >
+            <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                <RequiredItem identifier="Star_Danmu" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
+                <RequiredItem identifier="Star_Danmu" type="Contained" ExcludeFullCondition="true" />
+            </StatusEffect>
+            <RequiredItem identifier="Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" msg="ItemMsgAmmoRequired" />
+        </RangedWeapon>-->
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.11,0.11" anchor="Center" absoluteoffset="20,196" style="ItemUI" />
+            <Button text="Text.Touhou_Magic_Charging_Box_Charge">
+                <StatusEffect type="OnUse" target="This" forceplaysounds="true">
+                    <RequiredItem identifier="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" ExcludeFullCondition="true" />
+                    <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="1" range="200.0" loop="false" />
+                </StatusEffect>
+                <!--星星弹幕，幽冥弹匣-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-0.5" disabledeltatime="true" >
+                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--星屑幻想，皇家钻戒燃料，耀眼的龙玉-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Stardust_Reverie,Touhou_Royal_Diamond_Ring_Ammo,Touhou_Brilliant_Dragon_Bullet" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-5.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Stardust_Reverie,Touhou_Royal_Diamond_Ring_Ammo,Touhou_Brilliant_Dragon_Bullet" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--灵之御扎，冰晶，文文的团扇，铁制飞刀，水轮，糖衣炮弹，电荷中继器-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
+                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
+                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
+                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--电能要石，电子御扎，完美雪花，以太飞刀，星海水晶，灵异珠-波纹，糖衣大炮弹，星辰法杖-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
+                    Touhou_Crystal_Pistol_Ammo,Touhou_Mysterious_Pearl_Rippling,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-1.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
+                    Touhou_Crystal_Pistol_Ammo,Touhou_Mysterious_Pearl_Rippling,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--冻青蛙，恋之迷宫，幽冥弹匣Plus，月面流矢，月能弹匣，折扇机关，海底蔷薇，灼热核心，微缩地月系统，月震中心，远日点能量核心，核能电容弹匣-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
+                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Rose_Wand_Ammo,Touhou_Scorching_Ray_Gun_Ammo,
+                    Touhou_Miniature_Earth_Moon_System,Touhou_Lunar_Center,Touhou_Aphelion_Ammo,Touhou_Nuclear_Energy_Capacitor_Magazine" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-2.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
+                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Rose_Wand_Ammo,Touhou_Scorching_Ray_Gun_Ammo,
+                    Touhou_Miniature_Earth_Moon_System,Touhou_Lunar_Center,Touhou_Aphelion_Ammo,Touhou_Nuclear_Energy_Capacitor_Magazine" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+        <RepairTool barrelpos="64,16" >
+            <sound file="Content/Items/Tools/WeldingLoop.ogg" type="OnUse" range="500.0" loop="true" />
+            <ParticleEmitter particle="Touhou_Blue_Explosion_Underwater" AngleMax="360" ScaleMultiplier="0.25,0.25" particlespersecond="10" ColorMultiplier="255,155,255,200" />
+        </RepairTool>
+        <ItemContainer autofill="False" capacity="1" maxstacksize="1" >
+            <Containable identifiers="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" />
+        </ItemContainer>
+        <aitarget soundrange="1" fadeouttime="5" />
+    </Item>
+
+    <!--魔法武器充能箱（大型）-->
+    <Item name="魔法武器充能箱（大型）" identifier="Touhou_Magic_Charging_Box_Huge" subcategory="Touhou" category="Equipment" Health="300"
+          tags="mobilecontainer,Touhou_Magic_Charging_Box,toolbox" scale="0.4" cargocontaineridentifier="metalcrate" >
+        <PreferredContainer primary="crewcab" notcampaign="true"/>
+        <Price baseprice="5000" minleveldifficulty="30" >
+            <Price storeidentifier="merchantoutpost" sold="false"/>
+            <Price storeidentifier="merchantcity" maxavailable="1"/>
+            <Price storeidentifier="merchantresearch" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" maxavailable="1"/>
+            <Price storeidentifier="merchantmine" maxavailable="1" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="steel" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Huge.png" sourcerect="0,0,140,120" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Huge.png" sourcerect="0,0,140,120" depth="0.55" origin="0.5,0.5" />
+        <Body width="50" height="20" density="10" />
+        <Holdable slots="RightHand+LeftHand" msg="ItemMsgPickUpSelect" holdpos="50,-50" aimpos="50,-40" />
+<!--        <RangedWeapon reload="1.0" drawhudwhenequipped="true" >
+            <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                <RequiredItem identifier="Star_Danmu" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
+                <RequiredItem identifier="Star_Danmu" type="Contained" ExcludeFullCondition="true" />
+            </StatusEffect>
+            <RequiredItem identifier="Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" msg="ItemMsgAmmoRequired" />
+        </RangedWeapon>-->
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.11,0.11" anchor="Center" absoluteoffset="20,196" style="ItemUI" />
+            <Button text="Text.Touhou_Magic_Charging_Box_Charge">
+                <StatusEffect type="OnUse" target="This" forceplaysounds="true">
+                    <RequiredItem identifier="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" ExcludeFullCondition="true" />
+                    <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="1" range="200.0" loop="false" />
+                </StatusEffect>
+                <!--星星弹幕，幽冥弹匣-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-0.5" disabledeltatime="true" >
+                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--星屑幻想，皇家钻戒燃料，耀眼的龙玉-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Stardust_Reverie,Touhou_Royal_Diamond_Ring_Ammo,Touhou_Brilliant_Dragon_Bullet" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-4.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Stardust_Reverie,Touhou_Royal_Diamond_Ring_Ammo,Touhou_Brilliant_Dragon_Bullet" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--灵之御扎，冰晶，文文的团扇，铁制飞刀，水轮，糖衣炮弹，电荷中继器-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
+                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
+                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
+                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--电能要石，电子御扎，完美雪花，以太飞刀，星海水晶，灵异珠-波纹，糖衣大炮弹，星辰法杖-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
+                    Touhou_Crystal_Pistol_Ammo,Touhou_Mysterious_Pearl_Rippling,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-1.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
+                    Touhou_Crystal_Pistol_Ammo,Touhou_Mysterious_Pearl_Rippling,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+                <!--冻青蛙，恋之迷宫，幽冥弹匣Plus，月面流矢，月能弹匣，折扇机关，海底蔷薇，灼热核心，微缩地月系统，月震中心，远日点能量核心，核能电容弹匣-->
+                <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
+                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Rose_Wand_Ammo,Touhou_Scorching_Ray_Gun_Ammo,
+                    Touhou_Miniature_Earth_Moon_System,Touhou_Lunar_Center,Touhou_Aphelion_Ammo,Touhou_Nuclear_Energy_Capacitor_Magazine" type="Contained" ExcludeBroken="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" Condition="-2.0" disabledeltatime="true" >
+                    <RequiredItem identifier="Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
+                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Rose_Wand_Ammo,Touhou_Scorching_Ray_Gun_Ammo,
+                    Touhou_Miniature_Earth_Moon_System,Touhou_Lunar_Center,Touhou_Aphelion_Ammo,Touhou_Nuclear_Energy_Capacitor_Magazine" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+        <RepairTool barrelpos="64,16" >
+            <sound file="Content/Items/Tools/WeldingLoop.ogg" type="OnUse" range="500.0" loop="true" />
+            <ParticleEmitter particle="Touhou_Blue_Explosion_Underwater" AngleMax="360" ScaleMultiplier="0.25,0.25" particlespersecond="10" ColorMultiplier="255,155,255,200" />
+        </RepairTool>
+        <ItemContainer autofill="False" capacity="1" maxstacksize="1" >
+            <Containable identifiers="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" />
+        </ItemContainer>
+        <aitarget soundrange="1" fadeouttime="5" />
     </Item>
 </Items>
