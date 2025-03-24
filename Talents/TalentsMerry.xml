@@ -166,7 +166,6 @@
         <AbilityGroupInterval interval="1.9">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Hifuu_Club_Merry" />
-                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0"/>
                 <AbilityConditionCharacterUnconcious />
             </Conditions>
             <Abilities>
@@ -179,6 +178,24 @@
                 </CharacterAbilityApplyStatusEffectsToAllies>
             </Abilities>
         </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnUseRangedWeapon">
+            <Conditions>
+                <AbilityConditionItem tags="Touhou_Merry_MobilePhone"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Hifuu_Club_Merry" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Merry_MobilePhone_25CD" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToRandomAlly allowSelf="true" maxdistance="2500">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="haste" strength="100" />
+                            <Affliction identifier="durationincrease" strength="100" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToRandomAlly>
+            </Abilities>
+        </AbilityGroupEffect>
 
     </Talent>
 </Talents>

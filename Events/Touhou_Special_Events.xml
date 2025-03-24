@@ -781,6 +781,7 @@
                     </RNGAction>
                 </Failure>
             </RNGAction>
+            <ClearTagAction tag="Open_player"/>
         </ScriptedEvent>
 
         <!--在船上刷新新年礼物-->
@@ -793,26 +794,36 @@
 
         <!--BGM-->
         <ScriptedEvent identifier="Touhou_OutpostDestroyMission05_BGM">
-            <TagAction criteria="player" tag="player" />
+            <TagAction criteria="player" tag="BGM_Player" ChooseRandom="true" />
             <WaitAction time="3" />
-            <StatusEffectAction targettag="player">
-                <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+            <StatusEffectAction targettag="BGM_Player">
+                <StatusEffect target="Character" Interval="1.0" Duration="1.0" disabledeltatime="true" multiplybymaxvitality="true" >
                     <Affliction identifier="Touhou_OutpostDestroyMission05_BGM_Player" strength="10"/>
                 </StatusEffect>
             </StatusEffectAction>
+<!--            <StatusEffectAction targettag="player" enabledespawn="true">
+                <StatusEffect target="This">
+                    <Sound file="%ModDir%/Sounds/BGM/Touhou_Black_Dream.ogg" dontmuffle="true" range="40000" volume="5.0" />
+                </StatusEffect>
+            </StatusEffectAction>-->
             <Label name="BGMloop" />
-            <WaitAction time="216" />
-            <StatusEffectAction targettag="player">
-                <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+            <TagAction criteria="player" tag="BGM_Player" ChooseRandom="true" />
+            <WaitAction time="30" />
+            <StatusEffectAction targettag="BGM_Player">
+                <StatusEffect target="Character" Interval="1.0" Duration="1.0" disabledeltatime="true" multiplybymaxvitality="true" >
                     <Affliction identifier="Touhou_OutpostDestroyMission05_BGM_Player" strength="10"/>
                 </StatusEffect>
             </StatusEffectAction>
+<!--            <StatusEffectAction targettag="player" enabledespawn="true">
+                <StatusEffect target="This">
+                    <Sound file="%ModDir%/Sounds/BGM/Touhou_Black_Dream.ogg" dontmuffle="true" range="40000" volume="4.0" />
+                </StatusEffect>
+            </StatusEffectAction>-->
             <CheckDataAction identifier="Touhou_OutpostDestroyMission05_End" condition="eq true">
                 <Success>
 
                 </Success>
                 <Failure>
-                    <WaitAction time="100" />
                     <GoTo name="BGMloop"  />
                 </Failure>
             </CheckDataAction>
@@ -842,7 +853,7 @@
                     <WaitAction time="1.5" />
                 </Failure>
             </RNGAction>
-            <GoTo name="delay" maxtimes="200" />
+            <GoTo name="delay" maxtimes="180" />
             <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission05_Event.c2" dialogtype="Small" />
             <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
             <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
@@ -852,22 +863,42 @@
             <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
             <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
             <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+            <WaitAction time="1" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM05_Enemy_Human_Lunatic" tag="Touhou_ODM05_Enemy_Human" continueifnotargetsfound="true" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM05_Enemy_Human_Hard" tag="Touhou_ODM05_Enemy_Human" continueifnotargetsfound="true" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM05_Enemy_Human_Normal" tag="Touhou_ODM05_Enemy_Human" continueifnotargetsfound="true" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM05_Enemy_Human_Easy" tag="Touhou_ODM05_Enemy_Human" continueifnotargetsfound="true" />
+            <StatusEffectAction targettag="Touhou_ODM05_Enemy_Human">
+                <StatusEffect target="This" enabledespawn="true"/>
+            </StatusEffectAction>
             <WaitAction time="200" />
             <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission05_Event.c3" dialogtype="Small" >
-                <Option text="Eventtext.Touhou_OutpostDestroyMission05_Event.c3.o1" endconversation="true" >
+                <Option text="Eventtext.Touhou_OutpostDestroyMission05_Event.c3.o1" >
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission05_Event.c3.o1.c1" dialogtype="Small" />
                     <TriggerEventAction identifier="Touhou_OutpostDestroyMission05_Completed" nextround="false" />
                     <GoTo name="End_Mission" />
                 </Option>
-                <Option text="Eventtext.Touhou_OutpostDestroyMission05_Event.c3.o2" endconversation="true" >
+                <Option text="Eventtext.Touhou_OutpostDestroyMission05_Event.c3.o2" >
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission05_Event.c3.o2.c1" dialogtype="Small" ContinueAutomatically="true" />
                     <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic_Reinforcements" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
                     <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic_Reinforcements" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
                     <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic_Reinforcements" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
                     <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic_Reinforcements" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
                     <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic_Reinforcements" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
                     <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic_Reinforcements" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <WaitAction time="1" />
+                    <TagAction criteria="humanprefabidentifier:Touhou_ODM05_Enemy_Human_Lunatic_Reinforcements" tag="Touhou_ODM05_Enemy_Human" continueifnotargetsfound="true" />
+                    <StatusEffectAction targettag="Touhou_ODM05_Enemy_Human">
+                        <StatusEffect target="This" enabledespawn="true"/>
+                    </StatusEffectAction>
                     <WaitAction time="90" />
                     <SpawnAction npcsetidentifier="Touhou_ODM5_Enemy_NPC" npcidentifier="Touhou_ODM05_Enemy_Human_Lunatic_Reinforcements_Special" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
-                    <WaitAction time="240" />
+                    <WaitAction time="1" />
+                    <TagAction criteria="humanprefabidentifier:Touhou_ODM05_Enemy_Human_Lunatic_Reinforcements_Special" tag="Touhou_ODM05_Enemy_Human" continueifnotargetsfound="true" />
+                    <StatusEffectAction targettag="Touhou_ODM05_Enemy_Human">
+                        <StatusEffect target="This" enabledespawn="true"/>
+                    </StatusEffectAction>
+                    <WaitAction time="200" />
                     <TriggerEventAction identifier="Touhou_OutpostDestroyMission05_Completed" nextround="false" />
                 </Option>
             </ConversationAction>
@@ -876,15 +907,15 @@
 
         <!--黑色迷雾-->
         <ScriptedEvent identifier="Touhou_Dark_Fog_Event">
-            <TagAction criteria="player" tag="player" />
+            <TagAction criteria="player" tag="Fog_player" />
             <SetDataAction value="false" identifier="Touhou_OutpostDestroyMission05_End" />
-            <StatusEffectAction targettag="player">
-                <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+            <StatusEffectAction targettag="Fog_player">
+                <StatusEffect target="Character" Interval="1.0" Duration="1.0" disabledeltatime="true" multiplybymaxvitality="true" >
                     <Affliction identifier="Touhou_Dark_Fog_Effect" strength="10"/>
                 </StatusEffect>
             </StatusEffectAction>
             <Label name="eventloop" />
-            <WaitAction time="0.4" />
+            <WaitAction time="0.1" />
             <RNGAction chance="0.5">
                 <Success>
                     <WaitAction time="0.2" />
@@ -901,9 +932,9 @@
                     <WaitAction time="0.4" />
                 </Failure>
             </RNGAction>
-            <StatusEffectAction targettag="player">
-                <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
-                    <Affliction identifier="Touhou_Dark_Fog_Effect" strength="2.0"/>
+            <StatusEffectAction targettag="Fog_player">
+                <StatusEffect target="Character" Duration="1.0" multiplybymaxvitality="true" >
+                    <Affliction identifier="Touhou_Dark_Fog_Effect" strength="10.0"/>
                 </StatusEffect>
             </StatusEffectAction>
             <CheckDataAction identifier="Touhou_OutpostDestroyMission05_End" condition="eq true">
@@ -934,7 +965,7 @@
                 </Failure>
             </CheckVisibilityAction>
             <WaitAction time="3" />
-            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission06_Event.c1" dialogtype="Small" />
+            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission06_Event.c1" dialogtype="Small" ContinueAutomatically="true" />
             <TriggerEventAction identifier="Touhou_ODM6_Poison_Event" nextround="false" />
             <TriggerEventAction identifier="Touhou_OutpostDestroyMission06_BGM" nextround="false" />
             <Label name="delay" />
@@ -950,9 +981,16 @@
             <SpawnAction npcsetidentifier="Touhou_ODM6_Enemy_NPC" npcidentifier="Touhou_ODM06_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
             <SpawnAction npcsetidentifier="Touhou_ODM6_Enemy_NPC" npcidentifier="Touhou_ODM06_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
             <SpawnAction npcsetidentifier="Touhou_ODM6_Enemy_NPC" npcidentifier="Touhou_ODM06_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+            <WaitAction time="1" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM06_Enemy_Human_Lunatic" tag="Touhou_ODM06_Enemy_Human" continueifnotargetsfound="true" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM06_Enemy_Human_Hard" tag="Touhou_ODM06_Enemy_Human" continueifnotargetsfound="true" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM06_Enemy_Human_Normal" tag="Touhou_ODM06_Enemy_Human" continueifnotargetsfound="true" />
+            <StatusEffectAction targettag="Touhou_ODM06_Enemy_Human">
+                <StatusEffect target="This" enabledespawn="true"/>
+            </StatusEffectAction>
             <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission06_Event.c2" dialogtype="Small" />
             <StatusEffectAction targettag="TP_player">
-                <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+                <StatusEffect target="Character" Interval="1.0" Duration="1.0" disabledeltatime="true" multiplybymaxvitality="true" >
                     <Affliction identifier="Touhou_ODM06_TP_Effect" strength="10"/>
                 </StatusEffect>
             </StatusEffectAction>
@@ -969,22 +1007,28 @@
                 </Failure>
             </RNGAction>
             <SpawnAction npcsetidentifier="Touhou_ODM6_Enemy_NPC" npcidentifier="Touhou_ODM06_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
-            <SpawnAction npcsetidentifier="Touhou_ODM6_Enemy_NPC" npcidentifier="Touhou_ODM06_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+            <SpawnAction npcsetidentifier="Touhou_ODM6_Enemy_NPC" npcidentifier="Touhou_ODM06_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+            <WaitAction time="1" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM06_Enemy_Human_Hard" tag="Touhou_ODM06_Enemy_Human" continueifnotargetsfound="true" />
+            <StatusEffectAction targettag="Touhou_ODM06_Enemy_Human">
+                <StatusEffect target="This" enabledespawn="true"/>
+            </StatusEffectAction>
             <StatusEffectAction targettag="TP_player">
-                <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+                <StatusEffect target="Character" Interval="1.0" Duration="1.0" disabledeltatime="true" multiplybymaxvitality="true" >
                     <Affliction identifier="Touhou_ODM06_TP_Effect" strength="10"/>
                 </StatusEffect>
             </StatusEffectAction>
             <WaitAction time="4.5" />
             <TeleportAction targettag="TP_player" position="outpost" spawnpointtag="" />
-            <GoTo name="TP_Delay" maxtimes="6" />
+            <GoTo name="TP_Delay" maxtimes="4" />
             <WaitAction time="90" />
-            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission06_Event.c3" dialogtype="Small" >
-                <Option text="Eventtext.Touhou_OutpostDestroyMission06_Event.c3.o1" endconversation="true" >
+            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission06_Event.c3" >
+                <Option text="Eventtext.Touhou_OutpostDestroyMission06_Event.c3.o1" >
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission06_Event.c3.o1.c1" />
                     <TagAction Criteria="player" Tag="Poison_Player" IgnoreIncapacitatedCharacters="true" ChooseRandom="true"/>
                     <WaitAction time="3.0" />
-                    <StatusEffectAction targettag="TP_player">
-                        <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+                    <StatusEffectAction targettag="Poison_Player">
+                        <StatusEffect target="Character" Duration="10" multiplybymaxvitality="true" >
                             <Affliction identifier="Touhou_ODM6_Poison_Effect" strength="10"/>
                         </StatusEffect>
                     </StatusEffectAction>
@@ -992,7 +1036,8 @@
                     <SetDataAction value="true" identifier="Touhou_OutpostDestroyMission06_Poison_End" />
                     <GoTo name="End_Mission" />
                 </Option>
-                <Option text="Eventtext.Touhou_OutpostDestroyMission06_Event.c3.o2" endconversation="true" >
+                <Option text="Eventtext.Touhou_OutpostDestroyMission06_Event.c3.o2" >
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission06_Event.c3.o2.c1" />
                     <WaitAction time="60.0" />
                     <StatusEffectAction targettag="TP_player">
                         <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
@@ -1009,20 +1054,31 @@
 
         <!--控制ControlBGM-->
         <ScriptedEvent identifier="Touhou_OutpostDestroyMission06_BGM">
-            <TagAction criteria="player" tag="player" />
+            <TagAction criteria="player" tag="BGM_Player" ChooseRandom="true" />
             <WaitAction time="1" />
-            <StatusEffectAction targettag="player">
+            <StatusEffectAction targettag="BGM_Player">
                 <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
                     <Affliction identifier="Touhou_ODM06_BGM_Player01" strength="10"/>
                 </StatusEffect>
             </StatusEffectAction>
-            <WaitAction time="188" />
+<!--            <StatusEffectAction targettag="BGM_Player" enabledespawn="true">
+                <StatusEffect target="This">
+                    <Sound file="%ModDir%/Sounds/BGM/Touhou_ODM_Control01.ogg" dontmuffle="true" range="40000" volume="5.0" />
+                </StatusEffect>
+            </StatusEffectAction>-->
+            <WaitAction time="190" />
+            <TagAction criteria="player" tag="BGM_Player" ChooseRandom="true" />
             <Label name="BGMloop" />
-            <StatusEffectAction targettag="player">
+            <StatusEffectAction targettag="BGM_Player">
                 <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
                     <Affliction identifier="Touhou_ODM06_BGM_Player02" strength="10"/>
                 </StatusEffect>
             </StatusEffectAction>
+<!--            <StatusEffectAction targettag="BGM_Player" enabledespawn="true">
+                <StatusEffect target="This">
+                    <Sound file="%ModDir%/Sounds/BGM/Touhou_ODM_Control02.ogg" dontmuffle="true" range="40000" volume="4.0" />
+                </StatusEffect>
+            </StatusEffectAction>-->
             <WaitAction time="30" />
             <CheckDataAction identifier="Touhou_OutpostDestroyMission06_End" condition="eq true">
                 <Success>
@@ -1038,18 +1094,20 @@
         <ScriptedEvent identifier="Touhou_ODM6_Poison_Event">
             <TagAction criteria="player" tag="player" />
             <SetDataAction value="false" identifier="Touhou_OutpostDestroyMission06_Poison_End" />
-            <StatusEffectAction targettag="player">
-                <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+<!--            <StatusEffectAction targettag="player">
+                <StatusEffect target="Character" Interval="1.0" disabledeltatime="true" multiplybymaxvitality="true" >
                     <Affliction identifier="Touhou_ODM6_Poison_Effect" strength="1"/>
                 </StatusEffect>
-            </StatusEffectAction>
+            </StatusEffectAction>-->
+            <AfflictionAction affliction="Touhou_ODM6_Poison_Effect" strength="1" targettag="player" />
             <Label name="eventloop" />
             <WaitAction time="10.0" />
-            <StatusEffectAction targettag="player">
-                <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+<!--            <StatusEffectAction targettag="player">
+                <StatusEffect target="Character" Interval="1.0" disabledeltatime="true" multiplybymaxvitality="true" >
                     <Affliction identifier="Touhou_ODM6_Poison_Effect" strength="5.0"/>
                 </StatusEffect>
-            </StatusEffectAction>
+            </StatusEffectAction>-->
+            <AfflictionAction affliction="Touhou_ODM6_Poison_Effect" strength="0.1" targettag="player" />
             <CheckDataAction identifier="Touhou_OutpostDestroyMission06_Poison_End" condition="eq true">
                 <Success>
 
@@ -1059,6 +1117,427 @@
                 </Failure>
             </CheckDataAction>
         </ScriptedEvent>
+
+
+        <!--为时已晚随机事件-->
+        <ScriptedEvent identifier="Touhou_OutpostDestroyMission03_Event">
+            <TagAction criteria="crew" tag="crew" />
+            <TagAction criteria="bot" tag="bot" />
+            <TagAction criteria="player" tag="player" />
+            <Label name="waitforspotting" />
+            <WaitAction time="1" />
+            <CheckVisibilityAction entitytag="bot" excludedentitytag="crew" targettag="crew">
+                <Failure>
+                    <Goto name="waitforspotting" />
+                </Failure>
+            </CheckVisibilityAction>
+            <Label name="delay" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="0.3" />
+                </Success>
+                <Failure>
+                    <WaitAction time="0.6" />
+                </Failure>
+            </RNGAction>
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="0.2" />
+                </Success>
+                <Failure>
+                    <WaitAction time="0.4" />
+                </Failure>
+            </RNGAction>
+            <GoTo name="delay" maxtimes="180" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <RNGAction chance="0.5">
+                        <Success>
+                            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission03_Event.c1" dialogtype="Small" ContinueAutomatically="true" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                        </Success>
+                        <Failure>
+                            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission03_Event.c2" dialogtype="Small" ContinueAutomatically="true" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <TagAction criteria="humanprefabidentifier:Touhou_ODM03_Enemy_Human_Lunatic" tag="Touhou_ODM03_Enemy_Human_Stronger" continueifnotargetsfound="true" />
+                            <TagAction criteria="humanprefabidentifier:Touhou_ODM03_Enemy_Human_Hard" tag="Touhou_ODM03_Enemy_Human_Stronger" continueifnotargetsfound="true" />
+                            <TagAction criteria="humanprefabidentifier:Touhou_ODM03_Enemy_Human_Normal" tag="Touhou_ODM03_Enemy_Human_Stronger" continueifnotargetsfound="true" />
+                            <StatusEffectAction targettag="Touhou_ODM03_Enemy_Human_Stronger">
+                                <StatusEffect target="This" enabledespawn="true">
+                                    <Affliction identifier="Touhou_ODM03_Enemy_Human_Stronger_Effect" strength="50" />
+                                </StatusEffect>
+                            </StatusEffectAction>
+                        </Failure>
+                    </RNGAction>
+                </Success>
+                <Failure>
+                    <RNGAction chance="0.5">
+                        <Success>
+                            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission03_Event.c3" dialogtype="Small" ContinueAutomatically="true" />
+                            <StatusEffectAction targettag="player">
+                                <StatusEffect target="This" enabledespawn="true">
+                                    <Affliction identifier="Touhou_OutpostDestroyMission03_Event_Player_Weakness01" strength="50" />
+                                </StatusEffect>
+                            </StatusEffectAction>
+                        </Success>
+                        <Failure>
+                            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission03_Event.c4" dialogtype="Small" ContinueAutomatically="true" />
+                            <StatusEffectAction targettag="player">
+                                <StatusEffect target="This" enabledespawn="true">
+                                    <Affliction identifier="Touhou_OutpostDestroyMission03_Event_Player_Weakness02" strength="50" />
+                                </StatusEffect>
+                            </StatusEffectAction>
+                        </Failure>
+                    </RNGAction>
+                </Failure>
+            </RNGAction>
+            <Label name="End_Mission"/>
+        </ScriptedEvent>
+
+        <!--亡羊补牢随机事件-->
+        <ScriptedEvent identifier="Touhou_OutpostDestroyMission04_Event">
+            <TagAction criteria="crew" tag="crew" />
+            <TagAction criteria="bot" tag="bot" />
+            <TagAction criteria="player" tag="player" />
+            <Label name="waitforspotting" />
+            <WaitAction time="1" />
+            <CheckVisibilityAction entitytag="bot" excludedentitytag="crew" targettag="crew">
+                <Failure>
+                    <Goto name="waitforspotting" />
+                </Failure>
+            </CheckVisibilityAction>
+            <Label name="delay" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="0.3" />
+                </Success>
+                <Failure>
+                    <WaitAction time="0.6" />
+                </Failure>
+            </RNGAction>
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="0.2" />
+                </Success>
+                <Failure>
+                    <WaitAction time="0.4" />
+                </Failure>
+            </RNGAction>
+            <GoTo name="delay" maxtimes="180" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <RNGAction chance="0.5">
+                        <Success>
+                            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission04_Event.c1" dialogtype="Small" ContinueAutomatically="true" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                        </Success>
+                        <Failure>
+                            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission04_Event.c2" dialogtype="Small" ContinueAutomatically="true" />
+                            <SpawnAction SpeciesName="Touhou_fortune_teller" amount="2" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction SpeciesName="Touhou_fortune_teller" amount="2" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction SpeciesName="Touhou_fortune_teller_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                        </Failure>
+                    </RNGAction>
+                </Success>
+                <Failure>
+                    <RNGAction chance="0.5">
+                        <Success>
+                            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission04_Event.c3" dialogtype="Small" ContinueAutomatically="true" />
+                            <SpawnAction SpeciesName="Touhou_reiki_erode_mudraptor" amount="4" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <WaitAction time="1.0" />
+                            <SpawnAction SpeciesName="Touhou_reiki_erode_mudraptor" amount="2" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <WaitAction time="1.0" />
+                            <SpawnAction SpeciesName="Touhou_reiki_erode_mudraptor" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                        </Success>
+                        <Failure>
+                            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission04_Event.c4" dialogtype="Small" ContinueAutomatically="true" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM04_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM04_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM04_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <StatusEffectAction targettag="player">
+                                <StatusEffect target="This" enabledespawn="true">
+                                    <Affliction identifier="Touhou_OutpostDestroyMission04_Event_Player_Weakness" strength="50" />
+                                </StatusEffect>
+                            </StatusEffectAction>
+                        </Failure>
+                    </RNGAction>
+                </Failure>
+            </RNGAction>
+            <Label name="End_Mission"/>
+        </ScriptedEvent>
+
+        <!--清理魔咒污染随机事件-->
+        <ScriptedEvent identifier="Touhou_OutpostDestroyMission07_Event">
+            <TagAction criteria="player" tag="player" />
+            <Label name="delay" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="0.3" />
+                </Success>
+                <Failure>
+                    <WaitAction time="0.6" />
+                </Failure>
+            </RNGAction>
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="0.2" />
+                </Success>
+                <Failure>
+                    <WaitAction time="0.4" />
+                </Failure>
+            </RNGAction>
+            <GoTo name="delay" maxtimes="150" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission07_Event.c1" dialogtype="Small" ContinueAutomatically="true" />
+                    <SpawnAction SpeciesName="Touhou_reiki_erode_crawler" amount="2" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                </Success>
+                <Failure>
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission07_Event.c2" dialogtype="Small" ContinueAutomatically="true" />
+                    <StatusEffectAction targettag="player">
+                        <StatusEffect target="This" enabledespawn="true">
+                            <Affliction identifier="Touhou_Treatment_Grenade_Effect" strength="500" />
+                        </StatusEffect>
+                    </StatusEffectAction>
+                </Failure>
+            </RNGAction>
+            <Label name="End_Mission"/>
+        </ScriptedEvent>
+
+        <!--妖魔异化Hard随机事件-->
+        <ScriptedEvent identifier="Touhou_OutpostDestroyMission01_Event">
+            <TagAction criteria="player" tag="player" />
+            <Label name="delay" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="0.3" />
+                </Success>
+                <Failure>
+                    <WaitAction time="0.6" />
+                </Failure>
+            </RNGAction>
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="0.2" />
+                </Success>
+                <Failure>
+                    <WaitAction time="0.4" />
+                </Failure>
+            </RNGAction>
+            <GoTo name="delay" maxtimes="150" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission07_Event.c1" dialogtype="Small" ContinueAutomatically="true" />
+                    <SpawnAction SpeciesName="Touhou_fortune_teller" amount="2" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <WaitAction time="15" />
+                    <SpawnAction SpeciesName="Touhou_reiki_erode_mudraptor" amount="4" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                </Success>
+                <Failure>
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission07_Event.c2" dialogtype="Small" ContinueAutomatically="true" />
+                    <StatusEffectAction targettag="player">
+                        <StatusEffect target="This" enabledespawn="true">
+                            <Affliction identifier="Touhou_Treatment_Grenade_Effect" strength="500" />
+                        </StatusEffect>
+                    </StatusEffectAction>
+                </Failure>
+            </RNGAction>
+            <Label name="End_Mission"/>
+        </ScriptedEvent>
+
+        <!--妖魔异化Lunatic随机事件-->
+        <ScriptedEvent identifier="Touhou_OutpostDestroyMission02_Event">
+            <TagAction criteria="player" tag="player" />
+            <Label name="delay" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="0.3" />
+                </Success>
+                <Failure>
+                    <WaitAction time="0.6" />
+                </Failure>
+            </RNGAction>
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="0.2" />
+                </Success>
+                <Failure>
+                    <WaitAction time="0.4" />
+                </Failure>
+            </RNGAction>
+            <GoTo name="delay" maxtimes="120" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission07_Event.c1" dialogtype="Small" ContinueAutomatically="true" />
+                    <SpawnAction SpeciesName="Touhou_fortune_teller_Hard" amount="2" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction SpeciesName="Touhou_fortune_teller" amount="2" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <WaitAction time="15" />
+                    <SpawnAction SpeciesName="Touhou_fortune_teller_Hard" amount="4" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                </Success>
+                <Failure>
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission07_Event.c2" dialogtype="Small" ContinueAutomatically="true" />
+                    <StatusEffectAction targettag="player">
+                        <StatusEffect target="This" enabledespawn="true">
+                            <Affliction identifier="Touhou_Treatment_Grenade_Effect" strength="500" />
+                        </StatusEffect>
+                    </StatusEffectAction>
+                </Failure>
+            </RNGAction>
+            <Label name="End_Mission"/>
+        </ScriptedEvent>
+
+        <!--不期而遇事件-->
+        <ScriptedEvent identifier="Touhou_OutpostDestroyMission08_Event">
+            <TagAction criteria="crew" tag="crew" />
+            <TagAction criteria="bot" tag="bot" />
+            <TagAction criteria="player" tag="player" IgnoreIncapacitatedCharacters="true" />
+            <SetDataAction value="false" identifier="Touhou_OutpostDestroyMission08_End" />
+            <Label name="waitforspotting" />
+            <WaitAction time="1" />
+            <CheckVisibilityAction entitytag="bot" excludedentitytag="crew" targettag="crew">
+                <Failure>
+                    <Goto name="waitforspotting" />
+                </Failure>
+            </CheckVisibilityAction>
+            <WaitAction time="1" />
+            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission08_Event.c1" dialogtype="Small" ContinueAutomatically="true" />
+            <WaitAction time="60" />
+            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission08_Event.c2" dialogtype="Small" >
+                <Option text="Eventtext.Touhou_OutpostDestroyMission08_Event.c2.o1" >
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission08_Event.c2.o1.c1" />
+                    <WaitAction time="3.0" />
+                    <TriggerEventAction identifier="Touhou_ODM8_Aff_Event" nextround="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <GoTo name="Spawn_Delay" />
+                </Option>
+                <Option text="Eventtext.Touhou_OutpostDestroyMission08_Event.c2.o2" >
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission08_Event.c2.o2.c1" />
+                    <WaitAction time="3.0" />
+                    <TriggerEventAction identifier="Touhou_ODM8_Aff_Event" nextround="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <GoTo name="Spawn_Delay" />
+                </Option>
+                <Option text="Eventtext.Touhou_OutpostDestroyMission08_Event.c2.o3" >
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission08_Event.c2.o3.c1" />
+                    <WaitAction time="3.0" />
+                    <TriggerEventAction identifier="Touhou_ODM8_Aff_Event" nextround="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <GoTo name="Spawn_Delay" />
+                </Option>
+            </ConversationAction>
+            <Label name="Spawn_Delay" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <Label name="delay01" />
+                    <RNGAction chance="0.5">
+                        <Success>
+                            <WaitAction time="1.0" />
+                        </Success>
+                        <Failure>
+                            <WaitAction time="1.5" />
+                        </Failure>
+                    </RNGAction>
+                    <GoTo name="delay01" maxtimes="30" />
+                </Success>
+                <Failure>
+                    <Label name="delay02" />
+                    <RNGAction chance="0.5">
+                        <Success>
+                            <WaitAction time="0.5" />
+                        </Success>
+                        <Failure>
+                            <WaitAction time="1.0" />
+                        </Failure>
+                    </RNGAction>
+                    <GoTo name="delay02" maxtimes="30" />
+                </Failure>
+            </RNGAction>
+            <RNGAction chance="0.5">
+                <Success>
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                </Success>
+                <Failure>
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                </Failure>
+            </RNGAction>
+            <WaitAction time="1" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM08_Enemy_Human_Lunatic" tag="Touhou_ODM08_Enemy_Human" continueifnotargetsfound="true" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM08_Enemy_Human_Hard" tag="Touhou_ODM08_Enemy_Human" continueifnotargetsfound="true" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM08_Enemy_Human_Normal" tag="Touhou_ODM08_Enemy_Human" continueifnotargetsfound="true" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM08_Enemy_Human_Easy" tag="Touhou_ODM08_Enemy_Human" continueifnotargetsfound="true" />
+            <StatusEffectAction targettag="Touhou_ODM08_Enemy_Human">
+                <StatusEffect target="This" enabledespawn="true"/>
+            </StatusEffectAction>
+            <WaitAction time="4.5" />
+            <GoTo name="Spawn_Delay" maxtimes="9" />
+            <Label name="delay" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="1.0" />
+                </Success>
+                <Failure>
+                    <WaitAction time="1.3" />
+                </Failure>
+            </RNGAction>
+            <GoTo name="delay" maxtimes="100" />
+            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission08_Event.c3" dialogtype="Small" />
+            <Label name="End_Mission"/>
+        </ScriptedEvent>
+
+        <!--不期而遇BGM-->
+        <ScriptedEvent identifier="Touhou_ODM08_BGM">
+            <TagAction criteria="player" tag="BGM_Player" />
+            <WaitAction time="3" />
+            <StatusEffectAction targettag="BGM_Player" >
+<!--                <StatusEffect target="This">
+                    <Sound file="%ModDir%/Sounds/BGM/Touhou_Bump_Into_BGM.ogg" dontmuffle="true" range="40000" volume="4.0" />
+                </StatusEffect>-->
+                <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+                    <Affliction identifier="Touhou_OutpostDestroyMission08_BGM_Player" strength="10"/>
+                </StatusEffect>
+            </StatusEffectAction>
+        </ScriptedEvent>
+
+        <!--突然爆炸效果-->
+        <ScriptedEvent identifier="Touhou_ODM8_Aff_Event">
+            <TagAction criteria="player" tag="Aff_Player" />
+            <SetDataAction value="false" identifier="Touhou_OutpostDestroyMission08_End" />
+            <TriggerEventAction identifier="Touhou_ODM08_BGM" nextround="false" />
+            <WaitAction time="5" />
+            <StatusEffectAction targettag="Aff_Player">
+                <StatusEffect target="Character" disabledeltatime="true" oneshot="true" >
+                    <sound file="Content/Items/Weapons/ExplosionLarge1.ogg" volume="1" range="10000" />
+                    <sound file="Content/Items/Weapons/ExplosionLarge2.ogg" volume="1" range="10000" />
+                    <Explosion range="5000.0" ballastfloradamage="10000" force="5.0" debris="true"
+                               decal="explosion" decalsize="1.0" camerashake="1000" camerashakerange="50000" flashrange="12000" flashduration="5.0"
+                               screencolor="255,180,180,255" screencolorrange="10000" screencolorduration="5.0" penetration="0.6">
+                        <Affliction identifier="Touhou_Weakness" strength="10" />
+                        <Affliction identifier="Sleepless_Nightmare" strength="50" />
+                        <Affliction identifier="stun" strength="10" />
+                    </Explosion>
+                    <ParticleEmitter particle="underwaterexplosion" anglemin="0" anglemax="360" particleamount="3" velocitymin="0" velocitymax="0" scalemin="15" scalemax="15" />
+                </StatusEffect>
+            </StatusEffectAction>
+            <WaitAction time="1.5" />
+            <AfflictionAction affliction="Touhou_ODM8_Aff_Event_Effect" strength="1000" targettag="Aff_Player" />
+        </ScriptedEvent>
+
 
         <!--补给站事件01-->
         <ScriptedEvent identifier="Touhou_Supply_Station01" commonness="0">

@@ -987,10 +987,21 @@
         </AbilityGroupInterval>
     </Talent>
 
-    <!--刀枪不入 增加15%物理伤害抗性和烧伤抗性，受到攻击后略微增加自身的精神病。精神病越高，抗性越低，最低3%。-->
+    <!--刀枪不入 增加10%物理伤害抗性和烧伤抗性，受到攻击后略微增加自身的精神病。精神病越高，抗性越低，最低3%。-->
     <Talent identifier="Touhou_Yaoguai03">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Defense.png" sheetindex="0,0" sheetelementsize="400,400" />
         <Description tag="talentdescription.Touhou_Yaoguai03"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="psychosis" amount="0.75" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
         <AbilityGroupInterval interval="2.9">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="psychosis" invert="true" />
@@ -2280,7 +2291,7 @@
         </AbilityGroupInterval>
     </Talent>
 
-    <!--妖尾摆风 根据角色等级增加最大生命值，每级增加1%，最多15%
+    <!--妖尾摆风 根据角色等级增加最大生命值，每级增加1%，最多20%
         穿着阿吽装束+时：增加10%对人类敌人的伤害。根据角色等级给予不同的效果：
         15级：可以全速拖动生物，增加10%移动速度
         20级：提高50%缺氧抗性
@@ -2686,7 +2697,7 @@
 
     <!--山中神灵
         穿着文文装束+时：根据角色等级，每级增加1%移动速度，最高25%。角色等级达到20后，额外增加10%攻击伤害
-        穿着椛 装束+时：根据角色等级，每级增加1%近战攻击伤害，最高25%。角色等级到达20后，额外减少10%受到的伤害。-->
+        穿着椛 装束+时：根据角色等级，每级增加2%近战攻击伤害，最高50%。角色等级到达20后，额外减少10%受到的伤害。-->
     <Talent identifier="Touhou_Tiangou07" >
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Direct_Damage.png" sheetindex="0,0" sheetelementsize="400,400" />
         <Description tag="talentdescription.Touhou_Tiangou07"/>
@@ -2714,7 +2725,7 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Grunt_Security_Tengu" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStatToLevel stattype="MeleeAttackMultiplier" statperlevel="0.01" maxlevel="25" />
+                <CharacterAbilityModifyStatToLevel stattype="MeleeAttackMultiplier" statperlevel="0.02" maxlevel="25" />
             </Abilities>
         </AbilityGroupInterval>
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
@@ -2763,7 +2774,7 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--天衣无缝 提高20%毒药抗性和10%debuff抗性。如果你比最高等级的船员低2级以上，增加20%技能获取速度。否则提高10%技能水平和10%最大生命值-->
+    <!--天衣无缝 提高20%毒药抗性和10%debuff抗性。如果你比最高等级的船员低2级以上，增加20%技能获取速度。否则提高10%技能水平和10%攻击伤害-->
     <Talent identifier="Touhou_Tianren_Xianren02">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Defense.png" sheetindex="0,0" sheetelementsize="400,400" />
         <Description tag="talentdescription.Touhou_Tianren_Xianren02"/>
@@ -2931,7 +2942,7 @@
         </AbilityGroupInterval>
     </Talent>
 
-    <!--超凡脱俗 允许技能水平的上限超过100达到200
+    <!--超凡脱俗 允许技能水平的上限超过100达到200，修理速度下降25%
         穿着天子装束+时：对被气质剥离的敌人造成的伤害提高10%。根据角色等级，每级增加1%攻击速度，最高20%-->
     <Talent identifier="Touhou_Tianren_Xianren06">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Indirect_Damage.png" sheetindex="0,0" sheetelementsize="400,400" />
@@ -2939,6 +2950,7 @@
         <AbilityGroupEffect abilityeffecttype="None">
             <Abilities>
                 <CharacterAbilityGiveFlag flagtype="GainSkillPastMaximum" />
+                <CharacterAbilityGiveStat stattype="RepairSpeed" value="-0.5"/>
             </Abilities>
         </AbilityGroupEffect>
         <!--比那名居天子-->
@@ -2966,7 +2978,7 @@
     </Talent>
 
     <!--至圣至明
-        穿着天子装束+时：增加10%攻击伤害。根据魔法能力水平，提高相应10%的最大生命值。这个效果在魔法能力超过300时达到上限-->
+        穿着天子装束+时：增加10%攻击伤害。根据魔法能力水平，提高相应5%的最大生命值。这个效果在魔法能力超过300时达到上限-->
     <Talent identifier="Touhou_Tianren_Xianren07">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400" />
         <Description tag="talentdescription.Touhou_Tianren_Xianren07"/>
@@ -2990,7 +3002,7 @@
                 <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="300" invert="true" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStatToSkill stattype="MaximumHealthMultiplier" maxvalue="0.1" skillidentifier="Touhou_Magic" />
+                <CharacterAbilityModifyStatToSkill stattype="MaximumHealthMultiplier" maxvalue="0.05" skillidentifier="Touhou_Magic" />
             </Abilities>
         </AbilityGroupInterval>
         <AbilityGroupInterval interval="0.9">
@@ -2999,7 +3011,7 @@
                 <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="300" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.3" />
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.15" />
             </Abilities>
         </AbilityGroupInterval>
     </Talent>
