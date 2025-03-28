@@ -86,14 +86,14 @@
             <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" comparison="And" targetslot="0">
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
-            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="0.04" comparison="And" targetslot="0">
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="0.04" comparison="And" targetslot="0" Interval="1.0" Duration="1.0">
                 <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
                 <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="gt 50" />
                 <Conditional InWater="false" />
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
             <!-- consume oxygen if not in water and there's not enough oxygen in the hull -->
-            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.04" comparison="And" targetslot="0">
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.04" comparison="And" targetslot="0" Interval="1.0" disabledeltatime="true">
                 <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
                 <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
                 <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="lt 50" />
@@ -102,7 +102,7 @@
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
             <!-- consume oxygen if in water -->
-            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.08" comparison="And" targetslot="0">
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.08" comparison="And" targetslot="0" Interval="1.0" disabledeltatime="true">
                 <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
                 <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
                 <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true" />
@@ -147,52 +147,45 @@
             <SubContainer capacity="4" maxstacksize="1" >
                 <Containable items="Touhou_Peace_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect03" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Soft_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect04" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Warm_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect05" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Boiling_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect06" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Icy_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect07" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_White_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect08" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect09" strength="10" />
                     </StatusEffect>
                 </Containable>
+                <!--根据Aff减少勾玉耐久-->
                 <Containable items="Touhou_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Contained" Interval="2.0" disabledeltatime="true" condition="-0.01">
                         <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 0" TargetContainer="true" TargetGrandparent="true"/>
@@ -346,14 +339,14 @@
             <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" comparison="And" targetslot="0">
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
-            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="0.04" comparison="And" targetslot="0">
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="0.04" comparison="And" targetslot="0" Interval="1.0" Duration="1.0">
                 <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
                 <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="gt 50" />
                 <Conditional InWater="false" />
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
             <!-- consume oxygen if not in water and there's not enough oxygen in the hull -->
-            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.06" comparison="And" targetslot="0">
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.06" comparison="And" targetslot="0" Interval="1.0" disabledeltatime="true">
                 <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
                 <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
                 <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="lt 50" />
@@ -362,7 +355,7 @@
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
             <!-- consume oxygen if in water -->
-            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.09" comparison="And" targetslot="0">
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.09" comparison="And" targetslot="0" Interval="1.0" disabledeltatime="true">
                 <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
                 <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
                 <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true" />
@@ -431,49 +424,41 @@
             <SubContainer capacity="3" maxstacksize="1" >
                 <Containable items="Touhou_Peace_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect03" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Soft_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect04" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Warm_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect05" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Boiling_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect06" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Icy_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect07" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_White_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect08" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect09" strength="10" />
                     </StatusEffect>
                 </Containable>
@@ -575,14 +560,14 @@
             <StatusEffect type="OnWearing" target="Contained,Character" UseHullOxygen="false" OxygenAvailable="1000.0" comparison="And" targetslot="0">
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
-            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="0.1" comparison="And" targetslot="0">
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="0.1" comparison="And" targetslot="0" Interval="1.0" Duration="1.0">
                 <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
                 <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="gt 50" />
                 <Conditional InWater="false" />
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
             <!-- consume oxygen if not in water and there's not enough oxygen in the hull -->
-            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.07" comparison="And" targetslot="0">
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.07" comparison="And" targetslot="0" Interval="1.0" disabledeltatime="true">
                 <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
                 <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
                 <Conditional targetcontainer="true" targetgrandparent="true" HullOxygenPercentage="lt 50" />
@@ -591,7 +576,7 @@
                 <RequiredItem items="oxygensource" type="Contained" />
             </StatusEffect>
             <!-- consume oxygen if in water -->
-            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.14" comparison="And" targetslot="0">
+            <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.14" comparison="And" targetslot="0" Interval="1.0" disabledeltatime="true">
                 <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false" />
                 <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99" />
                 <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true" />
@@ -657,49 +642,41 @@
             <SubContainer capacity="2" maxstacksize="1" >
                 <Containable items="Touhou_Peace_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
                         <Affliction identifier="Ether_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
                         <Affliction identifier="Ether_Divinggear_Effect03" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Soft_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
                         <Affliction identifier="Ether_Divinggear_Effect04" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Warm_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
                         <Affliction identifier="Ether_Divinggear_Effect05" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Boiling_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
                         <Affliction identifier="Ether_Divinggear_Effect06" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Icy_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
                         <Affliction identifier="Ether_Divinggear_Effect07" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_White_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
                         <Affliction identifier="Ether_Divinggear_Effect08" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
                         <Affliction identifier="Ether_Divinggear_Effect09" strength="10" />
                     </StatusEffect>
                 </Containable>
@@ -803,7 +780,7 @@
             <StatValue stattype="FlowResistance" value="0.5" />
             <!--自动填满氧气 -->
             <StatusEffect type="OnWearing" target="This" OxygenAvailable="0.0" UseHullOxygen="true" />
-            <StatusEffect type="Always" target="This" Condition="0.4" targetslot="0" comparison="And" Interval="1.0" disabledeltatime="true">
+            <StatusEffect type="Always" target="This" Condition="0.4" targetslot="0" comparison="And" Interval="1.0" Duration="1.0">
                 <Conditional HullOxygenPercentage="gt 50" />
                 <Conditional InWater="false" />
             </StatusEffect>
@@ -848,49 +825,41 @@
             <SubContainer capacity="6" maxstacksize="1" >
                 <Containable items="Touhou_Peace_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect03" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Soft_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect04" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Warm_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect05" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Boiling_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect06" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Icy_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect07" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_White_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
                         <Affliction identifier="Magic_Veil_Effect02" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
                         <Affliction identifier="Magic_Veil_Effect03" strength="10" />
                     </StatusEffect>
                 </Containable>
@@ -995,7 +964,7 @@
             <StatValue stattype="FlowResistance" value="0.5" />
             <!--自动填满氧气 -->
             <StatusEffect type="OnWearing" target="This" OxygenAvailable="0.0" UseHullOxygen="true" />
-            <StatusEffect type="Always" target="This" Condition="0.4" targetslot="0" comparison="And" Interval="1.0" disabledeltatime="true">
+            <StatusEffect type="Always" target="This" Condition="0.4" targetslot="0" comparison="And" Interval="1.0" Duration="1.0">
                 <Conditional HullOxygenPercentage="gt 50" />
                 <Conditional InWater="false" />
             </StatusEffect>
@@ -1040,49 +1009,41 @@
             <SubContainer capacity="6" maxstacksize="1" >
                 <Containable items="Touhou_Peace_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect03" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Soft_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect04" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Warm_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect05" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Boiling_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect06" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Icy_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
                         <Affliction identifier="Gensokyo_Divinggear_Effect07" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_White_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
                         <Affliction identifier="Magic_Veil_Effect02" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
                         <Affliction identifier="Magic_Veil_Effect03" strength="10" />
                     </StatusEffect>
                 </Containable>
@@ -1172,7 +1133,7 @@
             <StatValue stattype="FlowResistance" value="0.8" />
             <!--自动填满氧气 -->
             <StatusEffect type="OnWearing" target="This" OxygenAvailable="0.0" UseHullOxygen="true" />
-            <StatusEffect type="Always" target="This" Condition="0.4" targetslot="0" comparison="And" Interval="1.0" disabledeltatime="true">
+            <StatusEffect type="Always" target="This" Condition="0.1" targetslot="0" comparison="And" Interval="1.0" Duration="1.0">
                 <Conditional HullOxygenPercentage="gt 50" />
                 <Conditional InWater="false" />
             </StatusEffect>
@@ -1242,49 +1203,41 @@
             <SubContainer capacity="5" maxstacksize="1" >
                 <Containable items="Touhou_Peace_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect03" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Soft_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect04" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Warm_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect05" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Boiling_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect06" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Icy_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect07" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_White_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect08" strength="10" />
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
-                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
                         <Affliction identifier="Boudary_Divinggear_Effect09" strength="10" />
                     </StatusEffect>
                 </Containable>

@@ -21,58 +21,26 @@
                 <CharacterAbilityPutItem itemidentifier="Perfect_Memento_In_Strict_Sense" amount="1"/>
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnGainMissionExperience">
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo" />
-                <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo_Round_End" />
+                <AbilityConditionCharacter targettype="Ally" invert="true"/>
+                <AbilityConditionHasLevel minlevel="15" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyValue multiplyvalue="1.5"/>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1" />
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
-            <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo" />
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="1.0" disabledeltatime="true">
-                            <Affliction identifier="Memory_Of_Gensokyo_Round_End" amount="100.0"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupInterval interval="3">
-            <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo" invert="true" />
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character">
-                            <ReduceAffliction identifier="Memory_Of_Gensokyo_Round_End" amount="100"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
-            </Abilities>
-        </AbilityGroupInterval>
         <AbilityGroupInterval>
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo" />
-                <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo_Round_End" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStat stattype="MovementSpeed" value="-0.25" />
-                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="-0.35" />
-                <CharacterAbilityModifyStat stattype="SkillGainSpeed" value="1" />
-                <CharacterAbilityModifyStat stattype="MedicalItemApplyingMultiplier" value="0.15" />
-                <CharacterAbilityModifyStat stattype="DeconstructorSpeedMultiplier" value="0.25" />
-                <CharacterAbilityModifyStat stattype="FabricationSpeed" value="0.25" />
-                <CharacterAbilityModifyStat stattype="MeleeAttackMultiplier" value="-0.25" />
-                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="-0.2" />
-                <CharacterAbilityModifyStat stattype="RangedAttackMultiplier" value="-0.15" />
+                <CharacterAbilityModifyStatToSkill stattype="SkillGainSpeed" maxvalue="1.0" skillidentifier="all" />
+                <CharacterAbilityModifyStatToSkill stattype="MissionExperienceGainMultiplier" maxvalue="0.5" skillidentifier="all" />
+                <CharacterAbilityModifyStatToSkill stattype="MedicalItemApplyingMultiplier" maxvalue="0.15" skillidentifier="all" />
+                <CharacterAbilityModifyStatToSkill stattype="FabricationSpeed" maxvalue="0.25" skillidentifier="all" />
+                <CharacterAbilityModifyStatToSkill stattype="DeconstructorSpeedMultiplier" maxvalue="0.25" skillidentifier="all" />
             </Abilities>
         </AbilityGroupInterval>
     </Talent>

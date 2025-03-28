@@ -3,6 +3,23 @@
     <Talent identifier="Casket_Of_Star">
         <Icon texture="%ModDir%/Images/Talents/Casket_Of_Star.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Casket_Of_Star"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician" />
+                <AbilityConditionServerRandom randomchance="0.1" />
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="70" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="burn" amount="0.2" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnOpenItemContainer">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician" />
@@ -25,6 +42,15 @@
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAffliction afflictionidentifiers="burn,acidburn" addedmultiplier="0.04" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician" />
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.04" />
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
