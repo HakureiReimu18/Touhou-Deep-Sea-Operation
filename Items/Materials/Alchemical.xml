@@ -15,6 +15,8 @@
           impactsoundtag="impact_soft">
         <PreferredContainer primary="medfabcab" spawnprobability="0.1"/>
         <PreferredContainer secondary="abandonedmedcab,wreckmedcab,outpostmedcab" spawnprobability="0.1"/>
+        <PreferredContainer primary="ruinstorage,ruinstoragesmall" minamount="1" maxamount="2" spawnprobability="0.1" />
+        <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.1" />
 <!--        <Holdable canBeCombined="true" removeOnCombined="true" slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />-->
         <Price baseprice="350" minavailable="2" >
             <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
@@ -64,21 +66,90 @@
             <RequiredSkill identifier="Touhou_Magic" level="20" />
             <RequiredItem tag="High_Alchemical_Metal" mincondition="0" maxcondtion="100" usecondition="false" />
         </Fabricate>
+
         <Sprite texture="%ModDir%/Images/Alchemical/Touhou_Base_Metal.png" sourcerect="0,0,72,72" depth="0.5" origin="0.5,0.5" />
         <Body width="25" radius="25" density="12" />
         <AiTarget sightrange="1000" static="true" />
-        <LevelResource deattachduration="4" randomoffsetfromwall="80">
-            <Commonness commonness="0.3" abysscommonness="30" />
-            <Commonness commonness="0.3" abysscommonness="25" leveltype="europanridge" />
+        <LevelResource deattachduration="2" randomoffsetfromwall="50">
+            <Commonness commonness="0.2" abysscommonness="20" />
+            <Commonness commonness="0.25" abysscommonness="25" leveltype="europanridge" />
             <Commonness commonness="0.3" abysscommonness="15" leveltype="theaphoticplateau" />
             <Commonness commonness="0.25" abysscommonness="10" leveltype="thegreatsea" />
             <Commonness commonness="0.30" abysscommonness="15" leveltype="hydrothermalwastes" />
+        </LevelResource>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" pickingtime="0.5" attachable="true" reattachable="false" >
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+            <LightComponent lightcolor="255,255,255,200" range="60" powerconsumption="10" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true"
+                            drawbehindsubs="false" castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+            </LightComponent>
+        </Holdable>
+    </Item>
+
+    <!--魔法水晶矿-->
+    <Item
+          name="魔法水晶矿"
+          identifier="Touhou_Base_Metal_Environment"
+          category="Material,Alien"
+          subcategory="Touhou"
+          maxstacksize="32"
+          tags="smallitem,ore"
+          canbepicked="true"
+          cargocontaineridentifier="mediccrate"
+          description=""
+          scale="0.5"
+          impactsoundtag="impact_soft">
+        <PreferredContainer primary="mineralcab" secondary="storagecab" />
+        <PreferredContainer secondary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.1" />
+        <PreferredContainer secondary="ruintreasure" minamount="1" maxamount="3" spawnprobability="0.2" />
+<!--        <Holdable canBeCombined="true" removeOnCombined="true" slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />-->
+        <Price baseprice="350" minavailable="2" sold="false" >
+            <Price locationtype="outpost" multiplier="1.2" maxavailable="8" />
+            <Price locationtype="city" multiplier="1" maxavailable="16" />
+            <Price locationtype="research" multiplier="1" maxavailable="12" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="8" />
+            <Price locationtype="mine" multiplier="0.8" maxavailable="8" />
+        </Price>
+        <Deconstruct time="5" chooserandom="true" amount="3" requireddeconstructor="Alchemy_Table">
+            <Item identifier="Mu_Alchemical" amount="2" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Huo_Alchemical" amount="2" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Tu_Alchemical" amount="2" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Jin_Alchemical" amount="2" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Shui_Alchemical" amount="2" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Touhou_Base_Metal" amount="3" requiredotheritem="Byproduct_Alchemical" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+        </Deconstruct>
+        <Deconstruct time="5" chooserandom="true" amount="5">
+            <Item identifier="magnesium" amount="3" commonness="1" />
+            <Item identifier="silicon" amount="2" commonness="1" />
+            <Item identifier="phosphorus" amount="3" commonness="1" />
+            <Item identifier="Touhou_Base_Metal" amount="2" commonness="2" />
+        </Deconstruct>
+        <ContainedSprite texture="%ModDir%/Images/Alchemical/Touhou_Magic_Crystal_Environment.png" usewhenattached="true" decorativespritebehavior="HideWhenNotVisible" depth="0.5" sourcerect="0,0,84,144" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Alchemical/Touhou_Magic_Crystal_Environment.png" sourcerect="0,144,100,144" depth="0.5" origin="0.5,0.5" />
+        <DecorativeSprite texture="%ModDir%/Images/Alchemical/Touhou_Magic_Crystal_Environment.png" depth="0.49" sourcerect="84,0,84,140" offset="20,0" randomrotation="-20,20" randomscale="0.8,1.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+        <DecorativeSprite texture="%ModDir%/Images/Alchemical/Touhou_Magic_Crystal_Environment.png" depth="0.48" sourcerect="170,0,84,140" offset="20,0" randomrotation="-20,20" randomscale="0.8,1.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="1" />
+        <DecorativeSprite texture="%ModDir%/Images/Alchemical/Touhou_Magic_Crystal_Environment.png" depth="0.51" sourcerect="84,0,84,140" offset="-20,0" randomrotation="-20,20" randomscale="0.8,1.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" />
+        <DecorativeSprite texture="%ModDir%/Images/Alchemical/Touhou_Magic_Crystal_Environment.png" depth="0.52" sourcerect="170,0,84,140" offset="-20,0" randomrotation="-20,20" randomscale="0.8,1.5" randomoffset="30,30" origin="0.5,0.5" randomgroupid="2" />
+        <DecorativeSprite texture="%ModDir%/Images/Alchemical/Touhou_Magic_Crystal_Environment.png" depth="0.491" sourcerect="84,0,84,140" offset="0,-30" randomrotation="-20,20" randomscale="0.8,1.5" randomoffset="30,10" origin="0.5,0.5" randomgroupid="3" />
+        <DecorativeSprite texture="%ModDir%/Images/Alchemical/Touhou_Magic_Crystal_Environment.png" depth="0.53" sourcerect="170,0,84,140" offset="0,-30" randomrotation="-20,20" randomscale="0.8,1.5" randomoffset="30,10" origin="0.5,0.5" randomgroupid="3" />
+
+        <Body width="40" radius="25" density="10" />
+        <AiTarget sightrange="1000" static="true" />
+        <LevelResource deattachduration="4" randomoffsetfromwall="80">
+            <Commonness commonness="0.15" cavecommonness="0.15" abysscommonness="15" />
+            <Commonness commonness="0.35" cavecommonness="0.35" abysscommonness="20" leveltype="europanridge" />
+            <Commonness commonness="0.4" cavecommonness="0.35" abysscommonness="25" leveltype="theaphoticplateau" />
+            <Commonness commonness="0.5" cavecommonness="0.45" abysscommonness="30" leveltype="thegreatsea" />
+            <Commonness commonness="0.5" cavecommonness="0.5" abysscommonness="35" leveltype="hydrothermalwastes" />
             <RequiredItem items="cuttingequipment" type="Equipped" />
         </LevelResource>
-        <LightComponent lightcolor="255,255,255,200" range="60" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
-            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
-        </LightComponent>
-        <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="3.0" attachable="true" reattachable="false" />
+        <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="3.0" attachable="true" reattachable="false" >
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+            <LightComponent lightcolor="255,255,255,200" range="60" powerconsumption="10" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" drawbehindsubs="false"
+                            castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+            </LightComponent>
+        </Holdable>
     </Item>
 
     <!--贵金属-->
@@ -95,50 +166,87 @@
           scale="0.6"
           impactsoundtag="impact_soft">
         <PreferredContainer primary="medfabcab" />
-        <PreferredContainer secondary="abandonedmedcab,wreckmedcab,outpostmedcab" spawnprobability="0.01"/>
         <PreferredContainer primary="ruinstorage,ruinstoragesmall" minamount="1" maxamount="2" spawnprobability="0.02" />
         <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="2" spawnprobability="0.05" />
 <!--        <Holdable canBeCombined="true" removeOnCombined="true" slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />-->
-        <Price baseprice="4500" minleveldifficulty="36" >
+        <Price baseprice="4500" minavailable="1" maxavailable="1" minleveldifficulty="36" >
             <Price locationtype="outpost" multiplier="1.2" sold="false" />
             <Price locationtype="city" multiplier="1" maxavailable="2" />
-            <Price locationtype="research" multiplier="1" maxavailable="1" />
-            <Price locationtype="military" multiplier="1.1" maxavailable="1" />
+            <Price locationtype="research" multiplier="1" maxavailable="1" sold="false" />
+            <Price locationtype="military" multiplier="1.1" maxavailable="1" sold="false" />
             <Price locationtype="mine" multiplier="1.1" maxavailable="1" />
         </Price>
         <Deconstruct time="5" chooserandom="false" requireddeconstructor="Alchemy_Table">
             <!--木 森罗-->
-            <Item identifier="Mu_Alchemical" amount="14" requiredotheritem="Gilead_Branch" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
-            <Item identifier="Mu_Alchemical" amount="7" requiredotheritem="Cinnamon_Branch" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Mu_Alchemical" amount="32" requiredotheritem="Gilead_Branch" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Mu_Alchemical" amount="48" requiredotheritem="Cinnamon_Branch" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
             <!--火 气炎-->
-            <Item identifier="Huo_Alchemical" amount="14" requiredotheritem="Reiki_Dust" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
-            <Item identifier="Huo_Alchemical" amount="7" requiredotheritem="aluminium" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Huo_Alchemical" amount="48" requiredotheritem="Reiki_Dust" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Huo_Alchemical" amount="32" requiredotheritem="aluminium" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
             <!--土 灵峰-->
-            <Item identifier="Tu_Alchemical" amount="14" requiredotheritem="Reiki_Dust_Caking" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
-            <Item identifier="Tu_Alchemical" amount="7" requiredotheritem="silicon" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Tu_Alchemical" amount="48" requiredotheritem="Reiki_Dust_Caking" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Tu_Alchemical" amount="32" requiredotheritem="silicon" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
             <!--金 玄金-->
-            <Item identifier="Jin_Alchemical" amount="14" requiredotheritem="Reiki_Stone" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
-            <Item identifier="Jin_Alchemical" amount="7" requiredotheritem="iron" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Jin_Alchemical" amount="48" requiredotheritem="Reiki_Stone" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Jin_Alchemical" amount="32" requiredotheritem="iron" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
             <!--水 啼水-->
-            <Item identifier="Shui_Alchemical" amount="14" requiredotheritem="Plant_Essential_Oil" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
-            <Item identifier="Shui_Alchemical" amount="7" requiredotheritem="stabilozine" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Shui_Alchemical" amount="48" requiredotheritem="Plant_Essential_Oil" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Shui_Alchemical" amount="32" requiredotheritem="stabilozine" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
             <!--日 烈阳-->
-            <Item identifier="Yang_Alchemical" amount="14" requiredotheritem="Magic_Material" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Yang_Alchemical" amount="24" requiredotheritem="Magic_Material" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
             <!--月 满月-->
-            <Item identifier="Yin_Alchemical" amount="14" requiredotheritem="Magic_Material" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <Item identifier="Yin_Alchemical" amount="24" requiredotheritem="Magic_Material" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
         </Deconstruct>
         <Sprite texture="%ModDir%/Images/Alchemical/Touhou_Precious_Metal.png" sourcerect="0,0,72,72" depth="0.5" origin="0.5,0.5" />
         <Body width="25" radius="25" density="12" />
         <AiTarget sightrange="1000" static="true" />
-        <LevelResource deattachduration="4" randomoffsetfromwall="80">
+        <LevelResource deattachduration="2" randomoffsetfromwall="50">
             <Commonness commonness="0.0" abysscommonness="0.0" />
             <Commonness commonness="0.0" abysscommonness="5" leveltype="europanridge" />
-            <Commonness commonness="0.06" abysscommonness="12" leveltype="theaphoticplateau" />
-            <Commonness commonness="0.09" abysscommonness="14" leveltype="thegreatsea" />
-            <Commonness commonness="0.11" abysscommonness="18" leveltype="hydrothermalwastes" />
-            <RequiredItem items="cuttingequipment" type="Equipped" />
+            <Commonness commonness="0.07" abysscommonness="14" leveltype="theaphoticplateau" />
+            <Commonness commonness="0.1" abysscommonness="16" leveltype="thegreatsea" />
+            <Commonness commonness="0.12" abysscommonness="20" leveltype="hydrothermalwastes" />
         </LevelResource>
-        <LightComponent lightcolor="255,150,150,200" range="60" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" pickingtime="0.5" attachable="true" reattachable="false" >
+            <LightComponent lightcolor="255,150,150,200" range="60" powerconsumption="10" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+            </LightComponent>
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+        </Holdable>
+    </Item>
+
+    <!--精神层金属-->
+    <Item
+            name="精神层金属"
+            identifier="Touhou_Mental_Metal"
+            category="Alien"
+            subcategory="Touhou"
+            tags="smallitem"
+            canbepicked="true"
+            cargocontaineridentifier="mediccrate"
+            description=""
+            scale="0.6"
+            impactsoundtag="impact_soft">
+        <PreferredContainer primary="medfabcab" />
+        <Deconstruct time="5" chooserandom="false" requireddeconstructor="Alchemy_Table">
+            <!--木 森罗-->
+            <Item identifier="Mu_Alchemical" amount="60" requiredotheritem="Cinnamon_Branch" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <!--火 气炎-->
+            <Item identifier="Huo_Alchemical" amount="60" requiredotheritem="aluminium" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <!--土 灵峰-->
+            <Item identifier="Tu_Alchemical" amount="60" requiredotheritem="silicon" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <!--金 玄金-->
+            <Item identifier="Jin_Alchemical" amount="60" requiredotheritem="iron" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <!--水 啼水-->
+           <Item identifier="Shui_Alchemical" amount="60" requiredotheritem="stabilozine" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <!--日 烈阳-->
+            <Item identifier="Yang_Alchemical" amount="40" requiredotheritem="Magic_Material" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+            <!--月 满月-->
+            <Item identifier="Yin_Alchemical" amount="40" requiredotheritem="Magic_Material" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Alchemical/Touhou_Mental_Metal.png" sourcerect="0,0,72,72" depth="0.5" origin="0.5,0.5" />
+        <Body width="25" radius="25" density="10" />
+        <LightComponent lightcolor="255,150,150,200" range="60" powerconsumption="10" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
             <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
         </LightComponent>
         <Holdable slots="Any,RightHand,LeftHand" msg="ItemMsgUsePlasmaCutter" handle1="0,0" pickingtime="3.0" attachable="true" reattachable="false" />
@@ -217,10 +325,12 @@
             <StatusEffect type="OnBroken" target="This">
                 <Remove />
             </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+            <LightComponent lightcolor="7,174,0,225" range="50" powerconsumption="10" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+            </LightComponent>
         </Holdable>
-        <LightComponent lightcolor="7,174,0,225" range="50" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
-            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
-        </LightComponent>
+
         <Price baseprice="300" minavailable="1" >
             <Price locationtype="outpost" multiplier="0.9" sold="false" maxavailable="4" />
             <Price locationtype="city" multiplier="1" maxavailable="8" />
@@ -239,7 +349,7 @@
                        drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
             <Containable items="Elements_Mu_Bolt" />
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
-            <StatusEffect type="OnUse" target="This" condition="-0.1" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="This" condition="-0.5" disabledeltatime="true" >
                 <SpawnItem identifiers="Elements_Mu_Bolt" spawnposition="ThisInventory" />
             </StatusEffect>
         </ItemContainer>
@@ -294,6 +404,10 @@
             <StatusEffect type="OnBroken" target="This">
                 <Remove />
             </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+            <LightComponent lightcolor="255,32,32,225" range="50" powerconsumption="10" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+            </LightComponent>
         </Holdable>
         <Price baseprice="300" minavailable="1" >
             <Price locationtype="outpost" multiplier="0.9" sold="false" maxavailable="4" />
@@ -307,16 +421,14 @@
             <Item identifier="Tu_Alchemical" requiredotheritem="Reiki_Dust_Caking" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
             <Item identifier="Byproduct_Alchemical" requiredotheritem="Reiki_Dust_Caking" activatebuttontext="Alchemy_Table.Research" infotext="Alchemy_Table.Research.Infotext" infotextonotheritemmissing="Alchemy_Table.Combine.Missingitem" />
         </Deconstruct>
-        <LightComponent lightcolor="255,32,32,225" range="50" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
-            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
-        </LightComponent>
+
         <Sprite texture="%ModDir%/Images/Alchemical/Element_In_Bottle.png" sourcerect="126,0,136,292" depth="0.5" origin="0.5,0.5" />
         <Body width="20" height="90" density="10" />
         <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Elements_Huo_Bolt" removecontaineditemsondeconstruct="true"
                        drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
             <Containable items="Elements_Huo_Bolt" />
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
-            <StatusEffect type="OnUse" target="This" condition="-0.1" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="This" condition="-0.5" disabledeltatime="true" >
                 <SpawnItem identifiers="Elements_Huo_Bolt" spawnposition="ThisInventory" />
             </StatusEffect>
         </ItemContainer>
@@ -371,10 +483,12 @@
             <StatusEffect type="OnBroken" target="This">
                 <Remove />
             </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+            <LightComponent lightcolor="70,50,2,225" range="50" powerconsumption="10" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+            </LightComponent>
         </Holdable>
-        <LightComponent lightcolor="70,50,2,225" range="50" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
-            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
-        </LightComponent>
+
         <Price baseprice="300" minavailable="1" >
             <Price locationtype="outpost" multiplier="0.9" sold="false" maxavailable="4" />
             <Price locationtype="city" multiplier="1" maxavailable="8" />
@@ -393,7 +507,7 @@
                        drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
             <Containable items="Elements_Tu_Bolt" />
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
-            <StatusEffect type="OnUse" target="This" condition="-0.1" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="This" condition="-0.5" disabledeltatime="true" >
                 <SpawnItem identifiers="Elements_Tu_Bolt" spawnposition="ThisInventory" />
             </StatusEffect>
         </ItemContainer>
@@ -448,10 +562,12 @@
             <StatusEffect type="OnBroken" target="This">
                 <Remove />
             </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+            <LightComponent lightcolor="220,150,10,225" range="50" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+            </LightComponent>
         </Holdable>
-        <LightComponent lightcolor="220,150,10,225" range="50" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
-            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
-        </LightComponent>
+
         <Price baseprice="300" minavailable="1" >
             <Price locationtype="outpost" multiplier="0.9" sold="false" maxavailable="4" />
             <Price locationtype="city" multiplier="1" maxavailable="8" />
@@ -470,7 +586,7 @@
                        drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
             <Containable items="Elements_Jin_Bolt" />
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
-            <StatusEffect type="OnUse" target="This" condition="-0.1" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="This" condition="-0.5" disabledeltatime="true" >
                 <SpawnItem identifiers="Elements_Jin_Bolt" spawnposition="ThisInventory" />
             </StatusEffect>
         </ItemContainer>
@@ -525,10 +641,12 @@
             <StatusEffect type="OnBroken" target="This">
                 <Remove />
             </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+            <LightComponent lightcolor="20,20,200,225" range="50" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+            </LightComponent>
         </Holdable>
-        <LightComponent lightcolor="20,20,200,225" range="50" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
-            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
-        </LightComponent>
+
         <Price baseprice="300" minavailable="1" >
             <Price locationtype="outpost" multiplier="0.9" sold="false" maxavailable="4" />
             <Price locationtype="city" multiplier="1" maxavailable="8" />
@@ -547,7 +665,7 @@
                        drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
             <Containable items="Elements_Shui_Bolt" />
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
-            <StatusEffect type="OnUse" target="This" condition="-0.1" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="This" condition="-0.5" disabledeltatime="true" >
                 <SpawnItem identifiers="Elements_Shui_Bolt" spawnposition="ThisInventory" />
             </StatusEffect>
         </ItemContainer>
@@ -602,10 +720,12 @@
             <StatusEffect type="OnBroken" target="This">
                 <Remove />
             </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+            <LightComponent lightcolor="255,72,72,225" range="75" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
+            </LightComponent>
         </Holdable>
-        <LightComponent lightcolor="255,72,72,225" range="75" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
-            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,1,1" origin="0.15,0" />
-        </LightComponent>
+
         <Price baseprice="500" minavailable="1" >
             <Price locationtype="outpost" multiplier="0.9" sold="false" maxavailable="4" />
             <Price locationtype="city" multiplier="1" maxavailable="8" />
@@ -624,7 +744,7 @@
                        drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
             <Containable items="Elements_Yang_Bolt" />
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
-            <StatusEffect type="OnUse" target="This" condition="-0.1" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="This" condition="-0.5" disabledeltatime="true" >
                 <SpawnItem identifiers="Elements_Yang_Bolt" spawnposition="ThisInventory" />
             </StatusEffect>
         </ItemContainer>
@@ -649,10 +769,12 @@
             <StatusEffect type="OnBroken" target="This">
                 <Remove />
             </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+            <LightComponent lightcolor="10,70,120,225" range="75" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,108,11" origin="0.15,0" />
+            </LightComponent>
         </Holdable>
-        <LightComponent lightcolor="10,70,120,225" range="75" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
-            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,108,11" origin="0.15,0" />
-        </LightComponent>
+
         <Price baseprice="500" minavailable="1" >
             <Price locationtype="outpost" multiplier="0.9" sold="false" maxavailable="4" />
             <Price locationtype="city" multiplier="1" maxavailable="8" />
@@ -671,7 +793,7 @@
                        drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
             <Containable items="Elements_Yin_Bolt" />
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
-            <StatusEffect type="OnUse" target="This" condition="-0.1" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="This" condition="-0.5" disabledeltatime="true" >
                 <SpawnItem identifiers="Elements_Yin_Bolt" spawnposition="ThisInventory" />
             </StatusEffect>
         </ItemContainer>
@@ -743,10 +865,12 @@
             <StatusEffect type="Always" target="This" Condition="0.01">
                 <Conditional InWater="true" />
             </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This" voltage="1.0" setvalue="true"/>
+            <LightComponent lightcolor="255,255,255,225" range="100" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
+                <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,108,11" origin="0.15,0" />
+            </LightComponent>
         </Holdable>
-        <LightComponent lightcolor="255,255,255,225" range="100" powerconsumption="0" flickerspeed="0" pulsefrequency="0.25" pulseamount="1" ison="true" castshadows="false" allowingameediting="false">
-            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="395,15,108,11" origin="0.15,0" />
-        </LightComponent>
+
         <Price baseprice="8000" minleveldifficulty="40" >
             <Price locationtype="outpost" multiplier="0.9" sold="false" maxavailable="4" />
             <Price locationtype="city" multiplier="0.95" maxavailable="1" />
@@ -939,7 +1063,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Reimu" >
             <StatusEffect type="Always" target="This" Interval="1.0" AllowWhenBroken="true">
@@ -1067,7 +1191,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Remilia" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -1187,7 +1311,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Marisa" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -1307,7 +1431,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Aya" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -1427,7 +1551,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Youmu" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -1547,7 +1671,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Nitori" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -1667,7 +1791,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Akyuu" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -1787,7 +1911,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Mokou" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -1907,7 +2031,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Patchouli" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -2027,7 +2151,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Tenshi" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -2147,7 +2271,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Momizi" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -2267,7 +2391,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Yuka" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -2387,7 +2511,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Aunn" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -2507,7 +2631,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Flandre" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -2627,7 +2751,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Nue" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -2747,7 +2871,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Piece" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -2867,7 +2991,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Cirno" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -2987,7 +3111,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Koishi" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -3107,7 +3231,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Alice" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -3227,7 +3351,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Sunny" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -3347,7 +3471,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Luna" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -3467,7 +3591,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Star" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -3587,7 +3711,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Sanae" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -3707,7 +3831,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Sakuya" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -3827,7 +3951,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Reisen" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
@@ -3947,7 +4071,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="100" />
             <RequiredItem identifier="Touhou_Memory_Relationship_Effect_Material_Unresearched" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="4" />
-            <RequiredItem identifier="Power_Point" />
+            <RequiredItem identifier="Touhou_Mental_Metal" />
         </Fabricate>
         <GeneticMaterial nameidentifier="Character.MRE_Material_Yukari" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >

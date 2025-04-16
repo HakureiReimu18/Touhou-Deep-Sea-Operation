@@ -8,7 +8,6 @@
         <Effect minstrength="0" maxstrength="10" >
             <StatValue stattype="SwimmingSpeed" value="0.5" />
             <StatValue stattype="WalkingSpeed" value="0.15" />
-            <StatValue stattype="RangedAttackSpeed" value="0.1" />
         </Effect>
         <icon texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb.png" sourcerect="0,0,32,32" color="255,255,255,255" origin="0,0"/>
     </Affliction>
@@ -45,8 +44,8 @@
     <Affliction identifier="Reimu_Weapons" type="Reimu_Weapons" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.15" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.15" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
             <StatValue stattype="RangedAttackSpeed" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Reimu_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
@@ -209,15 +208,15 @@
     <Affliction identifier="Reimilia_Weapons" type="Reimilia_Weapons" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1" >
-                <StatValue stattype="RangedAttackMultiplier" value="0.15" />
-                <StatValue stattype="MeleeAttackMultiplier" value="0.15" />
+                <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+                <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Reimilia_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
 
     <!--普通的魔法使-->
     <Affliction identifier="Ordinary_Magician" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
-                duration="1.0" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
+                duration="1.0" showinhealthscannerthreshold="100" >
         <Effect minstrength="0" maxstrength="10" >
             <StatusEffect target="Character" Interval="1.0" Duration="1.0">
                 <Conditional burn="gt 1" />
@@ -230,16 +229,26 @@
         <Icon texture="%ModDir%/Images/Afflictions/Ordinary_Magician.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
 
+    <!--魔力过载-->
+    <Affliction identifier="Touhou_Magic_Overload" type="Touhou_Character_Affliction" limbspecific="false" hideiconafterdelay="false" maxstrength="100" HealableInMedicalClinic="false"
+                showinhealthscannerthreshold="100" iconcolors="120,20,20;180,40,40;220,80,80;255,100,100">
+        <Effect minstrength="0" maxstrength="100" strengthchange="-0.1" >
+            <StatValue stattype="MaximumHealthMultiplier" minvalue="0" maxvalue="-0.2" />
+            <StatValue stattype="RangedAttackSpeed" minvalue="0" maxvalue="-0.2" />
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Ordinary_Magician.png" sourcerect="0,0,128,128" color="255,10,10,10" />
+    </Affliction>
+
     <!--魔理沙-完全凭依-->
     <Affliction identifier="Hyouibana_Effect_Prefect_Marisa" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="true"
-                showinhealthscannerthreshold="100" maxstrength="1" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
+                showinhealthscannerthreshold="100" maxstrength="1" >
         <Effect minstrength="0" maxstrength="1"/>
         <Icon texture="%ModDir%/Images/Afflictions/Ordinary_Magician.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
 
     <!--普通的魔法使的帽子-->
     <Affliction identifier="Ordinary_Magician_Hat" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
-                duration="5.0" showiconthreshold="100" showinhealthscannerthreshold="100" maxstrength="10" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
+                duration="5.0" showiconthreshold="100" showinhealthscannerthreshold="100" maxstrength="10" >
         <Effect minstrength="0" maxstrength="10" resistancefor="burn" minresistance="0.05" maxresistance="0.05" strengthchange="-9">
             <StatValue stattype="RangedAttackMultiplier" value="0.02" />
             <StatValue stattype="MeleeAttackMultiplier" value="0.02" />
@@ -250,7 +259,7 @@
 
     <!--凭依魔理沙-->
     <Affliction identifier="Hyouibana_Marisa_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
-                showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
+                showiconthreshold="100" showinhealthscannerthreshold="100" >
         <Effect minstrength="0" maxstrength="10" resistancefor="burn,acidburn" minresistance="0.05" maxresistance="0.05">
             <StatusEffect target="Character" Interval="1.0" Duration="1.0">
                 <Conditional burn="gt 1" />
@@ -265,10 +274,10 @@
 
     <!--魔理沙-专属武器效果-->
     <Affliction identifier="Marisa_Weapons" type="Marisa_Weapons" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
-                duration="1.0" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
+                duration="1.0" showinhealthscannerthreshold="100" >
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.15" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.15" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
             <StatValue stattype="RangedAttackSpeed" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Marisa_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
@@ -276,7 +285,7 @@
 
     <!--风神少女-->
     <Affliction identifier="Wind_God_Girl" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
-                duration="1.0" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
+                duration="1.0" showinhealthscannerthreshold="100" >
         <Effect minstrength="0" maxstrength="10" >
             <StatusEffect type="NotInWater" target="Character" multiplyafflictionsbymaxvitality="true">
                 <Affliction identifier="Wind_God_Girl_NotInWater" strength="50" />
@@ -288,7 +297,7 @@
 
     <!--文文-完全凭依-->
     <Affliction identifier="Hyouibana_Effect_Prefect_Aya" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="true"
-                showinhealthscannerthreshold="100" maxstrength="1" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
+                showinhealthscannerthreshold="100" maxstrength="1" >
         <Effect minstrength="0" maxstrength="1"/>
         <Icon texture="%ModDir%/Images/Afflictions/Wind_God_Girl.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -305,19 +314,10 @@
         <Icon texture="%ModDir%/Images/Afflictions/Wind_God_Girl.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
 
-    <!--风神少女-额外经验效果-->
-    <Affliction identifier="Wind_God_Girl_Gain_Extra_Experience" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" duration="4.0"
-                showiconthreshold="100" showinhealthscannerthreshold="100" maxstrength="10" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
-        <Effect minstrength="0" maxstrength="10" >
-            <StatValue stattype="ExperienceGainMultiplier" value="0.25"/>
-        </Effect>
-        <Icon texture="%ModDir%/Images/Afflictions/Wind_God_Girl.png" sourcerect="0,0,128,128" color="255,255,255,255" />
-    </Affliction>
-
     <!--文文的信物效果-->
     <Affliction name="文文的信物效果" identifier="Touhou_Aya_Token_Effect" isbuff="true" description="" type="Touhou_Character_Affliction" limbspecific="false"
                 indicatorlimb="Torso" maxstrength="100" affectmachines="true" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
-        <Effect minstrength="0" maxstrength="100" resistancefor="damage,burn,poison,bleeding" minresistance="0.2" maxresistance="0.2"
+        <Effect minstrength="0" maxstrength="100" resistancefor="damage,burn,poison,bleeding" minresistance="0.1" maxresistance="0.1"
                 minskillmultiplier="1.25" maxskillmultiplier="1.25" minspeedmultiplier="1.1" maxspeedmultiplier="1.1" strengthchange="-0.1" >
             <StatusEffect target="Character" Interval="5" comparison="And">
                 <Conditional Grunt_Security_Tengu="lt 1"/>
@@ -345,9 +345,9 @@
     <Affliction identifier="Aya_Weapons" type="Aya_Weapons" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
-            <StatValue stattype="RangedAttackSpeed" value="0.2" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.05" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.05" />
+            <StatValue stattype="RangedAttackSpeed" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Aya_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -553,8 +553,8 @@
     <Affliction identifier="Mokou_Weapons" type="Mokou_Weapons" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="0.5" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
         <Effect minstrength="0" maxstrength="10" resistancefor="Phoenix_Burn,burn" minresistance="0.1" maxresistance="0.1" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.15" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.15" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Mokou_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -692,8 +692,8 @@
     <Affliction identifier="Patchouli_Weapons" type="Patchouli_Weapons" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="damage,bloodloss,bleeding" minresistance="0.1" maxresistance="0.1">
-            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
-            <StatValue stattype="MeleeAttackMultiplier" value="1.0" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.05" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.7" />
             <StatValue stattype="RangedAttackSpeed" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Patchouli_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
@@ -761,8 +761,8 @@
     <Affliction identifier="Tenshi_Weapons" type="Tenshi_Weapons" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun,debuff" minresistance="0.1" maxresistance="0.1">
-            <StatValue stattype="RangedAttackMultiplier" value="0.15" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.15" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Tenshi_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -853,10 +853,10 @@
     <Affliction identifier="Momizi_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1">
-            <StatValue stattype="RangedAttackMultiplier" value="0.15" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.15" />
-            <StatValue stattype="MeleeAttackSpeed" value="0.15" />
-            <StatValue stattype="RangedAttackSpeed" value="0.15" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackSpeed" value="0.1" />
+            <StatValue stattype="RangedAttackSpeed" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Momizi_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -967,10 +967,10 @@
     <Affliction identifier="Yuka_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
-            <StatValue stattype="MeleeAttackSpeed" value="0.1" />
-            <StatValue stattype="RangedAttackSpeed" value="0.1" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.05" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.05" />
+            <StatValue stattype="MeleeAttackSpeed" value="0.05" />
+            <StatValue stattype="RangedAttackSpeed" value="0.05" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Yuka_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -979,8 +979,8 @@
     <Affliction name="幻想春花-集中" identifier="Sun_Flower_Petal01_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="100"
                 showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="100" strengthchange="-0.1" >
-            <StatValue stattype="RangedAttackMultiplier" minvalue="0" maxvalue="0.15" />
-            <StatValue stattype="MeleeAttackMultiplier" minvalue="0" maxvalue="0.15" />
+            <StatValue stattype="RangedAttackMultiplier" minvalue="0" maxvalue="0.1" />
+            <StatValue stattype="MeleeAttackMultiplier" minvalue="0" maxvalue="0.1" />
             <StatusEffect target="Character" Interval="2">
                 <Conditional Flowers_Of_Four_Seasons="lt 1"/>
                 <ReduceAffliction identifier="Sun_Flower_Petal01_Effect" strength="300" />
@@ -993,9 +993,9 @@
     <Affliction name="幻想春花-轻盈" identifier="Sun_Flower_Petal02_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="100"
                 showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="100" resistancefor="debuff" minresistance="0" maxresistance="0.15" strengthchange="-0.1" >
-            <StatValue stattype="MeleeAttackSpeed" minvalue="0" maxvalue="0.15" />
-            <StatValue stattype="RangedAttackSpeed" minvalue="0" maxvalue="0.15" />
-            <StatValue stattype="MovementSpeed" minvalue="0" maxvalue="0.15" />
+            <StatValue stattype="MeleeAttackSpeed" minvalue="0" maxvalue="0.1" />
+            <StatValue stattype="RangedAttackSpeed" minvalue="0" maxvalue="0.1" />
+            <StatValue stattype="MovementSpeed" minvalue="0" maxvalue="0.1" />
             <StatusEffect target="Character" Interval="2">
                 <Conditional Flowers_Of_Four_Seasons="lt 1"/>
                 <ReduceAffliction identifier="Sun_Flower_Petal02_Effect" strength="300" />
@@ -1008,7 +1008,7 @@
     <Affliction name="幻想春花-生机" identifier="Sun_Flower_Petal03_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="100"
                 showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="100" resistancefor="damage,burn,bleeding" minresistance="0" maxresistance="0.15" strengthchange="-0.1" >
-            <StatValue stattype="MaximumHealthMultiplier" minvalue="0" maxvalue="0.25" />
+            <StatValue stattype="MaximumHealthMultiplier" minvalue="0" maxvalue="0.15" />
             <StatusEffect target="Character" Interval="2">
                 <Conditional Flowers_Of_Four_Seasons="lt 1"/>
                 <ReduceAffliction identifier="Sun_Flower_Petal03_Effect" strength="300" />
@@ -1054,8 +1054,8 @@
     <Affliction identifier="Aunn_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.2" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.2" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
             <StatValue stattype="MeleeAttackSpeed" value="0.1" />
             <StatValue stattype="RangedAttackSpeed" value="0.1" />
         </Effect>
@@ -1173,9 +1173,9 @@
                 <Conditional bloodloss="gt 0"/>
                 <ReduceAffliction type="bloodloss" strength="0.2" />
             </StatusEffect>
-            <StatValue stattype="MedicalItemEffectivenessMultiplier" value="-0.3" />
-            <StatValue stattype="MedicalItemApplyingMultiplier" value="-0.3" />
-            <StatValue stattype="BuffItemApplyingMultiplier" value="-0.3" />
+            <StatValue stattype="MedicalItemEffectivenessMultiplier" value="-0.2" />
+            <StatValue stattype="MedicalItemApplyingMultiplier" value="-0.2" />
+            <StatValue stattype="BuffItemApplyingMultiplier" value="-0.2" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Younger_Sister_Of_Scarlet.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -1220,7 +1220,7 @@
                 <Conditional burn="gt 0"/>
                 <ReduceAffliction type="burn" strength="0.2" />
             </StatusEffect>
-            <StatValue stattype="MeleeAttackSpeed" value="0.15" />
+            <StatValue stattype="MeleeAttackSpeed" value="0.1" />
             <StatValue stattype="RangedAttackSpeed" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Flandre_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
@@ -1230,7 +1230,6 @@
     <Affliction name="鲜红血液的恶魔" identifier="FlandreTalent3_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="3.0" showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
         <Effect minstrength="0" maxstrength="1" resistancefor="debuff" minresistance="0.35" maxresistance="0.35" >
-            <StatValue stattype="SkillGainSpeed" value="0.5" />
             <StatValue stattype="MovementSpeed" value="0.15" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Younger_Sister_Of_Scarlet.png" sourcerect="0,0,128,128" color="255,255,255,255" />
@@ -1307,8 +1306,8 @@
     <Affliction identifier="Nue_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.15" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.15" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Nue_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -1324,7 +1323,7 @@
 
     <!--鵺天赋标记01-->
     <Affliction identifier="Unconfirmed_Fantasy_Flying_Girl_Level01" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="true" maxstrength="1"
-                Duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+                Duration="3.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="1" strengthchange="-0.2" >
             <StatValue stattype="SkillGainSpeed" value="0.5" />
             <StatValue stattype="MovementSpeed" value="0.1" />
@@ -1334,7 +1333,7 @@
 
     <!--鵺天赋标记02-->
     <Affliction identifier="Unconfirmed_Fantasy_Flying_Girl_Level02" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="true" maxstrength="1"
-                Duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+                Duration="3.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="1" strengthchange="-0.2" >
             <StatValue stattype="ExperienceGainMultiplier" value="0.15" />
             <StatValue stattype="MaximumHealthMultiplier" value="0.1" />
@@ -1344,7 +1343,7 @@
 
     <!--鵺天赋标记03-->
     <Affliction identifier="Unconfirmed_Fantasy_Flying_Girl_Level03" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="true" maxstrength="1"
-                Duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+                Duration="3.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="1" strengthchange="-0.2" >
             <StatValue stattype="BuffDurationMultiplier" value="0.2" />
             <StatValue stattype="RangedAttackSpeed" value="0.1" />
@@ -1355,7 +1354,7 @@
 
     <!--鵺天赋标记04-->
     <Affliction identifier="Unconfirmed_Fantasy_Flying_Girl_Level04" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="true" maxstrength="1"
-                Duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+                Duration="3.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="1" strengthchange="-0.2" >
             <StatValue stattype="RangedAttackMultiplier" value="0.1" />
             <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
@@ -1419,8 +1418,8 @@
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="burn" minresistance="0.1" maxresistance="0.1" >
             <StatusEffect target="Character">
-                <StatValue stattype="RangedAttackSpeed" value="0.15" />
-                <StatValue stattype="MeleeAttackSpeed" value="0.15" />
+                <StatValue stattype="RangedAttackSpeed" value="0.1" />
+                <StatValue stattype="MeleeAttackSpeed" value="0.1" />
             </StatusEffect>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Piece_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
@@ -1515,8 +1514,8 @@
     <Affliction identifier="Cirno_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="burn" minresistance="0.15" maxresistance="0.15" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.2" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.2" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Cirno_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -1526,8 +1525,9 @@
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" >
             <StatValue stattype="SkillGainSpeed" value="-0.3" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.3"/>
-            <StatValue stattype="RangedAttackMultiplier" value="-0.5"/>
+            <StatValue stattype="MeleeAttackMultiplier" value="0.4"/>
+            <StatValue stattype="RangedAttackMultiplier" value="-0.4"/>
+            <StatValue stattype="ExplosionDamageMultiplier" value="-0.4"/>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Closed_Eyes_Of_Koishi.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -1654,9 +1654,8 @@
         <Effect minstrength="0" maxstrength="10" resistancefor="damage,stun" minresistance="0.1" maxresistance="0.1" >
             <StatValue stattype="MeleeAttackSpeed" value="0.2" />
             <StatValue stattype="RangedAttackSpeed" value="0.1" />
-            <StatValue stattype="BuffDurationMultiplier" value="0.35" />
+            <StatValue stattype="BuffDurationMultiplier" value="0.3" />
             <StatValue stattype="RangedAttackMultiplier" value="0.5" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Koishi_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -1752,7 +1751,7 @@
     <Affliction identifier="Alice_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="damage,bleeding,stun" minresistance="0.1" maxresistance="0.1" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.25" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
             <StatValue stattype="MeleeAttackMultiplier" value="0.35" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Alice_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
@@ -2159,7 +2158,7 @@
     <Affliction identifier="Touhou_Three_Fairies_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="bleeding,stun" minresistance="0.15" maxresistance="0.15" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.15" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
             <StatValue stattype="MeleeAttackMultiplier" value="0.35" />
             <StatValue stattype="MeleeAttackSpeed" value="0.1" />
             <StatValue stattype="RangedAttackSpeed" value="0.1" />
@@ -2335,7 +2334,6 @@
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1" >
             <StatValue stattype="RangedAttackMultiplier" value="0.1" />
             <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
-            <StatValue stattype="RangedSpreadReduction" value="0.1" />
             <StatValue stattype="TeamAttackMultiplier" value="-0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Sakuya_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
@@ -2505,8 +2503,8 @@
     <Affliction identifier="Sanae_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.2" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.2" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
             <StatValue stattype="TeamAttackMultiplier" value="-0.2" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Sanae_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
@@ -2590,8 +2588,8 @@
     <Affliction identifier="Reisen_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.15" />
-            <StatValue stattype="MeleeAttackSpeed" value="0.15" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.1" />
+            <StatValue stattype="MeleeAttackSpeed" value="0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Reisen_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -2838,14 +2836,14 @@
 
     <!--梦境效果-实际显示-->
     <Affliction identifier="MerryTalent_Dream_Show" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
-                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+                 duration="5.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" />
         <Icon texture="%ModDir%/Images/Afflictions/MerryTalent_Dream.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
 
     <!--梦境效果-->
     <Affliction identifier="MerryTalent_Dream" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
-                 duration="1.0" showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+                 duration="5.0" showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" minskillmultiplier="1.25" maxskillmultiplier="1.25" />
         <Icon texture="%ModDir%/Images/Afflictions/MerryTalent_Dream.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -2898,11 +2896,11 @@
     <Affliction identifier="Hifuu_Club_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.15" maxresistance="0.15" >
-            <StatValue stattype="RangedAttackMultiplier" value="0.2" />
-            <StatValue stattype="MeleeAttackMultiplier" value="0.2" />
+            <StatValue stattype="RangedAttackMultiplier" value="0.15" />
+            <StatValue stattype="MeleeAttackMultiplier" value="0.15" />
             <StatValue stattype="RangedAttackSpeed" value="0.1" />
             <StatValue stattype="MeleeAttackSpeed" value="0.1" />
-            <StatValue stattype="FlowResistance" value="0.3" />
+            <StatValue stattype="FlowResistance" value="0.15" />
             <StatValue stattype="WeaponsSkillGainSpeed" value="-0.5" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Hifuu_Club_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />

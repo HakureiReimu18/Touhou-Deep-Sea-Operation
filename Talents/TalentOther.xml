@@ -11,17 +11,17 @@
                 <AbilityConditionServerRandom randomchance="0.2" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15" />
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.25" />
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Boudary_Divinggear_Effect08" />
                 <AbilityConditionHasAffliction afflictionidentifier="Boudary_Divinggear_Effect09" />
-                <AbilityConditionServerRandom randomchance="0.2" />
+                <AbilityConditionServerRandom randomchance="0.15" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1" />
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15" />
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
@@ -31,7 +31,7 @@
                 <AbilityConditionServerRandom randomchance="0.1" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1" />
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15" />
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
@@ -41,7 +41,7 @@
                 <AbilityConditionServerRandom randomchance="0.15" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15" />
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.2" />
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
@@ -51,7 +51,7 @@
                 <AbilityConditionServerRandom randomchance="0.1" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1" />
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.2" />
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
@@ -64,7 +64,7 @@
             <Abilities>
                 <CharacterAbilityApplyStatusEffectsToAttacker>
                     <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true">
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Head" delay="0.1" disabledeltatime="true">
                             <Affliction identifier="Touhou_Lost_Dream" amount="10"/>
                         </StatusEffect>
                     </StatusEffects>
@@ -163,26 +163,23 @@
         </AbilityGroupInterval>
     </Talent>
 
-    <!--星火霰弹枪天赋-->
-    <Talent identifier="Touhou_Sparkfire_Shotgun_Talent" IsHiddenExtraTalent="true">
+    <!--遗迹2彩蛋武器天赋-->
+    <Talent identifier="Touhou_Remnant_Talent" IsHiddenExtraTalent="true">
         <Icon texture="%ModDir%/Images/Afflictions/Gensokyo_Divinggear_Effect.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Gensokyo_Divinggear_Talent"/>
+        <!--星火霰弹枪天赋-->
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasItem tags="Touhou_Sparkfire_Shotgun"/>
-                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Turret" invert="true"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
             </Conditions>
             <Abilities>
                 <CharacterAbilityGiveAffliction affliction="burn" strength="0.45" />
-                <CharacterAbilityGiveAffliction affliction="Touhou_Sparkfire_Shotgun_Effect" strength="0.06" multiplystrengthbyskill="Touhou_Magic" />
+                <CharacterAbilityGiveAffliction affliction="Touhou_Sparkfire_Shotgun_Effect" strength="0.05" multiplystrengthbyskill="Touhou_Magic" />
             </Abilities>
         </AbilityGroupEffect>
-    </Talent>
 
-    <!--谎言天赋-->
-    <Talent identifier="Touhou_Deceit_Talent" IsHiddenExtraTalent="true">
-        <Icon texture="%ModDir%/Images/Afflictions/Gensokyo_Divinggear_Effect.png" sheetindex="0,0" sheetelementsize="128,128" />
-        <Description tag="talentdescription.Gensokyo_Divinggear_Talent"/>
+        <!--谎言天赋-->
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Deceit_Mod_Effect" />
@@ -205,7 +202,7 @@
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasItem tags="Touhou_Deceit"/>
-                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Turret" invert="true"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
                 <AbilityConditionCharacter>
                     <Conditional Touhou_Deceit_Mod_Mark_Effect="gt 0" />
                 </AbilityConditionCharacter>
@@ -214,7 +211,34 @@
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="0.9" />
             </Abilities>
         </AbilityGroupEffect>
+
+        <!--无情天赋-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Merciless"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+                <AbilityConditionCharacter>
+                    <Conditional bleeding="gt 20" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Merciless"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+                <AbilityConditionCharacter>
+                    <Conditional bleeding="gt 80" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
+
 <!--    &lt;!&ndash;单轨天赋&ndash;&gt;
     <Talent identifier="Touhou_Monorail_Talent" IsHiddenExtraTalent="true">
         <Icon texture="%ModDir%/Images/Afflictions/Gensokyo_Divinggear_Effect.png" sheetindex="0,0" sheetelementsize="128,128" />
@@ -261,6 +285,102 @@
                 <CharacterAbilityGivePermanentStat statidentifier="Touhou_Living_Cleaver_Talent_Counter_Done" value="1" removeondeath="false" />
             </Abilities>
         </AbilityGroupInterval>
+    </Talent>
+
+    <!--未知X天赋-->
+    <Talent identifier="Touhou_Unknown_X_Talent" IsHiddenExtraTalent="true">
+        <Icon texture="%ModDir%/Images/Afflictions/Gensokyo_Divinggear_Effect.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Gensokyo_Divinggear_Talent"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Unknown_X"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+                <AbilityConditionServerRandom randomchance="0.25" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Sleepless_Nightmare" strength="3" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Unknown_X"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+                <AbilityConditionServerRandom randomchance="0.25" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Lost_Dream" strength="3" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Unknown_X"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+                <AbilityConditionServerRandom randomchance="0.25" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Weakness" strength="0.5" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--瞬蓝天赋-->
+    <Talent identifier="Touhou_Instant_Blue_Talent" IsHiddenExtraTalent="true">
+        <Icon texture="%ModDir%/Images/Afflictions/Gensokyo_Divinggear_Effect.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Gensokyo_Divinggear_Talent"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Instant_Blue01"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+                <AbilityConditionServerRandom randomchance="0.3" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Lost_Dream" strength="3" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Instant_Blue02"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+                <AbilityConditionServerRandom randomchance="0.4" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Lost_Dream" strength="3" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Instant_Blue02"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional Touhou_Lost_Dream="gt 5" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.25" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Instant_Blue"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Lost_Dream" strength="2" />
+                <CharacterAbilityGiveAffliction affliction="Touhou_Instant_Blue_Talent_Effect" strength="3" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Instant_Blue"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Ranged" />
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional Touhou_Lost_Dream="gt 5" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.35" />
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 
     <!--出血效应-博丽灵梦-->

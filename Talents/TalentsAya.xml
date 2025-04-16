@@ -3,6 +3,15 @@
     <Talent identifier="Mysterious_Mountain">
         <Icon texture="%ModDir%/Images/Talents/Mysterious_Mountain.png" sheetindex="0,0" sheetelementsize="128,128" />
         <Description tag="talentdescription.Mysterious_Mountain"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Wind_God_Girl" />
+                <AbilityConditionInWater/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.25" />
+            </Abilities>
+        </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Wind_God_Girl" />
@@ -21,19 +30,12 @@
                 <CharacterAbilityPutItem itemidentifier="Aya_Press_Card" amount="1"/>
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupInterval interval="3.9">
+        <AbilityGroupInterval interval="3.0">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Wind_God_Girl" />
-                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="90" />
+                <AbilityConditionHasAffliction afflictionidentifier="Ancient_Temple" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="Wind_God_Girl_Gain_Extra_Experience" amount="50" />
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyStatToSkill stattype="ExperienceGainMultiplier" maxvalue="0.2" skillidentifier="Touhou_Magic" />
             </Abilities>
         </AbilityGroupInterval>
     </Talent>
