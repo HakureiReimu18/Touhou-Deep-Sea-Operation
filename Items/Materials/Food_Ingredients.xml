@@ -32,7 +32,7 @@
         </Holdable>
         <ItemContainer autofill="False" capacity="64" slotsperrow="8" canbeselected="true" hideitems="true">
             <GuiFrame relativesize="0.4,0.6" anchor="Center" style="ItemUI" />
-            <Containable identifiers="Touhou_Food_Ingredients,io_box"/>
+            <Containable identifiers="Touhou_Food_Ingredients,Touhou_Cuisine,io_box"/>
         </ItemContainer>
     </Item>
 
@@ -1123,6 +1123,34 @@
             <Item identifier="carbon" amount="3" />
         </Deconstruct>
         <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Cucumber.png" sourcerect="0,0,100,100" />
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" >
+            <StatusEffect type="OnFire" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="InWater" target="This" Condition="-10.0" Interval="1.0"/>
+            <StatusEffect type="OnBroken" target="This" >
+                <ParticleEmitter particle="whitegoosplash" anglemin="0" anglemax="360" particleamount="2" velocitymin="0" velocitymax="0" scalemin="1.5" scalemax="2" />
+                <ParticleEmitter particle="fruitchunks" anglemin="0" anglemax="360" particleamount="10" velocitymin="200" velocitymax="300" scalemin="0.4" scalemax="0.8" />
+                <Remove />
+            </StatusEffect>
+        </Pickable>
+    </Item>
+
+    <!--板栗-->
+    <Item name="板栗" identifier="Touhou_Chestnut" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Homecooking" subcategory="Food_Ingredients" scale="0.25" category="Misc" maxstacksize="32">
+        <PreferredContainer primary="Touhou_Ingredient_Refrigerator" />
+        <Price baseprice="300" sold="false">
+            <Price locationtype="outpost" multiplier="0.5"/>
+            <Price locationtype="city" multiplier="0.9" minavailable="3" />
+            <Price locationtype="research" multiplier="1" minavailable="2" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.1" minavailable="2" />
+        </Price>
+        <!--蔬菜类分解结果，三个碳-->
+        <Deconstruct time="3" >
+            <Item identifier="carbon" amount="3" />
+        </Deconstruct>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Chestnut.png" sourcerect="0,0,100,100" />
         <Sprite texture="%ModDir%/Images/Materials/Touhou_Food_Ingredients/Touhou_Food_Ingredients.png" depth="0.4" sourcerect="0,0,100,60" />
         <Body width="100" height="100" density="10" />
         <Pickable slots="Any" >

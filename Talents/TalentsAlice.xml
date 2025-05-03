@@ -28,5 +28,43 @@
                 </CharacterAbilityApplyStatusEffectToNonHumans>
             </Abilities>
         </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Abilities>
+                <CharacterAbilityResetPermanentStat statidentifier="Alice_Kill" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Alice_Kill" value="0" setvalue="true" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Puppeteer_Of_Seven_Colors" />
+                <AbilityConditionHasPermanentStat statidentifier="Alice_Kill" min="1" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Alice_Doll_Energy" amount="10" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Alice_Kill" value="-1" />
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Metamorphosis"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Puppeteer_Of_Seven_Colors" />
+                <AbilityConditionIsAiming weapontype="HandheldRanged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Alice_Kill" value="1" />
+            </Abilities>
+        </AbilityGroupEffect>
+
     </Talent>
 </Talents>

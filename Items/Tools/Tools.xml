@@ -4,7 +4,7 @@
     <!--魔理沙的扫帚-->
     <Item name="" identifier="Marisa_Broom" subcategory="Touhou" category="Equipment" cargocontaineridentifier="metalcrate" tags="mediumitem,provocative,scooter,underwaterscooter,light,Marisa_Broom" description="" impactsoundtag="impact_soft" scale="0.5" fireproof="true" isshootable="true">
         <PreferredContainer primary="crewcab" amount="1" spawnprobability="0.12"/>
-        <Price baseprice="1200">
+        <Price baseprice="1500">
             <Price storeidentifier="merchantoutpost" minavailable="1" />
             <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="1" />
             <Price storeidentifier="merchantresearch" minavailable="1" />
@@ -58,7 +58,7 @@
 
     <!--文文的充电宝-->
     <Item name="" identifier="Power_Bank" tags="mediumitem,batterycellrecharger,loadable,Power_Bank" subcategory="Touhou" category="Electrical" scale="0.4" >
-        <Price baseprice="1500" minleveldifficulty="5">
+        <Price baseprice="800" minleveldifficulty="5">
             <Price storeidentifier="merchantoutpost" minavailable="1" sold="false"/>
             <Price storeidentifier="merchantcity" multiplier="1" sold="true" maxavailable="1" />
             <Price storeidentifier="merchantresearch" multiplier="1.1" sold="true" maxavailable="1" />
@@ -81,12 +81,8 @@
             <StatusEffect type="Always" target="Contained" Condition="2.5" Interval="1.0" Duration="1.0" >
                 <Conditional TargetContainer="true" condition="gt 0" />
             </StatusEffect>
-            <StatusEffect type="Always" target="This" targetslot="0" Condition="-0.6" Interval="1.0" >
-                <RequiredItems items="loadable,battery" type="Contained" />
-                <Conditional condition="lt 100" TargetContainedItem="true" />
-            </StatusEffect>
-            <StatusEffect type="Always" target="This" targetslot="1" Condition="-0.6" Interval="1.0"  >
-                <RequiredItems items="loadable,battery" type="Contained" />
+            <StatusEffect type="Always" target="This" targetslot="0" Condition="-1.5" Interval="1.0" >
+                <RequiredItems items="loadable,battery,mobilebattery" type="Contained" />
                 <Conditional condition="lt 100" TargetContainedItem="true" />
             </StatusEffect>
         </Holdable>
@@ -102,7 +98,7 @@
     <!--河童背包-->
     <Item name="" identifier="Nitori_Backpack" scale="0.4" subcategory="Touhou" category="Equipment" tags="mediumitem,Nitori_Backpack,backpack" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="medcab" amount="1" spawnprobability="0.02" />
-        <Price baseprice="2000" >
+        <Price baseprice="600" >
             <Price storeidentifier="merchantoutpost" multiplier="1.4" minavailable="1" />
             <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="2" />
             <Price storeidentifier="merchantresearch" multiplier="0.9" sold="true" minavailable="2" />
@@ -170,7 +166,7 @@
     <!--河童背包Plus-->
     <Item name="" identifier="Kappa_Backpack_Plus" scale="0.4" subcategory="Touhou" category="Equipment" tags="mediumitem,Kappa_Backpack_Plus,backpack" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="medcab" />
-        <Price baseprice="6000" minleveldifficulty="25">
+        <Price baseprice="3000" minleveldifficulty="25">
             <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
             <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
             <Price storeidentifier="merchantresearch" multiplier="0.9" minavailable="1" />
@@ -187,7 +183,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
             <RequiredSkill identifier="mechanical" level="50" />
             <RequiredItem identifier="organicfiber" amount="2" />
-            <RequiredItem identifier="Touhou_Simple_Parts" amount="2"/>
+            <RequiredItem identifier="Touhou_Simple_Parts" />
             <RequiredItem identifier="Nitori_Backpack" />
             <RequiredItem identifier="Score_Point" amount="2"/>
         </Fabricate>
@@ -228,12 +224,10 @@
 
         <CustomInterface canbeselected="true" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.1,0.1" anchor="BottomRight" relativeoffset="0,0.7" style="ItemUI" />
-            <Button text="Text.Sonar_Open">
-                <StatusEffect type="OnUse" target="This" TargetItemComponent="Sonar" drawhudwhenequipped="true" setvalue="true" />
-            </Button>
-            <Button text="Text.Sonar_Close">
-                <StatusEffect type="OnUse" target="This" TargetItemComponent="Sonar" currentmode="Passive" drawhudwhenequipped="false" setvalue="true" />
-            </Button>
+            <TickBox text="Text.Sonar_Open" IsOn="true">
+                <StatusEffect type="OnUse" target="This" TargetItemComponent="Sonar" drawhudwhenequipped="true" setvalue="true"  />
+                <StatusEffect type="OnSecondaryUse" target="This" TargetItemComponent="Sonar" drawhudwhenequipped="false" setvalue="true" />
+            </TickBox>
         </CustomInterface>
 
         <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
@@ -260,7 +254,7 @@
                 <icon identifier="mineral" texture="Content/UI/MainIconsAtlas.png" sourcerect="336,434,7,12" origin="0.5,0.5" />
                 <icon identifier="" texture="Content/UI/MainIconsAtlas.png" sourcerect="346,416,4,4" origin="0.5,0.5" />
             </Sonar>
-            <StatusEffect type="OnWearing" target="Character" PressureProtection="5000.0" setvalue="true" disabledeltatime="true" />
+            <StatusEffect type="OnWearing" target="Character" PressureProtection="4000.0" setvalue="true" disabledeltatime="true" />
 
             <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="0.5" Duration="0.5" >
                 <Conditional IsDead="false" />
@@ -291,7 +285,7 @@
         <PreferredContainer primary="engcab" minamount="1" maxamount="2" spawnprobability="0.22" />
         <PreferredContainer primary="wreckstoragecab" minamount="0" maxamount="2" spawnprobability="0.225" />
         <PreferredContainer primary="outpostcrewcabinet" minamount="0" maxamount="1" spawnprobability="0.2" />
-        <Price baseprice="600" >
+        <Price baseprice="150" >
             <Price storeidentifier="merchantoutpost" multiplier="1" />
             <Price storeidentifier="merchantcity" multiplier="0.9" maxavailable="1" />
             <Price storeidentifier="merchantresearch" multiplier="1.25" />
@@ -314,11 +308,11 @@
         <Sprite texture="%ModDir%/Images/Tools/Kappa_Miningdrill.png" sourcerect="0,85,107,56" depth="0.55" origin="0.5,0.5" />
         <Body width="200" height="100" density="10" />
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="55,-10" aimpos="50,0" handle1="-40,-14" handle2="-5,-16" holdangle="-40" msg="ItemMsgPickUpSelect" />
-        <RepairTool firedamage="10.0" structurefixamount="-0.75" range="300" barrelpos="64,16" combatpriority="23" RepairMultiple="true" RepairThroughHoles="false" levelwallfixamount="-15.0">
+        <RepairTool firedamage="10.0" structurefixamount="-0.75" range="300" barrelpos="64,16" combatpriority="23" RepairMultiple="true" RepairThroughHoles="false" levelwallfixamount="-20.0">
             <RequiredItems identifier="batterycell,Spiritual_Water,fulguriumbatterycell" type="Contained" msg="需要电池或灵水" />
             <ParticleEmitter particle="plasma" particlespersecond="50" copyentityangle="true" scalemin="1.8" scalemax="2.2"/>
             <StatusEffect type="OnUse" target="This" Condition="-18" />
-            <StatusEffect type="Always" target="This" Condition="10">
+            <StatusEffect type="OnContained" target="This" Condition="10">
                 <Conditional condition="gt 0" />
             </StatusEffect>
             <StatusEffect type="InWater" target="This" Condition="4">
@@ -331,8 +325,8 @@
             <StatusEffect type="OnUse" targettype="Contained" targets="Spiritual_Water" Condition="-2" />
             <StatusEffect type="OnUse" targettype="Contained" targets="batterycell" Condition="-2.5" />
             <StatusEffect type="OnUse" targettype="Contained" targets="fulguriumbatterycell" Condition="-1.0" />
-            <StatusEffect type="OnUse" target="UseTarget" targetidentifiers="door,windoweddoor,hatch,ductblock,aliendoor,alienhatch" Stuck="-30.0" Condition="-120.0" />
-            <StatusEffect type="OnUse" target="UseTarget" targetidentifiers="ore" DeattachTimer="0.25" Condition="-75.0" />
+            <StatusEffect type="OnUse" target="UseTarget" targetidentifiers="door,windoweddoor,hatch,ductblock,aliendoor,alienhatch" Stuck="-30.0" Condition="-200.0" />
+            <StatusEffect type="OnUse" target="UseTarget" targetidentifiers="ore" DeattachTimer="0.35" Condition="-75.0" />
             <StatusEffect type="OnUse" target="Limb" >
                 <Conditional EntityType="eq Limb" />
                 <Affliction identifier="lacerations" strength="1" />
@@ -358,7 +352,7 @@
             </LightComponent>
             <Fixable identifier="structure" />
         </RepairTool>
-        <ItemContainer autofill="True" capacity="1" maxstacksize="1" hideitems="true" slotsperrow="2" containedstateindicatorslot="0">
+        <ItemContainer autofill="True" capacity="1" maxstacksize="1" hideitems="true" slotsperrow="2" containedstateindicatorslot="0" ExtraStackSize="8">
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32" />
             <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Kappa_Miningdrill_Ore_Indicator.png" sourcerect="0,0,56,56" origin="0.5,0.5" />
             <SlotIcon slotindex="2" texture="%ModDir%/Images/Tools/Kappa_Miningdrill_Ore_Indicator.png" sourcerect="0,0,56,56" origin="0.5,0.5" />
@@ -484,7 +478,7 @@
     <!--元素腰带-->
     <Item name="元素腰带" identifier="Magic_Pouch" scale="0.3" subcategory="Touhou" category="Equipment" tags="mediumitem,mobilecontainer,tool,backpack,locker,container" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="medcab" />
-        <Price baseprice="1800" minleveldifficulty="10">
+        <Price baseprice="1000" minleveldifficulty="10">
             <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
             <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
             <Price storeidentifier="merchantresearch" multiplier="0.9" minavailable="1" />
@@ -525,6 +519,8 @@
                     <StatusEffect type="OnContaining" target="Contained" targetslot="2" Condition="-0.01" Interval="1.0" disabledeltatime="true" >
                         <Conditional HasTag="eq Magic_Pouch_Open" TargetContainer="true"/>
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Mu_Alchemical">
                     <StatusEffect type="OnWearing" target="Contained">
@@ -591,6 +587,15 @@
                 <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,bigitem,bulkyweapon"/>
             </SubContainer>
         </ItemContainer>
+
+        <CustomInterface canbeselected="false" drawhudwhenequipped="false">
+            <GuiFrame relativesize="0.1,0.06" anchor="BottomRight" absoluteoffset="0,0" relativeoffset="0.19,0.0" style="ItemUI" />
+            <TickBox text="uilabel.Magic_Pouch_Effect" >
+                <StatusEffect type="OnUse" target="This" tags="Magic_Pouch_Open" setvalue="true" />
+                <StatusEffect type="OnSecondaryUse" target="This" tags="Magic_Pouch_False" setvalue="true" />
+            </TickBox>
+        </CustomInterface>
+
         <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
                   canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
         <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
@@ -598,14 +603,6 @@
             <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Magic_Pouch.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
                     inherittexturescale="false" hideotherwearables="false" sourcerect="0,0,160,136" origin="0.6,0.0" scale="0.23" />
             <StatusEffect type="OnWearing" target="Character" OxygenAvailable="0.0" UseHullOxygen="true" />
-
-            <CustomInterface canbeselected="false" drawhudwhenequipped="true">
-                <GuiFrame relativesize="0.1,0.06" anchor="BottomRight" absoluteoffset="0,0" relativeoffset="0.19,0.0" style="ItemUI" />
-                <TickBox text="uilabel.Magic_Pouch_Effect" >
-                    <StatusEffect type="OnUse" target="This" tags="Magic_Pouch_Open" setvalue="true" />
-                    <StatusEffect type="OnSecondaryUse" target="This" tags="Magic_Pouch_False" setvalue="true" />
-                </TickBox>
-            </CustomInterface>
 
             <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="0.5" disabledeltatime="true" >
                 <Conditional skillrequirement="true" Touhou_Magic="gt 60" />
@@ -718,7 +715,7 @@
     <!--元素腰带-医疗拓展-->
     <Item name="元素腰带-医疗拓展" identifier="Magic_Pouch_Medical_Expansion" scale="0.3" subcategory="Touhou" category="Equipment" tags="mediumitem,mobilecontainer,tool,backpack,locker,container,refrigerated" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="medcab" />
-        <Price baseprice="3000" minleveldifficulty="15">
+        <Price baseprice="2000" minleveldifficulty="15">
             <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
             <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
             <Price storeidentifier="merchantresearch" multiplier="0.9" minavailable="1" />
@@ -758,6 +755,8 @@
                     <StatusEffect type="OnContaining" target="Contained" targetslot="2" Condition="-0.01" Interval="1.0" disabledeltatime="true" >
                         <Conditional HasTag="eq Magic_Pouch_Open" TargetContainer="true"/>
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Mu_Alchemical">
                     <StatusEffect type="OnWearing" target="Contained">
@@ -826,6 +825,15 @@
         </ItemContainer>
         <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
                   canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
+
+        <CustomInterface canbeselected="false" drawhudwhenequipped="false">
+            <GuiFrame relativesize="0.1,0.06" anchor="BottomRight" absoluteoffset="0,0" relativeoffset="0.19,0.0" style="ItemUI" />
+            <TickBox text="uilabel.Magic_Pouch_Effect" >
+                <StatusEffect type="OnUse" target="This" tags="Magic_Pouch_Open" setvalue="true" />
+                <StatusEffect type="OnSecondaryUse" target="This" tags="Magic_Pouch_False" setvalue="true" />
+            </TickBox>
+        </CustomInterface>
+
         <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
             <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="0.5" disabledeltatime="true" >
                 <Conditional skillrequirement="true" Touhou_Magic="gt 60" />
@@ -836,14 +844,6 @@
             <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Magic_Pouch.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
                     inherittexturescale="false" hideotherwearables="false" sourcerect="0,0,160,136" origin="0.6,0.0" scale="0.23" />
             <StatusEffect type="OnWearing" target="Character" OxygenAvailable="0.0" UseHullOxygen="true" />
-
-            <CustomInterface canbeselected="false" drawhudwhenequipped="true">
-                <GuiFrame relativesize="0.1,0.06" anchor="BottomRight" absoluteoffset="0,0" relativeoffset="0.19,0.0" style="ItemUI" />
-                <TickBox text="uilabel.Magic_Pouch_Effect" >
-                    <StatusEffect type="OnUse" target="This" tags="Magic_Pouch_Open" setvalue="true" />
-                    <StatusEffect type="OnSecondaryUse" target="This" tags="Magic_Pouch_False" setvalue="true" />
-                </TickBox>
-            </CustomInterface>
 
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.9" damagesound="LimbArmor" deflectprojectiles="true" />
             <damagemodifier armorsector="0.0,360.0" afflictionidentifiers="radiationsickness" damagemultiplier="0.6" probabilitymultiplier="0.5" damagesound="LimbArmor" />
@@ -859,7 +859,7 @@
           cargocontaineridentifier="metalcrate" description="" Scale="0.75" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="wreckstoragecab,abandonedstoragecab,piratestoragecab" amount="1" spawnprobability="0.04"/>
         <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab,outpostengcab" amount="1" spawnprobability="0.04"/>
-        <Price baseprice="4000">
+        <Price baseprice="2000">
             <Price storeidentifier="merchantoutpost" maxavailable="3" />
             <Price storeidentifier="merchantcity" maxavailable="2" />
             <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1" />
@@ -914,7 +914,13 @@
             <!-- when using, the contained welding fuel tank will detoriate (= lose fuel) -->
             <StatusEffect type="OnUse" targettype="Contained" targets="weldingfueltank" Condition="-2.7" />
             <StatusEffect type="OnUse" targettype="Contained" targets="incendiumfueltank" Condition="-1.5" />
-            <StatusEffect type="OnUse" targettype="Contained" targets="Touhou_Fix_Foamg_Tank" Condition="-0.2" />
+            <StatusEffect type="OnUse" targettype="Contained" targets="Touhou_Fix_Foamg_Tank" Condition="-0.15" />
+            <StatusEffect type="OnUse" target="This" structurefixamount="4.5" setvalue="true" Interval="0.5" disabledeltatime="true" >
+                <RequiredItems items="Touhou_Fix_Foamg_Tank" type="Contained" />
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" structurefixamount="3.5" setvalue="true" Interval="0.5" disabledeltatime="true" >
+                <RequiredItems items="weldingfueltank,incendiumfueltank,Touhou_Kappa_Welding_Tool_Ammo" type="Contained" />
+            </StatusEffect>
             <!-- welding a door, it will get stuck after a while -->
             <StatusEffect type="OnSuccess" targettype="UseTarget" targets="weldable" Stuck="15.0" />
             <StatusEffect type="OnSuccess" targettype="UseTarget" targets="item" Condition="-9.0">
@@ -923,10 +929,6 @@
             <!-- do burn damage to characters -->
             <StatusEffect type="OnUse" target="UseTarget" >
                 <Affliction identifier="burn" amount="0.1" />
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="Character,This" Interval="0.5" duration="0.5" >
-                <RequiredItems items="Touhou_Fix_Foamg_Tank" type="Contained" />
-                <Affliction identifier="Touhou_Fix_Foamg_Tank_Effect" amount="10" />
             </StatusEffect>
             <!-- the tool can fix structures, i.e. walls and windows -->
             <Fixable identifier="structure" />
@@ -945,8 +947,8 @@
                 <Explosion range="100.0" force="1.0" shockwave="false" smoke="false" flames="false" sparks="false" underwaterbubble="false" camerashake="2.0" />
             </StatusEffect>
             <StatusEffect type="OnUse" target="This" forceplaysounds="true">
-                <Sound file="%ModDir%/Sounds/Weapons/Touhou_Kappa_Welding_Tool/01.ogg" type="OnUse" range="300" Volume="0.6" selectionmode="Random" />
-                <Sound file="%ModDir%/Sounds/Weapons/Touhou_Kappa_Welding_Tool/02.ogg" type="OnUse" range="300" Volume="0.6" />
+                <Sound file="%ModDir%/Sounds/Weapons/Touhou_Kappa_Welding_Tool/01.ogg" type="OnUse" range="1500" Volume="0.6" selectionmode="Random" />
+                <Sound file="%ModDir%/Sounds/Weapons/Touhou_Kappa_Welding_Tool/02.ogg" type="OnUse" range="1500" Volume="0.6" />
             </StatusEffect>
             <StatusEffect type="OnUse" target="Contained" >
                 <RequiredItems items="Touhou_Kappa_Welding_Tool_Ammo" type="Contained" />
@@ -1067,8 +1069,8 @@
             <RequiredItem identifier="titaniumaluminiumalloy" amount="6" />
             <RequiredItem identifier="fulgurium" />
             <RequiredItem identifier="Tu_Alchemical" />
-            <RequiredItem identifier="fuelrod" />
-            <RequiredItem identifier="thoriumfuelrod" />
+            <RequiredItem identifier="fuelrod" mincondition="0.8" maxcondtion="1" usecondition="false" />
+            <RequiredItem identifier="thoriumfuelrod" mincondition="0.8" maxcondtion="1" usecondition="false" />
             <RequiredItem identifier="Score_Point" />
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem" >
@@ -1238,7 +1240,7 @@
     <!--核能电容弹匣-->
     <Item name="“核能电容弹匣”" identifier="Touhou_Nuclear_Energy_Capacitor_Magazine" scale="0.17" subcategory="Touhou" category="Weapon"
           maxstacksize="16" maxstacksizecharacterinventory="4" cargocontaineridentifier="metalcrate"
-          tags="smallitem,Touhou_Kappa_Welding_Tool_Ammo" impactsoundtag="impact_metal_light" >
+          tags="smallitem,Touhou_Kappa_Welding_Tool_Ammo,Touhou_Magic_Charging03" impactsoundtag="impact_metal_light" >
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.08" />
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.05" />
         <PreferredContainer secondary="wreckweaponholder" amount="1" spawnprobability="0.04" />
@@ -1299,9 +1301,9 @@
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false" />
         <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" >
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.5" colormultiplier="255,100,100,220"/>
-            <Attack itemdamage="110" targetforce="2" targetimpulse="6" penetration="0.2" severlimbsprobability="0.4">
+            <Attack itemdamage="110" targetforce="2" targetimpulse="6" penetration="0.1" severlimbsprobability="0.4">
                 <Affliction identifier="lacerations" strength="5" />
-                <Affliction identifier="burn" strength="20" />
+                <Affliction identifier="burn" strength="15" />
                 <Affliction identifier="gunshotwound" strength="5" />
                 <Affliction identifier="Touhou_Weakness" strength="0.7" />
                 <Affliction identifier="stun" strength="0.1" probability="0.6"/>
@@ -1429,6 +1431,8 @@
                         <Conditional HasTag="eq Tactical_Open"/>
                         <Affliction identifier="Nitori_Backpack_Tactical_Expansion_Effect02" amount="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Nuclear_Energy_Capacitor_Magazine">
                     <StatusEffect type="OnWearing" target="Contained" Condition="-0.02" comparison="And">
@@ -1443,6 +1447,8 @@
                         <Conditional HasTag="eq Tactical_Open"/>
                         <Affliction identifier="Nitori_Backpack_Tactical_Expansion_Effect" amount="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
             </SubContainer>
             <SubContainer capacity="11" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
@@ -1456,20 +1462,20 @@
         <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
                   canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
 
+        <CustomInterface canbeselected="false" drawhudwhenequipped="false">
+            <GuiFrame relativesize="0.1,0.06" anchor="BottomRight" absoluteoffset="0,0" relativeoffset="0.19,0.0" style="ItemUI" />
+            <TickBox text="uilabel.Tactical_Effect_Button" >
+                <StatusEffect type="OnUse" target="This" tags="Tactical_Open" setvalue="true" />
+                <StatusEffect type="OnSecondaryUse" target="This" tags="Tactical_False" setvalue="true" />
+            </TickBox>
+        </CustomInterface>
+
         <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
 
             <sprite name="Backpack Wearable" texture="%ModDir%/Images/Nitori_Clothes/Tools.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
                     inherittexturescale="false" hideotherwearables="false" sourcerect="17,28,102,104" origin="0.75,0.57" scale="0.5" />
 
             <StatusEffect type="OnWearing" target="Character" PressureProtection="4200.0" SpeedMultiplier="0.95" setvalue="true" disabledeltatime="true" />
-
-            <CustomInterface canbeselected="false" drawhudwhenequipped="true">
-                <GuiFrame relativesize="0.1,0.06" anchor="BottomRight" absoluteoffset="0,0" relativeoffset="0.19,0.0" style="ItemUI" />
-                <TickBox text="uilabel.Tactical_Effect_Button" >
-                    <StatusEffect type="OnUse" target="This" tags="Tactical_Open" setvalue="true" />
-                    <StatusEffect type="OnSecondaryUse" target="This" tags="Tactical_False" setvalue="true" />
-                </TickBox>
-            </CustomInterface>
 
             <StatusEffect type="OnWearing" target="Character" >
                 <Conditional Candid_Friend="gt 0"/>
@@ -1537,7 +1543,7 @@
     <!--人偶手提箱-->
     <Item name="人偶手提箱" identifier="Touhou_Alice_Puppet_Suitcase" subcategory="Touhou" category="Equipment" tags="smallitem,Touhou_Alice_Puppet_Suitcase,backpack" scale="0.4" cargocontaineridentifier="metalcrate" description="HONK">
         <PreferredContainer primary="crewcab" notcampaign="true"/>
-        <Price baseprice="800" >
+        <Price baseprice="700" >
             <Price storeidentifier="merchantoutpost" sold="false"/>
             <Price storeidentifier="merchantcity" maxavailable="1"/>
             <Price storeidentifier="merchantresearch" maxavailable="1" />
@@ -2037,7 +2043,7 @@
         <Wearable limbtype="Head" slots="Any,HealthInterface" msg="ItemMsgPickUpSelect" displaycontainedstatus="true">
             <sprite name="Gene Splicer Wearable" texture="Content/Items/Genetic/Genetic.png" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.5" hideotherwearables="false" sourcerect="258,131,1,1" origin="0.6,0.0" />
         </Wearable>
-        <StatusHUD drawhudwhenequipped="true" overlaycolor="150,0,0,120" range="6500" thermalgoggles="true" showdeadcharacters="false" showtexts="false" />
+        <StatusHUD drawhudwhenequipped="true" overlaycolor="150,0,0,120" range="4500" thermalgoggles="true" showdeadcharacters="false" showtexts="false" />
     </Item>
 
 <!--    &lt;!&ndash;品质升级器&ndash;&gt;
@@ -2246,66 +2252,55 @@
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Small.png" sourcerect="0,0,140,120" depth="0.55" origin="0.5,0.5" />
         <Body width="50" height="20" density="10" />
         <Holdable canBeCombined="true" slots="RightHand+LeftHand" msg="ItemMsgPickUpSelect" holdpos="50,-50" aimpos="50,-40" />
-<!--        <RangedWeapon reload="1.0" drawhudwhenequipped="true" >
-            <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                <RequiredItem identifier="Star_Danmu" type="Contained" />
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
-                <RequiredItem identifier="Star_Danmu" type="Contained" ExcludeFullCondition="true" />
-            </StatusEffect>
-            <RequiredItem identifier="Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" msg="ItemMsgAmmoRequired" />
-        </RangedWeapon>-->
         <CustomInterface canbeselected="true" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.11,0.11" anchor="Center" absoluteoffset="20,196" style="ItemUI" />
             <Button text="Text.Touhou_Magic_Charging_Box_Charge">
                 <StatusEffect type="OnUse" target="This" forceplaysounds="true">
-                    <RequiredItem identifier="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" ExcludeFullCondition="true" />
+                    <RequiredItem identifier="Touhou_Magic_Charging01,Touhou_Magic_Charging02,Touhou_Magic_Charging03,Touhou_Magic_Charging04,
+                    Touhou_Magic_Charging05,Touhou_Magic_Charging06" type="Contained" ExcludeFullCondition="true" />
                     <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="1" range="200.0" loop="false" />
                 </StatusEffect>
+                <!--1级消耗-->
                 <!--灵之御扎，冰晶，文文的团扇，铁制飞刀，水轮，糖衣炮弹，电荷中继器-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
-                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging01" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
-                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
-                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging01" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
+                <!--2级消耗-->
                 <!--星星弹幕，幽冥弹匣-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging02" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-0.5" disabledeltatime="true" >
-                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging02" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
-                <!--电子御扎，完美雪花，以太飞刀，星海水晶，糖衣大炮弹，星辰法杖，核能电容弹匣，闪光魔方，无情之心-->
+                <!--3级消耗-->
+                <!--电子御扎，完美雪花，以太飞刀，星海水晶，糖衣大炮弹，星辰法杖，核能电容弹匣，闪光魔方，简单回路-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
-                    Touhou_Crystal_Pistol_Ammo,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff,
-                    Touhou_Nuclear_Energy_Capacitor_Magazine,Touhou_Magic_Ray_Gun_Ammo" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging03" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-1.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
-                    Touhou_Crystal_Pistol_Ammo,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff,
-                    Touhou_Nuclear_Energy_Capacitor_Magazine,Touhou_Magic_Ray_Gun_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging03" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
-                <!--电能要石，冻青蛙，恋之迷宫，幽冥弹匣Plus，月面流矢，月能弹匣，折扇机关，月震中心，未知弹幕碎片-->
+                <!--4级消耗-->
+                <!--电能要石，恋之迷宫，幽冥弹匣Plus，月面流矢，月能弹匣，折扇机关，月震中心，未知弹幕碎片，无情之心，精密回路-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
-                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Lunar_Center,Touhou_Unknown_X_Ammo,Touhou_Merciless_Ammo" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging04" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-3.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
-                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Lunar_Center,Touhou_Unknown_X_Ammo,Touhou_Merciless_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging04" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
             </Button>
         </CustomInterface>
         <ItemContainer autofill="False" capacity="1" maxstacksize="1" >
-            <Containable identifiers="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal" excludeditems="Touhou_Lunarquake,Touhou_Magic_Ray_Gun,Touhou_Scorching_Ray_Gun,Hakkero,Touhou_Elements_Book,backpack,toolbox" />
+            <Containable items="Touhou_Magic_Charging01,Touhou_Magic_Charging02,Touhou_Magic_Charging03,Touhou_Magic_Charging04,
+                    Touhou_Magic_Charging05,Touhou_Magic_Charging06" />
         </ItemContainer>
         <aitarget soundrange="1" fadeouttime="5" />
     </Item>
@@ -2338,61 +2333,48 @@
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Medium.png" sourcerect="0,0,140,120" depth="0.55" origin="0.5,0.5" />
         <Body width="50" height="20" density="10" />
         <Holdable canBeCombined="true" slots="RightHand+LeftHand" msg="ItemMsgPickUpSelect" holdpos="50,-50" aimpos="50,-40" />
-<!--        <RangedWeapon reload="1.0" drawhudwhenequipped="true" >
-            <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                <RequiredItem identifier="Star_Danmu" type="Contained" />
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
-                <RequiredItem identifier="Star_Danmu" type="Contained" ExcludeFullCondition="true" />
-            </StatusEffect>
-            <RequiredItem identifier="Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" msg="ItemMsgAmmoRequired" />
-        </RangedWeapon>-->
         <CustomInterface canbeselected="true" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.11,0.11" anchor="Center" absoluteoffset="20,196" style="ItemUI" />
             <Button text="Text.Touhou_Magic_Charging_Box_Charge">
                 <StatusEffect type="OnUse" target="This" forceplaysounds="true">
-                    <RequiredItem identifier="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" ExcludeFullCondition="true" />
+                    <RequiredItem identifier="Touhou_Magic_Charging01,Touhou_Magic_Charging02,Touhou_Magic_Charging03,Touhou_Magic_Charging04,
+                    Touhou_Magic_Charging05,Touhou_Magic_Charging06" type="Contained" ExcludeFullCondition="true" />
                     <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="1" range="200.0" loop="false" />
                 </StatusEffect>
-
+                <!--1级消耗-->
                 <!--灵之御扎，冰晶，文文的团扇，铁制飞刀，水轮，糖衣炮弹，电荷中继器-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
-                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging01" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
-                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
-                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging01" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
+                <!--2级消耗-->
                 <!--星星弹幕，幽冥弹匣-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging02" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-0.5" disabledeltatime="true" >
-                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging02" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
-                <!--电子御扎，完美雪花，以太飞刀，星海水晶，糖衣大炮弹，星辰法杖，核能电容弹匣，闪光魔方-->
+                <!--3级消耗-->
+                <!--电子御扎，完美雪花，以太飞刀，星海水晶，糖衣大炮弹，星辰法杖，核能电容弹匣，闪光魔方，简单回路-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
-                    Touhou_Crystal_Pistol_Ammo,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff,
-                    Touhou_Nuclear_Energy_Capacitor_Magazine,Touhou_Magic_Ray_Gun_Ammo" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging03" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-1.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
-                    Touhou_Crystal_Pistol_Ammo,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff,
-                    Touhou_Nuclear_Energy_Capacitor_Magazine,Touhou_Magic_Ray_Gun_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging03" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
-                <!--电能要石，冻青蛙，恋之迷宫，幽冥弹匣Plus，月面流矢，月能弹匣，折扇机关，月震中心，未知弹幕碎片，无情之心-->
+                <!--4级消耗-->
+                <!--电能要石，恋之迷宫，幽冥弹匣Plus，月面流矢，月能弹匣，折扇机关，月震中心，未知弹幕碎片，无情之心，精密回路-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
-                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Lunar_Center,Touhou_Unknown_X_Ammo,Touhou_Merciless_Ammo" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging04" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-2.5" disabledeltatime="true" >
-                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
-                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Lunar_Center,Touhou_Unknown_X_Ammo,Touhou_Merciless_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging04" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
             </Button>
         </CustomInterface>
@@ -2401,7 +2383,8 @@
             <ParticleEmitter particle="Touhou_Blue_Explosion_Underwater" AngleMax="360" ScaleMultiplier="0.25,0.25" particlespersecond="10" ColorMultiplier="255,155,255,200" />
         </RepairTool>
         <ItemContainer autofill="False" capacity="1" maxstacksize="1" >
-            <Containable identifiers="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal" excludeditems="Touhou_Lunarquake,Touhou_Magic_Ray_Gun,Touhou_Scorching_Ray_Gun,Hakkero,Touhou_Elements_Book,backpack,toolbox" />
+            <Containable items="Touhou_Magic_Charging01,Touhou_Magic_Charging02,Touhou_Magic_Charging03,Touhou_Magic_Charging04,
+                    Touhou_Magic_Charging05,Touhou_Magic_Charging06" />
         </ItemContainer>
         <aitarget soundrange="1" fadeouttime="5" />
     </Item>
@@ -2410,7 +2393,7 @@
     <Item name="魔法武器充能箱（大型）" identifier="Touhou_Magic_Charging_Box_Huge" subcategory="Touhou" category="Equipment" Health="300"
           tags="mobilecontainer,Touhou_Magic_Charging_Box,toolbox" scale="0.4" cargocontaineridentifier="metalcrate" >
         <PreferredContainer primary="crewcab" notcampaign="true"/>
-        <Price baseprice="5000" minleveldifficulty="30" >
+        <Price baseprice="6000" minleveldifficulty="30" >
             <Price storeidentifier="merchantoutpost" sold="false"/>
             <Price storeidentifier="merchantcity" maxavailable="1"/>
             <Price storeidentifier="merchantresearch" maxavailable="1" />
@@ -2424,78 +2407,67 @@
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Huge.png" sourcerect="0,0,140,120" depth="0.55" origin="0.5,0.5" />
         <Body width="50" height="20" density="10" />
         <Holdable canBeCombined="true" slots="RightHand+LeftHand" msg="ItemMsgPickUpSelect" holdpos="50,-50" aimpos="50,-40" />
-<!--        <RangedWeapon reload="1.0" drawhudwhenequipped="true" >
-            <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                <RequiredItem identifier="Star_Danmu" type="Contained" />
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
-                <RequiredItem identifier="Star_Danmu" type="Contained" ExcludeFullCondition="true" />
-            </StatusEffect>
-            <RequiredItem identifier="Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" msg="ItemMsgAmmoRequired" />
-        </RangedWeapon>-->
         <CustomInterface canbeselected="true" drawhudwhenequipped="true">
             <GuiFrame relativesize="0.11,0.11" anchor="Center" absoluteoffset="20,196" style="ItemUI" />
             <Button text="Text.Touhou_Magic_Charging_Box_Charge">
                 <StatusEffect type="OnUse" target="This" forceplaysounds="true">
-                    <RequiredItem identifier="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal,High_Alchemical_Metal" type="Contained" ExcludeFullCondition="true" />
+                    <RequiredItem identifier="Touhou_Magic_Charging01,Touhou_Magic_Charging02,Touhou_Magic_Charging03,Touhou_Magic_Charging04,
+                    Touhou_Magic_Charging05,Touhou_Magic_Charging06" type="Contained" ExcludeFullCondition="true" />
                     <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="1" range="200.0" loop="false" />
                 </StatusEffect>
+
+                <!--1级消耗-->
                 <!--灵之御扎，冰晶，文文的团扇，铁制飞刀，水轮，糖衣炮弹，电荷中继器-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
-                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging01" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-0.2" disabledeltatime="true" >
-                    <RequiredItem identifier="Homing_Amulet,Freeze_Icicle_Fall,Aya_Circular_Fan,Touhou_Sakuya_Knife_Iron,Touhou_Waterwheel_Gun_Magazine,
-                    Touhou_Sugar_Coated_Cannonball,Touhou_Charge_Rifle_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging01" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
+                <!--2级消耗-->
                 <!--星星弹幕，幽冥弹匣-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging02" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-0.5" disabledeltatime="true" >
-                    <RequiredItem identifier="Star_Danmu,Youmu_Smgmagazine" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging02" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
-                <!--电子御扎，完美雪花，以太飞刀，星海水晶，灵异珠-波纹，糖衣大炮弹，星辰法杖，核能电容弹匣，闪光魔方-->
+                <!--3级消耗-->
+                <!--电子御扎，完美雪花，以太飞刀，星海水晶，糖衣大炮弹，星辰法杖，核能电容弹匣，闪光魔方，简单回路-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
-                    Touhou_Crystal_Pistol_Ammo,Touhou_Mysterious_Pearl_Rippling,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff,
-                    Touhou_Nuclear_Energy_Capacitor_Magazine,Touhou_Magic_Ray_Gun_Ammo,Touhou_Unknown_X_Ammo" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging03" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-1.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Touhou_Cyber_Homing_Amulet,Touhou_Perfect_Snowflake,Touhou_Sakuya_Knife_Ether,
-                    Touhou_Crystal_Pistol_Ammo,Touhou_Mysterious_Pearl_Rippling,Touhou_Huge_Sugar_Coated_Cannonball,Touhou_Stellar_Staff,
-                    Touhou_Nuclear_Energy_Capacitor_Magazine,Touhou_Magic_Ray_Gun_Ammo,Touhou_Unknown_X_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging03" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
-                <!--电能要石，冻青蛙，恋之迷宫，幽冥弹匣Plus，月面流矢，月能弹匣，折扇机关，海底蔷薇，微缩地月系统，月震中心，远日点能量核心，花粉罐，未知弹幕碎片，无情之心-->
+                <!--4级消耗-->
+                <!--电能要石，恋之迷宫，幽冥弹匣Plus，月面流矢，月能弹匣，折扇机关，月震中心，未知弹幕碎片，无情之心，精密回路-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
-                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Rose_Wand_Ammo,Touhou_Miniature_Earth_Moon_System,
-                    Touhou_Lunar_Center,Touhou_Aphelion_Ammo,Touhou_Pellen_Bottle,Touhou_Unknown_X_Ammo,Touhou_Merciless_Ammo" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging04" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
-                <StatusEffect type="OnUse" target="This" Condition="-2.5" disabledeltatime="true" >
-                    <RequiredItem identifier="Lightning_Kanameishi,Touhou_Frozen_Frog,Touhou_Love_Maze,Youmu_Smgmagazine_Plus,Touhou_Lunar_Orbit_Gun_Ammo,
-                    Touhou_Lunar_Energy_Magazine,Touhou_Yukari_Folding_Fan_Ammo,Touhou_Rose_Wand_Ammo,Touhou_Miniature_Earth_Moon_System,
-                    Touhou_Lunar_Center,Touhou_Aphelion_Ammo,Touhou_Pellen_Bottle,Touhou_Unknown_X_Ammo,Touhou_Merciless_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                <StatusEffect type="OnUse" target="This" Condition="-2.0" disabledeltatime="true" >
+                    <RequiredItem items="Touhou_Magic_Charging04" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
+                <!--5级消耗-->
                 <!--星屑幻想，皇家钻戒燃料，耀眼的龙玉-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Stardust_Reverie,Touhou_Royal_Diamond_Ring_Ammo,Touhou_Brilliant_Dragon_Bullet" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging05" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-4.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Stardust_Reverie,Touhou_Royal_Diamond_Ring_Ammo,Touhou_Brilliant_Dragon_Bullet" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging05" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
 
+                <!--6级消耗-->
                 <!--灼热核心，怜悯弹匣-->
                 <StatusEffect type="OnUse" target="Contained" Condition="10.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Touhou_Scorching_Ray_Gun_Ammo,Touhou_Mercy_Ammo" type="Contained" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging06" type="Contained" ExcludeBroken="false" />
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" Condition="-8.0" disabledeltatime="true" >
-                    <RequiredItem identifier="Touhou_Scorching_Ray_Gun_Ammo,Touhou_Mercy_Ammo" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
+                    <RequiredItem items="Touhou_Magic_Charging06" type="Contained" ExcludeFullCondition="true" ExcludeBroken="false" />
                 </StatusEffect>
             </Button>
         </CustomInterface>
@@ -2504,7 +2476,8 @@
             <ParticleEmitter particle="Touhou_Blue_Explosion_Underwater" AngleMax="360" ScaleMultiplier="0.25,0.25" particlespersecond="10" ColorMultiplier="255,155,255,200" />
         </RepairTool>
         <ItemContainer autofill="False" capacity="1" maxstacksize="1" >
-            <Containable identifiers="smallitem,Low_Alchemical_Metal,Normal_Alchemical_Metal" excludeditems="Touhou_Lunarquake,Touhou_Magic_Ray_Gun,Touhou_Scorching_Ray_Gun,Hakkero,Touhou_Elements_Book,backpack,toolbox" />
+            <Containable items="Touhou_Magic_Charging01,Touhou_Magic_Charging02,Touhou_Magic_Charging03,Touhou_Magic_Charging04,
+                    Touhou_Magic_Charging05,Touhou_Magic_Charging06" />
         </ItemContainer>
         <aitarget soundrange="1" fadeouttime="5" />
     </Item>
@@ -2556,4 +2529,1300 @@
             <QualityStat stattype="Condition" value="0.334"/>
         </Quality>
     </Item>
+
+
+    <!--共情装置（1阶）-->
+    <Item name="共情装置（1阶）" identifier="Touhou_Empathy_Device01" subcategory="Touhou" category="Equipment" scale="0.35" tags="smallitem,geneticdevice" allowasextracargo="true" >
+        <PreferredContainer primary="medcab" secondary="medcab"/>
+        <Price baseprice="2000" sold="true" minleveldifficulty="15">
+            <Price storeidentifier="merchantoutpost" />
+            <Price storeidentifier="merchantcity" multiplier="0.9" />
+            <Price storeidentifier="merchantresearch" multiplier="1.1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.1" />
+            <Price storeidentifier="merchantmine" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="fulgurium" amount="1" />
+            <Item identifier="Magic_Material" amount="4" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20" >
+            <RequiredSkill identifier="Touhou_Magic" level="40" />
+            <RequiredSkill identifier="medical" level="40" />
+            <RequiredItem identifier="fulgurium" />
+            <RequiredItem identifier="Touhou_Base_Metal" amount="2" />
+            <RequiredItem identifier="Magic_Material" amount="4" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Device.png" sourcerect="0,0,176,56" depth="0.45" />
+        <Body radius="8" width="48" density="10" />
+        <ItemContainer capacity="1" maxstacksize="1" autoinject="true" autoinjectthreshold="Infinity" allowswappingcontaineditems="false">
+            <SlotIcon slotindex="0" texture="Content/Items/Genetic/Genetic.png" sheetindex="11,0" sheetelementsize="32,32" origin="0.5,0.5" />
+            <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Yin_Yang_Orb.png" sourcerect="0,0,220,272" origin="0.5,0.5" />
+            <Containable items="geneticmaterial" />
+            <SubContainer capacity="1" maxstacksize="1" autoinject="true" autoinjectthreshold="Infinity">
+                <Containable items="Touhou_Empathy_Item" />
+            </SubContainer>
+        </ItemContainer>
+        <Wearable limbtype="Head" slots="Any,HealthInterface" msg="ItemMsgPickUpSelect" displaycontainedstatus="true">
+            <sprite name="Gene Splicer Wearable" texture="Content/Items/Genetic/Genetic.png" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.5" hideotherwearables="false" sourcerect="258,131,1,1" origin="0.6,0.0" />
+            <StatusEffect type="OnWearing" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Empathy_Device_Talent" />
+            </StatusEffect>
+        </Wearable>
+    </Item>
+
+    <!--共情装置（2阶）-->
+    <Item name="共情装置（2阶）" identifier="Touhou_Empathy_Device02" subcategory="Touhou" category="Equipment" scale="0.35" tags="smallitem,geneticdevice" allowasextracargo="true" >
+        <PreferredContainer primary="medcab" secondary="medcab"/>
+        <Price baseprice="5000" sold="true" minleveldifficulty="30">
+            <Price storeidentifier="merchantoutpost" />
+            <Price storeidentifier="merchantcity" multiplier="0.9" />
+            <Price storeidentifier="merchantresearch" multiplier="1.1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.1" />
+            <Price storeidentifier="merchantmine" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="fulgurium" amount="4" />
+            <Item identifier="incendium" amount="4" />
+            <Item identifier="Power_Point" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20" >
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredSkill identifier="medical" level="70" />
+            <RequiredItem identifier="fulgurium" amount="4" />
+            <RequiredItem identifier="incendium" amount="4" />
+            <RequiredItem identifier="Touhou_Base_Metal" amount="6" />
+            <RequiredItem identifier="Power_Point" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Device.png" sourcerect="2,56,172,56" depth="0.45" />
+        <Body radius="8" width="48" density="10" />
+        <ItemContainer capacity="1" maxstacksize="1" autoinject="true" autoinjectthreshold="Infinity" allowswappingcontaineditems="false">
+            <SlotIcon slotindex="0" texture="Content/Items/Genetic/Genetic.png" sheetindex="11,0" sheetelementsize="32,32" origin="0.5,0.5" />
+            <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Yin_Yang_Orb.png" sourcerect="0,0,220,272" origin="0.5,0.5" />
+            <SlotIcon slotindex="2" texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Yin_Yang_Orb.png" sourcerect="0,0,220,272" origin="0.5,0.5" />
+            <SlotIcon slotindex="3" texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Yin_Yang_Orb.png" sourcerect="0,0,220,272" origin="0.5,0.5" />
+            <Containable items="geneticmaterial" />
+            <SubContainer capacity="3" maxstacksize="1" autoinject="true" autoinjectthreshold="Infinity">
+                <Containable items="Touhou_Empathy_Item" />
+            </SubContainer>
+        </ItemContainer>
+        <Wearable limbtype="Head" slots="Any,HealthInterface" msg="ItemMsgPickUpSelect" displaycontainedstatus="true">
+            <sprite name="Gene Splicer Wearable" texture="Content/Items/Genetic/Genetic.png" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.5" hideotherwearables="false" sourcerect="258,131,1,1" origin="0.6,0.0" />
+            <StatusEffect type="OnWearing" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Empathy_Device_Talent" />
+            </StatusEffect>
+        </Wearable>
+    </Item>
+
+    <!--共情装置（3阶）-->
+    <Item name="共情装置（3阶）" identifier="Touhou_Empathy_Device03" subcategory="Touhou" category="Equipment" scale="0.35" tags="smallitem,geneticdevice" allowasextracargo="true" >
+        <PreferredContainer primary="medcab" secondary="medcab"/>
+        <Price baseprice="10000" sold="false" minleveldifficulty="30">
+            <Price storeidentifier="merchantoutpost" />
+            <Price storeidentifier="merchantcity" multiplier="0.9" />
+            <Price storeidentifier="merchantresearch" multiplier="1.1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.1" />
+            <Price storeidentifier="merchantmine" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="fulgurium" amount="4" />
+            <Item identifier="incendium" amount="4" />
+            <Item identifier="Power_Point" amount="2" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20" >
+            <RequiredSkill identifier="Touhou_Magic" level="100" />
+            <RequiredSkill identifier="medical" level="100" />
+            <RequiredItem identifier="advancedgenesplicer" />
+            <RequiredItem identifier="Touhou_Precious_Metal" />
+            <RequiredItem identifier="Power_Point" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Device.png" sourcerect="6,116,165,47" depth="0.45" />
+        <Body radius="8" width="48" density="10" />
+        <ItemContainer capacity="2" maxstacksize="1" autoinject="true" autoinjectthreshold="Infinity" allowswappingcontaineditems="false">
+            <SlotIcon slotindex="0" texture="Content/Items/Genetic/Genetic.png" sheetindex="11,0" sheetelementsize="32,32" origin="0.5,0.5" />
+            <SlotIcon slotindex="1" texture="Content/Items/Genetic/Genetic.png" sheetindex="11,0" sheetelementsize="32,32" origin="0.5,0.5" />
+            <SlotIcon slotindex="2" texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Yin_Yang_Orb.png" sourcerect="0,0,220,272" origin="0.5,0.5" />
+            <SlotIcon slotindex="3" texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Yin_Yang_Orb.png" sourcerect="0,0,220,272" origin="0.5,0.5" />
+            <SlotIcon slotindex="4" texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Yin_Yang_Orb.png" sourcerect="0,0,220,272" origin="0.5,0.5" />
+            <SlotIcon slotindex="5" texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Yin_Yang_Orb.png" sourcerect="0,0,220,272" origin="0.5,0.5" />
+            <Containable items="geneticmaterial" />
+            <SubContainer capacity="4" maxstacksize="1" autoinject="true" autoinjectthreshold="Infinity">
+                <Containable items="Touhou_Empathy_Item" />
+            </SubContainer>
+        </ItemContainer>
+        <Wearable limbtype="Head" slots="Any,HealthInterface" msg="ItemMsgPickUpSelect" displaycontainedstatus="true">
+            <sprite name="Gene Splicer Wearable" texture="Content/Items/Genetic/Genetic.png" limb="Head" hidelimb="false" inheritlimbdepth="true" inheritscale="true" ignorelimbscale="true" scale="0.5" hideotherwearables="false" sourcerect="258,131,1,1" origin="0.6,0.0" />
+            <StatusEffect type="OnWearing" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Empathy_Device_Talent" />
+            </StatusEffect>
+        </Wearable>
+    </Item>
+
+
+    <!--共情物卡牌包-->
+    <Item name="共情物卡牌包" identifier="Touhou_Empathy_Item_Box" tags="smallitem" maxstacksize="32" subcategory="Touhou" scale="0.25" category="Misc" >
+        <PreferredContainer primary="medfabcab" amount="1" spawnprobability="0.075"/>
+        <PreferredContainer secondary="abandonedmedcab,wreckmedcab,outpostmedcab" amount="1" spawnprobability="0.1"/>
+        <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.1" />
+        <PreferredContainer primary="ruinstoragelarge" amount="1" spawnprobability="0.1" />
+        <PreferredContainer primary="wreckstoragecab" amount="1" spawnprobability="0.125" />
+        <PreferredContainer primary="outpostcrewcabinet" amount="1" spawnprobability="0.15" />
+        <Deconstruct time="3" amount="2" chooserandom="true">
+            <Item identifier="Touhou_Empathy_Yin_Yang_Orb" commonness="1" />
+            <Item identifier="Touhou_Empathy_Yin_Yang_Orb_Needle" commonness="1" />
+            <Item identifier="Touhou_Empathy_Precious_Amulet" commonness="1" />
+            <Item identifier="Touhou_Empathy_Tea_Cup_Reimu" commonness="1" />
+            <Item identifier="Touhou_Empathy_Mini_Hakkero" commonness="1" />
+            <Item identifier="Touhou_Empathy_Mini_Hakkero_Missile" commonness="1" />
+            <Item identifier="Touhou_Empathy_Tea_Cup_Marisa" commonness="1" />
+            <Item identifier="Touhou_Empathy_The_Collector_Lesson" commonness="1" />
+            <Item identifier="Touhou_Empathy_Vampire_Fangs" commonness="1" />
+            <Item identifier="Touhou_Empathy_Half_Of_Half_Spirit" commonness="1" />
+            <Item identifier="Touhou_Empathy_Spare_Half_Spirit_Effect" commonness="1" />
+            <Item identifier="Touhou_Empathy_Hurricane_Sandals" commonness="1" />
+            <Item identifier="Touhou_Empathy_Phoenix_Tail" commonness="1" />
+            <Item identifier="Touhou_Empathy_Spell_Card_Of_Preparedness" commonness="1" />
+            <Item identifier="Touhou_Empathy_Basic_Training_For_Magicians" commonness="1" />
+            <Item identifier="Touhou_Empathy_Essential_Stone_Of_Patience" commonness="1" />
+            <Item identifier="Touhou_Empathy_Essential_Stone_Missile" commonness="1" />
+            <Item identifier="Touhou_Empathy_Encouraging_Komainu" commonness="1" />
+            <Item identifier="Touhou_Empathy_Guardian_Komainu" commonness="1" />
+            <Item identifier="Touhou_Empathy_Aesthetics_Of_Destruction" commonness="1" />
+            <Item identifier="Touhou_Empathy_Annoying_UFO" commonness="1" />
+            <Item identifier="Touhou_Empathy_Lunatic_Moon" commonness="1" />
+            <Item identifier="Touhou_Empathy_Torch_Of_Burning_Life" commonness="1" />
+            <Item identifier="Touhou_Empathy_Ice_Fairy" commonness="1" />
+            <Item identifier="Touhou_Empathy_Pebble_Hat" commonness="1" />
+            <Item identifier="Touhou_Empathy_Shanghai_Doll" commonness="1" />
+            <Item identifier="Touhou_Empathy_Lively_Powerlessness" commonness="1" />
+            <Item identifier="Touhou_Empathy_Crazy_Silence" commonness="1" />
+            <Item identifier="Touhou_Empathy_Tranquil_Shimmer" commonness="1" />
+            <Item identifier="Touhou_Empathy_Maid_Knife" commonness="1" />
+            <Item identifier="Touhou_Empathy_Maid_Knife_Bouncing" commonness="1" />
+            <Item identifier="Touhou_Empathy_The_Miser_Lesson" commonness="1" />
+            <Item identifier="Touhou_Empathy_The_Dilemma_Of_Capitalism" commonness="1" />
+            <Item identifier="Touhou_Empathy_Frog_Amulet_For_Safe_Return" commonness="1" />
+            <Item identifier="Touhou_Empathy_Snake_Skin_Amulet" commonness="1" />
+            <Item identifier="Touhou_Empathy_Boundary_Of_The_Screen" commonness="1" />
+        </Deconstruct>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Item_Box.png" depth="0.4" sourcerect="0,0,60,72" />
+        <Body width="100" height="100" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：阴阳玉-->
+    <Item name="" identifier="Touhou_Empathy_Yin_Yang_Orb" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Yin_Yang_Orb" effect="Touhou_Empathy_Yin_Yang_Orb_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Yin_Yang_Orb.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：阴阳玉（针）-->
+    <Item name="共情物：阴阳玉（针）" identifier="Touhou_Empathy_Yin_Yang_Orb_Needle" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Yin_Yang_Orb_Needle" effect="Touhou_Empathy_Yin_Yang_Orb_Needle_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Yin_Yang_Orb_Needle.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：珍贵御扎-->
+    <Item name="共情物：珍贵御扎" identifier="Touhou_Empathy_Precious_Amulet" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Precious_Amulet" effect="Touhou_Empathy_Precious_Amulet_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Precious_Amulet.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：茶杯灵梦-->
+    <Item name="共情物：茶杯灵梦" identifier="Touhou_Empathy_Tea_Cup_Reimu" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Tea_Cup_Reimu" effect="Touhou_Empathy_Tea_Cup_Reimu_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Tea_Cup_Reimu.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：迷你八卦炉-->
+    <Item name="共情物：迷你八卦炉" identifier="Touhou_Empathy_Mini_Hakkero" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Mini_Hakkero" effect="Touhou_Empathy_Mini_Hakkero_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Mini_Hakkero.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：迷你八卦炉（导弹）-->
+    <Item name="共情物：迷你八卦炉（导弹）" identifier="Touhou_Empathy_Mini_Hakkero_Missile" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Mini_Hakkero_Missile" effect="Touhou_Empathy_Mini_Hakkero_Missile_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Mini_Hakkero_Missile.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：茶杯魔理沙-->
+    <Item name="共情物：茶杯魔理沙" identifier="Touhou_Empathy_Tea_Cup_Marisa" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Tea_Cup_Marisa" effect="Touhou_Empathy_Tea_Cup_Marisa_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Tea_Cup_Marisa.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：收藏家的教训-->
+    <Item name="共情物：收藏家的教训" identifier="Touhou_Empathy_The_Collector_Lesson" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_The_Collector_Lesson" effect="Touhou_Empathy_The_Collector_Lesson_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_The_Collector_Lesson.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：吸血鬼之牙-->
+    <Item name="共情物：吸血鬼之牙" identifier="Touhou_Empathy_Vampire_Fangs" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Vampire_Fangs" effect="Touhou_Empathy_Vampire_Fangs_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Vampire_Fangs.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：半灵的一半-->
+    <Item name="共情物：半灵的一半" identifier="Touhou_Empathy_Half_Of_Half_Spirit" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Half_Of_Half_Spirit" effect="Touhou_Empathy_Half_Of_Half_Spirit_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Half_Of_Half_Spirit.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：备用半灵-->
+    <Item name="共情物：备用半灵" identifier="Touhou_Empathy_Spare_Half_Spirit" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Spare_Half_Spirit" effect="Touhou_Empathy_Spare_Half_Spirit_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Spare_Half_Spirit.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：疾风木屐-->
+    <Item name="共情物：疾风木屐" identifier="Touhou_Empathy_Hurricane_Sandals" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Hurricane_Sandals" effect="Touhou_Empathy_Hurricane_Sandals_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Hurricane_Sandals.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：不死鸟之尾-->
+    <Item name="共情物：不死鸟之尾" identifier="Touhou_Empathy_Phoenix_Tail" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Phoenix_Tail" effect="Touhou_Empathy_Phoenix_Tail_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Phoenix_Tail.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：未雨绸缪之符-->
+    <Item name="共情物：未雨绸缪之符" identifier="Touhou_Empathy_Spell_Card_Of_Preparedness" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Spell_Card_Of_Preparedness" effect="Touhou_Empathy_Spell_Card_Of_Preparedness_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Spell_Card_Of_Preparedness.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：魔法使的基础练习-->
+    <Item name="共情物：魔法使的基础练习" identifier="Touhou_Empathy_Basic_Training_For_Magicians" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Basic_Training_For_Magicians" effect="Touhou_Empathy_Basic_Training_For_Magicians_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Basic_Training_For_Magicians.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：忍耐的要石-->
+    <Item name="共情物：忍耐的要石" identifier="Touhou_Empathy_Essential_Stone_Of_Patience" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Essential_Stone_Of_Patience" effect="Touhou_Empathy_Essential_Stone_Of_Patience_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Essential_Stone_Of_Patience.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：要石导弹-->
+    <Item name="共情物：要石导弹" identifier="Touhou_Empathy_Essential_Stone_Missile" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Essential_Stone_Missile" effect="Touhou_Empathy_Essential_Stone_Missile_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Essential_Stone_Missile.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：激励狛犬-->
+    <Item name="共情物：激励狛犬" identifier="Touhou_Empathy_Encouraging_Komainu" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Encouraging_Komainu" effect="Touhou_Empathy_Encouraging_Komainu_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Encouraging_Komainu.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：守护狛犬-->
+    <Item name="共情物：守护狛犬" identifier="Touhou_Empathy_Guardian_Komainu" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Guardian_Komainu" effect="Touhou_Empathy_Guardian_Komainu_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Guardian_Komainu.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：破坏的美学-->
+    <Item name="共情物：破坏的美学" identifier="Touhou_Empathy_Aesthetics_Of_Destruction" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Aesthetics_Of_Destruction" effect="Touhou_Empathy_Aesthetics_Of_Destruction_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Aesthetics_Of_Destruction.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：恼人的UFO-->
+    <Item name="共情物：恼人的UFO" identifier="Touhou_Empathy_Annoying_UFO" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Annoying_UFO" effect="Touhou_Empathy_Annoying_UFO_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Annoying_UFO.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：疯狂之月-->
+    <Item name="共情物：疯狂之月" identifier="Touhou_Empathy_Lunatic_Moon" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Lunatic_Moon" effect="Touhou_Empathy_Lunatic_Moon_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Lunatic_Moon.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：燃烧生命的火把-->
+    <Item name="共情物：燃烧生命的火把" identifier="Touhou_Empathy_Torch_Of_Burning_Life" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Torch_Of_Burning_Life" effect="Touhou_Empathy_Torch_Of_Burning_Life_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Torch_Of_Burning_Life.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：冰之妖精-->
+    <Item name="共情物：冰之妖精" identifier="Touhou_Empathy_Ice_Fairy" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Ice_Fairy" effect="Touhou_Empathy_Ice_Fairy_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Ice_Fairy.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：小石子帽子-->
+    <Item name="共情物：小石子帽子" identifier="Touhou_Empathy_Pebble_Hat" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Pebble_Hat" effect="Touhou_Empathy_Pebble_Hat_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Pebble_Hat.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：上海人偶-->
+    <Item name="共情物：上海人偶" identifier="Touhou_Empathy_Shanghai_Doll" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Shanghai_Doll" effect="Touhou_Empathy_Shanghai_Doll_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Shanghai_Doll.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：活泼的无力-->
+    <Item name="共情物：活泼的无力" identifier="Touhou_Empathy_Lively_Powerlessness" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Lively_Powerlessness" effect="Touhou_Empathy_Lively_Powerlessness_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Lively_Powerlessness.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：疯狂的寂静-->
+    <Item name="共情物：疯狂的寂静" identifier="Touhou_Empathy_Crazy_Silence" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Lively_Powerlessness" effect="Touhou_Empathy_Crazy_Silence_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Lively_Powerlessness.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：静谧的闪耀-->
+    <Item name="共情物：静谧的闪耀" identifier="Touhou_Empathy_Tranquil_Shimmer" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Tranquil_Shimmer" effect="Touhou_Empathy_Tranquil_Shimmer_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Tranquil_Shimmer.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：女仆飞刀-->
+    <Item name="共情物：女仆飞刀" identifier="Touhou_Empathy_Maid_Knife" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Maid_Knife" effect="Touhou_Empathy_Maid_Knife_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Maid_Knife.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：女仆飞刀（跳弹）-->
+    <Item name="共情物：女仆飞刀（跳弹）" identifier="Touhou_Empathy_Maid_Knife_Bouncing" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Maid_Knife_Bouncing" effect="Touhou_Empathy_Maid_Knife_Bouncing_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Maid_Knife_Bouncing.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：守财奴的教诲-->
+    <Item name="共情物：守财奴的教诲" identifier="Touhou_Empathy_The_Miser_Lesson" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_The_Miser_Lesson" effect="Touhou_Empathy_The_Miser_Lesson_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_The_Miser_Lesson.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：资本主义的困境-->
+    <Item name="共情物：资本主义的困境" identifier="Touhou_Empathy_The_Dilemma_Of_Capitalism" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_The_Dilemma_Of_Capitalism" effect="Touhou_Empathy_The_Dilemma_Of_Capitalism_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_The_Dilemma_Of_Capitalism.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：平安归来蛙护身符-->
+    <Item name="共情物：平安归来蛙护身符" identifier="Touhou_Empathy_Frog_Amulet_For_Safe_Return" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Frog_Amulet_For_Safe_Return" effect="Touhou_Empathy_Frog_Amulet_For_Safe_Return_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Frog_Amulet_For_Safe_Return.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：放入蛇蜕的护身符-->
+    <Item name="共情物：放入蛇蜕的护身符" identifier="Touhou_Empathy_Snake_Skin_Amulet" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Snake_Skin_Amulet" effect="Touhou_Empathy_Snake_Skin_Amulet_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Snake_Skin_Amulet.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
+    <!--共情物：画面的界线-->
+    <Item name="共情物：画面的界线" identifier="Touhou_Empathy_Boundary_Of_The_Screen" nameidentifier="Touhou_Empathy_Item" category="Material" subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="medfabcab" />
+        <Price baseprice="750" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2" />
+        </Price>
+        <Deconstruct time="5" >
+            <RequiredItem identifier="Magic_Material" amount="2" />
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Boundary_Of_The_Screen" effect="Touhou_Empathy_Boundary_Of_The_Screen_Effect" >
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500" />
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5" scalemax="1.0" />
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5" />
+                <Affliction identifier="organdamage" amount="50" penetration="0.5" />
+                <Affliction identifier="stun" amount="1.5" penetration="0.5" />
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Boundary_Of_The_Screen.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Body width="23" height="31" density="10" />
+        <Pickable slots="Any" />
+    </Item>
+
 </Items>

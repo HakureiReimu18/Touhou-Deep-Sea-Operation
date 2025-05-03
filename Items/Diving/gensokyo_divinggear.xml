@@ -31,7 +31,7 @@
         <Sprite name="Combat Diving Suit Item" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_3.png" sourcerect="0,0,64,64" depth="0.45" origin="0.5,0.5" />
         <ContainedSprite name="Combat Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_1.png" sourcerect="0,0,77,209" depth="0.55" origin="-0.12,-0.14" />
         <Body radius="45" width="34" density="10" />
-        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+        <CustomInterface canbeselected="false" drawhudwhenequipped="false">
             <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
             <TickBox text="Light" IsOn="true">
                 <StatusEffect type="OnUse" target="This" IsOn="true" >
@@ -149,6 +149,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -179,6 +181,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Gensokyo_Divinggear_Effect08" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -200,52 +204,6 @@
                         <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 60" TargetContainer="true" TargetGrandparent="true"/>
                     </StatusEffect>
                 </Containable>
-<!--                <Containable items="Touhou_Hooked_Jade">
-                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0">
-                        <Conditional Hastag="eq Touhou_Peace_Hooked_Jade"/>
-                        <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0">
-                        <Conditional Hastag="eq Touhou_Hard_Hooked_Jade"/>
-                        <Affliction identifier="Gensokyo_Divinggear_Effect03" strength="10" />
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0">
-                        <Conditional Hastag="eq Touhou_Soft_Hooked_Jade"/>
-                        <Affliction identifier="Gensokyo_Divinggear_Effect04" strength="10" />
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0">
-                        <Conditional Hastag="eq Touhou_Warm_Hooked_Jade"/>
-                        <Affliction identifier="Gensokyo_Divinggear_Effect05" strength="10" />
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0">
-                        <Conditional Hastag="eq Touhou_Boiling_Hooked_Jade"/>
-                        <Affliction identifier="Gensokyo_Divinggear_Effect06" strength="10" />
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0">
-                        <Conditional Hastag="eq Touhou_Icy_Hooked_Jade"/>
-                        <Affliction identifier="Gensokyo_Divinggear_Effect07" strength="10" />
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Character,Contained" interval="5" Duration="5.0">
-                        <Conditional Hastag="eq Touhou_White_Hooked_Jade"/>
-                        <Affliction identifier="Gensokyo_Divinggear_Effect08" strength="10" />
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Character,Contained" interval="5" Duration="5.0">
-                        <Conditional Hastag="eq Touhou_Black_Hooked_Jade"/>
-                        <Affliction identifier="Gensokyo_Divinggear_Effect09" strength="10" />
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Contained" Interval="2.0" disabledeltatime="true" condition="-0.01">
-                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 0" TargetContainer="true" TargetGrandparent="true"/>
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Contained" Interval="2.0" disabledeltatime="true" condition="-0.01">
-                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 20" TargetContainer="true" TargetGrandparent="true"/>
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Contained" Interval="2.0" disabledeltatime="true" condition="-0.02">
-                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 40" TargetContainer="true" TargetGrandparent="true"/>
-                    </StatusEffect>
-                    <StatusEffect type="OnWearing" target="Contained" Interval="2.0" disabledeltatime="true" condition="-0.02">
-                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 60" TargetContainer="true" TargetGrandparent="true"/>
-                    </StatusEffect>
-                </Containable>-->
             </SubContainer>
             <SubContainer capacity="2" maxstacksize="64">
                 <Containable items="smallitem,mediumitem" excludeditems="toolbelt,toolbox,backpack,scooter,Touhou_Hooked_Jade" />
@@ -256,7 +214,7 @@
 
     <!--境界潜水服-->
     <Item name="" identifier="Touhou_Boudary_Divinggear" subcategory="Touhou" category="Diving,Equipment" tags="diving,deepdiving,divinggear_wearableindoors,provocative" scale="0.5" fireproof="true" description="" allowdroppingonswapwith="diving" impactsoundtag="impact_metal_heavy">
-        <Price baseprice="7000" minleveldifficulty="25">
+        <Price baseprice="5000" minleveldifficulty="25">
             <Price storeidentifier="merchantoutpost" multiplier="0.95" sold="false"/>
             <Price storeidentifier="merchantcity" multiplier="0.95" minavailable="1"/>
             <Price storeidentifier="merchantresearch" multiplier="1.3" minavailable="1"/>
@@ -264,8 +222,8 @@
             <Price storeidentifier="merchantmine" multiplier="1.25" sold="false"/>
         </Price>
         <Deconstruct time="15">
-            <Item identifier="Power_Point" amount="3"/>
-            <Item identifier="Magic_Material" amount="3"/>q
+            <Item identifier="Power_Point" />
+            <Item identifier="Magic_Material" amount="3"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="30">
             <RequiredSkill identifier="Touhou_Magic" level="70" />
@@ -281,7 +239,7 @@
         <Sprite name="Combat Diving Suit Item" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_6.png" sourcerect="0,0,64,64" depth="0.45" origin="0.5,0.5" />
         <ContainedSprite name="Combat Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_7.png" sourcerect="0,0,77,209" depth="0.55" origin="-0.12,-0.14" />
         <Body radius="45" width="34" density="10" />
-        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+        <CustomInterface canbeselected="false" drawhudwhenequipped="false">
             <StatusEffect type="Always" target="This" IsOn="true" >
                 <RequiredItem items="Touhou_White_Hooked_Jade,Touhou_Peace_Hooked_Jade" type="Contained" />
             </StatusEffect>
@@ -426,6 +384,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Boudary_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -456,6 +416,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Boudary_Divinggear_Effect08" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -510,7 +472,7 @@
         <Sprite name="Combat Diving Suit Item" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_4.png" sourcerect="0,0,64,64" depth="0.45" origin="0.5,0.5" />
         <ContainedSprite name="Combat Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_5.png" sourcerect="0,0,77,209" depth="0.55" origin="-0.12,-0.14" />
         <Body radius="40" width="34" density="10.5" />
-        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+        <CustomInterface canbeselected="false" drawhudwhenequipped="false">
             <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
             <TickBox text="Light" IsOn="true">
                 <StatusEffect type="OnUse" target="This" IsOn="true" >
@@ -643,6 +605,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Ether_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -673,6 +637,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Ether_Divinggear_Effect08" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -730,7 +696,7 @@
       -->
         <Sprite name="Combat Diving Suit Item" texture="%ModDir%/Images/Divinggear/Magic_Veil.png" sourcerect="0,0,196,244" depth="0.45" origin="0.5,0.5" />
         <Body radius="40" width="34" density="11" />
-        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+        <CustomInterface canbeselected="false" drawhudwhenequipped="false">
             <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
             <TickBox text="Light" IsOn="true">
                 <StatusEffect type="OnUse" target="This" IsOn="true" >
@@ -826,6 +792,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -856,6 +824,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Magic_Veil_Effect02" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -914,7 +884,7 @@
       -->
         <Sprite name="Combat Diving Suit Item" texture="%ModDir%/Images/Divinggear/Magic_Veil02.png" sourcerect="0,0,196,244" depth="0.45" origin="0.5,0.5" />
         <Body radius="40" width="34" density="11" />
-        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+        <CustomInterface canbeselected="false" drawhudwhenequipped="false">
             <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
             <TickBox text="Light" IsOn="true">
                 <StatusEffect type="OnUse" target="This" IsOn="true" >
@@ -1010,6 +980,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -1040,6 +1012,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Magic_Veil_Effect02" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -1093,7 +1067,7 @@
         <Sprite name="Combat Diving Suit Item" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_8.png" sourcerect="0,0,64,64" depth="0.45" origin="0.5,0.5" />
         <ContainedSprite name="Combat Diving Suit Behind Window" allowedcontainertags="divingsuitcontainerwindow" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_9.png" sourcerect="0,0,77,209" depth="0.55" origin="-0.12,-0.14" />
         <Body radius="40" width="34" density="10" />
-        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+        <CustomInterface canbeselected="false" drawhudwhenequipped="false">
             <GuiFrame relativesize="0.12,0.08" anchor="BottomLeft" absoluteoffset="20,148" style="ItemUI" />
             <TickBox text="Light" IsOn="true">
                 <StatusEffect type="OnUse" target="This" IsOn="true" >
@@ -1204,6 +1178,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Boudary_Divinggear_Effect02" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Hard_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
@@ -1234,6 +1210,8 @@
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
                         <Affliction identifier="Boudary_Divinggear_Effect08" strength="10" />
                     </StatusEffect>
+                    <StatusEffect type="OnInserted" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="true" setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
                 </Containable>
                 <Containable items="Touhou_Black_Hooked_Jade" >
                     <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">

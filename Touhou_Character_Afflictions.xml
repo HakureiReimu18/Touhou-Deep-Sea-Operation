@@ -130,6 +130,17 @@
         <Icon texture="%ModDir%/Images/Talents/TalentsIcons_Remilia.png" sheetindex="1,0" sheetelementsize="128,128" />
     </Affliction>
 
+    <!--渴血-->
+    <Affliction identifier="Blood_Needs_Remilia" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="100"
+                showiconthreshold="30" showinhealthscannerthreshold="30" iconcolors="255,100,100;255,100,100;255,100,100;255,100,100">
+        <Effect minstrength="0" maxstrength="100" minskillmultiplier="1.0" maxskillmultiplier="0.85" >
+            <StatValue stattype="MaximumHealthMultiplier" minvalue="0" maxvalue="-0.15" />
+            <StatValue stattype="RangedAttackMultiplier" minvalue="0" maxvalue="-0.15" />
+            <StatValue stattype="MeleeAttackMultiplier" minvalue="0" maxvalue="-0.15" />
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Blood_Needs_Remilia.png" sourcerect="0,0,128,128" color="255,255,255,255" />
+    </Affliction>
+
     <!--蕾米莉亚-完全凭依-->
     <Affliction identifier="Hyouibana_Effect_Prefect_Remilia" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="true"
                 showinhealthscannerthreshold="100" maxstrength="1" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
@@ -189,6 +200,9 @@
                 <Reduceaffliction identifier="bleeding" amount="1.8" />
                 <Reduceaffliction type="psychosis" amount="1" />
             </StatusEffect>
+            <StatusEffect target="Character" Interval="1.0" Duration="1.0">
+                <Reduceaffliction identifier="Blood_Needs_Remilia" amount="10" />
+            </StatusEffect>
         </Effect>
         <Icon texture="%ModDir%/Images/Talents/TalentsIcons_Remilia.png" sheetindex="1,0" sheetelementsize="128,128" />
     </Affliction>
@@ -232,7 +246,7 @@
     <!--魔力过载-->
     <Affliction identifier="Touhou_Magic_Overload" type="Touhou_Character_Affliction" limbspecific="false" hideiconafterdelay="false" maxstrength="100" HealableInMedicalClinic="false"
                 showinhealthscannerthreshold="100" iconcolors="120,20,20;180,40,40;220,80,80;255,100,100">
-        <Effect minstrength="0" maxstrength="100" strengthchange="-0.1" >
+        <Effect minstrength="0" maxstrength="100" strengthchange="-0.2" >
             <StatValue stattype="MaximumHealthMultiplier" minvalue="0" maxvalue="-0.2" />
             <StatValue stattype="RangedAttackSpeed" minvalue="0" maxvalue="-0.2" />
         </Effect>
@@ -292,6 +306,13 @@
             </StatusEffect>
             <StatValue stattype="SwimmingSpeed" value="0.3"/>
         </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Wind_God_Girl.png" sourcerect="0,0,128,128" color="255,255,255,255" />
+    </Affliction>
+
+    <!--风神少女-->
+    <Affliction identifier="Wind_God_Girl_Bot" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
+                duration="5.0" showiconthreshold="100" showinhealthscannerthreshold="100" >
+        <Effect minstrength="0" maxstrength="10" />
         <Icon texture="%ModDir%/Images/Afflictions/Wind_God_Girl.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
 
@@ -708,7 +729,7 @@
                 <ReduceAffliction type="Aura_Strip" strength="0.75" />
             </StatusEffect>
             <StatValue stattype="MaximumHealthMultiplier" value="0.15" />
-            <StatValue stattype="RangedAttackSpeed" value="-0.1" />
+            <StatValue stattype="RangedAttackSpeed" value="-0.15" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/The_Daughter_Of_Heaven.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -1656,6 +1677,7 @@
             <StatValue stattype="RangedAttackSpeed" value="0.1" />
             <StatValue stattype="BuffDurationMultiplier" value="0.3" />
             <StatValue stattype="RangedAttackMultiplier" value="0.5" />
+            <StatValue stattype="ExplosionDamageMultiplier" value="0.5" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Koishi_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -1671,6 +1693,9 @@
             <StatValue stattype="MedicalItemEffectivenessMultiplier" value="0.1" />
             <StatValue stattype="MeleeAttackMultiplier" value="-0.35" />
             <StatValue stattype="BuffDurationMultiplier" value="0.2" />
+            <StatusEffect target="Character" Interval="10.0" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                <Affliction identifier="Alice_Doll_Energy" amount="0.5" />
+            </StatusEffect>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Puppeteer_Of_Seven_Colors.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -2880,7 +2905,7 @@
             <StatValue stattype="RangedAttackMultiplier" value="0.1" />
             <StatValue stattype="MeleeAttackMultiplier" value="0.1" />
         </Effect>
-        <Icon texture="%ModDir%/Images/Afflictions/Realm_Of_Fantasy.png" sourcerect="0,0,128,128" color="255,255,255,255" />
+        <Icon texture="%ModDir%/Images/Afflictions/Hifuu_Club_Merry.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
 
     <!--凭依梅莉-->
@@ -2889,7 +2914,7 @@
         <Effect minstrength="0" maxstrength="1" >
             <StatValue stattype="SkillGainSpeed" value="0.5" />
         </Effect>
-        <Icon texture="%ModDir%/Images/Afflictions/Realm_Of_Fantasy.png" sourcerect="0,0,128,128" color="255,255,255,255" />
+        <Icon texture="%ModDir%/Images/Afflictions/Hifuu_Club_Merry.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
 
     <!--少女秘封俱乐部-专属武器效果-->
