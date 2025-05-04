@@ -543,6 +543,12 @@
             <StatusEffect type="OnNotContained" target="This" lifetime="3.0">
                 <ParticleEmitter particle="GlowDot" scalemin="2.0" scalemax="4.0" particlespersecond="160" anglemin="0" anglemax="360" colormultiplier="135,50,105,220" />
             </StatusEffect>
+            <StatusEffect type="OnImpact" target="Limb" comparison="And">
+                <Conditional speciesname="neq human" />
+                <Conditional speciesname="neq HumanTouhou_Tail" />
+                <Conditional speciesname="neq HumanYuka" />
+                <Affliction identifier="Reiki_Pressure" strength="10" />
+            </StatusEffect>
             <StatusEffect type="OnImpact" target="This">
                 <SpawnItem identifier="Touhou_Rippling_Bolt_Spawn_Force" spawnposition="This" aimspread="360" rotationtype="Collider" rotation="0" />
                 <Explosion range="300.0" sparks="false" underwaterbubble="false" flash="false" flames="false" force="10.0" camerashake="100" camerashakerange="2000">
@@ -1259,16 +1265,16 @@
     <Item name="污染霰弹枪" identifier="Touhou_Pollution_Shotgun" category="Weapon" cargocontaineridentifier="metalcrate" hideinmenus="true"
           tags="mediumitem,weapon,gun,gunsmith,mountableweapon" Scale="0.45" impactsoundtag="impact_metal_light" >
         <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
-        <Deconstruct time="3">
+        <Deconstruct time="60">
             <Item identifier="ballisticfiber" />
             <Item identifier="Reiki_Stone" amount="12" />
-            <Item identifier="titaniumaluminiumalloy" />
+            <Item identifier="Power_Point" />
         </Deconstruct>
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Pollution_Shotgun.png" sourcerect="340,0,172,132" origin="0.5,0.5" />
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Pollution_Shotgun.png" depth="0.4" sourcerect="0,0,318,100" />
-        <Body width="318" height="100" density="10" />
+        <Body width="318" height="80" density="10" />
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-20" aimpos="48,-5" handle1="-12,-15" handle2="20,5" holdangle="-20" msg="ItemMsgPickUpSelect"/>
-        <RangedWeapon barrelpos="68,10" weapondamagemodifier="1.4" penetration="0.25" penetrationmodifier="1.0" spread="0" unskilledspread="16" combatPriority="90" reload="0.35" holdtrigger="true" drawhudwhenequipped="true" crosshairscale="0.2">
+        <RangedWeapon barrelpos="68,10" weapondamagemodifier="1.4" penetration="0.25" penetrationmodifier="1.0" spread="0" unskilledspread="16" combatPriority="90" reload="0.45" holdtrigger="true" drawhudwhenequipped="true" crosshairscale="0.2">
             <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
             <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256" />
             <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="55,255,55,255" />
@@ -1286,8 +1292,6 @@
                 <Conditional jobidentifier="neq Magician_Enemy"/>
                 <Affliction identifier="Reiki_Side_Effect" amount="20" />
             </StatusEffect>
-            <StatusEffect type="OnUse" target="This" reload="0.8" setvalue="true" delay="0.4" disabledeltatime="true" />
-            <StatusEffect type="OnUse" target="This" reload="0.2" setvalue="true" delay="1.2" disabledeltatime="true" />
         </RangedWeapon>
         <ItemContainer capacity="1" maxstacksize="12" hideitems="false" containedstateindicatorstyle="bullet" ShowTotalStackCapacityInContainedStateIndicator="true" containedstateindicatorslot="0" containedspritedepth="0.56">
             <Containable items="Touhou_Magic_Automatic_Shotgun_Bullet,shotgunammo" hide="true"/>
@@ -1301,14 +1305,14 @@
     <Item name="污染步枪" identifier="Touhou_Pollution_Rifle" category="Weapon" cargocontaineridentifier="metalcrate" hideinmenus="true"
           tags="mediumitem,weapon,gun,gunsmith,mountableweapon" Scale="0.45" impactsoundtag="impact_metal_light" >
         <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
-        <Deconstruct time="3">
+        <Deconstruct time="60">
             <Item identifier="ballisticfiber" />
             <Item identifier="Reiki_Stone" amount="12" />
-            <Item identifier="titaniumaluminiumalloy" />
+            <Item identifier="Power_Point" />
         </Deconstruct>
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Pollution_Rifle.png" sourcerect="318,0,130,76" origin="0.5,0.5" />
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Pollution_Rifle.png" depth="0.4" sourcerect="0,0,310,71" />
-        <Body width="318" height="100" density="10" />
+        <Body width="318" height="70" density="10" />
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-20" aimpos="48,-5" handle1="-12,-15" handle2="20,5" holdangle="-20" msg="ItemMsgPickUpSelect"/>
         <RangedWeapon barrelpos="68,10" weapondamagemodifier="1.5" penetration="0.2" penetrationmodifier="1.0" spread="0" unskilledspread="10" combatPriority="90" reload="1.0" holdtrigger="true" drawhudwhenequipped="true" crosshairscale="0.2">
             <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />

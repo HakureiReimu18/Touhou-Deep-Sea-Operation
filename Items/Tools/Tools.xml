@@ -476,7 +476,7 @@
     </Item>
 
     <!--元素腰带-->
-    <Item name="元素腰带" identifier="Magic_Pouch" scale="0.3" subcategory="Touhou" category="Equipment" tags="mediumitem,mobilecontainer,tool,backpack,locker,container" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+    <Item name="元素腰带" identifier="Magic_Pouch" scale="0.3" subcategory="Touhou" category="Equipment" tags="mediumitem,mobilecontainer,tool,backpack,locker,container,Magic_Pouch" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="medcab" />
         <Price baseprice="1000" minleveldifficulty="10">
             <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
@@ -604,10 +604,10 @@
                     inherittexturescale="false" hideotherwearables="false" sourcerect="0,0,160,136" origin="0.6,0.0" scale="0.23" />
             <StatusEffect type="OnWearing" target="Character" OxygenAvailable="0.0" UseHullOxygen="true" />
 
-            <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="0.5" disabledeltatime="true" >
+            <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="1.0" setvalue="true" disabledeltatime="true" >
                 <Conditional skillrequirement="true" Touhou_Magic="gt 60" />
-                <Conditional Touhou_Magic_Boost="lte 148" />
-                <Affliction identifier="Touhou_Magic_Boost" amount="1.0" />
+                <Conditional Touhou_Magic_Boost="lte 150" />
+                <Affliction identifier="Touhou_Magic_Boost" amount="149.5" />
             </StatusEffect>
 
             <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.75" damagesound="LimbArmor" deflectprojectiles="true" />
@@ -713,7 +713,7 @@
 
 
     <!--元素腰带-医疗拓展-->
-    <Item name="元素腰带-医疗拓展" identifier="Magic_Pouch_Medical_Expansion" scale="0.3" subcategory="Touhou" category="Equipment" tags="mediumitem,mobilecontainer,tool,backpack,locker,container,refrigerated" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+    <Item name="元素腰带-医疗拓展" identifier="Magic_Pouch_Medical_Expansion" scale="0.3" subcategory="Touhou" category="Equipment" tags="mediumitem,mobilecontainer,tool,backpack,locker,container,refrigerated,Magic_Pouch" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="medcab" />
         <Price baseprice="2000" minleveldifficulty="15">
             <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
@@ -835,10 +835,10 @@
         </CustomInterface>
 
         <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
-            <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="0.5" disabledeltatime="true" >
+            <StatusEffect type="OnWearing" target="Character" comparison="And" Interval="1.0" setvalue="true" disabledeltatime="true" >
                 <Conditional skillrequirement="true" Touhou_Magic="gt 60" />
-                <Conditional Touhou_Magic_Boost="lte 148" />
-                <Affliction identifier="Touhou_Magic_Boost" amount="1" />
+                <Conditional Touhou_Magic_Boost="lte 150" />
+                <Affliction identifier="Touhou_Magic_Boost" amount="149.5" />
             </StatusEffect>
 
             <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Magic_Pouch.png" limb="Torso" hidelimb="false" inheritlimbdepth="true"
@@ -914,8 +914,8 @@
             <!-- when using, the contained welding fuel tank will detoriate (= lose fuel) -->
             <StatusEffect type="OnUse" targettype="Contained" targets="weldingfueltank" Condition="-2.7" />
             <StatusEffect type="OnUse" targettype="Contained" targets="incendiumfueltank" Condition="-1.5" />
-            <StatusEffect type="OnUse" targettype="Contained" targets="Touhou_Fix_Foamg_Tank" Condition="-0.15" />
-            <StatusEffect type="OnUse" target="This" structurefixamount="4.5" setvalue="true" Interval="0.5" disabledeltatime="true" >
+            <StatusEffect type="OnUse" targettype="Contained" targets="Touhou_Fix_Foamg_Tank" Condition="-0.2" />
+            <StatusEffect type="OnUse" target="This" structurefixamount="5.0" setvalue="true" Interval="0.5" disabledeltatime="true" >
                 <RequiredItems items="Touhou_Fix_Foamg_Tank" type="Contained" />
             </StatusEffect>
             <StatusEffect type="OnUse" target="This" structurefixamount="3.5" setvalue="true" Interval="0.5" disabledeltatime="true" >
@@ -2677,7 +2677,7 @@
             <Item identifier="Touhou_Empathy_The_Collector_Lesson" commonness="1" />
             <Item identifier="Touhou_Empathy_Vampire_Fangs" commonness="1" />
             <Item identifier="Touhou_Empathy_Half_Of_Half_Spirit" commonness="1" />
-            <Item identifier="Touhou_Empathy_Spare_Half_Spirit_Effect" commonness="1" />
+            <Item identifier="Touhou_Empathy_Spare_Half_Spirit" commonness="1" />
             <Item identifier="Touhou_Empathy_Hurricane_Sandals" commonness="1" />
             <Item identifier="Touhou_Empathy_Phoenix_Tail" commonness="1" />
             <Item identifier="Touhou_Empathy_Spell_Card_Of_Preparedness" commonness="1" />
@@ -3556,7 +3556,7 @@
         <Deconstruct time="5" >
             <RequiredItem identifier="Magic_Material" amount="2" />
         </Deconstruct>
-        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Lively_Powerlessness" effect="Touhou_Empathy_Crazy_Silence_Effect" >
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Crazy_Silence" effect="Touhou_Empathy_Crazy_Silence_Effect" >
             <StatusEffect type="OnWearing" target="Character" duration="0.0">
                 <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500" />
                 <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500" />
@@ -3572,7 +3572,7 @@
                 <Affliction identifier="stun" amount="1.5" penetration="0.5" />
             </StatusEffect>
         </GeneticMaterial>
-        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Lively_Powerlessness.png" sourcerect="0,0,220,272" depth="0.45" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Crazy_Silence.png" sourcerect="0,0,220,272" depth="0.45" />
         <Body width="23" height="31" density="10" />
         <Pickable slots="Any" />
     </Item>

@@ -2804,7 +2804,7 @@
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Aphelion_Ammo.png" sourcerect="0,0,88,88" depth="0.45" origin="0.5,0.5" />
         <Body width="88" height="88" density="10" />
         <Pickable slots="Any" msg="ItemMsgPickUpSelect" />
-        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
+        <Holdable canBeCombined="true" removeOnCombined="false" slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
         <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Touhou_Aphelion_Ammo_Light" removecontaineditemsondeconstruct="true"
                        drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
             <Containable items="Touhou_Aphelion_Ammo_Light" />
@@ -2812,14 +2812,6 @@
             <StatusEffect type="OnUse" target="This" condition="-10.0" disabledeltatime="true" >
                 <SpawnItem identifiers="Touhou_Aphelion_Ammo_Light" spawnposition="ThisInventory" />
             </StatusEffect>
-<!--            <StatusEffect type="OnUse" target="This" condition="-1.0" disabledeltatime="true" >
-                <Conditional Touhou_Aphelion_Mod_Effect="lte 0" targetcontainer="true" TargetGrandParent="true"/>
-                <SpawnItem identifiers="Touhou_Aphelion_Ammo_Light" spawnposition="ThisInventory" />
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="This" condition="-1.0" disabledeltatime="true" >
-                <Conditional Touhou_Aphelion_Mod_Effect="gt 0" TargetGrandParent="true"/>
-                <SpawnItem identifiers="Touhou_Aphelion_Ammo_Light_Ball" spawnposition="ThisInventory" />
-            </StatusEffect>-->
         </ItemContainer>
     </Item>
 
@@ -2939,34 +2931,34 @@
                     <Affliction identifier="explosiondamage" strength="300" />
                 </Explosion>
             </StatusEffect>
+            <StatusEffect type="OnUse" target="This" weapondamagemodifier="0.2" penetration="0.05" Interval="0.25" disabledeltatime="true" />
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.8" setvalue="true" AllowWhenBroken="true" />
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.6" setvalue="true" AllowWhenBroken="true" />
         </Holdable>
-<!--        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
-            <GuiFrame relativesize="0.06,0.08" anchor="BottomLeft" absoluteoffset="20,60" relativeoffset="0,0.25" style="ItemUI" />
-            <Button text="Text.Touhou_Open_Mod">
-                <StatusEffect type="OnUse" target="This" condition="0.001" delay="0.65" tags="Touhou_Monorail_Mod_Open" setvalue="true" disabledeltatime="true" checkconditionalalways="true" AllowWhenBroken="true" >
-                    <Conditional Condition="lte 1" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" condition="0.001" delay="20.65" tags="Touhou_Monorail_Mod_Close" setvalue="true" disabledeltatime="true" checkconditionalalways="true" AllowWhenBroken="true" >
-                    <Conditional Condition="lte 1" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" holdpos="55,-40" aimpos="55,-40" holdangle="70" maxchargetime="999" setvalue="true" AllowWhenBroken="true" >
-                    <Conditional Condition="lte 1" />
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" setvalue="true" AllowWhenBroken="true" >
-                    <Conditional Condition="lte 1" />
-                    <ParticleEmitter particle="Touhou_Electric_Shock" copyentityangle="false" anglemin="0" anglemax="360" particleamount="10" velocitymin="100" velocitymax="150" scalemin="0.15" scalemax="0.25" colormultiplier="255,255,200,180" />
-                    <Sound file="%ModDir%/Sounds/Weapons/Touhou_Deceit_Mod_Open.ogg" type="OnUse" range="500" selectionmode="Random"/>
-                </StatusEffect>
-                <StatusEffect type="OnUse" target="This" holdpos="55,0" aimpos="58,-5" handle1="-100,-12" handle2="0,15" holdangle="-10" disabledeltatime="true" checkconditionalalways="true" delay="0.65" maxchargetime="0.4" setvalue="true" comparison="And" AllowWhenBroken="true">
-                    <Conditional Condition="lte 1" />
-                    <conditional maxchargetime="eq 999" />
-                </StatusEffect>
-            </Button>
-        </CustomInterface>-->
+        <PowerContainer capacity="4" Charge="2" canbeselected="true" >
+            <GuiFrame relativesize="0.2,0.1" minsize="250,100" anchor="Center" style="ItemUI" relativeoffset="0.5,0.2" />
+            <StatusEffect type="OnActive" target="This" Interval="0.25" maxchargetime="0" setvalue="true" disabledeltatime="true" >
+                <Conditional Charge="eq 0"/>
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="This" Interval="0.25" maxchargetime="1" setvalue="true" disabledeltatime="true" >
+                <Conditional Charge="eq 1"/>
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="This" Interval="0.25" maxchargetime="2" setvalue="true" disabledeltatime="true" >
+                <Conditional Charge="eq 2"/>
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="This" Interval="0.25" maxchargetime="3" setvalue="true" disabledeltatime="true" >
+                <Conditional Charge="eq 3"/>
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="This" Interval="0.25" maxchargetime="4" setvalue="true" disabledeltatime="true" >
+                <Conditional Charge="eq 4"/>
+            </StatusEffect>
+        </PowerContainer>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true" allowuioverlap="false" >
+            <GuiFrame relativesize="0.1,0.1" anchor="CenterLeft" pivot="TopLeft" relativeoffset="0.006,0.006" style="ItemUI" />
+            <IntegerInput text="bomb.timer" targetitemcomponent="PowerContainer" propertyname="Charge" min="0" max="4" step="1" GetValueInterval="0.25"/>
+        </CustomInterface>
         <RangedWeapon barrelpos="200,9" spread="0" combatPriority="80" Reload="2.0" holdtrigger="true" penetration="0.0" weapondamagemodifier="1.0"
-                      maxchargetime="10" drawhudwhenequipped="true" crosshairscale="0.3">
+                      maxchargetime="0" drawhudwhenequipped="true" crosshairscale="0.3">
             <Crosshair texture="%ModDir%/Images/OtherWeapons/Touhou_Monorail_Crosshairs.png" sourcerect="0,0,256,256" />
             <CrosshairPointer texture="%ModDir%/Images/OtherWeapons/Touhou_Monorail_Crosshairs.png" sourcerect="256,0,256,256" />
             <ParticleEmitter particle="muzzleflash" particleamount="1" velocitymin="0" velocitymax="0" colormultiplier="255,255,255,255" />
@@ -2979,13 +2971,7 @@
                 <Sound file="%ModDir%/Sounds/Weapons/Touhou_Aphelion/Touhou_Aphelion_Attack03.ogg" type="OnUse" range="2000" volume="1.5" selectionmode="Random" />
                 <Explosion range="500.0" force="1.2" shockwave="false" smoke="false" flash="true" sparks="false" flames="false" underwaterbubble="false" camerashake="20.0" />
             </StatusEffect>
-            <StatusEffect type="OnUse" target="This" weapondamagemodifier="0.2" penetration="0.1" />
-            <StatusEffect type="OnActive" target="This" weapondamagemodifier="-0.2" Interval="1.0" >
-                <Conditional weapondamagemodifier="gt 1.0"/>
-            </StatusEffect>
-            <StatusEffect type="OnActive" target="This" penetration="-0.1" Interval="1.0" >
-                <Conditional penetration="gt 0.0"/>
-            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" weapondamagemodifier="1.0" penetration="0.0" setvalue="true" disabledeltatime="true" />
 <!--            <StatusEffect type="OnSecondaryUse" target="This" condition="75" AllowWhenBroken="true" comparison="And" >
                 <Conditional HasTag="eq Touhou_Monorail_Mod_Open"/>
                 <Conditional condition="gte 0"/>

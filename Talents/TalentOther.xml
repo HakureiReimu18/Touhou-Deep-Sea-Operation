@@ -34,6 +34,7 @@
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15" />
             </Abilities>
         </AbilityGroupEffect>
+        <!--魔力披纱-->
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Magic_Veil_Effect02" />
@@ -44,6 +45,21 @@
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.2" />
             </Abilities>
         </AbilityGroupEffect>
+        <AbilityGroupInterval interval="3.0">
+            <Conditions>
+                <AbilityConditionHasItem tags="Magic_Veil,Magic_Pouch" requireall="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Magic_Boost" amount="300.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <!--二色莲花蝶-->
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Dichromatic_Lotus_Butterfly_Effect02" />
@@ -58,7 +74,7 @@
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Dichromatic_Lotus_Butterfly_Effect02" />
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Dichromatic_Lotus_Butterfly_Effect03" />
-                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="NoWeapon,Melee"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="NoWeapon,Melee,Ranged"/>
                 <AbilityConditionServerRandom randomchance="0.3" />
             </Conditions>
             <Abilities>
@@ -85,7 +101,53 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
+        <AbilityGroupInterval interval="3.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Dichromatic_Lotus_Butterfly_Effect01" />
+                <AbilityConditionHasAffliction afflictionidentifier="durationincrease" minimumPercentage="0.05" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Durationincrease_Boost" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="3.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Dichromatic_Lotus_Butterfly_Effect01" />
+                <AbilityConditionHasAffliction afflictionidentifier="huskinfectionresistance" minimumPercentage="0.05" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Huskinfectionresistance_Boost" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="3.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Dichromatic_Lotus_Butterfly_Effect01" />
+                <AbilityConditionHasAffliction afflictionidentifier="paralysisresistance" minimumPercentage="0.05" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Paralysisresistance_Boost" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
 
+        <!--摩洛克基因拮抗-->
         <AbilityGroupInterval interval="1.9">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Gensokyo_Divinggear_Effect01" />
@@ -414,6 +476,70 @@
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="0.2" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--叶片棘刺天赋-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Leaves_Thorns"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="HandheldRanged" />
+                <AbilityConditionCharacter>
+                    <Conditional HealthPercentage="gte 100"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="1.0" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Leaves_Thorns"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="HandheldRanged" />
+                <AbilityConditionCharacter>
+                    <Conditional HealthPercentage="lte 90"/>
+                    <Conditional HealthPercentage="gte 70"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.7" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Leaves_Thorns"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="HandheldRanged" />
+                <AbilityConditionCharacter>
+                    <Conditional HealthPercentage="lte 70"/>
+                    <Conditional HealthPercentage="gte 50"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.5" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Leaves_Thorns"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="HandheldRanged" />
+                <AbilityConditionCharacter>
+                    <Conditional HealthPercentage="lte 50"/>
+                    <Conditional HealthPercentage="gte 30"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.3" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Leaves_Thorns"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="HandheldRanged" />
+                <AbilityConditionCharacter>
+                    <Conditional HealthPercentage="lte 30"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-1.0" />
             </Abilities>
         </AbilityGroupEffect>
     </Talent>
@@ -1009,6 +1135,7 @@
         <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Flowers_Of_Four_Seasons" />
+                <AbilityConditionIsAiming weapontype="ranged,Melee"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAffliction afflictionidentifiers="lacerations" addedmultiplier="0.25" />
@@ -1017,6 +1144,7 @@
         <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Flowers_Of_Four_Seasons" />
+                <AbilityConditionIsAiming weapontype="ranged,Melee"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAffliction afflictionidentifiers="blunttrauma" addedmultiplier="0.5" />
@@ -2247,6 +2375,16 @@
             </Conditions>
             <Abilities>
                 <CharacterAbilityPutItem itemidentifier="Touhou_Simple_Parts" amount="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <!--资本主义的困境-->
+        <AbilityGroupEffect abilityeffecttype="OnGainMissionMoney">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Empathy_The_Dilemma_Of_Capitalism_Effect" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyValue addedvalue="0.05"/>
             </Abilities>
         </AbilityGroupEffect>
 
