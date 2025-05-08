@@ -76,7 +76,7 @@
 
 
     <!--欧罗巴浸剂-->
-    <Item name="" identifier="Europa_Infusion" tags="smallitem,chem,medical,syringe,Touhou_Magic_Item" subcategory="Touhou" category="Alien,medical" cargocontaineridentifier="metalcrate"
+    <Item name="" identifier="Europa_Infusion" tags="smallitem,chem,medical,syringe,Touhou_Magic_Item" subcategory="Touhou" category="medical" cargocontaineridentifier="metalcrate"
           maxstacksizecharacterinventory="16" maxstacksize="32" scale="0.5" useinhealthinterface="true" RequireAimToUse="True">
         <PreferredContainer primary="medcab" secondary="medcontainer" minamount="1" maxamount="3" spawnprobability="0.2" />
         <PreferredContainer secondary="supplycab" minamount="1" maxamount="2" spawnprobability="0.1" notcampaign="true"/>
@@ -157,7 +157,7 @@
     </Item>
 
     <!--基列香膏-->
-    <Item name="" identifier="Balm_Of_Gilead" tags="smallitem,medical,Touhou_Magic_Item" subcategory="Touhou" category="Alien,medical" cargocontaineridentifier="metalcrate" maxstacksize="32" maxstacksizecharacterinventory="8"
+    <Item name="" identifier="Balm_Of_Gilead" tags="smallitem,medical,Touhou_Magic_Item" subcategory="Touhou" category="medical" cargocontaineridentifier="metalcrate" maxstacksize="32" maxstacksizecharacterinventory="8"
           scale="0.15" useinhealthinterface="true" RequireAimToUse="True">
         <PreferredContainer primary="medcab" secondary="medcontainer" />
         <Price baseprice="2000" >
@@ -252,7 +252,7 @@
     </Item>
 
     <!--肉桂熏香-->
-    <Item name="" identifier="Cinnamon_Incense" tags="smallitem,light" subcategory="Touhou" category="Alien,medical" cargocontaineridentifier="metalcrate" maxstacksize="1"
+    <Item name="" identifier="Cinnamon_Incense" tags="smallitem,light" subcategory="Touhou" category="medical" cargocontaineridentifier="metalcrate" maxstacksize="1"
           scale="0.25" allowasextracargo="true" >
         <PreferredContainer primary="medcab" secondary="medcontainer" amount="1" spawnprobability="0.1" />
         <PreferredContainer secondary="outpostmedcab" amount="1" spawnprobability="0.1" />
@@ -1304,6 +1304,82 @@
         </Holdable>
         <AiTarget sightrange="1000" static="true" />
         <SkillRequirementHint identifier="medical" level="50" />
+    </Item>
+
+
+    <!--永远亭外敷药箱-->
+    <Item name="永远亭外敷药箱" identifier="Touhou_External_Medicine_Box" tags="smallitem,medical,Touhou_Magic_Item" subcategory="Touhou" category="medical" Health="120"
+          cargocontaineridentifier="metalcrate" maxstacksize="32" maxstacksizecharacterinventory="2"
+          scale="0.25" useinhealthinterface="true" RequireAimToUse="True">
+        <PreferredContainer primary="medcab" secondary="medcontainer" />
+        <Price baseprice="800" >
+            <Price storeidentifier="merchantoutpost" minavailable="2" />
+            <Price storeidentifier="merchantcity" minavailable="2" />
+            <Price storeidentifier="merchantresearch" minavailable="2" />
+            <Price storeidentifier="merchantmilitary" minavailable="2" />
+            <Price storeidentifier="merchantmine" minavailable="2"/>
+            <Price storeidentifier="merchantmedical" multiplier="0.9" minavailable="4"/>
+        </Price>
+        <Deconstruct time="5">
+            <Item identifier="carbon" />
+            <Item identifier="Plant_Essential_Oil" amount="2" />
+            <Item identifier="stabilozine" amount="2"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20" >
+            <RequiredSkill identifier="medical" level="70" />
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredItem identifier="elastin" amount="4" />
+            <RequiredItem identifier="Plant_Essential_Oil" amount="4"/>
+            <RequiredItem identifier="Reiki_Dust_Caking" amount="4"/>
+            <RequiredItem identifier="antibiotics" amount="4"/>
+            <RequiredItem identifier="stabilozine" amount="4" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_External_Medicine_Box.png" depth="0.4" sourcerect="0,0,80,52" />
+        <Body width="80" height="50" density="10" />
+        <!--治疗作用-->
+        <SuitableTreatment type="bleeding" suitability="80" />
+        <SuitableTreatment type="burn" suitability="60" />
+        <SuitableTreatment type="infection" suitability="100" />
+        <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="10" reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
+            <RequiredSkill identifier="medical" level="70" />
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <StatusEffect type="OnUse" target="This" Condition="-10">
+                <Sound file="Content/Items/Medical/Bandage1.ogg" range="500" />
+                <Sound file="Content/Items/Medical/Bandage2.ogg" range="500" />
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnSuccess" target="This, Limb" duration="2.0">
+                <ReduceAffliction type="bleeding" amount="40" />
+                <ReduceAffliction type="burn" amount="30" />
+                <ReduceAffliction type="damage" amount="10" />
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" duration="15.0">
+                <ReduceAffliction type="infection" amount="40" />
+                <ReduceAffliction type="bleeding" amount="5" />
+                <ReduceAffliction type="burn" amount="2" />
+                <ReduceAffliction type="damage" amount="2" />
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnFailure" target="This, Limb" duration="2.0">
+                <ReduceAffliction type="bleeding" amount="20" />
+                <ReduceAffliction type="burn" amount="15" />
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnFailure" target="UseTarget" duration="10.0">
+                <ReduceAffliction type="bleeding" amount="4" />
+                <ReduceAffliction type="burn" amount="2" />
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnFailure" target="This, Limb" duration="5.0">
+                <Affliction identifier="Reiki_Side_Effect" amount="10.0" />
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" multiplyafflictionsbymaxvitality="true" >
+                <Affliction identifier="Reiki_Side_Effect" amount="4" />
+            </StatusEffect>
+            <!-- Remove the item when fully used -->
+            <StatusEffect type="OnBroken" target="This">
+                <Remove />
+            </StatusEffect>
+        </MeleeWeapon>
+        <Projectile characterusable="false" launchimpulse="24.0" sticktocharacters="true" launchrotation="-90" inheritstatuseffectsfrom="MeleeWeapon" inheritrequiredskillsfrom="MeleeWeapon" />
+        <SkillRequirementHint identifier="medical" level="70" />
+        <SkillRequirementHint identifier="Touhou_Magic" level="50" />
     </Item>
 
 </Items>
