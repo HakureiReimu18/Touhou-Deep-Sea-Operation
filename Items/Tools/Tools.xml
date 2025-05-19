@@ -204,6 +204,7 @@
                 </StatusEffect>
             </Containable>
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45" />
+            <SlotIcon slotindex="18" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6" />
             <SlotIcon slotindex="19" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6" />
             <SubContainer capacity="3" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
                 <Containable items="smallitem" excludeditems="backpack,crate,toolbelt,toolbox,Touhou_Magic_Charging_Box,bulkyweapon"/>
@@ -211,10 +212,10 @@
             <SubContainer capacity="8" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
                 <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,toolbox,Touhou_Magic_Charging_Box,bulkyweapon"/>
             </SubContainer>
-            <SubContainer capacity="7" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+            <SubContainer capacity="6" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
                 <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,tsm_ammobox,toolbox,Touhou_Magic_Charging_Box,bulkyweapon"/>
             </SubContainer>
-            <SubContainer capacity="1" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+            <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
                 <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,tsm_ammobox"/>
             </SubContainer>
         </ItemContainer>
@@ -941,7 +942,7 @@
             </LightComponent>
         </RepairTool>
         <!--武器参数-->
-        <RangedWeapon barrelpos="40,5" spread="1" unskilledspread="8" reload="0.2" maxchargetime="0.6" combatPriority="50" drawhudwhenequipped="true"
+        <RangedWeapon barrelpos="40,5" spread="1" unskilledspread="8" reload="0.4" maxchargetime="0.4" combatPriority="50" drawhudwhenequipped="true"
                       crosshairscale="0.4" penetrationmultiplier="1.0" penetration="0.2" >
             <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256" />
             <ParticleEmitterCharge particle="ElectricShock" particlespersecond="30" scalemultiplier="0.5,0.5" scalemin="0.1" scalemax="0.2" anglemin="0" anglemax="359" Distance="10" />
@@ -1579,6 +1580,283 @@
         </ItemContainer>
         <aitarget soundrange="1" fadeouttime="5" />
     </Item>
+
+
+    <!--事件触发用ID卡-补给站事件01-->
+    <Item name="事件触发用ID卡-补给站事件01" identifier="Trigger_Touhou_Supply_Station01" category="Misc" subcategory="Touhou" maxstacksize="8" tags="smallitem" scale="0.5" cargocontaineridentifier="metalcrate" description="">
+        <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="192,64,64,64" origin="0.5,0.5" />
+        <Sprite texture="Content/Items/idcard.png" depth="0.5" sourcerect="0,0,16,16" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="100,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="Always" target="NearbyCharacters,This" Interval="5" range="2000">
+                <Conditional speciesname="human"/>
+                <TriggerEvent identifier="Touhou_Supply_Station01" />
+                <TriggerEvent identifier="Touhou_Supply_Station01_Data_Clear" />
+                <RemoveItem />
+            </StatusEffect>
+        </Holdable>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--文文的礼物清单-->
+    <Item name="文文的礼物清单" identifier="Touhou_Aya_Gift_List" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Aya_Gift_List.png" depth="0.5" sourcerect="0,0,68,48" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+    </Item>
+
+    <!--阿求的任务日志-绿UFO-->
+    <Item name="阿求的任务日志-绿UFO" identifier="Touhou_Missions_Collection_Green_UFO" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Missions_Collection.png" depth="0.5" sourcerect="0,0,108,108" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+        <Deconstruct time="1"/>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.2,0.15" anchor="TopCenter" style="ItemUI" />
+            <Button text="真相不明-忠义绿色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Green_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="幽灵线">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Ghost_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="泥牛入海">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Erode_Crawler_Mission" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
+
+    <!--阿求的任务日志-红UFO-->
+    <Item name="阿求的任务日志-红UFO" identifier="Touhou_Missions_Collection_Red_UFO" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Missions_Collection.png" depth="0.5" sourcerect="0,0,108,108" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+        <Deconstruct time="1"/>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.2,0.2" anchor="TopCenter" style="ItemUI" />
+            <Button text="真相不明-愤怒红色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Red_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="长眠不醒的噩梦">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Photosphere_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声隐隐">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Erode_Mudraptor_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声阵阵">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Deterioration_Tigerthresher_Mission" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
+
+    <!--阿求的任务日志-蓝UFO-->
+    <Item name="阿求的任务日志-蓝UFO" identifier="Touhou_Missions_Collection_Blue_UFO" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Missions_Collection.png" depth="0.5" sourcerect="0,0,108,108" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+        <Deconstruct time="1"/>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.2,0.25" anchor="TopCenter" style="ItemUI" />
+            <Button text="真相不明-哀愁蓝色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Blue_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="魔法物质运输">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_MagicItems_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="清理毛玉">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Maoyu_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声滚滚">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Deterioration_Hammerhead_Mission" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
+
+    <!--阿求的任务日志-黑暗-->
+    <Item name="阿求的任务日志-黑暗" identifier="Touhou_Missions_Collection_Nue" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Missions_Collection.png" depth="0.5" sourcerect="0,0,108,108" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+        <Deconstruct time="1"/>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.3,0.4" anchor="TopCenter" style="ItemUI" />
+            <Button text="真相不明的黑暗-Easy">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Easy" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Normal">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Normal" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Hard">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Hard" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Lunatic">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Lunatic" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
+
+    <!--阿求的任务日志-灵异的波纹与漫漫长夜-->
+    <Item name="阿求的任务日志-灵异的波纹与漫漫长鵺" identifier="Touhou_Missions_Collection_Nue_List" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" description="">
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Missions_Collection.png" depth="0.5" sourcerect="0,0,108,108" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="0,0" msg="ItemMsgPickUpSelect" />
+        <Deconstruct time="1"/>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="0.5" >
+            <RequiredItem identifier="Touhou_Missions_Collection_Green_UFO" />
+            <RequiredItem identifier="Touhou_Missions_Collection_Red_UFO" />
+            <RequiredItem identifier="Touhou_Missions_Collection_Blue_UFO" />
+            <RequiredItem identifier="Touhou_Missions_Collection_Nue" />
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="0.5" >
+            <RequiredItem identifier="Touhou_Boss_Fight_Music_Nue" />
+        </Fabricate>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.3,0.6" anchor="TopCenter" style="ItemUI" relativeoffset="-0.2,0" />
+            <Button text="魔法物质运输">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_MagicItems_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="清理毛玉">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Maoyu_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="幽灵线">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Ghost_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="泥牛入海">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Erode_Crawler_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声隐隐">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Erode_Mudraptor_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声阵阵">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Deterioration_Tigerthresher_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="雷声滚滚">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Reiki_Deterioration_Hammerhead_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="地狱月食">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindClownpiece_Mission" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.3,0.6" anchor="TopCenter" style="ItemUI" relativeoffset="0.2,0" />
+            <Button text="长眠不醒的噩梦">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Photosphere_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明-忠义绿色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Green_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明-愤怒红色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Red_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明-哀愁蓝色UFO">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="Touhou_Blue_UFO_Mission" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Easy">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Mission_Easy" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Normal">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Mission_Normal" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Hard">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Mission_Hard" />
+                </StatusEffect>
+            </Button>
+            <Button text="真相不明的黑暗-Lunatic">
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true" >
+                    <TriggerEvent identifier="FindHoujuuNue_Mission_Lunatic" />
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+    </Item>
+
+    <!--灵异珠-波纹-任务物品-->
+    <Item name="灵异珠-波纹-任务物品" identifier="Touhou_Mysterious_Pearl_Rippling_Mission" tags="smallitem,Touhou_Mysterious_Pearl_Rippling_Mission,alienartifact" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" scale="0.2">
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Mysterious_Pearl_Rippling.png" depth="0.4" sourcerect="0,0,256,256" />
+        <Body width="256" height="256" density="10" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
+            <StatusEffect type="OnActive" target="Character" interval="5" oneshot="true">
+                <SpawnItem identifier="Salvage_Mysterious_Pearl_Mission_Completed" spawnposition="SameInventory" SpawnIfInventoryFull="true" SpawnIfNotInInventory="true" />
+                <TriggerEvent identifier="Salvage_Mysterious_Pearl_Completed" />
+            </StatusEffect>
+            <StatusEffect type="Always" Interval="180.0" disabledeltatime="true" target="This" >
+                <Conditional hastag="neq artifactcontainer" targetcontainer="true" />
+                <Conditional voltage="lte 0" targetcontainer="true" />
+                <SpawnCharacter speciesname="Touhou_reiki_erode_crawler" count="1" TotalMaxCount="8" spread="100" />
+            </StatusEffect>
+        </Holdable>
+        <AiTarget soundrange="350000" sonarlabel="???" sight="500" staticsight="true"/>
+        <LightComponent LightColor="0.0,1.0,0.0,1.0" range="50" powerconsumption="0" blinkfrequency="2" IsOn="true" canbeselected="false">
+            <StatusEffect type="Always" targettype="This" SoundRange="350000" setvalue="true"/>
+        </LightComponent>
+    </Item>
+
+    <!--未确认未知遗迹-任务完成凭证-->
+    <Item name="未确认未知遗迹-任务完成凭证" identifier="Salvage_Mysterious_Pearl_Mission_Completed" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" cargocontaineridentifier="metalcrate" description="" spritecolor="200,36,0,255">
+        <Sprite texture="Content/Items/idcard.png" depth="0.5" sourcerect="0,0,16,16" />
+        <Body width="16" height="12" density="10.05" />
+        <Deconstruct time="1"/>
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="50,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" />
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
 
     <!--宁静的勾玉-->
     <!--提供眩晕抗性和光照-->
@@ -3826,6 +4104,348 @@
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Boundary_Of_The_Screen.png" sourcerect="0,0,220,272" depth="0.45" />
         <Body width="23" height="31" density="10" />
         <Pickable slots="Any" />
+    </Item>
+
+
+    <!--事件触发用ID卡-沉船事件01-->
+    <Item name="事件触发用ID卡-沉船事件01" identifier="Trigger_Touhou_Wreck01" category="Misc" subcategory="Touhou" maxstacksize="8" tags="smallitem" scale="0.5" cargocontaineridentifier="metalcrate" description="">
+        <InventoryIcon texture="Content/Items/InventoryIconAtlas.png" sourcerect="192,64,64,64" origin="0.5,0.5" />
+        <Sprite texture="Content/Items/idcard.png" depth="0.5" sourcerect="0,0,16,16" />
+        <Body width="16" height="12" density="10.05" />
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="100,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="Always" target="NearbyCharacters,This" Interval="5" range="2000">
+                <Conditional speciesname="human"/>
+                <SpawnCharacter speciesname="Touhou_reiki_erode_crawler" count="3" TotalMaxCount="3" spread="800" />
+                <SpawnCharacter speciesname="Touhou_reiki_erode_mudraptor" count="3" TotalMaxCount="3" spread="800" />
+                <SpawnCharacter speciesname="Touhou_fortune_teller" count="3" TotalMaxCount="3" spread="800" />
+                <RemoveItem />
+            </StatusEffect>
+        </Holdable>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--毛玉宠物-->
+    <Item name="毛玉宠物" identifier="Touhou_Maoyu_Pet_Spawn" category="Misc" subcategory="Touhou" tags="smallitem" scale="1.0" cargocontaineridentifier="metalcrate" description="">
+        <Sprite Texture="%ModDir%/Characters/Maoyu/Maoyu.png" depth="0.5" sourcerect="52,3,44,32" />
+        <Body width="16" height="12" density="10.05" />
+        <Price baseprice="100" >
+            <Price locationtype="outpost" multiplier="1.1" minavailable="1" />
+            <Price locationtype="city" multiplier="0.9" minavailable="1" />
+            <Price locationtype="research" multiplier="0.85" maxavailable="1" />
+            <Price locationtype="military" multiplier="1.2" minavailable="1" />
+            <Price locationtype="mine" multiplier="1.2" maxavailable="1"/>
+        </Price>
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="30,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" />
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.08,0.1" anchor="BottomLeft" absoluteoffset="20,95" style="ItemUI" />
+            <Button text="uilabel.Touhou_Open">
+                <StatusEffect type="OnUse" target="Character" delay="0.25" >
+                    <SpawnCharacter speciesname="Touhou_Maoyu_Pet" count="1" spread="10" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.5" >
+                    <RemoveItem/>
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--新年礼物-->
+    <Item name="新年礼物" identifier="Touhou_New_Year_Gift_Box" category="Misc" subcategory="Touhou" tags="smallitem" scale="0.5" cargocontaineridentifier="metalcrate" description="">
+        <Body width="63" height="55" density="10" />
+        <InventoryIcon Texture="%ModDir%/Images/Materials/Touhou_New_Year_Gift_Box.png" sourcerect="0,0,64,56" origin="0.5,0.5" />
+        <Sprite Texture="%ModDir%/Images/Materials/Touhou_New_Year_Gift_Box.png" depth="0.5" sourcerect="66,0,63,55" />
+        <Holdable slots="Any,RightHand+LeftHand" aimpos="30,0" handle1="-5,-10" msg="ItemMsgPickUpSelect" />
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.08,0.2" anchor="Center" absoluteoffset="0,-95" style="ItemUI" />
+            <Button text="uilabel.Touhou_Open">
+                <StatusEffect type="OnUse" target="Character" delay="0.1" >
+                    <TriggerEvent identifier="Touhou_Gift_Box_Open" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" disabledeltatime="true">
+                    <sound file="%ModDir%/Sounds/Tools/Touhou_Open_Box_Sound.ogg" Volmue="8.0" range="500.0" loop="false" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.2" >
+                    <RemoveItem/>
+                </StatusEffect>
+            </Button>
+        </CustomInterface>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <Item name="" identifier="Touhou_Secret_Classified_Reiki_Erode_Crawler" category="Misc" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.03" />
+        <Price baseprice="2000" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="3"/>
+            <Price storeidentifier="merchantcity" minavailable="3" />
+            <Price storeidentifier="merchantresearch" minavailable="3" />
+            <Price storeidentifier="merchantmilitary" minavailable="3" />
+            <Price storeidentifier="merchantmine" minavailable="3"/>
+        </Price>
+        <PreferredContainer primary="secarmcab" />
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" readonly="true" autoscrolltobottom="false"
+                  AutoHideScrollbar="true" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true"
+                  welcomemessage="Touhou_Secret_Classified_Reiki_Erode_Crawler_Msg" textcolor="50,50,50,255">
+            <GuiFrame relativesize="0.3,0.5" anchor="Center" style="Parchment" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+    <Item name="" identifier="Touhou_Confidential_Classified_Reiki_Erode_Crawler" category="Misc" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.03" />
+        <Price baseprice="2000" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="3"/>
+            <Price storeidentifier="merchantcity" minavailable="3" />
+            <Price storeidentifier="merchantresearch" minavailable="3" />
+            <Price storeidentifier="merchantmilitary" minavailable="3" />
+            <Price storeidentifier="merchantmine" minavailable="3"/>
+        </Price>
+        <PreferredContainer primary="secarmcab" />
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" readonly="true" autoscrolltobottom="false"
+                  AutoHideScrollbar="true" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true"
+                  welcomemessage="Touhou_Confidential_Classified_Reiki_Erode_Crawler_Msg" textcolor="50,50,50,255">
+            <GuiFrame relativesize="0.3,0.5" anchor="Center" style="Parchment" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+    <Item name="" identifier="Touhou_Top_Secret_Classified_Reiki_Erode_Crawler" category="Misc" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.03" />
+        <Price baseprice="2000" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="3"/>
+            <Price storeidentifier="merchantcity" minavailable="3" />
+            <Price storeidentifier="merchantresearch" minavailable="3" />
+            <Price storeidentifier="merchantmilitary" minavailable="3" />
+            <Price storeidentifier="merchantmine" minavailable="3"/>
+        </Price>
+        <PreferredContainer primary="secarmcab" />
+        <InventoryIcon texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="59,110,51,65" origin="0.5,0.5" />
+        <Sprite texture="Content/Map/Outposts/Art/FactionItems.png" sourcerect="114,165,41,51" depth="0.8" origin="0.5,0.5" />
+        <Body width="40" height="50" density="8" />
+        <Holdable slots="Any,RightHand,LeftHand" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" />
+        <Terminal canbeselected="true" msg="ItemMsgInteractSelect" AllowInGameEditing="false" readonly="true" autoscrolltobottom="false"
+                  AutoHideScrollbar="true" linestartsymbol="" marginmultiplier="1.5" drawhudwhenequipped="true"
+                  welcomemessage="Touhou_Top_Secret_Classified_Reiki_Erode_Crawler_Msg" textcolor="50,50,50,255">
+            <GuiFrame relativesize="0.3,0.5" anchor="Center" style="Parchment" hidedragicons="true" />
+        </Terminal>
+    </Item>
+
+
+    <!--腐化密辛-->
+    <Item name="腐化密辛" identifier="Touhou_Corrupted_Weapon_Unlocked_Book" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+        <Price baseprice="100" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" minavailable="1" maxavailable="2"/>
+        </Price>
+        <Deconstruct time="1"/>
+        <PreferredContainer primary="crewcab" secondary="locker"/>
+        <InventoryIcon Texture="%ModDir%/Images/Materials/Touhou_Corrupted_Weapon_Unlocked_Book.png" sourcerect="0,0,68,88" origin="0.5,0.5" />
+        <Sprite Texture="%ModDir%/Images/Materials/Touhou_Corrupted_Weapon_Unlocked_Book.png" depth="0.5" sourcerect="0,0,68,88" />
+        <Body width="40" height="50" density="10" />
+        <Holdable slots="Any,RightHand,LeftHand" aimable="false" aimpos="40,-20" aimangle="-20" holdangle="30" handle1="-10,0" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnSecondaryUse" target="This" Condition="-25" />
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true">
+                <Conditional Condition="lte 0" />
+                <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Corrupted_Weapon_Unlocked_Talent" />
+                <RemoveItem />
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+
+    <!--宝藏袋-封兽鵺-->
+    <Item name="宝藏袋-封兽鵺" identifier="Touhou_Treasure_Bag_Nue" category="Misc" subcategory="Touhou" tags="mobilecontainer" scale="0.4" hideinmenus="true" cargocontaineridentifier="metalcrate" description="">
+        <InventoryIcon Texture="%ModDir%/Images/Materials/Touhou_Treasure_Bag.png" sourcerect="0,0,100,128" origin="0.5,0.5" />
+        <Sprite Texture="%ModDir%/Images/Materials/Touhou_Treasure_Bag.png" depth="0.5" sourcerect="0,0,100,128" />
+        <Body width="16" height="12" density="10" />
+        <Deconstruct time="1"/>
+        <Holdable slots="RightHand+LeftHand" aimpos="30,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" />
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.15,0.1" anchor="Center" absoluteoffset="20,95" style="ItemUI" />
+            <Button text="uilabel.Touhou_Open">
+                <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" >
+                    <SpawnItem identifiers="Touhou_Precious_Metal" spawnposition="ThisInventory" />
+                    <SpawnItem identifiers="Touhou_Boss_Fight_Music_Nue" spawnposition="ThisInventory" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" >
+                    <SpawnItem identifiers="Score_Point" spawnposition="ThisInventory" MinCount="3" MaxCount="6" />
+                    <SpawnItem identifiers="Score_Point" spawnposition="ThisInventory" MinCount="1" MaxCount="3" Probability="0.5" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" >
+                    <SpawnItem identifiers="Power_Point" spawnposition="ThisInventory" MinCount="2" MaxCount="4" />
+                    <SpawnItem identifiers="Power_Point" spawnposition="ThisInventory" MinCount="1" MaxCount="2" Probability="0.5" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" >
+                    <SpawnItem identifiers="Touhou_Precious_Metal" spawnposition="ThisInventory" MinCount="1" MaxCount="2" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.25" stackable="false" TargetItemComponent="ItemContainer" drawinventory="true" />
+                <StatusEffect type="OnUse" target="This" delay="0.25" stackable="false" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" />
+            </Button>
+        </CustomInterface>
+        <ItemContainer autofill="False" capacity="0" maxstacksize="1" drawinventory="false">
+            <SubContainer capacity="8" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem" />
+            </SubContainer>
+        </ItemContainer>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+    <!--宝藏袋-月-->
+    <Item name="宝藏袋-月" identifier="Touhou_Treasure_Bag_Piece" category="Misc" subcategory="Touhou" tags="mobilecontainer" scale="0.4" hideinmenus="true" cargocontaineridentifier="metalcrate" description="">
+        <InventoryIcon Texture="%ModDir%/Images/Materials/Touhou_Treasure_Bag.png" sourcerect="0,0,100,128" origin="0.5,0.5" />
+        <Sprite Texture="%ModDir%/Images/Materials/Touhou_Treasure_Bag.png" depth="0.5" sourcerect="0,0,100,128" />
+        <Body width="16" height="12" density="10" />
+        <Deconstruct time="1"/>
+        <Holdable slots="RightHand+LeftHand" aimpos="30,0" handle1="-15,-3" msg="ItemMsgPickUpSelect" />
+        <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.15,0.1" anchor="Center" absoluteoffset="20,95" style="ItemUI" />
+            <Button text="uilabel.Touhou_Open">
+                <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" >
+                    <SpawnItem identifiers="Touhou_Precious_Metal" spawnposition="ThisInventory" />
+                    <SpawnItem identifiers="Touhou_Boss_Fight_Piece" spawnposition="ThisInventory" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" >
+                    <SpawnItem identifiers="Score_Point" spawnposition="ThisInventory" MinCount="2" MaxCount="4" />
+                    <SpawnItem identifiers="Score_Point" spawnposition="ThisInventory" MinCount="1" MaxCount="2" Probability="0.5" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" >
+                    <SpawnItem identifiers="Power_Point" spawnposition="ThisInventory" MinCount="1" MaxCount="2" />
+                    <SpawnItem identifiers="Power_Point" spawnposition="ThisInventory" Count="1" Probability="0.5" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" >
+                    <SpawnItem identifiers="Touhou_Precious_Metal" spawnposition="ThisInventory" MinCount="1" MaxCount="2" />
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" TargetItemComponent="ItemContainer" drawinventory="true" />
+                <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" />
+            </Button>
+        </CustomInterface>
+        <ItemContainer autofill="False" capacity="0" maxstacksize="1" drawinventory="false">
+            <SubContainer capacity="8" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem" />
+            </SubContainer>
+        </ItemContainer>
+        <aitarget soundrange="800" fadeouttime="5" />
+    </Item>
+
+
+    <!--小熊腰包-->
+    <Item name="小熊腰包" identifier="Touhou_Bear_Doll_Bag" scale="0.8" subcategory="Touhou" category="Equipment" tags="mediumitem,Touhou_Bear_Doll_Bag,backpack" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="medcab" />
+        <Price baseprice="5000" minleveldifficulty="15">
+            <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
+            <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="0.9" minavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmine" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmedical" multiplier="1.2" sold="false" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Magic_Material"/>
+            <Item identifier="Score_Point" amount="2"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredItem identifier="organicfiber" amount="16" />
+            <RequiredItem identifier="Magic_Material" amount="2"/>
+            <RequiredItem identifier="Score_Point" amount="2" />
+            <RequiredItem identifier="Seven_Elements_Alchemical_Fake" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Bear_Doll_Bag.png" sourcerect="44,0,46,58" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Bear_Doll_Bag.png" depth="0.5" sourcerect="0,0,41,56" origin="0.5,0.5" />
+        <Body width="41" height="56" density="10" />
+        <ItemContainer autofill="False" capacity="0" maxstacksize="1" ExtraStackSize="4" slotsperrow="4">
+            <SlotIcon slotindex="0" texture="%ModDir%/Images/Tools/Touhou_Hooked_Jade_Indicator.png" sourcerect="0,0,68,68" origin="0.5,0.5" />
+            <SlotIcon slotindex="10" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6" />
+            <SlotIcon slotindex="11" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6" />
+            <SubContainer capacity="1" maxstacksize="1" >
+                <Containable items="Touhou_Peace_Hooked_Jade" >
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
+                        <Affliction identifier="Gensokyo_Divinggear_Effect02" strength="10" />
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Touhou_Hard_Hooked_Jade" >
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
+                        <Affliction identifier="Gensokyo_Divinggear_Effect03" strength="10" />
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Touhou_Soft_Hooked_Jade" >
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
+                        <Affliction identifier="Gensokyo_Divinggear_Effect04" strength="10" />
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Touhou_Warm_Hooked_Jade" >
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
+                        <Affliction identifier="Gensokyo_Divinggear_Effect05" strength="10" />
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Touhou_Boiling_Hooked_Jade" >
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
+                        <Affliction identifier="Gensokyo_Divinggear_Effect06" strength="10" />
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Touhou_Icy_Hooked_Jade" >
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
+                        <Affliction identifier="Gensokyo_Divinggear_Effect07" strength="10" />
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Touhou_White_Hooked_Jade" >
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
+                        <Affliction identifier="Gensokyo_Divinggear_Effect08" strength="10" />
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Touhou_Black_Hooked_Jade" >
+                    <StatusEffect type="OnWearing" target="Character,Contained" Interval="5.0" Duration="5.0" setvalue="true" multiplyafflictionsbymaxvitality="true">
+                        <Affliction identifier="Gensokyo_Divinggear_Effect09" strength="10" />
+                    </StatusEffect>
+                </Containable>
+                <!--根据Aff减少勾玉耐久-->
+                <Containable items="Touhou_Hooked_Jade" >
+                    <StatusEffect type="OnWearing" target="Contained" targetslot="0" Interval="2.0" disabledeltatime="true" condition="-0.02">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 0" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnWearing" target="Contained" targetslot="0" Interval="2.0" disabledeltatime="true" condition="-0.04">
+                        <Conditional Touhou_Hooked_Jade_Condition_Down_Effect="gt 50" TargetContainer="true" TargetGrandparent="true"/>
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+            <SubContainer capacity="3" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem" excludeditems="backpack,crate,toolbelt,Touhou_Magic_Charging_Box,bulkyweapon"/>
+            </SubContainer>
+            <SubContainer capacity="6" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,Touhou_Magic_Charging_Box,bulkyweapon"/>
+            </SubContainer>
+            <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem,Touhou_Magic_Charging_Box" excludeditems="backpack,crate,toolbelt"/>
+            </SubContainer>
+        </ItemContainer>
+
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="0,0" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
+                  canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
+
+        <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
+
+            <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Touhou_Bear_Doll_Bag.png" sourcerect="0,0,41,56" limb="Torso" hidelimb="false" inheritlimbdepth="true"
+                    inherittexturescale="false" hideotherwearables="false" origin="0.65,0.12" scale="0.6" />
+
+            <StatusEffect type="OnWearing" target="Character" Interval="3.0" setvalue="true" multiplyafflictionsbymaxvitality="true" disabledeltatime="true" >
+                <Affliction identifier="Touhou_Locked_Flandre" amount="10" />
+            </StatusEffect>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.6" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.8" damagesound="LimbArmor" deflectprojectiles="true" />
+            <SkillModifier skillidentifier="Touhou_Magic" skillvalue="10" />
+            <SkillModifier skillidentifier="medical" skillvalue="10" />
+        </Wearable>
+        <aitarget maxsightrange="1500" />
     </Item>
 
 </Items>

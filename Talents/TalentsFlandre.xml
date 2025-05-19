@@ -34,6 +34,36 @@
                 <CharacterAbilityModifyResistance resistanceid="burn" multiplier="1.5"/>
             </Abilities>
         </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet" />
+                <AbilityConditionAttackData tags="Touhou_Laevatein" ignorenonharmfulattacks="true" weapontype="Melee"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" limb="Torso" multiplyafflictionsbymaxvitality="true" >
+                            <Conditional MaxHealth="lte 400"/>
+                            <Affliction identifier="Destruction_Of_Mu" strength="16" />
+                        </StatusEffect>
+                        <StatusEffect type="OnAbility" target="Character" limb="Torso" multiplyafflictionsbymaxvitality="true" comparison="And" >
+                            <Conditional MaxHealth="gt 400"/>
+                            <Conditional MaxHealth="lte 1000"/>
+                            <Affliction identifier="Destruction_Of_Mu" strength="10" />
+                        </StatusEffect>
+                        <StatusEffect type="OnAbility" target="Character" limb="Torso" multiplyafflictionsbymaxvitality="true" comparison="And" >
+                            <Conditional MaxHealth="gt 1000"/>
+                            <Conditional MaxHealth="lte 5000"/>
+                            <Affliction identifier="Destruction_Of_Mu" strength="6.4" />
+                        </StatusEffect>
+                        <StatusEffect type="OnAbility" target="Character" limb="Torso" multiplyafflictionsbymaxvitality="true" >
+                            <Conditional MaxHealth="gt 5000"/>
+                            <Affliction identifier="Destruction_Of_Mu" strength="3.5" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
     <Talent identifier="FlandreTalent2">
         <Icon texture="%ModDir%/Images/Talents/FlandreTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
