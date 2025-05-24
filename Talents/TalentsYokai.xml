@@ -269,11 +269,11 @@
                 <CharacterAbilityGiveStat stattype="MaximumHealthMultiplier" value="-0.05"/>
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="None">
             <Abilities>
-                <CharacterAbilityModifyStat stattype="TeamAttackMultiplier" value="-0.2" />
+                <CharacterAbilityGiveStat stattype="TeamAttackMultiplier" value="-0.2" />
             </Abilities>
-        </AbilityGroupInterval>
+        </AbilityGroupEffect>
     </Talent>
 
     <!--始作俑者 减少5%最大生命值，增加5%所有类型的伤害（包括爆炸伤害，炮塔伤害）-->
@@ -467,15 +467,21 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
-        <AbilityGroupEffect abilityeffecttype="None" >
+        <AbilityGroupInterval interval="4.9">
             <Conditions>
                 <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="320"/>
                 <AbilityConditionCrewMemberUnconscious />
             </Conditions>
             <Abilities>
-                <CharacterAbilityGiveFlag flagtype="MoveNormallyWhileDragging" />
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="Talents_Yokai_Primary15_Level02_Effect" amount="10" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
             </Abilities>
-        </AbilityGroupEffect>
+        </AbilityGroupInterval>
 
         <AbilityGroupInterval interval="9.9">
             <Conditions>
@@ -597,8 +603,8 @@
                 <CharacterAbilityApplyStatusEffectsToAttacker>
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" targetlimb="Head" delay="0.1" disabledeltatime="true">
-                            <Affliction identifier="Touhou_Freeze" amount="15.0"/>
-                            <Affliction identifier="psychosis" amount="10.0"/>
+                            <Affliction identifier="Touhou_Freeze" amount="10.0"/>
+                            <Affliction identifier="psychosis" amount="5.0"/>
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffectsToAttacker>
@@ -617,7 +623,7 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--灵魂恐惧 对越弱小的敌人造成额外伤害，最高15%-->
+    <!--灵魂恐惧 对越弱小的敌人造成额外伤害，最高10%-->
     <Talent identifier="Touhou_Youling_Wangling02">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Direct_Damage.png" sheetindex="0,0" sheetelementsize="400,400" />
         <Description tag="talentdescription.Touhou_Youling_Wangling02"/>
@@ -625,11 +631,25 @@
             <Conditions>
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
                 <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional MaxHealth="lte 100"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasTalent identifier="Touhou_Yokai_Talents_Locked" invert="true" />
+            </Conditions>
+            <Conditions>
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+                <AbilityConditionCharacter targettype="Enemy">
                     <Conditional MaxHealth="lte 300"/>
                 </AbilityConditionCharacter>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
@@ -643,21 +663,7 @@
                 </AbilityConditionCharacter>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionHasTalent identifier="Touhou_Yokai_Talents_Locked" invert="true" />
-            </Conditions>
-            <Conditions>
-                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
-                <AbilityConditionCharacter targettype="Enemy">
-                    <Conditional MaxHealth="lte 1000"/>
-                </AbilityConditionCharacter>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.04"/>
             </Abilities>
         </AbilityGroupEffect>
     </Talent>
@@ -727,8 +733,8 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--三魂七魄 当血量低于30%时，一定时间内提高30%物理伤害抗性和烧伤抗性
-    穿着妖梦装束+时：增加20%最大生命值，增加20点武器操作-->
+    <!--三魂七魄 当血量低于30%时，一定时间内提高20%物理伤害抗性和烧伤抗性
+    穿着妖梦装束+时：增加10%最大生命值，增加20点武器操作-->
     <Talent identifier="Touhou_Youling_Wangling04">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Defense.png" sheetindex="0,0" sheetelementsize="400,400" />
         <Description tag="talentdescription.Touhou_Youling_Wangling04"/>
@@ -751,7 +757,7 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Ancient_Temple" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.2"/>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.1"/>
                 <CharacterAbilityModifyStat stattype="WeaponsSkillBonus" value="20"/>
             </Abilities>
         </AbilityGroupInterval>

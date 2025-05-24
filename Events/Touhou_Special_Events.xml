@@ -207,6 +207,37 @@
         </ScriptedEvent>
 
 
+        <!--人数较少时高难BOSS赐福-->
+        <ScriptedEvent identifier="Touhou_Lunatic_Mission_Resistance_Event">
+            <TagAction criteria="player" tag="player" />
+            <TagAction criteria="crew" tag="crew" />
+            <Label name="delay" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="60" />
+                </Success>
+                <Failure>
+                    <WaitAction time="30" />
+                </Failure>
+            </RNGAction>
+            <GoTo name="delay" maxtimes="150" />
+            <CountTargetsAction targettag="player" MinAmount="3">
+                <Success>
+
+                </Success>
+                <Failure>
+                    <StatusEffectAction targettag="crew">
+                        <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+                            <Affliction identifier="Touhou_Lunatic_Mission_Resistance_Effect" strength="10"/>
+                        </StatusEffect>
+                    </StatusEffectAction>
+                </Failure>
+            </CountTargetsAction>
+            <Label name="End_Mission"/>
+        </ScriptedEvent>
+
+
+
         <!--恋恋的无意识概率事件-->
         <ScriptedEvent identifier="KoishiTalent_Unconscious" commonness="0">
             <CheckAfflictionAction identifier="Koishi_Unconscious_Flag" MinStrength="0.1" >
@@ -693,7 +724,7 @@
 
         <!--八云紫传送事件-->
         <ScriptedEvent identifier="YukariTalent_Effect_Self" commonness="0">
-            <TagAction Criteria="player" Tag="YukariTalent_Effect_Self" IgnoreIncapacitatedCharacters="false" />
+            <TagAction Criteria="player" Tag="YukariTalent_Effect_Self" IgnoreIncapacitatedCharacters="true" />
             <TeleportAction Position="MainSub" targettag="YukariTalent_Effect_Self" SpawnPointTag=""/>
             <StatusEffectAction targettag="YukariTalent_Effect_Self">
                 <StatusEffect target="Character" delay="1.0" disabledeltatime="true" >
@@ -1240,10 +1271,29 @@
                     <RNGAction chance="0.5">
                         <Success>
                             <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission03_Event.c1" dialogtype="Small" ContinueAutomatically="true" />
-                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
-                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
-                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
-                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <CountTargetsAction targettag="player" MinAmount="6">
+                                <Success>
+                                    <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard_Super" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard_Super" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard_Super" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal_Super" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal_Super" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal_Super" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                </Success>
+                                <Failure>
+                                    <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                </Failure>
+                            </CountTargetsAction>
+                            <TagAction criteria="humanprefabidentifier:Touhou_ODM03_Enemy_Human_Hard_Super" tag="Touhou_ODM03_Enemy_Human_Stronger" continueifnotargetsfound="true" />
+                            <TagAction criteria="humanprefabidentifier:Touhou_ODM03_Enemy_Human_Normal_Super" tag="Touhou_ODM03_Enemy_Human_Stronger" continueifnotargetsfound="true" />
+                            <TagAction criteria="humanprefabidentifier:Touhou_ODM03_Enemy_Human_Hard" tag="Touhou_ODM03_Enemy_Human_Stronger" continueifnotargetsfound="true" />
+                            <TagAction criteria="humanprefabidentifier:Touhou_ODM03_Enemy_Human_Normal" tag="Touhou_ODM03_Enemy_Human_Stronger" continueifnotargetsfound="true" />
+                            <StatusEffectAction targettag="Touhou_ODM03_Enemy_Human_Stronger">
+                                <StatusEffect target="This" enabledespawn="true"/>
+                            </StatusEffectAction>
                         </Success>
                         <Failure>
                             <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission03_Event.c2" dialogtype="Small" ContinueAutomatically="true" />
@@ -1319,11 +1369,19 @@
                     <RNGAction chance="0.5">
                         <Success>
                             <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission04_Event.c1" dialogtype="Small" ContinueAutomatically="true" />
-                            <CountTargetsAction targettag="player" MinAmount="3">
+                            <CountTargetsAction targettag="player" MinAmount="6">
                                 <Success>
                                     <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Lunatic" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
                                     <WaitAction time="1" />
                                     <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
                                     <WaitAction time="1" />
                                     <SpawnAction npcsetidentifier="Touhou_ODM4_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
                                     <WaitAction time="1" />
@@ -1586,16 +1644,30 @@
                 <Success>
                     <CountTargetsAction targettag="player" MinAmount="3">
                         <Success>
-                            <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
-                            <WaitAction time="1" />
-                            <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
-                            <WaitAction time="1" />
-                            <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
-                            <WaitAction time="1" />
-                            <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
-                            <WaitAction time="1" />
-                            <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
-                            <WaitAction time="1" />
+                            <CountTargetsAction targettag="player" MinAmount="6">
+                                <Success>
+                                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard_Super" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard_Super" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard_Super" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                </Success>
+                                <Failure>
+                                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                </Failure>
+                            </CountTargetsAction>
                         </Success>
                         <Failure>
                             <SpawnAction npcsetidentifier="Touhou_ODM8_Enemy_NPC" npcidentifier="Touhou_ODM08_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
@@ -1677,7 +1749,7 @@
                 <StatusEffect target="Character" disabledeltatime="true" oneshot="true" >
                     <sound file="Content/Items/Weapons/ExplosionLarge1.ogg" volume="1" range="10000" />
                     <sound file="Content/Items/Weapons/ExplosionLarge2.ogg" volume="1" range="10000" />
-                    <Explosion range="5000.0" ballastfloradamage="10000" force="5.0" debris="true"
+                    <Explosion range="5000.0" ballastfloradamage="10000" force="5.0" debris="true" applyFireEffects="false"
                                decal="explosion" decalsize="1.0" camerashake="1000" camerashakerange="50000" flashrange="12000" flashduration="5.0"
                                screencolor="255,180,180,255" screencolorrange="10000" screencolorduration="5.0" penetration="0.6">
                         <Affliction identifier="Touhou_Weakness" strength="10" />

@@ -541,10 +541,10 @@
     <Affliction identifier="Possessed_By_Phoenix" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
         <Effect minstrength="0" maxstrength="10" resistancefor="Phoenix_Burn" minresistance="0.4" maxresistance="0.4" >
-            <StatusEffect target="Character" Interval="1.0" Duration="1.0">
-                <ReduceAffliction type="damage" strength="0.05" />
-                <ReduceAffliction identifier="Phoenix_Burn" strength="3.0" />
-                <Reduceaffliction type="burn" amount="0.4" />
+            <StatusEffect target="Character" Interval="5.0" disabledeltatime="true">
+                <ReduceAffliction type="damage" strength="0.25" />
+                <ReduceAffliction identifier="Phoenix_Burn" strength="5.0" />
+                <Reduceaffliction type="burn" amount="0.5" />
             </StatusEffect>
             <StatValue stattype="MaximumHealthMultiplier" value="-0.1" />
         </Effect>
@@ -562,9 +562,9 @@
     <Affliction identifier="Hyouibana_Mokou_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
         <Effect minstrength="0" maxstrength="10" resistancefor="Phoenix_Burn" minresistance="0.15" maxresistance="0.15">
-            <StatusEffect target="Character" Interval="1.0" Duration="1.0">
-                <ReduceAffliction type="damage" strength="0.025" />
-                <ReduceAffliction identifier="Phoenix_Burn" strength="1.0" />
+            <StatusEffect target="Character" Interval="5.0" disabledeltatime="true">
+                <ReduceAffliction type="damage" strength="0.125" />
+                <ReduceAffliction identifier="Phoenix_Burn" strength="3.0" />
                 <Reduceaffliction type="burn" amount="0.2" />
             </StatusEffect>
         </Effect>
@@ -582,9 +582,9 @@
     </Affliction>
 
     <!--涅槃-->
-    <Affliction identifier="Resurrection" type="talentbuff" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="30" treatmentthreshold="1000"
-            duration="30" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
-        <Effect minstrength="0" maxstrength="30" resistancefor="damage" minresistance="0.35" maxresistance="0.35">
+    <Affliction identifier="Resurrection" type="talentbuff" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="5" treatmentthreshold="1000"
+            duration="5" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="5" >
             <StatusEffect target="Character">
                 <ParticleEmitter particle="StarDanmuBoom" particleamount="1" anglemin="0" anglemax="360" velocitymin="100" velocitymax="250" scalemin="0.2" scalemax="0.3" drawontop="true" colormultiplier="255,72,36,180" />
             </StatusEffect>
@@ -622,20 +622,19 @@
     </Affliction>
 
     <!--间歇性效果-不会因苦痛死亡-->
-    <Affliction identifier="Mokou_Not_Die" type="talentbuff" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="30" treatmentthreshold="1000"
+    <Affliction identifier="Mokou_Not_Die" type="talentbuff" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="5" treatmentthreshold="1000"
                 showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
-        <Effect minstrength="0" maxstrength="25" strengthchange="-1">
+        <Effect minstrength="0" maxstrength="5" strengthchange="-1">
             <AbilityFlag flagtype="CanNotDieToAfflictions" />
         </Effect>
-        <Effect minstrength="25" maxstrength="30" strengthchange="-1"/>
         <Icon texture="%ModDir%/Images/Afflictions/Resurrection.png" sheetindex="0,0" sheetelementsize="128,128" color="10,193,114,255" origin="0,0"/>
     </Affliction>
 
     <!--用来检测妹红天赋是否触发的空效果-->
-    <Affliction name="Test01" identifier="No_Effects10" type="No_Effects10" isbuff="true" limbspecific="false" hideiconafterdelay="true" maxstrength="30"
+    <Affliction name="Test01" identifier="No_Effects10" type="No_Effects10" isbuff="true" limbspecific="false" hideiconafterdelay="true" maxstrength="15"
                 showiconthreshold="100" showinhealthscannerthreshold="100" resetbetweenrounds="true" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
-        <Effect minstrength="0" maxstrength="29" />
-        <Effect minstrength="29" maxstrength="30" strengthchange="1">
+        <Effect minstrength="0" maxstrength="14" />
+        <Effect minstrength="14" maxstrength="15" strengthchange="1">
             <StatusEffect target="Character">
                 <Affliction identifier="No_Effects11" amount="4" />
             </StatusEffect>
@@ -837,11 +836,27 @@
             showinhealthscannerthreshold="1000"
             duration="10"
             maxstrength="1">
-        <Effect minstrength="0" maxstrength="1" resistancefor="triton_7L,tsm_bl" minresistance="0.3" maxresistance="0.3">
+        <Effect minstrength="0" maxstrength="1" >
             <StatusEffect target="Character">
                 <ParticleEmitter particle="Tenshi_Peach_Effect" particleamount="1" anglemin="0" anglemax="360" colormultiplier="55,55,255,255"
                                  velocitymin="100" velocitymax="250" scalemin="0.2" scalemax="0.3" drawontop="true" />
             </StatusEffect>
+        </Effect>
+        <icon texture="%ModDir%/Images/Transparent.png" sourcerect="0,0,128,128" color="0,0,0,0" origin="0,0"/>
+    </Affliction>
+
+    <!--天桃效果CD-->
+    <Affliction
+            identifier="Tenshi_Peach_CD"
+            type="talentbuff"
+            limbspecific="false"
+            showiconthreshold="1000"
+            treatmentthreshold="1000"
+            showicontoothersthreshold="1000"
+            showinhealthscannerthreshold="1000"
+            duration="60"
+            maxstrength="1">
+        <Effect minstrength="0" maxstrength="1" >
         </Effect>
         <icon texture="%ModDir%/Images/Transparent.png" sourcerect="0,0,128,128" color="0,0,0,0" origin="0,0"/>
     </Affliction>
@@ -1110,7 +1125,7 @@
     </AfflictionHusk>
 
     <!--狮子-->
-    <Affliction identifier="Aunn_Lion" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" resetbetweenrounds="true" hideiconafterdelay="false" maxstrength="10"
+    <Affliction identifier="Aunn_Lion" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" resetbetweenrounds="true" hideiconafterdelay="true" maxstrength="10"
                 showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="damage" minresistance="-0.1" maxresistance="-0.1"
                 strengthchange="-1">
@@ -1124,7 +1139,7 @@
     </Affliction>
 
     <!--狛犬-->
-    <Affliction identifier="Aunn_Koma_Inu" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" resetbetweenrounds="true" hideiconafterdelay="false" maxstrength="10"
+    <Affliction identifier="Aunn_Koma_Inu" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" resetbetweenrounds="true" hideiconafterdelay="true" maxstrength="10"
                 showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="damage,psychosis" minresistance="0.1" maxresistance="0.1"
                 strengthchange="-1">
@@ -1140,7 +1155,7 @@
     </Affliction>
 
     <!--守护神兽-->
-    <Affliction identifier="Aunn_Koma_Inu_Others" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" resetbetweenrounds="true" hideiconafterdelay="false" maxstrength="10"
+    <Affliction identifier="Aunn_Koma_Inu_Others" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" resetbetweenrounds="true" hideiconafterdelay="true" maxstrength="10"
                 duration="5.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="damage,psychosis" minresistance="0.1" maxresistance="0.1">
             <StatusEffect target="Character" Interval="1.0" Duration="1.0">
@@ -1981,7 +1996,7 @@
     <!--倾泻而下的星之光-->
     <Affliction identifier="Cascading_Light_Of_The_Star" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
-        <Effect minstrength="0" maxstrength="10" ThermalOverlayRange="15000" ThermalOverlayColor="160,160,255,120" >
+        <Effect minstrength="0" maxstrength="10" ThermalOverlayRange="1000" ThermalOverlayColor="160,160,255,120" >
             <StatValue stattype="MaximumHealthMultiplier" value="-0.1" />
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Cascading_Light_Of_The_Star.png" sourcerect="0,0,128,128" color="255,255,255,255" />
@@ -1994,11 +2009,10 @@
         <Effect minstrength="39" maxstrength="40" >
             <StatValue stattype="MaximumHealthMultiplier" value="0.1" />
             <StatValue stattype="MedicalSkillGainSpeed" value="-0.5" />
-            <StatusEffect target="Character" Interval="0.1" disabledeltatime="true" >
+            <StatusEffect target="Character" Interval="1.0" disabledeltatime="true" >
                 <ReduceAffliction type="damage" amount="0.1"/>
                 <ReduceAffliction type="burn" amount="0.2"/>
                 <ReduceAffliction type="bleeding" amount="0.2"/>
-                <ReduceAffliction type="debuff" amount="0.01"/>
             </StatusEffect>
             <StatusEffect target="Character" Interval="0.1" disabledeltatime="true" >
                 <Conditional Cascading_Light_Of_The_Star="eq 0"/>
@@ -2016,7 +2030,7 @@
         <Effect minstrength="39" maxstrength="40" >
             <StatValue stattype="MaximumHealthMultiplier" value="0.05" />
             <StatValue stattype="MedicalSkillGainSpeed" value="-0.5" />
-            <StatusEffect target="Character" Interval="0.1" disabledeltatime="true" >
+            <StatusEffect target="Character" Interval="1.0" disabledeltatime="true" >
                 <ReduceAffliction type="damage" amount="0.05"/>
                 <ReduceAffliction type="burn" amount="0.1"/>
                 <ReduceAffliction type="bleeding" amount="0.1"/>
@@ -2328,7 +2342,7 @@
             type="debuff"
             limbspecific="false"
             maxstrength="8">
-        <Effect minstrength="0" maxstrength="8" resistancefor="damage" minresistance="-0.25" maxresistance="-0.25" minspeedmultiplier="0.8" maxspeedmultiplier="0.8" strengthchange="-1" >
+        <Effect minstrength="0" maxstrength="8" resistancefor="damage,burn,stun" minresistance="-0.35" maxresistance="-0.35" minspeedmultiplier="0.8" maxspeedmultiplier="0.8" strengthchange="-1" >
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Touhou_Luna_Clock_Time.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
@@ -2574,7 +2588,7 @@
     <Affliction name="狂气" identifier="Touhou_Lunatic_Reisen_Effect" description="" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" maxstrength="30"
                 showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
         <Effect minstrength="0" maxstrength="30" minskillmultiplier="1.1" maxskillmultiplier="1.1" strengthchange="-1" >
-            <StatValue stattype="RangedSpreadReduction" value="0.3" />
+            <StatValue stattype="RangedSpreadReduction" value="0.15" />
         </Effect>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_Lunatic_Reisen_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" />
     </Affliction>
