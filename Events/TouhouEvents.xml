@@ -1109,6 +1109,26 @@
                             </Option>
                           </ConversationAction>
                         </Option>-->
+                <Option text="炼金实验室委托">
+                  <ConversationAction targettag="triggerer_player" dialogtype="Small" text="炼金实验室请求你的协助，此去凶多吉少，请一定小心选择">
+                    <Option text="同意">
+                      <ConversationAction text="地点已经在地图上标明了" dialogtype="Small" targettag="triggerer_player" />
+                      <RNGAction chance="0.5">
+                        <Success>
+                          <MissionAction missionidentifier="Touhou_OutpostDestroyMission08" locationtype="Abandoned" UnlockFurtherOnMap="true" Minlocationdistance="2" CreateLocationIfNotFound="true" />
+                        </Success>
+                        <Failure>
+                          <MissionAction missionidentifier="Touhou_OutpostDestroyMission11" locationtype="Abandoned" UnlockFurtherOnMap="true" Minlocationdistance="2" CreateLocationIfNotFound="true" />
+                        </Failure>
+                      </RNGAction>
+                    </Option>
+                    <Option text="再考虑考虑">
+                      <ConversationAction text="等查明情况再去看看吧" dialogtype="Small" targettag="triggerer_player" />
+                      <ClearTagAction tag="triggerer_player" />
+                      <GoTo name="waitformission" />
+                    </Option>
+                  </ConversationAction>
+                </Option>
                 <Option text="秘密委托（需要优先完成整个UFO任务线）">
                   <CheckDataAction identifier="Touhou_Find_Nue_Mission_End" condition="eq true">
                     <Success>

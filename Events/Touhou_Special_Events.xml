@@ -1156,6 +1156,7 @@
                     <SetDataAction value="false" identifier="Touhou_OutpostDestroyMission06_Poison_End" />
                 </Option>
             </ConversationAction>
+            <MissionAction missionidentifier="Touhou_OutpostDestroyMission05" locationtype="Abandoned" UnlockFurtherOnMap="true" Minlocationdistance="1" CreateLocationIfNotFound="true"/>
             <Label name="End_Mission"/>
         </ScriptedEvent>
 
@@ -1441,6 +1442,7 @@
                     </RNGAction>
                 </Failure>
             </RNGAction>
+            <MissionAction missionidentifier="Touhou_OutpostDestroyMission11" locationtype="Abandoned" UnlockFurtherOnMap="true" Minlocationdistance="1" CreateLocationIfNotFound="true"/>
             <Label name="End_Mission"/>
         </ScriptedEvent>
 
@@ -1781,6 +1783,7 @@
             <TagAction criteria="bot" tag="bot" />
             <TagAction criteria="player" tag="player" />
             <SetDataAction value="false" identifier="Touhou_OutpostDestroyMission09_End" />
+            <SetDataAction value="false" identifier="Touhou_OutpostDestroyMission09_Giveup" />
             <Label name="waitforspotting" />
             <WaitAction time="1" />
             <CheckVisibilityAction entitytag="bot" excludedentitytag="crew" targettag="crew">
@@ -1795,7 +1798,7 @@
             <TriggerEventAction identifier="Touhou_ODM09_Enemy_Spawn" nextround="false" />
             <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission09_Event.c2" dialogtype="Small" >
                 <Option text="Eventtext.Touhou_OutpostDestroyMission09_Event.c2.o1" >
-                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission09_Event.c2.o1.c1" endconversation="true">
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission09_Event.c2.o1.c1" >
                         <Option text="Eventtext.Touhou_OutpostDestroyMission09_Event.c2.o1.c1.o1" >
                             <WaitAction time="1.0" />
                             <TriggerEventAction identifier="Touhou_ODM9_Curse_Event01" nextround="false" />
@@ -1806,6 +1809,13 @@
                             <WaitAction time="1.0" />
                             <TriggerEventAction identifier="Touhou_ODM9_Curse_Event02" nextround="false" />
                             <TriggerEventAction identifier="Touhou_ODM09_BGM" nextround="false" />
+                            <GoTo name="Spawn_Delay" />
+                        </Option>
+                        <Option text="Eventtext.Touhou_OutpostDestroyMission09_Event.c2.o1.c1.o3" endconversation="true">
+                            <WaitAction time="1.0" />
+                            <TriggerEventAction identifier="Touhou_ODM9_Curse_Event02" nextround="false" />
+                            <TriggerEventAction identifier="Touhou_ODM09_BGM" nextround="false" />
+                            <SetDataAction value="true" identifier="Touhou_OutpostDestroyMission09_Giveup" />
                             <GoTo name="Spawn_Delay" />
                         </Option>
                     </ConversationAction>
@@ -1823,6 +1833,13 @@
                             <WaitAction time="1.0" />
                             <TriggerEventAction identifier="Touhou_ODM9_Curse_Event02" nextround="false" />
                             <TriggerEventAction identifier="Touhou_ODM09_BGM" nextround="false" />
+                            <GoTo name="Spawn_Delay" />
+                        </Option>
+                        <Option text="Eventtext.Touhou_OutpostDestroyMission09_Event.c2.o2.c1.o3" endconversation="true">
+                            <WaitAction time="1.0" />
+                            <TriggerEventAction identifier="Touhou_ODM9_Curse_Event02" nextround="false" />
+                            <TriggerEventAction identifier="Touhou_ODM09_BGM" nextround="false" />
+                            <SetDataAction value="true" identifier="Touhou_OutpostDestroyMission09_Giveup" />
                             <GoTo name="Spawn_Delay" />
                         </Option>
                     </ConversationAction>
@@ -1852,10 +1869,8 @@
                 </Failure>
             </RNGAction>
             <WaitAction time="5.0" />
-            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission09_Event.c3" >
-                <Option text="Eventtext.Touhou_OutpostDestroyMission09_Event.c3.o1" endconversation="true">
-                    <WaitAction time="1.0" />
-                    <TriggerEventAction identifier="Touhou_ODM9_Curse_Event01" nextround="false" />
+            <CheckDataAction identifier="Touhou_OutpostDestroyMission09_Giveup" condition="eq true">
+                <Success>
                     <RNGAction chance="0.5">
                         <Success>
                             <WaitAction time="1.0" />
@@ -1863,15 +1878,33 @@
                         </Success>
                         <Failure>
                             <WaitAction time="1.0" />
+                            <TriggerEventAction identifier="Touhou_ODM9_Curse_Event02" nextround="false" />
                         </Failure>
                     </RNGAction>
-                </Option>
-                <Option text="Eventtext.Touhou_OutpostDestroyMission09_Event.c3.o2" endconversation="true">
-                    <WaitAction time="1.0" />
-                    <TriggerEventAction identifier="Touhou_ODM9_Curse_Event02" nextround="false" />
-                </Option>
-            </ConversationAction>
-            <WaitAction time="10.0" />
+                </Success>
+                <Failure>
+                    <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission09_Event.c3" >
+                        <Option text="Eventtext.Touhou_OutpostDestroyMission09_Event.c3.o1" endconversation="true">
+                            <WaitAction time="1.0" />
+                            <TriggerEventAction identifier="Touhou_ODM9_Curse_Event01" nextround="false" />
+                            <RNGAction chance="0.5">
+                                <Success>
+                                    <WaitAction time="1.0" />
+                                    <TriggerEventAction identifier="Touhou_ODM9_Curse_Event01" nextround="false" />
+                                </Success>
+                                <Failure>
+                                    <WaitAction time="1.0" />
+                                </Failure>
+                            </RNGAction>
+                        </Option>
+                        <Option text="Eventtext.Touhou_OutpostDestroyMission09_Event.c3.o2" endconversation="true">
+                            <WaitAction time="1.0" />
+                            <TriggerEventAction identifier="Touhou_ODM9_Curse_Event02" nextround="false" />
+                        </Option>
+                    </ConversationAction>
+                </Failure>
+            </CheckDataAction>
+            <WaitAction time="9.0" />
             <TriggerEventAction identifier="Touhou_ODM09_Enemy_Spawn" nextround="false" />
             <GoTo name="Spawn_Delay" maxtimes="4" />
             <WaitAction time="1.0" />
@@ -1905,6 +1938,7 @@
             <GoTo name="delay" maxtimes="50" />
             <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission09_Event.c4" dialogtype="Small" />
             <SetDataAction value="true" identifier="Touhou_OutpostDestroyMission09_End" />
+            <MissionAction missionidentifier="Touhou_OutpostDestroyMission08" locationtype="Abandoned" UnlockFurtherOnMap="true" Minlocationdistance="1" CreateLocationIfNotFound="true"/>
             <Label name="End_Mission"/>
         </ScriptedEvent>
 
@@ -1992,6 +2026,207 @@
                 </Failure>
             </RNGAction>
         </ScriptedEvent>
+
+
+        <!--破坏冲动事件-->
+        <ScriptedEvent identifier="Touhou_OutpostDestroyMission11_Event">
+            <TagAction criteria="crew" tag="crew" />
+            <TagAction criteria="bot" tag="bot" />
+            <TagAction criteria="player" tag="player" IgnoreIncapacitatedCharacters="true" />
+            <SetDataAction value="false" identifier="Touhou_OutpostDestroyMission11_End" />
+            <Label name="waitforspotting" />
+            <WaitAction time="1" />
+            <CheckVisibilityAction entitytag="bot" excludedentitytag="crew" targettag="crew">
+                <Failure>
+                    <Goto name="waitforspotting" />
+                </Failure>
+            </CheckVisibilityAction>
+            <WaitAction time="1" />
+            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission11_Event.c1" dialogtype="Small" />
+            <WaitAction time="3" />
+            <TriggerEventAction identifier="Touhou_ODM11_Aff_Event" nextround="false" />
+            <Label name="Spawn_Delay" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <Label name="delay01" />
+                    <RNGAction chance="0.5">
+                        <Success>
+                            <WaitAction time="1.0" />
+                        </Success>
+                        <Failure>
+                            <WaitAction time="1.5" />
+                        </Failure>
+                    </RNGAction>
+                    <GoTo name="delay01" maxtimes="25" />
+                </Success>
+                <Failure>
+                    <Label name="delay02" />
+                    <RNGAction chance="0.5">
+                        <Success>
+                            <WaitAction time="0.5" />
+                        </Success>
+                        <Failure>
+                            <WaitAction time="1.0" />
+                        </Failure>
+                    </RNGAction>
+                    <GoTo name="delay02" maxtimes="25" />
+                </Failure>
+            </RNGAction>
+            <RNGAction chance="0.5">
+                <Success>
+                    <CountTargetsAction targettag="player" MinAmount="3">
+                        <Success>
+                            <CountTargetsAction targettag="player" MinAmount="6">
+                                <Success>
+                                    <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                </Success>
+                                <Failure>
+                                    <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                    <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                                    <WaitAction time="1" />
+                                </Failure>
+                            </CountTargetsAction>
+                        </Success>
+                        <Failure>
+                            <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <WaitAction time="1" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <WaitAction time="1" />
+                        </Failure>
+                    </CountTargetsAction>
+                </Success>
+                <Failure>
+                    <CountTargetsAction targettag="player" MinAmount="3">
+                        <Success>
+                            <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <WaitAction time="1" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <WaitAction time="1" />
+                        </Success>
+                        <Failure>
+                            <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Hard" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <WaitAction time="1" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Normal" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <WaitAction time="1" />
+                            <SpawnAction npcsetidentifier="Touhou_ODM11_Enemy_NPC" npcidentifier="Touhou_ODM11_Enemy_Human_Easy" lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false" />
+                            <WaitAction time="1" />
+                        </Failure>
+                    </CountTargetsAction>
+                </Failure>
+            </RNGAction>
+            <WaitAction time="1" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM11_Enemy_Human_Hard" tag="Touhou_ODM11_Enemy_Human" continueifnotargetsfound="true" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM11_Enemy_Human_Normal" tag="Touhou_ODM11_Enemy_Human" continueifnotargetsfound="true" />
+            <TagAction criteria="humanprefabidentifier:Touhou_ODM11_Enemy_Human_Easy" tag="Touhou_ODM11_Enemy_Human" continueifnotargetsfound="true" />
+            <StatusEffectAction targettag="Touhou_ODM11_Enemy_Human">
+                <StatusEffect target="This" enabledespawn="true"/>
+            </StatusEffectAction>
+            <WaitAction time="10.0" />
+            <GoTo name="Spawn_Delay" maxtimes="5" />
+            <Label name="delay" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <WaitAction time="1.0" />
+                </Success>
+                <Failure>
+                    <WaitAction time="1.3" />
+                </Failure>
+            </RNGAction>
+            <GoTo name="delay" maxtimes="10" />
+            <ConversationAction text="Eventtext.Touhou_OutpostDestroyMission11_Event.c3" dialogtype="Small" />
+            <SetDataAction value="true" identifier="Touhou_OutpostDestroyMission11_End" />
+            <Label name="End_Mission"/>
+        </ScriptedEvent>
+
+        <!--破坏冲动BGM-->
+        <ScriptedEvent identifier="Touhou_ODM11_BGM">
+            <TagAction criteria="player" tag="BGM_Player" />
+            <StatusEffectAction targettag="BGM_Player" >
+                <StatusEffect target="Character" disabledeltatime="true" multiplybymaxvitality="true" >
+                    <Affliction identifier="Touhou_OutpostDestroyMission11_BGM_Player" strength="10"/>
+                </StatusEffect>
+            </StatusEffectAction>
+        </ScriptedEvent>
+
+        <!--破坏冲动给予增幅-->
+        <ScriptedEvent identifier="Touhou_ODM11_Aff_Event">
+            <TagAction criteria="player" tag="Aff_Player" />
+            <SetDataAction value="false" identifier="Touhou_OutpostDestroyMission11_End" />
+            <WaitAction time="3" />
+            <TriggerEventAction identifier="Touhou_ODM11_BGM" nextround="false" />
+            <TriggerEventAction identifier="Touhou_ODM11_Weather" nextround="false" />
+            <AfflictionAction affliction="Touhou_ODM11_Aff_Event_Effect" strength="1000" targettag="Aff_Player" />
+            <Label name="Aff_Delay" />
+            <TagAction criteria="player" tag="Aff_Player" />
+            <WaitAction time="10.0" />
+            <AfflictionAction affliction="Touhou_ODM11_Aff_Event_Effect" strength="1000" targettag="Aff_Player" />
+            <CheckDataAction identifier="Touhou_OutpostDestroyMission11_End" condition="eq true">
+                <Success>
+
+                </Success>
+                <Failure>
+                    <GoTo name="Aff_Delay" />
+                </Failure>
+            </CheckDataAction>
+        </ScriptedEvent>
+
+
+        <!--破坏冲动随机天气-->
+        <ScriptedEvent identifier="Touhou_ODM11_Weather">
+            <TagAction criteria="crew" tag="crew" />
+            <TagAction criteria="bot" tag="bot" />
+            <TagAction criteria="player" tag="Aff_Player" />
+            <Label name="Touhou_ODM11_Weather_Delay"/>
+            <WaitAction time="30" />
+            <RNGAction chance="0.5">
+                <Success>
+                    <RNGAction chance="0.5">
+                        <Success>
+                            <WaitAction time="5.0" />
+                            <AfflictionAction affliction="Touhou_ODM11_Aff_Event_Weather_Effect01" strength="1000" targettag="Aff_Player" />
+                        </Success>
+                        <Failure>
+                            <WaitAction time="5.0" />
+                            <AfflictionAction affliction="Touhou_ODM11_Aff_Event_Weather_Effect02" strength="1000" targettag="Aff_Player" />
+                        </Failure>
+                    </RNGAction>
+                </Success>
+                <Failure>
+                    <RNGAction chance="0.5">
+                        <Success>
+                            <WaitAction time="5.0" />
+                            <AfflictionAction affliction="Touhou_ODM11_Aff_Event_Weather_Effect03" strength="1000" targettag="Aff_Player" />
+                        </Success>
+                        <Failure>
+                            <WaitAction time="5.0" />
+                            <AfflictionAction affliction="Touhou_ODM11_Aff_Event_Weather_Effect04" strength="1000" targettag="Aff_Player" />
+                        </Failure>
+                    </RNGAction>
+                </Failure>
+            </RNGAction>
+            <CheckDataAction identifier="Touhou_OutpostDestroyMission11_End" condition="eq true">
+                <Success>
+
+                </Success>
+                <Failure>
+                    <GoTo name="Touhou_ODM11_Weather_Delay" />
+                </Failure>
+            </CheckDataAction>
+            <Label name="Touhou_ODM11_End_Mission"/>
+        </ScriptedEvent>
+
 
 
         <!--补给站事件01-->

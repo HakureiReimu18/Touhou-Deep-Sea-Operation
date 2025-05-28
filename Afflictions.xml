@@ -18,7 +18,7 @@
       <StatusEffect target="Character" setvalue="true" SpeedMultiplier="0.35" />
     </Effect>
     <PeriodicEffect mininterval="30" maxinterval="100">
-      <StatusEffect target="Character" onlyinside="true">
+      <StatusEffect target="Character" onlyinside="true" Interval="5.0">
         <Conditional IsLocalPlayer="True"/>
         <Sound file="%ModDir%/Sounds/Afflictions/Baka!.ogg" />
       </StatusEffect>
@@ -2958,7 +2958,7 @@
 
 
   <!--污染魔法使效果-->
-  <Affliction identifier="Pollution_Magician_Clothes_Effect" type="Pollution_Magician_Clothes_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso"
+  <Affliction identifier="Pollution_Magician_Clothes01_Effect" type="Pollution_Magician_Clothes01_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso"
               maxstrength="10" duration="1.0" iconcolors="94,94,94;163,164,164;255,255,255" >
     <Effect minstrength="0" maxstrength="10"
             resistancefor="alieninfection,fractures,oxygenlow,internalbleeding,arterialcut,hemotransfusionshock,t_amputation,foreignbody,
@@ -2973,7 +2973,7 @@
   </Affliction>
 
   <!--污染魔法使抗性-->
-  <Affliction identifier="Touhou_Enemy_Pollution_Magician_Talent_Effect" type="Pollution_Magician_Clothes_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso"
+  <Affliction identifier="Touhou_Enemy_Pollution_Magician_Talent_Effect" type="Pollution_Magician_Clothes01_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso"
               maxstrength="10" duration="1.0" iconcolors="94,94,94;163,164,164;255,255,255" >
     <Effect minstrength="0" maxstrength="10" minvitalitydecrease="-40" maxvitalitydecrease="-40" multiplybymaxvitality="false"
             resistancefor="stun,bleeding,poison,debuff,Phoenix_Burn,burn"
@@ -3876,4 +3876,115 @@
             minvitalitydecrease="0" maxvitalitydecrease="-20" multiplybymaxvitality="false" />
     <icon texture="%ModDir%/Images/Afflictions/Touhou_Never_Give_Up_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
+
+  <!--破坏冲动BGM-->
+  <Affliction name="破坏冲动BGM"
+              identifier="Touhou_OutpostDestroyMission11_BGM_Player"
+              type="Touhou_OutpostDestroyMission11_BGM_Player"
+              limbspecific="false"
+              indicatorlimb="Head"
+              maxstrength="10"
+              duration="50"
+              showiconthreshold="100"
+              showinhealthscannerthreshold="100"
+              affectmachines="true"
+              iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Touhou_OutpostDestroyMission11_BGM_Player" minstrength="0" maxstrength="10"/>
+    <Effect minstrength="0" maxstrength="10" >
+      <StatusEffect target="Character" >
+        <Sound file="%ModDir%/Sounds/BGM/Touhou_Explosion_BGM.ogg" dontmuffle="true" range="40000" volume="1.0" />
+      </StatusEffect>
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_Deceit_Mod_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+
+  <!--破坏的冲动-->
+  <Affliction name="破坏的冲动" identifier="Touhou_ODM11_Aff_Event_Effect" description="" type="Touhou_Never_Give_Up_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="1"
+              resetbetweenrounds="true" affectmachines="true" iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Touhou_ODM11_Aff_Event_Effect" minstrength="0" maxstrength="1"/>
+    <Effect minstrength="0" maxstrength="1" resistancefor="sym_unconsciousness,stun" minresistance="10.0" maxresistance="10.0" minskillmultiplier="1.25" maxskillmultiplier="1.25">
+      <StatValue stattype="ExplosionDamageMultiplier" value="0.5" />
+      <StatValue stattype="ExplosionRadiusMultiplier" value="0.3" />
+      <StatValue stattype="TeamAttackMultiplier" value="-0.2" />
+      <StatusEffect target="Character" Interval="1.0" Duration="1.0" >
+        <Affliction identifier="Touhou_ODM11_Aff_Event_Effect_Resistance" strength="10" />
+      </StatusEffect>
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM8_Aff_Event_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+
+  <!--破坏的冲动-抗性-->
+  <Affliction name="破坏的冲动-抗性" identifier="Touhou_ODM11_Aff_Event_Effect_Resistance" description="" type="Touhou_Never_Give_Up_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="1"
+              resetbetweenrounds="true" showiconthreshold="100" showinhealthscannerthreshold="100" affectmachines="true" iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Touhou_ODM8_Aff_Event_Effect" minstrength="0" maxstrength="1"/>
+    <Effect minstrength="0" maxstrength="1" resistancefor="explosiondamage,burn,debuff" minresistance="0.2" maxresistance="0.2"/>
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM8_Aff_Event_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <!--异常天气-暴雨-->
+  <Affliction name="异常天气-暴雨" identifier="Touhou_ODM11_Aff_Event_Weather_Effect01" description="" type="Touhou_Never_Give_Up_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="1"
+              duration="30.0" resetbetweenrounds="true" showinhealthscannerthreshold="100" affectmachines="true" iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Touhou_ODM11_Aff_Event_Weather_Effect01" minstrength="0" maxstrength="1"/>
+    <Effect minstrength="0" maxstrength="1" resistancefor="burn" minresistance="0.2" maxresistance="0.2"
+            minafflictionoverlayalphamultiplier="0.35" maxafflictionoverlayalphamultiplier="0.35">
+      <StatValue stattype="RangedSpreadReduction" value="-0.2" />
+      <StatValue stattype="RangedAttackSpeed" value="-0.2" />
+    </Effect>
+    <AfflictionOverlay texture="%ModDir%/Images/Missions/Screen_Raining.png" />
+    <PeriodicEffect mininterval="10" maxinterval="20">
+      <StatusEffect target="Character" onlyinside="true" Interval="5.0">
+        <Conditional IsLocalPlayer="True"/>
+        <Sound file="%ModDir%/Sounds/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect01.ogg" volume="1.5" />
+      </StatusEffect>
+    </PeriodicEffect>
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect01.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <!--异常天气-雷电-->
+  <Affliction name="异常天气-雷电" identifier="Touhou_ODM11_Aff_Event_Weather_Effect02" description="" type="Touhou_Never_Give_Up_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="1"
+              duration="30.0" resetbetweenrounds="true" showinhealthscannerthreshold="100" affectmachines="true" iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Touhou_ODM11_Aff_Event_Weather_Effect02" minstrength="0" maxstrength="1"/>
+    <Effect minstrength="0" maxstrength="1" >
+      <StatValue stattype="RangedAttackSpeed" value="0.15" />
+      <StatValue stattype="MeleeAttackSpeed" value="0.3" />
+    </Effect>
+    <PeriodicEffect mininterval="10" maxinterval="20">
+      <StatusEffect target="Character" onlyinside="true" Interval="5.0">
+        <Conditional IsLocalPlayer="True"/>
+        <Sound file="%ModDir%/Sounds/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect02.ogg" volume="1.5" />
+      </StatusEffect>
+    </PeriodicEffect>
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect02.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <!--异常天气-飓风-->
+  <Affliction name="异常天气-飓风" identifier="Touhou_ODM11_Aff_Event_Weather_Effect03" description="" type="Touhou_Never_Give_Up_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="1"
+              duration="30.0" resetbetweenrounds="true" showinhealthscannerthreshold="100" affectmachines="true" iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Touhou_ODM11_Aff_Event_Weather_Effect03" minstrength="0" maxstrength="1"/>
+    <Effect minstrength="0" maxstrength="1" minspeedmultiplier="1.2" maxspeedmultiplier="1.2">
+      <PeriodicEffect mininterval="10" maxinterval="20" minstrength="0" maxstrength="1">
+        <StatusEffect target="Character">
+          <Affliction identifier="slow" strength="40" />
+        </StatusEffect>
+        <StatusEffect target="Character" onlyinside="true" Interval="5.0">
+          <Conditional IsLocalPlayer="True"/>
+          <Sound file="%ModDir%/Sounds/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect03.ogg" volume="1.5" />
+        </StatusEffect>
+      </PeriodicEffect>
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect03.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <!--异常天气-迷雾-->
+  <Affliction name="异常天气-迷雾" identifier="Touhou_ODM11_Aff_Event_Weather_Effect04" description="" type="Touhou_Never_Give_Up_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="1"
+              duration="20.0" resetbetweenrounds="true" showinhealthscannerthreshold="100" affectmachines="true" iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Touhou_ODM11_Aff_Event_Weather_Effect04" minstrength="0" maxstrength="1"/>
+    <Effect minstrength="0" maxstrength="10" MinScreenBlur="0.0" MaxScreenBlur="0.25"
+            minafflictionoverlayalphamultiplier="0.65" maxafflictionoverlayalphamultiplier="0.65" />
+    <AfflictionOverlay texture="%ModDir%/Images/Missions/Screen_Black.png" />
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect04.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
 </Afflictions>
