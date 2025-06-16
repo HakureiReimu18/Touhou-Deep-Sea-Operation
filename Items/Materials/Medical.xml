@@ -289,7 +289,7 @@
                 <Conditional IsDead="false" />
                 <ReduceAffliction type="damage" amount="0.1" />
                 <ReduceAffliction type="Phoenix_Burn" amount="0.2" />
-                <ReduceAffliction type="debuff" amount="0.05" />
+                <ReduceAffliction type="debuff" amount="0.025" />
                 <ReduceAffliction type="psychosis" amount="0.5" />
                 <ReduceAffliction type="opiatewithdrawal" amount="0.4" />
                 <ReduceAffliction identifier="Patchouli_Asthma" amount="0.4" />
@@ -363,7 +363,7 @@
         <PreferredContainer primary="medcab"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" spawnprobability="0.03" />
         <PreferredContainer secondary="wreckmedcab,abandonedmedcab" minamount="1" maxamount="1" spawnprobability="0.04" />
-        <Price baseprice="15000" minleveldifficulty="36" >
+        <Price baseprice="10000" minleveldifficulty="36" >
             <Price storeidentifier="merchantoutpost" maxavailable="1" sold="false"/>
             <Price storeidentifier="merchantcity" multiplier="0.9" maxavailable="1" />
             <Price storeidentifier="merchantresearch" multiplier="1.1" maxavailable="1" />
@@ -383,7 +383,7 @@
                                 talentidentifiers="Hyouibana_Aya,Hyouibana_Marisa,Hyouibana_Mokou,Hyouibana_Remilia,Hyouibana_Youmu,Hyouibana_Nitori,Hyouibana_Patchouli,
                                 Hyouibana_Tenshi,Hyouibana_Reimu,Hyouibana_Momizi,Hyouibana_Yuka,Hyouibana_Aunn,Hyouibana_Flandre,Hyouibana_Nue,Hyouibana_Piece,
                                 Hyouibana_Cirno,Hyouibana_Koishi,Hyouibana_Alice,Hyouibana_Sunny,Hyouibana_Luna,Hyouibana_Star,Hyouibana_Sakuya,Hyouibana_Sanae，
-                                Hyouibana_Reisen,Hyouibana_Yukari,Hyouibana_Merry" />
+                                Hyouibana_Reisen,Hyouibana_Yukari,Hyouibana_Merry,Hyouibana_Renko" />
             </StatusEffect>
             <StatusEffect type="OnUse" target="UseTarget" >
                 <Conditional Hyouibana_Effect_Flag="gt 0"/>
@@ -841,8 +841,8 @@
     <Item name="永远亭医疗套件" identifier="Touhou_Medical_Toolkit" tags="smallitem,medical" subcategory="Touhou" category="medical"
           cargocontaineridentifier="metalcrate" scale="0.4" useinhealthinterface="true" RequireAimToUse="false">
         <PreferredContainer primary="medcab" />
-        <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.015" />
-        <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.065" />
+        <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.01" />
+        <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.02" />
         <Price baseprice="8000" minleveldifficulty="50" sold="false" >
             <Price storeidentifier="merchantoutpost" minavailable="2" />
             <Price storeidentifier="merchantcity" minavailable="2" />
@@ -890,8 +890,10 @@
         </CustomInterface>
         <Holdable slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" >
             <RequiredSkill identifier="medical" level="40" />
-
-            <StatusEffect type="Always" target="This" Condition="2.5" Interval="5">
+            <StatusEffect type="OnActive" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Medical_Toolkit_Talent" />
+            </StatusEffect>
+            <StatusEffect type="OnContained" target="This" Condition="2.5" Interval="5">
                 <Conditional condition="gt 0" />
             </StatusEffect>
             <StatusEffect type="OnBroken" target="This" Condition="5" disabledeltatime="true" delay="20" setvalue="true" />
@@ -1142,7 +1144,7 @@
                 <Remove />
             </StatusEffect>
         </Pickable>
-        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5">
+        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5" requiresrecipe="true" HideIfNoRecipe="true">
             <RequiredSkill identifier="Medical" level="40" />
             <RequiredItem identifier="opium" amount="16" />
         </Fabricate>
@@ -1158,7 +1160,7 @@
                 <Remove />
             </StatusEffect>
         </Pickable>
-        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5">
+        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5" requiresrecipe="true" HideIfNoRecipe="true">
             <RequiredSkill identifier="Medical" level="40" />
             <RequiredItem identifier="pomegrenadeextract" amount="4" />
         </Fabricate>
@@ -1174,7 +1176,7 @@
                 <Remove />
             </StatusEffect>
         </Pickable>
-        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5">
+        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5" requiresrecipe="true" HideIfNoRecipe="true">
             <RequiredSkill identifier="Medical" level="40" />
             <RequiredItem identifier="antidama1" amount="16" />
         </Fabricate>
@@ -1190,7 +1192,7 @@
                 <Remove />
             </StatusEffect>
         </Pickable>
-        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5">
+        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5" requiresrecipe="true" HideIfNoRecipe="true">
             <RequiredSkill identifier="Medical" level="40" />
             <RequiredItem identifier="antidama2" amount="12" />
         </Fabricate>
@@ -1206,7 +1208,7 @@
                 <Remove />
             </StatusEffect>
         </Pickable>
-        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5">
+        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5" requiresrecipe="true" HideIfNoRecipe="true">
             <RequiredSkill identifier="Medical" level="40" />
             <RequiredItem identifier="antibloodloss1" amount="16" />
         </Fabricate>
@@ -1222,7 +1224,7 @@
                 <Remove />
             </StatusEffect>
         </Pickable>
-        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5">
+        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5" requiresrecipe="true" HideIfNoRecipe="true">
             <RequiredSkill identifier="Medical" level="40" />
             <RequiredItem identifier="antibloodloss2" amount="12" />
         </Fabricate>
@@ -1238,7 +1240,7 @@
                 <Remove />
             </StatusEffect>
         </Pickable>
-        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5">
+        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5" requiresrecipe="true" HideIfNoRecipe="true">
             <RequiredSkill identifier="Medical" level="40" />
             <RequiredItem identifier="antibleeding1" amount="32" />
         </Fabricate>
@@ -1254,7 +1256,7 @@
                 <Remove />
             </StatusEffect>
         </Pickable>
-        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5">
+        <Fabricate suitablefabricators="medicalfabricator" requiredtime="5" requiresrecipe="true" HideIfNoRecipe="true">
             <RequiredSkill identifier="Medical" level="40" />
             <RequiredItem identifier="antibleeding2" amount="24" />
         </Fabricate>
@@ -1299,7 +1301,7 @@
 
 
     <!--永远亭外敷药箱-->
-    <Item name="永远亭外敷药箱" identifier="Touhou_External_Medicine_Box" tags="smallitem,medical,Touhou_Magic_Item" subcategory="Touhou" category="medical" Health="120"
+    <Item name="永远亭外敷药箱" identifier="Touhou_External_Medicine_Box" tags="smallitem,medical,Touhou_Magic_Item" subcategory="Touhou" category="medical" Health="100"
           cargocontaineridentifier="metalcrate" maxstacksize="32" maxstacksizecharacterinventory="2"
           scale="0.25" useinhealthinterface="true" RequireAimToUse="True">
         <PreferredContainer primary="medcab" secondary="medcontainer" />
@@ -1324,11 +1326,24 @@
             <RequiredItem identifier="antibiotics" amount="2"/>
             <RequiredItem identifier="antidama1" amount="2" />
         </Fabricate>
+        <Fabricate suitablefabricators="medicalfabricator" requiredtime="20" >
+            <RequiredSkill identifier="medical" level="70" />
+            <RequiredItem identifier="Reiki_Dust_Caking" amount="4"/>
+            <RequiredItem identifier="antibleeding3" amount="2"/>
+            <RequiredItem identifier="antidama1" />
+        </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20" amount="2" >
             <RequiredSkill identifier="medical" level="70" />
             <RequiredSkill identifier="Touhou_Magic" level="50" />
             <RequiredItem identifier="elastin" amount="4" />
             <RequiredItem identifier="Plant_Essential_Oil" amount="6"/>
+            <RequiredItem identifier="Reiki_Dust_Caking" amount="4"/>
+            <RequiredItem identifier="Mu_Alchemical" />
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20" amount="2" >
+            <RequiredSkill identifier="medical" level="70" />
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredItem identifier="antibleeding3" />
             <RequiredItem identifier="Reiki_Dust_Caking" amount="4"/>
             <RequiredItem identifier="Mu_Alchemical" />
         </Fabricate>
@@ -1353,7 +1368,7 @@
             <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" duration="10.0">
                 <ReduceAffliction type="infection" amount="40" />
                 <ReduceAffliction type="bleeding" amount="3" />
-                <ReduceAffliction type="burn" amount="2" />
+                <ReduceAffliction type="burn" amount="1" />
             </StatusEffect>
             <StatusEffect statuseffecttags="medical" type="OnFailure" target="This, Limb" duration="2.0">
                 <ReduceAffliction type="bleeding" amount="20" />

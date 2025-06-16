@@ -1056,4 +1056,45 @@
             </Abilities>
         </AbilityGroupEffect>
     </Talent>
+
+    <!--凭依莲子-->
+    <Talent identifier="Hyouibana_Renko" >
+        <Icon texture="%ModDir%/Images/Talents/RenkoTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Hyouibana_Renko"/>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="Hyouibana_Renko_Effect" amount="10.0"/>
+                            <Affliction identifier="Hyouibana_Effect_Flag" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="9.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Hyouibana_Effect_Prefect" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" Duration="10.0" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Hyouibana_Effect_Prefect_Renko" amount="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="2.9">
+            <Conditions>
+                <AbilityConditionHasSkill skillidentifier="medical" minvalue="60" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackSpeed" value="0.1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
 </Talents>

@@ -602,7 +602,8 @@
             <Abilities>
                 <CharacterAbilityApplyStatusEffectsToAttacker>
                     <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" targetlimb="Head" delay="0.1" disabledeltatime="true">
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Head" delay="0.1" disabledeltatime="true" comparison="And">
+                            <Conditional speciesgroup="neq human" />
                             <Affliction identifier="Touhou_Freeze" amount="10.0"/>
                             <Affliction identifier="psychosis" amount="5.0"/>
                         </StatusEffect>
@@ -1770,7 +1771,7 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--嗜血传说 远程攻击速度、近战攻击速度和攻击伤害增加10%，这个效果在水中减半。
+    <!--嗜血传说 远程攻击速度、近战攻击速度增加10%，这个效果在水中减半。
     穿着蕾米莉亚装束+时：增加5%物理伤害抗性、5%烧伤抗性和10%最大生命值
     穿着芙兰朵露装束+时：增加15%烧伤抗性，生命值大于50%时，提高50%精神病抗性，增加50%技能获取速度-->
     <Talent identifier="Touhou_Vampire04">
@@ -1780,21 +1781,17 @@
             <Abilities>
                 <CharacterAbilityGiveStat stattype="RangedAttackSpeed" value="0.05"/>
                 <CharacterAbilityGiveStat stattype="MeleeAttackSpeed" value="0.05"/>
-                <CharacterAbilityGiveStat stattype="RangedAttackMultiplier" value="0.05"/>
-                <CharacterAbilityGiveStat stattype="MeleeAttackMultiplier" value="0.05"/>
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="None">
+        <AbilityGroupInterval interval="2.9">
             <Conditions>
                 <AbilityConditionInWater invert="true" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityGiveStat stattype="RangedAttackSpeed" value="0.05"/>
-                <CharacterAbilityGiveStat stattype="MeleeAttackSpeed" value="0.05"/>
-                <CharacterAbilityGiveStat stattype="RangedAttackMultiplier" value="0.05"/>
-                <CharacterAbilityGiveStat stattype="MeleeAttackMultiplier" value="0.05"/>
+                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="0.05"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackSpeed" value="0.05"/>
             </Abilities>
-        </AbilityGroupEffect>
+        </AbilityGroupInterval>
         <!--蕾米莉亚-->
         <AbilityGroupEffect abilityeffecttype="None">
             <Conditions>
@@ -2933,7 +2930,6 @@
         <AbilityGroupEffect abilityeffecttype="OnAllMissionsCompleted">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="The_Daughter_Of_Heaven" />
-                <AbilityConditionLocation hasoutpost="true"/>
                 <AbilityConditionHasPermanentStat statidentifier="Touhou_Tiangou05_Counter" min="11" invert="true"/>
             </Conditions>
             <Abilities>
