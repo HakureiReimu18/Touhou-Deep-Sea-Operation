@@ -36,4 +36,10 @@ Hook.Patch("Barotrauma.Character", "ControlLocalPlayer", function(instance)
         Screen.Selected.Cam.OffsetAmount = math.min(Lerp(Screen.Selected.Cam.OffsetAmount, 0, 0.64)
                 * (1 + math.min( GetSkillLevel(character,"Touhou_Magic") * 0.001, 0.15)), 471.5)
         end
+    if PlayerInput.SecondaryMouseButtonHeld()
+            and (character.HasEquippedItem("Touhou_Cam_Offset_Sniper",true,2) or character.HasEquippedItem("Touhou_Cam_Offset_Sniper",true,4))
+            and not character.SelectedItem then
+        Screen.Selected.Cam.OffsetAmount = math.min(Lerp(Screen.Selected.Cam.OffsetAmount, 0, 0.76)
+                * (1 + math.min( GetSkillLevel(character,"Touhou_Magic") * 0.001, 0.15)), 560)
+    end
 end, Hook.HookMethodType.After)

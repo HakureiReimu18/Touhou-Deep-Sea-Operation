@@ -1900,19 +1900,19 @@
         </Explosion>
       </StatusEffect>
       <StatusEffect target="Character" >
-        <ParticleEmitter particle="flameburningcharacter" DistanceMin="0" DistanceMax="30" ParticlesPerSecond="120" AngleMin="60" AngleMax="120" VelocityMax="20" colormultiplier="255,100,255,255"/>
+        <ParticleEmitter particle="flameburningcharacter" DistanceMin="0" DistanceMax="30" ParticlesPerSecond="60" AngleMin="60" AngleMax="120" VelocityMax="20" colormultiplier="255,100,255,255"/>
       </StatusEffect>
     </Effect>
     <PeriodicEffect mininterval="1.5" maxinterval="3">
       <StatusEffect target="Character">
-        <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="200" distancemax="250" velocitymin="-500" velocitymax="-900" particlespersecond="120" colormultiplier="255,100,100,255" />
+        <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="200" distancemax="250" velocitymin="-500" velocitymax="-900" particlespersecond="60" colormultiplier="255,100,100,255" />
         <Affliction identifier="burn" amount="0.7" />
         <Affliction identifier="Reiki_Pressure" amount="1"/>
       </StatusEffect>
     </PeriodicEffect>
     <PeriodicEffect mininterval="1" maxinterval="2">
       <StatusEffect target="Character">
-        <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="200" distancemax="250" velocitymin="-500" velocitymax="-900" particlespersecond="120" colormultiplier="255,100,100,255" />
+        <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="200" distancemax="250" velocitymin="-500" velocitymax="-900" particlespersecond="60" colormultiplier="255,100,100,255" />
         <Affliction identifier="lacerations" amount="0.5" />
         <Affliction identifier="bleeding" strength="1.5" probability="0.15" />
         <Affliction identifier="Touhou_Lost_Dream" strength="10" probability="0.15" />
@@ -3010,8 +3010,7 @@
       </StatusEffect>
       <StatusEffect target="Character">
         <Conditional InWater="false" />
-        <ParticleEmitter particle="flameburningcharacter" DistanceMin="0" DistanceMax="30" ParticlesPerSecond="50" AngleMin="60" AngleMax="120" VelocityMax="20"/>
-        <ParticleEmitter particle="smoke" particlespersecond="3" scalemin="1" scalemax="3" distancemin="10" distancemax="50" />
+        <ParticleEmitter particle="flameburningcharacter" DistanceMin="0" DistanceMax="30" ParticlesPerSecond="30" AngleMin="60" AngleMax="120" VelocityMax="20"/>
       </StatusEffect>
       <StatusEffect target="Limb" disabledeltatime="true">
         <Conditional InWater="true" />
@@ -3029,8 +3028,7 @@
       </StatusEffect>
       <StatusEffect target="Character">
         <Conditional InWater="false" />
-        <ParticleEmitter particle="flameburningcharacter" DistanceMin="0" DistanceMax="30" ParticlesPerSecond="50" AngleMin="60" AngleMax="120" VelocityMax="20"/>
-        <ParticleEmitter particle="smoke" particlespersecond="3" scalemin="1" scalemax="3" distancemin="10" distancemax="50" />
+        <ParticleEmitter particle="flameburningcharacter" DistanceMin="0" DistanceMax="30" ParticlesPerSecond="30" AngleMin="60" AngleMax="120" VelocityMax="20"/>
       </StatusEffect>
       <StatusEffect target="Limb" disabledeltatime="true">
         <Conditional InWater="true" />
@@ -3859,7 +3857,18 @@
     <Effect minstrength="0" maxstrength="1" minbuffmultiplier="0.5" maxbuffmultiplier="0.5" >
       <StatValue stattype="MedicalItemApplyingMultiplier" value="-0.3" />
       <StatValue stattype="MedicalItemEffectivenessMultiplier" value="-0.3" />
-      <StatValue stattype="BuffDurationMultiplier" value="-0.9" />
+      <StatValue stattype="BuffDurationMultiplier" value="-0.94" />
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_Minus_K_Bullet_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <!--裂神者击中效果-->
+  <Affliction name="裂神者击中效果" identifier="Touhou_Godsplitter_Effect" description="" type="Touhou_Meniscate_Reflection_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="1"
+              duration="8.0" showiconthreshold="100" showinhealthscannerthreshold="100" affectmachines="true" iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Touhou_Never_Give_Up_Effect" minstrength="0" maxstrength="1"/>
+    <Effect minstrength="0" maxstrength="1" >
+      <StatValue stattype="MedicalItemApplyingMultiplier" value="-0.3" />
+      <StatValue stattype="MedicalItemEffectivenessMultiplier" value="-0.3" />
     </Effect>
     <icon texture="%ModDir%/Images/Afflictions/Touhou_Minus_K_Bullet_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
@@ -4046,7 +4055,7 @@
               showiconthreshold="100" showinhealthscannerthreshold="100" affectmachines="false" iconcolors="94,94,94;163,164,164;255,255,255">
     <Description textidentifier="afflictiondescription.Touhou_Water_Heart" minstrength="0" maxstrength="10"/>
     <Effect minstrength="0" maxstrength="10"
-            resistancefor="debuff,explosiondamage,bleeding,Phoenix_Burn"
+            resistancefor="debuff,explosiondamage,bleeding,Phoenix_Burn,stun"
             minresistance="0.2" maxresistance="0.2">
       <StatValue stattype="AttackMultiplier" value="0.2" />
       <StatValue stattype="MeleeAttackMultiplier" value="1.0" />
@@ -4059,8 +4068,8 @@
               resetbetweenrounds="true" showinhealthscannerthreshold="100" affectmachines="false" iconcolors="94,94,94;163,164,164;255,255,255">
     <Description textidentifier="afflictiondescription.Touhou_ODM10_Aff_Event_Effect" minstrength="0" maxstrength="1"/>
     <Effect minstrength="0" maxstrength="1"
-            resistancefor="debuff,damage"
-            minresistance="-0.2" maxresistance="-0.2">
+            resistancefor="debuff,damage,bleeding" tag="provocative"
+            minresistance="-0.3" maxresistance="-0.3">
       <StatValue stattype="ExplosionDamageMultiplier" value="-0.3" />
       <StatValue stattype="ExplosionRadiusMultiplier" value="-0.3" />
       <StatValue stattype="TeamAttackMultiplier" value="0.5" />
