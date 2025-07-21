@@ -34,13 +34,9 @@
     <Effect minstrength="0" maxstrength="16" strengthchange="-0.1" >
     <StatusEffect target="Character" setvalue="true" SpeedMultiplier="0.95" />
     </Effect>
-    <Effect minstrength="16" maxstrength="40" strengthchange="-0.1" minvitalitydecrease="0" maxvitalitydecrease="40">
-      <StatusEffect target="Character" >
-        <Affliction identifier="Slow_Baka" strength="4.5"/>
-      </StatusEffect>
-    </Effect>
+    <Effect minstrength="16" maxstrength="40" strengthchange="-0.1" minvitalitydecrease="0" maxvitalitydecrease="40"/>
 
-    <Effect minstrength="40" maxstrength="80" strengthchange="0.4" minvitalitydecrease="40" maxvitalitydecrease="80">
+    <Effect minstrength="40" maxstrength="80" strengthchange="0.4" minvitalitydecrease="40" maxvitalitydecrease="120">
       <StatusEffect target="Character" Interval="0.3" >
         <Affliction identifier="bloodloss" strength="1.8"/>
         <Affliction identifier="bleeding" strength="4.2" />
@@ -48,7 +44,7 @@
       </StatusEffect>
     </Effect>
 
-    <Effect minstrength="80" maxstrength="90" strengthchange="-0.1" minvitalitydecrease="80" maxvitalitydecrease="160">
+    <Effect minstrength="80" maxstrength="90" strengthchange="-0.1" minvitalitydecrease="120" maxvitalitydecrease="200">
       <StatusEffect target="Character" Interval="0.1" >
         <Affliction identifier="Reiki_Pressure" strength="1.5" penetration="0.8"/>
         <Affliction identifier="bleeding" strength="1" penetration="0.8"/>
@@ -56,7 +52,7 @@
       </StatusEffect>
     </Effect>
 
-    <Effect minstrength="90" maxstrength="100" strengthchange="-0.05" minvitalitydecrease="160" maxvitalitydecrease="400">
+    <Effect minstrength="90" maxstrength="100" strengthchange="-0.05" minvitalitydecrease="200" maxvitalitydecrease="400">
       <StatusEffect target="Character" Interval="0.1" >
         <Affliction identifier="Reiki_Pressure" strength="10"/>
         <Affliction identifier="bleeding" strength="8"/>
@@ -224,13 +220,11 @@
   </Affliction>
 
   <!--魔药浸剂-->
-  <Affliction name="魔药浸剂" identifier="Potion_In_Effect" description="" type="resistance" isbuff="true" limbspecific="false" maxstrength="360"
-              hideiconafterdelay="true" affectmachines="false" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
-    <Description textidentifier="afflictiondescription.Potion_In_Effect" minstrength="0" maxstrength="360"/>
+  <Affliction name="魔药浸剂" identifier="Potion_In_Effect" description="" type="resistance" isbuff="true" limbspecific="false" maxstrength="240"
+              hideiconafterdelay="true" affectmachines="false" iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Potion_In_Effect" minstrength="0" maxstrength="240"/>
     <Effect minstrength="0" maxstrength="120"
-            strengthchange="-1"
-            resistancefor="damage,burn"
-            minresistance="0" maxresistance="-0.1">
+            strengthchange="-1">
       <StatValue stattype="MaximumHealthMultiplier" minvalue="0" maxvalue="0.05" />
       <StatusEffect target="Character" Interval="1.0" Duration="1.0" >
         <Conditional Patchouli_Asthma="gt 0"/>
@@ -248,11 +242,10 @@
         <ReduceAffliction identifier="Touhou_Royal_Flare_Burn" amount="2" />
         <ReduceAffliction identifier="Touhou_Silent_Selene_Dream" amount="2" />
       </StatusEffect>
+      <StatValue stattype="AttackMultiplier" minvalue="0" value="-0.2" />
     </Effect>
-    <Effect minstrength="120" maxstrength="360"
-            strengthchange="-1"
-            resistancefor="damage,burn"
-            minresistance="-0.1" maxresistance="-0.2">
+    <Effect minstrength="120" maxstrength="240"
+            strengthchange="-1">
       <StatValue stattype="MaximumHealthMultiplier" minvalue="0.05" maxvalue="0.1" />
       <StatusEffect target="Character" Interval="1.0" Duration="1.0" >
         <Conditional Patchouli_Asthma="gt 0"/>
@@ -272,6 +265,7 @@
         <ReduceAffliction identifier="Touhou_Royal_Flare_Burn" amount="4" />
         <ReduceAffliction identifier="Touhou_Silent_Selene_Dream" amount="4" />
       </StatusEffect>
+      <StatValue stattype="AttackMultiplier" minvalue="-0.2" value="-0.4" />
     </Effect>
     <icon texture="%ModDir%/Images/Afflictions/Essential_Oil_Application.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
@@ -357,7 +351,7 @@
     <Effect minstrength="0" maxstrength="10"
             strengthchange="-3"
             resistancefor="hallucinating"
-            minresistance="0.25" maxresistance="0.25">
+            minresistance="0.35" maxresistance="0.35">
       <StatusEffect target="Character" Interval="1.0" disabledeltatime="true" >
         <Conditional HealthPercentage="lte 100" />
         <ReduceAffliction type="damage" amount="0.05" />
@@ -367,7 +361,7 @@
       </StatusEffect>
       <StatusEffect target="Character" comparison="And" Interval="1.0" disabledeltatime="true" >
         <Conditional oxygenlow="gte 2" />
-        <ReduceAffliction type="oxygenlow" amount="2" />
+        <ReduceAffliction type="oxygenlow" amount="1.0" />
       </StatusEffect>
       <StatusEffect target="Character" Interval="1.0" disabledeltatime="true" >
         <Conditional psychosis="gt 0" />
@@ -377,9 +371,6 @@
       </StatusEffect>
       <StatusEffect target="Character" Interval="1.0" disabledeltatime="true" >
         <ReduceAffliction type="Reiki_Side_Effect" amount="0.03" />
-      </StatusEffect>
-      <StatusEffect target="Character" Interval="3.0" disabledeltatime="true" >
-        <ReduceAffliction type="hallucinating" amount="6" />
       </StatusEffect>
     </Effect>
     <icon texture="%ModDir%/Images/Afflictions/Touhou_Water_Heart.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
@@ -1062,30 +1053,30 @@
     </Effect>
     <Effect minstrength="150" maxstrength="300" strengthchange="-1" minskillmultiplier="1.1" maxskillmultiplier="1.305"
             resistancefor="bleeding,damage,alieninfection,poison,stun" minresistance="0.15" maxresistance="0.15">
-      <StatusEffect target="Character" Interval="1.0" Duration="1.0" >
+      <StatusEffect target="Character" comparison="And" Interval="1.0" disabledeltatime="true" >
         <Conditional skillrequirement="true" Touhou_Magic="gt 60"/>
+        <Conditional HealthPercentage="gt 10"/>
         <ReduceAffliction type="Reiki_Side_Effect" strength="0.2" />
-        <ReduceAffliction type="damage" strength="0.2" />
-        <ReduceAffliction type="burn" strength="0.2" />
+        <ReduceAffliction type="damage" strength="0.1" />
+        <ReduceAffliction type="burn" strength="0.1" />
       </StatusEffect>
-      <StatusEffect target="Character" Interval="1.0" Duration="1.0" >
+      <StatusEffect target="Character" Interval="1.0" disabledeltatime="true" >
         <Conditional skillrequirement="true" Touhou_Magic="gt 120"/>
         <ReduceAffliction type="damage" strength="0.2" />
         <ReduceAffliction type="burn" strength="0.2" />
       </StatusEffect>
-      <StatusEffect target="Character" comparison="And" Interval="1.0" Duration="1.0" >
+      <StatusEffect target="Character" comparison="And" Interval="1.0" disabledeltatime="true" >
         <Conditional skillrequirement="true" Touhou_Magic="gt 120"/>
-        <Conditional  bleeding="gt 0"/>
-        <ReduceAffliction type="bleeding" strength="0.2" />
+        <Conditional bleeding="gt 0"/>
+        <Conditional HealthPercentage="gt 10"/>
+        <ReduceAffliction type="bleeding" strength="0.1" />
       </StatusEffect>
-      <StatusEffect target="Character" comparison="And" Interval="1.0" Duration="1.0">
-        <Conditional skillrequirement="true" Touhou_Magic="gt 105"/>
-        <Conditional haste="lte 300"/>
-        <Conditional IsDead="false" />
-        <Affliction identifier="haste" strength="3.5" />
-      </StatusEffect>
-      <StatusEffect target="Character" comparison="And" Interval="1.0" Duration="1.0" >
+      <StatusEffect target="Character" comparison="And" Interval="1.0" disabledeltatime="true" >
         <Conditional The_Still_Library="gt 0"/>
+        <Conditional IsDead="false" />
+        <Affliction identifier="Touhou_Magic_Boost_Patchouli" strength="10" />
+      </StatusEffect>
+      <StatusEffect target="Character" comparison="And" Interval="1.0" disabledeltatime="true" >
         <Conditional Hyouibana_Effect_Prefect_Patchouli="gt 0"/>
         <Conditional IsDead="false" />
         <Affliction identifier="Touhou_Magic_Boost_Patchouli" strength="10" />
@@ -1893,7 +1884,7 @@
     <Description textidentifier="afflictiondescription.Touhou_Tide_Bolt_Effect" minstrength="0" maxstrength="10"/>
     <Effect minstrength="0" maxstrength="10" resistancefor="damage,burn,stun" minresistance="0" maxresistance="-0.4" strengthchange="-0.1">
       <StatusEffect target="Character" disabledeltatime="true" Interval="3.0" >
-        <Explosion range="50.0" force="4.0" severlimbsprobability="0.2" penetration="0.15">
+        <Explosion range="50.0" force="4.0" severlimbsprobability="0.2" penetration="0.35">
           <Affliction identifier="Touhou_Lost_Dream" strength="6" />
           <Affliction identifier="burn" strength="10" />
           <Affliction identifier="explosiondamage" strength="10" />
@@ -1906,15 +1897,15 @@
     <PeriodicEffect mininterval="1.5" maxinterval="3">
       <StatusEffect target="Character">
         <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="200" distancemax="250" velocitymin="-500" velocitymax="-900" particlespersecond="60" colormultiplier="255,100,100,255" />
-        <Affliction identifier="burn" amount="0.7" />
-        <Affliction identifier="Reiki_Pressure" amount="1"/>
+        <Affliction identifier="burn" amount="0.7" penetration="0.15" />
+        <Affliction identifier="Reiki_Pressure" amount="1" penetration="0.15"/>
       </StatusEffect>
     </PeriodicEffect>
     <PeriodicEffect mininterval="1" maxinterval="2">
       <StatusEffect target="Character">
         <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="200" distancemax="250" velocitymin="-500" velocitymax="-900" particlespersecond="60" colormultiplier="255,100,100,255" />
-        <Affliction identifier="lacerations" amount="0.5" />
-        <Affliction identifier="bleeding" strength="1.5" probability="0.15" />
+        <Affliction identifier="lacerations" amount="0.5" penetration="0.15" />
+        <Affliction identifier="bleeding" strength="1.5" probability="0.15" penetration="0.15" />
         <Affliction identifier="Touhou_Lost_Dream" strength="10" probability="0.15" />
       </StatusEffect>
     </PeriodicEffect>
@@ -2077,7 +2068,7 @@
           maxstrength="1"
           Duration="10.1"
           iconcolors="94,94,94;163,164,164;255,255,255">
-    <Effect minstrength="0" maxstrength="1" resistancefor="damage,burn" ResistanceLimbs="Head,Torso" minresistance="0.15" maxresistance="0.15" />
+    <Effect minstrength="0" maxstrength="1" resistancefor="damage,burn" ResistanceLimbs="Head,Torso" minresistance="0.075" maxresistance="0.075"/>
     <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
 
@@ -2115,19 +2106,17 @@
           Duration="10.1"
           iconcolors="94,94,94;163,164,164;255,255,255">
     <Effect minstrength="0" maxstrength="1" >
-      <StatusEffect target="Character" Interval="5.0" Duration="5.0">
+      <StatusEffect target="Character" Interval="1.0" disabledeltatime="true">
         <ReduceAffliction type="damage" strength="0.035" />
         <ReduceAffliction type="burn" strength="0.035" />
         <ReduceAffliction type="bleeding" strength="0.035" />
-        <ReduceAffliction type="bloodloss" strength="0.035" />
         <ReduceAffliction type="poison" strength="0.15" />
       </StatusEffect>
-      <StatusEffect target="Character" Interval="5.0" Duration="5.0">
+      <StatusEffect target="Character" Interval="1.0" disabledeltatime="true">
         <Conditional InWater="true" />
         <ReduceAffliction type="damage" strength="0.035" />
         <ReduceAffliction type="burn" strength="0.035" />
         <ReduceAffliction type="bleeding" strength="0.035" />
-        <ReduceAffliction type="bloodloss" strength="0.035" />
         <ReduceAffliction type="poison" strength="0.15" />
       </StatusEffect>
     </Effect>
@@ -2165,7 +2154,7 @@
           Duration="10.1"
           iconcolors="94,94,94;163,164,164;255,255,255">
     <Effect minstrength="0" maxstrength="1" minskillmultiplier="1.1" maxskillmultiplier="1.1" ResistanceLimbs="Head,Torso" resistancefor="damage,burn"
-            minresistance="0.075" maxresistance="0.075"/>
+            minresistance="0.15" maxresistance="0.15" />
     <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
 
@@ -2274,7 +2263,7 @@
           maxstrength="1"
           Duration="10.1"
           iconcolors="94,94,94;163,164,164;255,255,255">
-    <Effect minstrength="0" maxstrength="1" resistancefor="damage,burn" ResistanceLimbs="Head,Torso" minresistance="0.125" maxresistance="0.125" />
+    <Effect minstrength="0" maxstrength="1" resistancefor="damage,burn" ResistanceLimbs="Head,Torso" minresistance="0.05" maxresistance="0.05"/>
     <icon texture="%ModDir%/Images/Afflictions/Boudary_Divinggear_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
 
@@ -2312,19 +2301,17 @@
           Duration="10.1"
           iconcolors="94,94,94;163,164,164;255,255,255">
     <Effect minstrength="0" maxstrength="1" >
-      <StatusEffect target="Character" Interval="5.0" Duration="5.0">
+      <StatusEffect target="Character" Interval="1.0" disabledeltatime="true">
         <ReduceAffliction type="damage" strength="0.025" />
         <ReduceAffliction type="burn" strength="0.025" />
         <ReduceAffliction type="bleeding" strength="0.025" />
-        <ReduceAffliction type="bloodloss" strength="0.025" />
         <ReduceAffliction type="poison" strength="0.1" />
       </StatusEffect>
-      <StatusEffect target="Character" Interval="5.0" Duration="5.0">
+      <StatusEffect target="Character" Interval="1.0" disabledeltatime="true">
         <Conditional InWater="true" />
         <ReduceAffliction type="damage" strength="0.025" />
         <ReduceAffliction type="burn" strength="0.025" />
         <ReduceAffliction type="bleeding" strength="0.025" />
-        <ReduceAffliction type="bloodloss" strength="0.025" />
         <ReduceAffliction type="poison" strength="0.1" />
       </StatusEffect>
     </Effect>
@@ -2362,7 +2349,7 @@
           Duration="10.1"
           iconcolors="94,94,94;163,164,164;255,255,255">
     <Effect minstrength="0" maxstrength="1" minskillmultiplier="1.05" maxskillmultiplier="1.05" ResistanceLimbs="Head,Torso" resistancefor="damage,burn"
-            minresistance="0.05" maxresistance="0.05"/>
+            minresistance="0.125" maxresistance="0.125" />
     <icon texture="%ModDir%/Images/Afflictions/Boudary_Divinggear_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
 
@@ -2471,7 +2458,7 @@
           maxstrength="1"
           Duration="10.1"
           iconcolors="94,94,94;163,164,164;255,255,255">
-    <Effect minstrength="0" maxstrength="1" resistancefor="damage,burn" ResistanceLimbs="Head,Torso" minresistance="0.1" maxresistance="0.1" />
+    <Effect minstrength="0" maxstrength="1" resistancefor="damage,burn" ResistanceLimbs="Head,Torso" minresistance="0.025" maxresistance="0.025"/>
     <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
 
@@ -2509,18 +2496,16 @@
           Duration="10.1"
           iconcolors="94,94,94;163,164,164;255,255,255">
     <Effect minstrength="0" maxstrength="1" >
-      <StatusEffect target="Character" Interval="5.0" Duration="5.0">
+      <StatusEffect target="Character" Interval="1.0" disabledeltatime="true">
         <ReduceAffliction type="damage" strength="0.015" />
         <ReduceAffliction type="burn" strength="0.015" />
         <ReduceAffliction type="bleeding" strength="0.015" />
-        <ReduceAffliction type="bloodloss" strength="0.015" />
       </StatusEffect>
-      <StatusEffect target="Character" Interval="5.0" Duration="5.0">
+      <StatusEffect target="Character" Interval="1.0" disabledeltatime="true">
         <Conditional InWater="true" />
         <ReduceAffliction type="damage" strength="0.015" />
         <ReduceAffliction type="burn" strength="0.015" />
         <ReduceAffliction type="bleeding" strength="0.015" />
-        <ReduceAffliction type="bloodloss" strength="0.015" />
       </StatusEffect>
     </Effect>
     <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
@@ -2557,7 +2542,7 @@
           Duration="10.1"
           iconcolors="94,94,94;163,164,164;255,255,255">
     <Effect minstrength="0" maxstrength="1" minskillmultiplier="1.05" maxskillmultiplier="1.05" ResistanceLimbs="Head,Torso" resistancefor="damage,burn"
-            minresistance="0.025" maxresistance="0.025"/>
+            minresistance="0.1" maxresistance="0.1" />
     <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
 
@@ -2596,11 +2581,10 @@
         <RequiredAffliction type="damage,burn,bleeding" minstrength="48" />
         <Affliction identifier="Touhou_Hooked_Jade_Condition_Down_Effect" strength="35" />
       </StatusEffect>
-      <StatusEffect target="Character" Interval="5.0" Duration="5.0">
+      <StatusEffect target="Character" Interval="1.0" disabledeltatime="true">
         <ReduceAffliction type="damage" strength="0.035" />
         <ReduceAffliction type="burn" strength="0.035" />
         <ReduceAffliction type="bleeding" strength="0.035" />
-        <ReduceAffliction type="bloodloss" strength="0.035" />
       </StatusEffect>
     </Effect>
     <icon texture="%ModDir%/Images/Afflictions/Magic_Veil_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
@@ -2676,7 +2660,7 @@
         <RequiredAffliction type="damage,burn,bleeding" minstrength="48" />
         <Affliction identifier="Touhou_Hooked_Jade_Condition_Down_Effect" strength="35" />
       </StatusEffect>
-      <StatusEffect target="Character" Interval="3.0" Duration="3.0">
+      <StatusEffect target="Character" Interval="1.0" disabledeltatime="true">
         <ReduceAffliction type="debuff" strength="0.05" />
         <ReduceAffliction type="nausea" strength="5" />
         <ReduceAffliction type="invertcontrols" strength="5" />
@@ -2833,6 +2817,232 @@
     </Effect>
     <icon texture="Content/UI/MainIconsAtlas.png" sourcerect="640,896,128,128" color="255,100,100,255" origin="0,0"/>
   </Affliction>
+
+
+  <!--凭依武装-无燃料减速-->
+  <Affliction
+          name="无燃料减速"
+          identifier="Touhou_Hyouibana_Armor_Effect_No_Fuel"
+          description=""
+          type="Touhou_Hyouibana_Armor_Effect01"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showiconthreshold="100"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="1.1"
+          hideiconafterdelay="true"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" minspeedmultiplier="0.2" maxspeedmultiplier="0.2" />
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_Hyouibana_Armor_Effect01.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <!--凭依武装效果-->
+  <Affliction
+          name="幻想的凭依"
+          identifier="Touhou_Hyouibana_Armor_Effect01"
+          description=""
+          type="Touhou_Hyouibana_Armor_Effect01"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="5.1"
+          hideiconafterdelay="true"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" resistancefor="poison,alieninfection" minresistance="0.4" maxresistance="0.4" >
+      <!--受到少量伤害减少勾玉耐久-->
+      <StatusEffect type="OnDamaged" target="Character">
+        <RequiredAffliction type="damage,burn,bleeding" minstrength="3" />
+        <Affliction identifier="Touhou_Hooked_Jade_Condition_Down_Effect" strength="3" />
+      </StatusEffect>
+      <!--受到适量伤害减少勾玉耐久-->
+      <StatusEffect type="OnDamaged" target="Character">
+        <RequiredAffliction type="damage,burn,bleeding" minstrength="6" />
+        <Affliction identifier="Touhou_Hooked_Jade_Condition_Down_Effect" strength="10" />
+      </StatusEffect>
+      <!--受到中量伤害减少勾玉耐久-->
+      <StatusEffect type="OnDamaged" target="Character">
+        <RequiredAffliction type="damage,burn,bleeding" minstrength="18" />
+        <Affliction identifier="Touhou_Hooked_Jade_Condition_Down_Effect" strength="15" />
+      </StatusEffect>
+      <!--受到大量伤害减少勾玉耐久-->
+      <StatusEffect type="OnDamaged" target="Character">
+        <RequiredAffliction type="damage,burn,bleeding" minstrength="48" />
+        <Affliction identifier="Touhou_Hooked_Jade_Condition_Down_Effect" strength="35" />
+      </StatusEffect>
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_Hyouibana_Armor_Effect01.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+
+  <Affliction
+          name="宁静的勾玉效果"
+          identifier="Touhou_Hyouibana_Armor_Effect02"
+          description=""
+          type="Gensokyo_Divinggear_Effect"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showiconthreshold="100"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="10.1"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" >
+      <StatValue stattype="FlowResistance" value="0.5" />
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <Affliction
+          name="坚硬的勾玉效果"
+          identifier="Touhou_Hyouibana_Armor_Effect03"
+          description=""
+          type="Gensokyo_Divinggear_Effect"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showiconthreshold="100"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="10.1"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" >
+      <StatValue stattype="RangedSpreadReduction" value="0.15" />
+      <StatValue stattype="MeleeAttackSpeed" value="0.1" />
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <Affliction
+          name="柔软的勾玉效果"
+          identifier="Touhou_Hyouibana_Armor_Effect04"
+          description=""
+          type="Gensokyo_Divinggear_Effect"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showiconthreshold="100"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="10.1"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" resistancefor="poison,infection,paralysis" minresistance="0.3" maxresistance="0.3" >
+      <AbilityFlag flagtype="MoveNormallyWhileDragging" />
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <Affliction
+          name="温暖的勾玉效果"
+          identifier="Touhou_Hyouibana_Armor_Effect05"
+          description=""
+          type="Gensokyo_Divinggear_Effect"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showiconthreshold="100"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="10.1"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" resistancefor="burn" minresistance="0.2" maxresistance="0.2"/>
+    <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <Affliction
+          name="沸腾的勾玉效果"
+          identifier="Touhou_Hyouibana_Armor_Effect06"
+          description=""
+          type="Gensokyo_Divinggear_Effect"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showiconthreshold="100"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="10.1"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" >
+      <StatValue stattype="MeleeAttackMultiplier" value="0.25" />
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <Affliction
+          name="冰冷的勾玉效果"
+          identifier="Touhou_Hyouibana_Armor_Effect07"
+          description=""
+          type="Gensokyo_Divinggear_Effect"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showiconthreshold="100"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="10.1"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" minvitalitydecrease="-20" maxvitalitydecrease="-20" multiplybymaxvitality="false" />
+    <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <Affliction
+          name="白勾玉效果"
+          identifier="Touhou_Hyouibana_Armor_Effect08"
+          description=""
+          type="Gensokyo_Divinggear_Effect"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showiconthreshold="100"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="10.1"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" resistancefor="stun" minresistance="0.2" maxresistance="0.2"/>
+    <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <Affliction
+          name="黑勾玉效果"
+          identifier="Touhou_Hyouibana_Armor_Effect09"
+          description=""
+          type="Gensokyo_Divinggear_Effect"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showiconthreshold="100"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="10.1"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" minskillmultiplier="1.1" maxskillmultiplier="1.1" />
+    <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <Affliction
+          name="平滑的勾玉效果"
+          identifier="Touhou_Hyouibana_Armor_Effect10"
+          description=""
+          type="Gensokyo_Divinggear_Effect"
+          isbuff="true"
+          limbspecific="false"
+          indicatorlimb="Torso"
+          showiconthreshold="100"
+          showinhealthscannerthreshold="100"
+          maxstrength="1"
+          Duration="3.1"
+          iconcolors="94,94,94;163,164,164;255,255,255">
+    <Effect minstrength="0" maxstrength="1" >
+      <StatValue stattype="PropulsionSpeed" value="0.2" />
+      <AbilityFlag flagtype="ImmuneToPressure" />
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Hyouibana_Effect_Flag.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
 
   <!--MRE效果检测-->
   <Affliction
@@ -3112,7 +3322,7 @@
               affectmachines="true"
               iconcolors="94,94,94;163,164,164;255,255,255">
     <Description textidentifier="afflictiondescription.Touhou_Dark_Fog_Effect" minstrength="0" maxstrength="10"/>
-    <Effect minstrength="0" maxstrength="10" MinScreenBlur="0.0" MaxScreenBlur="0.35"
+    <Effect minstrength="0" maxstrength="10" MinScreenBlur="0.0" MaxScreenBlur="0.25"
             minafflictionoverlayalphamultiplier="0" maxafflictionoverlayalphamultiplier="0.7" strengthchange="-0.4" />
     <AfflictionOverlay texture="%ModDir%/Images/Missions/Screen_Black.png" />
     <icon texture="%ModDir%/Images/Afflictions/Touhou_Deceit_Mod_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
@@ -3217,7 +3427,7 @@
       <StatValue stattype="RangedSpreadReduction" value="-0.3" />
       <StatValue stattype="ExplosionRadiusMultiplier" value="-0.5" />
       <StatValue stattype="ExplosionDamageMultiplier" value="-0.5" />
-      <StatValue stattype="TeamAttackMultiplier" value="-0.5" />
+      <StatValue stattype="TeamAttackMultiplier" value="-0.25" />
     </Effect>
     <Effect minstrength="150" maxstrength="165" resistancefor="damage,debuff" minresistance="-0.15" maxresistance="-0.15"
             minvitalitydecrease="-25" maxvitalitydecrease="-50" multiplybymaxvitality="false" strengthchange="0.4" >
@@ -3227,7 +3437,7 @@
       <StatValue stattype="RangedSpreadReduction" value="-0.3" />
       <StatValue stattype="ExplosionRadiusMultiplier" value="-0.5" />
       <StatValue stattype="ExplosionDamageMultiplier" value="-0.5" />
-      <StatValue stattype="TeamAttackMultiplier" value="-0.5" />
+      <StatValue stattype="TeamAttackMultiplier" value="-0.25" />
     </Effect>
     <Effect minstrength="165" maxstrength="180" resistancefor="damage,burn,debuff" minresistance="-0.25" maxresistance="-0.25"
             minvitalitydecrease="0" maxvitalitydecrease="0" multiplybymaxvitality="false" strengthchange="0.4" >
@@ -3237,7 +3447,7 @@
       <StatValue stattype="RangedSpreadReduction" value="-0.3" />
       <StatValue stattype="ExplosionRadiusMultiplier" value="-0.5" />
       <StatValue stattype="ExplosionDamageMultiplier" value="-0.5" />
-      <StatValue stattype="TeamAttackMultiplier" value="-0.5" />
+      <StatValue stattype="TeamAttackMultiplier" value="-0.25" />
     </Effect>
     <Effect minstrength="180" maxstrength="200" resistancefor="damage,burn,debuff" minresistance="-0.25" maxresistance="-0.25"
             minvitalitydecrease="0" maxvitalitydecrease="1" multiplybymaxvitality="true" strengthchange="0.4" >
@@ -3605,9 +3815,10 @@
     <Description textidentifier="afflictiondescription.Touhou_Rose_Fragrance" minstrength="0" maxstrength="10"/>
     <Effect minstrength="0" maxstrength="100" minbuffmultiplier="1.2" maxbuffmultiplier="1.2"
             resistancefor="bleeding,burn,stun" minresistance="0.1" maxresistance="0.1">
-      <StatusEffect target="Character" Interval="1.0" Duration="1.0" >
+      <StatusEffect target="Character" Interval="1.0" disabledeltatime="true" >
         <ReduceAffliction type="burn" strength="0.2" />
       </StatusEffect>
+      <StatValue stattype="MeleeAttackSpeed" value="0.1" />
       <StatValue stattype="RangedSpreadReduction" value="0.1" />
       <StatValue stattype="TeamAttackMultiplier" value="-0.1" />
       <StatValue stattype="PropulsionSpeed" value="0.25" />
@@ -3675,8 +3886,8 @@
     <Effect minstrength="0" maxstrength="1" resistancefor="sym_unconsciousness,stun" minresistance="10.0" maxresistance="10.0" minskillmultiplier="1.25" maxskillmultiplier="1.25"
             minvitalitydecrease="0.5" maxvitalitydecrease="0.5" multiplybymaxvitality="true" >
       <StatValue stattype="AttackMultiplier" value="0.25" />
-      <StatValue stattype="MedicalItemEffectivenessMultiplier" minvalue="-0.25" value="-0.25" />
-      <StatValue stattype="BuffItemApplyingMultiplier" minvalue="-0.25" value="-0.25" />
+      <StatValue stattype="MedicalItemEffectivenessMultiplier" value="-0.25" />
+      <StatValue stattype="BuffItemApplyingMultiplier" value="-0.25" />
       <StatusEffect target="Character" Interval="1.0" Duration="1.0">
         <Affliction identifier="implacable" amount="10.0" />
       </StatusEffect>
@@ -3836,9 +4047,9 @@
       <StatusEffect target="Character" Interval="2.0" stackable="false" disabledeltatime="true">
         <Affliction identifier="Reiki_Pressure" amount="9" penetration="0.2" />
         <Affliction identifier="organdamage" amount="9" penetration="0.2" />
-        <Explosion range="200" force="2" flash="false" flames="false">
+        <Explosion range="200" force="2" flash="false" flames="false" penetration="0.2">
           <Affliction identifier="lacerations" strength="33" />
-          <Affliction identifier="explosiondamage" strength="33" />
+          <Affliction identifier="explosiondamage" strength="9" />
         </Explosion>
         <ParticleEmitter particle="Touhou_Blue_Explosion_Underwater" anglemin="0" anglemax="360" velocitymin="0" velocitymax="0" scalemin="2.5" scalemax="2.5" colormultiplier="255,72,36,150" />
       </StatusEffect>
@@ -3861,6 +4072,18 @@
     </Effect>
     <icon texture="%ModDir%/Images/Afflictions/Touhou_Minus_K_Bullet_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
+
+  <!--幻崩实验性步枪贫化弹药击中效果-->
+  <Affliction name="幻崩实验性步枪贫化弹药击中效果" identifier="Touhou_Knightmare_Experimental_Rifle_Ammo01_Effect" description="" type="Touhou_Meniscate_Reflection_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="10"
+              showiconthreshold="100" showinhealthscannerthreshold="100" affectmachines="true" iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Touhou_Never_Give_Up_Effect" minstrength="0" maxstrength="10"/>
+    <Effect minstrength="0" maxstrength="10" resistancefor="bleeding,bloodloss" minresistance="0" maxresistance="-0.5" strengthchange="-1" >
+      <StatValue stattype="MedicalItemApplyingMultiplier" value="-0.3" />
+      <StatValue stattype="MedicalItemEffectivenessMultiplier" value="-0.3" />
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_Minus_K_Bullet_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
 
   <!--裂神者击中效果-->
   <Affliction name="裂神者击中效果" identifier="Touhou_Godsplitter_Effect" description="" type="Touhou_Meniscate_Reflection_Effect" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="1"
@@ -4086,6 +4309,19 @@
             minresistance="0.25" maxresistance="0.25">
     </Effect>
     <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM10_Aff_Event_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+  </Affliction>
+
+  <!--劣化虎尾鲨-半血效果-->
+  <Affliction name="幽灵鲨-低血量效果" identifier="Touhou_Spectral_Shark_Low_Healh_Effect" description="" type="resistance" isbuff="true" limbspecific="false" indicatorlimb="Torso" maxstrength="8"
+              showinhealthscannerthreshold="100" affectmachines="true" iconcolors="94,94,94;163,164,164;255,255,255">
+    <Description textidentifier="afflictiondescription.Touhou_Magic_Boost" minstrength="0" maxstrength="8"/>
+    <Effect minstrength="0" maxstrength="8" resistancefor="debuff,damage,burn" minresistance="0.2" maxresistance="0.2"
+            multiplybymaxvitality="true" minvitalitydecrease="0" maxvitalitydecrease="-0.5" strengthchange="1" >
+      <StatusEffect target="Character">
+        <ParticleEmitter particle="StarDanmuBoom" particleamount="1" anglemin="0" anglemax="360" velocitymin="100" velocitymax="250" scalemin="0.2" scalemax="0.3" drawontop="true" colormultiplier="55,55,255,180" />
+      </StatusEffect>
+    </Effect>
+    <icon texture="%ModDir%/Images/Afflictions/Touhou_Magic_Boost.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
   </Affliction>
 
 </Afflictions>

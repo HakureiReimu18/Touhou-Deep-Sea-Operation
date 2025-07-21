@@ -10,6 +10,7 @@
     <Sprite identifier="Momizi_Join" texture="%ModDir%/Images/Missions/Momizi_Join.png" sourcerect="0,0,504,656" origin="0.7,0.7" />
     <Sprite identifier="Cirno_Join" texture="%ModDir%/Images/Missions/Cirno_Join.png" sourcerect="0,0,504,610" origin="0.7,0.7" />
     <Sprite identifier="Touhou_Akyuu_Mission" texture="%ModDir%/Images/Missions/Touhou_Akyuu_Mission.png" sourcerect="0,0,504,712" origin="0.7,0.7" />
+    <Sprite identifier="Reimu_Mission" texture="%ModDir%/Images/Missions/Reimu_Mission.png" sourcerect="0,0,420,300" origin="0.7,0.7" />
   </EventSprites>
 
   <EventPrefabs>
@@ -623,7 +624,6 @@
                                 </Success>
                                 <Failure>
                                   <ConversationAction targettag="triggerer_player" text="“呀？还没有找到吗？就是一个黑色的，上面顶着一个桃子的帽子，很显眼的。”" speakertag="Tenshi" eventsprite="Tenshi_Join"/>
-                                  <MessageBoxAction identifier="Find_Tenshi_Hat" TargetTag="triggerer_player" ObjectiveTag="Msg.Find_Tenshi_Hat" text="Msg.Find_Tenshi_Hat" iconstyle="GUINotificationButton" />
                                   <Goto name="Check_Tenshi_Hat"/>
                                 </Failure>
                               </CheckItemAction>
@@ -1574,9 +1574,46 @@
         </Failure>
       </CheckDataAction>
     </ScriptedEvent>
+
+    <!--站点简单任务-->
+    <ScriptedEvent identifier="Touhou_Easy_Mission01" commonness="100">
+      <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hakurei_Reimu" targettag="missionnpc" spawnlocation="Outpost" spawnpointtype="airlock" />
+      <ConversationAction text="EventText.Touhou_Easy_Mission01.c1" speakertag="missionnpc" endeventifinterrupted="false" dialogtype="Small" eventsprite="Reimu_Mission" />
+      <MissionAction missiontag="Touhou_Mission_Easy" />
+      <MissionAction missiontag="Touhou_Mission_Easy" />
+      <MissionAction missiontag="killmonster_set2" />
+    </ScriptedEvent>
+
+    <!--站点一般任务-->
+    <ScriptedEvent identifier="Touhou_Normal_Mission01" commonness="100">
+      <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hakurei_Reimu" targettag="missionnpc" spawnlocation="Outpost" spawnpointtype="airlock" />
+      <ConversationAction text="EventText.Touhou_Normal_Mission01.c1" speakertag="missionnpc" endeventifinterrupted="false" dialogtype="Small" eventsprite="Reimu_Mission" />
+      <MissionAction missiontag="Touhou_Mission_Normal" />
+      <MissionAction missiontag="Touhou_Mission_Normal" />
+      <MissionAction missiontag="killmonster_set3" />
+<!--      <CheckDataAction identifier="Touhou_Monster_Spectral_Mission01_Completed" condition="eq true">
+        <Success>
+          <MissionAction MissionIdentifier="Touhou_Monster_Spectral_Mission03" />
+        </Success>
+        <Failure>
+        </Failure>
+      </CheckDataAction>-->
+    </ScriptedEvent>
+
+    <!--站点困难任务-->
+    <ScriptedEvent identifier="Touhou_Hard_Mission01" commonness="100">
+      <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Mission_Hakurei_Reimu" targettag="missionnpc" spawnlocation="Outpost" spawnpointtype="airlock" />
+      <ConversationAction text="EventText.Touhou_Hard_Mission01.c1" speakertag="missionnpc" endeventifinterrupted="false" dialogtype="Small" eventsprite="Reimu_Mission" />
+      <MissionAction missiontag="Touhou_Mission_Hard" />
+      <MissionAction missiontag="Touhou_Mission_Hard" />
+      <MissionAction missiontag="Touhou_Mission_Hard" />
+      <MissionAction missiontag="killmonster_set4" />
+    </ScriptedEvent>
+
   </EventPrefabs>
 
-  <EventSet identifier="Touhou_Mission" leveltype="outpost" locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion,tsm_city,tsm_military,tsm_mine" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" campaign="true" additive="true" selectalways="true" ignorecooldown="true" commonness="120" eventcount="2">
+  <EventSet identifier="Touhou_Join" leveltype="outpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" campaign="true" additive="true" selectalways="true" ignorecooldown="true" commonness="100" eventcount="2"
+            locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion,tsm_city,tsm_military,tsm_mine">
     <EventSet identifier="Touhou_All_Join_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="3">
       <EventSet identifier="Touhou_Join_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1">
         <ScriptedEvent identifier="aya_join" commonness="200" triggercooldown="false" />
@@ -1593,9 +1630,36 @@
         <ScriptedEvent identifier="youmujoin" commonness="200" triggercooldown="false" />
       </EventSet>
     </EventSet>
-    <EventSet identifier="Touhou_Mission_Events" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1">
-      <ScriptedEvent identifier="Touhou_Akyuu_Mission" commonness="300" triggercooldown="false" />
-      <ScriptedEvent identifier="Akyuu_Join" commonness="300" triggercooldown="false" />
+  </EventSet>
+  <EventSet identifier="Touhou_Mission_Events_Akyuu" leveltype="outpost" minleveldifficulty="0" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1" campaign="true" additive="true"
+            locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion,tsm_city,tsm_military,tsm_mine">
+    <ScriptedEvent identifier="Touhou_Akyuu_Mission" commonness="100" triggercooldown="false" />
+    <ScriptedEvent identifier="Akyuu_Join" commonness="70" triggercooldown="false" />
+  </EventSet>
+  <EventSet identifier="Touhou_Mission_Events01" leveltype="outpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" additive="true" selectalways="true" campaign="true">
+    <EventSet identifier="Touhou_Mission_Events01_0_15" minleveldifficulty="0" maxleveldifficulty="15" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1" additive="true" selectalways="true"
+              locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion,tsm_city,tsm_military,tsm_mine">
+      <ScriptedEvent identifier="Touhou_Easy_Mission01" commonness="100" />
+      <ScriptedEvent identifier="Touhou_Normal_Mission01" commonness="20" />
+    </EventSet>
+    <EventSet identifier="Touhou_Mission_Events01_15_36" minleveldifficulty="15" maxleveldifficulty="36" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1" additive="true" selectalways="true"
+              locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion,tsm_city,tsm_military,tsm_mine">
+      <ScriptedEvent identifier="Touhou_Easy_Mission01" commonness="20" />
+      <ScriptedEvent identifier="Touhou_Normal_Mission01" commonness="100" />
+      <ScriptedEvent identifier="Touhou_Hard_Mission01" commonness="60" />
+      <!--      <ScriptedEvent identifier="Touhou_Lunatic_Mission01" commonness="10" />-->
+    </EventSet>
+    <EventSet identifier="Touhou_Mission_Events01_36_100" minleveldifficulty="36" maxleveldifficulty="100" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1" additive="true" selectalways="true"
+              locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion,tsm_city,tsm_military,tsm_mine">
+      <ScriptedEvent identifier="Touhou_Normal_Mission01" commonness="50" />
+      <ScriptedEvent identifier="Touhou_Hard_Mission01" commonness="80" />
+      <!--      <ScriptedEvent identifier="Touhou_Lunatic_Mission01" commonness="100" />-->
     </EventSet>
   </EventSet>
+<!--  <EventSet identifier="Touhou_Mission_Events02" leveltype="outpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" ignorecooldown="true" additive="true" selectalways="true" commonness="100" campaign="true">
+
+  </EventSet>
+  <EventSet identifier="Touhou_Mission_Events03" leveltype="outpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" ignorecooldown="true" additive="true" selectalways="true" commonness="100" campaign="true">
+
+  </EventSet>-->
 </Randomevents>

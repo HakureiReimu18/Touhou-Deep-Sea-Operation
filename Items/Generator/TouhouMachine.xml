@@ -29,7 +29,6 @@
       <RequiredItem identifier="Reiki_Stone" amount="4"/>
       <RequiredItem identifier="carbon" amount="4"/>
       <RequiredItem identifier="Magic_Material" />
-      <Item identifier="Spiritual_Water" usecondition="true" />
     </Fabricate>
     <Body width="160" height="160" density="30" />
     <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="false">
@@ -263,7 +262,7 @@
     <Turret
             canbeselected="false"
             spread="1.0"
-            launchimpulse="80.0"
+            launchimpulse="90.0"
             characterusable="false"
             linkable="true"
             barrelpos="112,82"
@@ -274,7 +273,7 @@
             recoildistance="120"
             reload="0.05"
             ShotsPerBurst="5"
-            DelayBetweenBursts="1.0"
+            DelayBetweenBursts="0.85"
             DamageMultiplier="1.1"
             springstiffnesslowskill="2"
             springstiffnesshighskill="50"
@@ -366,7 +365,7 @@
             recoildistance="50"
             maxchargetime="0.3"
             reload="0.09"
-            DamageMultiplier="1.05"
+            DamageMultiplier="1.1"
             springstiffnesslowskill="2"
             springstiffnesshighskill="50"
             springdampinglowskill="0.5"
@@ -777,6 +776,9 @@
     </Fabricate>
     <Body width="160" height="160" density="30" />
     <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="false">
+      <StatusEffect type="OnActive" target="Character" interval="5">
+        <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Plant_Machine_Talent" />
+      </StatusEffect>
       <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.75" setvalue="true" />
       <StatusEffect type="Always" target="This" comparison="And" Interval="1.0" disabledeltatime="true" setvalue="true" Tags="Gilead_Branch_Seed_On" stackable="false" >
         <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0" />
@@ -916,5 +918,86 @@
         <Remove />
       </StatusEffect>
     </Holdable>
+  </Item>
+
+
+  <Item
+          name="灵水收集器"
+          identifier="Touhou_Spiritual_Water_Collector"
+          category="Machine"
+          subcategory="Touhou"
+          tags="container"
+          pickdistance="50"
+          linkable="true"
+          allowedlinks="medcabinet,locker,toxcontainer,Touhou_Plant_Machine"
+          scale="0.5">
+    <sprite texture="%ModDir%/Images/General_Items/Touhou_Spiritual_Water_Collector.png" sourcerect="0,0,128,96" depth="0.79" premultiplyalpha="false" origin="0.5,0.5" />
+    <Price baseprice="200" >
+      <Price storeidentifier="merchantoutpost" multiplier="1.1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantcity" multiplier="1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantresearch" multiplier="1.1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantmilitary" multiplier="1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantmine" multiplier="1.1" sold="true" maxavailable="1" />
+    </Price>
+    <Deconstruct time="5">
+      <Item identifier="steel" amount="2" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiredtime="10">
+      <RequiredSkill identifier="mechanical" level="30" />
+      <RequiredItem identifier="Reiki_Stone" amount="2"/>
+      <RequiredItem identifier="steel" amount="2"/>
+    </Fabricate>
+    <Body width="128" height="96" density="10" />
+    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="8.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="false">
+      <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.9" setvalue="true" />
+    </Holdable>
+    <Powered powerconsumption="400" currpowerconsumption="400" isactive="true">
+      <GuiFrame relativesize="0.18,0.15" minsize="350,160" maxsize="420,192" anchor="Center" relativeoffset="0,-0.1" style="ItemUI" msg="ItemMsgInteractSelect" />
+    </Powered>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredSkill identifier="electrical" level="25" />
+      <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand" AllowWhenBroken="true">
+        <Sound file="Content/Sounds/Damage/Electrocution1.ogg" range="1000" />
+        <Explosion range="100.0" stun="0" force="1.0" flames="false" shockwave="false" sparks="true" underwaterbubble="false" />
+        <Affliction identifier="stun" strength="2" probability="0.5" />
+        <Affliction identifier="electricshock" strength="30"/>
+        <Affliction identifier="burn" strength="2" />
+        <ParticleEmitter particle="ElectricShock" DistanceMin="10" DistanceMax="25" ParticleAmount="5" ScaleMin="0.1" ScaleMax="0.12" />
+      </StatusEffect>
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <ParticleEmitter particle="spark" particleamount="5" emitinterval="1.05" anglemax="360" distancemax="20" scalemin="0.5" scalemax="1" mincondition="0.0" maxcondition="15.0" />
+      <ParticleEmitter particle="fleshsmoke" particlespersecond="2" scalemin="1" scalemax="2" mincondition="0.0" maxcondition="50.0" />
+      <input name="power_in" displayname="connection.powerin" />
+    </ConnectionPanel>
+    <ItemContainer hideitems="false" drawinventory="true" capacity="3" ItemsUseInventoryPlacement="true" maxstacksize="1" slotsperrow="3" itempos="36,-48" iteminterval="25.0,0" itemrotation="0" canbeselected="true" containedspritedepth="0.78" msg="ItemMsgInteractSelect">
+      <GuiFrame relativesize="0.16,0.18" anchor="Center" style="ItemUI" />
+      <SlotIcon slotindex="0" texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="100,0,100,139" origin="0.5,0.5" />
+      <SlotIcon slotindex="1" texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="100,0,100,139" origin="0.5,0.5" />
+      <SlotIcon slotindex="2" texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="100,0,100,139" origin="0.5,0.5" />
+      <Containable items="Spiritual_Water" excludebroken="false" excludefullcondition="true">
+        <StatusEffect type="OnContaining" targettype="Contained" Condition="2.5" Interval="1.0" disabledeltatime="true" >
+          <Conditional Voltage="gt 0.1" targetcontainer="true" targetitemcomponent="Powered"/>
+        </StatusEffect>
+        <StatusEffect type="OnContaining" targettype="Contained" scale="0.2" setvalue="true" Interval="0.5" disabledeltatime="true" />
+      </Containable>
+    </ItemContainer>
+
+    <LightComponent lightcolor="219,30,36,150" castshadows="false" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
+      <sprite texture="Content/Items/Weapons/Loaders.png" sourcerect="348,921,25,27" origin="1.0,-1.0" alpha="1.0" />
+      <IsActiveConditional targetcontaineditem="true" conditionpercentage="gt 0" />
+    </LightComponent>
+    <LightComponent lightcolor="255,170,0,150" castshadows="false" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
+      <sprite texture="Content/Items/Weapons/Loaders.png" sourcerect="348,921,25,27" origin="0.6,-1.0" alpha="1.0" />
+      <IsActiveConditional targetcontaineditem="true" conditionpercentage="gt 33" />
+    </LightComponent>
+    <LightComponent lightcolor="246,210,2,150" castshadows="false" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
+      <sprite texture="Content/Items/Weapons/Loaders.png" sourcerect="348,921,25,27" origin="0.2,-1.0" alpha="1.0" />
+      <IsActiveConditional targetcontaineditem="true" conditionpercentage="gt 66" />
+    </LightComponent>
+    <LightComponent lightcolor="80,200,0,150" castshadows="false" range="0.0" IsOn="true" powerconsumption="0" alphablend="true" allowingameediting="false">
+      <sprite texture="Content/Items/Weapons/Loaders.png" sourcerect="348,921,25,27" origin="-0.2,-1.0" alpha="1.0" />
+      <IsActiveConditional targetcontaineditem="true" conditionpercentage="gte 100" />
+    </LightComponent>
   </Item>
 </Items>

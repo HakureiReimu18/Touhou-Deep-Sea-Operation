@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Items>
 
-    <Item name="" identifier="Power_Point" tags="smallitem,Touhou_Power_Point" subcategory="Touhou" category="Misc" maxstacksize="32">
+    <Item name="" identifier="Power_Point" tags="smallitem,Touhou_Power_Point,disallowduplicatedeconstructoutput" subcategory="Touhou" category="Misc" maxstacksize="32">
         <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="1" spawnprobability="0.01" />
         <PreferredContainer primary="ruinstoragelarge" amount="1" spawnprobability="0.02" />
         <PreferredContainer primary="ruintreasure" amount="1" spawnprobability="0.04" />
@@ -32,10 +32,10 @@
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" />
     </Item>
 
-    <Item name="" identifier="Score_Point" tags="smallitem" subcategory="Touhou" category="Misc" maxstacksize="32">
+    <Item name="" identifier="Score_Point" tags="smallitem,disallowduplicatedeconstructoutput" subcategory="Touhou" category="Misc" maxstacksize="32">
         <PreferredContainer primary="ruinstorage,ruinstoragesmall" amount="2" spawnprobability="0.06" />
         <PreferredContainer primary="ruinstoragelarge" minamount="1" maxamount="3" spawnprobability="0.12" />
-        <PreferredContainer primary="ruintreasure" minamount="1" maxamount="3" spawnprobability="0.15" />
+        <PreferredContainer primary="ruintreasure" minamount="2" maxamount="3" spawnprobability="0.15" />
         <Price baseprice="1300" minleveldifficulty="16">
             <Price locationtype="outpost" multiplier="1.8" maxavailable="4" />
             <Price locationtype="city" multiplier="1.5" minavailable="10" />
@@ -166,6 +166,7 @@
             <RequiredSkill identifier="mechanical" level="20" />
             <RequiredItem identifier="silicon" amount="2" />
             <RequiredItem identifier="carbon" />
+            <RequiredItem identifier="iron" />
             <RequiredItem identifier="Spiritual_Water" mincondition="0.0499" usecondition="true"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="0.5" amount="3">
@@ -181,11 +182,11 @@
     </Item>
 
     <!--灵水-->
-    <Item name="" identifier="Spiritual_Water" tags="smallitem,Spiritual_Water,Touhou_Magic_Item" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="4" scale="0.4">
+    <Item name="" identifier="Spiritual_Water" tags="smallitem,Spiritual_Water,Touhou_Magic_Item" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="6" scale="0.35">
         <PreferredContainer primary="medcab" secondary="medcontainer" spawnprobability="0.02"/>
         <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.02" />
         <PreferredContainer secondary="supplycab" minamount="1" maxamount="2" spawnprobability="0.05" notcampaign="true"/>
-        <Price baseprice="100" >
+        <Price baseprice="70" >
             <Price storeidentifier="merchantoutpost" minavailable="4"/>
             <Price storeidentifier="merchantcity" minavailable="4" />
             <Price storeidentifier="merchantresearch" minavailable="4" />
@@ -195,7 +196,6 @@
         <Deconstruct time="2.5">
             <Item identifier="silicon" />
             <Item identifier="carbon" />
-            <Item identifier="aluminium" />
         </Deconstruct>
         <Fabricate suitablefabricators="fabricator" requiredtime="4" outcondition="0.0">
             <RequiredSkill identifier="mechanical" level="20" />
@@ -203,22 +203,23 @@
             <RequiredItem identifier="carbon" />
             <RequiredItem identifier="silicon" />
         </Fabricate>
-        <Sprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" depth="0.4" sourcerect="0,0,100,139" scale="0.4"/>
-        <Body width="80" height="80" density="10.1" />
+        <Sprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" depth="0.4" sourcerect="0,0,100,139" />
+        <Body width="80" height="139" density="10" />
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0" >
             <StatusEffect type="InWater" target="This" Condition="0.5" Interval="1.0" disabledeltatime="true" >
                 <Conditional condition="gte 2"/>
             </StatusEffect>
-            <StatusEffect type="Always" target="This" Condition="0.25" Interval="3" disabledeltatime="true" comparison="And" >
-                <Conditional condition="lte 2"/>
+            <StatusEffect type="OnNotContained" target="This" Condition="0.25" Interval="3" disabledeltatime="true" AllowWhenBroken="true" >
                 <Conditional InWater="true"/>
             </StatusEffect>
+            <StatusEffect type="OnPicked" targettype="This" scale="0.35" setvalue="true" disabledeltatime="true" />
+            <StatusEffect type="OnNotContained" targettype="This" scale="0.35" setvalue="true" Interval="5.0" disabledeltatime="true" />
         </Holdable>
 
-        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="100,0,100,139" depth="0.5" maxcondition="75.5" origin="0.5,0.5" scale="0.4" />
-        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="200,0,100,139" depth="0.5" maxcondition="50.5" origin="0.5,0.5" scale="0.4" />
-        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="300,0,100,139" depth="0.5" maxcondition="25.5" origin="0.5,0.5" scale="0.4" />
-        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="400,0,100,139" depth="0.5" maxcondition="0.5" origin="0.5,0.5" scale="0.4" />
+        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="100,0,100,139" depth="0.5" maxcondition="75.5" origin="0.5,0.5" />
+        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="200,0,100,139" depth="0.5" maxcondition="50.5" origin="0.5,0.5" />
+        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="300,0,100,139" depth="0.5" maxcondition="25.5" origin="0.5,0.5" />
+        <BrokenSprite texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="400,0,100,139" depth="0.5" maxcondition="0.5" origin="0.5,0.5" />
 
     </Item>
 
@@ -235,8 +236,7 @@
             <Price storeidentifier="merchantmilitary" minavailable="56" />
             <Price storeidentifier="merchantmine" minavailable="60"/>
         </Price>
-        <Deconstruct time="1">
-        </Deconstruct>
+        <Deconstruct time="1"/>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="0.5" amount="3">
             <RequiredSkill identifier="Touhou_Magic" level="10" />
             <RequiredItem identifier="carbon" amount="2"/>
@@ -297,11 +297,11 @@
             <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And">
                 <Conditional Condition="lte 0" />
                 <Conditional Memory_Of_Gensokyo="eq 0"/>
-                <GiveSkill skillidentifier="electrical" amount="2" triggertalents="false" />
-                <GiveSkill skillidentifier="helm" amount="2" triggertalents="false"/>
-                <GiveSkill skillidentifier="mechanical" amount="2" triggertalents="false"/>
-                <GiveSkill skillidentifier="medical" amount="2" triggertalents="false"/>
-                <GiveSkill skillidentifier="weapons" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="electrical" amount="1" triggertalents="false" />
+                <GiveSkill skillidentifier="helm" amount="1" triggertalents="false"/>
+                <GiveSkill skillidentifier="mechanical" amount="1" triggertalents="false"/>
+                <GiveSkill skillidentifier="medical" amount="1" triggertalents="false"/>
+                <GiveSkill skillidentifier="weapons" amount="1" triggertalents="false"/>
                 <GiveExperience amount="100" />
                 <RemoveItem />
             </StatusEffect>
@@ -332,7 +332,7 @@
             <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And" >
                 <Conditional Condition="lte 0" />
                 <Conditional Memory_Of_Gensokyo="eq 0"/>
-                <GiveSkill skillidentifier="Touhou_Magic" amount="5" triggertalents="false"/>
+                <GiveSkill skillidentifier="Touhou_Magic" amount="4" triggertalents="false"/>
                 <GiveExperience amount="200" />
                 <RemoveItem />
             </StatusEffect>
@@ -368,11 +368,11 @@
             <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And" >
                 <Conditional skillrequirement="true" Touhou_Magic="lt 80" />
                 <Conditional Condition="lte 0" />
-                <GiveSkill skillidentifier="electrical" amount="4" triggertalents="false" />
-                <GiveSkill skillidentifier="helm" amount="4" triggertalents="false"/>
-                <GiveSkill skillidentifier="mechanical" amount="4" triggertalents="false"/>
-                <GiveSkill skillidentifier="medical" amount="4" triggertalents="false"/>
-                <GiveSkill skillidentifier="weapons" amount="4" triggertalents="false"/>
+                <GiveSkill skillidentifier="electrical" amount="2" triggertalents="false" />
+                <GiveSkill skillidentifier="helm" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="mechanical" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="medical" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="weapons" amount="2" triggertalents="false"/>
                 <GiveSkill skillidentifier="Touhou_Magic" amount="4" triggertalents="false"/>
                 <GiveExperience amount="800" />
                 <RemoveItem />
@@ -380,11 +380,11 @@
             <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And" >
                 <Conditional skillrequirement="true" Touhou_Magic="gte 80" />
                 <Conditional Condition="lte 0" />
-                <GiveSkill skillidentifier="electrical" amount="2" triggertalents="false" />
-                <GiveSkill skillidentifier="helm" amount="2" triggertalents="false"/>
-                <GiveSkill skillidentifier="mechanical" amount="2" triggertalents="false"/>
-                <GiveSkill skillidentifier="medical" amount="2" triggertalents="false"/>
-                <GiveSkill skillidentifier="weapons" amount="2" triggertalents="false"/>
+                <GiveSkill skillidentifier="electrical" amount="1" triggertalents="false" />
+                <GiveSkill skillidentifier="helm" amount="1" triggertalents="false"/>
+                <GiveSkill skillidentifier="mechanical" amount="1" triggertalents="false"/>
+                <GiveSkill skillidentifier="medical" amount="1" triggertalents="false"/>
+                <GiveSkill skillidentifier="weapons" amount="1" triggertalents="false"/>
                 <GiveSkill skillidentifier="Touhou_Magic" amount="2" triggertalents="false"/>
                 <GiveExperience amount="500" />
                 <RemoveItem />
@@ -480,7 +480,7 @@
 
     <!--《文文。新闻》-->
     <Item identifier="Aya_News" tags="smallitem" subcategory="Touhou" category="Misc" cargocontaineridentifier="metalcrate" maxstacksize="32" scale="0.1" >
-        <Price baseprice="1200" >
+        <Price baseprice="800" >
             <Price storeidentifier="merchantoutpost" minavailable="8"/>
             <Price storeidentifier="merchantcity" minavailable="8" />
             <Price storeidentifier="merchantresearch" minavailable="8" />
@@ -494,7 +494,7 @@
     </Item>
 
     <!--帕秋莉手册-木元素-->
-    <Item name="帕秋莉手册-护符篇" identifier="Patchouli_Book_Charm_01" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+    <Item name="帕秋莉手册-护符篇" identifier="Patchouli_Book_Charm_01" category="Misc" hideinmenus="true" Tags="smallitem,Patchouli_Book" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
         <Price baseprice="20" canbespecial="false" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
             <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
@@ -520,7 +520,7 @@
     </Item>
 
     <!--帕秋莉手册-五行元素转换-->
-    <Item name="帕秋莉手册-元素转换篇" identifier="Patchouli_Book_01" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+    <Item name="帕秋莉手册-元素转换篇" identifier="Patchouli_Book_01" category="Misc" hideinmenus="true" Tags="smallitem,Patchouli_Book" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
         <Price baseprice="20" canbespecial="false" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
             <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
@@ -546,7 +546,7 @@
     </Item>
 
     <!--帕秋莉手册-以太层金属篇-->
-    <Item name="帕秋莉手册-以太层金属篇" identifier="Patchouli_Book_02" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+    <Item name="帕秋莉手册-以太层金属篇" identifier="Patchouli_Book_02" category="Misc" hideinmenus="true" Tags="smallitem,Patchouli_Book" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
         <Price baseprice="20" canbespecial="false" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
             <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
@@ -572,7 +572,7 @@
     </Item>
 
     <!--帕秋莉手册-副产物篇-->
-    <Item name="帕秋莉手册-副产物篇" identifier="Patchouli_Book_03" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+    <Item name="帕秋莉手册-副产物篇" identifier="Patchouli_Book_03" category="Misc" hideinmenus="true" Tags="smallitem,Patchouli_Book" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
         <Price baseprice="20" canbespecial="false" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
             <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
@@ -624,7 +624,7 @@
     </Item>-->
 
     <!--帕秋莉手册-伊奘诺物质篇-->
-    <Item name="帕秋莉手册-伊奘诺物质篇" identifier="Patchouli_Book_05" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+    <Item name="帕秋莉手册-伊奘诺物质篇" identifier="Patchouli_Book_05" category="Misc" hideinmenus="true" Tags="smallitem,Patchouli_Book" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
         <Price baseprice="20" canbespecial="false" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
             <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
@@ -650,7 +650,7 @@
     </Item>
 
     <!--帕秋莉手册-记忆材料篇-->
-    <Item name="帕秋莉手册-记忆材料篇" identifier="Patchouli_Book_06" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+    <Item name="帕秋莉手册-记忆材料篇" identifier="Patchouli_Book_06" category="Misc" hideinmenus="true" Tags="smallitem,Patchouli_Book" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
         <Price baseprice="20" canbespecial="false" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
             <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
@@ -676,7 +676,7 @@
     </Item>
 
     <!--帕秋莉手册-出血物质篇-->
-    <Item name="帕秋莉手册-出血物质篇" identifier="Patchouli_Book_07" category="Misc" hideinmenus="true" Tags="smallitem" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
+    <Item name="帕秋莉手册-出血物质篇" identifier="Patchouli_Book_07" category="Misc" hideinmenus="true" Tags="smallitem,Patchouli_Book" cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
         <Price baseprice="20" canbespecial="false" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
             <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
@@ -736,11 +736,11 @@
     </Item>
 
     <!--灵异珠-波纹-->
-    <Item name="灵异珠-波纹" identifier="Touhou_Mysterious_Pearl_Rippling" tags="smallitem,Touhou_Mysterious_Pearl_Rippling,alienartifact" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" scale="0.2">
+    <Item name="灵异珠-波纹" identifier="Touhou_Mysterious_Pearl_Rippling" tags="smallitem,Touhou_Mysterious_Pearl_Rippling,alienartifact,Touhou_Magic_Charging05" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" scale="0.2">
         <PreferredContainer primary="ruintreasure" amount="1" spawnprobability="0.02" />
         <PreferredContainer secondary="ruinstoragelarge" amount="1" spawnprobability="0.01" />
         <PreferredContainer primary="Touhou_Rippling" amount="1" spawnprobability="1" />
-        <Price baseprice="10000" sold="false">
+        <Price baseprice="1000" sold="false">
             <Price locationtype="outpost" multiplier="1.1" minavailable="6" />
             <Price locationtype="city" multiplier="0.9" minavailable="14" />
             <Price locationtype="research" multiplier="0.85" maxavailable="16" />
@@ -767,8 +767,8 @@
     <!--简单零件-->
     <Item name="简单零件" identifier="Touhou_Simple_Parts" tags="smallitem" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="48" scale="0.15" HideConditionBar="true">
         <PreferredContainer primary="engcab" />
-        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab" minamount="1" maxamount="2" spawnprobability="0.1" />
-        <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab" minamount="1" maxamount="2" spawnprobability="0.15"/>
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab" minamount="1" maxamount="2" spawnprobability="0.13" />
+        <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab" minamount="1" maxamount="2" spawnprobability="0.16"/>
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.18" />
         <Deconstruct time="10" chooserandom="true" amount="4">
             <Item identifier="iron" commonness="0.8" />
@@ -818,15 +818,8 @@
 
     <!--《红斑博物志》-->
     <Item name="《红斑博物志》" identifier="Touhou_Red_Spot_Freak_Report" tags="smallitem" subcategory="Touhou" category="Misc" cargocontaineridentifier="metalcrate" maxstacksize="32" scale="0.75" >
-        <Price baseprice="400" sold="false">
-            <Price storeidentifier="merchantoutpost" minavailable="8"/>
-            <Price storeidentifier="merchantcity" minavailable="8" />
-            <Price storeidentifier="merchantresearch" minavailable="8" />
-            <Price storeidentifier="merchantmilitary" minavailable="8" />
-            <Price storeidentifier="merchantmine" minavailable="8"/>
-        </Price>
         <Deconstruct time="1" >
-            <Item identifier="organicfiber" amount="3" />
+            <Item identifier="organicfiber" amount="2" />
         </Deconstruct>
         <Sprite texture="%ModDir%/Images/Materials/Touhou_Red_Spot_Freak_Report.png" depth="0.4" sourcerect="0,0,36,52" />
         <Body width="28" height="36" density="10" />
@@ -841,6 +834,19 @@
                 <Conditional condition="gt 10"/>
             </StatusEffect>
         </Holdable>
+    </Item>
+
+
+    <!--幽灵核心-->
+    <Item name="幽灵核心" identifier="Touhou_Spectral_Core_Item" tags="smallitem" subcategory="Touhou" category="Alien" cargocontaineridentifier="metalcrate" maxstacksize="32" scale="0.15" HideConditionBar="true">
+        <PreferredContainer primary="engcab" />
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab,piratestoragecab" amount="1" spawnprobability="0.025"/>
+        <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab" amount="1" spawnprobability="0.025"/>
+        <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.05" />
+        <Deconstruct time="5" />
+        <Sprite texture="%ModDir%/Images/Characters/Touhou_Spectral_Core/Touhou_Spectral_Core.png" depth="0.4" sourcerect="0,0,300,300" />
+        <Body width="300" height="300" density="10" gravityscale="0" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,-55" handle2="0,-55" />
     </Item>
 
 </Items>
