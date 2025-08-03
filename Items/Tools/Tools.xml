@@ -86,7 +86,6 @@
         </Deconstruct>
         <Fabricate suitablefabricators="fabricator" requiredtime="30" outcondition="0">
             <RequiredSkill identifier="electrical" level="60" />
-            <RequiredSkill identifier="medical" level="60" />
             <RequiredItem identifier="Score_Point" />
             <RequiredItem identifier="batterycell" amount="4"/>
         </Fabricate>
@@ -455,7 +454,8 @@
 -->
 
     <!--病气平愈护符-->
-    <Item name="" identifier="Illness_Recovery_Charm" tags="smallitem,mobileradio" subcategory="Touhou" category="Equipment" allowasextracargo="true" cargocontaineridentifier="metalcrate" maxstacksize="1" scale="0.25" >
+    <Item name="" identifier="Illness_Recovery_Charm" tags="smallitem,mobileradio,Illness_Recovery_Charm,Illness_Recovery_Charm_Tag" subcategory="Touhou" category="Equipment" allowasextracargo="true"
+          cargocontaineridentifier="metalcrate" maxstacksize="1" scale="0.25" >
         <PreferredContainer primary="medcab"/>
         <Price baseprice="1600" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="8"/>
@@ -605,8 +605,11 @@
             <SubContainer capacity="9" depth="0.5" maxstacksize="64" displaycontainedstatus="true" ExtraStackSize="2">
                 <Containable items="smallitem" excludeditems="backpack,crate,toolbelt,bigitem,toolbox,bulkyweapon,Touhou_Magic_Charging_Box"/>
             </SubContainer>
-            <SubContainer capacity="3" depth="0.5" maxstacksize="64" displaycontainedstatus="true"  ExtraStackSize="2">
-                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,bigitem,bulkyweapon"/>
+            <SubContainer capacity="1" depth="0.5" maxstacksize="64" displaycontainedstatus="true"  ExtraStackSize="2">
+                <Containable items="smallitem,mediumitem,Touhou_Magic_Charging_Box" excludeditems="backpack,crate,toolbelt,bigitem,bulkyweapon"/>
+            </SubContainer>
+            <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true"  ExtraStackSize="2">
+                <Containable items="smallitem,mediumitem,bulkyweapon,Touhou_Magic_Charging_Box" excludeditems="backpack,crate,toolbelt,bigitem"/>
             </SubContainer>
         </ItemContainer>
 
@@ -661,7 +664,7 @@
     </Item>
 
     <!--文文的信物-->
-    <Item name="文文的信物" identifier="Touhou_Aya_Token" category="Misc" subcategory="Touhou" maxstacksize="32" tags="smallitem" scale="0.35" cargocontaineridentifier="metalcrate" description="">
+    <Item name="天狗的信物" identifier="Touhou_Aya_Token" category="Misc" subcategory="Touhou" maxstacksize="32" tags="smallitem" scale="0.35" cargocontaineridentifier="metalcrate" description="">
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Aya_Token.png" sourcerect="0,0,108,108" depth="0.55" />
         <Body width="96" height="96" density="10" />
         <Fabricate suitablefabricators="fabricator" requiredtime="4" requiresrecipe="true" >
@@ -842,7 +845,7 @@
                 <Containable items="smallitem,Power_Bank,chem,medical,refrigerated,stasisbag" excludeditems="backpack,toolbelt,toolbox,bandolier,organ,bulkyweapon,mobilecontainer,organcrate"/>
             </SubContainer>
             <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,Power_Bank,chem,medical,refrigerated,stasisbag,Touhou_Magic_Charging_Box,toolbox" excludeditems="backpack,toolbelt,bandolier,organ,bulkyweapon,organcrate"/>
+                <Containable items="smallitem,Power_Bank,chem,medical,refrigerated,stasisbag,Touhou_Magic_Charging_Box,toolbox,bulkyweapon" excludeditems="backpack,toolbelt,bandolier,organ,bulkyweapon,organcrate"/>
             </SubContainer>
         </ItemContainer>
         <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="-40,30" handle2="40,30" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
@@ -920,7 +923,7 @@
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100" />
             </StatusEffect>
         </Holdable>
-        <RepairTool firedamage="10.0" structurefixamount="3.5" range="200" barrelpos="25,5" particles="weld" repairmultiple="true" repairthroughwalls="false" levelwallfixamount="-0.8" targetforce="10">
+        <RepairTool firedamage="10.0" structurefixamount="3.0" range="200" barrelpos="25,5" particles="weld" repairmultiple="true" repairthroughwalls="false" levelwallfixamount="-0.8" targetforce="10">
             <!-- the item must contain a welding fuel tank for it to work -->
             <RequiredItems items="weldingtoolfuel,Touhou_Fix_Foamg_Tank" type="Contained" />
             <RequiredItems items="Welding_Mode" type="Contained" />
@@ -937,10 +940,10 @@
             <StatusEffect type="OnUse" targettype="Contained" targets="weldingfueltank" Condition="-2.7" />
             <StatusEffect type="OnUse" targettype="Contained" targets="incendiumfueltank" Condition="-1.5" />
             <StatusEffect type="OnUse" targettype="Contained" targets="Touhou_Fix_Foamg_Tank" Condition="-0.2" />
-            <StatusEffect type="OnUse" target="This" structurefixamount="4.5" setvalue="true" Interval="0.5" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="This" structurefixamount="4.0" setvalue="true" Interval="0.5" disabledeltatime="true" >
                 <RequiredItems items="Touhou_Fix_Foamg_Tank" type="Contained" />
             </StatusEffect>
-            <StatusEffect type="OnUse" target="This" structurefixamount="3.5" setvalue="true" Interval="0.5" disabledeltatime="true" >
+            <StatusEffect type="OnUse" target="This" structurefixamount="3.0" setvalue="true" Interval="0.5" disabledeltatime="true" >
                 <RequiredItems items="weldingfueltank,incendiumfueltank,Touhou_Kappa_Welding_Tool_Ammo" type="Contained" />
             </StatusEffect>
             <!-- welding a door, it will get stuck after a while -->
@@ -1262,7 +1265,7 @@
     <!--核能电容弹匣-->
     <Item name="“核能电容弹匣”" identifier="Touhou_Nuclear_Energy_Capacitor_Magazine" scale="0.17" subcategory="Touhou" category="Weapon"
           maxstacksize="16" maxstacksizecharacterinventory="4" cargocontaineridentifier="metalcrate"
-          tags="smallitem,Touhou_Kappa_Welding_Tool_Ammo,Touhou_Magic_Charging03" impactsoundtag="impact_metal_light" >
+          tags="smallitem,Touhou_Kappa_Welding_Tool_Ammo,Touhou_Magic_Charging04" impactsoundtag="impact_metal_light" >
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.08" />
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.05" />
         <PreferredContainer secondary="wreckweaponholder" amount="1" spawnprobability="0.04" />
@@ -1325,7 +1328,7 @@
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.5" colormultiplier="255,100,100,220"/>
             <Attack itemdamage="110" targetforce="2" targetimpulse="6" penetration="0.1" severlimbsprobability="0.4">
                 <Affliction identifier="lacerations" strength="5" />
-                <Affliction identifier="burn" strength="15" />
+                <Affliction identifier="burn" strength="10" />
                 <Affliction identifier="gunshotwound" strength="5" />
                 <Affliction identifier="Touhou_Weakness" strength="0.7" />
                 <Affliction identifier="stun" strength="0.1" probability="0.6"/>
@@ -4647,6 +4650,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="60" />
             <RequiredItem identifier="Touhou_Spectral_Core_Item" />
+            <RequiredItem identifier="Reiki_Dust" amount="16" />
             <RequiredItem identifier="Touhou_Base_Metal" amount="2" />
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Spectral_Core_Fuelrod.png" sourcerect="0,0,150,160" origin="0.5,0.5" />
@@ -4698,6 +4702,86 @@
                 <Remove />
             </StatusEffect>
         </Projectile>
+    </Item>
+
+
+    <!--守矢神社腰包-->
+    <Item name="守矢神社腰包" identifier="Touhou_Moriya_Bag" scale="0.4" subcategory="Touhou" category="Equipment" tags="mediumitem,Touhou_Moriya_Bag,backpack,Illness_Recovery_Charm" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="medcab" />
+        <Price baseprice="6000" minleveldifficulty="15">
+            <Price storeidentifier="merchantoutpost" multiplier="1.4" sold="false" />
+            <Price storeidentifier="merchantcity" multiplier="1.2" minavailable="1" />
+            <Price storeidentifier="merchantresearch" multiplier="0.9" minavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmine" multiplier="1.2" sold="false" />
+            <Price storeidentifier="merchantmedical" multiplier="1.2" sold="false" />
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="organicfiber" amount="2"/>
+            <Item identifier="Power_Point" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
+            <RequiredSkill identifier="Touhou_Magic" level="50" />
+            <RequiredItem identifier="organicfiber" amount="6" />
+            <RequiredItem identifier="Mu_Alchemical" amount="2"/>
+            <RequiredItem identifier="Power_Point" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Moriya_Bag.png" sourcerect="0,0,124,100" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Moriya_Bag.png" depth="0.5" sourcerect="0,0,124,100" origin="0.5,0.5" />
+        <Body width="41" height="56" density="10" />
+        <ItemContainer autofill="False" hideitems="true" capacity="0" maxstacksize="1" ExtraStackSize="4" slotsperrow="4">
+            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5" />
+            <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5" />
+            <SlotIcon slotindex="12" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6" />
+            <SlotIcon slotindex="13" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6" />
+            <SlotIcon slotindex="14" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6" />
+            <SubContainer capacity="1" maxstacksize="1" autoinject="true" >
+                <Containable items="chem,syringe" />
+            </SubContainer>
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="mobilebattery" setactive="true" >
+                    <StatusEffect type="OnWearing" target="This,Character" setvalue="true" Interval="3.0" disabledeltatime="true">
+                        <Conditional IsDead="false" />
+                        <Affliction identifier="Touhou_Moriya_Bag_Effect" strength="10" />
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+            <SubContainer capacity="6" depth="0.5" maxstacksize="64" displaycontainedstatus="true" >
+                <Containable items="smallitem" excludeditems="backpack,crate,toolbelt,toolbox,Touhou_Magic_Charging_Box,bulkyweapon"/>
+            </SubContainer>
+            <SubContainer capacity="4" depth="0.5" maxstacksize="64" displaycontainedstatus="true" >
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,toolbox,Touhou_Magic_Charging_Box,bulkyweapon"/>
+            </SubContainer>
+            <SubContainer capacity="3" depth="0.5" maxstacksize="64" displaycontainedstatus="true" >
+                <Containable items="smallitem,mediumitem,Touhou_Magic_Charging_Box,bulkyweapon" excludeditems="backpack,crate,toolbelt"/>
+            </SubContainer>
+        </ItemContainer>
+
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-80" handle1="0,0" aimable="false" msg="ItemMsgPickUpUse" canbeselected="false"
+                  canbepicked="true" pickkey="Select" allowswappingwhenpicked="false" />
+
+        <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select" displaycontainedstatus="true">
+
+            <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Touhou_Moriya_Bag.png" sourcerect="0,0,124,100" limb="Torso" hidelimb="false" inheritlimbdepth="true"
+                    inherittexturescale="false" hideotherwearables="false" origin="0.65,0.2" scale="0.3" />
+
+            <StatusEffect type="OnWearing" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Moriya_Bag_Talent" />
+            </StatusEffect>
+
+            <StatusEffect type="OnWearing" target="Contained,Character" Condition="-0.1" interval="1.0" disabledeltatime="true" targetslot="1" >
+                <Conditional IsDead="false" />
+                <RequiredItem items="mobilebattery" targetslot="1" type="Contained" />
+            </StatusEffect>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="damage" damagemultiplier="0.85" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn" damagemultiplier="0.65" damagesound="LimbArmor" deflectprojectiles="true" />
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.85" damagesound="LimbArmor" deflectprojectiles="true" />
+            <SkillModifier skillidentifier="Touhou_Magic" skillvalue="15" />
+            <SkillModifier skillidentifier="mechanical" skillvalue="10" />
+            <SkillModifier skillidentifier="electrical" skillvalue="10" />
+        </Wearable>
+        <aitarget maxsightrange="1500" />
     </Item>
 
 </Items>

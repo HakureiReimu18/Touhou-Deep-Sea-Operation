@@ -91,6 +91,21 @@
         </AbilityGroupEffect>
     </Talent>
 
+    <!--神明/付丧神天赋分支 选择此分支后，不可再解锁其它分支。对应角色：秦心-->
+    <Talent identifier="Yokai_Select_ShenMing">
+        <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.Yokai_Select_ShenMing"/>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasPermanentStat statidentifier="Yokai_Select" min="1" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveTalentPoints amount="1" />
+                <CharacterAbilityGivePermanentStat statidentifier="Yokai_Select" value="1" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
     <!--天赋停摆 增加5%最大生命值，如果异变源头的计数未满，则立刻获得100点计数。分支最后的天赋，解锁此天赋后，其他分支将无法解锁-->
     <Talent identifier="Touhou_Yokai_Talents_Locked">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128" />
@@ -3008,6 +3023,367 @@
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.15" />
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--神明/付丧神-->
+
+    <!--寄宿于物 物理伤害抗性减少10%，增加10%最大生命值。生命值高于50%时，更难被敌人发现-->
+    <Talent identifier="Touhou_ShenMing01">
+        <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Survivable.png" sheetindex="0,0" sheetelementsize="400,400" />
+        <Description tag="talentdescription.Touhou_ShenMing01"/>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_ShenMing01_Effect" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="MaximumHealthMultiplier" value="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionAboveVitality vitalitypercentage="0.5"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="SoundRangeMultiplier" value="-0.4"/>
+                <CharacterAbilityModifyStat stattype="SightRangeMultiplier" value="-0.4"/>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--光亮如新 受到药物治疗的效果增加20%，增加10%debuff抗性和35%毒药抗性，减少15%debuff持续时间-->
+    <Talent identifier="Touhou_ShenMing02">
+        <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400" />
+        <Description tag="talentdescription.Touhou_ShenMing02"/>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="MedicalItemEffectivenessMultiplier" value="0.2"/>
+                <CharacterAbilityGiveStat stattype="DebuffDurationMultiplier" value="-0.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="5.0">
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="debuff" multiplier="0.9"/>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--本质具现 对人类造成的伤害增加10%。使用魔法武器对非人类的攻击额外造成灵压伤害，这个伤害随着魔法能力增加会逐渐增加-->
+    <Talent identifier="Touhou_ShenMing03">
+        <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Direct_Damage.png" sheetindex="0,0" sheetelementsize="400,400" />
+        <Description tag="talentdescription.Touhou_ShenMing03"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional speciesname="eq human" />
+                </AbilityConditionCharacter>
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional speciesname="neq human" />
+                </AbilityConditionCharacter>
+                <AbilityConditionHoldingItem tags="Touhou_Cam_Offset_Low,Touhou_Cam_Offset_Normal,Touhou_Cam_Offset_High,Touhou_Cam_Offset_Sniper"/>
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Reiki_Pressure" strength="0.05" multiplystrengthbyskill="Touhou_Magic" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--遗忘之物 生命值大于50%时，增加15%技能水平
+    穿着秦心装束+时：根据剩余学习的感情数量，给予不同增益：
+    11：造成的撕裂伤增加10%，增加10%撕裂伤抗性
+    33；增加10%技能水平
+    55：减少15%远程攻击散布-->
+    <Talent identifier="Touhou_ShenMing04">
+        <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400" />
+        <Description tag="talentdescription.Touhou_ShenMing04"/>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionAboveVitality vitalitypercentage="0.5"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_ShenMing04_Effect" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <!--秦心-->
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasPermanentStat statidentifier="Mood_Learning_Counter" min="11" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="lacerations" addedmultiplier="0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasPermanentStat statidentifier="Mood_Learning_Counter" min="11" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="lacerations" multiplier="0.9"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="9.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasPermanentStat statidentifier="Mood_Learning_Counter" min="33" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_ShenMing04_Effect_Kokoro" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasPermanentStat statidentifier="Mood_Learning_Counter" min="55" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="RangedSpreadReduction" value="0.15"/>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--无形信仰 完成巡回后若无人死亡，则获得的金钱增加10%
+        穿着秦心装束+时：巡回开始时，获得10分钟强化：增加10%最大生命值、烧伤抗性和所有攻击伤害-->
+    <Talent identifier="Touhou_ShenMing05">
+        <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400" />
+        <Description tag="talentdescription.Touhou_ShenMing05"/>
+        <AbilityGroupEffect abilityeffecttype="OnGainMissionMoney">
+            <Conditions>
+                <AbilityConditionNoCrewDied />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyValue multiplyvalue="1.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--秦心-->
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Abilities>
+                <CharacterAbilityResetPermanentStat statidentifier="Touhou_ShenMing05_Kokoro_Counter" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval maxtriggercount="1" Interval="10.0" >
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_ShenMing05_Kokoro_Counter" min="1" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" multiplyafflictionsbymaxvitality="true" disabledeltatime="true" >
+                            <Affliction identifier="Touhou_ShenMing05_Effect_Kokoro" amount="1"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_ShenMing05_Kokoro_Counter" value="1" />
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--神话传说 一个巡回4次，受到攻击后的一分钟内，增加15%烧伤抗性和最大生命值
+        穿着秦心装束+时：抓取符合条件的生物时，有概率额外学习一次感情。感情总数超过33个后，强化主要感情：
+        喜：造成的烧伤增加10%，远程弹幕附加少量烧伤
+        怒：攻击目标将附加持续撕裂伤害，魔法武器攻击附加缓慢
+        哀：魔法近战武器攻击生物将使其攻击伤害暂时降低25%，远程弹幕的效果则减半
+        乐：根据所有技能水平平均值，增加对应5%的攻击伤害和移动速度-->
+    <Talent identifier="Touhou_ShenMing06" trackedstat="Touhou_ShenMing06_Counter" trackedmax="4">
+        <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400" />
+        <Description tag="talentdescription.Touhou_ShenMing06"/>
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Abilities>
+                <CharacterAbilityResetPermanentStat statidentifier="Touhou_ShenMing06_Counter" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_ShenMing06_Counter" min="4" invert="true"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_ShenMing06_Effect" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_ShenMing06_Counter" value="1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_ShenMing06_Counter" min="4" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true">
+                            <Affliction identifier="Touhou_ShenMing06_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--秦心-->
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface_Mood01" />
+                <AbilityConditionHasPermanentStat statidentifier="Mood_Learning_Counter" min="33" />
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction afflictionidentifiers="burn" addedmultiplier="0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface_Mood01" />
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="burn" strength="0.25" />
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface_Mood02" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_ShenMing06_Effect_Kokoro01" strength="1.0" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface_Mood02" />
+                <AbilityConditionHoldingItem tags="Touhou_Cam_Offset_Low,Touhou_Cam_Offset_Normal,Touhou_Cam_Offset_High,Touhou_Cam_Offset_Sniper"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="slow" strength="10.0" />
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface_Mood03" />
+                <AbilityConditionHasItem tags="Touhou_Weapon_Level01,Touhou_Weapon_Level02,Touhou_Weapon_Level03,Touhou_Weapon_Level04,Touhou_Weapon_Level05" />
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Melee"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_ShenMing06_Effect_Kokoro02" strength="1.0" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface_Mood03" />
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_ShenMing06_Effect_Kokoro03" strength="1.0" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="10.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface_Mood04" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="RangedAttackMultiplier" maxvalue="0.05" skillidentifier="all" />
+                <CharacterAbilityModifyStatToSkill stattype="MeleeAttackMultiplier" maxvalue="0.05" skillidentifier="all" />
+                <CharacterAbilityModifyStatToSkill stattype="MovementSpeed" maxvalue="0.05" skillidentifier="all" />
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+
+    <!--本源力量
+        穿着秦心装束+时：站立不动时，受到攻击有50%概率减少30%受到的伤害。行走时，远程攻击散布减少15%。奔跑时，所有攻击伤害增加10%-->
+    <Talent identifier="Touhou_ShenMing07">
+        <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Indirect_Damage.png" sheetindex="0,0" sheetelementsize="400,400" />
+        <Description tag="talentdescription.Touhou_ShenMing07"/>
+        <!--秦心-->
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasVelocity velocity="0"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_ShenMing07_Effect_Kokoro01" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_ShenMing07_Effect_Kokoro01" />
+                <AbilityConditionServerRandom randomchance="0.5" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.3" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionHasVelocity velocity="0.1"/>
+                <AbilityConditionRunning invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_ShenMing07_Effect_Kokoro02" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionRunning/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_ShenMing07_Effect_Kokoro03" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
     </Talent>
