@@ -3077,15 +3077,13 @@
         </AbilityGroupInterval>
     </Talent>
 
-    <!--本质具现 对人类造成的伤害增加10%。使用魔法武器对非人类的攻击额外造成灵压伤害，这个伤害随着魔法能力增加会逐渐增加-->
+    <!--本质具现 对人类造成的伤害增加10%。使用魔法武器对敌人的攻击额外造成灵压伤害，这个伤害随着魔法能力增加会逐渐增加-->
     <Talent identifier="Touhou_ShenMing03">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Direct_Damage.png" sheetindex="0,0" sheetelementsize="400,400" />
         <Description tag="talentdescription.Touhou_ShenMing03"/>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionCharacter targettype="Enemy">
-                    <Conditional speciesname="eq human" />
-                </AbilityConditionCharacter>
+                <AbilityConditionCharacter targettype="Enemy"/>
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
             </Conditions>
             <Abilities>
@@ -3248,12 +3246,52 @@
             </Abilities>
         </AbilityGroupEffect>
         <!--秦心-->
+        <AbilityGroupEffect abilityeffecttype="OnLootCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionCharacter targettype="Any">
+                    <Conditional maxhealth="gt 40"/>
+                    <Conditional ismachine="false" />
+                    <Conditional ispet="false" />
+                    <Conditional KokoroTalent_Mark="lte 0" />
+                </AbilityConditionCharacter>
+                <AbilityConditionServerRandom randomchance="0.35" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget" disabledeltatime="true" >
+                            <ParticleEmitter particle="spark" copyentityangle="true" anglemin="-10" anglemax="10" particleamount="15" velocitymin="100" velocitymax="200" scalemin="0.8" scalemax="1.6" colormultiplier="200,50,150,255"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Mood_Learning_Counter" value="1" removeondeath="false" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnLootCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
+                <AbilityConditionCharacter targettype="Any">
+                    <Conditional maxhealth="gt 40"/>
+                    <Conditional ismachine="false" />
+                    <Conditional KokoroTalent_Mark="lte 0" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget" disabledeltatime="true" >
+                            <Affliction identifier="KokoroTalent_Mark" amount="100" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface" />
                 <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface_Mood01" />
                 <AbilityConditionHasPermanentStat statidentifier="Mood_Learning_Counter" min="33" />
-                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAffliction afflictionidentifiers="burn" addedmultiplier="0.1" />

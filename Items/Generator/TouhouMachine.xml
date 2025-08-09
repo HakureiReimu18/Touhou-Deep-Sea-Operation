@@ -772,10 +772,9 @@
       <RequiredItem identifier="Reiki_Stone" amount="4"/>
       <RequiredItem identifier="carbon" amount="4"/>
       <RequiredItem identifier="Magic_Material" />
-      <Item identifier="Spiritual_Water" amount="4" />
     </Fabricate>
     <Body width="160" height="160" density="30" />
-    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" aimable="false">
+    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" limitedattachable="true" aimable="false">
       <StatusEffect type="OnActive" target="Character" interval="5">
         <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Plant_Machine_Talent" />
       </StatusEffect>
@@ -823,7 +822,6 @@
       <StatusEffect type="Always" target="This" comparison="And" Interval="420" stackable="false"  spawnItemRandomly="true" >
         <Conditional HasTag="eq Cinnamon_Branch_Seed_On"/>
         <SpawnItem identifiers="Cinnamon_Branch" spawnposition="ThisInventory" />
-        <SpawnItem identifiers="Reiki_Stone" Count="4" spawnposition="ThisInventory" />
       </StatusEffect>
       <StatusEffect type="Always" target="This" comparison="And" Interval="240" stackable="false" spawnItemRandomly="true" >
         <Conditional HasTag="eq Sun_Flower_Seed_On"/>
@@ -999,5 +997,130 @@
       <sprite texture="Content/Items/Weapons/Loaders.png" sourcerect="348,921,25,27" origin="-0.2,-1.0" alpha="1.0" />
       <IsActiveConditional targetcontaineditem="true" conditionpercentage="gte 100" />
     </LightComponent>
+  </Item>
+
+
+  <Item
+          name="便携式幽灵采矿机"
+          identifier="Touhou_Pokect_Spectral_Mining_Machine"
+          tags="Touhou_Plant_Machine"
+          category="Machine"
+          subcategory="Touhou"
+          linkable="true"
+          allowedlinks="medcabinet,locker,toxcontainer"
+          scale="0.4">
+    <UpgradePreviewSprite texture="Content/UI/WeaponUI.png" sourcerect="384,960,64,64" origin="0.5,0.45" />
+    <sprite texture="%ModDir%/Images/General_Items/Touhou_Pokect_Spectral_Mining_Machine.png" sourcerect="0,0,300,168" depth="0.79" premultiplyalpha="false" origin="0.5,0.5" />
+    <Price baseprice="3000" >
+      <Price storeidentifier="merchantoutpost" multiplier="1.1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantcity" multiplier="1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantresearch" multiplier="1.1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantmilitary" multiplier="1" sold="true" maxavailable="1" />
+      <Price storeidentifier="merchantmine" multiplier="1.1" sold="true" maxavailable="1" />
+    </Price>
+    <Deconstruct time="5">
+      <Item identifier="Reiki_Stone" amount="4" />
+      <Item identifier="steel" amount="4" />
+      <Item identifier="Score_Point" />
+    </Deconstruct>
+    <Fabricate suitablefabricators="fabricator" requiredtime="10">
+      <RequiredSkill identifier="Touhou_Magic" level="50" />
+      <RequiredSkill identifier="mechanical" level="70" />
+      <RequiredItem identifier="Reiki_Stone" amount="4"/>
+      <RequiredItem identifier="steel" amount="4"/>
+      <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
+      <RequiredItem identifier="Score_Point" />
+    </Fabricate>
+    <Body width="300" height="168" density="30" />
+    <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="10.0" aimpos="65,-10" handle1="0,0" attachable="true" limitedattachable="true" aimable="false">
+      <StatusEffect type="OnActive" target="Character" interval="5">
+        <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Pokect_Spectral_Mining_Machine_Talent" />
+      </StatusEffect>
+      <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.75" setvalue="true" />
+      <StatusEffect type="Always" target="This" comparison="And" Interval="1.0" disabledeltatime="true" setvalue="true" Tags="Mining_Machine_On" stackable="false" >
+        <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0" />
+        <RequiredItems items="reactorfuel" type="Contained" targetslot="1" />
+        <RequiredItems items="ethanol" type="Contained" targetslot="2" />
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" Interval="360" stackable="false" spawnItemRandomly="true" >
+        <Conditional HasTag="eq Mining_Machine_On"/>
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Base_Metal" spawnposition="ThisInventory" />
+      </StatusEffect>
+    </Holdable>
+
+    <ItemContainer capacity="0" maxstacksize="1" canbeselected="true" hideitems="true" itempos="185,-172" iteminterval="27,0" containedspritedepth="0.81" slotsperrow="3">
+      <GuiFrame relativesize="0.2,0.2" anchor="Center" style="ItemUI" />
+      <SlotIcon slotindex="0" texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="100,0,100,139" origin="0.5,0.5" />
+      <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="192,448,64,64" origin="0.5,0.5" />
+      <SlotIcon slotindex="2" texture="%ModDir%/Images/Characters/Touhou_Spectral_Core/Touhou_Spectral_Core.png" sourcerect="0,0,300,300" origin="0.5,0.5" />
+      <SubContainer capacity="1" maxstacksize="1" >
+        <Containable items="Spiritual_Water" >
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.025" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="Contained" Tags="Touhou_Pokect_Spectral_Mining_Machine_False" >
+            <Conditional condition="lte 0"/>
+          </StatusEffect>
+        </Containable>
+      </SubContainer>
+      <SubContainer capacity="1" maxstacksize="1" >
+        <Containable items="reactorfuel" setactive="true" >
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.15" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="This,Contained" Tags="Touhou_Pokect_Spectral_Mining_Machine_False" >
+            <Conditional condition="lte 0"/>
+          </StatusEffect>
+        </Containable>
+      </SubContainer>
+      <SubContainer capacity="1" maxstacksize="1" >
+        <Containable items="Touhou_Spectral_Core_Item" >
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.04" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="This,Contained" Tags="Touhou_Pokect_Spectral_Mining_Machine_False" >
+            <Conditional condition="lte 0"/>
+          </StatusEffect>
+        </Containable>
+      </SubContainer>
+      <SubContainer capacity="3" maxstacksize="63" >
+        <Containable items="Touhou_Spectral_Ore01" />
+      </SubContainer>
+    </ItemContainer>
+    <Powered powerconsumption="2000" currpowerconsumption="2000" isactive="true">
+      <GuiFrame relativesize="0.18,0.15" minsize="350,160" maxsize="420,192" anchor="Center" relativeoffset="0,-0.1" style="ItemUI" msg="ItemMsgInteractSelect" />
+    </Powered>
+    <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
+      <RequiredSkill identifier="electrical" level="45" />
+      <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand" AllowWhenBroken="true">
+        <Sound file="Content/Sounds/Damage/Electrocution1.ogg" range="1000" />
+        <Explosion range="100.0" stun="0" force="1.0" flames="false" shockwave="false" sparks="true" underwaterbubble="false" />
+        <Affliction identifier="stun" strength="2" probability="0.5" />
+        <Affliction identifier="electricshock" strength="30"/>
+        <Affliction identifier="burn" strength="2" />
+        <ParticleEmitter particle="ElectricShock" DistanceMin="10" DistanceMax="25" ParticleAmount="5" ScaleMin="0.1" ScaleMax="0.12" />
+      </StatusEffect>
+      <RequiredItem items="screwdriver" type="Equipped" />
+      <ParticleEmitter particle="spark" particleamount="5" emitinterval="1.05" anglemax="360" distancemax="20" scalemin="0.5" scalemax="1" mincondition="0.0" maxcondition="15.0" />
+      <ParticleEmitter particle="fleshsmoke" particlespersecond="2" scalemin="1" scalemax="2" mincondition="0.0" maxcondition="50.0" />
+      <input name="power_in" displayname="connection.powerin" />
+    </ConnectionPanel>
+
+    <Repairable selectkey="Action" header="electricalrepairsheader" deteriorationspeed="0.06" mindeteriorationdelay="360" maxdeteriorationdelay="720" mindeteriorationcondition="0" RepairThreshold="80" fixDurationHighSkill="15" fixDurationLowSkill="35" msg="ItemMsgRepairScrewdriver" hudpriority="10">
+      <GuiFrame relativesize="0.2,0.16" minsize="400,180" maxsize="480,216" anchor="Center" relativeoffset="0.0,0.27" style="ItemUI" />
+      <RequiredSkill identifier="Touhou_Magic" level="45" />
+      <RequiredSkill identifier="mechanical" level="65" />
+      <RequiredItem items="wrench" type="Equipped" />
+      <StatusEffect type="OnFailure" target="Character" targetlimbs="LeftHand,RightHand">
+        <Sound file="Content/Sounds/Damage/Electrocution1.ogg" range="1000" />
+        <Affliction identifier="stun" strength="5" />
+        <Affliction identifier="burn" strength="5" />
+      </StatusEffect>
+      <ParticleEmitter particle="damagebubbles" particleburstamount="2" particleburstinterval="2.0" particlespersecond="2" scalemin="0.5" scalemax="1.5" anglemin="0" anglemax="359" velocitymin="-10" velocitymax="10" mincondition="0.0" maxcondition="50.0" />
+      <ParticleEmitter particle="spark" particleburstamount="5" particlespersecond="5" anglemin="0" anglemax="359" velocitymin="100" velocitymax="500" particleburstinterval="2" scalemin="0.5" scalemax="1" mincondition="0.0" maxcondition="15.0" />
+      <ParticleEmitter particle="fleshsmoke" particlespersecond="2" scalemin="1" scalemax="2" mincondition="0.0" maxcondition="50.0" />
+    </Repairable>
+
   </Item>
 </Items>

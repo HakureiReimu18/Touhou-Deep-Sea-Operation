@@ -1010,7 +1010,7 @@
                 <Conditional hastag="Laser_Mode_Parent" targetcontainer="true" />
             </StatusEffect>
             <SubContainer capacity="1" maxstacksize="1">
-                <Containable items="flashlight" hide="false" itempos="25,0" setactive="true"/>
+                <Containable items="flashlight,Touhou_Enhanced_Crystal" hide="false" itempos="25,0" setactive="true"/>
             </SubContainer>
         </ItemContainer>
         <aitarget sightrange="2000" soundrange="500" fadeouttime="3" />
@@ -1368,6 +1368,7 @@
             <Price storeidentifier="merchantmilitary" multiplier="1.25" />
             <Price storeidentifier="merchantmine" />
             <Price storeidentifier="merchantengineering" maxavailable="3" multiplier="0.9" sold="true"/>
+<!--            <Price storeidentifier="Merchant_Kawasiro_Nitori" maxavailable="3" multiplier="0.5" sold="true"/>-->
         </Price>
         <Deconstruct time="10">
             <Item identifier="iron" amount="8" />
@@ -4636,7 +4637,7 @@
 
     <!--幽灵燃料棒-->
     <Item name="幽灵燃料棒" identifier="Touhou_Spectral_Core_Fuelrod" Category="Fuel" subcategory="Touhou" Tags="smallitem,reactorfuel,divingsuitfuel,thoriumfuelrod" maxstacksize="32"
-          maxstacksizecharacterinventory="8" cargocontaineridentifier="metalcrate" health="500" scale="0.25">
+          maxstacksizecharacterinventory="8" cargocontaineridentifier="metalcrate" health="600" scale="0.25">
         <PreferredContainer primary="reactorcab" />
         <Price baseprice="200" sold="false" >
             <Price storeidentifier="merchantoutpost" />
@@ -4782,6 +4783,136 @@
             <SkillModifier skillidentifier="electrical" skillvalue="10" />
         </Wearable>
         <aitarget maxsightrange="1500" />
+    </Item>
+
+
+    <Item name="增幅水晶" identifier="Touhou_Enhanced_Crystal01" subcategory="Touhou" category="Equipment" Tags="smallitem,Touhou_Enhanced_Crystal" Scale="0.2"
+          Health="200" impactsoundtag="impact_metal_light">
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab,wrecksupplycab,beaconsupplycab" amount="1" spawnprobability="0.05" />
+        <PreferredContainer secondary="outpostcrewcabinet" amount="1" spawnprobability="0.05" />
+        <PreferredContainer primary="storagecab" />
+        <Price baseprice="300" sold="false">
+            <Price storeidentifier="merchantoutpost" maxavailable="3" />
+            <Price storeidentifier="merchantcity" maxavailable="2" />
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3" />
+            <Price storeidentifier="merchantengineering" maxavailable="1" multiplier="0.9"/>
+        </Price>
+        <Deconstruct time="6">
+            <Item identifier="Magic_Material" amount="3" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" >
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredItem tag="Elements_Book_Ammo" amount="3" />
+            <RequiredItem identifier="Reiki_Stone" amount="4" />
+            <RequiredItem identifier="Touhou_Base_Metal" amount="3" />
+            <RequiredItem identifier="Touhou_Spectral_Core_Item" />
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" displayname="recycleitem" >
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredItem tag="Elements_Book_Ammo" amount="3" />
+            <RequiredItem identifier="Reiki_Stone" amount="4" />
+            <RequiredItem tag="Touhou_Enhanced_Crystal" mincondition="0.0" maxcondition="0.5" usecondition="false" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Enhanced_Crystal01.png" sourcerect="0,0,68,100" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Enhanced_Crystal01.png" sourcerect="68,0,50,34" depth="0.56" origin="0.5,0.5" />
+        <Body radius="35" density="10" />
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnActive" target="Character" Interval="1.0" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                <Affliction identifier="Touhou_Enhanced_Crystal01_Effect" strength="1" />
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="This" Condition="-0.05" Interval="1.0" disabledeltatime="true"/>
+        </Pickable>
+        <Quality>
+            <QualityStat stattype="Condition" value="0.1"/>
+        </Quality>
+    </Item>
+
+    <Item name="气化水晶" identifier="Touhou_Enhanced_Crystal02" subcategory="Touhou" category="Equipment" Tags="smallitem,Touhou_Enhanced_Crystal" Scale="0.2"
+          Health="200" impactsoundtag="impact_metal_light">
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab,wrecksupplycab,beaconsupplycab" amount="1" spawnprobability="0.05" />
+        <PreferredContainer secondary="outpostcrewcabinet" amount="1" spawnprobability="0.05" />
+        <PreferredContainer primary="storagecab" />
+        <Price baseprice="300" sold="false">
+            <Price storeidentifier="merchantoutpost" maxavailable="3" />
+            <Price storeidentifier="merchantcity" maxavailable="2" />
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3" />
+            <Price storeidentifier="merchantengineering" maxavailable="1" multiplier="0.9"/>
+        </Price>
+        <Deconstruct time="6">
+            <Item identifier="Magic_Material" amount="3" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" >
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredItem tag="Elements_Book_Ammo" amount="3" />
+            <RequiredItem identifier="Reiki_Stone" amount="4" />
+            <RequiredItem identifier="Touhou_Base_Metal" amount="3" />
+            <RequiredItem identifier="Touhou_Spectral_Core_Item" />
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" displayname="recycleitem" >
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredItem tag="Elements_Book_Ammo" amount="3" />
+            <RequiredItem identifier="Reiki_Stone" amount="4" />
+            <RequiredItem tag="Touhou_Enhanced_Crystal" mincondition="0.0" maxcondition="0.5" usecondition="false" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Enhanced_Crystal02.png" sourcerect="0,0,60,100" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Enhanced_Crystal02.png" sourcerect="60,0,50,31" depth="0.56" origin="0.5,0.5" />
+        <Body radius="35" density="10" />
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnActive" target="Character" Interval="1.0" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                <Affliction identifier="Touhou_Enhanced_Crystal02_Effect" strength="1" />
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="This" Condition="-0.05" Interval="1.0" disabledeltatime="true"/>
+        </Pickable>
+        <Quality>
+            <QualityStat stattype="Condition" value="0.1"/>
+        </Quality>
+    </Item>
+
+    <Item name="深渊水晶" identifier="Touhou_Enhanced_Crystal03" subcategory="Touhou" category="Equipment" Tags="smallitem,Touhou_Enhanced_Crystal" Scale="0.2"
+          Health="200" impactsoundtag="impact_metal_light">
+        <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab,wrecksupplycab,beaconsupplycab" amount="1" spawnprobability="0.05" />
+        <PreferredContainer secondary="outpostcrewcabinet" amount="1" spawnprobability="0.05" />
+        <PreferredContainer primary="storagecab" />
+        <Price baseprice="300" sold="false">
+            <Price storeidentifier="merchantoutpost" maxavailable="3" />
+            <Price storeidentifier="merchantcity" maxavailable="2" />
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1" />
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3" />
+            <Price storeidentifier="merchantengineering" maxavailable="1" multiplier="0.9"/>
+        </Price>
+        <Deconstruct time="6">
+            <Item identifier="Magic_Material" amount="3" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" >
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredItem tag="Elements_Book_Ammo" amount="3" />
+            <RequiredItem identifier="Reiki_Stone" amount="4" />
+            <RequiredItem identifier="Touhou_Base_Metal" amount="3" />
+            <RequiredItem identifier="Touhou_Spectral_Core_Item" />
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" displayname="recycleitem" >
+            <RequiredSkill identifier="Touhou_Magic" level="70" />
+            <RequiredItem tag="Elements_Book_Ammo" amount="3" />
+            <RequiredItem identifier="Reiki_Stone" amount="4" />
+            <RequiredItem tag="Touhou_Enhanced_Crystal" mincondition="0.0" maxcondition="0.5" usecondition="false" />
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Enhanced_Crystal03.png" sourcerect="0,0,65,100" origin="0.5,0.5" />
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Enhanced_Crystal03.png" sourcerect="60,0,50,33" depth="0.56" origin="0.5,0.5" />
+        <Body radius="35" density="10" />
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect" >
+            <StatusEffect type="OnActive" target="Character" Interval="1.0" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                <Affliction identifier="Touhou_Enhanced_Crystal03_Effect" strength="1" />
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="This" Condition="-0.05" Interval="1.0" disabledeltatime="true"/>
+        </Pickable>
+        <Quality>
+            <QualityStat stattype="Condition" value="0.1"/>
+        </Quality>
     </Item>
 
 </Items>
