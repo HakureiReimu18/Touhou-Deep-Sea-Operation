@@ -1011,12 +1011,13 @@
           scale="0.4">
     <UpgradePreviewSprite texture="Content/UI/WeaponUI.png" sourcerect="384,960,64,64" origin="0.5,0.45" />
     <sprite texture="%ModDir%/Images/General_Items/Touhou_Pokect_Spectral_Mining_Machine.png" sourcerect="0,0,300,168" depth="0.79" premultiplyalpha="false" origin="0.5,0.5" />
-    <Price baseprice="3000" >
+    <Price baseprice="2400" >
       <Price storeidentifier="merchantoutpost" multiplier="1.1" sold="true" maxavailable="1" />
       <Price storeidentifier="merchantcity" multiplier="1" sold="true" maxavailable="1" />
       <Price storeidentifier="merchantresearch" multiplier="1.1" sold="true" maxavailable="1" />
       <Price storeidentifier="merchantmilitary" multiplier="1" sold="true" maxavailable="1" />
       <Price storeidentifier="merchantmine" multiplier="1.1" sold="true" maxavailable="1" />
+      <Price storeidentifier="Merchant_Kawasiro_Nitori" multiplier="0.75" minavailable="1" />
     </Price>
     <Deconstruct time="5">
       <Item identifier="Reiki_Stone" amount="4" />
@@ -1041,9 +1042,28 @@
         <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0" />
         <RequiredItems items="reactorfuel" type="Contained" targetslot="1" />
         <RequiredItems items="Touhou_Spectral_Core_Item" type="Contained" targetslot="2" />
+        <Conditional ChargePercentage="gt 0.01" targetitemcomponent="PowerContainer"/>
+      </StatusEffect>
+      <StatusEffect type="Always" target="This" comparison="And" Interval="1.0" disabledeltatime="true" setvalue="true" Tags="Touhou_Pokect_Spectral_Mining_Machine_False" stackable="false" >
+        <Conditional ChargePercentage="lt 0.01" targetitemcomponent="PowerContainer"/>
       </StatusEffect>
       <StatusEffect type="Always" target="This" comparison="And" Interval="330" stackable="false" spawnItemRandomly="true" >
         <Conditional HasTag="eq Mining_Machine_On"/>
+        <Conditional  IsActive="true"/>
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
+        <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
         <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
         <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
         <SpawnItem identifiers="Touhou_Spectral_Ore01" spawnposition="ThisInventory" />
@@ -1053,7 +1073,14 @@
         <SpawnItem identifiers="Touhou_Base_Metal" spawnposition="ThisInventory" />
       </StatusEffect>
     </Holdable>
-
+    <PowerContainer capacity="2000.0" charge="0" maxrechargespeed="2000.0" canbeselected="true" >
+      <GuiFrame relativesize="0.25,0.23" minsize="350,200" anchor="Center" style="ItemUI" />
+      <StatusEffect type="OnActive" targettype="This" charge="-1.0" Interval="1.0" disabledeltatime="true" comparison="and">
+        <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0" />
+        <RequiredItems items="reactorfuel" type="Contained" targetslot="1" />
+        <RequiredItems items="Touhou_Spectral_Core_Item" type="Contained" targetslot="2" />
+      </StatusEffect>
+    </PowerContainer>
     <ItemContainer capacity="0" maxstacksize="1" canbeselected="true" hideitems="true" itempos="185,-172" iteminterval="27,0" containedspritedepth="0.81" slotsperrow="3">
       <GuiFrame relativesize="0.2,0.2" anchor="Center" style="ItemUI" />
       <SlotIcon slotindex="0" texture="%ModDir%/Images/Materials/Spiritual_Water.png" sourcerect="100,0,100,139" origin="0.5,0.5" />
@@ -1061,25 +1088,31 @@
       <SlotIcon slotindex="2" texture="%ModDir%/Images/Characters/Touhou_Spectral_Core/Touhou_Spectral_Core.png" sourcerect="0,0,300,300" origin="0.5,0.5" />
       <SubContainer capacity="1" maxstacksize="1" >
         <Containable items="Spiritual_Water" >
-          <StatusEffect type="OnContaining" target="Contained" condition="-0.025" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.025" Interval="1.0" disabledeltatime="true" >
+            <Conditional HasTag="eq Mining_Machine_On" targetcontainer="true"/>
+          </StatusEffect>
           <StatusEffect type="OnContaining" target="Contained" Tags="Touhou_Pokect_Spectral_Mining_Machine_False" >
-            <Conditional condition="lte 0"/>
+            <RequiredItems items="Touhou_Fake_Item" type="Contained" MatchOnEmpty="true" />
           </StatusEffect>
         </Containable>
       </SubContainer>
       <SubContainer capacity="1" maxstacksize="1" >
         <Containable items="reactorfuel" setactive="true" >
-          <StatusEffect type="OnContaining" target="Contained" condition="-0.15" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.15" Interval="1.0" disabledeltatime="true" >
+          <Conditional HasTag="eq Mining_Machine_On" targetcontainer="true"/>
+        </StatusEffect>
           <StatusEffect type="OnContaining" target="This,Contained" Tags="Touhou_Pokect_Spectral_Mining_Machine_False" >
-            <Conditional condition="lte 0"/>
+            <RequiredItems items="Touhou_Fake_Item" type="Contained" MatchOnEmpty="true" />
           </StatusEffect>
         </Containable>
       </SubContainer>
       <SubContainer capacity="1" maxstacksize="1" >
         <Containable items="Touhou_Spectral_Core_Item" >
-          <StatusEffect type="OnContaining" target="Contained" condition="-0.04" Interval="1.0" disabledeltatime="true" />
+          <StatusEffect type="OnContaining" target="Contained" condition="-0.04" Interval="1.0" disabledeltatime="true" >
+            <Conditional HasTag="eq Mining_Machine_On" targetcontainer="true"/>
+          </StatusEffect>
           <StatusEffect type="OnContaining" target="This,Contained" Tags="Touhou_Pokect_Spectral_Mining_Machine_False" >
-            <Conditional condition="lte 0"/>
+            <RequiredItems items="Touhou_Fake_Item" type="Contained" MatchOnEmpty="true" />
           </StatusEffect>
         </Containable>
       </SubContainer>
@@ -1087,9 +1120,6 @@
         <Containable items="Touhou_Spectral_Ore01,Touhou_Base_Metal" />
       </SubContainer>
     </ItemContainer>
-    <Powered powerconsumption="2000" currpowerconsumption="2000" isactive="true">
-      <GuiFrame relativesize="0.18,0.15" minsize="350,160" maxsize="420,192" anchor="Center" relativeoffset="0,-0.1" style="ItemUI" msg="ItemMsgInteractSelect" />
-    </Powered>
     <ConnectionPanel selectkey="Action" canbeselected="true" msg="ItemMsgRewireScrewdriver" hudpriority="10">
       <GuiFrame relativesize="0.2,0.32" minsize="400,350" maxsize="480,420" anchor="Center" style="ConnectionPanel" />
       <RequiredSkill identifier="electrical" level="45" />

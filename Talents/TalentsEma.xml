@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="EmaTalent">
+        <Icon texture="%ModDir%/Images/Talents/EmaTalent.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Description tag="talentdescription.EmaTalent"/>
+        <AbilityGroupInterval interval="1">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="Ema_Wings_Spawn" amount="100"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="3">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation" minimumPercentage="0.99" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <ReduceAffliction identifier="Ema_Wings_Spawn" amount="100"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="3">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <ReduceAffliction identifier="Ema_Wings_Spawn" amount="100"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="5.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="EmaTalent_TO_Ally_Effect" multiplier="0.0"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+                <AbilityConditionAboveVitality vitalitypercentage="0.5"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies allowself="false" requiresalive="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="EmaTalent_TO_Ally_Effect" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+                <AbilityConditionAboveVitality vitalitypercentage="0.5"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="2.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Cuisine_Effect04" invert="true" />
+                <AbilityConditionAboveVitality vitalitypercentage="0.5" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="EmaTalent_Witch_Transformation" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="6.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+                <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="EmaTalent_Witch_Transformation_End" amount="1" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnGainMissionExperience">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+                <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation_End" minimumPercentage="0.99" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyValue multiplyvalue="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+                <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation" minimumPercentage="0.99" />
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+                <AbilityConditionCharacter targettype="Any">
+                    <Conditional EmaTalent_Witch_Factor="gt 0"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.35"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAttacker>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true">
+                            <Affliction identifier="EmaTalent_Witch_Factor" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAttacker>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <!--击杀血量判断标记-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+                <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation" minimumPercentage="0.99" />
+                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+                <AbilityConditionCharacter targettype="Any">
+                    <Conditional MaxHealth="gte 50"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="EmaTalent_Kill_Health_Marked" strength="1.0" />
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <!--击杀给予经验-->
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Abilities>
+                <CharacterAbilityResetPermanentStat statidentifier="Ema_Kill" />
+                <CharacterAbilityResetPermanentStat statidentifier="Ema_Kill_Max" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Ema_Kill" value="0" setvalue="true" />
+                <CharacterAbilityGivePermanentStat statidentifier="Ema_Kill_Max" value="0" setvalue="true" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+                <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation" minimumPercentage="0.99" />
+                <AbilityConditionHasPermanentStat statidentifier="Ema_Kill" min="1" />
+                <AbilityConditionHasPermanentStat statidentifier="Ema_Kill_Max" min="10" invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <GiveExperience amount="50" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Ema_Kill" value="-1" />
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One" />
+                <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation" minimumPercentage="0.99" />
+                <AbilityConditionCharacter targettype="Any">
+                    <Conditional EmaTalent_Kill_Health_Marked="gt 0"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Ema_Kill" value="1" />
+                <CharacterAbilityGivePermanentStat statidentifier="Ema_Kill_Max" value="1" />
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+</Talents>

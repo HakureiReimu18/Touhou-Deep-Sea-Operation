@@ -1611,11 +1611,70 @@
     </ScriptedEvent>
 
     <!--站点商人01-->
-<!--
-    <ScriptedEvent identifier="Touhou_Merchant_Event01" commonness="100">
-      <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Merchant_Kawasiro_Nitori" spawnlocation="Outpost" spawnpointtype="airlock" />
+<!--    <ScriptedEvent identifier="Touhou_Merchant_Event01" commonness="100">
+      <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Costume_Merchant_Kawasiro_Nitori" spawnlocation="Outpost" spawnpointtype="airlock" />
+    </ScriptedEvent>-->
+
+
+    <!--河童卫星事件-->
+    <ScriptedEvent identifier="Touhou_Kappa_Satellite_Event" commonness="0">
+      <TagAction criteria="player" tag="player" />
+      <SpawnAction npcsetidentifier="touhounpc" npcidentifier="Satellite_Event_Kawasiro_Nitori" targettag="Satellite_Event_Kawasiro_Nitori" spawnlocation="Outpost" targetmoduletags="admin,adminmodule" />
+      <Label name="waitfortalk" />
+      <NPCWaitAction npctag="Satellite_Event_Kawasiro_Nitori" wait="true" />
+      <TriggerAction target1tag="Satellite_Event_Kawasiro_Nitori" target2tag="player" applytotarget2="triggerer_player" radius="200" waitforinteraction="true" />
+      <ConversationAction targettag="triggerer_player" speakertag="Satellite_Event_Kawasiro_Nitori" text="Eventtext.Touhou_Kappa_Satellite_Event.c1" />
+      <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2" >
+        <Option text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1" endconversation="true">
+          <GoTo name="waitfortalk" />
+        </Option>
+        <Option text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1">
+          <CheckItemAction targettag="triggerer_player" itemidentifiers="Touhou_Magic_Crystal_Mission">
+            <Failure>
+              <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o2.c1" >
+                <Option text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c1.o1">
+                  <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c1.o1.c1" />
+                  <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c1.o1.c2" />
+                  <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c1.o1.c3" >
+                    <SpawnAction itemidentifier="Touhou_Special_Material_Mission" targetinventory="triggerer_player" />
+                  </ConversationAction>
+                </Option>
+                <Option text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1" endconversation="true">
+                  <GoTo name="waitfortalk" />
+                </Option>
+              </ConversationAction>
+            </Failure>
+            <Success>
+              <Label name="Check_Touhou_Magic_Crystal_Mission" />
+              <RemoveItemAction targettag="triggerer_player" itemidentifier="Touhou_Magic_Crystal_Mission" />
+              <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c2" />
+              <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c3" >
+                <Option text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c3.o1" >
+                  <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c3.o1.c1" />
+                  <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c3.o1.c2" >
+                    <Option text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c3.o1.c2.o1" >
+                      <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c3.o1.c2.o1.c1" >
+                        <Label name="Another_Option_Callback" />
+                        <Option text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c3.o1.c2.o1.c1.o1" >
+                          <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c3.o1.c2.o1.c1.o1.c1" >
+                            <MissionAction missionidentifier="Touhou_Rocket_Event_Mission01" locationtype="Abandoned" CreateLocationIfNotFound="true" />
+                          </ConversationAction>
+                        </Option>
+                      </ConversationAction>
+                    </Option>
+                  </ConversationAction>
+                </Option>
+                <Option text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c3.o2" >
+                  <ConversationAction targettag="triggerer_player" text="Eventtext.Touhou_Kappa_Satellite_Event.c2.o1.c3.o2.c1" />
+                  <GoTo name="Another_Option_Callback" />
+                </Option>
+              </ConversationAction>
+            </Success>
+          </CheckItemAction>
+        </Option>
+      </ConversationAction>
     </ScriptedEvent>
--->
+
 
   </EventPrefabs>
 
@@ -1663,6 +1722,12 @@
       <!--      <ScriptedEvent identifier="Touhou_Lunatic_Mission01" commonness="100" />-->
     </EventSet>
   </EventSet>
+<!--  <EventSet identifier="Touhou_Merchant_Events01" leveltype="outpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="false" ignorecooldown="true" additive="true" selectalways="true" campaign="true">
+    <EventSet identifier="Touhou_Merchant_Events01_Nitori" minleveldifficulty="0" maxleveldifficulty="40" allowatstart="true" chooserandom="true" onceperoutpost="true" eventcount="1" additive="true" selectalways="true"
+              locationtype="outpost,city,research,military,mine,colony,settlement,construction,camp,base,blockade,survey,excavation,study,lab,clinic,hospital,surgery,hydroponics,biosphere,nourishment,factory,shipyard,fusion,tsm_city,tsm_military,tsm_mine">
+      <ScriptedEvent identifier="Touhou_Merchant_Event01" commonness="100" />
+    </EventSet>
+  </EventSet>-->
 <!--  <EventSet identifier="Touhou_Mission_Events02" leveltype="outpost" allowatstart="true" minleveldifficulty="0" maxleveldifficulty="100" chooserandom="true" ignorecooldown="true" additive="true" selectalways="true" commonness="100" campaign="true">
 
   </EventSet>
