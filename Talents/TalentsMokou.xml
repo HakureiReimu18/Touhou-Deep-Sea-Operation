@@ -1,58 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Talents>
     <Talent identifier="Immortal_Human">
-        <Icon texture="%ModDir%/Images/Talents/Immortal_Human.png" sheetindex="0,0" sheetelementsize="128,128" />
+        <Icon texture="%ModDir%/Images/Talents/Immortal_Human.png" sheetindex="0,0" sheetelementsize="128,128"/>
         <Description tag="talentdescription.Immortal_Human"/>
-        <AbilityGroupEffect abilityeffecttype="None">
+        <AbilityGroupInterval Interval="5.0">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="No_Effects11" />
+                <AbilityConditionHasAffliction afflictionidentifier="Fairy_Of_Ice"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityGiveResistance resistanceid="Resurrection" multiplier="0" />
+                <CharacterAbilityModifyResistance resistanceid="Phoenix_Burn" multiplier="0.5"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="No_Effects11"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveResistance resistanceid="Resurrection" multiplier="0"/>
             </Abilities>
         </AbilityGroupEffect>
 
         <AbilityGroupInterval interval="60">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix" />
+                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
                     <StatusEffects>
                         <StatusEffect target="Character" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="Mokou_Not_Die" strength="60" />
+                            <Affliction identifier="Mokou_Not_Die" strength="60"/>
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
 
-        <AbilityGroupInterval maxtriggercount="1" >
+        <AbilityGroupInterval maxtriggercount="1">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix" />
+                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix"/>
                 <AbilityConditionAboveVitality invert="true" vitalitypercentage="0"/>
                 <AbilityConditionHasPermanentStat statidentifier="Mokou_Resurrection" min="1" invert="true"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
                     <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" multiplyafflictionsbymaxvitality="true" disabledeltatime="true" >
+                        <StatusEffect type="OnAbility" target="Character" multiplyafflictionsbymaxvitality="true" disabledeltatime="true">
                             <Affliction identifier="Resurrection" amount="30"/>
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
-                <CharacterAbilityGivePermanentStat statidentifier="Mokou_Resurrection" value="1" />
+                <CharacterAbilityGivePermanentStat statidentifier="Mokou_Resurrection" value="1"/>
             </Abilities>
         </AbilityGroupInterval>
 
         <AbilityGroupInterval interval="0.9">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Resurrection" />
+                <AbilityConditionHasAffliction afflictionidentifier="Resurrection"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityApplyStatusEffectsToAllies allowself="true">
                     <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" >
+                        <StatusEffect type="OnAbility" target="Character">
                             <Affliction identifier="No_Effects10" strength="1"/>
                         </StatusEffect>
                     </StatusEffects>
@@ -62,22 +70,22 @@
 
         <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
             <Abilities>
-                <CharacterAbilityResetPermanentStat statidentifier="Mokou_Resurrection" />
+                <CharacterAbilityResetPermanentStat statidentifier="Mokou_Resurrection"/>
             </Abilities>
         </AbilityGroupEffect>
 
         <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix" />
+                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAffliction afflictionidentifiers="Phoenix_Burn" addedmultiplier="0.3" />
+                <CharacterAbilityModifyAffliction afflictionidentifiers="Phoenix_Burn" addedmultiplier="0.3"/>
             </Abilities>
         </AbilityGroupEffect>
 
         <AbilityGroupEffect abilityeffecttype="None">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix" />
+                <AbilityConditionHasAffliction afflictionidentifier="Possessed_By_Phoenix"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityGiveStat stattype="BallastFloraDamageMultiplier" value="0.8"/>
