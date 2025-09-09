@@ -5,7 +5,7 @@
     <Affliction name="" identifier="RedAndWhite" description="" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
         <Description textidentifier="afflictiondescription.RedAndWhite" minstrength="0" maxstrength="10"/>
-        <Effect minstrength="0" maxstrength="10">
+        <Effect minstrength="0" maxstrength="10" resistancefor="damage" minresistance="-0.2" maxresistance="-0.2" >
             <StatValue stattype="SwimmingSpeed" value="0.5"/>
             <StatValue stattype="WalkingSpeed" value="0.15"/>
         </Effect>
@@ -457,7 +457,8 @@
                 strengthchange="-4">
             <StatValue stattype="RangedAttackMultiplier" value="0.1"/>
             <StatValue stattype="MovementSpeed" value="0.15"/>
-            <StatValue stattype="MeleeAttackMultiplier" value="0.6"/>
+            <StatValue stattype="MeleeAttackMultiplier" value="0.75"/>
+            <StatValue stattype="RangedSpreadReduction" value="0.15"/>
             <!--            <StatusEffect target="Character">
                             <ParticleEmitter particle="Tenshi_Peach_Effect" AngleMin="90" AngleMax="90" ScaleMultiplier="0.1,0.1" ParticlesPerSecond="1" ColorMultiplier="255,55,205,255" />
                         </StatusEffect>-->
@@ -528,6 +529,7 @@
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
         <Effect minstrength="0" maxstrength="10" resistancefor="burn,bleeding" minresistance="0.1" maxresistance="0.1" strengthchange="-9">
             <StatValue stattype="MeleeAttackMultiplier" value="0.15"/>
+            <StatValue stattype="RangedSpreadReduction" value="0.15"/>
             <StatValue stattype="MaximumHealthMultiplier" value="0.1"/>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Nitori_Tools.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
@@ -923,7 +925,7 @@
     <Affliction identifier="Grunt_Security_Tengu" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
                 maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
-        <Effect minstrength="0" maxstrength="10" resistancefor="bitewounds,Touhou_Bite" minresistance="0.25" maxresistance="0.25">
+        <Effect minstrength="0" maxstrength="10" resistancefor="bitewounds" minresistance="0.25" maxresistance="0.25">
             <StatValue stattype="MaximumHealthMultiplier" value="0.25"/>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Grunt_Security_Tengu.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
@@ -941,7 +943,7 @@
     <Affliction identifier="Hyouibana_Momizi_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
                 maxstrength="10"
                 showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
-        <Effect minstrength="0" maxstrength="10" resistancefor="bitewounds,Touhou_Bite" minresistance="0.1" maxresistance="0.1">
+        <Effect minstrength="0" maxstrength="10" resistancefor="bitewounds" minresistance="0.1" maxresistance="0.1">
             <StatValue stattype="MaximumHealthMultiplier" value="0.1"/>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Grunt_Security_Tengu.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
@@ -1073,8 +1075,8 @@
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.1" maxresistance="0.1">
             <StatValue stattype="RangedAttackMultiplier" value="0.05"/>
-            <StatValue stattype="MeleeAttackMultiplier" value="0.05"/>
-            <StatValue stattype="MeleeAttackSpeed" value="0.05"/>
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1"/>
+            <StatValue stattype="MeleeAttackSpeed" value="0.1"/>
             <StatValue stattype="RangedAttackSpeed" value="0.05"/>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Yuka_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
@@ -1218,12 +1220,6 @@
                 showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="damage,psychosis" minresistance="0.1" maxresistance="0.1"
                 strengthchange="-1">
-            <StatusEffect target="Character" Interval="1.0" Duration="1.0">
-                <Conditional Reiki_Pressure="gt 0"/>
-                <Conditional Touhou_Bite="gt 0"/>
-                <ReduceAffliction type="Reiki_Pressure" strength="0.06"/>
-                <ReduceAffliction type="Touhou_Bite" strength="0.06"/>
-            </StatusEffect>
             <StatValue stattype="TeamAttackMultiplier" value="-0.15"/>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Aunn_Koma_Inu.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
@@ -1235,12 +1231,6 @@
                 resetbetweenrounds="true" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
         <Effect minstrength="0" maxstrength="10" resistancefor="damage,psychosis" minresistance="0.1" maxresistance="0.1" minvitalitydecrease="-10"
                 maxvitalitydecrease="-10" multiplybymaxvitality="false">
-            <StatusEffect target="Character" Interval="1.0" Duration="1.0">
-                <Conditional Reiki_Pressure="gt 0"/>
-                <Conditional Touhou_Bite="gt 0"/>
-                <ReduceAffliction type="Reiki_Pressure" strength="0.06"/>
-                <ReduceAffliction type="Touhou_Bite" strength="0.06"/>
-            </StatusEffect>
             <StatValue stattype="TeamAttackMultiplier" value="-0.15"/>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Aunn_Koma_Inu.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
@@ -3422,6 +3412,11 @@
             </StatusEffect>
         </Effect>
         <Effect minstrength="100" maxstrength="100.1" multiplybymaxvitality="false" minvitalitydecrease="-20" maxvitalitydecrease="-20">
+            <StatusEffect target="Character" disabledeltatime="true" Interval="0.5">
+                <Conditional Touhou_Cuisine_Effect03="gt 0"/>
+                <Conditional Touhou_Drinks_Effect03="gt 0"/>
+                <ReduceAffliction identifier="EmaTalent_Witch_Transformation" strength="500"/>
+            </StatusEffect>
             <StatValue stattype="MovementSpeed" value="0.15"/>
             <StatValue stattype="RangedAttackMultiplier" value="0.15"/>
             <StatValue stattype="MeleeAttackMultiplier" value="0.15"/>
@@ -3451,15 +3446,6 @@
     <Affliction name="魔女因子" identifier="EmaTalent_Witch_Factor" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false"
                 hideiconafterdelay="false" maxstrength="1"
                 resetbetweenrounds="true" iconcolors="255,255,255;255,255,200;255,255,150;255,255,100">
-        <Effect minstrength="0" maxstrength="1"/>
-        <Icon texture="%ModDir%/Images/Afflictions/EmaTalent_Witch_Factor.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
-    </Affliction>
-
-    <!--魔女化击杀标记-->
-    <Affliction name="魔女化击杀标记" identifier="EmaTalent_Kill_Health_Marked" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false"
-                hideiconafterdelay="false" maxstrength="1"
-                resetbetweenrounds="true" showiconthreshold="100" showinhealthscannerthreshold="100"
-                iconcolors="255,255,255;255,255,200;255,255,150;255,255,100">
         <Effect minstrength="0" maxstrength="1"/>
         <Icon texture="%ModDir%/Images/Afflictions/EmaTalent_Witch_Factor.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>

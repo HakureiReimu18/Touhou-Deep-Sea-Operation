@@ -571,18 +571,22 @@
                                         <!--星之奇迹：增加50%技能获取速度，技能水平提高10%-->
                                         <Success>
                                             <StatusEffectAction targettag="SanaeTalent_Target">
-                                                <StatusEffect target="Character" disabledeltatime="true">
+                                                <StatusEffect target="Character" delay="0.1" stackable="false" comparison="And" disabledeltatime="true">
                                                     <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                                    <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                                     <Affliction identifier="SanaeTalent_Effect01" strength="10"/>
+                                                    <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
                                                 </StatusEffect>
                                             </StatusEffectAction>
                                         </Success>
                                         <!--月之奇迹：修复速度和船体修复速度提高50%，提高15%眩晕抗性-->
                                         <Failure>
                                             <StatusEffectAction targettag="SanaeTalent_Target">
-                                                <StatusEffect target="Character" disabledeltatime="true">
+                                                <StatusEffect target="Character" delay="0.2" stackable="false" comparison="And" disabledeltatime="true">
                                                     <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                                    <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                                     <Affliction identifier="SanaeTalent_Effect02" strength="10"/>
+                                                    <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
                                                 </StatusEffect>
                                             </StatusEffectAction>
                                         </Failure>
@@ -591,9 +595,11 @@
                                 <!--日之奇迹：每次攻击有35%概率额外造成15%的伤害-->
                                 <Failure>
                                     <StatusEffectAction targettag="SanaeTalent_Target">
-                                        <StatusEffect target="Character" disabledeltatime="true">
+                                        <StatusEffect target="Character" delay="0.3" stackable="false" comparison="And" disabledeltatime="true">
                                             <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                            <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                             <Affliction identifier="SanaeTalent_Effect03" strength="10"/>
+                                            <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
                                         </StatusEffect>
                                     </StatusEffectAction>
                                 </Failure>
@@ -605,18 +611,22 @@
                                 <!--山之奇迹：增加20%最大生命值，双腿的物理伤害抗性提高20%-->
                                 <Success>
                                     <StatusEffectAction targettag="SanaeTalent_Target">
-                                        <StatusEffect target="Character" disabledeltatime="true">
+                                        <StatusEffect target="Character" delay="0.4" stackable="false" comparison="And" disabledeltatime="true">
                                             <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                            <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                             <Affliction identifier="SanaeTalent_Effect04" strength="10"/>
+                                            <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
                                         </StatusEffect>
                                     </StatusEffectAction>
                                 </Success>
                                 <!--海之奇迹：增加40%游泳速度，烧伤抗性提高10%-->
                                 <Failure>
                                     <StatusEffectAction targettag="SanaeTalent_Target">
-                                        <StatusEffect target="Character" disabledeltatime="true">
+                                        <StatusEffect target="Character" delay="0.5" stackable="false" comparison="And" disabledeltatime="true">
                                             <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                            <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                             <Affliction identifier="SanaeTalent_Effect05" strength="10"/>
+                                            <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
                                         </StatusEffect>
                                     </StatusEffectAction>
                                 </Failure>
@@ -630,9 +640,11 @@
                         <!--空之奇迹：获得随机技能7点，经验获取速度提高20%-->
                         <Success>
                             <StatusEffectAction targettag="SanaeTalent_Target">
-                                <StatusEffect target="Character" disabledeltatime="true">
+                                <StatusEffect target="Character" delay="0.6" stackable="false" comparison="And" disabledeltatime="true">
                                     <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                    <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                     <Affliction identifier="SanaeTalent_Effect06" strength="10"/>
+                                    <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
                                     <GiveSkill skillidentifier="randomskill" amount="7" triggertalents="false"/>
                                 </StatusEffect>
                             </StatusEffectAction>
@@ -640,9 +652,11 @@
                         <!--风之奇迹：移动速度提高15%，攻击速度提高10%，降低20%友军伤害-->
                         <Failure>
                             <StatusEffectAction targettag="SanaeTalent_Target">
-                                <StatusEffect target="Character" disabledeltatime="true">
+                                <StatusEffect target="Character" delay="0.7" stackable="false" comparison="And" disabledeltatime="true">
                                     <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                    <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                     <Affliction identifier="SanaeTalent_Effect07" strength="10"/>
+                                    <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
                                 </StatusEffect>
                             </StatusEffectAction>
                         </Failure>
@@ -2156,7 +2170,6 @@
                     <WaitAction time="5.0"/>
                 </Success>
                 <Failure>
-                    <TriggerEventAction identifier="Touhou_ODM09_Enemy_Spawn" nextround="false"/>
                     <WaitAction time="5.0"/>
                     <TagAction criteria="humanprefabidentifier:Touhou_ODM09_Enemy_Human_Lunatic" tag="Touhou_ODM09_Enemy_Human"
                                continueifnotargetsfound="true"/>
@@ -2213,7 +2226,9 @@
             </CheckDataAction>
             <WaitAction time="9.0"/>
             <TriggerEventAction identifier="Touhou_ODM09_Enemy_Spawn" nextround="false"/>
-            <GoTo name="Spawn_Delay" maxtimes="3"/>
+            <GoTo name="Spawn_Delay" maxtimes="2"/>
+            <SpawnAction npcsetidentifier="Touhou_ODM9_Enemy_NPC" npcidentifier="Touhou_ODM09_Enemy_Human_Lunatic"
+                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
             <WaitAction time="1.0"/>
             <CheckDataAction identifier="Touhou_ODM09_Enemy_Stun" condition="eq false">
                 <Success>
@@ -2268,35 +2283,6 @@
                             <SpawnAction npcsetidentifier="Touhou_ODM9_Enemy_NPC" npcidentifier="Touhou_ODM09_Enemy_Human_Hard"
                                          lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
                             <WaitAction time="1"/>
-                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal"
-                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
-                            <WaitAction time="1"/>
-                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal"
-                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
-                            <WaitAction time="1"/>
-                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Easy"
-                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
-                            <WaitAction time="1"/>
-                        </Success>
-                        <Failure>
-                            <SpawnAction npcsetidentifier="Touhou_ODM9_Enemy_NPC" npcidentifier="Touhou_ODM09_Enemy_Human_Lunatic"
-                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
-                            <WaitAction time="1"/>
-                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Easy"
-                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
-                            <WaitAction time="1"/>
-                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Easy"
-                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
-                            <WaitAction time="1"/>
-                        </Failure>
-                    </CountTargetsAction>
-                </Success>
-                <Failure>
-                    <CountTargetsAction targettag="player" MinAmount="3">
-                        <Success>
-                            <SpawnAction npcsetidentifier="Touhou_ODM9_Enemy_NPC" npcidentifier="Touhou_ODM09_Enemy_Human_Lunatic"
-                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
-                            <WaitAction time="1"/>
                             <SpawnAction npcsetidentifier="Touhou_ODM9_Enemy_NPC" npcidentifier="Touhou_ODM09_Enemy_Human_Hard"
                                          lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
                             <WaitAction time="1"/>
@@ -2314,10 +2300,54 @@
                             <WaitAction time="1"/>
                         </Success>
                         <Failure>
-                            <SpawnAction npcsetidentifier="Touhou_ODM9_Enemy_NPC" npcidentifier="Touhou_ODM09_Enemy_Human_Lunatic"
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Easy"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Easy"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Easy"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                        </Failure>
+                    </CountTargetsAction>
+                </Success>
+                <Failure>
+                    <CountTargetsAction targettag="player" MinAmount="3">
+                        <Success>
+                            <SpawnAction npcsetidentifier="Touhou_ODM9_Enemy_NPC" npcidentifier="Touhou_ODM09_Enemy_Human_Hard"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                            <SpawnAction npcsetidentifier="Touhou_ODM9_Enemy_NPC" npcidentifier="Touhou_ODM09_Enemy_Human_Hard"
                                          lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
                             <WaitAction time="1"/>
                             <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Easy"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                        </Success>
+                        <Failure>
+                            <SpawnAction npcsetidentifier="Touhou_ODM9_Enemy_NPC" npcidentifier="Touhou_ODM09_Enemy_Human_Hard"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Normal"
+                                         lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
+                            <WaitAction time="1"/>
+                            <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Easy"
                                          lootingisstealing="false" spawnlocation="outpost" TeamID="None" allowinplayerview="false"/>
                             <WaitAction time="1"/>
                             <SpawnAction npcsetidentifier="Touhou_ODM3_Enemy_NPC" npcidentifier="Touhou_ODM03_Enemy_Human_Easy"

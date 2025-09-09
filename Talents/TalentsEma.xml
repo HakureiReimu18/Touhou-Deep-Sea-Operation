@@ -94,10 +94,29 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
-        <AbilityGroupInterval interval="6.0">
+
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Cuisine_Effect03" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" duration="1.0" stackable="false">
+                            <Affliction identifier="EmaTalent_Witch_Transformation" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupInterval interval="10.0">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One"/>
                 <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation" minimumPercentage="0.99"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Cuisine_Effect03" invert="true"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Drinks_Effect03" invert="true"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
@@ -145,21 +164,6 @@
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffectsToAttacker>
-            </Abilities>
-        </AbilityGroupEffect>
-
-        <!--击杀血量判断标记-->
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One"/>
-                <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation" minimumPercentage="0.99"/>
-                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
-                <AbilityConditionCharacter targettype="Any">
-                    <Conditional MaxHealth="gte 50"/>
-                </AbilityConditionCharacter>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityGiveAffliction affliction="EmaTalent_Kill_Health_Marked" strength="1.0"/>
             </Abilities>
         </AbilityGroupEffect>
 
@@ -238,14 +242,26 @@
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One"/>
                 <AbilityConditionHasAffliction afflictionidentifier="EmaTalent_Witch_Transformation" minimumPercentage="0.99"/>
-                <AbilityConditionCharacter targettype="Any">
-                    <Conditional EmaTalent_Kill_Health_Marked="gt 0"/>
-                </AbilityConditionCharacter>
             </Conditions>
             <Abilities>
                 <CharacterAbilityGivePermanentStat statidentifier="Ema_Kill" value="1"/>
                 <CharacterAbilityGivePermanentStat statidentifier="Ema_Kill_Max" value="1"/>
             </Abilities>
         </AbilityGroupEffect>
+
+        <AbilityGroupInterval interval="10.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Ema_The_Loathed_One"/>
+                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="300" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="MaximumHealthMultiplier" maxvalue="0.0025" skillidentifier="Touhou_Magic"/>
+                <CharacterAbilityModifyStatToSkill stattype="TeamAttackMultiplier" maxvalue="0.002" skillidentifier="Touhou_Magic"/>
+            </Abilities>
+            <FallbackAbilities>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.75"/>
+                <CharacterAbilityModifyStat stattype="TeamAttackMultiplier" value="0.6"/>
+            </FallbackAbilities>
+        </AbilityGroupInterval>
     </Talent>
 </Talents>

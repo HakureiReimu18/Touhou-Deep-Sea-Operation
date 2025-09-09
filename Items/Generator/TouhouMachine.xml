@@ -1099,6 +1099,7 @@
     </Item>
 
 
+
     <Item
             name="便携式幽灵采矿机"
             identifier="Touhou_Pokect_Spectral_Mining_Machine"
@@ -1120,14 +1121,13 @@
             <Price storeidentifier="Merchant_Kawasiro_Nitori" multiplier="0.75" minavailable="1"/>
         </Price>
         <Deconstruct time="5">
-            <Item identifier="Reiki_Stone" amount="4"/>
+            <Item identifier="Touhou_Plant_Extract" amount="4"/>
             <Item identifier="steel" amount="4"/>
             <Item identifier="Score_Point"/>
         </Deconstruct>
         <Fabricate suitablefabricators="fabricator" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredSkill identifier="mechanical" level="70"/>
-            <RequiredItem identifier="Reiki_Stone" amount="4"/>
             <RequiredItem identifier="steel" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
             <RequiredItem identifier="Score_Point"/>
@@ -1139,14 +1139,21 @@
                 <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Pokect_Spectral_Mining_Machine_Talent"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
-            <StatusEffect type="Always" target="This" comparison="And" Interval="1.0" disabledeltatime="true" setvalue="true" Tags="Mining_Machine_On"
-                          stackable="false">
+            <StatusEffect type="Always" target="This,Contained" comparison="And" Interval="5.0" disabledeltatime="true" setvalue="true" Tags="Mining_Machine_On">
                 <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0"/>
                 <RequiredItems items="reactorfuel" type="Contained" targetslot="1"/>
                 <RequiredItems items="Touhou_Spectral_Core_Item" type="Contained" targetslot="2"/>
-                <Conditional ChargePercentage="gt 0.01" targetitemcomponent="PowerContainer"/>
             </StatusEffect>
-            <StatusEffect type="Always" target="This" comparison="And" Interval="1.0" disabledeltatime="true" setvalue="true"
+            <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Sun_Flower_Seed_False" stackable="false">
+                <RequiredItems items="Touhou_Fake_Item" type="Contained" targetslot="0" MatchOnEmpty="true"/>
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Sun_Flower_Seed_False" stackable="false">
+                <RequiredItems items="Touhou_Fake_Item" type="Contained" targetslot="1" MatchOnEmpty="true"/>
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" comparison="And" disabledeltatime="true" Tags="Sun_Flower_Seed_False" stackable="false">
+                <RequiredItems items="Touhou_Fake_Item" type="Contained" targetslot="2" MatchOnEmpty="true"/>
+            </StatusEffect>
+            <StatusEffect type="Always" target="This" comparison="And" Interval="1.0" Duration="1.0" disabledeltatime="true" setvalue="true"
                           Tags="Touhou_Pokect_Spectral_Mining_Machine_False" stackable="false">
                 <Conditional ChargePercentage="lt 0.01" targetitemcomponent="PowerContainer"/>
             </StatusEffect>
