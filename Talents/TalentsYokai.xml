@@ -2312,7 +2312,7 @@
     <!--妖尾摆风 根据角色等级增加最大生命值，每级增加1%，最多20%
         穿着阿吽装束+时：增加10%对人类敌人的伤害。
         根据角色等级给予不同的效果：
-        15级：可以全速拖动生物，增加10%移动速度
+        15级：可以全速拖动生物
         20级：提高50%缺氧抗性
         25级：失去意识后，不会成为怪物的攻击目标
         穿着铃仙装束+时：增加5%远程攻击伤害，远程弹幕额外增加10%，造成的枪伤再额外增加5%。-->
@@ -2344,7 +2344,6 @@
             </Conditions>
             <Abilities>
                 <CharacterAbilityGiveFlag flagtype="MoveNormallyWhileDragging"/>
-                <CharacterAbilityGiveStat stattype="MovementSpeed" value="0.1"/>
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupInterval interval="9.9">
@@ -3077,7 +3076,7 @@
         </AbilityGroupInterval>
     </Talent>
 
-    <!--本质具现 对人类造成的伤害增加10%。使用魔法武器对敌人的攻击额外造成撕裂伤，这个伤害随着魔法能力增加会逐渐增加-->
+    <!--本质具现 对人类造成的伤害增加10%。使用魔法武器对敌人的攻击额外造成梦消失，这个伤害随着魔法能力增加会逐渐增加-->
     <Talent identifier="Touhou_ShenMing03">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Direct_Damage.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_ShenMing03"/>
@@ -3099,7 +3098,7 @@
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityGiveAffliction affliction="lacerations" strength="0.001" multiplystrengthbyskill="Touhou_Magic"/>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Lost_Dream" strength="0.005" multiplystrengthbyskill="Touhou_Magic"/>
             </Abilities>
         </AbilityGroupEffect>
     </Talent>
@@ -3166,7 +3165,7 @@
                 <AbilityConditionHasPermanentStat statidentifier="Mood_Learning_Counter" min="55"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStat stattype="RangedSpreadReduction" value="0.15"/>
+                <CharacterAbilityModifyStat stattype="RangedSpreadReduction" value="0.177"/>
             </Abilities>
         </AbilityGroupInterval>
     </Talent>
@@ -3365,7 +3364,7 @@
     </Talent>
 
     <!--本源力量
-        穿着秦心装束+时：站立不动时，受到攻击有50%概率减少30%受到的伤害。行走时，远程攻击散布减少15%。奔跑时，所有攻击伤害增加10%-->
+        穿着秦心装束+时：站立不动时，受到攻击有30%概率减少30%受到的伤害。行走时，远程攻击散布减少10%。奔跑时，近战攻击伤害增加30%-->
     <Talent identifier="Touhou_ShenMing07">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Indirect_Damage.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_ShenMing07"/>
@@ -3389,7 +3388,7 @@
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Expressive_Pokerface"/>
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_ShenMing07_Effect_Kokoro01"/>
-                <AbilityConditionServerRandom randomchance="0.5"/>
+                <AbilityConditionServerRandom randomchance="0.3"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.3"/>
@@ -3402,13 +3401,7 @@
                 <AbilityConditionRunning invert="true"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="Touhou_ShenMing07_Effect_Kokoro02" amount="1"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyStat stattype="RangedSpreadReduction" value="0.123"/>
             </Abilities>
         </AbilityGroupInterval>
         <AbilityGroupInterval interval="0.9">
@@ -3420,7 +3413,7 @@
                 <CharacterAbilityApplyStatusEffects>
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="Touhou_ShenMing07_Effect_Kokoro03" amount="1"/>
+                            <Affliction identifier="Touhou_ShenMing07_Effect_Kokoro02" amount="1"/>
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
