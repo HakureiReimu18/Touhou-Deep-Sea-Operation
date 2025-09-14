@@ -47,21 +47,21 @@
                 </AbilityGroupEffect>-->
     </Talent>
 
-    <!--自然友谊 获得10%移动速度加成和对缺氧25%的抗性，且造成的友伤下降20%-->
+    <!--自然友谊 获得5%移动速度加成和对缺氧25%的抗性，且造成的友伤下降20%-->
     <Talent identifier="Talents_Yousei_Primary03">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Talents_Yousei_Primary03"/>
-        <AbilityGroupInterval interval="9.9">
+        <AbilityGroupInterval interval="4.9">
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="Talents_Yousei_Primary03_Effect" strength="1.0"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyResistance resistanceid="oxygenlow" multiplier="0.75"/>
             </Abilities>
         </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="MovementSpeed" value="0.05"/>
+                <CharacterAbilityGiveStat stattype="TeamAttackMultiplier" value="-0.2"/>
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 
     <!--白日梦 增加10%最大生命值。生命值高于50%时，修复速度增加25%，且巡回完成任务后额外获得妖精糖果（蜜桃味）-->
@@ -73,14 +73,14 @@
                 <CharacterAbilityGiveStat stattype="MaximumHealthMultiplier" value="0.1"/>
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="None">
+        <AbilityGroupInterval interval="4.9">
             <Conditions>
                 <AbilityConditionAboveVitality vitalitypercentage="0.5"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityGiveStat stattype="RepairSpeed" value="0.25"/>
+                <CharacterAbilityModifyStat stattype="RepairSpeed" value="0.25"/>
             </Abilities>
-        </AbilityGroupEffect>
+        </AbilityGroupInterval>
         <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
             <Abilities>
                 <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Peach" amount="1"/>
@@ -104,7 +104,7 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--自然躲避 所在潜艇遭到攻击后，会让自己在6秒内提高15%的物理伤害抗性和10%的移动速度。-->
+    <!--自然躲避 所在潜艇遭到攻击后，会让自己在6秒内提高10%的物理伤害抗性和10%的移动速度。-->
     <Talent identifier="Talents_Yousei_Primary06">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Defense.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Talents_Yousei_Primary06"/>
@@ -166,11 +166,11 @@
         <AddedRecipe itemidentifier="Touhou_Mutation_Candy"/>
     </Talent>
 
-    <!--自然生长 技能水平两两取均值，根据平均值的8%获得对应加成：驾驶水平+武器操作：最大生命值；机械水平+电器工程：修理速度；医疗水平+魔法能力：攻击伤害。魔法能力给予的增幅在技能水平400时停止增长-->
+    <!--自然生长 技能水平两两取均值，根据平均值的8%获得对应加成：驾驶水平+武器操作：最大生命值；机械水平+电器工程：修理速度；医疗水平+魔法能力：攻击伤害。最多20%-->
     <Talent identifier="Talents_Yousei_Primary09">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Talents_Yousei_Primary09"/>
-        <AbilityGroupInterval interval="3.0">
+        <AbilityGroupInterval interval="30.0">
             <Abilities>
                 <CharacterAbilityModifyStatToSkill stattype="MaximumHealthMultiplier" maxvalue="0.04" skillidentifier="helm"/>
                 <CharacterAbilityModifyStatToSkill stattype="MaximumHealthMultiplier" maxvalue="0.04" skillidentifier="weapons"/>
@@ -182,17 +182,74 @@
                 <CharacterAbilityModifyStatToSkill stattype="MeleeAttackMultiplier" maxvalue="0.04" skillidentifier="Touhou_Magic"/>
             </Abilities>
         </AbilityGroupInterval>
-        <AbilityGroupInterval interval="3.0">
+        <AbilityGroupInterval interval="30.0">
             <Conditions>
-                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="400" invert="true"/>
+                <AbilityConditionHasSkill skillidentifier="helm" minvalue="250" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="MaximumHealthMultiplier" maxvalue="0.04" skillidentifier="helm"/>
+            </Abilities>
+            <FallbackAbilities>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.1"/>
+            </FallbackAbilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="30.0">
+            <Conditions>
+                <AbilityConditionHasSkill skillidentifier="weapons" minvalue="250" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="MaximumHealthMultiplier" maxvalue="0.04" skillidentifier="weapons"/>
+            </Abilities>
+            <FallbackAbilities>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.1"/>
+            </FallbackAbilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="30.0">
+            <Conditions>
+                <AbilityConditionHasSkill skillidentifier="mechanical" minvalue="250" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="RepairSpeed" maxvalue="0.04" skillidentifier="mechanical"/>
+            </Abilities>
+            <FallbackAbilities>
+                <CharacterAbilityModifyStat stattype="RepairSpeed" value="0.1"/>
+            </FallbackAbilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="30.0">
+            <Conditions>
+                <AbilityConditionHasSkill skillidentifier="electrical" minvalue="250" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="RepairSpeed" maxvalue="0.04" skillidentifier="electrical"/>
+            </Abilities>
+            <FallbackAbilities>
+                <CharacterAbilityModifyStat stattype="RepairSpeed" value="0.1"/>
+            </FallbackAbilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="30.0">
+            <Conditions>
+                <AbilityConditionHasSkill skillidentifier="medical" minvalue="250" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="RangedAttackMultiplier" maxvalue="0.04" skillidentifier="medical"/>
+                <CharacterAbilityModifyStatToSkill stattype="MeleeAttackMultiplier" maxvalue="0.04" skillidentifier="medical"/>
+            </Abilities>
+            <FallbackAbilities>
+                <CharacterAbilityModifyStat stattype="RangedAttackMultiplier" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackMultiplier" value="0.1"/>
+            </FallbackAbilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="30.0">
+            <Conditions>
+                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="250" invert="true"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyStatToSkill stattype="RangedAttackMultiplier" maxvalue="0.04" skillidentifier="Touhou_Magic"/>
                 <CharacterAbilityModifyStatToSkill stattype="MeleeAttackMultiplier" maxvalue="0.04" skillidentifier="Touhou_Magic"/>
             </Abilities>
             <FallbackAbilities>
-                <CharacterAbilityModifyStat stattype="RangedAttackMultiplier" value="0.16"/>
-                <CharacterAbilityModifyStat stattype="MeleeAttackMultiplier" value="0.16"/>
+                <CharacterAbilityModifyStat stattype="RangedAttackMultiplier" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackMultiplier" value="0.1"/>
             </FallbackAbilities>
         </AbilityGroupInterval>
     </Talent>
@@ -225,15 +282,17 @@
     <Talent identifier="Touhou_Insouciance">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Survivable.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_Insouciance"/>
-        <AbilityGroupInterval interval="4.9">
+        <AbilityGroupInterval interval="3.0">
             <Conditions>
                 <AbilityConditionNearbyCharacterCount distance="800" targettypes="Enemy,Alive" count="0"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityApplyStatusEffects SetUser="false">
                     <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="Touhou_Insouciance_Effect" amount="1"/>
+                        <StatusEffect type="OnAbility" target="This" disabledeltatime="true">
+                            <ReduceAffliction type="damage" strength="0.5"/>
+                            <ReduceAffliction type="burn" strength="0.5"/>
+                            <ReduceAffliction type="bleeding" strength="1.0"/>
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
@@ -251,18 +310,13 @@
                 <AbilityConditionAboveVitality vitalitypercentage="0.5" invert="true"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="Touhou_Emergency_Avoidance_Effect" amount="1"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyResistance resistanceid="stun" multiplier="0.85"/>
+                <CharacterAbilityModifyStat stattype="MovementSpeed" value="0.2"/>
             </Abilities>
         </AbilityGroupInterval>
     </Talent>
 
-    <!--孓然一身 如果附近没有其它船员，自己使用医疗物品的效果提高20%，对debuff的抗性提高30%-->
+    <!--孓然一身 如果附近没有其它船员，自己受到药物治疗的效果提高20%，对debuff的抗性提高20%-->
     <Talent identifier="Touhou_Lone_Yousei">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Survivable.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_Lone_Yousei"/>
@@ -271,13 +325,8 @@
                 <AbilityConditionAllyNearby distance="1200" truthywhen="NoCharacterMatches"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="Touhou_Lone_Yousei_Effect" amount="1.0"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyResistance resistanceid="debuff" multiplier="0.8"/>
+                <CharacterAbilityModifyStat stattype="MedicalItemEffectivenessMultiplier" value="0.2"/>
             </Abilities>
         </AbilityGroupInterval>
     </Talent>
@@ -286,7 +335,12 @@
     <Talent identifier="Touhou_Candy_World">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Production.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_Candy_World"/>
-        <AbilityGroupInterval interval="0.9">
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGiveStat stattype="IncreaseFabricationQuality" value="1.0"/>
+            </Abilities>
+        </AbilityGroupEffect>
+<!--        <AbilityGroupInterval interval="0.9">
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
                     <StatusEffects>
@@ -296,7 +350,7 @@
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
-        </AbilityGroupInterval>
+        </AbilityGroupInterval>-->
         <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
             <Abilities>
                 <CharacterAbilityPutItem itemidentifier="Touhou_Candy_Apple" amount="1"/>
@@ -438,13 +492,15 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yousei_Power" minimumPercentage="0.2"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyResistance resistanceid="stun" multiplier="0.8"/>
+                <CharacterAbilityModifyResistance resistanceid="burn" multiplier="0.8"/>
+<!--                <CharacterAbilityApplyStatusEffects>
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
                             <Affliction identifier="Behind_The_Mutation_Effect" amount="1"/>
                         </StatusEffect>
                     </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                </CharacterAbilityApplyStatusEffects>-->
             </Abilities>
         </AbilityGroupInterval>
     </Talent>
@@ -505,7 +561,7 @@
 
     <!--稚气未脱-->
 
-    <!--魔法助理 如果船上有魔法使，则为其提供25%技能获取速度，每个巡回获得额外5%金钱-->
+    <!--魔法助理 如果船上有魔法使，则为其提供25%技能获取速度。自己增加10%技能水平-->
     <Talent identifier="Touhou_Magical_Assistant">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Support.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_Magical_Assistant"/>
@@ -579,17 +635,12 @@
     <Talent identifier="Touhou_Further_Study">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_Further_Study"/>
-        <AbilityGroupInterval interval="0.9">
+        <AbilityGroupEffect abilityeffecttype="None">
             <Abilities>
-                <CharacterAbilityApplyStatusEffects allowself="true">
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="Touhou_Further_Study_Effect" amount="1.0"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGiveStat stattype="FabricationSpeed" value="0.5"/>
+                <CharacterAbilityGiveStat stattype="DeconstructorSpeedMultiplier" value="0.5"/>
             </Abilities>
-        </AbilityGroupInterval>
+        </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="None">
             <Abilities>
                 <CharacterAbilityGivePermanentStat statidentifier="medical" stattype="FabricationSpeed" value="0.5" setvalue="true"/>
@@ -676,35 +727,12 @@
         <AddedRecipe itemidentifier="Seven_Elements_Alchemical"/>
     </Talent>
 
-    <!--魔法天才 周围的敌人越多，造成的伤害越高，伤害最高至30%，解锁配方：MEID-->
+    <!--魔法天才 解锁配方：MEID-->
     <Talent identifier="MEID_Unlocked_Yousei">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Direct_Damage.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.MEID_Unlocked_Yousei"/>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="2"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="4"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="6"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
-            </Abilities>
-        </AbilityGroupEffect>
         <AddedRecipe itemidentifier="Touhou_MEID"/>
+        <AddedRecipe itemidentifier="Power_Point"/>
     </Talent>
 
     <!--宴会 每次巡回结束后，如果没有人死亡，则恢复所有人些许的物理伤害、烧伤、出血、失血和死神之税-->

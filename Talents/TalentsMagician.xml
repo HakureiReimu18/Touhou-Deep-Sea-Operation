@@ -107,21 +107,21 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--修行 根据当前魔法能力的水平，提高相应10%的移动速度、远程射击速度和攻击伤害。这个效果在魔法能力到达400时达到上限-->
+    <!--修行 根据当前魔法能力的水平，提高相应10%的移动速度、远程射击速度。最多20%-->
     <Talent identifier="Talents_Magician_Primary06">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Ranged.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Talents_Magician_Primary06"/>
         <AbilityGroupInterval interval="3.0">
             <Conditions>
-                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="400" invert="true"/>
+                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="200" invert="true"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyStatToSkill stattype="MovementSpeed" maxvalue="0.1" skillidentifier="Touhou_Magic"/>
                 <CharacterAbilityModifyStatToSkill stattype="RangedAttackSpeed" maxvalue="0.1" skillidentifier="Touhou_Magic"/>
             </Abilities>
             <FallbackAbilities>
-                <CharacterAbilityModifyStat stattype="MovementSpeed" value="0.4"/>
-                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="0.4"/>
+                <CharacterAbilityModifyStat stattype="MovementSpeed" value="0.2"/>
+                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="0.2"/>
             </FallbackAbilities>
         </AbilityGroupInterval>
     </Talent>
@@ -149,24 +149,38 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--物理魔法使 受水流冲击影响减少30%，增加15%最大生命值，解锁配方：退魔圣焰，祓魔霰弹-->
+    <!--物理魔法使 受水流冲击影响减少30%，增加10%最大生命值，解锁配方：退魔圣焰，祓魔霰弹-->
     <Talent identifier="Talents_Magician_Primary08">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Survivable.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Talents_Magician_Primary08"/>
         <AbilityGroupEffect abilityeffecttype="None">
             <Abilities>
                 <CharacterAbilityGiveStat stattype="FlowResistance" value="0.3"/>
-                <CharacterAbilityGiveStat stattype="MaximumHealthMultiplier" value="0.15"/>
+                <CharacterAbilityGiveStat stattype="MaximumHealthMultiplier" value="0.1"/>
             </Abilities>
         </AbilityGroupEffect>
         <AddedRecipe itemidentifier="Touhou_Winchester"/>
         <AddedRecipe itemidentifier="Exorcism_Bullet"/>
     </Talent>
 
-    <!--宴会 每次巡回结束后，如果没有人死亡，则恢复所有人一部分的物理伤害、烧伤、出血、失血和死神之税-->
+    <!--宴会 食用任意料理后效果的生效期间，获得15点额外生命值。每次巡回结束后，如果没有人死亡，则恢复所有人一部分的物理伤害、烧伤、出血、失血和死神之税。-->
     <Talent identifier="Gensokyo_Banquet">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Support.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Gensokyo_Banquet"/>
+        <AbilityGroupInterval interval="10.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Cuisine_Effect01" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Gensokyo_Banquet_Effect01" amount="1"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
         <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
             <Conditions>
                 <AbilityConditionNoCrewDied assistantsdontcount="false"/>
@@ -175,7 +189,7 @@
                 <CharacterAbilityApplyStatusEffectsToAllies requiresalive="true" allowself="true">
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
-                            <Affliction identifier="Gensokyo_Banquet_Effect" amount="5"/>
+                            <Affliction identifier="Gensokyo_Banquet_Effect02" amount="5"/>
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffectsToAllies>
@@ -183,10 +197,55 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--飘逸 受到攻击时有25%概率减少40%的承受伤害，这个效果有2秒冷却-->
+    <!--飘逸 增加10%魔法武器近战造成的伤害。受到攻击时有25%概率减少40%的承受伤害，这个效果有2秒冷却-->
     <Talent identifier="Gensokyo_Hermit">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Defense.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Gensokyo_Hermit"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionIsAiming weapontype="ranged" invert="true"/>
+                <AbilityConditionHasItem tags="Touhou_Weapon_Level01" requireall="false"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionIsAiming weapontype="ranged" invert="true"/>
+                <AbilityConditionHasItem tags="Touhou_Weapon_Level02" requireall="false"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionIsAiming weapontype="ranged" invert="true"/>
+                <AbilityConditionHasItem tags="Touhou_Weapon_Level03" requireall="false"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionIsAiming weapontype="ranged" invert="true"/>
+                <AbilityConditionHasItem tags="Touhou_Weapon_Level04" requireall="false"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionIsAiming weapontype="ranged" invert="true"/>
+                <AbilityConditionHasItem tags="Touhou_Weapon_Level05" requireall="false"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
                 <AbilityConditionServerRandom randomchance="0.25"/>
@@ -241,13 +300,14 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--居酒屋 拥有对醉酒的80%的抗性，受到攻击后，短暂提高10%烧伤抗性和出血抗性，解锁配方：啤酒，友谊果汁-->
+    <!--居酒屋 拥有对醉酒的50%的抗性。饮用任意饮品后效果的生效期间，提高15%烧伤抗性、出血抗性，并增加10%最大生命值。解锁配方：啤酒，友谊果汁-->
     <Talent identifier="Izakaya">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Defense.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Izakaya"/>
         <AbilityGroupEffect abilityeffecttype="None">
             <Abilities>
-                <CharacterAbilityGiveResistance resistanceid="drunk" multiplier="0.2"/>
+                <CharacterAbilityGiveResistance resistanceid="drunk" multiplier="0.5"/>
+                <CharacterAbilityGiveResistance resistanceid="Touhou_Drinks_Drunk" multiplier="0.5"/>
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupInterval>
@@ -258,42 +318,15 @@
                 <CharacterAbilityModifyResistance resistanceid="nausea" multiplier="0.2"/>
             </Abilities>
         </AbilityGroupInterval>
-        <AbilityGroupInterval interval="5.0">
-            <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="This" disabledeltatime="true">
-                            <Affliction identifier="Izakaya_Effect_CD" amount="10"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
-            </Abilities>
-        </AbilityGroupInterval>
-        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+        <AbilityGroupInterval interval="8.0">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Izakaya_Effect_CD"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Cuisine_Effect01" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
-                            <Affliction identifier="Izakaya_Effect" amount="1.0"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyResistance resistanceid="burn,bleeding" multiplier="0.85"/>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.1"/>
             </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttackedResult">
-            <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="This">
-                            <ReduceAffliction identifier="Izakaya_Effect_CD" strength="100.0"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
-            </Abilities>
-        </AbilityGroupEffect>
+        </AbilityGroupInterval>
         <AddedRecipe itemidentifier="Touhou_Beer"/>
         <AddedRecipe itemidentifier="Touhou_Friendship_Juice"/>
     </Talent>
@@ -423,21 +456,21 @@
         <AddedRecipe itemidentifier="gensokyo_divinggear"/>
     </Talent>
 
-    <!--炼金无限 瓶装元素的出售价格增加至75%，双手部位的物理伤害抗性和烧伤抗性提高5%，解锁配方：回收日、月符卡-->
+    <!--炼金无限 瓶装元素的购买价格降低至15%，双手部位的物理伤害抗性和烧伤抗性提高5%，解锁配方：回收日、月符卡-->
     <Talent identifier="Spell_Card_Recycle_Unlocked">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Defense.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Spell_Card_Recycle_Unlocked"/>
         <AbilityGroupEffect abilityeffecttype="None">
             <Abilities>
-                <CharacterAbilityGivePermanentStat statidentifier="Mu_Alchemical" stattype="StoreSellMultiplier" value="0.75" targetallies="false"
+                <CharacterAbilityGivePermanentStat statidentifier="Mu_Alchemical" stattype="StoreBuyMultiplier" value="0.15" targetallies="false"
                                                    setvalue="true"/>
-                <CharacterAbilityGivePermanentStat statidentifier="Huo_Alchemical" stattype="StoreSellMultiplier" value="0.75" targetallies="false"
+                <CharacterAbilityGivePermanentStat statidentifier="Huo_Alchemical" stattype="StoreBuyMultiplier" value="0.15" targetallies="false"
                                                    setvalue="true"/>
-                <CharacterAbilityGivePermanentStat statidentifier="Tu_Alchemical" stattype="StoreSellMultiplier" value="0.75" targetallies="false"
+                <CharacterAbilityGivePermanentStat statidentifier="Tu_Alchemical" stattype="StoreBuyMultiplier" value="0.15" targetallies="false"
                                                    setvalue="true"/>
-                <CharacterAbilityGivePermanentStat statidentifier="Jin_Alchemical" stattype="StoreSellMultiplier" value="0.75" targetallies="false"
+                <CharacterAbilityGivePermanentStat statidentifier="Jin_Alchemical" stattype="StoreBuyMultiplier" value="0.15" targetallies="false"
                                                    setvalue="true"/>
-                <CharacterAbilityGivePermanentStat statidentifier="Shui_Alchemical" stattype="StoreSellMultiplier" value="0.75" targetallies="false"
+                <CharacterAbilityGivePermanentStat statidentifier="Shui_Alchemical" stattype="StoreBuyMultiplier" value="0.15" targetallies="false"
                                                    setvalue="true"/>
             </Abilities>
         </AbilityGroupEffect>
@@ -582,16 +615,15 @@
         </AbilityGroupInterval>
     </Talent>
 
-    <!--三重伟大 攻击伤害、攻击速度、物理抗性提高10%，解锁配方：贤者之石-->
+    <!--三重伟大 攻击伤害、最大生命值、物理抗性提高10%，解锁配方：贤者之石，P点（红）（高效合成）-->
     <Talent identifier="Hermes">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Hermes"/>
         <AbilityGroupEffect abilityeffecttype="None">
             <Abilities>
-                <CharacterAbilityGiveStat stattype="RangedAttackMultiplier" value="0.10"/>
-                <CharacterAbilityGiveStat stattype="MeleeAttackMultiplier" value="0.10"/>
-                <CharacterAbilityGiveStat stattype="RangedAttackSpeed" value="0.10"/>
-                <CharacterAbilityGiveStat stattype="MeleeAttackSpeed" value="0.10"/>
+                <CharacterAbilityGiveStat stattype="RangedAttackMultiplier" value="0.1"/>
+                <CharacterAbilityGiveStat stattype="MeleeAttackMultiplier" value="0.1"/>
+                <CharacterAbilityGiveStat stattype="MaximumHealthMultiplier" value="0.1"/>
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupInterval interval="4.9">
@@ -600,9 +632,10 @@
             </Abilities>
         </AbilityGroupInterval>
         <AddedRecipe itemidentifier="Seven_Elements_Alchemical"/>
+        <AddedRecipe itemidentifier="Power_Point"/>
     </Talent>
 
-    <!--旅行法师 完成巡回后，若无人死亡，则获得一本《魔法教学》，同时潜艇成员中等级小于6的成员获取经验值的速度加快20%-->
+    <!--旅行法师 完成巡回后，若无人死亡，则获得一本《魔法教学》，同时潜艇成员中等级小于7的成员获取经验值的速度加快20%-->
     <Talent identifier="Traveling_Magician">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Production.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Traveling_Magician"/>
@@ -616,7 +649,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAllyGainMissionExperience">
             <Conditions>
-                <AbilityConditionHasLevel minlevel="6" invert="true"/>
+                <AbilityConditionHasLevel minlevel="7" invert="true"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyValue multiplyvalue="1.2"/>
@@ -625,8 +658,8 @@
     </Talent>
 
     <!--魔力外放 根据当前角色等级，提供不同加成：
-        5级：魔法能力大于60后，每次攻击都有25%概率造成15%额外伤害
-        10级：魔法能力大于80后，远程弹幕的伤害提高10%
+        5级：魔法能力大于60后，每次攻击都有40%概率造成15%额外伤害
+        10级：魔法能力大于80后，远程弹幕的伤害提高20%
         15级：魔法能力大于100后，在水中获得300秒免疫水压，回到干燥环境后这个效果的剩余时间将开始恢复-->
     <Talent identifier="Mana_Release">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Ranged.png" sheetindex="0,0" sheetelementsize="400,400"/>
@@ -634,7 +667,7 @@
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
-                <AbilityConditionServerRandom randomchance="0.25"/>
+                <AbilityConditionServerRandom randomchance="0.4"/>
                 <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="60"/>
                 <AbilityConditionHasLevel minlevel="5"/>
             </Conditions>
@@ -649,7 +682,7 @@
                 <AbilityConditionHasLevel minlevel="10"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.2"/>
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupInterval interval="4.9">
@@ -672,7 +705,7 @@
 
     <!--魔力内敛 根据当前角色等级，提供不同加成：
         5级后：每一级提供3%技能获取速度和1%经验获取速度，直到20级为止
-        10级后：每一级提供2%游泳速度并减少2%双持惩罚，直到20级为止
+        10级后：每一级提供2%游泳速度并减少1%双持惩罚，直到20级为止
         15级后：每次完成任意任务都会增加2%最大生命值，最大10%，死亡后效果清零-->
     <Talent identifier="Mana_Convergence" trackedstat="Mana_Convergence_Counter" trackedmax="5">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
@@ -692,7 +725,7 @@
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyStatToLevel stattype="SwimmingSpeed" statperlevel="0.02" maxlevel="20"/>
-                <CharacterAbilityModifyStatToLevel stattype="DualWieldingPenaltyReduction" statperlevel="0.02" maxlevel="20"/>
+                <CharacterAbilityModifyStatToLevel stattype="DualWieldingPenaltyReduction" statperlevel="0.01" maxlevel="20"/>
             </Abilities>
         </AbilityGroupInterval>
         <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
@@ -746,7 +779,7 @@
         </AbilityGroupInterval>
     </Talent>
 
-    <!--远见卓识 每次巡回能额外接受一个任务，获得的声望增加25%，解锁配方：P点（红）（高效合成）-->
+    <!--远见卓识 每次巡回能额外接受一个任务，获得的声望增加25%，允许全速拖动生物-->
     <Talent identifier="Power_Point_Efficient_Synthesis">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Support.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Power_Point_Efficient_Synthesis"/>
@@ -761,96 +794,31 @@
                 <CharacterAbilityGiveFlag flagtype="MoveNormallyWhileDragging"/>
             </Abilities>
         </AbilityGroupEffect>
-        <AddedRecipe itemidentifier="Power_Point"/>
     </Talent>
 
-    <!--魔法天才 周围的敌人越多，造成的伤害越高，伤害最高至30%。生命值低于50%后，这个效果翻倍。解锁配方：MEID-->
+    <!--魔法天才 制作P点（红）或其他魔法武器时，有概率不消耗其中一个材料。解锁配方：MEID-->
     <Talent identifier="MEID_Unlocked">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Direct_Damage.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.MEID_Unlocked"/>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
+        <AbilityGroupEffect abilityeffecttype="OnItemFabricatedIngredients">
             <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="2"/>
+                <AbilityConditionServerRandom randomChance="0.5" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
+                <CharacterAbilityRemoveRandomIngredient>
+                    <AbilityConditionItem tags="Power_Point" />
+                </CharacterAbilityRemoveRandomIngredient>
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
+        <AbilityGroupEffect abilityeffecttype="OnItemFabricatedIngredients">
             <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="2"/>
-                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.5"/>
+                <AbilityConditionServerRandom randomChance="0.65" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="4"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="4"/>
-                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.5"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="6"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="6"/>
-                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.5"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="8"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="8"/>
-                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.5"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="10"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionNearbyCharacterCount distance="500" targettypes="Enemy,Alive" count="10"/>
-                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.5"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
+                <CharacterAbilityRemoveRandomIngredient>
+                    <AbilityConditionItem tags="Touhou_Weapon_Level01,Touhou_Weapon_Level02,Touhou_Weapon_Level03,Touhou_Weapon_Level04,
+                    Touhou_Weapon_Level05" />
+                </CharacterAbilityRemoveRandomIngredient>
             </Abilities>
         </AbilityGroupEffect>
         <AddedRecipe itemidentifier="Touhou_MEID"/>

@@ -21,10 +21,58 @@
         <Body width="260" height="350" density="15"/>
         <Holdable selectkey="Select" pickkey="Use" slots="Any,RightHand,LeftHand" holdpos="-20,-100" handle1="-20,-50" holdangle="0" aimable="false"
                   PickingTime="1.0" msg="ItemMsgDetach"/>
-        <ItemContainer capacity="1" canbeselected="true" hideitems="true" allowuioverlap="false" allowdraganddrop="true">
-            <GuiFrame relativesize="0.3,0.3" anchor="Center" size="268,200" style="ItemUI"/>
-            <Containable items="Touhou_Record"/>
+        <ItemContainer canbeselected="true" capacity="1" maxstacksize="1" hideitems="true" allowuioverlap="false">
+            <GuiFrame relativesize="0.3,0.3" anchor="Center" minsize="200,220" maxsize="300,320" style="ItemUI" />
+            <Containable items="Touhou_Record">
+                <StatusEffect type="OnContaining" target="This" interval="1.0">
+                    <particleemitter particle="shockwave" particleamount="1" scalemin="2" scalemax="12" />
+                </StatusEffect>
+                <StatusEffect type="OnContaining" target="Contained" voltage="0.1" setvalue="true" interval="1.0" duration="1.05" stackable="false" comparison="and">
+                    <Conditional targetcontainer="true" ConditionPercentage="gt 0" />
+                    <Conditional targetcontainer="true" ConditionPercentage="lte 10" />
+                </StatusEffect>
+                <StatusEffect type="OnContaining" target="Contained" voltage="0.2" setvalue="true" interval="1.0" duration="1.05" stackable="false" comparison="and">
+                    <Conditional targetcontainer="true" ConditionPercentage="gt 10" />
+                    <Conditional targetcontainer="true" ConditionPercentage="lte 20" />
+                </StatusEffect>
+                <StatusEffect type="OnContaining" target="Contained" voltage="0.3" setvalue="true" interval="1.0" duration="1.05" stackable="false" comparison="and">
+                    <Conditional targetcontainer="true" ConditionPercentage="gt 20" />
+                    <Conditional targetcontainer="true" ConditionPercentage="lte 30" />
+                </StatusEffect>
+                <StatusEffect type="OnContaining" target="Contained" voltage="0.4" setvalue="true" interval="1.0" duration="1.05" stackable="false" comparison="and">
+                    <Conditional targetcontainer="true" ConditionPercentage="gt 30" />
+                    <Conditional targetcontainer="true" ConditionPercentage="lte 40" />
+                </StatusEffect>
+                <StatusEffect type="OnContaining" target="Contained" voltage="0.5" setvalue="true" interval="1.0" duration="1.05" stackable="false" comparison="and">
+                    <Conditional targetcontainer="true" ConditionPercentage="gt 40" />
+                    <Conditional targetcontainer="true" ConditionPercentage="lte 50" />
+                </StatusEffect>
+                <StatusEffect type="OnContaining" target="Contained" voltage="0.6" setvalue="true" interval="1.0" duration="1.05" stackable="false" comparison="and">
+                    <Conditional targetcontainer="true" ConditionPercentage="gt 50" />
+                    <Conditional targetcontainer="true" ConditionPercentage="lte 60" />
+                </StatusEffect>
+                <StatusEffect type="OnContaining" target="Contained" voltage="0.7" setvalue="true" interval="1.0" duration="1.05" stackable="false" comparison="and">
+                    <Conditional targetcontainer="true" ConditionPercentage="gt 60" />
+                    <Conditional targetcontainer="true" ConditionPercentage="lte 70" />
+                </StatusEffect>
+                <StatusEffect type="OnContaining" target="Contained" voltage="0.8" setvalue="true" interval="1.0" duration="1.05" stackable="false" comparison="and">
+                    <Conditional targetcontainer="true" ConditionPercentage="gt 70" />
+                    <Conditional targetcontainer="true" ConditionPercentage="lte 80" />
+                </StatusEffect>
+                <StatusEffect type="OnContaining" target="Contained" voltage="0.9" setvalue="true" interval="1.0" duration="1.05" stackable="false" comparison="and">
+                    <Conditional targetcontainer="true" ConditionPercentage="gt 80" />
+                    <Conditional targetcontainer="true" ConditionPercentage="lte 90" />
+                </StatusEffect>
+                <StatusEffect type="OnContaining" target="Contained" voltage="1.0" setvalue="true" interval="1.0" duration="1.05" stackable="false" comparison="and">
+                    <Conditional targetcontainer="true" ConditionPercentage="gt 90" />
+                    <Conditional targetcontainer="true" ConditionPercentage="lte 100" />
+                </StatusEffect>
+            </Containable>
         </ItemContainer>
+        <CustomInterface canbeselected="true" selectkey="Select" drawhudwhenequipped="true" allowuioverlap="false">
+            <GuiFrame relativesize="0.16,0.10" anchor="BottomCenter" pivot="BottomCenter" style="ItemUI" draggable="true" />
+            <NumberInput text="Volume" numbertype="float" decimalplaces="0" propertyname="Condition" min="10" max="100" step="10" signal="100" />
+        </CustomInterface>
     </Item>
     <!--唱片收纳箱-->
     <Item name="" identifier="Touhou_Records_Box" subcategory="Touhou" tags="container,suppliescontainer" category="Machine" linkable="true"
