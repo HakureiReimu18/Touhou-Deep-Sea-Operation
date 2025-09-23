@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Talents>
 
-    <Talent identifier="Savant">
+    <Talent identifier="Savant" trackedstat="Touhou_Akyuu_Counter" trackedmax="33">
         <Icon texture="%ModDir%/Images/Talents/Savant.png" sheetindex="0,0" sheetelementsize="128,128"/>
         <Description tag="talentdescription.Savant"/>
         <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
             <Conditions>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Akyuu_Counter" min="10"/>
                 <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo"/>
             </Conditions>
             <Abilities>
@@ -14,6 +15,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
             <Conditions>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Akyuu_Counter" min="10"/>
                 <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo"/>
                 <AbilityConditionNoCrewDied/>
             </Conditions>
@@ -21,25 +23,52 @@
                 <CharacterAbilityPutItem itemidentifier="Perfect_Memento_In_Strict_Sense" amount="1"/>
             </Abilities>
         </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAllMissionsCompleted">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Akyuu_Counter" min="33" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Akyuu_Counter" value="1" removeondeath="true"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="2.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Akyuu_Counter" min="10"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="SkillGainSpeed" value="0.8"/>
+                <CharacterAbilityModifyStat stattype="MedicalItemApplyingMultiplier" value="0.25"/>
+            </Abilities>
+        </AbilityGroupInterval>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo"/>
-                <AbilityConditionCharacter targettype="Ally" invert="true"/>
-                <AbilityConditionHasLevel minlevel="15"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Akyuu_Counter" min="10"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional speciesname="neq human"/>
+                </AbilityConditionCharacter>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.2"/>
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupInterval Interval="5.0">
+        <AbilityGroupInterval interval="2.9">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Memory_Of_Gensokyo"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Akyuu_Counter" min="33"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStatToSkill stattype="SkillGainSpeed" maxvalue="0.8" skillidentifier="all"/>
-                <CharacterAbilityModifyStatToSkill stattype="MedicalItemApplyingMultiplier" maxvalue="0.15" skillidentifier="all"/>
-                <CharacterAbilityModifyStatToSkill stattype="FabricationSpeed" maxvalue="0.25" skillidentifier="all"/>
-                <CharacterAbilityModifyStatToSkill stattype="DeconstructorSpeedMultiplier" maxvalue="0.25" skillidentifier="all"/>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="Touhou_Akyuu_Counter_Effect" amount="10"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
     </Talent>

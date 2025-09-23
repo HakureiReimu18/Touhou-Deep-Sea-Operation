@@ -61,21 +61,18 @@
                 <CharacterAbilityModifyStat stattype="RangedAttackMultiplier" value="0.15"/>
             </Abilities>
         </AbilityGroupInterval>
-        <AbilityGroupInterval interval="2.9">
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
-                <AbilityConditionHasVelocity velocity="0"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional Touhou_Elements_Marked="gt 0"/>
+                </AbilityConditionCharacter>
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="The_Still_Library_Standing_Effect" amount="1"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
             </Abilities>
-        </AbilityGroupInterval>
+        </AbilityGroupEffect>
 
         <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
             <Conditions>
@@ -91,5 +88,29 @@
                 <CharacterAbilityModifyAffliction afflictionidentifiers="acidburn" addedmultiplier="0.15"/>
             </Abilities>
         </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional The_Still_Library_Marked_Effect="lte 0"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.3"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional The_Still_Library_Marked_Effect="gt 0"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addedpenetration="0.05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
     </Talent>
 </Talents>

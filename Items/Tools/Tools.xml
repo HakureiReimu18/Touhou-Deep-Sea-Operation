@@ -3233,6 +3233,7 @@
             <Item identifier="Touhou_Empathy_Frog_Amulet_For_Safe_Return" commonness="1"/>
             <Item identifier="Touhou_Empathy_Snake_Skin_Amulet" commonness="1"/>
             <Item identifier="Touhou_Empathy_Boundary_Of_The_Screen" commonness="1"/>
+            <Item identifier="Touhou_Empathy_Season_Of_The_Item" commonness="1"/>
         </Deconstruct>
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Item_Box.png" depth="0.4" sourcerect="0,0,60,72"/>
         <Body width="100" height="100" density="10"/>
@@ -4505,6 +4506,41 @@
         <Pickable slots="Any"/>
     </Item>
 
+    <!--共情物：道具的季节-->
+    <Item name="共情物：道具的季节" identifier="Touhou_Empathy_Season_Of_The_Item" nameidentifier="Touhou_Empathy_Item" category="Material"
+          subcategory="Touhou" maxstacksize="16" tags="smallitem,Touhou_Empathy_Item" cargocontaineridentifier="mediccrate" scale="0.2"
+          impactsoundtag="impact_metal_light">
+        <PreferredContainer primary="medfabcab"/>
+        <Price baseprice="250" sold="false">
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.2"/>
+        </Price>
+        <Deconstruct time="5">
+            <RequiredItem identifier="Magic_Material" amount="2"/>
+        </Deconstruct>
+        <GeneticMaterial SetTaintedOnDeath="false" CanBeUntainted="false" nameidentifier="Character.Touhou_Empathy_Season_Of_The_Item"
+                         effect="Touhou_Empathy_Season_Of_The_Item_Effect">
+            <StatusEffect type="OnWearing" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500"/>
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500"/>
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500"/>
+            </StatusEffect>
+            <StatusEffect type="OnSevered" target="Character" duration="0.0">
+                <Sound file="Content/Sounds/Damage/Gore1.ogg" type="OnUse" range="500"/>
+                <Sound file="Content/Sounds/Damage/Gore2.ogg" type="OnUse" range="500"/>
+                <Sound file="Content/Sounds/Damage/Gore3.ogg" type="OnUse" range="500"/>
+                <ParticleEmitter particle="bloodsplash" anglemin="0" anglemax="360" particleamount="5" velocitymin="0" velocitymax="0" scalemin="0.5"
+                                 scalemax="1.0"/>
+                <Affliction identifier="Touhou_Lost_Dream" amount="50" penetration="0.5"/>
+                <Affliction identifier="organdamage" amount="50" penetration="0.5"/>
+                <Affliction identifier="stun" amount="1.5" penetration="0.5"/>
+            </StatusEffect>
+        </GeneticMaterial>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Empathy_Item/Touhou_Empathy_Season_Of_The_Item.png" sourcerect="0,0,220,272" depth="0.45"/>
+        <Body width="23" height="31" density="10"/>
+        <Pickable slots="Any"/>
+    </Item>
+
 
     <!--事件触发用ID卡-沉船事件01-->
     <Item name="事件触发用ID卡-沉船事件01" identifier="Trigger_Touhou_Wreck01" category="Misc" subcategory="Touhou" maxstacksize="8" tags="smallitem"
@@ -5514,7 +5550,7 @@
 
     <!--魔法武器置物架-->
     <Item name="魔法武器置物架" identifier="Touhou_Weapon_Holder" category="Equipment" tags="weaponholder" subcategory="Touhou" scale="0.25">
-        <Sprite texture="%ModDir%/Images/Tools/Touhou_Weapon_Holder.png" sourcerect="0,0,400,400" depth="0.45" scale="0.5"
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Weapon_Holder.png" sourcerect="0,0,400,400" depth="0.75" scale="0.5"
                 origin="0.5,0.5"/>
         <Body width="400" height="400" density="10"/>
         <Holdable selectkey="Select" pickkey="Use" slots="RightHand+LeftHand" PickingTime="5.0" aimpos="65,-10" handle1="0,0" attachable="true"

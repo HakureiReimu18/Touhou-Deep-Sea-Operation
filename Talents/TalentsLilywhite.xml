@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="LilywhiteTalent" >
+        <Icon texture="%ModDir%/Images/Talents/LilywhiteTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.LilywhiteTalent"/>
+        <AbilityGroupInterval interval="3">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Spring_Bearer_Fairy" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <ReduceAffliction identifier="Lilywhite_Wings_Spawn" amount="100"/>
+                            <ReduceAffliction identifier="Lilywhite_Black_Wings_Spawn" amount="100"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="1">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Spring_Bearer_Fairy"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects SetUser="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="This" multiplyafflictionsbymaxvitality="true" disabledeltatime="true">
+                            <ReduceAffliction type="oxygenlow" amount="1"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="1">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Spring_Bearer_Fairy"/>
+                <AbilityConditionHasTalent identifier="Touhou_Yousei_Alliance"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects SetUser="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="This" multiplyafflictionsbymaxvitality="true" disabledeltatime="true">
+                            <ReduceAffliction type="oxygenlow" amount="0.5"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Spring_Bearer_Fairy"/>
+                <AbilityConditionHasAffliction afflictionidentifier="LilywhiteTalent_OnAttacked_Effect_CD" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" delay="0.05" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="LilywhiteTalent_OnAttacked_Effect_CD" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityApplyStatusEffectsToAttacker>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true">
+                            <Conditional speciesgroup="neq human"/>
+                            <Affliction identifier="LilywhiteTalent_OnAttacked_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAttacker>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Spring_Bearer_Fairy"/>
+                <AbilityConditionHasTalent identifier="Touhou_Yousei_Alliance"/>
+                <AbilityConditionHasAffliction afflictionidentifier="LilywhiteTalent_OnAttacked_Effect_CD" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" delay="0.05" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="LilywhiteTalent_OnAttacked_Effect_CD" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityApplyStatusEffectsToAttacker>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true">
+                            <Conditional speciesgroup="neq human"/>
+                            <Affliction identifier="LilywhiteTalent_OnAttacked_Effect_Touhou_Yousei_Alliance" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAttacker>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Spring_Bearer_Fairy"/>
+                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.3"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.2"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Spring_Bearer_Fairy"/>
+                <AbilityConditionHasTalent identifier="Touhou_Yousei_Alliance"/>
+                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.3"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnApplyTreatment">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Spring_Bearer_Fairy"/>
+                <AbilityConditionItem tags="Touhou_Magic_Medical,Touhou_Candy"/>
+                <AbilityConditionCharacter>
+                    <Conditional jobidentifier="Yousei"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect statuseffecttags="medical" type="OnAbility" target="Character" duration="10.0">
+                            <Affliction identifier="LilywhiteTalent_OnApplyTreatment_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnApplyTreatment">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Spring_Bearer_Fairy"/>
+                <AbilityConditionHasTalent identifier="Touhou_Yousei_Alliance"/>
+                <AbilityConditionItem tags="Touhou_Magic_Medical,Touhou_Candy"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect statuseffecttags="medical" type="OnAbility" target="Character" duration="10.0">
+                            <Affliction identifier="LilywhiteTalent_OnApplyTreatment_Effect_Touhou_Yousei_Alliance" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Spring_Bearer_Fairy"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies maxdistance="1500" allowself="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="LilywhiteTalent_ToAllies_Effect" amount="10"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupInterval>
+    </Talent>
+</Talents>

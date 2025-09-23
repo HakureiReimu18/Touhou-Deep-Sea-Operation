@@ -548,6 +548,17 @@
         <icon texture="%ModDir%/Images/Afflictions/Memory_Of_Gensokyo.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>
 
+    <!--幻想乡的记忆-->
+    <Affliction identifier="Touhou_Akyuu_Counter_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" indicatorlimb="Torso"
+                maxstrength="10"
+                duration="3.0" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="10" minskillmultiplier="1.3" maxskillmultiplier="1.3" >
+            <StatValue stattype="RangedAttackMultiplier" value="0.15"/>
+            <StatValue stattype="MeleeAttackMultiplier" value="0.25"/>
+        </Effect>
+        <icon texture="%ModDir%/Images/Afflictions/Memory_Of_Gensokyo.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
     <!--阿求-专属武器效果-->
     <Affliction identifier="Akyuu_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
                 duration="1.0" maxstrength="10" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
@@ -710,7 +721,6 @@
             <StatValue stattype="MaximumHealthMultiplier" value="-0.25"/>
             <StatValue stattype="SkillGainSpeed" value="0.5"/>
             <StatValue stattype="MeleeAttackMultiplier" value="-1"/>
-            <StatValue stattype="BuffDurationMultiplier" value="0.3"/>
             <!--给予在陆地上不能奔跑效果-->
             <StatusEffect type="NotInWater" target="Character" comparison="And">
                 <Conditional Touhou_MEID_Effect="eq 0"/>
@@ -722,16 +732,12 @@
         <Icon texture="%ModDir%/Images/Afflictions/The_Still_Library.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>
 
-    <!--帕秋莉静止效果-->
-    <Affliction name="帕秋莉静止效果" identifier="The_Still_Library_Standing_Effect" type="Touhou_Character_Affliction" isbuff="true"
-                limbspecific="false" hideiconafterdelay="false" maxstrength="10"
-                duration="3.0" showiconthreshold="100" showinhealthscannerthreshold="100"
+    <!--帕秋莉攻击标记-->
+    <Affliction name="帕秋莉攻击标记" identifier="The_Still_Library_Marked_Effect" type="Touhou_Character_Affliction" isbuff="true"
+                limbspecific="false" hideiconafterdelay="false" maxstrength="1"
+                resetbetweenrounds="true" showiconthreshold="100" showinhealthscannerthreshold="100"
                 iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
-        <Effect minstrength="0" maxstrength="10">
-            <StatValue stattype="RangedAttackMultiplier" value="0.1"/>
-            <StatValue stattype="MeleeAttackMultiplier" value="0.1"/>
-            <StatValue stattype="MaximumHealthMultiplier" value="0.1"/>
-        </Effect>
+        <Effect minstrength="0" maxstrength="1"/>
         <Icon texture="%ModDir%/Images/Afflictions/The_Still_Library.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>
 
@@ -1325,13 +1331,13 @@
     </Affliction>
 
     <!--鲜红血液的恶魔-->
-    <Affliction name="鲜红血液的恶魔" identifier="FlandreTalent3_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false"
+<!--    <Affliction name="鲜红血液的恶魔" identifier="FlandreTalent3_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false"
                 hideiconafterdelay="false" maxstrength="10"
                 duration="3.0" showiconthreshold="100" showinhealthscannerthreshold="100"
                 iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
-        <Effect minstrength="0" maxstrength="1" resistancefor="debuff" minresistance="0.35" maxresistance="0.35"/>
+        <Effect minstrength="0" maxstrength="1" resistancefor="debuff" minresistance="0.15" maxresistance="0.15"/>
         <Icon texture="%ModDir%/Images/Afflictions/Younger_Sister_Of_Scarlet.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
-    </Affliction>
+    </Affliction>-->
 
     <!--鲜红血液的恶魔-医疗提升-->
     <Affliction name="鲜红血液的恶魔-医疗提升" identifier="FlandreTalent3_Effect_Medical" type="Touhou_Character_Affliction" isbuff="true"
@@ -1362,6 +1368,7 @@
             </StatusEffect>
             <StatValue stattype="RangedAttackMultiplier" value="-1.0"/>
             <StatValue stattype="MeleeAttackMultiplier" value="-1.0"/>
+            <StatValue stattype="ExplosionDamageMultiplier" value="-1.0"/>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Younger_Sister_Of_Scarlet.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>
@@ -1872,7 +1879,7 @@
         <Effect minstrength="0" maxstrength="100" resistancefor="debuff" minresistance="0" maxresistance="0.1">
             <StatusEffect target="Character" Interval="10.0" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
                 <Conditional Puppeteer_Of_Seven_Colors="eq 0"/>
-                <ReduceAffliction identifier="Alice_Doll_Energy" amount="1"/>
+                <ReduceAffliction identifier="Alice_Doll_Energy" amount="5"/>
             </StatusEffect>
             <StatValue stattype="MaximumHealthMultiplier" minvalue="0" value="0.1"/>
             <StatValue stattype="BuffDurationMultiplier" minvalue="0" value="0.1"/>
@@ -1890,9 +1897,9 @@
 
     <!--人偶强化效果-->
     <Affliction identifier="Alice_Doll_Strength" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
-                maxstrength="1"
+                maxstrength="1" Targets="Touhou_Alice_Doll_Normal,Touhou_Alice_Doll_ShangHai,Touhou_Alice_Doll_PengLai"
                 Duration="3.0" showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="40,40,40;120,120,120;200,200,200;255,255,255">
-        <Effect minstrength="0" maxstrength="1" resistancefor="damage,burn.stun,bleeding,debuff" minresistance="0.3" maxresistance="0.3">
+        <Effect minstrength="0" maxstrength="1" resistancefor="damage,burn,stun,bleeding,debuff" minresistance="0.3" maxresistance="0.3">
             <StatValue stattype="RangedAttackMultiplier" value="0.3"/>
             <StatValue stattype="MeleeAttackMultiplier" value="0.3"/>
         </Effect>
@@ -3439,6 +3446,166 @@
                 resetbetweenrounds="true" iconcolors="255,255,255;255,255,200;255,255,150;255,255,100">
         <Effect minstrength="0" maxstrength="1"/>
         <Icon texture="%ModDir%/Images/Afflictions/EmaTalent_Witch_Factor.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+
+
+    <!--莉莉白翅膀-->
+    <AfflictionHusk
+            name="莉莉白翅膀"
+            identifier="Lilywhite_Wings_Spawn"
+            type="Lilywhite_Wings_Spawn"
+            limbspecific="false"
+            targets="human"
+            huskedspeciesname="[speciesname]Touhou_Tail"
+            indicatorlimb="Torso"
+            showiconthreshold="100"
+            showinhealthscannerthreshold="100"
+            needsair="true"
+            causespeechimpediment="false"
+            treatmentthreshold="1000"
+            dormantthreshold="0"
+            activethreshold="0"
+            transitionthreshold="1000"
+            transformthresholdondeath="1000"
+            sendmessages="false"
+            maxstrength="10"
+            iconcolors="94,54,95;163,73,164;200,191,231">
+        <icon texture="Content/UI/TalentsIcons3.png" sheetindex="4,0" sheetelementsize="128,128" color="181,230,29,255" origin="0,0"/>
+        <Effect minstrength="0" maxstrength="10"/>
+    </AfflictionHusk>
+
+    <!--莉莉黑翅膀-->
+    <AfflictionHusk
+            name="莉莉黑翅膀"
+            identifier="Lilywhite_Black_Wings_Spawn"
+            type="Lilywhite_Black_Wings_Spawn"
+            limbspecific="false"
+            targets="human"
+            huskedspeciesname="[speciesname]Touhou_Tail"
+            indicatorlimb="Torso"
+            showiconthreshold="100"
+            showinhealthscannerthreshold="100"
+            needsair="true"
+            causespeechimpediment="false"
+            treatmentthreshold="1000"
+            dormantthreshold="0"
+            activethreshold="0"
+            transitionthreshold="1000"
+            transformthresholdondeath="1000"
+            sendmessages="false"
+            maxstrength="10"
+            iconcolors="94,54,95;163,73,164;200,191,231">
+        <icon texture="Content/UI/TalentsIcons3.png" sheetindex="4,0" sheetelementsize="128,128" color="181,230,29,255" origin="0,0"/>
+        <Effect minstrength="0" maxstrength="10"/>
+    </AfflictionHusk>
+
+    <!--运送春天的妖精-->
+    <Affliction identifier="Spring_Bearer_Fairy" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10"
+                duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" >
+            <StatValue stattype="MaximumHealthMultiplier" value="-0.1"/>
+            <StatValue stattype="SwimmingSpeed" value="0.2"/>
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Spring_Bearer_Fairy.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--莉莉白给予攻击者效果-->
+    <Affliction identifier="LilywhiteTalent_OnAttacked_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" duration="5.0" showiconthreshold="100"
+                showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" >
+            <StatValue stattype="AttackMultiplier" value="-0.2"/>
+            <StatValue stattype="NaturalMeleeAttackMultiplier" value="-0.2"/>
+            <StatValue stattype="NaturalRangedAttackMultiplier" value="-0.2"/>
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Spring_Bearer_Fairy.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--莉莉白给予攻击者效果-妖精联盟-->
+    <Affliction identifier="LilywhiteTalent_OnAttacked_Effect_Touhou_Yousei_Alliance" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" duration="5.0" showiconthreshold="100"
+                showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" >
+            <StatValue stattype="AttackMultiplier" value="-0.1"/>
+            <StatValue stattype="NaturalMeleeAttackMultiplier" value="-0.1"/>
+            <StatValue stattype="NaturalRangedAttackMultiplier" value="-0.1"/>
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Spring_Bearer_Fairy.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--莉莉白给予攻击者效果CD-->
+    <Affliction identifier="LilywhiteTalent_OnAttacked_Effect_CD" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" duration="15.0" showiconthreshold="100"
+                showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" />
+        <Icon texture="%ModDir%/Images/Afflictions/Spring_Bearer_Fairy.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--莉莉白用药特效-->
+    <Affliction identifier="LilywhiteTalent_OnApplyTreatment_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" resetbetweenrounds="true" showiconthreshold="100"
+                showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" minvitalitydecrease="-10" maxvitalitydecrease="-10" multiplybymaxvitality="false" />
+        <Icon texture="%ModDir%/Images/Afflictions/Spring_Bearer_Fairy.png" sourcerect="0,0,128,128" color="255,150,150,255"/>
+    </Affliction>
+
+    <!--莉莉白用药特效-妖精联盟-->
+    <Affliction identifier="LilywhiteTalent_OnApplyTreatment_Effect_Touhou_Yousei_Alliance" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" resetbetweenrounds="true" showiconthreshold="100"
+                showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" minvitalitydecrease="-5" maxvitalitydecrease="-5" multiplybymaxvitality="false" />
+        <Icon texture="%ModDir%/Images/Afflictions/Spring_Bearer_Fairy.png" sourcerect="0,0,128,128" color="255,150,150,255"/>
+    </Affliction>
+
+    <!--莉莉白给予其他玩家效果-->
+    <Affliction identifier="LilywhiteTalent_ToAllies_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" Duration="5.0" showiconthreshold="100"
+                showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" resistancefor="chemaddiction,opiateaddiction,oxygenlow" minresistance="0.15" maxresistance="0.15" >
+            <StatValue stattype="MedicalItemApplyingMultiplier" value="0.1"/>
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Spring_Bearer_Fairy.png" sourcerect="0,0,128,128" color="255,150,150,255"/>
+    </Affliction>
+
+    <!--凭依莉莉白-->
+    <Affliction identifier="Hyouibana_Lilywhite_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10"
+                showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
+        <Effect minstrength="0" maxstrength="10">
+            <StatusEffect target="Character" Interval="1.0" Duration="1.0">
+                <ReduceAffliction type="oxygenlow" strength="1.0"/>
+            </StatusEffect>
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Spring_Bearer_Fairy.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--莉莉白-完全凭依-->
+    <Affliction identifier="Hyouibana_Effect_Prefect_Lilywhite" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false"
+                hideiconafterdelay="true"
+                showinhealthscannerthreshold="100" maxstrength="1" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
+        <Effect minstrength="0" maxstrength="1"/>
+        <Icon texture="%ModDir%/Images/Afflictions/Fairy_Of_Ice.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--出血效应-莉莉白-->
+    <Affliction name="" identifier="MRE_Lilywhite_Effect" description="" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false"
+                maxstrength="10"
+                Duration="10.0" showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="10" minvitalitydecrease="-20" maxvitalitydecrease="-20" multiplybymaxvitality="false"/>
+        <icon texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb.png" sourcerect="0,0,32,32" color="255,255,255,255" origin="0,0"/>
+    </Affliction>
+
+    <!--莉莉白-专属武器效果-->
+    <Affliction identifier="Lilywhite_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10"
+                duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.15" maxresistance="0.15">
+            <!--            <StatValue stattype="RangedAttackMultiplier" value="0.1"/>-->
+            <StatValue stattype="MeleeAttackMultiplier" value="0.2"/>
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Lilywhite_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>
 
 

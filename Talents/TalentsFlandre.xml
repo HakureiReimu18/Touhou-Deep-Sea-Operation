@@ -30,7 +30,7 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyResistance resistanceid="damage" multiplier="1.25"/>
+                <CharacterAbilityModifyResistance resistanceid="damage" multiplier="1.3"/>
                 <CharacterAbilityModifyResistance resistanceid="burn" multiplier="1.5"/>
             </Abilities>
         </AbilityGroupInterval>
@@ -64,6 +64,25 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet"/>
+                <AbilityConditionHasItem tags="Flandre_Weapons"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet"/>
+                <AbilityConditionHasItem tags="Flandre_Weapons"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Melee"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.3"/>
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
     <Talent identifier="FlandreTalent2">
         <Icon texture="%ModDir%/Images/Talents/FlandreTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
@@ -71,18 +90,9 @@
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet"/>
-                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0.9"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
                 <AbilityConditionServerRandom randomchance="0.3"/>
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.3"/>
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttack">
-            <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet"/>
-                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.495"/>
-                <AbilityConditionAttackData weapontype="Turret" invert="true"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="0.495"/>
@@ -92,18 +102,12 @@
     <Talent identifier="FlandreTalent3">
         <Icon texture="%ModDir%/Images/Talents/FlandreTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
         <Description tag="talentdescription.FlandreTalent3"/>
-        <AbilityGroupInterval interval="2.9">
+        <AbilityGroupInterval interval="4.9">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
-                            <Affliction identifier="FlandreTalent3_Effect" amount="100"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyResistance resistanceid="debuff" multiplier="0.85"/>
             </Abilities>
         </AbilityGroupInterval>
         <AbilityGroupInterval interval="2.9">
@@ -147,6 +151,9 @@
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Younger_Sister_Of_Scarlet"/>
                 <AbilityConditionHasAffliction afflictionidentifier="FlandreTalent4_Effect_CD"/>
+                <AbilityConditionHasItem
+                        tags="Touhou_Weapon_Level01,Touhou_Weapon_Level02,Touhou_Weapon_Level03,Touhou_Weapon_Level04,Touhou_Weapon_Level05,weapon"
+                invert="true"/>
                 <AbilityConditionRagdolled invert="true"/>
                 <AbilityConditionCrouched/>
             </Conditions>
