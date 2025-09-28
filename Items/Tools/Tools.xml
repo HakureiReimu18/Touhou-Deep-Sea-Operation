@@ -72,7 +72,7 @@
             </StatusEffect>
         </Propulsion>
         <ItemContainer capacity="4" keepopenwhenequipped="false" movableframe="true" QuickUseMovesItemsInside="false">
-            <Containable items="smallitem,mediumitem" excludeditems="Marisa_Broom,Kappa_Backpack,backpack,toolbelt,gun,toolbox"/>
+            <Containable items="smallitem,mediumitem" excludeditems="Marisa_Broom,Kappa_Backpack,backpack,toolbelt,gun,toolbox,bulkyweapon"/>
         </ItemContainer>
         <AiTarget soundrange="2000"/>
     </Item>
@@ -1485,7 +1485,7 @@
             <RequiredItem identifier="fpgacircuit" amount="6"/>
             <RequiredItem identifier="Magic_Material" amount="3"/>
         </Fabricate>
-        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Kappa_Multi_Functional_Tool.png" sourcerect="0,0,110,100" origin="0.5,0.5"/>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Kappa_Multi_Functional_Tool.png" sourcerect="0,0,110,95" origin="0.5,0.5"/>
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Kappa_Multi_Functional_Tool.png" sourcerect="110,0,142,100" depth="0.45" origin="0.5,0.5"/>
         <Body width="60" height="15" density="30"/>
         <MeleeWeapon slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="-8,0" holdangle="60" reload="1.0" range="50" combatpriority="8"
@@ -2740,7 +2740,7 @@
 
 
     <!--魔法武器充能箱（小型）-->
-    <Item name="魔法武器充能箱（小型）" identifier="Touhou_Magic_Charging_Box_Small" subcategory="Touhou" category="Equipment" Health="60"
+    <Item name="魔法武器充能箱（小型）" identifier="Touhou_Magic_Charging_Box_Small" subcategory="Touhou" category="Equipment" Health="70"
           tags="smallitem,Touhou_Magic_Charging_Box,toolbox" scale="0.4" cargocontaineridentifier="metalcrate">
         <PreferredContainer primary="crewcab" notcampaign="true"/>
         <Price baseprice="800">
@@ -2751,9 +2751,7 @@
             <Price storeidentifier="merchantmine" maxavailable="1"/>
             <Price storeidentifier="Merchant_Kawasiro_Nitori" multiplier="0.5" maxavailable="1"/>
         </Price>
-        <Deconstruct time="10">
-            <Item identifier="steel" amount="3"/>
-        </Deconstruct>
+        <Deconstruct time="5"/>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="Byproduct_Alchemical" amount="3"/>
@@ -2818,7 +2816,7 @@
     </Item>
 
     <!--魔法武器充能箱（中型）-->
-    <Item name="魔法武器充能箱（中型）" identifier="Touhou_Magic_Charging_Box_Medium" subcategory="Touhou" category="Equipment" Health="150"
+    <Item name="魔法武器充能箱（中型）" identifier="Touhou_Magic_Charging_Box_Medium" subcategory="Touhou" category="Equipment" Health="180"
           tags="mediumitem,Touhou_Magic_Charging_Box,toolbox" scale="0.4" cargocontaineridentifier="metalcrate">
         <PreferredContainer primary="crewcab" notcampaign="true"/>
         <Price baseprice="3000">
@@ -2829,9 +2827,7 @@
             <Price storeidentifier="merchantmine" maxavailable="1"/>
             <Price storeidentifier="Merchant_Kawasiro_Nitori" multiplier="0.5" maxavailable="1"/>
         </Price>
-        <Deconstruct time="10">
-            <Item identifier="steel" amount="3"/>
-        </Deconstruct>
+        <Deconstruct time="5"/>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="Seven_Elements_Alchemical_Fake"/>
@@ -2901,7 +2897,7 @@
     </Item>
 
     <!--魔法武器充能箱（大型）-->
-    <Item name="魔法武器充能箱（大型）" identifier="Touhou_Magic_Charging_Box_Huge" subcategory="Touhou" category="Equipment" Health="300"
+    <Item name="魔法武器充能箱（大型）" identifier="Touhou_Magic_Charging_Box_Huge" subcategory="Touhou" category="Equipment" Health="400"
           tags="mobilecontainer,Touhou_Magic_Charging_Box,toolbox" scale="0.4" cargocontaineridentifier="metalcrate">
         <PreferredContainer primary="crewcab" notcampaign="true"/>
         <Price baseprice="6000" minleveldifficulty="30">
@@ -2912,9 +2908,7 @@
             <Price storeidentifier="merchantmine" maxavailable="1"/>
             <Price storeidentifier="Merchant_Kawasiro_Nitori" multiplier="0.6" maxavailable="1"/>
         </Price>
-        <Deconstruct time="10">
-            <Item identifier="steel" amount="3"/>
-        </Deconstruct>
+        <Deconstruct time="5"/>
         <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Huge.png" sourcerect="0,0,140,120" origin="0.5,0.5"/>
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Magic_Charging_Box_Huge.png" sourcerect="0,0,140,120" depth="0.55" origin="0.5,0.5"/>
         <Body width="50" height="100" density="10"/>
@@ -5568,6 +5562,35 @@
             <GuiFrame relativesize="0.2,0.25" anchor="Center" minsize="140,170" maxsize="280,280" style="ItemUI" />
             <Containable items="Touhou_Weapon_Level01,Touhou_Weapon_Level02,Touhou_Weapon_Level03,Touhou_Weapon_Level04,Touhou_Weapon_Level05" />
         </ItemContainer>
+    </Item>
+
+
+    <!--幽灵电池-->
+    <Item name="幽灵电池" identifier="Touhou_Spectral_Core_Battery" Category="Equipment,Electrical" subcategory="Touhou"
+          Tags="smallitem,loadable,mobilebattery" maxstacksize="16"
+          maxstacksizecharacterinventory="4" cargocontaineridentifier="metalcrate" health="500" scale="0.1">
+        <PreferredContainer primary="reactorcab"/>
+        <Price baseprice="1000" sold="false">
+            <Price storeidentifier="merchantoutpost"/>
+            <Price storeidentifier="merchantcity"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.25"/>
+            <Price storeidentifier="merchantmilitary" multiplier="1.25"/>
+            <Price storeidentifier="merchantmine" multiplier="1.1"/>
+            <Price storeidentifier="merchantengineering" multiplier="0.9" minavailable="2"/>
+            <Price storeidentifier="Merchant_Kawasiro_Nitori" multiplier="0.7" maxavailable="1" sold="true"/>
+        </Price>
+        <Deconstruct time="5"/>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
+            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredItem identifier="Touhou_Spectral_Core_Item" amount="2"/>
+            <RequiredItem identifier="fulgurium" />
+            <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
+            <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Spectral_Core_Battery.png" sourcerect="152,0,81,100" origin="0.5,0.5"/>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Spectral_Core_Battery.png" sourcerect="0,0,152,105" depth="0.55"/>
+        <Body radius="6" height="55" density="20"/>
+        <Holdable handle1="0,0" slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect"/>
     </Item>
 
 

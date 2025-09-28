@@ -161,11 +161,21 @@
         <Projectile characterusable="false" hitscan="false" launchimpulse="120" removeonhit="true">
             <Attack structuredamage="70" targetforce="5" levelwalldamage="100" itemdamage="50" severlimbsprobability="0.6" penetration="0.25">
                 <Affliction identifier="explosiondamage" strength="35"/>
-                <Affliction identifier="burn" strength="45"/>
+                <Affliction identifier="burn" strength="25"/>
                 <Affliction identifier="lacerations" strength="20"/>
                 <Affliction identifier="stun" strength="1"/>
                 <Affliction identifier="stun" strength="2" probability="0.2"/>
             </Attack>
+            <StatusEffect type="OnImpact" target="UseTarget">
+                <Explosion range="200.0" structuredamage="3" itemdamage="5" force="10.0" flames="true" smoke="false" sparks="false"
+                           underwaterbubble="false" flashcolor="255,0,0,255">
+                    <Affliction identifier="explosiondamage" strength="15"/>
+                    <Affliction identifier="burn" strength="15"/>
+                    <Affliction identifier="lacerations" strength="15"/>
+                </Explosion>
+                <ParticleEmitter particle="spark" copyentityangle="true" anglemin="-10" anglemax="10" particleamount="5" velocitymin="-10"
+                                 velocitymax="-200" scalemin="0.5" scalemax="1"/>
+            </StatusEffect>
             <StatusEffect type="OnActive" target="This" condition="-24"/>
             <StatusEffect type="OnActive" target="This" lifetime="1">
                 <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" particleamount="4" anglemin="125" anglemax="235" velocitymin="200"

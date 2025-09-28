@@ -327,10 +327,8 @@
                                  scalemin="1.8" scalemax="2.2" drawontop="true" colormultiplier="255,72,36,180"/>
                 <ParticleEmitter particle="GlowDot" scalemin="1.0" scalemax="1.2" particlespersecond="60" anglemin="0" anglemax="360"
                                  colormultiplier="204,195,141,180"/>
-                <Explosion range="1.0" showeffects="false">
-                    <Affliction identifier="burn" amount="1.5"/>
-                    <Affliction identifier="burn" amount="2.0" probability="0.1"/>
-                </Explosion>
+                <Affliction identifier="burn" DivideByLimbCount="True" amount="6.0" penetration="0.5"/>
+                <Affliction identifier="burn" DivideByLimbCount="True" amount="12.0" probability="0.1" penetration="0.5"/>
             </StatusEffect>
         </PeriodicEffect>
         <PeriodicEffect mininterval="0.5" maxinterval="1.5" minstrength="15" maxstrength="100">
@@ -339,8 +337,8 @@
                                  scalemin="1.8" scalemax="2.2" drawontop="true" colormultiplier="255,72,36,180"/>
                 <ParticleEmitter particle="GlowDot" scalemin="1.0" scalemax="1.2" particlespersecond="60" anglemin="0" anglemax="360"
                                  colormultiplier="204,195,141,180"/>
-                <Affliction identifier="bleeding" amount="0.5"/>
-                <Affliction identifier="bleeding" amount="0.5" probability="0.5"/>
+                <Affliction identifier="bleeding" DivideByLimbCount="True" amount="3.5" penetration="0.3"/>
+                <Affliction identifier="bleeding" DivideByLimbCount="True" amount="1.5" probability="0.5" penetration="0.3"/>
                 <Affliction identifier="bloodloss" amount="0.5" probability="0.2"/>
             </StatusEffect>
         </PeriodicEffect>
@@ -350,8 +348,8 @@
                                  scalemin="1.8" scalemax="2.2" drawontop="true" colormultiplier="255,72,36,180"/>
                 <ParticleEmitter particle="GlowDot" scalemin="1.0" scalemax="1.2" particlespersecond="60" anglemin="0" anglemax="360"
                                  colormultiplier="204,195,141,180"/>
-                <Affliction identifier="organdamage" amount="2.0"/>
-                <Affliction identifier="organdamage" amount="4" probability="0.5"/>
+                <Affliction identifier="organdamage" amount="2.0" penetration="0.3"/>
+                <Affliction identifier="organdamage" amount="4" probability="0.5" penetration="0.3"/>
             </StatusEffect>
         </PeriodicEffect>
         <PeriodicEffect mininterval="5" maxinterval="15" minstrength="20" maxstrength="100">
@@ -2036,31 +2034,33 @@
                 affectmachines="true"
                 iconcolors="94,94,94;163,164,164;255,255,255">
         <Description textidentifier="afflictiondescription.Touhou_Tide_Bolt_Effect" minstrength="0" maxstrength="10"/>
-        <Effect minstrength="0" maxstrength="10" resistancefor="damage,burn,stun" minresistance="0" maxresistance="-0.4" strengthchange="-0.1">
+        <Effect minstrength="0" maxstrength="10" resistancefor="damage,burn,stun" minresistance="0" maxresistance="-0.4"
+                minbuffmultiplier="0.25" maxbuffmultiplier="0.25" strengthchange="-0.1">
             <StatusEffect target="Character" disabledeltatime="true" Interval="3.0">
                 <Affliction identifier="Touhou_Lost_Dream" strength="6" penetration="0.35"/>
-                <Affliction identifier="burn" strength="0.8" penetration="0.35"/>
-                <Affliction identifier="explosiondamage" strength="0.6" penetration="0.35"/>
+                <Affliction identifier="burn" strength="7.0" DivideByLimbCount="True" penetration="0.5"/>
+                <Affliction identifier="explosiondamage" strength="4.9" DivideByLimbCount="True" penetration="0.5"/>
             </StatusEffect>
             <StatusEffect target="Character">
                 <ParticleEmitter particle="flameburningcharacter" DistanceMin="0" DistanceMax="30" ParticlesPerSecond="60" AngleMin="60"
                                  AngleMax="120" VelocityMax="20" colormultiplier="255,100,255,255"/>
             </StatusEffect>
+            <StatValue stattype="BuffDurationMultiplier" value="-0.2"/>
         </Effect>
         <PeriodicEffect mininterval="1.5" maxinterval="3">
             <StatusEffect target="Character">
                 <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="200" distancemax="250" velocitymin="-500" velocitymax="-900"
                                  particlespersecond="60" colormultiplier="255,100,100,255"/>
-                <Affliction identifier="burn" amount="0.7" penetration="0.15"/>
-                <Affliction identifier="organdamage" amount="1" penetration="0.15"/>
+                <Affliction identifier="burn" amount="4.9" DivideByLimbCount="True" penetration="0.15"/>
+                <Affliction identifier="organdamage" amount="1.5" penetration="0.25"/>
             </StatusEffect>
         </PeriodicEffect>
         <PeriodicEffect mininterval="1" maxinterval="2">
             <StatusEffect target="Character">
                 <ParticleEmitter particle="skyholderfx2" anglemax="360" distancemin="200" distancemax="250" velocitymin="-500" velocitymax="-900"
                                  particlespersecond="60" colormultiplier="255,100,100,255"/>
-                <Affliction identifier="lacerations" amount="0.5" penetration="0.15"/>
-                <Affliction identifier="bleeding" strength="1.5" probability="0.15" penetration="0.15"/>
+                <Affliction identifier="lacerations" amount="14.0" DivideByLimbCount="True" penetration="0.2"/>
+                <Affliction identifier="bleeding" strength="4.9" DivideByLimbCount="True" probability="0.15" penetration="0.15"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="10" probability="0.15"/>
             </StatusEffect>
         </PeriodicEffect>
