@@ -439,15 +439,15 @@
     </Talent>
 
     <!--异变源头 每杀死一个生物，增加1点计数。计数到达不同阶段将给予不同效果：
-    200：增加10%最大生命值。双手部位的物理伤害抗性增加5%
-    400：些许加快物理伤害、出血的恢复。有船员失去意识时，可以全速拖动生物
-    600：增加10%的攻击伤害-->
+    140：增加10%最大生命值。双手部位的物理伤害抗性增加5%
+    280：些许加快物理伤害、出血的恢复。有船员失去意识时，可以全速拖动生物
+    420：增加10%的弹幕伤害-->
     <Talent identifier="Talents_Yokai_Primary15" trackedstat="Yokai_Counter" trackedmax="480">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Talents_Yokai_Primary15"/>
         <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
             <Conditions>
-                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="481" invert="true"/>
+                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="421" invert="true"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityGivePermanentStat statidentifier="Yokai_Counter" value="1" removeondeath="false"/>
@@ -456,7 +456,7 @@
 
         <AbilityGroupInterval interval="9.9">
             <Conditions>
-                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="160"/>
+                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="140"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
@@ -471,7 +471,7 @@
 
         <AbilityGroupInterval interval="9.9">
             <Conditions>
-                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="320"/>
+                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="280"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
@@ -485,7 +485,7 @@
         </AbilityGroupInterval>
         <AbilityGroupInterval interval="4.9">
             <Conditions>
-                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="320"/>
+                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="280"/>
                 <AbilityConditionCrewMemberUnconscious/>
             </Conditions>
             <Abilities>
@@ -499,20 +499,15 @@
             </Abilities>
         </AbilityGroupInterval>
 
-        <AbilityGroupInterval interval="9.9">
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="480"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasPermanentStat statidentifier="Yokai_Counter" min="420"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityApplyStatusEffects>
-                    <StatusEffects>
-                        <StatusEffect type="OnAbility" target="Character">
-                            <Affliction identifier="Talents_Yokai_Primary15_Level03" amount="10"/>
-                        </StatusEffect>
-                    </StatusEffects>
-                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
             </Abilities>
-        </AbilityGroupInterval>
+        </AbilityGroupEffect>
     </Talent>
 
     <!--水涨船高 根据当前技能水平的5%给予不同的效果，最多15%：
@@ -1295,8 +1290,8 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Sun_Flower_Petal01_Effect"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStat stattype="RangedAttackMultiplier" value="0.15"/>
-                <CharacterAbilityModifyStat stattype="MeleeAttackMultiplier" value="0.15"/>
+                <CharacterAbilityModifyStat stattype="RangedAttackMultiplier" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackMultiplier" value="0.1"/>
             </Abilities>
         </AbilityGroupInterval>
         <AbilityGroupInterval interval="4.9">
@@ -1305,9 +1300,9 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Sun_Flower_Petal02_Effect"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStat stattype="MeleeAttackSpeed" value="0.15"/>
-                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="0.15"/>
-                <CharacterAbilityModifyStat stattype="MovementSpeed" value="0.15"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackSpeed" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="MovementSpeed" value="0.1"/>
             </Abilities>
         </AbilityGroupInterval>
         <AbilityGroupInterval interval="4.9">
@@ -1316,7 +1311,7 @@
                 <AbilityConditionHasAffliction afflictionidentifier="Sun_Flower_Petal03_Effect"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.15"/>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.1"/>
             </Abilities>
         </AbilityGroupInterval>
         <!--鵺-->

@@ -3,9 +3,26 @@
     <Talent identifier="Lord_Of_Flowers">
         <Icon texture="%ModDir%/Images/Talents/Lord_Of_Flowers.png" sheetindex="0,0" sheetelementsize="128,128"/>
         <Description tag="talentdescription.Lord_Of_Flowers"/>
+        <AbilityGroupInterval Interval="5.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Flowers_Of_Four_Seasons" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <ReduceAffliction identifier="Sun_Flower_Petal01_Effect" amount="100.0"/>
+                            <ReduceAffliction identifier="Sun_Flower_Petal02_Effect" amount="100.0"/>
+                            <ReduceAffliction identifier="Sun_Flower_Petal03_Effect" amount="100.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
         <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Flowers_Of_Four_Seasons"/>
+                <AbilityConditionServerRandom randomchance="0.5"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityPutItem itemidentifier="Sun_Flower_Seed" amount="1"/>
@@ -21,5 +38,45 @@
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1"/>
             </Abilities>
         </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Flowers_Of_Four_Seasons"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Sun_Flower_Petal01_Effect"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Flowers_Of_Four_Seasons"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Sun_Flower_Petal01_Effect"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval interval="5.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Flowers_Of_Four_Seasons"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Sun_Flower_Petal02_Effect"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="MovementSpeed" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="0.1"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackSpeed" value="0.1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="5.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Flowers_Of_Four_Seasons"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Sun_Flower_Petal03_Effect"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="damage,burn" multiplier="0.9"/>
+            </Abilities>
+        </AbilityGroupInterval>
     </Talent>
 </Talents>

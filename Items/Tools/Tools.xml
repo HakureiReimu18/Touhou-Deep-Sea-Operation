@@ -350,7 +350,7 @@
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/Tools/Kappa_Miningdrill.png" sourcerect="0,0,95,82"/>
         <Sprite texture="%ModDir%/Images/Tools/Kappa_Miningdrill.png" sourcerect="0,85,107,56" depth="0.55" origin="0.5,0.5"/>
-        <Body width="200" height="100" density="10"/>
+        <Body width="107" height="56" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="55,-10" aimpos="50,0" handle1="-40,-14" handle2="-5,-16" holdangle="-40"
                   msg="ItemMsgPickUpSelect"/>
         <RepairTool firedamage="10.0" structurefixamount="-0.75" range="300" barrelpos="64,16" combatpriority="23" RepairMultiple="true"
@@ -1457,13 +1457,12 @@
 
     <!--河童多功能工具-->
     <Item name="河童多功能工具" identifier="Touhou_Kappa_Multi_Functional_Tool" category="Equipment" subcategory="Touhou"
-          Tags="smallitem,tool,screwdriver,wrench"
+          Tags="smallitem,tool,electricalrepairtool,mechanicalrepairtool,wrench,wrenchitem,screwdriver,screwdriveritem,multitool"
           cargocontaineridentifier="metalcrate" Scale="0.3" impactsoundtag="impact_metal_light" RequireAimToUse="True"
           addedrepairspeedmultiplier="0.6">
         <PreferredContainer primary="engcab"/>
         <PreferredContainer secondary="wreckstoragecab,abandonedstoragecab,piratestoragecab" amount="1" spawnprobability="0.05"/>
         <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab" amount="1" spawnprobability="0.05"/>
-        <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.1"/>
         <Price baseprice="2000" maxavailable="1" sold="false" minleveldifficulty="15">
             <Price storeidentifier="merchantoutpost"/>
             <Price storeidentifier="merchantcity" maxavailable="2"/>
@@ -2672,23 +2671,20 @@
         <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Rose_Gift_Bag.png" sourcerect="55,0,49,36" origin="0.5,0.5"/>
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Rose_Gift_Bag.png" depth="0.5" sourcerect="0,0,52,34" origin="0.5,0.5"/>
         <Body width="52" height="34" density="10"/>
-        <ItemContainer autofill="False" capacity="0" maxstacksize="1" ExtraStackSize="4" slotsperrow="4">
+        <ItemContainer autofill="False" capacity="0" maxstacksize="1" ExtraStackSize="4" slotsperrow="4"  AutoInjectThreshold="0.3">
             <SlotIcon slotindex="0" texture="%ModDir%/Images/Materials/Touhou_Cuisine/Touhou_Cuisine.png" sheetindex="0,7" sheetelementsize="104,104"
                       origin="0.5,0.5"/>
             <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5"/>
-            <SlotIcon slotindex="2" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5"/>
-            <SlotIcon slotindex="3" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5"/>
-            <SlotIcon slotindex="16" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6"/>
-            <SlotIcon slotindex="17" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6"/>
+            <SlotIcon slotindex="14" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6"/>
+            <SlotIcon slotindex="15" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6"/>
             <SubContainer capacity="1" maxstacksize="1">
                 <Containable items="Touhou_Unconscious_Yokai_Mousse">
                     <StatusEffect type="OnWearing" target="Contained" Condition="-0.01">
                         <Conditional TargetContainer="true" TargetGrandparent="true" IsDead="false"/>
                     </StatusEffect>
                     <StatusEffect type="OnWearing" target="Contained,Character" Interval="10.0" disabledeltatime="true"
-                                  multiplyafflictionsbymaxvitality="true" targetslot="15">
+                                  multiplyafflictionsbymaxvitality="true">
                         <RequiredItem items="Touhou_Cuisine" type="Contained"/>
-                        <Conditional condition="gt 0"/>
                         <Affliction identifier="Touhou_Cuisine_Effect01" amount="10"/>
                         <Affliction identifier="Touhou_Cuisine_Effect02" amount="10"/>
                         <Affliction identifier="Touhou_Cuisine_Effect03" amount="10"/>
@@ -2698,16 +2694,10 @@
             <SubContainer capacity="1" maxstacksize="1" autoinject="true" AutoInjectThreshold="0.3">
                 <Containable items="chem,syringe"/>
             </SubContainer>
-            <SubContainer capacity="1" maxstacksize="1" autoinject="true" AutoInjectThreshold="0.6">
-                <Containable items="chem,syringe"/>
-            </SubContainer>
-            <SubContainer capacity="1" maxstacksize="1" autoinject="true" AutoInjectThreshold="0.9">
-                <Containable items="chem,syringe"/>
-            </SubContainer>
-            <SubContainer capacity="8" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+            <SubContainer capacity="10" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
                 <Containable items="smallitem" excludeditems="backpack,crate,toolbelt,Touhou_Magic_Charging_Box,bulkyweapon"/>
             </SubContainer>
-            <SubContainer capacity="4" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+            <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
                 <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,Touhou_Magic_Charging_Box,bulkyweapon"/>
             </SubContainer>
             <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
@@ -5214,7 +5204,7 @@
         <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Moriya_Bag.png" sourcerect="0,0,124,100" origin="0.5,0.5"/>
         <Sprite texture="%ModDir%/Images/Tools/Touhou_Moriya_Bag.png" depth="0.5" sourcerect="0,0,124,100" origin="0.5,0.5"/>
         <Body width="41" height="56" density="10"/>
-        <ItemContainer autofill="False" hideitems="true" capacity="0" maxstacksize="1" ExtraStackSize="4" slotsperrow="4">
+        <ItemContainer autofill="False" hideitems="true" capacity="0" maxstacksize="1" ExtraStackSize="4" slotsperrow="4" AutoInjectThreshold="0.8">
             <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="384,448,64,64" origin="0.5,0.5"/>
             <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5"/>
             <SlotIcon slotindex="12" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6"/>

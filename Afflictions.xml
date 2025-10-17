@@ -976,9 +976,9 @@
                     <Affliction identifier="burn" strength="14"/>
                     <Affliction identifier="explosiondamage" strength="14"/>
                 </Explosion>
-                <Affliction identifier="Touhou_Lost_Dream" strength="6" penetration="0.35"/>
-                <Affliction identifier="burn" DivideByLimbCount="True" strength="14" penetration="0.5"/>
-                <Affliction identifier="explosiondamage" DivideByLimbCount="True" strength="14"/>
+                <Affliction identifier="Touhou_Lost_Dream" strength="6" penetration="0.15"/>
+                <Affliction identifier="burn" DivideByLimbCount="True" strength="28" penetration="0.15"/>
+                <Affliction identifier="explosiondamage" DivideByLimbCount="True" strength="28"/>
             </StatusEffect>
             <StatusEffect target="Character">
                 <ParticleEmitter particle="GlowDot" scalemin="3.0" scalemax="7.0" particlespersecond="120" anglemin="0" anglemax="360"
@@ -993,7 +993,7 @@
                                  velocitymax="700" scalemin="0.25" scalemax="0.5" colormultiplier="255,72,36,170"/>
                 <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="0" anglemax="360" particleamount="2" velocitymin="400"
                                  velocitymax="700" scalemin="0.25" scalemax="0.5" colormultiplier="225,200,100,180"/>
-                <Affliction identifier="lacerations" amount="14.0" DivideByLimbCount="True" penetration="0.2"/>
+                <Affliction identifier="lacerations" amount="21.0" DivideByLimbCount="True" penetration="0.2"/>
                 <Affliction identifier="burn" strength="4.9" DivideByLimbCount="True" probability="0.15" penetration="0.15"/>
             </StatusEffect>
         </PeriodicEffect>
@@ -1009,8 +1009,8 @@
                 strengthchange="-0.7">
             <StatValue stattype="MovementSpeed" minvalue="-0.2" maxvalue="-0.7"/>
             <StatusEffect target="Character" Interval="0.7">
-                <Affliction identifier="acidburn" DivideByLimbCount="True" strength="14" penetration="0.5"/>
-                <Affliction identifier="explosiondamage" DivideByLimbCount="True" strength="14" penetration="0.5"/>
+                <Affliction identifier="acidburn" DivideByLimbCount="True" strength="35" penetration="0.5"/>
+                <Affliction identifier="explosiondamage" DivideByLimbCount="True" strength="35" penetration="0.5"/>
                 <Affliction identifier="stun" strength="0.14" probability="0.25"/>
             </StatusEffect>
             <StatusEffect target="Character">
@@ -1521,7 +1521,7 @@
             <StatusEffect target="Character" OxygenAvailable="1000.0"/>
             <StatValue stattype="MovementSpeed" value="0.2"/>
             <StatValue stattype="AttackMultiplier" value="0.1"/>
-            <StatValue stattype="TeamAttackMultiplier" value="-0.5"/>
+            <StatValue stattype="TeamAttackMultiplier" value="-0.3"/>
             <StatValue stattype="MeleeAttackMultiplier" value="0.7"/>
             <StatValue stattype="MeleeAttackSpeed" value="0.4"/>
             <StatValue stattype="FlowResistance" value="0.9"/>
@@ -1602,7 +1602,7 @@
             <StatusEffect target="Character" OxygenAvailable="1000.0"/>
             <StatValue stattype="MovementSpeed" value="0.15"/>
             <StatValue stattype="AttackMultiplier" value="0.05"/>
-            <StatValue stattype="TeamAttackMultiplier" value="-0.4"/>
+            <StatValue stattype="TeamAttackMultiplier" value="-0.3"/>
             <StatValue stattype="MeleeAttackMultiplier" value="0.6"/>
             <StatValue stattype="MeleeAttackSpeed" value="0.3"/>
             <StatValue stattype="FlowResistance" value="0.9"/>
@@ -1633,7 +1633,7 @@
             <StatusEffect target="Character" OxygenAvailable="1000.0"/>
             <StatValue stattype="MovementSpeed" value="0.2"/>
             <StatValue stattype="AttackMultiplier" value="0.2"/>
-            <StatValue stattype="TeamAttackMultiplier" value="-0.7"/>
+            <StatValue stattype="TeamAttackMultiplier" value="-0.3"/>
             <StatValue stattype="MeleeAttackMultiplier" value="1.0"/>
             <StatValue stattype="MeleeAttackSpeed" value="0.4"/>
             <StatValue stattype="FlowResistance" value="0.9"/>
@@ -2037,16 +2037,17 @@
     <!--魔界之火-->
     <Affliction name="魔界之火"
                 identifier="Touhou_Alice_Magic_Book_Bolt_Effect"
-                type="debuff"
+                type="burn"
                 limbspecific="false"
                 indicatorlimb="Head"
-                maxstrength="10"
+                maxstrength="30"
                 affectmachines="true"
                 iconcolors="94,94,94;163,164,164;255,255,255">
-        <Description textidentifier="afflictiondescription.Touhou_Tide_Bolt_Effect" minstrength="0" maxstrength="10"/>
-        <Effect minstrength="0" maxstrength="10" resistancefor="damage,burn,stun" minresistance="0" maxresistance="-0.4"
-                minbuffmultiplier="0.25" maxbuffmultiplier="0.25" strengthchange="-0.1">
+        <Description textidentifier="afflictiondescription.Touhou_Tide_Bolt_Effect" minstrength="0" maxstrength="30"/>
+        <Effect minstrength="0" maxstrength="30" resistancefor="damage,burn,stun" minresistance="0" maxresistance="-0.4"
+                minbuffmultiplier="0.25" maxbuffmultiplier="0.25" strengthchange="-0.35">
             <StatusEffect target="Character" disabledeltatime="true" Interval="3.0">
+                <Conditional speciesgroup="neq human"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="6" penetration="0.35"/>
                 <Affliction identifier="burn" strength="7.0" DivideByLimbCount="True" penetration="0.5"/>
                 <Affliction identifier="explosiondamage" strength="4.9" DivideByLimbCount="True" penetration="0.5"/>
@@ -2753,11 +2754,6 @@
                 <RequiredAffliction type="damage,burn,bleeding" minstrength="48"/>
                 <Affliction identifier="Touhou_Hooked_Jade_Condition_Down_Effect" strength="35"/>
             </StatusEffect>
-            <StatusEffect target="Character" Interval="1.0" disabledeltatime="true">
-                <ReduceAffliction type="damage" strength="0.035"/>
-                <ReduceAffliction type="burn" strength="0.035"/>
-                <ReduceAffliction type="bleeding" strength="0.035"/>
-            </StatusEffect>
         </Effect>
         <icon texture="%ModDir%/Images/Afflictions/Magic_Veil_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
     </Affliction>
@@ -2837,8 +2833,8 @@
                 <ReduceAffliction type="debuff" strength="0.05"/>
                 <ReduceAffliction type="nausea" strength="5"/>
                 <ReduceAffliction type="invertcontrols" strength="5"/>
-                <ReduceAffliction type="oxygenlow" strength="0.5"/>
-                <ReduceAffliction type="psychosis" strength="0.3"/>
+                <ReduceAffliction type="oxygenlow" strength="0.2"/>
+                <ReduceAffliction type="psychosis" strength="0.2"/>
             </StatusEffect>
             <StatusEffect target="Character" Interval="0.5" Duration="0.5" disabledeltatime="true">
                 <ReduceAffliction identifier="haste" strength="100"/>
@@ -2925,7 +2921,7 @@
             iconcolors="94,35,35;163,70,70;255,100,100">
         <Effect minstrength="0" maxstrength="1">
             <StatValue stattype="BuffDurationMultiplier" value="0.3"/>
-            <StatValue stattype="DebuffDurationMultiplier" value="-0.15"/>
+            <StatValue stattype="DebuffDurationMultiplier" value="-0.1"/>
         </Effect>
         <icon texture="Content/UI/MainIconsAtlas.png" sourcerect="0,896,128,128" color="255,100,100,255" origin="0,0"/>
     </Affliction>
@@ -4134,7 +4130,7 @@
         <Description textidentifier="afflictiondescription.Touhou_Dark_Fog_Effect" minstrength="0" maxstrength="10"/>
         <Effect minstrength="0" maxstrength="10">
             <StatusEffect target="Character">
-                <Sound file="%ModDir%/Sounds/BGM/Touhou_Bump_Into_BGM.ogg" dontmuffle="true" range="40000" volume="1.1"/>
+                <Sound file="%ModDir%/Sounds/BGM/Touhou_Bump_Into_BGM.ogg" dontmuffle="true" range="40000" volume="1.0"/>
             </StatusEffect>
         </Effect>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_Deceit_Mod_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
@@ -4423,7 +4419,7 @@
                 iconcolors="94,94,94;163,164,164;255,255,255">
         <Description textidentifier="afflictiondescription.Touhou_ODM11_Aff_Event_Weather_Effect01" minstrength="0" maxstrength="1"/>
         <Effect minstrength="0" maxstrength="1" resistancefor="burn" minresistance="0.2" maxresistance="0.2"
-                minafflictionoverlayalphamultiplier="0.35" maxafflictionoverlayalphamultiplier="0.35">
+                minafflictionoverlayalphamultiplier="0.3" maxafflictionoverlayalphamultiplier="0.3">
             <StatValue stattype="RangedSpreadReduction" value="-0.2"/>
             <StatValue stattype="RangedAttackSpeed" value="-0.2"/>
         </Effect>
@@ -4431,7 +4427,7 @@
         <PeriodicEffect mininterval="10" maxinterval="20">
             <StatusEffect target="Character" onlyinside="true" Interval="5.0">
                 <Conditional IsLocalPlayer="True"/>
-                <Sound file="%ModDir%/Sounds/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect01.ogg" volume="1.5"/>
+                <Sound file="%ModDir%/Sounds/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect01.ogg" volume="2.5"/>
             </StatusEffect>
         </PeriodicEffect>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect01.png" sourcerect="0,0,128,128" color="255,255,255,255"
@@ -4451,7 +4447,7 @@
         <PeriodicEffect mininterval="10" maxinterval="20">
             <StatusEffect target="Character" onlyinside="true" Interval="5.0">
                 <Conditional IsLocalPlayer="True"/>
-                <Sound file="%ModDir%/Sounds/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect02.ogg" volume="1.5"/>
+                <Sound file="%ModDir%/Sounds/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect02.ogg" volume="2.5"/>
             </StatusEffect>
         </PeriodicEffect>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect02.png" sourcerect="0,0,128,128" color="255,255,255,255"
@@ -4467,7 +4463,7 @@
         <Effect minstrength="0" maxstrength="1" minspeedmultiplier="1.2" maxspeedmultiplier="1.2">
             <PeriodicEffect mininterval="10" maxinterval="20" minstrength="0" maxstrength="1">
                 <StatusEffect target="Character">
-                    <Affliction identifier="slow" strength="40"/>
+                    <Affliction identifier="slow" strength="400"/>
                 </StatusEffect>
                 <StatusEffect target="Character" onlyinside="true" Interval="5.0">
                     <Conditional IsLocalPlayer="True"/>
@@ -4485,8 +4481,8 @@
                 duration="20.0" resetbetweenrounds="true" showinhealthscannerthreshold="100" affectmachines="true"
                 iconcolors="94,94,94;163,164,164;255,255,255">
         <Description textidentifier="afflictiondescription.Touhou_ODM11_Aff_Event_Weather_Effect04" minstrength="0" maxstrength="1"/>
-        <Effect minstrength="0" maxstrength="10" MinScreenBlur="0.0" MaxScreenBlur="0.25"
-                minafflictionoverlayalphamultiplier="0.15" maxafflictionoverlayalphamultiplier="0.65"/>
+        <Effect minstrength="0" maxstrength="10" MinScreenBlur="0.0" MaxScreenBlur="0.5"
+                minafflictionoverlayalphamultiplier="0.15" maxafflictionoverlayalphamultiplier="0.65" strengthchange="-0.04"/>
         <AfflictionOverlay texture="%ModDir%/Images/Missions/Screen_Black.png"/>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM11_Aff_Event_Weather_Effect04.png" sourcerect="0,0,128,128" color="255,255,255,255"
               origin="0,0"/>
@@ -4536,7 +4532,7 @@
         <Description textidentifier="afflictiondescription.Touhou_OutpostDestroyMission10_BGM_Player" minstrength="0" maxstrength="10"/>
         <Effect minstrength="0" maxstrength="10">
             <StatusEffect target="Character">
-                <Sound file="%ModDir%/Sounds/BGM/Touhou_Prometheus_BGM.ogg" dontmuffle="true" range="40000" volume="0.9"/>
+                <Sound file="%ModDir%/Sounds/BGM/Touhou_Prometheus_BGM.ogg" dontmuffle="true" range="40000" volume="1.0"/>
             </StatusEffect>
         </Effect>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_Deceit_Mod_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
@@ -4751,12 +4747,40 @@
     </Affliction>
 
     <!--腐化AWM改装-->
-    <Affliction name="腐化AWM改装" identifier="Touhou_TSM_Corrupted_AA12_Mod_Effect" description="" type="Touhou_Buff" isbuff="true" limbspecific="false" indicatorlimb="Head"
-                maxstrength="1"
-                duration="15.0" showiconthreshold="100" showinhealthscannerthreshold="100" affectmachines="false"
+    <Affliction name="腐化AWM改装" identifier="Touhou_TSM_Corrupted_AA12_Mod_Effect" description="" type="Touhou_Buff" isbuff="true"
+                limbspecific="false" indicatorlimb="Head" maxstrength="1" duration="15.0" showiconthreshold="100"
+                showinhealthscannerthreshold="100" affectmachines="false"
                 iconcolors="94,94,94;163,164,164;255,255,255">
         <Description textidentifier="afflictiondescription.Touhou_ODM10_Aff_Event_Effect" minstrength="0" maxstrength="1"/>
         <Effect minstrength="0" maxstrength="1" />
+        <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM10_Aff_Event_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+    </Affliction>
+
+
+    <!--潮汐超导电磁枪爆炸效果-->
+    <Affliction name="潮汐超导电磁枪爆炸效果" identifier="Touhou_Superconducting_Electromagnetic_Gun_Effect" description=""
+                type="Touhou_Superconducting_Electromagnetic_Gun_Effect"
+                isbuff="true" limbspecific="false" indicatorlimb="Head" maxstrength="1"
+                duration="10.0" showiconthreshold="100" showinhealthscannerthreshold="100" affectmachines="false"
+                iconcolors="94,94,94;163,164,164;255,255,255">
+        <Description textidentifier="afflictiondescription.Touhou_ODM10_Aff_Event_Effect" minstrength="0" maxstrength="1"/>
+        <Effect minstrength="0" maxstrength="1" minspeedmultiplier="0.5" maxspeedmultiplier="0.5" />
+        <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM10_Aff_Event_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+    </Affliction>
+
+    <!--结界净化者效果-->
+    <Affliction name="结界净化者效果" identifier="Touhou_Boundary_Purifier_Effect" description=""
+                type="Touhou_Boundary_Purifier_Effect"
+                isbuff="true" limbspecific="false" indicatorlimb="Head" maxstrength="1"
+                duration="3.0" showiconthreshold="100" showinhealthscannerthreshold="100" affectmachines="false"
+                iconcolors="94,94,94;163,164,164;255,255,255">
+        <Description textidentifier="afflictiondescription.Touhou_ODM10_Aff_Event_Effect" minstrength="0" maxstrength="1"/>
+        <Effect minstrength="0" maxstrength="1" >
+            <StatValue stattype="RangedAttackMultiplier" value="-0.15"/>
+            <StatValue stattype="MeleeAttackMultiplier" value="-0.15"/>
+            <StatValue stattype="NaturalMeleeAttackMultiplier" value="-0.3"/>
+            <StatValue stattype="NaturalRangedAttackMultiplier" value="-0.3"/>
+        </Effect>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM10_Aff_Event_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
     </Affliction>
 
