@@ -161,6 +161,13 @@
                     <Conditional InWater="false"/>
                     <RequiredItem items="oxygensource" type="Contained"/>
                 </StatusEffect>
+                <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.3" comparison="And" targetslot="0">
+                    <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false"/>
+                    <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99"/>
+                    <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true"/>
+                    <Conditional InWater="true"/>
+                    <RequiredItem items="oxygensource" type="Contained"/>
+                </StatusEffect>
             </Containable>
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45"/>
             <SubContainer capacity="3" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
@@ -237,6 +244,13 @@
                     <Conditional InWater="false"/>
                     <RequiredItem items="oxygensource" type="Contained"/>
                 </StatusEffect>
+                <StatusEffect type="OnWearing" target="Contained" UseHullOxygen="false" Condition="-0.3" comparison="And" targetslot="0">
+                    <Conditional targetcontainer="true" targetgrandparent="true" IsDead="false"/>
+                    <Conditional targetcontainer="true" targetgrandparent="true" DecreasedOxygenConsumption="lt 99"/>
+                    <Conditional targetcontainer="true" targetgrandparent="true" NeedsAir="true"/>
+                    <Conditional InWater="true"/>
+                    <RequiredItem items="oxygensource" type="Contained"/>
+                </StatusEffect>
             </Containable>
             <SlotIcon slotindex="0" texture="Content/UI/ContainerIndicators.png" sourcerect="1,93,120,29" origin="0.5,0.45"/>
             <SlotIcon slotindex="18" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6"/>
@@ -261,7 +275,7 @@
                   canbepicked="true" pickkey="Select" allowswappingwhenpicked="false"/>
 
         <CustomInterface canbeselected="true" drawhudwhenequipped="true">
-            <GuiFrame relativesize="0.1,0.06" anchor="BottomRight" relativeoffset="0,0.63" style="ItemUI_Transparent"/>
+            <GuiFrame relativesize="0.1,0.06" anchor="BottomRight" absoluteoffset="0,0" relativeoffset="0.19,0.0" style="ItemUI_Transparent"/>
             <TickBox text="Text.Sonar_Open" IsOn="true">
                 <StatusEffect type="OnUse" target="This" TargetItemComponent="Sonar" drawhudwhenequipped="true" setvalue="true"/>
                 <StatusEffect type="OnSecondaryUse" target="This" TargetItemComponent="Sonar" drawhudwhenequipped="false" setvalue="true"/>
@@ -531,7 +545,7 @@
 
     <!--元素腰带-->
     <Item name="元素腰带" identifier="Magic_Pouch" scale="0.3" subcategory="Touhou" category="Equipment"
-          tags="mediumitem,mobilecontainer,tool,backpack,locker,container,Magic_Pouch" fireproof="true" waterproof="true"
+          tags="mediumitem,tool,backpack,Magic_Pouch" fireproof="true" waterproof="true"
           cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="medcab"/>
         <Price baseprice="1000" minleveldifficulty="10">
@@ -788,7 +802,7 @@
 
     <!--元素腰带-医疗拓展-->
     <Item name="元素腰带-医疗拓展" identifier="Magic_Pouch_Medical_Expansion" scale="0.3" subcategory="Touhou" category="Equipment"
-          tags="mediumitem,mobilecontainer,tool,backpack,locker,container,refrigerated,Magic_Pouch" fireproof="true" waterproof="true"
+          tags="mediumitem,tool,backpack,refrigerated,Magic_Pouch" fireproof="true" waterproof="true"
           cargocontaineridentifier="metalcrate" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="medcab"/>
         <Price baseprice="2000" minleveldifficulty="15">
@@ -1121,14 +1135,14 @@
             <Item identifier="rubber" amount="3"/>
             <Item identifier="steel" amount="4"/>
         </Deconstruct>
-        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
+        <Fabricate suitablefabricators="Magic_Altar,fabricator" requiredtime="10">
             <RequiredSkill identifier="mechanical" level="70"/>
             <RequiredItem identifier="aluminium" amount="4"/>
             <RequiredItem identifier="rubber" amount="6"/>
             <RequiredItem identifier="fixfoamgrenade" amount="2"/>
             <RequiredItem identifier="steel" amount="2"/>
         </Fabricate>
-        <Fabricate suitablefabricators="Magic_Altar" displayname="recycleitem" requiredtime="5">
+        <Fabricate suitablefabricators="Magic_Altar,fabricator" displayname="recycleitem" requiredtime="5">
             <RequiredSkill identifier="mechanical" level="60"/>
             <RequiredItem identifier="Touhou_Fix_Foamg_Tank" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
             <RequiredItem identifier="sodium"/>
@@ -4687,7 +4701,7 @@
 
 
     <!--腐化密辛-->
-    <Item name="腐化密辛" identifier="Touhou_Corrupted_Weapon_Unlocked_Book" category="Misc" hideinmenus="true" Tags="smallitem"
+    <Item name="腐化密辛" identifier="Touhou_Corrupted_Weapon_Unlocked_Book" category="Misc" hideinmenus="true" Tags="smallitem" maxstacksize="32"
           cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft">
         <Price baseprice="100" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
@@ -4714,7 +4728,7 @@
     </Item>
 
     <!--盗火者密辛-->
-    <Item name="盗火者密辛" identifier="Touhou_Special_Weapon_Unlocked_Book01" category="Misc" hideinmenus="true" Tags="smallitem"
+    <Item name="盗火者密辛" identifier="Touhou_Special_Weapon_Unlocked_Book01" category="Misc" hideinmenus="true" Tags="smallitem" maxstacksize="32"
           cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft" spritecolor="100,100,255,255">
         <Price baseprice="100" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
@@ -5180,7 +5194,7 @@
 
     <!--守矢神社腰包-->
     <Item name="守矢神社腰包" identifier="Touhou_Moriya_Bag" scale="0.4" subcategory="Touhou" category="Equipment"
-          tags="mediumitem,Touhou_Moriya_Bag,backpack,Illness_Recovery_Charm" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate"
+          tags="mediumitem,backpack,Touhou_Moriya_Bag,backpack,Illness_Recovery_Charm" fireproof="true" waterproof="true" cargocontaineridentifier="metalcrate"
           impactsoundtag="impact_metal_light">
         <PreferredContainer primary="medcab"/>
         <Price baseprice="8000" minleveldifficulty="15">
@@ -5215,7 +5229,7 @@
             </SubContainer>
             <SubContainer capacity="1" maxstacksize="1">
                 <Containable items="mobilebattery" setactive="true">
-                    <StatusEffect type="OnWearing" target="This,Character" setvalue="true" Interval="3.0" disabledeltatime="true">
+                    <StatusEffect type="OnWearing" target="This,Character" setvalue="true" multiplyafflictionsbymaxvitality="true" Interval="3.0" disabledeltatime="true">
                         <Conditional IsDead="false"/>
                         <Affliction identifier="Touhou_Moriya_Bag_Effect" strength="10"/>
                     </StatusEffect>
@@ -5583,5 +5597,100 @@
         <Holdable handle1="0,0" slots="Any,RightHand,LeftHand" msg="ItemMsgPickUpSelect"/>
     </Item>
 
+
+    <!--校勘风灯-->
+    <Item name="校勘风灯" identifier="Touhou_Errata_Lanthorn" subcategory="Touhou" category="Equipment" Tags="mediumitem,backpack"
+          cargocontaineridentifier="metalcrate" scale="0.1" impactsoundtag="impact_metal_light" >
+        <PreferredContainer primary="secarmcab" secondary="armcab"/>
+        <Price baseprice="3000" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="2"/>
+            <Price storeidentifier="merchantcity" minavailable="2"/>
+            <Price storeidentifier="merchantresearch" minavailable="2"/>
+            <Price storeidentifier="merchantmilitary" minavailable="2"/>
+            <Price storeidentifier="merchantmine" minavailable="2"/>
+            <Price storeidentifier="merchantmedical" multiplier="0.9" minavailable="4"/>
+        </Price>
+        <Deconstruct time="10">
+            <Item identifier="Score_Point" amount="3"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
+            <RequiredSkill identifier="weapons" level="80"/>
+            <Item identifier="organicfiber" amount="4"/>
+            <Item identifier="plastic" amount="4"/>
+            <RequiredItem identifier="Score_Point" amount="3"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/Tools/Touhou_Errata_Lanthorn.png" sourcerect="400,0,200,255" origin="0.5,0.5"/>
+        <Sprite texture="%ModDir%/Images/Tools/Touhou_Errata_Lanthorn.png" sourcerect="0,0,400,509" depth="0.55" origin="0.5,0.5"/>
+        <Body width="400" height="509" density="10"/>
+        <Holdable slots="RightHand+LeftHand,Bag" />
+        <Wearable limbtype="Torso" slots="Bag" msg="ItemMsgEquipSelect" canbeselected="false" canbepicked="true" pickkey="Select"
+                  displaycontainedstatus="true">
+
+            <sprite name="Backpack Wearable" texture="%ModDir%/Images/Tools/Touhou_Errata_Lanthorn.png" sourcerect="0,0,400,509" limb="Torso"
+                    hidelimb="false" inheritlimbdepth="true"
+                    inherittexturescale="false" hideotherwearables="false" origin="0.65,0.12" scale="0.1">
+                <LightComponent LightColor="200,140,50,110" range="1000" IsOn="false">
+                    <!--            <StatusEffect type="OnUse" targettype="This" IsOn="true"/>-->
+                    <StatusEffect type="OnActive" target="Contained" targetslot="0" Condition="-0.1" />
+                </LightComponent>
+            </sprite>
+            <sprite name="Combat Diving Suit Torso" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32"
+                    limb="RightForearm" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true"
+                    inheritsourcerect="true"/>
+            <sprite name="Combat Diving Suit Torso" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32"
+                    limb="LeftForearm" hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true"
+                    inheritsourcerect="true"/>
+            <sprite name="Combat Diving Suit Torso" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="RightHand"
+                    hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true"/>
+            <sprite name="Combat Diving Suit Torso" texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb_0.png" sourcerect="32,32,32,32" limb="LeftHand"
+                    hidelimb="false" inherittexturescale="true" hideotherwearables="false" inheritorigin="true" inheritsourcerect="true"/>
+
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="burn,bleeding" damagemultiplier="0.7" damagesound="LimbArmor" deflectprojectiles="true"/>
+            <damagemodifier armorsector="0.0,360.0" afflictiontypes="stun" damagemultiplier="0.8" damagesound="LimbArmor" deflectprojectiles="true"/>
+            <SkillModifier skillidentifier="Touhou_Magic" skillvalue="10"/>
+            <SkillModifier skillidentifier="medical" skillvalue="10"/>
+        </Wearable>
+
+        <CustomInterface canbeselected="false" drawhudwhenequipped="true">
+            <GuiFrame relativesize="0.1,0.06" anchor="BottomRight" absoluteoffset="0,0" relativeoffset="0.19,0.0" style="ItemUI_Transparent"/>
+            <TickBox text="Text.Touhou_Light" IsOn="true">
+                <StatusEffect type="OnUse" target="This" IsOn="true">
+                    <RequiredItem items="Touhou_Errata_Lanthorn_Ammo,mobilebattery" type="Contained"/>
+                </StatusEffect>
+                <StatusEffect type="OnUse" target="This" tags="Touhou_Errata_Lanthorn_On" setvalue="true" disabledeltatime="true">
+                    <RequiredItem items="Touhou_Errata_Lanthorn_Ammo,mobilebattery" type="Contained"/>
+                </StatusEffect>
+                <StatusEffect type="OnSecondaryUse" target="This" IsOn="false"/>
+                <StatusEffect type="OnSecondaryUse" target="This" tags="Touhou_Errata_Lanthorn_False" setvalue="true" disabledeltatime="true"/>
+            </TickBox>
+        </CustomInterface>
+        <ItemContainer autofill="False" hideitems="true" capacity="0" maxstacksize="1" ExtraStackSize="4" slotsperrow="4">
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
+            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="128,448,64,64" origin="0.5,0.5"/>
+            <SlotIcon slotindex="14" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6"/>
+            <SlotIcon slotindex="15" texture="Content/Items/InventoryIconAtlas.png" sourcerect="640,256,64,64" origin="0.5,0.6"/>
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="Touhou_Errata_Lanthorn_Ammo,mobilebattery" hide="true" itempos="-21,-3" depth="0.56" setactive="true">
+                    <StatusEffect type="OnWearing" target="This,Character" setvalue="true" multiplyafflictionsbymaxvitality="true"
+                                  Interval="3.0" disabledeltatime="true" comparison="And">
+                        <Conditional IsDead="false"/>
+                        <Conditional Memory_Of_Gensokyo="gt 0"/>
+                        <Conditional HasTag="eq Touhou_Errata_Lanthorn_On"/>
+                        <Affliction identifier="Touhou_Errata_Lanthorn_Effect" amount="10"/>
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+            <SubContainer capacity="9" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem" excludeditems="backpack,crate,toolbelt,toolbox,Touhou_Magic_Charging_Box,bulkyweapon"/>
+            </SubContainer>
+            <SubContainer capacity="4" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,toolbox,Touhou_Magic_Charging_Box,bulkyweapon"/>
+            </SubContainer>
+            <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
+                <Containable items="smallitem,mediumitem,Touhou_Magic_Charging_Box,bulkyweapon" excludeditems="backpack,crate,toolbelt"/>
+            </SubContainer>
+        </ItemContainer>
+        <aitarget sightrange="500" soundrange="250" fadeouttime="1"/>
+    </Item>
 
 </Items>
