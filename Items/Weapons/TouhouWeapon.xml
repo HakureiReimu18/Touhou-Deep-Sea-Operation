@@ -14,7 +14,7 @@
 
     <!--迷你八卦炉-->
     <Item name="迷你八卦炉" identifier="Hakkero" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,DanMu_Game_Mode,Touhou_Weapon_Level02,Touhou_Cam_Offset_Normal" Scale="0.32" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,DanMu_Game_Mode,ProvocativeToHumanAI,Touhou_Weapon_Level02,Touhou_Cam_Offset_Normal" Scale="0.32" impactsoundtag="impact_metal_light">
         <Price baseprice="2200" minleveldifficulty="15">
             <Price storeidentifier="merchantoutpost" minavailable="1" sold="false"/>
             <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="1"/>
@@ -30,8 +30,7 @@
             <RequiredSkill identifier="weapons" level="50"/>
             <RequiredSkill identifier="mechanical" level="50"/>
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Magic_Material" amount="2"/>
             <RequiredItem identifier="Score_Point"/>
         </Fabricate>
@@ -155,6 +154,7 @@
                 <Conditional hastag="Non_Directional_Laser_Mode" targetcontainer="true"/>
             </StatusEffect>
         </ItemContainer>
+        <aitarget sightrange="2000" soundrange="3000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="FirepowerMultiplier" value="0.12"/>
             <QualityStat stattype="Condition" value="0.15"/>
@@ -246,8 +246,7 @@
             <RequiredSkill identifier="weapons" level="40"/>
             <RequiredSkill identifier="Touhou_Magic" level="40"/>
             <RequiredItem identifier="Magic_Material"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
-            <RequiredItem identifier="Yin_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar,fabricator" requiredtime="10" displayname="Touhou_Recharge">
             <RequiredSkill identifier="weapons" level="40"/>
@@ -321,7 +320,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="weapons" level="70"/>
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="8"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="6"/>
             <RequiredItem identifier="Touhou_Precious_Metal" amount="2"/>
             <RequiredItem identifier="Power_Point" amount="4"/>
             <RequiredItem identifier="alienpowercell" amount="3"/>
@@ -362,7 +361,7 @@
                              scalemultiplier="1,0.7"/>
             <Attack structuredamage="80" itemdamage="60" targetforce="5" penetration="0.4">
                 <Affliction identifier="lacerations" strength="15"/>
-                <Affliction identifier="burn" strength="8"/>
+                <Affliction identifier="burn" strength="5"/>
                 <Affliction identifier="stun" strength="0.1" probability="0.3"/>
                 <Affliction identifier="stun" strength="0.1" probability="0.5"/>
             </Attack>
@@ -381,8 +380,8 @@
                 <Conditional Removed="false"/>
                 <Explosion range="60" structuredamage="20" force="6.0" itemdamage="60" shockwave="false" smoke="false" flames="false" flash="false"
                            sparks="false" underwaterbubble="true" camerashake="10" penetration="0.4">
-                    <Affliction identifier="explosiondamage" strength="8"/>
-                    <Affliction identifier="burn" strength="8"/>
+                    <Affliction identifier="explosiondamage" strength="5"/>
+                    <Affliction identifier="lacerations" strength="8"/>
                     <Affliction identifier="Touhou_Lost_Dream" strength="10"/>
                 </Explosion>
                 <sound file="Content/Items/Weapons/ExplosionSmall1.ogg" volume="0.5" selectionmode="Random" range="5000"/>
@@ -413,7 +412,7 @@
         <Projectile characterusable="false" launchimpulse="20" hitscan="false" removeonhit="true" friendlyfire="false" sticktocharacters="false">
             <Attack targetforce="2">
                 <Affliction identifier="lacerations" strength="3"/>
-                <Affliction identifier="burn" strength="3"/>
+                <Affliction identifier="burn" strength="1"/>
             </Attack>
             <StatusEffect type="OnActive" target="This" lifetime="0.5">
                 <ParticleEmitter particle="StarDanmuBoom" copyentityangle="true" anglemin="105" anglemax="255" particleamount="3" velocitymin="200"
@@ -424,7 +423,7 @@
                 <Conditional Removed="false"/>
                 <Explosion range="10" force="6.0" shockwave="false" smoke="false" flames="false" flash="false" sparks="false" underwaterbubble="true"
                            camerashake="10" penetration="0.4">
-                    <Affliction identifier="explosiondamage" strength="2.5"/>
+                    <Affliction identifier="explosiondamage" strength="2"/>
                     <Affliction identifier="Touhou_Lost_Dream" strength="1"/>
                 </Explosion>
                 <ParticleEmitter particle="StarDustBoom" anglemin="0" anglemax="360" particleamount="5" velocitymin="200" velocitymax="600"
@@ -441,7 +440,7 @@
 
     <!--迷你八卦炉（仿制）-->
     <Item name="迷你八卦炉（仿制）" identifier="Fake_Hakkero" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level01,Touhou_Cam_Offset_Low" Scale="0.42" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level01,Touhou_Cam_Offset_Low" Scale="0.42" impactsoundtag="impact_metal_light">
         <Price baseprice="600">
             <Price storeidentifier="merchantoutpost" minavailable="1"/>
             <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="1"/>
@@ -518,6 +517,7 @@
             <Containable identifiers="Star_Danmu"/>
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
         </ItemContainer>
+        <aitarget sightrange="2000" soundrange="3000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="FirepowerMultiplier" value="0.1"/>
             <QualityStat stattype="FiringRateMultiplier" value="0.2"/>
@@ -528,7 +528,7 @@
 
     <!--灵之御扎-->
     <Item name="灵之御扎" identifier="Touhou_Homing_Amulet" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level01,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging01,disallowremovefabricationingredient"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level01,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging01"
           Scale="0.5" impactsoundtag="impact_metal_light">
         <Price baseprice="300">
             <Price storeidentifier="merchantoutpost" minavailable="1"/>
@@ -598,6 +598,7 @@
             <Containable identifiers="Touhou_Homing_Amulet_Ammo"/>
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
         </ItemContainer>
+        <aitarget sightrange="1000" soundrange="1500" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="Condition" value="0.2"/>
             <QualityStat stattype="FirepowerMultiplier" value="0.12"/>
@@ -661,7 +662,7 @@
 
     <!--琪露诺的冰晶-->
     <Item name="琪露诺的冰晶" identifier="Freeze_Icicle_Fall" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Cam_Offset_Low,Touhou_Weapon_Level01,Touhou_Magic_Charging01" Scale="0.6" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Cam_Offset_Low,Touhou_Weapon_Level01,Touhou_Magic_Charging01" Scale="0.6" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.3"/>
         <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
         <Price baseprice="100">
@@ -726,6 +727,7 @@
             <Containable identifier="Mc_SnowBall"/>
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
         </ItemContainer>
+        <aitarget sightrange="1000" soundrange="1500" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="FirepowerMultiplier" value="0.999"/>
             <QualityStat stattype="Condition" value="0.999"/>
@@ -761,7 +763,7 @@
 
     <!--冈格尼尔之枪（平民版）-->
     <Item name="冈格尼尔之枪（平民版）" identifier="Remilia_Gungnier" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,gunsmith,Touhou_Weapon_Level01,Touhou_Cam_Offset_Low" Scale="0.5" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,gunsmith,ProvocativeToHumanAI,Touhou_Weapon_Level01,Touhou_Cam_Offset_Low" Scale="0.5" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="wreckweaponholder" spawnprobability="0.05"/>
         <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.1"/>
         <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
@@ -906,7 +908,7 @@
     <!--冈格尼尔之枪-->
     <Item name="冈格尼尔" identifier="Touhou_Gungnier" noninteractable="false" subcategory="Touhou" category="Weapon"
           cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_High" Scale="0.5" impactsoundtag="impact_metal_light"
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_High" Scale="0.5" impactsoundtag="impact_metal_light"
           HideConditionBar="true">
         <Price baseprice="66666" minleveldifficulty="36">
             <Price storeidentifier="merchantoutpost" sold="false"/>
@@ -987,11 +989,11 @@
             <Containable items="Gungnier_Bolt"/>
         </ItemContainer>
         <SkillRequirementHint identifier="Touhou_Magic" level="100"/>
-        <aitarget sightrange="0" soundrange="500" fadeouttime="2"/>
+        <aitarget sightrange="500" soundrange="1500" fadeouttime="2"/>
     </Item>
 
 
-    <!--冈格尼尔-->
+    <!--冈格尼尔射弹-->
     <Item name="" identifier="Gungnier_Bolt" category="Weapon" hideinmenus="true" interactthroughwalls="true" tags="Touhou_Magic_Danmu" Scale="0.75"
           impactsoundtag="impact_metal_light">
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Remilia_Gungnier.png" sourcerect="542,0,224,75" origin="0.5,0.5"/>
@@ -1008,15 +1010,15 @@
                     penetration="0.66">
                 <Affliction identifier="bleeding" strength="80"/>
                 <Affliction identifier="Scarlet_Long_Night" strength="10"/>
-                <Affliction identifier="lacerations" strength="140"/>
-                <Affliction identifier="stun" strength="3"/>
+                <Affliction identifier="lacerations" strength="110"/>
+                <Affliction identifier="stun" strength="2"/>
             </Attack>
             <StatusEffect type="OnNotContained" target="this" stackable="false" setvalue="true" condition="0" delay="3"/>
             <StatusEffect type="OnBroken" target="this" stackable="false" delay="0.4">
                 <remove/>
             </StatusEffect>
             <StatusEffect type="OnImpact" target="Limb">
-                <Affliction identifier="bloodloss" strength="10"/>
+                <Affliction identifier="bloodloss" strength="5"/>
             </StatusEffect>
             <StatusEffect type="OnImpact" target="UseTarget" multiplyafflictionsbymaxvitality="true">
                 <Affliction identifier="Touhou_Lost_Dream" strength="20"/>
@@ -1057,7 +1059,7 @@
 
     <!--木卫二居合-->
     <Item name="冲锋枪|魂魄妖梦" identifier="youmusmg" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallautoweapon,smallitem,weapon,Touhou_Weapon_Level01,gunsmith,Touhou_Cam_Offset_Normal" Scale="0.5"
+          tags="smallautoweapon,smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level01,gunsmith,Touhou_Cam_Offset_Normal" Scale="0.5"
           impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" amount="1" spawnprobability="0.1"/>
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.05"/>
@@ -1156,7 +1158,7 @@
                 <Containable items="flashlight,Touhou_Enhanced_Crystal" hide="false" itempos="22,-1" setactive="true"/>
             </SubContainer>
         </ItemContainer>
-        <aitarget sightrange="2000" soundrange="4000" fadeouttime="5"/>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="FirepowerMultiplier" value="0.12"/>
         </Quality>
@@ -1455,7 +1457,7 @@
             <!--Reset the reload speed-->
             <StatusEffect type="OnUse" target="This" reload="0.8" setvalue="true" delay="1"/>
         </MeleeWeapon>
-        <aitarget sightrange="500" soundrange="250" fadeouttime="1"/>
+        <aitarget sightrange="1000" soundrange="500" fadeouttime="2"/>
         <Quality>
             <QualityStat stattype="StrikingPowerMultiplier" value="0.12"/>
         </Quality>
@@ -1498,10 +1500,10 @@
                      combatPriority="30" allowhitmultiple="true" msg="ItemMsgPickUpSelect">
             <Attack targetimpulse="2" severlimbsprobability="0.01" itemdamage="1" structuresoundtype="StructureSlash" penetration="0.6">
                 <Affliction identifier="lacerations" strength="4"/>
-                <Affliction identifier="burn" strength="2"/>
+                <Affliction identifier="burn" strength="1"/>
             </Attack>
             <StatusEffect type="OnUse" target="limb">
-                <Affliction identifier="internaldamage" strength="6"/>
+                <Affliction identifier="internaldamage" strength="5"/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="limb" multiplyafflictionsbymaxvitality="true">
                 <Affliction identifier="Touhou_Lost_Heart" strength="6"/>
@@ -1577,7 +1579,7 @@
             <!--Reset the reload speed-->
             <StatusEffect type="OnUse" target="This" reload="0.8" setvalue="true" delay="1.5"/>
         </MeleeWeapon>
-        <aitarget sightrange="500" soundrange="250" fadeouttime="1"/>
+        <aitarget sightrange="1000" soundrange="500" fadeouttime="2"/>
         <Quality>
             <QualityStat stattype="StrikingPowerMultiplier" value="0.15"/>
         </Quality>
@@ -1619,7 +1621,7 @@
 
     <!--妹红的氧化剂-->
     <Item name="妹红的氧化剂" identifier="Mokou_Flamer" subcategory="Touhou" category="Weapon"
-          Tags="smallitem,weapon,gun,Touhou_Weapon_Level02,Touhou_Cam_Offset_Low" cargocontaineridentifier="metalcrate" Scale="0.5"
+          Tags="smallitem,weapon,gun,ProvocativeToHumanAI,Touhou_Weapon_Level02,Touhou_Cam_Offset_Low" cargocontaineridentifier="metalcrate" Scale="0.5"
           impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" amount="1" spawnprobability="0.1"/>
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.3"/>
@@ -1737,7 +1739,7 @@
             <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="64,448,64,64" origin="0.5,0.5"/>
             <Containable items="weldingtoolfuel,Phoenix_Tail"/>
         </ItemContainer>
-        <aitarget sightrange="5000" soundrange="500" fadeouttime="5"/>
+        <aitarget sightrange="3000" soundrange="500" fadeouttime="5"/>
         <SkillRequirementHint identifier="weapons" level="60"/>
         <SkillRequirementHint identifier="electrical" level="60"/>
     </Item>
@@ -1770,7 +1772,7 @@
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" displayname="recycleitem" requiredtime="2">
             <RequiredSkill identifier="electrical" level="30"/>
-            <Item identifier="Huo_Alchemical"/>
+            <Item identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Phoenix_Tail" mincondition="0.0" maxcondition="0.9" usecondition="false"/>
         </Fabricate>
         <Sprite texture="%ModDir%/Images/OtherWeapons/Mokou_Flamer.png" depth="0.4" sourcerect="0,0,140,185" scale="0.4"/>
@@ -1854,7 +1856,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="weapons" level="70"/>
             <RequiredItem identifier="Gilead_Branch"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="8"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="6"/>
             <RequiredItem identifier="Touhou_Precious_Metal" amount="3"/>
             <RequiredItem identifier="Score_Point" amount="2"/>
             <RequiredItem identifier="Power_Point" amount="3"/>
@@ -1922,7 +1924,7 @@
             </LightComponent>
             <Attack targetimpulse="5" severlimbsprobability="0.1" itemdamage="85" structuresoundtype="StructureSlash" penetration="0.4">
                 <Affliction identifier="lacerations" strength="20"/>
-                <Affliction identifier="burn" strength="10"/>
+                <Affliction identifier="burn" strength="5"/>
                 <Affliction identifier="burn" strength="5" probability="0.4"/>
                 <Affliction identifier="stun" strength="0.3"/>
                 <Affliction identifier="stun" strength="0.5" probability="0.1"/>
@@ -1936,7 +1938,7 @@
             </StatusEffect>
             <StatusEffect type="OnUse" target="Limb">
                 <Affliction identifier="explosiondamage" strength="5" penetration="0.2"/>
-                <Affliction identifier="burn" strength="10" penetration="0.2"/>
+                <Affliction identifier="burn" strength="5" penetration="0.2"/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="UseTarget">
                 <ParticleEmitter particle="StarDanmuBoom" copyentityangle="false" anglemin="30" anglemax="240" particleamount="3" velocitymin="100"
@@ -1961,7 +1963,7 @@
             <!--Reset the reload speed-->
             <StatusEffect type="OnUse" target="This" reload="1.0" setvalue="true" delay="1"/>
         </MeleeWeapon>
-        <aitarget sightrange="500" soundrange="250" fadeouttime="1"/>
+        <aitarget sightrange="1000" soundrange="500" fadeouttime="2"/>
         <Quality>
             <QualityStat stattype="StrikingPowerMultiplier" value="0.16"/>
         </Quality>
@@ -1971,7 +1973,7 @@
 
     <!--文文的团扇-->
     <Item name="文文的团扇" identifier="Aya_Circular_Fan" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level01,Touhou_Cam_Offset_Low,Touhou_Magic_Charging01,disallowremovefabricationingredient"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level01,Touhou_Cam_Offset_Low,Touhou_Magic_Charging01,disallowremovefabricationingredient"
           Scale="0.55" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.1"/>
         <PreferredContainer primary="armcab" amount="1" spawnprobability="0.2"/>
@@ -2058,6 +2060,7 @@
             <Containable identifier="Aya_Maple_Leaves"/>
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
         </ItemContainer>
+        <aitarget sightrange="1000" soundrange="2000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="FirepowerMultiplier" value="0.12"/>
             <QualityStat stattype="Condition" value="0.334"/>
@@ -2125,7 +2128,7 @@
 
     <!--七曜魔导书-->
     <Item name="七曜魔导书" identifier="Touhou_Elements_Book" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging03,disallowremovefabricationingredient"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging03,disallowremovefabricationingredient"
           Scale="0.4" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="abandonedmedcab" spawnprobability="0.01"/>
         <Price baseprice="4000" minleveldifficulty="25">
@@ -2331,8 +2334,8 @@
                     <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Clear.ogg" type="OnUse" volume="1.6" range="500.0" loop="false"/>
                 </StatusEffect>
             </Button>
-
         </CustomInterface>
+        <aitarget sightrange="1000" soundrange="2000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="Condition" value="0.257"/>
         </Quality>
@@ -2854,8 +2857,7 @@
             <RequiredItem identifier="Gilead_Branch"/>
             <RequiredItem identifier="incendium" amount="6"/>
             <RequiredItem identifier="Touhou_Precious_Metal" amount="3"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="4"/>
-            <RequiredItem identifier="Huo_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="6"/>
             <RequiredItem identifier="Score_Point" amount="3"/>
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Immortal_Moon_Smoke/Immortal_Moon_Smoke_Icon.png" sourcerect="0,0,50,60"
@@ -2999,7 +3001,7 @@
 
     <!--聚能电弧发射器-手持型-->
     <Item name="聚能电弧发射器-手持型" identifier="Touhou_Concentrated_Energy_Arc_Emitter"
-          tags="mediumitem,weapon,gun,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" category="Weapon"
+          tags="mediumitem,weapon,gun,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" category="Weapon"
           subcategory="Touhou" isshootable="true" Scale="1">
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Concentrated_Energy_Arc_Emitter.png" sourcerect="0,0,118,44" depth="0.5"
                 origin="0.5,0.5"/>
@@ -3089,7 +3091,7 @@
         </Quality>
         <SkillRequirementHint identifier="weapons" level="90"/>
         <SkillRequirementHint identifier="Touhou_Magic" level="70"/>
-        <aitarget sightrange="3000" soundrange="3000" fadeouttime="5"/>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
     </Item>
 
     <!--电能要石-->
@@ -3103,13 +3105,12 @@
             <RequiredSkill identifier="weapons" level="80"/>
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem identifier="Score_Point"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="Touhou_Recharge">
             <RequiredSkill identifier="weapons" level="80"/>
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
-            <RequiredItem identifier="Magic_Material"/>
+            <RequiredItem identifier="Magic_Material" amount="2"/>
             <RequiredItem identifier="Lightning_Kanameishi" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
         <Sprite texture="%ModDir%/Images/OtherWeapons/Kanameishi.png" sourcerect="3,0,92,72" origin="0.5,0.5"/>
@@ -3225,7 +3226,7 @@
 
 
     <!--哨戒长刀-->
-    <Item name="" identifier="Tengu_Longsword" subcategory="Touhou" category="Weapon"
+    <Item name="哨戒长刀" identifier="Tengu_Longsword" subcategory="Touhou" category="Weapon"
           Tags="smallitem,weapon,Touhou_Weapon_Level01,Touhou_Cam_Offset_Low" cargocontaineridentifier="metalcrate" scale="0.5"
           impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
@@ -3317,7 +3318,7 @@
 
 
     <!--天狗盾牌-->
-    <Item name="" identifier="Tengu_Shield" category="Equipment" subcategory="Touhou" tags="mediumitem,Touhou_Weapon_Level03" Health="200"
+    <Item name="天狗盾牌" identifier="Tengu_Shield" category="Equipment" subcategory="Touhou" tags="mediumitem,Touhou_Weapon_Level03" Health="300"
           impactsoundtag="impact_metal_light" DamagedByMeleeWeapons="false" DamagedByProjectiles="true" DamagedByMonsters="true"
           cargocontaineridentifier="metalcrate" scale="0.85" allowasextracargo="true">
         <PreferredContainer primary="armcab" secondary="secarmcab"/>
@@ -3442,7 +3443,7 @@
     </Item>-->
 
     <!--天狗大盾-->
-    <Item name="" identifier="Tengu_Shield_Huge" category="Equipment" subcategory="Touhou" tags="mediumitem,Touhou_Weapon_Level05" health="600"
+    <Item name="天狗大盾" identifier="Tengu_Shield_Huge" category="Equipment" subcategory="Touhou" tags="mediumitem,Touhou_Weapon_Level05" health="800"
           damagedbyprojectiles="true"
           impactsoundtag="impact_metal_light" cargocontaineridentifier="metalcrate" scale="1.0" allowasextracargo="true">
         <PreferredContainer primary="armcab" secondary="secarmcab"/>
@@ -3560,8 +3561,7 @@
             <Item identifier="Magic_Material" amount="2"/>
             <Item identifier="Score_Point" amount="2"/>
             <Item identifier="organicfiber" amount="4"/>
-            <Item identifier="Tu_Alchemical"/>
-            <Item identifier="Mu_Alchemical" amount="2"/>
+            <Item identifier="Touhou_Bottle_Element" amount="3"/>
         </Fabricate>
         <Sprite texture="%ModDir%/Images/OtherWeapons/Yuka_Parasol/1.png" sourcerect="0,0,190,118" origin="0.5,0.5" depth="0.54"/>
         <BrokenSprite texture="%ModDir%/Images/OtherWeapons/Yuka_Parasol/1.png" sourcerect="0,0,190,118" origin="0.5,0.5" depth="0.54"
@@ -3688,8 +3688,8 @@
 
 
     <!--电子御扎-->
-    <Item name="" identifier="Touhou_Cyber_Homing_Amulet" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging03" Scale="0.2"
+    <Item name="电子御扎" identifier="Touhou_Cyber_Homing_Amulet" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging03" Scale="0.2"
           impactsoundtag="impact_metal_light">
         <Price baseprice="1700" minleveldifficulty="25">
             <Price storeidentifier="merchantoutpost" minavailable="1"/>
@@ -3766,6 +3766,7 @@
             <Containable items="Touhou_Cyber_Homing_Amulet_Bolt" hide="true"/>
             <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="256,448,64,64" origin="0.5,0.5"/>
         </ItemContainer>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="Condition" value="0.167"/>
             <QualityStat stattype="FiringRateMultiplier" value="0.1"/>
@@ -3807,8 +3808,8 @@
     </Item>
 
     <!--文文的相机-->
-    <Item name="" identifier="Touhou_Aya_Camera" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_High" Scale="1.2" impactsoundtag="impact_metal_light">
+    <Item name="文文的相机" identifier="Touhou_Aya_Camera" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_High" Scale="1.2" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.05"/>
         <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
         <Price baseprice="2400">
@@ -3890,12 +3891,13 @@
             <Containable identifier="Touhou_Aya_Maple_Film"/>
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
         </ItemContainer>
+        <aitarget sightrange="3000" soundrange="3000" fadeouttime="5"/>
         <SkillRequirementHint identifier="weapons" level="50"/>
         <SkillRequirementHint identifier="Touhou_Magic" level="50"/>
     </Item>
 
     <!--胶卷-->
-    <Item name="" identifier="Touhou_Aya_Maple_Film" tags="smallitem,Touhou_Magic_Danmu" subcategory="Touhou" category="Weapon"
+    <Item name="胶卷" identifier="Touhou_Aya_Maple_Film" tags="smallitem,Touhou_Magic_Danmu" subcategory="Touhou" category="Weapon"
           cargocontaineridentifier="metalcrate" maxstacksize="12" scale="0.15" HideConditionBar="true">
         <Price baseprice="400" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="6"/>
@@ -3934,7 +3936,7 @@
 
 
     <!--绯色月下-->
-    <Item name="" identifier="Touhou_Crimson_Moonlight" subcategory="Touhou" category="Weapon"
+    <Item name="绯色月下" identifier="Touhou_Crimson_Moonlight" subcategory="Touhou" category="Weapon"
           Tags="smallitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low,Flandre_Weapons" cargocontaineridentifier="metalcrate"
           scale="1.0" impactsoundtag="impact_metal_light" RequireAimToUse="True">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
@@ -3955,7 +3957,7 @@
             <RequiredItem identifier="Gilead_Branch" amount="2"/>
             <RequiredItem identifier="dementonite" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="3"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="3"/>
             <RequiredItem identifier="Score_Point" amount="4"/>
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Crimson_Moonlight.png" sourcerect="0,0,140,48" origin="0.5,0.5"/>
@@ -3992,10 +3994,10 @@
             </StatusEffect>
 
             <Attack targetimpulse="5" severlimbsprobability="0.35" itemdamage="60" structuresoundtype="StructureSlash" penetration="0.2">
-                <Affliction identifier="lacerations" strength="18"/>
+                <Affliction identifier="lacerations" strength="12"/>
                 <Affliction identifier="lacerations" strength="6" probability="0.495"/>
-                <Affliction identifier="internaldamage" strength="6"/>
-                <Affliction identifier="internaldamage" strength="6" probability="0.495"/>
+                <Affliction identifier="internaldamage" strength="4.95"/>
+                <Affliction identifier="internaldamage" strength="4.95" probability="0.495"/>
                 <Affliction identifier="bleeding" strength="20"/>
                 <Affliction identifier="bleeding" strength="20" probability="0.495"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="3"/>
@@ -4043,7 +4045,7 @@
     </Item>
 
     <!--午鵺-->
-    <Item name="" identifier="Touhou_Nue_Midnight" subcategory="Touhou" category="Weapon"
+    <Item name="午鵺" identifier="Touhou_Nue_Midnight" subcategory="Touhou" category="Weapon"
           Tags="smallitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low" cargocontaineridentifier="metalcrate"
           scale="1.0" impactsoundtag="impact_metal_light" RequireAimToUse="True">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
@@ -4063,9 +4065,7 @@
             <RequiredSkill identifier="weapons" level="100"/>
             <RequiredItem identifier="dementonite" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
-            <RequiredItem identifier="Huo_Alchemical" amount="2"/>
-            <RequiredItem identifier="Shui_Alchemical" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="6"/>
             <RequiredItem identifier="Score_Point" amount="4"/>
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Nue_Midnight.png" sourcerect="190,0,67,47" origin="0.5,0.5"/>
@@ -4102,7 +4102,7 @@
             </StatusEffect>
 
             <Attack targetimpulse="5" severlimbsprobability="0.4" itemdamage="80" structuresoundtype="StructureSlash" penetration="0.25">
-                <Affliction identifier="lacerations" strength="30"/>
+                <Affliction identifier="lacerations" strength="26"/>
                 <Affliction identifier="bitewounds" strength="5"/>
                 <Affliction identifier="bleeding" strength="15"/>
                 <Affliction identifier="bleeding" strength="15" probability="0.5"/>
@@ -4185,8 +4185,7 @@
             <RequiredItem identifier="dementonite" amount="8"/>
             <RequiredItem identifier="incendium" amount="8"/>
             <RequiredItem identifier="Touhou_Precious_Metal" amount="6"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
-            <RequiredItem identifier="Huo_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Power_Point" amount="3"/>
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Laevatein/1.png" sourcerect="0,0,188,96" origin="0.5,0.5"/>
@@ -4260,8 +4259,8 @@
                 <Affliction identifier="lacerations" strength="6.66"/>
                 <Affliction identifier="internaldamage" strength="6.66"/>
                 <Affliction identifier="organdamage" strength="6.66"/>
-                <Affliction identifier="burn" strength="13"/>
-                <Affliction identifier="explosiondamage" strength="13"/>
+                <Affliction identifier="burn" strength="10"/>
+                <Affliction identifier="explosiondamage" strength="10"/>
                 <Affliction identifier="bleeding" strength="33"/>
                 <Affliction identifier="bleeding" strength="33" probability="0.495"/>
                 <Affliction identifier="stun" strength="0.5"/>
@@ -4309,7 +4308,7 @@
             <!--Reset the reload speed-->
             <StatusEffect type="OnUse" target="This" reload="2.0" setvalue="true" delay="3.5" stackable="false"/>
         </MeleeWeapon>
-        <aitarget sightrange="500" soundrange="250" fadeouttime="1"/>
+        <aitarget sightrange="1000" soundrange="500" fadeouttime="1"/>
         <SkillRequirementHint identifier="Touhou_Magic" level="100"/>
     </Item>
 
@@ -4337,8 +4336,7 @@
             <RequiredItem identifier="sulphuriteshard" amount="3"/>
             <RequiredItem identifier="dementonite" amount="3"/>
             <RequiredItem identifier="Touhou_Precious_Metal" amount="2"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
-            <RequiredItem identifier="Shui_Alchemical" amount="6"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="6"/>
             <RequiredItem identifier="Power_Point"/>
         </Fabricate>
 
@@ -4384,7 +4382,7 @@
             </LightComponent>
 
             <Attack targetimpulse="6" severlimbsprobability="0.5" itemdamage="99" structuresoundtype="StructureSlash" penetration="0.3">
-                <Affliction identifier="lacerations" strength="30"/>
+                <Affliction identifier="lacerations" strength="21"/>
                 <Affliction identifier="slow" strength="30"/>
                 <Affliction identifier="Slow_Baka" strength="15"/>
                 <Affliction identifier="Touhou_Freeze" strength="18"/>
@@ -4434,7 +4432,7 @@
 
     <!--冻青蛙-->
     <Item name="冻青蛙" identifier="Touhou_Frozen_Frog" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low" Scale="0.25" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low" Scale="0.25" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.05"/>
         <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
         <Price baseprice="3999">
@@ -4450,8 +4448,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
-            <RequiredItem identifier="Shui_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Score_Point" amount="2"/>
         </Fabricate>
         <InventoryIcon name="" texture="%ModDir%/Images/OtherWeapons/Touhou_Frozen_Frog.png" sourcerect="0,0,112,140" origin="0.5,0.5"/>
@@ -4519,6 +4516,7 @@
             <Containable identifier="Touhou_Perfect_Snowflake"/>
             <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
         </ItemContainer>
+        <aitarget sightrange="1000" soundrange="2000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="FirepowerMultiplier" value="0.09"/>
             <QualityStat stattype="Condition" value="0.15"/>
@@ -4535,12 +4533,12 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="9">
             <RequiredSkill identifier="Touhou_Magic" level="40"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
-            <RequiredItem identifier="Shui_Alchemical" amount="3"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="3"/>
             <RequiredItem identifier="Magic_Material" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
-            <RequiredItem identifier="Shui_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Magic_Material" amount="2"/>
             <RequiredItem identifier="Touhou_Perfect_Snowflake" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -4563,7 +4561,7 @@
     </Item>
 
     <!--完美雪花射弹01-->
-    <Item name="" identifier="Touhou_Perfect_Snowflake_Bolt01" tags="Touhou_Perfect_Snowflake_Bolt,Touhou_Magic_Danmu" category="Misc" scale="0.4"
+    <Item name="完美雪花射弹01" identifier="Touhou_Perfect_Snowflake_Bolt01" tags="Touhou_Perfect_Snowflake_Bolt,Touhou_Magic_Danmu" category="Misc" scale="0.4"
           sonarsize="1" hideinmenus="true" maxstacksize="8">
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Perfect_Snowflake.png" sourcerect="0,0,108,108" origin="0.5,0.5" depth="0.46"/>
         <Body width="90" height="20" density="10"/>
@@ -4598,7 +4596,7 @@
     </Item>
 
     <!--完美雪花射弹02-->
-    <Item name="" identifier="Touhou_Perfect_Snowflake_Bolt02" tags="Touhou_Perfect_Snowflake_Bolt,Touhou_Magic_Danmu" category="Misc" scale="0.4"
+    <Item name="完美雪花射弹02" identifier="Touhou_Perfect_Snowflake_Bolt02" tags="Touhou_Perfect_Snowflake_Bolt,Touhou_Magic_Danmu" category="Misc" scale="0.4"
           sonarsize="1" hideinmenus="true" maxstacksize="8">
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Perfect_Snowflake.png" sourcerect="0,0,108,108" origin="0.5,0.5" depth="0.46"/>
         <Body width="90" height="20" density="10"/>
@@ -4647,8 +4645,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
             <RequiredItem identifier="dementonite" amount="6"/>
             <RequiredItem identifier="Touhou_Precious_Metal"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="6"/>
-            <RequiredItem identifier="Huo_Alchemical" amount="6"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="6"/>
             <RequiredItem identifier="Power_Point" amount="3"/>
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Hellfire_Torch/00.png" sourcerect="0,0,470,160" origin="0.5,0.5"/>
@@ -4769,7 +4766,7 @@
 
     <!--恋之迷宫-->
     <Item name="恋之迷宫" identifier="Touhou_Love_Maze" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging04,Flandre_Weapons" Scale="0.85"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging04,Flandre_Weapons" Scale="0.85"
           impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="6000" minleveldifficulty="25">
@@ -4786,14 +4783,13 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="weapons" level="60"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
-            <RequiredItem identifier="Huo_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Score_Point" amount="3"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="Touhou_Recharge">
             <RequiredSkill identifier="weapons" level="65"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="4"/>
-            <RequiredItem identifier="Huo_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Magic_Material" amount="2"/>
             <RequiredItem identifier="Touhou_Love_Maze" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -4916,12 +4912,12 @@
                 <ReduceAffliction identifier="Touhou_Love_Maze_Counter03" strength="1000"/>
             </StatusEffect>
         </RangedWeapon>
-
         <ItemContainer capacity="1" maxstacksize="12" hideitems="true" containedstateindicatorstyle="bullet" SpawnWithId="Touhou_Love_Maze_Arrow"
                        containedspritedepth="0.56" drawinventory="false" removecontaineditemsondeconstruct="true" autofill="true"
                        ShowConditionInContainedStateIndicator="false">
             <Containable items="Touhou_Love_Maze_Arrow" hide="true" setactive="true"/>
         </ItemContainer>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
         <SkillRequirementHint identifier="weapons" level="50"/>
         <SkillRequirementHint identifier="Touhou_Magic" level="70"/>
         <Quality>
@@ -5004,7 +5000,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="dementonite"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="6"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="steel" amount="4"/>
             <RequiredItem identifier="Score_Point" amount="2"/>
         </Fabricate>
@@ -5097,7 +5093,7 @@
 
     <!--怪奇电话-->
     <Item name="怪奇电话" identifier="Touhou_Strange_Phone" subcategory="Touhou" category="Weapon"
-          tags="smallitem,Touhou_Strange_Phone,Touhou_Weapon_Level03" scale="0.5" cargocontaineridentifier="metalcrate" description="HONK">
+          tags="smallitem,ProvocativeToHumanAI,Touhou_Strange_Phone,Touhou_Weapon_Level03" scale="0.5" cargocontaineridentifier="metalcrate" description="HONK">
         <PreferredContainer primary="crewcab" notcampaign="true"/>
         <PreferredContainer secondary="wreckcrewcab,abandonedcrewcab" spawnprobability="0.05"/>
         <Price baseprice="2500">
@@ -5147,11 +5143,11 @@
                 <sound file="%ModDir%/Sounds/Weapons/Touhou_Strange_Phone_Sound.ogg" type="OnUse" range="2000.0" loop="false"/>
             </StatusEffect>
         </RangedWeapon>
-        <aitarget soundrange="1" fadeouttime="5"/>
+        <aitarget soundrange="2000" fadeouttime="5"/>
     </Item>
 
     <!--博丽的御币-->
-    <Item name="" identifier="Touhou_Gohei_Reimu" category="Weapon" subcategory="Touhou"
+    <Item name="博丽的御币" identifier="Touhou_Gohei_Reimu" category="Weapon" subcategory="Touhou"
           Tags="mediumitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low" scale="0.5" allowasextracargo="true" requireaimtouse="true"
           impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
@@ -5169,8 +5165,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredSkill identifier="weapons" level="60"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
-            <RequiredItem identifier="Yin_Alchemical"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Score_Point"/>
             <RequiredItem identifier="titaniumaluminiumalloy"/>
         </Fabricate>
@@ -5249,7 +5244,7 @@
     <!--炽热的射线枪-->
     <Item name="炽热的射线枪" identifier="Touhou_Scorching_Ray_Gun" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,weapon,gun,Touhou_Weapon_Level05,Touhou_Cam_Offset_High" Scale="0.4" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,weapon,gun,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_High" Scale="0.4" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="16000" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -5373,7 +5368,7 @@
                 </Containable>
             </SubContainer>
         </ItemContainer>
-        <aitarget sightrange="1000" soundrange="3000" fadeouttime="5"/>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="FirepowerMultiplier" value="0.067"/>
             <QualityStat stattype="FiringRateMultiplier" value="0.08"/>
@@ -5406,7 +5401,7 @@
             <RequiredItem identifier="uranium" amount="2"/>
             <RequiredItem identifier="flashpowder"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="2"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Phoenix_Tail"/>
             <RequiredItem identifier="Touhou_Base_Metal"/>
         </Fabricate>
@@ -5435,7 +5430,7 @@
     </Item>
 
     <!--灼热射线-->
-    <Item name="" identifier="Touhou_Scorching_Ray_Gun_Light" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.5" sonarsize="0.5"
+    <Item name="灼热射线" identifier="Touhou_Scorching_Ray_Gun_Light" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.5" sonarsize="0.5"
           hideinmenus="true">
         <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55"/>
         <Body width="170" height="10" density="10"/>
@@ -5444,9 +5439,8 @@
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.6"
                              colormultiplier="255,10,10,220"/>
             <Attack itemdamage="90" levelwalldamage="120" targetforce="5" targetimpulse="5" penetration="0.35" severlimbsprobability="1.0">
-                <Affliction identifier="explosiondamage" strength="25"/>
-                <Affliction identifier="lacerations" strength="40"/>
-                <Affliction identifier="burn" strength="30"/>
+                <Affliction identifier="explosiondamage" strength="20"/>
+                <Affliction identifier="lacerations" strength="50"/>
                 <Affliction identifier="emp" strength="50"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="20"/>
                 <Affliction identifier="stun" strength="1.0"/>
@@ -5457,7 +5451,7 @@
                 <Explosion range="180" force="6.0" itemdamage="20" levelwalldamage="30" shockwave="false" smoke="false" flames="false" flash="false"
                            DistanceFalloff="false" sparks="false" camerashake="10" penetration="0.25">
                     <Affliction identifier="explosiondamage" strength="35"/>
-                    <Affliction identifier="burn" strength="30"/>
+                    <Affliction identifier="burn" strength="10"/>
                     <Affliction identifier="lacerations" strength="20"/>
                     <Affliction identifier="Touhou_Lost_Dream" strength="10"/>
                 </Explosion>
@@ -5580,7 +5574,7 @@
 
     <!--魔法之国的魔导书-->
     <Item name="魔法之国的魔导书" identifier="Touhou_Alice_Magic_Book" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging04" Scale="0.4"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging04" Scale="0.4"
           impactsoundtag="impact_metal_light">
         <Price baseprice="4000" minleveldifficulty="20">
             <Price storeidentifier="merchantoutpost" minavailable="1" sold="false"/>
@@ -5598,15 +5592,14 @@
             <RequiredSkill identifier="Touhou_Magic" level="100"/>
             <RequiredItem identifier="organicfiber" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="2"/>
-            <RequiredItem identifier="Tu_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="3"/>
             <RequiredItem identifier="Score_Point" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" displayname="Touhou_Recharge" requiredtime="3">
             <RequiredSkill identifier="weapons" level="40"/>
             <RequiredSkill identifier="Touhou_Magic" level="100"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Touhou_Alice_Magic_Book" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
         <InventoryIcon name="" texture="%ModDir%/Images/OtherWeapons/Touhou_Alice_Magic_Book.png" sourcerect="0,0,80,64" origin="0.5,0.5"/>
@@ -5845,6 +5838,7 @@
                 </StatusEffect>
             </Button>
         </CustomInterface>-->
+        <aitarget sightrange="1000" soundrange="2000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="FirepowerMultiplier" value="0.07"/>
         </Quality>
@@ -5999,7 +5993,7 @@
             <RequiredSkill identifier="weapons" level="70"/>
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
             <RequiredItem identifier="dementonite" amount="2"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="6"/>
             <RequiredItem identifier="bloodpackB" amount="6"/>
             <RequiredItem identifier="Power_Point" amount="6"/>
@@ -6124,7 +6118,7 @@
             <Attack targetimpulse="-10" targetforce="-10" penetration="0.25">
                 <Affliction identifier="stun" strength="0.2" probability="0.5"/>
                 <Affliction identifier="internaldamage" strength="3"/>
-                <Affliction identifier="burn" strength="6"/>
+                <Affliction identifier="burn" strength="5"/>
             </Attack>
             <StatusEffect type="OnUse" target="This" forceplaysounds="true">
                 <sound file="Content/Items/Weapons/WEAPONS_electricalDischarge1.ogg" range="500" selectionmode="random"/>
@@ -6143,7 +6137,7 @@
             <QualityStat stattype="strikingspeedmultiplier" value="0.05"/>
             <QualityStat stattype="StrikingPowerMultiplier" value="0.1"/>
         </Quality>
-        <aitarget sightrange="500" soundrange="250" fadeouttime="1"/>
+        <aitarget sightrange="1500" soundrange="1000" fadeouttime="1"/>
         <SkillRequirementHint identifier="Touhou_Magic" level="66"/>
     </Item>
 
@@ -6151,7 +6145,7 @@
     <!--阳光大炮-->
     <Item name="阳光大炮" identifier="Touhou_Sun_Cannon" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           HideConditionBar="true"
-          tags="mediumitem,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="1.0" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="1.0" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="armcab"/>
         <Price baseprice="8000" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -6168,7 +6162,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="weapons" level="60"/>
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="6"/>
             <RequiredItem identifier="incendium" amount="4"/>
             <RequiredItem identifier="Power_Point"/>
@@ -6287,8 +6281,7 @@
         </Deconstruct>
         <Fabricate suitablefabricators="fabricator" amount="8" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="uex" amount="2"/>
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Three_Fairies_Weapon.png" sourcerect="195,85,33,35" origin="0.5,0.5"/>
@@ -6307,7 +6300,7 @@
                 <sound file="Content/Items/Weapons/ExplosionDebris2.ogg" range="2000"/>
                 <Explosion range="300.0" ballastfloradamage="80" structuredamage="10" levelwalldamage="120" itemdamage="200" force="5.0"
                            severlimbsprobability="0.4" penetration="0.35">
-                    <Affliction identifier="burn" strength="60"/>
+                    <Affliction identifier="burn" strength="50"/>
                     <Affliction identifier="lacerations" strength="30"/>
                     <Affliction identifier="bleeding" strength="20"/>
                     <Affliction identifier="Touhou_Lost_Dream" strength="80"/>
@@ -6320,7 +6313,7 @@
 
     <!--环月轨道-->
     <Item name="环月轨道" identifier="Touhou_Lunar_Orbit_Gun" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_High" Scale="1.0" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_High" Scale="1.0" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="armcab"/>
         <Price baseprice="8000" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -6338,7 +6331,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="weapons" level="60"/>
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="6"/>
             <RequiredItem identifier="dementonite" amount="4"/>
             <RequiredItem identifier="Power_Point"/>
@@ -6404,7 +6397,7 @@
                 <Containable items="Touhou_Enhanced_Crystal" hide="false" itempos="30,0" setactive="true"/>
             </SubContainer>
         </ItemContainer>
-        <aitarget sightrange="2000" soundrange="4000" fadeouttime="5"/>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="FirepowerMultiplier" value="0.1"/>
             <QualityStat stattype="FiringRateMultiplier" value="0.0667"/>
@@ -6435,15 +6428,14 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem identifier="fulgurium"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem identifier="Magic_Material" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" displayname="recycleitem" requiredtime="5">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
-            <RequiredItem identifier="Yin_Alchemical"/>
-            <RequiredItem identifier="Shui_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem identifier="Touhou_Lunar_Orbit_Gun_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -6558,8 +6550,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="weapons" level="60"/>
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="2"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="6"/>
             <RequiredItem identifier="fulgurium" amount="2"/>
             <RequiredItem identifier="physicorium" amount="2"/>
@@ -6600,7 +6591,7 @@
             </StatusEffect>
 
             <Attack targetimpulse="6" severlimbsprobability="0.4" itemdamage="75" structuresoundtype="StructureSlash" penetration="0.2">
-                <Affliction identifier="lacerations" strength="18"/>
+                <Affliction identifier="lacerations" strength="15"/>
                 <Affliction identifier="Touhou_Freeze" strength="6"/>
                 <Affliction identifier="bleeding" strength="5"/>
                 <Affliction identifier="bleeding" strength="5" probability="0.5"/>
@@ -6701,7 +6692,7 @@
 
     <!--铁制飞刀-->
     <Item name="铁制飞刀" identifier="Touhou_Sakuya_Knife_Iron" category="Weapon" subcategory="Touhou" cargocontaineridentifier="metalcrate"
-          tags="smallitem,Touhou_Cam_Offset_Low,Touhou_Weapon_Level01,Touhou_Magic_Charging01" Scale="0.28" impactsoundtag="impact_metal_light"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Cam_Offset_Low,Touhou_Weapon_Level01,Touhou_Magic_Charging01" Scale="0.28" impactsoundtag="impact_metal_light"
           allowasextracargo="true">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.2"/>
@@ -6847,7 +6838,7 @@
 
     <!--以太飞刀-->
     <Item name="以太飞刀" identifier="Touhou_Sakuya_Knife_Ether" category="Weapon" subcategory="Touhou" cargocontaineridentifier="metalcrate"
-          tags="smallitem,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low,Touhou_Magic_Charging04" Scale="0.27" impactsoundtag="impact_metal_light"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low,Touhou_Magic_Charging04" Scale="0.27" impactsoundtag="impact_metal_light"
           allowasextracargo="true">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.08"/>
@@ -6875,7 +6866,7 @@
         <Fabricate suitablefabricators="Magic_Altar" displayname="recycleitem" requiredtime="4">
             <RequiredSkill identifier="weapons" level="50"/>
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
-            <RequiredItem identifier="Touhou_Plant_Extract" amount="4"/>
+            <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
             <RequiredItem identifier="steel" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
             <RequiredItem identifier="Touhou_Sakuya_Knife_Ether" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
@@ -6998,7 +6989,7 @@
 
     <!--吸血鬼之牙-->
     <Item name="吸血鬼之牙" identifier="Touhou_Vampire_Fang_Sword" subcategory="Touhou" category="Weapon"
-          Tags="smallitem,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal,Sakuya_Knife" cargocontaineridentifier="metalcrate" scale="0.16"
+          Tags="smallitem,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal,Sakuya_Knife" cargocontaineridentifier="metalcrate" scale="0.16"
           impactsoundtag="impact_metal_light" RequireAimToUse="True">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
         <Price baseprice="10000" sold="false">
@@ -7018,8 +7009,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
             <RequiredItem identifier="physicorium" amount="4"/>
             <RequiredItem identifier="dementonite" amount="2"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
-            <RequiredItem identifier="Shui_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Power_Point" amount="4"/>
         </Fabricate>
 
@@ -7066,7 +7056,7 @@
             </StatusEffect>
 
             <Attack targetimpulse="6" severlimbsprobability="0.4" itemdamage="80" structuresoundtype="StructureSlash" penetration="0.2">
-                <Affliction identifier="lacerations" strength="28"/>
+                <Affliction identifier="lacerations" strength="24"/>
                 <Affliction identifier="bleeding" strength="16"/>
                 <Affliction identifier="bleeding" strength="16" probability="0.7"/>
                 <Affliction identifier="Scarlet_Long_Night" strength="3"/>
@@ -7116,7 +7106,7 @@
 
     <!--梦幻月之刃-->
     <Item name="梦幻月之刃" identifier="Touhou_Dream_Luna_Sword" subcategory="Touhou" category="Weapon"
-          Tags="smallitem,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal,Sakuya_Knife" cargocontaineridentifier="metalcrate" scale="0.16"
+          Tags="smallitem,weapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal,Sakuya_Knife" cargocontaineridentifier="metalcrate" scale="0.16"
           impactsoundtag="impact_metal_light" RequireAimToUse="True">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
         <Price baseprice="16000" sold="false">
@@ -7136,7 +7126,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
             <RequiredItem identifier="physicorium" amount="3"/>
             <RequiredItem identifier="Touhou_Precious_Metal" amount="2"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="3"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="3"/>
             <RequiredItem identifier="Power_Point" amount="2"/>
         </Fabricate>
 
@@ -7183,7 +7173,7 @@
             </StatusEffect>
 
             <Attack targetimpulse="6" severlimbsprobability="0.4" itemdamage="16" structuresoundtype="StructureSlash" penetration="0.4">
-                <Affliction identifier="lacerations" strength="28"/>
+                <Affliction identifier="lacerations" strength="26"/>
                 <Affliction identifier="explosiondamage" strength="10"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="5" probability="0.5"/>
                 <Affliction identifier="stun" strength="0.2"/>
@@ -7230,7 +7220,7 @@
 
     <!--月神之钟-->
     <Item name="月神之钟" identifier="Touhou_Luna_Clock" subcategory="Touhou" category="Weapon"
-          tags="smallitem,Touhou_Luna_Clock,Touhou_Weapon_Level03" scale="0.12" cargocontaineridentifier="metalcrate" description="HONK">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Luna_Clock,Touhou_Weapon_Level03" scale="0.12" cargocontaineridentifier="metalcrate" >
         <PreferredContainer primary="crewcab" notcampaign="true"/>
         <Price baseprice="5000" sold="false">
             <Price storeidentifier="merchantoutpost"/>
@@ -7248,7 +7238,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="dementonite"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
-            <RequiredItem identifier="Touhou_Precision_Parts"/>
+            <RequiredItem identifier="Touhou_Precision_Parts" amount="2"/>
             <RequiredItem identifier="steel" amount="4"/>
             <RequiredItem identifier="Power_Point"/>
         </Fabricate>
@@ -7277,7 +7267,7 @@
                 <sound file="%ModDir%/Sounds/Weapons/Touhou_Luna_Clock_Sound.ogg" type="OnUse" volume="4.0" range="1500.0" loop="false"/>
             </StatusEffect>
         </RangedWeapon>
-        <aitarget soundrange="1" fadeouttime="5"/>
+        <aitarget soundrange="1500" fadeouttime="5"/>
     </Item>
 
 
@@ -7302,8 +7292,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
             <RequiredItem identifier="physicorium"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="3"/>
-            <RequiredItem identifier="Jin_Alchemical" amount="3"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="6"/>
             <RequiredItem identifier="Score_Point" amount="4"/>
         </Fabricate>
 
@@ -7409,8 +7398,8 @@
 
 
     <!--喇叭枪-->
-    <Item name="" identifier="Blunderbuss" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level02,Touhou_Cam_Offset_High" Scale="0.32" impactsoundtag="impact_metal_light">
+    <Item name="喇叭枪" identifier="Blunderbuss" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level02,Touhou_Cam_Offset_High" Scale="0.32" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" amount="1" spawnprobability="1" notcampaign="true"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.12"/>
         <PreferredContainer secondary="wreckweaponholder" amount="1" spawnprobability="0.05"/>
@@ -7520,7 +7509,7 @@
 
 
     <!--心灵震颤-->
-    <Item name="" identifier="Mind_Bullet" scale="0.32" subcategory="Touhou" category="Weapon" interactthroughwalls="true"
+    <Item name="心灵震颤" identifier="Mind_Bullet" scale="0.32" subcategory="Touhou" category="Weapon" interactthroughwalls="true"
           cargocontaineridentifier="metalcrate"
           tags="smallitem,Blunderbussround,Touhou_Magic_Danmu" impactsoundtag="impact_metal_light" maxstacksize="36">
         <PreferredContainer primary="Blunderbuss" amount="12" spawnprobability="1"/>
@@ -7580,7 +7569,7 @@
 
 
     <!--月狂之眼-->
-    <Item name="" identifier="Lunatic_Bullet" scale="0.32" subcategory="Touhou" category="Weapon" interactthroughwalls="true"
+    <Item name="月狂之眼" identifier="Lunatic_Bullet" scale="0.32" subcategory="Touhou" category="Weapon" interactthroughwalls="true"
           cargocontaineridentifier="metalcrate"
           tags="smallitem,Blunderbussround,Touhou_Magic_Danmu" impactsoundtag="impact_metal_light" maxstacksize="36">
         <PreferredContainer primary="Blunderbuss" amount="12" spawnprobability="1"/>
@@ -7710,7 +7699,7 @@
             <RequiredSkill identifier="weapons" level="80"/>
             <RequiredSkill identifier="Touhou_Magic" level="80"/>
             <RequiredItem tag="munition_propulsion" amount="3" defaultitem="phosphorus"/>
-            <RequiredItem identifier="Yin_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="4"/>
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Blunderbussround.png" sourcerect="135,34,107,72" origin="0.5,0.5"/>
@@ -7793,7 +7782,7 @@
 
     <!--月能步枪-->
     <Item name="月能步枪" identifier="Touhou_Lunar_Energy_Assault_Rifle" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallautoweapon,smallitem,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.4" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.4" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.05" minleveldifficulty="20"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.025"/>
         <PreferredContainer secondary="armcab,weaponholder"/>
@@ -7811,7 +7800,7 @@
             <RequiredItem identifier="Power_Point"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="6"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="2"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="6"/>
         </Fabricate>
         <Deconstruct time="5">
@@ -7934,7 +7923,7 @@
 
     <!--月能弹匣-->
     <Item name="月能弹匣" identifier="Touhou_Lunar_Energy_Magazine" maxstacksize="16" maxstacksizecharacterinventory="5" scale="0.2"
-          subcategory="Touhou" Health="140" category="Weapon" cargocontaineridentifier="metalcrate"
+          subcategory="Touhou" Health="120" category="Weapon" cargocontaineridentifier="metalcrate"
           tags="smallitem,Touhou_Lunar_Energy_Magazine,assaultriflemagazine,Touhou_Magic_Charging03" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="Touhou_Lunar_Energy_Assault_Rifle" amount="1" spawnprobability="1"/>
         <PreferredContainer primary="armcab" amount="1" spawnprobability="1" notcampaign="true"/>
@@ -7956,7 +7945,7 @@
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="titaniumaluminiumalloy"/>
-            <RequiredItem identifier="Yin_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="recycleitem">
             <RequiredSkill identifier="weapons" level="40"/>
@@ -8028,7 +8017,7 @@
 
     <!--水轮枪-->
     <Item name="水轮枪" identifier="Touhou_Waterwheel_Gun" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level01,Touhou_Cam_Offset_Low,Touhou_Waterwheel_Gun" Scale="0.1" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level01,Touhou_Cam_Offset_Low,Touhou_Waterwheel_Gun" Scale="0.1" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" amount="1" spawnprobability="0.1"/>
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.1"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.05"/>
@@ -8209,7 +8198,7 @@
             <RequiredSkill identifier="weapons" level="60"/>
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="4"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="3"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="3"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
             <RequiredItem identifier="physicorium"/>
             <RequiredItem identifier="Score_Point" amount="3"/>
@@ -8255,7 +8244,7 @@
             </StatusEffect>
 
             <Attack targetimpulse="6" severlimbsprobability="0.4" itemdamage="80" structuresoundtype="StructureSlash" penetration="0.2">
-                <Affliction identifier="blunttrauma" strength="35"/>
+                <Affliction identifier="blunttrauma" strength="32"/>
                 <Affliction identifier="internaldamage" strength="5"/>
                 <Affliction identifier="stun" strength="0.2"/>
                 <Affliction identifier="stun" strength="0.2" probability="0.5"/>
@@ -8319,7 +8308,7 @@
 
     <!--八云紫的折扇-->
     <Item name="八云紫的折扇" identifier="Touhou_Yukari_Folding_Fan" category="Weapon" subcategory="Touhou" cargocontaineridentifier="metalcrate"
-          tags="smallitem,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" Scale="0.5" impactsoundtag="impact_metal_light" allowasextracargo="true">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" Scale="0.5" impactsoundtag="impact_metal_light" allowasextracargo="true">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.02"/>
         <Price baseprice="3000">
@@ -8417,14 +8406,14 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Score_Point"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Magic_Material"/>
             <RequiredItem identifier="Touhou_Yukari_Folding_Fan_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -8490,7 +8479,7 @@
 
     <!--三妖精的三重大弩炮-->
     <Item name="三妖精的三重大弩炮" identifier="Three_Fairies_Triple_Heavy_Crossbows"
-          tags="mediumitem,weapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" category="Weapon" HideConditionBar="true"
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" category="Weapon" HideConditionBar="true"
           subcategory="Touhou" isshootable="true" Scale="0.8">
         <PreferredContainer primary="armcab" secondary="secarmcab"/>
         <Price baseprice="15000" sold="false">
@@ -8610,7 +8599,7 @@
             <RequiredSkill identifier="weapons" level="30"/>
             <RequiredSkill identifier="Touhou_Magic" level="30"/>
             <RequiredItem identifier="Gilead_Branch"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
         </Fabricate>
         <Sprite texture="%ModDir%/Images/OtherWeapons/Three_Fairies_Triple_Heavy_Crossbows_Ammo.png" sourcerect="0,0,112,48" depth="0.55"
@@ -8664,7 +8653,7 @@
             <RequiredSkill identifier="weapons" level="30"/>
             <RequiredSkill identifier="Touhou_Magic" level="30"/>
             <RequiredItem identifier="Gilead_Branch"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
         </Fabricate>
         <Sprite texture="%ModDir%/Images/OtherWeapons/Three_Fairies_Triple_Heavy_Crossbows_Ammo.png" sourcerect="0,48,112,48" depth="0.55"
@@ -8722,8 +8711,7 @@
             <RequiredSkill identifier="weapons" level="30"/>
             <RequiredSkill identifier="Touhou_Magic" level="30"/>
             <RequiredItem identifier="Gilead_Branch"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
-            <RequiredItem identifier="Yin_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
         </Fabricate>
         <Sprite texture="%ModDir%/Images/OtherWeapons/Three_Fairies_Triple_Heavy_Crossbows_Ammo.png" sourcerect="0,96,112,48" depth="0.55"
@@ -8766,7 +8754,7 @@
 
     <!--水晶手枪-->
     <Item name="水晶手枪" identifier="Touhou_Crystal_Pistol" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level02,Touhou_Cam_Offset_Low" Scale="1.0" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level02,Touhou_Cam_Offset_Low" Scale="1.0" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" amount="1" spawnprobability="0.06"/>
         <PreferredContainer secondary="outpostsecarmcab" amount="1" spawnprobability="0.05"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.05"/>
@@ -8781,7 +8769,7 @@
         </Price>
         <Fabricate suitablefabricators="fabricator" requiredtime="15">
             <RequiredSkill identifier="weapons" level="55"/>
-            <RequiredItem identifier="Shui_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
             <RequiredItem identifier="Magic_Material" amount="4"/>
@@ -8904,16 +8892,16 @@
             <RequiredSkill identifier="weapons" level="40"/>
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem identifier="Touhou_Base_Metal"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="4"/>
             <RequiredItem tag="munition_core" defaultitem="copper"/>
         </Fabricate>
         <Fabricate suitablefabricators="fabricator" requiredtime="5" displayname="recycleitem">
-            <RequiredSkill identifier="weapons" level="40"/>
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
-            <RequiredItem identifier="Touhou_Crystal_Pistol_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
+            <RequiredSkill identifier="weapons" level="20"/>
+            <RequiredSkill identifier="Touhou_Magic" level="30"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem tag="munition_core" defaultitem="copper"/>
+            <RequiredItem identifier="Touhou_Crystal_Pistol_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
         <Deconstruct time="6">
             <Item identifier="Touhou_Plant_Extract" amount="4"/>
@@ -9041,7 +9029,7 @@
                 <Affliction identifier="Touhou_Magic_Attack_Multiply_Effect03" strength="100"/>
             </StatusEffect>
 
-            <Attack targetimpulse="6" severlimbsprobability="0.4" itemdamage="85" structuresoundtype="StructureSlash" penetration="0.2">
+            <Attack targetimpulse="6" severlimbsprobability="0.4" itemdamage="85" structuresoundtype="StructureSlash" penetration="0.15">
                 <Affliction identifier="burn" strength="7"/>
                 <Affliction identifier="blunttrauma" strength="7"/>
                 <Affliction identifier="lacerations" strength="7"/>
@@ -9137,7 +9125,7 @@
         <Body width="170" height="10" density="10" gravityscale="0" waterdragcoefficient="1"/>
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false"/>
         <Projectile characterusable="false" hitscan="false" launchimpulse="5" removeonhit="true" damagedoors="true" friendlyfire="false">
-            <Attack penetration="0.1" severlimbsprobability="0.5">
+            <Attack severlimbsprobability="0.5">
                 <Affliction identifier="burn" strength="0.7"/>
                 <Affliction identifier="blunttrauma" strength="0.7"/>
                 <Affliction identifier="lacerations" strength="0.7"/>
@@ -9285,7 +9273,7 @@
 
     <!--枫叶转轮手枪-->
     <Item name="枫叶转轮手枪" identifier="Touhou_Maple_Leaf_Revolver" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" Scale="0.75" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" Scale="0.75" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" amount="1" spawnprobability="0.03"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.05"/>
         <PreferredContainer secondary="armcab,weaponholder"/>
@@ -9299,7 +9287,7 @@
         </Price>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="15">
             <RequiredSkill identifier="weapons" level="55"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem identifier="fulgurium"/>
@@ -9424,7 +9412,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" amount="18">
             <RequiredSkill identifier="weapons" level="20"/>
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_core" amount="2" defaultitem="copper"/>
             <Item identifier="Touhou_Plant_Extract"/>
         </Fabricate>
@@ -9457,7 +9445,7 @@
 
     <!--皇家钻戒-->
     <Item name="皇家钻戒" identifier="Touhou_Royal_Diamond_Ring" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_High" Scale="0.5" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_High" Scale="0.5" impactsoundtag="impact_metal_light">
         <Price baseprice="49000" minleveldifficulty="35" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1"/>
             <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="1"/>
@@ -9472,8 +9460,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="120"/>
             <RequiredItem identifier="Seven_Elements_Alchemical"/>
             <RequiredItem identifier="Touhou_Precious_Metal" amount="6"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="6"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="6"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="6"/>
             <RequiredItem identifier="Power_Point" amount="2"/>
         </Fabricate>
         <InventoryIcon name="" texture="%ModDir%/Images/OtherWeapons/Touhou_Royal_Diamond_Ring.png" sourcerect="65,0,79,96" origin="0.5,0.5"/>
@@ -9559,7 +9546,7 @@
     </Item>
 
     <!--皇家钻戒燃料-->
-    <Item name="" identifier="Touhou_Royal_Diamond_Ring_Ammo" scale="0.25" subcategory="Touhou" category="Weapon"
+    <Item name="皇家钻戒燃料" identifier="Touhou_Royal_Diamond_Ring_Ammo" scale="0.25" subcategory="Touhou" category="Weapon"
           cargocontaineridentifier="metalcrate"
           Health="180" tags="smallitem,Touhou_Magic_Charging06" impactsoundtag="impact_metal_light">
         <Deconstruct time="6">
@@ -9591,7 +9578,7 @@
     </Item>
 
     <!--皇家钻戒射线-->
-    <Item name="" identifier="Touhou_Royal_Diamond_Ring_Light" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.5" sonarsize="1.5"
+    <Item name="皇家钻戒射线" identifier="Touhou_Royal_Diamond_Ring_Light" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.5" sonarsize="1.5"
           hideinmenus="true">
         <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55"/>
         <Body width="170" height="10" density="10"/>
@@ -9600,9 +9587,9 @@
             <ParticleEmitter particle="tracerpulselaser" particleamount="1" scalemultiplier="1,5" colormultiplier="255,50,50,255"/>
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" scalemultiplier="1,1" colormultiplier="20,20,180,255"/>
             <Attack structuredamage="5" targetforce="2" targetimpulse="2" itemdamage="50" severlimbsprobability="0.5" penetration="0.35">
-                <Affliction identifier="burn" strength="10"/>
-                <Affliction identifier="explosiondamage" strength="10"/>
-                <Affliction identifier="lacerations" strength="45"/>
+                <Affliction identifier="burn" strength="5"/>
+                <Affliction identifier="explosiondamage" strength="5"/>
+                <Affliction identifier="lacerations" strength="40"/>
                 <Affliction identifier="Touhou_Silent_Selene_Dream" strength="2.5"/>
                 <Affliction identifier="Touhou_Royal_Flare_Burn" strength="2.5"/>
                 <Affliction identifier="stun" strength="0.5" probability="0.5"/>
@@ -9625,7 +9612,7 @@
                            camerashake="60" camerashakerange="1000" underwaterbubble="false" flashcolor="255,200,70,255">
                     <Affliction identifier="burn" strength="5"/>
                     <Affliction identifier="explosiondamage" strength="10"/>
-                    <Affliction identifier="lacerations" strength="20"/>
+                    <Affliction identifier="lacerations" strength="10"/>
                 </Explosion>
             </StatusEffect>
             <StatusEffect type="OnImpact" target="UseTarget">
@@ -9642,7 +9629,7 @@
 
     <!--蔷薇魔杖-->
     <Item name="蔷薇魔杖" identifier="Touhou_Rose_Wand" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_High" Scale="1.0" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_High" Scale="1.0" impactsoundtag="impact_metal_light">
         <Price baseprice="29000" minleveldifficulty="35" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1"/>
             <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="1"/>
@@ -9657,7 +9644,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="80"/>
             <RequiredItem identifier="Seven_Elements_Alchemical_Fake"/>
             <RequiredItem identifier="Touhou_Precious_Metal" amount="2"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="3"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="3"/>
             <RequiredItem identifier="Power_Point" amount="2"/>
         </Fabricate>
         <InventoryIcon name="" texture="%ModDir%/Images/OtherWeapons/Touhou_Rose_Wand.png" sourcerect="44,0,45,63" origin="0.5,0.5"/>
@@ -9757,14 +9744,14 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="30">
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
             <RequiredSkill identifier="weapons" level="70"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Magic_Material"/>
             <RequiredItem identifier="Score_Point" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="Touhou_Recharge">
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredSkill identifier="weapons" level="60"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Magic_Material"/>
             <RequiredItem identifier="Score_Point" amount="2"/>
             <RequiredItem identifier="Touhou_Rose_Wand_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
@@ -9879,7 +9866,7 @@
     </Item>
 
     <!--海底蔷薇之刺-->
-    <Item name="" identifier="Touhou_Rose_Wand_Stick_Needling" category="Weapon" tags="Touhou_Rose_Wand_Bullet,Touhou_Magic_Danmu" scale="0.5"
+    <Item name="海底蔷薇之刺" identifier="Touhou_Rose_Wand_Stick_Needling" category="Weapon" tags="Touhou_Rose_Wand_Bullet,Touhou_Magic_Danmu" scale="0.5"
           sonarsize="1.5" hideinmenus="true">
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Rose_Wand.png" sourcerect="0,130,218,30" depth="0.25" origin="0.5,0.5"/>
         <Body width="170" height="10" density="10" gravityscale="0.1"/>
@@ -9930,7 +9917,7 @@
 
     <!--梅莉的电话-->
     <Item name="梅莉的电话" identifier="Touhou_Merry_MobilePhone" subcategory="Touhou" category="Weapon"
-          tags="smallitem,Touhou_Merry_MobilePhone,Touhou_Weapon_Level03" scale="0.3" cargocontaineridentifier="metalcrate" description="HONK">
+          tags="smallitem,ProvocativeToHumanAI,Touhou_Merry_MobilePhone,Touhou_Weapon_Level03" scale="0.3" cargocontaineridentifier="metalcrate" description="HONK">
         <PreferredContainer primary="crewcab" notcampaign="true"/>
         <Price baseprice="2200">
             <Price storeidentifier="merchantoutpost" sold="false"/>
@@ -9970,12 +9957,12 @@
                 <sound file="%ModDir%/Sounds/Weapons/Touhou_Merry_MobilePhone_Sound.ogg" type="OnUse" range="500.0" loop="false"/>
             </StatusEffect>
         </RangedWeapon>
-        <aitarget soundrange="1" fadeouttime="5"/>
+        <aitarget soundrange="500" fadeouttime="5"/>
     </Item>
 
     <!--花粉喷枪-->
     <Item name="花粉喷枪" identifier="Touhou_Pellen_Gun" category="Weapon" subcategory="Touhou"
-          Tags="smallitem,weapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal"
+          Tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal"
           cargocontaineridentifier="metalcrate" description="" Scale="0.24" impactsoundtag="impact_metal_light">
         <Price baseprice="20000" sold="false">
             <Price storeidentifier="merchantoutpost" maxavailable="3"/>
@@ -9993,7 +9980,7 @@
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="15">
             <RequiredSkill identifier="mechanical" level="30"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="6"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="6"/>
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="fpgacircuit" amount="4"/>
             <RequiredItem identifier="Touhou_Precious_Metal"/>
@@ -10025,8 +10012,8 @@
             <ParticleEmitterHitStructure particle="MistSmoke" particlespersecond="20" anglemin="-10" anglemax="10" velocitymin="0" velocitymax="50"/>
             <sound file="Content/Items/Weapons/FlameThrowerLoop.ogg" type="OnUse" range="1000.0" loop="true"/>
             <StatusEffect type="OnUse" target="Limb" Interval="0.1" disabledeltatime="true">
-                <Affliction identifier="burn" amount="1.5" penetration="0.15"/>
-                <Affliction identifier="acidburn" amount="3"/>
+                <Affliction identifier="burn" amount="1.0" penetration="0.15"/>
+                <Affliction identifier="acidburn" amount="2"/>
                 <Affliction identifier="lacerations" strength="17" penetration="0.15"/>
                 <Affliction identifier="explosiondamage" strength="2"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="2" probability="0.3"/>
@@ -10052,7 +10039,7 @@
                 <Containable items="flashlight,Touhou_Enhanced_Crystal" hide="true" itempos="15,-5" setactive="true"/>
             </SubContainer>
         </ItemContainer>
-        <aitarget sightrange="2000" soundrange="500" fadeouttime="3"/>
+        <aitarget sightrange="3000" soundrange="1500" fadeouttime="3"/>
         <Quality>
             <QualityStat stattype="firingratemultiplier" value="0.05"/>
             <QualityStat stattype="firepowermultiplier" value="0.05"/>
@@ -10079,7 +10066,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem tag="Sun_Flower_Petal" amount="6"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="fpgacircuit" amount="4"/>
             <RequiredItem identifier="Score_Point"/>
@@ -10140,7 +10127,7 @@
     <!--未知X-->
     <Item name="未知X" identifier="Touhou_Unknown_X" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,weapon,bulkyweapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_High" Scale="0.25" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,weapon,bulkyweapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_High" Scale="0.25" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="8000">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -10277,10 +10264,10 @@
                 </Containable>
             </SubContainer>
         </ItemContainer>
-        <aitarget sightrange="1000" soundrange="3000" fadeouttime="5"/>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="Condition" value="0.1"/>
-            <QualityStat stattype="firepowermultiplier" value="0.12"/>
+            <QualityStat stattype="firepowermultiplier" value="0.1"/>
         </Quality>
         <SkillRequirementHint identifier="Touhou_Magic" level="95"/>
     </Item>
@@ -10380,14 +10367,14 @@
     <!--熄焰-->
     <Item name="熄焰" identifier="Touhou_Minus_K" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,weapon,bulkyweapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_High" Scale="0.32" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,weapon,bulkyweapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_High" Scale="0.32" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="10000">
-            <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
-            <Price storeidentifier="merchantcity" multiplier="1.25"/>
-            <Price storeidentifier="merchantresearch" multiplier="1.25"/>
+            <Price storeidentifier="merchantoutpost" multiplier="1.3"/>
+            <Price storeidentifier="merchantcity" multiplier="1.15"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.15"/>
             <Price storeidentifier="merchantmilitary" multiplier="0.9" minavailable="1" maxavailable="2" sold="true"/>
-            <Price storeidentifier="merchantmine" multiplier="1.25"/>
+            <Price storeidentifier="merchantmine" multiplier="1.15"/>
         </Price>
         <Deconstruct time="5">
             <Item identifier="titaniumaluminiumalloy" amount="2"/>
@@ -10525,14 +10512,14 @@
             <RequiredItem tag="advmunition_core" amount="1"/>
             <RequiredItem identifier="flashpowder" amount="2"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="6"/>
-            <RequiredItem identifier="Shui_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem tag="advmunition_core" amount="1"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
-            <RequiredItem identifier="Shui_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="flashpowder"/>
             <RequiredItem identifier="Touhou_Minus_K_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -10606,7 +10593,7 @@
     <!--静滞彗星-->
     <Item name="静滞彗星" identifier="Touhou_Stagnant_Comet" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.15" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.15" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="8000">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -10709,7 +10696,7 @@
                 <Containable items="flashlight,Touhou_Enhanced_Crystal" hide="false" itempos="18,-1" setactive="true"/>
             </SubContainer>
         </ItemContainer>
-        <aitarget sightrange="1000" soundrange="3000" fadeouttime="5"/>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="firepowermultiplier" value="0.08"/>
             <QualityStat stattype="FiringRateMultiplier" value="0.04"/>
@@ -10739,14 +10726,14 @@
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="6"/>
-            <RequiredItem identifier="Shui_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="Touhou_Plant_Extract"/>
-            <RequiredItem identifier="Shui_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="Touhou_Stagnant_Comet_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -10803,7 +10790,7 @@
     <!--嬗变-->
     <Item name="嬗变" identifier="Touhou_Metamorphosis" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.28" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.28" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="10000">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -10819,8 +10806,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
             <RequiredSkill identifier="Touhou_Magic" level="80"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="2"/>
-            <RequiredItem identifier="Tu_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="3"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
             <RequiredItem identifier="Power_Point" amount="2"/>
         </Fabricate>
@@ -10886,7 +10872,7 @@
             </SubContainer>
             <ContainedStateIndicator texture="%ModDir%/Images/UI/Touhou_Magic_ContainerIndicators.png" sourcerect="0,0,120,32"/>
         </ItemContainer>
-        <aitarget sightrange="1000" soundrange="3000" fadeouttime="5"/>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="Condition" value="0.1"/>
             <QualityStat stattype="firepowermultiplier" value="0.05"/>
@@ -10971,7 +10957,7 @@
     <!--羽翊-->
     <Item name="羽翊" identifier="Touhou_Feather_Wings" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,bulkyweapon,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.26" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,bulkyweapon,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.26" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="16000">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -10987,7 +10973,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
             <RequiredSkill identifier="Touhou_Magic" level="80"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="2"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="6"/>
             <RequiredItem identifier="Power_Point" amount="4"/>
         </Fabricate>
@@ -11110,14 +11096,14 @@
             <RequiredItem tag="advmunition_core" amount="3"/>
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="6"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem tag="advmunition_core" amount="3"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="Touhou_Feather_Wings_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -11154,7 +11140,7 @@
                 <Affliction identifier="stun" strength="0.15" probability="0.2"/>
             </Attack>
             <StatusEffect type="OnImpact" target="Limb">
-                <Affliction identifier="lacerations" strength="12"/>
+                <Affliction identifier="lacerations" strength="10"/>
             </StatusEffect>
             <StatusEffect type="OnImpact" target="UseTarget" multiplyafflictionsbymaxvitality="true">
                 <Affliction identifier="Touhou_Lost_Dream" strength="2.0" probability="0.5"/>
@@ -11185,7 +11171,7 @@
     <!--叶片棘刺-->
     <Item name="叶片棘刺" identifier="Touhou_Leaves_Thorns" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,weapon,bulkyweapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,weapon,bulkyweapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="20000" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -11203,8 +11189,7 @@
             <RequiredSkill identifier="weapons" level="80"/>
             <RequiredItem identifier="Gilead_Branch" amount="4"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="2"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Touhou_Precious_Metal" amount="2"/>
             <RequiredItem identifier="Power_Point"/>
         </Fabricate>
@@ -11309,8 +11294,7 @@
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="potassium"/>
             <RequiredItem identifier="chlorine" amount="2"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
@@ -11319,7 +11303,7 @@
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="potassium"/>
             <RequiredItem identifier="chlorine" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="Touhou_Leaves_Thorns_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -11348,7 +11332,7 @@
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.2"
                              colormultiplier="100,100,205,255"/>
             <Attack itemdamage="50" levelwalldamage="20" targetimpulse="3" penetration="0.3" severlimbsprobability="0.4">
-                <Affliction identifier="lacerations" strength="55"/>
+                <Affliction identifier="lacerations" strength="40"/>
                 <Affliction identifier="lacerations" strength="20" probability="0.3"/>
                 <Affliction identifier="slow" strength="50"/>
                 <Affliction identifier="bleeding" strength="20"/>
@@ -11436,7 +11420,7 @@
 
     <!--月战型冷却飞刀-->
     <Item name="月战型冷却飞刀" identifier="Touhou_Sakuya_Knife_Lunatic" category="Weapon" subcategory="Touhou" cargocontaineridentifier="metalcrate"
-          tags="smallitem,Touhou_Weapon_Level04,Touhou_Cam_Offset_Low" Scale="0.2" impactsoundtag="impact_metal_light" allowasextracargo="true">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Low" Scale="0.2" impactsoundtag="impact_metal_light" allowasextracargo="true">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
         <Price baseprice="10000">
             <Price storeidentifier="merchantoutpost" sold="false" multiplier="1.4"/>
@@ -11553,8 +11537,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem identifier="lithium" amount="2"/>
-            <RequiredItem identifier="Yin_Alchemical"/>
-            <RequiredItem identifier="Jin_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="alienpowercell" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
@@ -11562,8 +11545,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="lithium" amount="2"/>
-            <RequiredItem identifier="Yin_Alchemical"/>
-            <RequiredItem identifier="Jin_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="Touhou_Sakuya_Knife_Lunatic_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -11601,7 +11583,7 @@
             <StatusEffect type="OnImpact" target="Limb">
                 <Affliction identifier="explosiondamage" strength="1"/>
                 <Affliction identifier="burn" strength="1"/>
-                <Affliction identifier="lacerations" strength="2"/>
+                <Affliction identifier="lacerations" strength="1"/>
                 <Affliction identifier="slow" strength="10"/>
             </StatusEffect>
             <StatusEffect type="OnImpact" target="UseTarget" multiplyafflictionsbymaxvitality="true">
@@ -11625,7 +11607,7 @@
 
     <!--紧闭之瞳-->
     <Item name="紧闭之瞳" identifier="Touhou_Closed_Third_Eye" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallitem,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.2" impactsoundtag="impact_metal_light">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.2" impactsoundtag="impact_metal_light">
         <Price baseprice="9000" minleveldifficulty="25">
             <Price storeidentifier="merchantoutpost" minavailable="1" sold="false"/>
             <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="1"/>
@@ -11639,7 +11621,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="80"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="6"/>
-            <RequiredItem identifier="Tu_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Power_Point" amount="2"/>
         </Fabricate>
         <InventoryIcon name="" texture="%ModDir%/Images/OtherWeapons/Touhou_Closed_Third_Eye.png" sourcerect="0,0,140,140" origin="0.5,0.5"/>
@@ -11738,12 +11720,12 @@
             <RequiredSkill identifier="Touhou_Magic" level="100"/>
             <RequiredItem identifier="dementonite"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
-            <RequiredItem identifier="Tu_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="Touhou_Recharge">
             <RequiredSkill identifier="weapons" level="65"/>
             <RequiredItem tag="munition_propulsion" amount="5" defaultitem="phosphorus"/>
-            <RequiredItem identifier="Tu_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Touhou_Closed_Third_Eye_Ammo01" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
         <InventoryIcon name="" texture="%ModDir%/Images/OtherWeapons/Touhou_Closed_Third_Eye.png" sourcerect="143,0,42,49" origin="0.5,0.5"/>
@@ -11772,8 +11754,8 @@
             <ParticleEmitter particle="tracerpulselaser" particleamount="1" scalemultiplier="1,1" colormultiplier="255,50,255,255"/>
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" scalemultiplier="1,0.5" colormultiplier="255,20,255,255"/>
             <Attack structuredamage="5" targetforce="2" targetimpulse="2" itemdamage="50" severlimbsprobability="0.5" penetration="0.25">
-                <Affliction identifier="lacerations" strength="50"/>
-                <Affliction identifier="bleeding" strength="50"/>
+                <Affliction identifier="lacerations" strength="40"/>
+                <Affliction identifier="bleeding" strength="40"/>
                 <Affliction identifier="stun" strength="0.25" probability="0.1"/>
                 <Affliction identifier="slow" strength="15"/>
             </Attack>
@@ -11864,7 +11846,7 @@
     <!--渴望鲜血的阴阳玉-->
     <Item name="渴望鲜血的阴阳玉" identifier="Touhou_Onmyo_Ball" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,weapon,bulkyweapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging05" Scale="0.4"
+          tags="mediumitem,weapon,bulkyweapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal,Touhou_Magic_Charging05" Scale="0.4"
           impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="15000" sold="false">
@@ -11965,7 +11947,7 @@
             <QualityStat stattype="ExplosionRadius" value="0.05"/>
             <QualityStat stattype="ExplosionDamage" value="0.05"/>
         </Quality>
-        <aitarget sightrange="1000" soundrange="3000" fadeouttime="5"/>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
         <SkillRequirementHint identifier="Touhou_Magic" level="95"/>
     </Item>
 
@@ -12001,8 +11983,8 @@
             <Attack itemdamage="40" levelwalldamage="20" targetimpulse="2" penetration="0.4" severlimbsprobability="1.0">
                 <Affliction identifier="lacerations" strength="25"/>
                 <Affliction identifier="blunttrauma" strength="25"/>
-                <Affliction identifier="explosiondamage" strength="10"/>
-                <Affliction identifier="explosiondamage" strength="10" probability="0.3"/>
+                <Affliction identifier="explosiondamage" strength="5"/>
+                <Affliction identifier="explosiondamage" strength="5" probability="0.3"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="5"/>
                 <Affliction identifier="stun" strength="0.1"/>
                 <Affliction identifier="stun" strength="0.2" probability="0.3"/>
@@ -12047,7 +12029,7 @@
     <!--疾风电磁枪-->
     <Item name="疾风电磁枪" identifier="Touhou_Cyclone_Electromagnetic_Gun" subcategory="Touhou" category="Weapon"
           cargocontaineridentifier="metalcrate" allowasextracargo="true"
-          tags="mediumitem,weapon,bulkyweapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,weapon,bulkyweapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="10000" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -12064,8 +12046,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="80"/>
             <RequiredSkill identifier="weapons" level="80"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="6"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="4"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="6"/>
             <RequiredItem identifier="Touhou_Precious_Metal"/>
             <RequiredItem identifier="Power_Point" amount="2"/>
         </Fabricate>
@@ -12176,16 +12157,15 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="steel" amount="3"/>
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
-            <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
+            <RequiredItem tag="munition_propulsion" amount="4" defaultitem="phosphorus"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="steel" amount="3"/>
             <RequiredItem identifier="Touhou_Cyclone_Electromagnetic_Gun_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -12214,7 +12194,7 @@
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.1"
                              colormultiplier="255,255,255,255"/>
             <Attack itemdamage="25" levelwalldamage="20" targetimpulse="3" penetration="0.25" severlimbsprobability="0.4">
-                <Affliction identifier="lacerations" strength="32"/>
+                <Affliction identifier="lacerations" strength="30"/>
                 <Affliction identifier="lacerations" strength="6" probability="0.3"/>
                 <Affliction identifier="slow" strength="10"/>
                 <Affliction identifier="bleeding" strength="10"/>
@@ -12251,7 +12231,7 @@
     <!--破坏者-->
     <Item name="破坏者" identifier="Touhou_Flandre_Destroyer" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,weapon,bulkyweapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal,Flandre_Weapons" Scale="0.3" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,weapon,bulkyweapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal,Flandre_Weapons" Scale="0.3" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="10000" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -12268,7 +12248,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="80"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="4"/>
             <RequiredItem identifier="incendium" amount="2"/>
-            <RequiredItem identifier="Huo_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="6"/>
             <RequiredItem identifier="Power_Point" amount="2"/>
         </Fabricate>
@@ -12349,7 +12329,7 @@
                 </Containable>
             </SubContainer>
         </ItemContainer>
-        <aitarget sightrange="1000" soundrange="3000" fadeouttime="5"/>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
         <Quality>
             <QualityStat stattype="firepowermultiplier" value="0.05"/>
         </Quality>
@@ -12377,7 +12357,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="compoundn"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
@@ -12385,7 +12365,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="compoundn"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="Touhou_Flandre_Destroyer_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -12521,7 +12501,7 @@
     <!--夜晚之舞-->
     <Item name="夜晚之舞" identifier="Touhou_Night_Dance" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,bulkyweapon,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" Scale="0.35" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,bulkyweapon,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" Scale="0.35" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="7500">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -12536,7 +12516,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20" outcondition="0.05">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="Touhou_Simple_Parts"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
             <RequiredItem identifier="Score_Point" amount="4"/>
         </Fabricate>
@@ -12733,7 +12713,7 @@
     <!--太阳花之祝福-->
     <Item name="太阳花之祝福" identifier="Touhou_Blessings_Sunflowers" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,bulkyweapon,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,bulkyweapon,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="10000">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -12750,7 +12730,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
             <RequiredItem identifier="physicorium"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem tag="Sun_Flower_Petal" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
             <RequiredItem identifier="Power_Point" amount="2"/>
@@ -12902,7 +12882,6 @@
                     sticktoitems="true" sticktostructures="true" sticktodeflective="true" sticktodoors="false" sticktolighttargets="true">
             <Attack itemdamage="50" levelwalldamage="20" targetimpulse="3" penetration="0.35" severlimbsprobability="0.2">
                 <Affliction identifier="lacerations" strength="50"/>
-                <Affliction identifier="burn" strength="5"/>
                 <Affliction identifier="explosiondamage" strength="5"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="5"/>
                 <Affliction identifier="bleeding" strength="20"/>
@@ -13011,8 +12990,8 @@
                              colormultiplier="220,200,80,255"/>
             <Attack itemdamage="40" levelwalldamage="20" targetimpulse="3" penetration="0.15" severlimbsprobability="0.5">
                 <Affliction identifier="lacerations" strength="40"/>
-                <Affliction identifier="burn" strength="5"/>
-                <Affliction identifier="explosiondamage" strength="5"/>
+                <Affliction identifier="burn" strength="2"/>
+                <Affliction identifier="explosiondamage" strength="3"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="4"/>
                 <Affliction identifier="bleeding" strength="20"/>
                 <Affliction identifier="bleeding" strength="10" probability="0.2"/>
@@ -13042,7 +13021,7 @@
 
     <!--能乐表演扇-->
     <Item name="能乐表演扇" identifier="Touhou_Noh_Performance_Fan" category="Weapon" subcategory="Touhou" cargocontaineridentifier="metalcrate"
-          tags="smallitem,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_light" allowasextracargo="true">
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_light" allowasextracargo="true">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.02"/>
         <Price baseprice="4000">
@@ -13060,7 +13039,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="8">
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem identifier="organicfiber" amount="6"/>
-            <RequiredItem identifier="Huo_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
             <RequiredItem identifier="Score_Point" amount="4"/>
         </Fabricate>
@@ -13179,14 +13158,14 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="4"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Score_Point"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Magic_Material"/>
             <RequiredItem identifier="Touhou_Noh_Performance_Fan_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -13271,11 +13250,8 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="weapons" level="70"/>
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
-            <RequiredItem identifier="physicorium" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="2"/>
-            <RequiredItem identifier="Huo_Alchemical" amount="2"/>
-            <RequiredItem identifier="Jin_Alchemical" amount="2"/>
-            <RequiredItem identifier="Shui_Alchemical" amount="2"/>
+            <RequiredItem identifier="physicorium" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Power_Point" amount="3"/>
         </Fabricate>
         <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Dark_Noh_Doll_Dagger.png" sourcerect="0,68,136,120" origin="0.5,0.5"/>
@@ -13319,9 +13295,9 @@
 
             <Attack targetimpulse="6" severlimbsprobability="0.8" itemdamage="80" structuresoundtype="StructureSlash" penetration="0.25">
                 <Affliction identifier="lacerations" strength="25"/>
-                <Affliction identifier="burn" strength="5"/>
+                <Affliction identifier="burn" strength="2"/>
                 <Affliction identifier="Touhou_Freeze" strength="5"/>
-                <Affliction identifier="explosiondamage" strength="5"/>
+                <Affliction identifier="explosiondamage" strength="3"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="10"/>
                 <Affliction identifier="bleeding" strength="15" probability="0.5"/>
                 <Affliction identifier="stun" strength="0.1"/>
@@ -13362,7 +13338,7 @@
     <!--河童狙击炮-->
     <Item name="河童狙击炮" identifier="Touhou_Kappa_Sniper_Cannon" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,weapon,bulkyweapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_High" Scale="0.27" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,weapon,bulkyweapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_High" Scale="0.27" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="10000" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -13379,8 +13355,7 @@
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredSkill identifier="mechanical" level="70"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="4"/>
-            <RequiredItem identifier="Shui_Alchemical" amount="4"/>
-            <RequiredItem identifier="Huo_Alchemical" amount="4"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
             <RequiredItem identifier="Power_Point" amount="2"/>
         </Fabricate>
@@ -13413,7 +13388,7 @@
             <!--狙击射击-->
             <Button text="uilabel.Sniper_Shooting">
                 <StatusEffect type="OnUse" target="This" Tags="High_Pressure_Shooting" reload="1.4" spread="1" unskilledspread="8"
-                              weapondamagemodifier="2.7"
+                              weapondamagemodifier="2.0"
                               penetration="0.15" setvalue="true" disabledeltatime="true"/>
             </Button>
             <!--常态射击-->
@@ -13424,7 +13399,7 @@
             </Button>
         </CustomInterface>
         <RangedWeapon reload="1.4" holdtrigger="true" barrelpos="180,0" spread="8" unskilledspread="16" combatPriority="80" penetration="0.15"
-                      weapondamagemodifier="2.7" drawhudwhenequipped="true" crosshairscale="0.25">
+                      weapondamagemodifier="2.0" drawhudwhenequipped="true" crosshairscale="0.25">
             <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256"/>
             <CrosshairPointer texture="%ModDir%/Images/OtherWeapons/Touhou_Magic_Crosshair02.png" sourcerect="0,0,160,160"/>
             <ParticleEmitter particle="FlareBubbles" scalemin="0.4" scalemax="0.8" particleamount="10" anglemin="0" anglemax="360" velocitymin="0"
@@ -13439,10 +13414,6 @@
             </StatusEffect>
             <StatusEffect type="OnUse" target="Contained">
                 <RequiredItems items="Touhou_Kappa_Sniper_Cannon_Ammo" type="Contained" msg="ItemMsgAmmoRequired"/>
-                <Use/>
-            </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained">
-                <Conditional HasTag="eq High_Pressure_Shooting" TargetContainer="true"/>
                 <Use/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="Contained">
@@ -13503,15 +13474,15 @@
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="copper"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="Touhou_Recharge">
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="30"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="copper"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="Touhou_Kappa_Sniper_Cannon_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -13569,7 +13540,7 @@
 
     <!--半灵低语-->
     <Item name="半灵低语" identifier="Touhou_Whisper_Half_Phantom" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="smallautoweapon,smallitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low" Scale="0.2"
+          tags="smallautoweapon,smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low" Scale="0.2"
           impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.04"/>
@@ -13688,12 +13659,12 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="7.5">
             <RequiredSkill identifier="weapons" level="40"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
-            <RequiredItem identifier="Jin_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_core" amount="4" defaultitem="copper"/>
             <RequiredItem identifier="steel" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="recycleitem">
-            <RequiredSkill identifier="weapons" level="40"/>
+            <RequiredSkill identifier="weapons" level="20"/>
             <RequiredItem identifier="Magic_Material"/>
             <RequiredItem tag="munition_core" amount="3" defaultitem="copper"/>
             <RequiredItem tag="Touhou_Whisper_Half_Phantom_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
@@ -13772,14 +13743,14 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="7.5">
             <RequiredSkill identifier="weapons" level="40"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
-            <RequiredItem identifier="Shui_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_core" amount="1" defaultitem="copper"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="steel" amount="2"/>
             <RequiredItem identifier="plastic" amount="3"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="recycleitem">
-            <RequiredSkill identifier="weapons" level="40"/>
+            <RequiredSkill identifier="weapons" level="20"/>
             <RequiredItem identifier="Magic_Material"/>
             <RequiredItem tag="munition_core" amount="1" defaultitem="copper"/>
             <RequiredItem tag="munition_propulsion" amount="1" defaultitem="phosphorus"/>
@@ -13926,7 +13897,7 @@
 
     <!--白狼特遣突击步枪-->
     <Item name="白狼特遣突击步枪" identifier="Touhou_Tengu_Special_Task_Assault_Rifle" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,Touhou_Tengu_Special_Task_Assault_Rifle,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" Scale="0.28"
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Tengu_Special_Task_Assault_Rifle,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" Scale="0.28"
           impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab"/>
         <Price baseprice="30000" sold="false">
@@ -13943,7 +13914,7 @@
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="2"/>
             <RequiredItem identifier="physicorium" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Power_Point" amount="2"/>
             <RequiredItem identifier="Touhou_Precious_Metal" amount="2"/>
         </Fabricate>
@@ -14032,7 +14003,7 @@
         </ItemContainer>
         <aitarget sightrange="1000" soundrange="1000" fadeouttime="1"/>
         <Quality>
-            <QualityStat stattype="FirepowerMultiplier" value="0.0334"/>
+            <QualityStat stattype="FirepowerMultiplier" value="0.08"/>
         </Quality>
         <SkillRequirementHint identifier="weapons" level="80"/>
         <SkillRequirementHint identifier="Touhou_Magic" level="60"/>
@@ -14057,7 +14028,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="7.5">
             <RequiredSkill identifier="weapons" level="40"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
-            <RequiredItem identifier="Jin_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_core" amount="2" defaultitem="copper"/>
             <RequiredItem tag="munition_propulsion" amount="3" defaultitem="phosphorus"/>
             <RequiredItem identifier="steel" amount="2"/>
@@ -14096,7 +14067,7 @@
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.1"
                              colormultiplier="255,255,255,255"/>
             <Attack targetforce="2" itemdamage="10" severlimbsprobability="0.6" penetration="0.35">
-                <Affliction identifier="lacerations" strength="20"/>
+                <Affliction identifier="lacerations" strength="18"/>
                 <Affliction identifier="lacerations" strength="2" probability="0.5"/>
                 <Affliction identifier="gunshotwound" strength="2"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="2" probability="0.35"/>
@@ -14138,7 +14109,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="7.5">
             <RequiredSkill identifier="weapons" level="40"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
-            <RequiredItem identifier="Jin_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_core" amount="3" defaultitem="copper"/>
             <RequiredItem identifier="steel" amount="4"/>
         </Fabricate>
@@ -14177,7 +14148,7 @@
                              colormultiplier="255,255,255,255"/>
             <Attack targetforce="2" itemdamage="10" severlimbsprobability="0.75" penetration="0.1">
                 <Affliction identifier="lacerations" strength="11"/>
-                <Affliction identifier="burn" strength="4"/>
+                <Affliction identifier="burn" strength="2"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="4" probability="0.35"/>
                 <Affliction identifier="stun" strength="0.1" probability="0.1"/>
             </Attack>
@@ -14210,7 +14181,7 @@
 
     <!--狛焰-->
     <Item name="狛焰" identifier="Touhou_Komainu_Blaze"
-          tags="mediumitem,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" category="Weapon"
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" category="Weapon"
           subcategory="Touhou" isshootable="true" Scale="0.25">
         <Price baseprice="9400" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -14304,7 +14275,7 @@
     </Item>
 
     <!--狮子之火-->
-    <Item name="" identifier="Touhou_Komainu_Blaze_Ammo" scale="0.32" subcategory="Touhou" category="Weapon" interactthroughwalls="true" Health="80"
+    <Item name="狮子之火" identifier="Touhou_Komainu_Blaze_Ammo" scale="0.32" subcategory="Touhou" category="Weapon" interactthroughwalls="true" Health="80"
           cargocontaineridentifier="metalcrate" tags="smallitem,Touhou_Magic_Charging04" impactsoundtag="impact_metal_light" maxstacksize="16"
           maxstacksizecharacterinventory="3">
         <Deconstruct time="2">
@@ -14313,13 +14284,12 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="Score_Point"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="Touhou_Recharge">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="Magic_Material"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Touhou_Komainu_Blaze_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Komainu_Blaze.png" sourcerect="0,141,44,100" origin="0.5,0.5"/>
@@ -14337,7 +14307,7 @@
     </Item>
 
     <!--狮子之火射弹-->
-    <Item name="" identifier="Touhou_Komainu_Blaze_Bolt" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.5" sonarsize="0.75" hideinmenus="true">
+    <Item name="狮子之火射弹" identifier="Touhou_Komainu_Blaze_Bolt" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.5" sonarsize="0.75" hideinmenus="true">
         <Sprite texture="%ModDir%/Images/OtherWeapons/Kanameishi.png" sourcerect="96,0,1,1" depth="0.45"/>
         <Body width="28" height="36" density="10" gravityscale="0" waterdragcoefficient="1"/>
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false"/>
@@ -14381,7 +14351,7 @@
 
     <!--幻胧月睨-->
     <Item name="幻胧月睨" identifier="Touhou_Lunar_Phantasm" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate" allowasextracargo="true"
-          tags="mediumitem,weapon,gun,bulkyweapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" Scale="0.23" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,weapon,gun,bulkyweapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" Scale="0.23" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="39000" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -14564,7 +14534,7 @@
             <RequiredItem identifier="flashpowder"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="3"/>
             <RequiredItem identifier="ballisticfiber" amount="6"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="3"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="3"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" displayname="recycleitem">
@@ -14604,13 +14574,12 @@
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.25"
                              colormultiplier="255,10,255,220"/>
             <Attack itemdamage="100" levelwalldamage="120" targetforce="5" targetimpulse="5" penetration="0.3" severlimbsprobability="0.75">
-                <Affliction identifier="gunshotwound" strength="80"/>
-                <Affliction identifier="burn" strength="10"/>
+                <Affliction identifier="gunshotwound" strength="60"/>
+                <Affliction identifier="burn" strength="5"/>
                 <Affliction identifier="stun" strength="1.0"/>
                 <Affliction identifier="stun" strength="0.4" probability="0.6"/>
                 <Affliction identifier="stun" strength="0.6" probability="0.4"/>
                 <StatusEffect type="OnUse" target="Limb" targetLimbs="Head">
-                    <Affliction identifier="acidburn" strength="20" penetration="0.35"/>
                     <Affliction identifier="stun" strength="0.5"/>
                 </StatusEffect>
             </Attack>
@@ -14680,7 +14649,7 @@
 
     <!--祈风之腕-->
     <Item name="祈风之腕" identifier="Touhou_Prayer_Wind_Bracer" category="Weapon" subcategory="Touhou" cargocontaineridentifier="metalcrate"
-          tags="smallitem,Touhou_Cam_Offset_Low,Touhou_Weapon_Level03" Scale="0.1" impactsoundtag="impact_metal_light"
+          tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Cam_Offset_Low,Touhou_Weapon_Level03" Scale="0.1" impactsoundtag="impact_metal_light"
           allowasextracargo="true">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.05"/>
@@ -14808,7 +14777,7 @@
 
 
     <!--祈风核心-->
-    <Item name="" identifier="Touhou_Prayer_Wind_Bracer_Ammo" scale="0.32" subcategory="Touhou" category="Weapon" interactthroughwalls="true"
+    <Item name="祈风核心" identifier="Touhou_Prayer_Wind_Bracer_Ammo" scale="0.32" subcategory="Touhou" category="Weapon" interactthroughwalls="true"
           cargocontaineridentifier="metalcrate" tags="smallitem,Touhou_Magic_Charging03" impactsoundtag="impact_metal_light" maxstacksize="16"
           maxstacksizecharacterinventory="6" Health="140">
         <Deconstruct time="2">
@@ -14817,13 +14786,12 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="Touhou_Recharge">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="Touhou_Plant_Extract"/>
-            <RequiredItem identifier="Mu_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Touhou_Prayer_Wind_Bracer_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Prayer_Wind_Bracer.png" sourcerect="400,202,158,100" origin="0.5,0.5"/>
@@ -14841,7 +14809,7 @@
     </Item>
 
     <!--祈风核心射弹-->
-    <Item name="" identifier="Touhou_Prayer_Wind_Bracer_Bullet" category="Weapon" tags="Touhou_Magic_Danmu" scale="1.5" sonarsize="0.75" hideinmenus="true">
+    <Item name="祈风核心射弹" identifier="Touhou_Prayer_Wind_Bracer_Bullet" category="Weapon" tags="Touhou_Magic_Danmu" scale="1.5" sonarsize="0.75" hideinmenus="true">
         <Sprite texture="%ModDir%/Images/OtherWeapons/Kanameishi.png" sourcerect="96,0,1,1" depth="0.45"/>
         <Body width="28" height="36" density="10" gravityscale="0" waterdragcoefficient="1"/>
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false"/>
@@ -14878,7 +14846,7 @@
     <!--元素符文炮-->
     <Item name="元素符文炮" identifier="Touhou_Arcane_Rune_Cannon" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           allowasextracargo="true"
-          tags="mediumitem,bulkyweapon,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.16" impactsoundtag="impact_metal_heavy">
+          tags="mediumitem,bulkyweapon,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.16" impactsoundtag="impact_metal_heavy">
         <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
         <Price baseprice="14000">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -14960,7 +14928,7 @@
             <RequiredItems items="Touhou_Arcane_Rune_Cannon_Ammo" type="Contained"/>
             <RequiredSkill identifier="Touhou_Magic" level="80"/>
         </RangedWeapon>
-        <RangedWeapon reload="0.75" holdtrigger="true" barrelpos="200,40" spread="7" unskilledspread="14" combatPriority="80"
+        <RangedWeapon reload="0.85" holdtrigger="true" barrelpos="200,40" spread="7" unskilledspread="14" combatPriority="80"
                       drawhudwhenequipped="true" crosshairscale="0.25">
             <StatusEffect type="OnUse" target="Contained">
                 <RequiredItems items="Touhou_Arcane_Rune_Cannon_Ammo" type="Contained" msg="ItemMsgAmmoRequired"/>
@@ -14969,7 +14937,7 @@
             <RequiredItems items="Touhou_Arcane_Rune_Cannon_Ammo" type="Contained" msg="ItemMsgAmmoRequired"/>
             <RequiredSkill identifier="Touhou_Magic" level="80"/>
         </RangedWeapon>
-        <RangedWeapon reload="0.75" holdtrigger="true" barrelpos="200,-40" spread="7" unskilledspread="14" combatPriority="80"
+        <RangedWeapon reload="0.85" holdtrigger="true" barrelpos="200,-40" spread="7" unskilledspread="14" combatPriority="80"
                       drawhudwhenequipped="true" crosshairscale="0.25">
             <Crosshair texture="%ModDir%/Images/OtherWeapons/Touhou_Magic_Crosshair03.png" sourcerect="0,0,128,128"/>
             <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256"/>
@@ -15016,15 +14984,12 @@
             <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Touhou_Enhanced_Crystal01.png" sourcerect="0,0,68,100" origin="0.5,0.5"/>
         </ItemContainer>
         <aitarget sightrange="1000" soundrange="3000" fadeouttime="5"/>
-        <Quality>
-            <QualityStat stattype="firepowermultiplier" value="0.07"/>
-        </Quality>
         <SkillRequirementHint identifier="Touhou_Magic" level="80"/>
     </Item>
 
     <!--元素符文核心-->
     <Item name="元素符文核心" identifier="Touhou_Arcane_Rune_Cannon_Ammo" scale="0.16" subcategory="Touhou" category="Weapon" maxstacksize="16"
-          maxstacksizecharacterinventory="3" cargocontaineridentifier="metalcrate" tags="smallitem,Touhou_Magic_Charging04"
+          maxstacksizecharacterinventory="2" cargocontaineridentifier="metalcrate" tags="smallitem,Touhou_Magic_Charging04"
           Health="120" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="400" sold="false">
@@ -15044,15 +15009,13 @@
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="2"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
-            <RequiredItem identifier="Yin_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
-            <RequiredItem identifier="Yang_Alchemical"/>
-            <RequiredItem identifier="Yin_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="Touhou_Arcane_Rune_Cannon_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -15353,7 +15316,7 @@
 
     <!--花瓣暴风-->
     <Item name="花瓣暴风" identifier="Touhou_Petal_Tempest" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low" Scale="0.25" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Low" Scale="0.25" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="3800" maxavailable="1" sold="false">
             <Price storeidentifier="merchantoutpost" maxavailable="3"/>
@@ -15577,7 +15540,7 @@
 
     <!--花讯使者-->
     <Item name="花讯使者" identifier="Touhou_Bloom_Herald" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" Scale="0.25" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal" Scale="0.25" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="13800" maxavailable="1" sold="false">
             <Price storeidentifier="merchantoutpost" maxavailable="3"/>
@@ -15741,12 +15704,12 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" requiresrecipe="true">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="plastic" amount="2"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Magic_Material" amount="6"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" displayname="recycleitem" requiresrecipe="true">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
-            <RequiredItem identifier="Mu_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="plastic"/>
             <RequiredItem identifier="Magic_Material" amount="4"/>
             <RequiredItem identifier="Touhou_Bloom_Herald_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
@@ -15795,7 +15758,7 @@
 
     <!--星条狂焰炮-->
     <Item name="星条狂焰炮" identifier="Touhou_Stars_Stripes_Anarchy_Cannon" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.25" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.25" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="10000" maxavailable="1" sold="true">
             <Price storeidentifier="merchantoutpost" maxavailable="3"/>
@@ -15919,13 +15882,13 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="plastic" amount="2"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="magnesium"/>
             <RequiredItem identifier="Magic_Material" amount="3"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="plastic"/>
             <RequiredItem identifier="magnesium"/>
             <RequiredItem identifier="Magic_Material" amount="2"/>
@@ -15957,7 +15920,7 @@
                              colormultiplier="255,100,0,255"/>
             <Attack itemdamage="50" levelwalldamage="20" targetimpulse="2" penetration="0.2" severlimbsprobability="0.4">
                 <Affliction identifier="lacerations" strength="20"/>
-                <Affliction identifier="blunttrauma" strength="15"/>
+                <Affliction identifier="blunttrauma" strength="10"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="5"/>
                 <Affliction identifier="psychosis" strength="5"/>
                 <Affliction identifier="psychosis" strength="5" probability="0.5"/>
@@ -15974,7 +15937,6 @@
                            severlimbsprobability="0.4" penetration="0.2">
                     <Affliction identifier="burn" strength="5"/>
                     <Affliction identifier="lacerations" strength="35"/>
-                    <Affliction identifier="explosiondamage" strength="5"/>
                     <Affliction identifier="bleeding" strength="10"/>
                     <Affliction identifier="Sleepless_Nightmare" strength="20"/>
                 </Explosion>
@@ -15997,7 +15959,7 @@
 
     <!--结界裂隙炮-->
     <Item name="结界裂隙炮" identifier="Touhou_Boundary_Rift_Cannon" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,Touhou_Weapon_Level02,Touhou_Cam_Offset_Normal" Scale="0.15" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level02,Touhou_Cam_Offset_Normal" Scale="0.15" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="1000" maxavailable="1" sold="true">
             <Price storeidentifier="merchantoutpost" maxavailable="3"/>
@@ -16222,7 +16184,7 @@
     <!--未知现象发射器-->
     <Item name="未知现象发射器" identifier="Touhou_Unidentified_Phenomena_Emitter" subcategory="Touhou" category="Weapon"
           cargocontaineridentifier="metalcrate"
-          tags="mediumitem,bulkyweapon,weapon,Touhou_Unidentified_Phenomena_Emitter,Touhou_Weapon_Level05,Touhou_Cam_Offset_High"
+          tags="mediumitem,bulkyweapon,weapon,ProvocativeToHumanAI,Touhou_Unidentified_Phenomena_Emitter,Touhou_Weapon_Level05,Touhou_Cam_Offset_High"
           Scale="0.25" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="30000" maxavailable="1" sold="true" minleveldifficulty="16">
@@ -16349,7 +16311,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="plastic" amount="2"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_propulsion" defaultitem="phosphorus" amount="3"/>
             <RequiredItem identifier="Magic_Material" amount="3"/>
         </Fabricate>
@@ -16386,10 +16348,10 @@
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.15"
                              colormultiplier="150,10,150,255"/>
             <Attack itemdamage="10" levelwalldamage="20" targetimpulse="2" penetration="0.25" severlimbsprobability="0.4">
-                <Affliction identifier="lacerations" strength="25"/>
+                <Affliction identifier="lacerations" strength="23"/>
                 <Affliction identifier="blunttrauma" strength="5"/>
-                <Affliction identifier="explosiondamage" strength="3"/>
-                <Affliction identifier="burn" strength="3"/>
+                <Affliction identifier="explosiondamage" strength="2"/>
+                <Affliction identifier="burn" strength="2"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="5"/>
                 <Affliction identifier="stun" strength="0.1" probability="0.1"/>
                 <StatusEffect type="OnUse" target="Limb" targetLimbs="Head">
@@ -16418,7 +16380,7 @@
 
     <!--情绪共振枪-->
     <Item name="情绪共振枪" identifier="Touhou_Maskwheel_Resonator_Rifle" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,bulkyweapon,weapon,Touhou_Maskwheel_Resonator_Rifle,Touhou_Weapon_Level04,Touhou_Cam_Offset_High"
+          tags="mediumitem,bulkyweapon,weapon,ProvocativeToHumanAI,Touhou_Maskwheel_Resonator_Rifle,Touhou_Weapon_Level04,Touhou_Cam_Offset_High"
           Scale="0.3" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="16000" maxavailable="1" sold="true">
@@ -16473,7 +16435,7 @@
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.45" setvalue="true"/>
         </Holdable>
 
-        <RangedWeapon reload="1.0" holdtrigger="true" barrelpos="200,5" spread="2" unskilledspread="8"
+        <RangedWeapon reload="1.2" holdtrigger="true" barrelpos="200,5" spread="2" unskilledspread="8"
                       combatPriority="80" drawhudwhenequipped="true" crosshairscale="0.2">
             <Crosshair texture="%ModDir%/Images/OtherWeapons/Touhou_Magic_Crosshair04.png" sourcerect="0,0,512,512"/>
             <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256"/>
@@ -16586,7 +16548,7 @@
             <Attack itemdamage="20" levelwalldamage="20" targetimpulse="2" penetration="0.3" severlimbsprobability="0.5">
                 <Affliction identifier="lacerations" strength="45"/>
                 <Affliction identifier="blunttrauma" strength="10"/>
-                <Affliction identifier="explosiondamage" strength="3"/>
+                <Affliction identifier="explosiondamage" strength="2"/>
                 <Affliction identifier="burn" strength="2"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="5"/>
                 <Affliction identifier="stun" strength="0.1" probability="0.1"/>
@@ -16617,7 +16579,7 @@
     <!--潮汐超导电磁枪-->
     <Item name="潮汐超导电磁枪" identifier="Touhou_Superconducting_Electromagnetic_Gun" subcategory="Touhou" category="Weapon"
           cargocontaineridentifier="metalcrate"
-          tags="mediumitem,bulkyweapon,Touhou_Superconducting_Electromagnetic_Gun,weapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal"
+          tags="mediumitem,bulkyweapon,ProvocativeToHumanAI,Touhou_Superconducting_Electromagnetic_Gun,weapon,Touhou_Weapon_Level05,Touhou_Cam_Offset_Normal"
           Scale="0.3" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="15000" maxavailable="1" sold="false">
@@ -16803,8 +16765,8 @@
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.1"
                              colormultiplier="130,130,255,255"/>
             <Attack itemdamage="10" levelwalldamage="20" targetimpulse="2" penetration="0.3" severlimbsprobability="0.4">
-                <Affliction identifier="lacerations" strength="27"/>
-                <Affliction identifier="explosiondamage" strength="3"/>
+                <Affliction identifier="lacerations" strength="26"/>
+                <Affliction identifier="explosiondamage" strength="2"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="2"/>
                 <Affliction identifier="stun" strength="0.1" probability="0.1"/>
                 <StatusEffect type="OnUse" target="Limb" targetLimbs="Head">
@@ -16872,7 +16834,7 @@
 
     <!--结界净化者-->
     <Item name="结界净化者" identifier="Touhou_Boundary_Purifier" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.25" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.25" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="10000" maxavailable="1" sold="false">
             <Price storeidentifier="merchantoutpost" maxavailable="3"/>
@@ -17069,7 +17031,7 @@
             <RequiredSkill identifier="weapons" level="50"/>
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
             <RequiredItem identifier="steel" amount="2"/>
-            <RequiredItem identifier="Yang_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="3"/>
             <RequiredItem identifier="Power_Point" amount="3"/>
         </Fabricate>
@@ -17106,7 +17068,7 @@
                 <Affliction identifier="Touhou_Magic_Attack_Multiply_Effect02" strength="100"/>
             </StatusEffect>
             <Attack targetimpulse="6" severlimbsprobability="0.8" itemdamage="80" structuresoundtype="StructureSlash" penetration="0.25">
-                <Affliction identifier="lacerations" strength="35"/>
+                <Affliction identifier="lacerations" strength="31"/>
                 <Affliction identifier="burn" strength="2"/>
                 <Affliction identifier="explosiondamage" strength="2"/>
                 <Affliction identifier="slow" strength="5"/>
@@ -17160,7 +17122,7 @@
 
     <!--狂月磷火-->
     <Item name="狂月磷火" identifier="Touhou_Lunacy_Phosphor_Torch" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="7500" maxavailable="1" sold="true">
             <Price storeidentifier="merchantoutpost" maxavailable="3"/>
@@ -17284,7 +17246,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="plastic" amount="2"/>
-            <RequiredItem identifier="Huo_Alchemical"/>
+            <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_propulsion" defaultitem="phosphorus"/>
             <RequiredItem tag="munition_core" amount="3" defaultitem="copper"/>
             <RequiredItem identifier="Magic_Material" amount="3"/>
@@ -17344,7 +17306,7 @@
 
     <!--日耀穿梭枪-->
     <Item name="日耀穿梭枪" identifier="Touhou_Sun_Dart_Phase_Gun" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,bulkyweapon,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_High"
+          tags="mediumitem,bulkyweapon,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_High"
           Scale="0.3" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="7000" maxavailable="1" sold="true">
@@ -17580,7 +17542,7 @@
             <RequiredSkill identifier="weapons" level="20"/>
             <RequiredSkill identifier="Touhou_Magic" level="50"/>
             <RequiredItem identifier="steel" amount="2"/>
-            <RequiredItem identifier="Yin_Alchemical" amount="2"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
             <RequiredItem identifier="Score_Point" amount="2"/>
         </Fabricate>
@@ -17669,7 +17631,7 @@
 
     <!--星夜分光炮-->
     <Item name="星夜分光炮" identifier="Touhou_Astrolite_Split_Caster" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,bulkyweapon,weapon,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal"
+          tags="mediumitem,bulkyweapon,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal"
           Scale="0.3" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="7000" maxavailable="1" sold="true">
@@ -17713,7 +17675,7 @@
                 <Conditional skillrequirement="true" Touhou_Magic="gte 100"/>
                 <Affliction identifier="Touhou_Magic_Attack_Multiply_Effect02" strength="100"/>
             </StatusEffect>
-            <StatusEffect type="OnContained" target="This" Condition="1" Interval="0.5" disabledeltatime="true">
+            <StatusEffect type="OnContained" target="This" Condition="0.9" Interval="0.5" disabledeltatime="true">
                 <Conditional condition="gte 0"/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="This" weapondamagemodifier="1.1" penetration="0.05" spread="4" setvalue="true" comparison="And" disabledeltatime="true">
@@ -17743,7 +17705,7 @@
                 <Explosion range="200.0" force="0.8" shockwave="false" smoke="false" flash="false" sparks="false" flames="false"
                            underwaterbubble="false" camerashake="28.0"/>
             </StatusEffect>
-            <StatusEffect type="OnUse" target="This" Condition="-0.8" disabledeltatime="true">
+            <StatusEffect type="OnUse" target="This" Condition="-0.9" disabledeltatime="true">
                 <Conditional condition="gt 2"/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="Contained">
@@ -17865,7 +17827,7 @@
     <!--潮汐墨线轨道炮-->
     <Item name="潮汐墨线轨道炮" identifier="Touhou_TidalInk_Rail_Caster" subcategory="Touhou" category="Weapon"
           cargocontaineridentifier="metalcrate"
-          tags="mediumitem,bulkyweapon,weapon,Touhou_TidalInk_Rail_Caster,Touhou_Weapon_Level05,Touhou_Cam_Offset_High"
+          tags="mediumitem,bulkyweapon,weapon,ProvocativeToHumanAI,Touhou_TidalInk_Rail_Caster,Touhou_Weapon_Level05,Touhou_Cam_Offset_High"
           Scale="0.3" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="armcab"/>
         <Price baseprice="15000" maxavailable="1" sold="true" minleveldifficulty="24">
@@ -17910,7 +17872,7 @@
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.4" setvalue="true"/>
         </Holdable>
 
-        <RangedWeapon reload="1.0" holdtrigger="true" barrelpos="180,24" spread="2" unskilledspread="16"
+        <RangedWeapon reload="1.2" holdtrigger="true" barrelpos="180,24" spread="2" unskilledspread="16"
                       maxchargetime="0.3" combatPriority="80" drawhudwhenequipped="true" crosshairscale="0.3">
             <Crosshair texture="%ModDir%/Images/OtherWeapons/Touhou_Magic_Crosshair07.png" sourcerect="0,0,512,512"/>
             <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256"/>
@@ -17936,7 +17898,7 @@
             <StatusEffect type="OnUse" target="Contained" targetslot="0">
                 <Use/>
             </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-1.0" disabledeltatime="true">
+            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-15.0" disabledeltatime="true">
                 <RequiredItem items="Touhou_Book" type="Contained"/>
             </StatusEffect>
             <RequiredItems items="Touhou_TidalInk_Rail_Caster_Ammo" type="Contained" msg="ItemMsgAmmoRequired"/>
@@ -18038,16 +18000,16 @@
     </Item>
 
     <!--潮汐墨线轨道炮射弹-->
-    <Item name="潮汐墨线轨道炮射弹" identifier="Touhou_TidalInk_Rail_Caster_Bullet" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.3"
+        <Item name="潮汐墨线轨道炮射弹" identifier="Touhou_TidalInk_Rail_Caster_Bullet" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.3"
           sonarsize="0.3" hideinmenus="true">
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Lightsmithing.png" sourcerect="185,145,1,1" depth="0.56" origin="0.5,0.5"/>
         <Body width="170" height="10" density="10" gravityscale="0.2" waterdragcoefficient="0.1"/>
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false"/>
         <Projectile characterusable="false" hitscan="true" removeonhit="true" maxtargetstohit="2" damagedoors="true">
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.3" colormultiplier="100,130,255,255"/>
-            <Attack itemdamage="75" levelwalldamage="20" targetimpulse="2" penetration="0.35" severlimbsprobability="0.4">
-                <Affliction identifier="lacerations" strength="120"/>
-                <Affliction identifier="explosiondamage" strength="15"/>
+            <Attack itemdamage="75" levelwalldamage="20" targetimpulse="2" penetration="0.3" severlimbsprobability="0.4">
+                <Affliction identifier="lacerations" strength="80"/>
+                <Affliction identifier="explosiondamage" strength="10"/>
                 <Affliction identifier="Sleepless_Nightmare" strength="3"/>
                 <Affliction identifier="stun" strength="0.2" probability="0.2"/>
                 <StatusEffect type="OnUse" target="Limb" targetLimbs="Head">

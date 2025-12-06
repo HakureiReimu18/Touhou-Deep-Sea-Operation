@@ -266,7 +266,7 @@
                              excludeditems="backpack,crate,toolbelt,tsm_ammobox,toolbox,Touhou_Magic_Charging_Box,bulkyweapon"/>
             </SubContainer>
             <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true">
-                <Containable items="smallitem,mediumitem" excludeditems="backpack,crate,toolbelt,tsm_ammobox"/>
+                <Containable items="smallitem,mediumitem,Touhou_Magic_Charging_Box" excludeditems="backpack,crate,toolbelt,tsm_ammobox"/>
             </SubContainer>
         </ItemContainer>
 
@@ -662,7 +662,7 @@
                 <Containable items="smallitem,mediumitem,Touhou_Magic_Charging_Box" excludeditems="backpack,crate,toolbelt,bigitem,bulkyweapon"/>
             </SubContainer>
             <SubContainer capacity="2" depth="0.5" maxstacksize="64" displaycontainedstatus="true" ExtraStackSize="2">
-                <Containable items="smallitem,mediumitem,bulkyweapon,Touhou_Magic_Charging_Box" excludeditems="backpack,crate,toolbelt,bigitem"/>
+                <Containable items="smallitem,mediumitem,bulkyweapon,Touhou_Magic_Charging_Box" excludeditems="backpack,crate,toolbelt,bigitem,toolbox"/>
             </SubContainer>
         </ItemContainer>
 
@@ -953,7 +953,7 @@
 
     <!--河童工具枪-->
     <Item name="河童工具枪" identifier="Touhou_Kappa_Welding_Tool" category="Equipment" subcategory="Touhou"
-          Tags="smallitem,weldingequipment,tool,Welding_Mode_Parent,Laser_Mode_Parent,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal"
+          Tags="smallitem,weldingequipment,tool,ProvocativeToHumanAI,Welding_Mode_Parent,Laser_Mode_Parent,Touhou_Weapon_Level03,Touhou_Cam_Offset_Normal"
           cargocontaineridentifier="metalcrate" description="" Scale="0.75" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="wreckstoragecab,abandonedstoragecab,piratestoragecab" amount="1" spawnprobability="0.04"/>
         <PreferredContainer primary="wreckengcab,abandonedengcab,pirateengcab,outpostengcab" amount="1" spawnprobability="0.04"/>
@@ -1440,13 +1440,11 @@
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.5"
                              colormultiplier="255,100,100,220"/>
             <Attack itemdamage="110" targetforce="2" targetimpulse="6" penetration="0.1" severlimbsprobability="0.4">
-                <Affliction identifier="lacerations" strength="5"/>
+                <Affliction identifier="lacerations" strength="10"/>
                 <Affliction identifier="burn" strength="10"/>
-                <Affliction identifier="gunshotwound" strength="5"/>
                 <Affliction identifier="Touhou_Weakness" strength="0.7"/>
                 <Affliction identifier="stun" strength="0.1" probability="0.6"/>
                 <Affliction identifier="stun" strength="0.1" probability="0.4"/>
-                <Affliction identifier="stun" strength="0.1" probability="0.2"/>
             </Attack>
             <StatusEffect type="OnImpact" target="UseTarget">
                 <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350"
@@ -1455,7 +1453,7 @@
             </StatusEffect>
             <StatusEffect type="OnImpact" target="limb">
                 <Conditional speciesgroup="neq human"/>
-                <Affliction identifier="burn" strength="20"/>
+                <Affliction identifier="burn" strength="10"/>
             </StatusEffect>
             <StatusEffect type="OnImpact" target="UseTarget">
                 <Conditional entitytype="eq Structure"/>
@@ -3096,9 +3094,8 @@
             <Price storeidentifier="Merchant_Kawasiro_Nitori" multiplier="0.6"/>
         </Price>
         <Deconstruct time="10">
-            <Item identifier="fulgurium" amount="4"/>
-            <Item identifier="incendium" amount="2"/>
-            <Item identifier="Power_Point"/>
+            <Item identifier="fulgurium" amount="2"/>
+            <Item identifier="incendium" />
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
             <RequiredSkill identifier="Touhou_Magic" level="70"/>
@@ -4713,8 +4710,8 @@
         </Price>
         <Deconstruct time="1"/>
         <PreferredContainer primary="crewcab" secondary="locker"/>
-        <InventoryIcon Texture="%ModDir%/Images/Materials/Touhou_Corrupted_Weapon_Unlocked_Book.png" sourcerect="0,0,68,88" origin="0.5,0.5"/>
-        <Sprite Texture="%ModDir%/Images/Materials/Touhou_Corrupted_Weapon_Unlocked_Book.png" depth="0.5" sourcerect="0,0,68,88"/>
+        <InventoryIcon Texture="%ModDir%/Images/Tools/Touhou_Corrupted_Weapon_Unlocked_Book.png" sourcerect="0,0,68,88" origin="0.5,0.5"/>
+        <Sprite Texture="%ModDir%/Images/Tools/Touhou_Corrupted_Weapon_Unlocked_Book.png" depth="0.5" sourcerect="0,0,68,88"/>
         <Body width="40" height="50" density="10"/>
         <Holdable slots="Any,RightHand,LeftHand" aimable="false" aimpos="40,-20" aimangle="-20" holdangle="30" handle1="-10,0"
                   msg="ItemMsgPickUpSelect">
@@ -4729,7 +4726,7 @@
 
     <!--盗火者密辛-->
     <Item name="盗火者密辛" identifier="Touhou_Special_Weapon_Unlocked_Book01" category="Misc" hideinmenus="true" Tags="smallitem" maxstacksize="32"
-          cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft" spritecolor="100,100,255,255">
+          cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft" >
         <Price baseprice="100" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
             <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
@@ -4739,8 +4736,8 @@
         </Price>
         <Deconstruct time="1"/>
         <PreferredContainer primary="crewcab" secondary="locker"/>
-        <InventoryIcon Texture="%ModDir%/Images/Materials/Touhou_Corrupted_Weapon_Unlocked_Book.png" sourcerect="0,0,68,88" origin="0.5,0.5"/>
-        <Sprite Texture="%ModDir%/Images/Materials/Touhou_Corrupted_Weapon_Unlocked_Book.png" depth="0.5" sourcerect="0,0,68,88"/>
+        <InventoryIcon Texture="%ModDir%/Images/Tools/Touhou_Special_Weapon_Unlocked_Book01.png" sourcerect="0,0,68,88" origin="0.5,0.5"/>
+        <Sprite Texture="%ModDir%/Images/Tools/Touhou_Special_Weapon_Unlocked_Book01.png" depth="0.5" sourcerect="0,0,68,88"/>
         <Body width="40" height="50" density="10"/>
         <Holdable slots="Any,RightHand,LeftHand" aimable="false" aimpos="40,-20" aimangle="-20" holdangle="30" handle1="-10,0"
                   msg="ItemMsgPickUpSelect">
@@ -4748,6 +4745,32 @@
             <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true">
                 <Conditional Condition="lte 0"/>
                 <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Prometheus_Weapon_Unlocked_Talent"/>
+                <RemoveItem/>
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
+    <!--联盟隐秘密辛-->
+    <Item name="联盟隐秘密辛" identifier="Touhou_Special_Weapon_Unlocked_Book02" category="Misc" hideinmenus="true" Tags="smallitem" maxstacksize="32"
+          cargocontaineridentifier="metalcrate" scale="0.5" impactsoundtag="impact_soft" >
+        <Price baseprice="100" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantcity" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" minavailable="1" maxavailable="2"/>
+        </Price>
+        <Deconstruct time="1"/>
+        <PreferredContainer primary="crewcab" secondary="locker"/>
+        <InventoryIcon Texture="%ModDir%/Images/Tools/Touhou_Special_Weapon_Unlocked_Book02.png" sourcerect="0,0,68,88" origin="0.5,0.5"/>
+        <Sprite Texture="%ModDir%/Images/Tools/Touhou_Special_Weapon_Unlocked_Book02.png" depth="0.5" sourcerect="0,0,68,88"/>
+        <Body width="40" height="50" density="10"/>
+        <Holdable slots="Any,RightHand,LeftHand" aimable="false" aimpos="40,-20" aimangle="-20" holdangle="30" handle1="-10,0"
+                  msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnSecondaryUse" target="This" Condition="-25"/>
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true">
+                <Conditional Condition="lte 0"/>
+                <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Coalition_Weapon_Unlocked_Talent"/>
                 <RemoveItem/>
             </StatusEffect>
         </Holdable>
@@ -4787,7 +4810,7 @@
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false">
                     <Conditional HasTag="neq Opened"/>
-                    <SpawnItem identifiers="Touhou_Precious_Metal" spawnposition="ThisInventory" MinCount="1" MaxCount="2"/>
+                    <SpawnItem identifiers="Touhou_Bottle_Element" spawnposition="ThisInventory" MinCount="2" MaxCount="8"/>
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" TargetItemComponent="ItemContainer" drawinventory="true"/>
                 <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" TargetItemComponent="CustomInterface"
@@ -4836,7 +4859,7 @@
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false">
                     <Conditional HasTag="neq Opened"/>
-                    <SpawnItem identifiers="Touhou_Precious_Metal" spawnposition="ThisInventory" MinCount="1" MaxCount="2"/>
+                    <SpawnItem identifiers="Touhou_Bottle_Element" spawnposition="ThisInventory" MinCount="2" MaxCount="8"/>
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" TargetItemComponent="ItemContainer" drawinventory="true"/>
                 <StatusEffect type="OnUse" target="This" delay="0.2" stackable="false" TargetItemComponent="CustomInterface"
