@@ -2,7 +2,7 @@
 <Items>
 
     <!--基列木种子-->
-    <Item name="" identifier="Gilead_Branch_Seed" subcategory="Touhou" category="Alien" Tags="smallitem,seed,plantitem" maxstacksize="32"
+    <Item name="基列木种子" identifier="Gilead_Branch_Seed" subcategory="Touhou" category="Alien" Tags="smallitem,seed,plantitem" maxstacksize="32"
           cargocontaineridentifier="metalcrate" scale="0.35" impactsoundtag="impact_soft">
         <Sprite texture="%ModDir%/Images/Gardening/Plants_Seed.png" depth="0.2" sourcerect="0,0,68,102" origin="0.5,0.5"/>
         <PreferredContainer primary="wreckstoragecab,abandonedstoragecab" amount="1" spawnprobability="0.15"/>
@@ -26,9 +26,9 @@
             <VineSprites vineatlas="Content/Items/Gardening/branches.png" decayatlas="Content/Items/Gardening/branches_overlay.png">
                 <LeafSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="0,256,256,256"/>
                 <LeafSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="256,256,256,256"/>
-                <FlowerSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="384,896,128,128"/>
-                <FlowerSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="512,896,128,128"/>
-                <FlowerSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="640,896,128,128"/>
+                <FlowerSprite texture="%ModDir%/Images/Gardening/Touhou_Magic_Plant_Flower.png" sourcerect="128,0,128,128"/>
+                <FlowerSprite texture="%ModDir%/Images/Gardening/Touhou_Magic_Plant_Flower.png" sourcerect="128,0,128,128"/>
+                <FlowerSprite texture="%ModDir%/Images/Gardening/Touhou_Magic_Plant_Flower.png" sourcerect="0,0,1,1"/>
                 <VineSprite type="Stem" sourcerect="640,384,128,128"/>
                 <VineSprite type="CrossJunction" sourcerect="512,384,128,128"/>
                 <VineSprite type="VerticalLane" sourcerect="512,256,128,128"/>
@@ -83,9 +83,9 @@
             <VineSprites vineatlas="Content/Items/Gardening/branches.png" decayatlas="Content/Items/Gardening/branches_overlay.png">
                 <LeafSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="0,256,256,256"/>
                 <LeafSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="256,256,256,256"/>
-                <FlowerSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="384,896,128,128"/>
-                <FlowerSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="512,896,128,128"/>
-                <FlowerSprite texture="Content/Items/Gardening/GrowablePlants_Temp.png" sourcerect="640,896,128,128"/>
+                <FlowerSprite texture="%ModDir%/Images/Gardening/Touhou_Magic_Plant_Flower.png" sourcerect="0,0,128,128"/>
+                <FlowerSprite texture="%ModDir%/Images/Gardening/Touhou_Magic_Plant_Flower.png" sourcerect="0,0,128,128"/>
+                <FlowerSprite texture="%ModDir%/Images/Gardening/Touhou_Magic_Plant_Flower.png" sourcerect="0,0,1,1"/>
                 <VineSprite type="Stem" sourcerect="640,384,128,128"/>
                 <VineSprite type="CrossJunction" sourcerect="512,384,128,128"/>
                 <VineSprite type="VerticalLane" sourcerect="512,256,128,128"/>
@@ -168,6 +168,39 @@
             </VineSprites>
         </Growable>
     </Item>
+
+
+    <!--魔药混合种子-->
+    <Item name="魔药混合种子" identifier="Touhou_Potion_Blending_Seeds" subcategory="Touhou" category="Alien" Tags="smallitem,seed,plantitem" maxstacksize="32"
+          cargocontaineridentifier="metalcrate" scale="0.35" impactsoundtag="impact_soft">
+        <Sprite texture="%ModDir%/Images/Gardening/Touhou_Potion_Blending_Seeds.png" depth="0.2" sourcerect="0,0,100,128" origin="0.5,0.5"/>
+        <PreferredContainer primary="wreckstoragecab,abandonedstoragecab" amount="1" spawnprobability="0.05"/>
+        <PreferredContainer primary="seedbag" amount="1" spawnprobability="0.02"/>
+        <Price baseprice="150" sold="false">
+            <Price storeidentifier="merchantoutpost" maxavailable="1"/>
+            <Price storeidentifier="merchantcity" multiplier="1.2" maxavailable="1"/>
+            <Price storeidentifier="merchantresearch" multiplier="0.9" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" multiplier="1.2" maxavailable="1"/>
+            <Price storeidentifier="merchantmine" multiplier="0.75" maxavailable="1"/>
+        </Price>
+        <Deconstruct time="2">
+            <Item identifier="carbon"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" >
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
+            <RequiredItem identifier="creepingorangevineseed"/>
+            <RequiredItem identifier="tobaccovineseed"/>
+            <RequiredItem identifier="saltvineseed"/>
+            <RequiredItem identifier="raptorbaneseed"/>
+        </Fabricate>
+        <Body radius="15" density="10.1"/>
+        <Holdable canBeCombined="true" slots="Any,RightHand,LeftHand" handle1="0,0" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnBroken" target="This">
+                <Remove/>
+            </StatusEffect>
+        </Holdable>
+    </Item>
+
 
     <!--基列木枝-->
     <Item name="" identifier="Gilead_Branch" subcategory="Touhou" category="Alien" maxstacksize="60" Tags="smallitem,plantitem,Touhou_Plantitem"
