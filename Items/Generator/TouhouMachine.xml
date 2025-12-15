@@ -929,7 +929,7 @@
         </CustomInterface>
         <PowerContainer capacity="600" charge="0" maxrechargespeed="0" rechargespeed="0" allowingameediting="false" canbeselected="false" VulnerableToEMP="false" />
         <LightComponent range="0.0" lightcolor="255,255,255,255" IsOn="false" castshadows="false" alphablend="false" allowingameediting="false" canbeselected="false"
-                        powerconsumption="0">
+                        characterusable="false" powerconsumption="0">
             <StatusEffect type="OnActive" target="This" statuseffecttags="Touhou_Machine_On" Interval="1.0" duration="1.0" comparison="And">
                 <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0"/>
                 <RequiredItems items="mobilebattery" type="Contained" targetslot="1"/>
@@ -945,37 +945,42 @@
             </StatusEffect>
             <StatusEffect type="OnActive" target="This" interval="1.0" stackable="false" charge="0" setvalue="true" disabledeltatime="true" comparison="And">
                 <Conditional HasStatusTag="eq Touhou_Machine_On" />
-                <Conditional charge="gte 600" />
+                <Conditional charge="gte 599" />
                 <Use />
             </StatusEffect>
 
-            <StatusEffect type="OnUse" target="Contained" stackable="false">
-                <Conditional HasStatusTag="eq Touhou_Machine_On" targetcontainer="true" />
+            <StatusEffect type="OnUse" target="This" stackable="false" comparison="And">
+                <Conditional HasStatusTag="eq Touhou_Machine_On" />
+                <Conditional charge="gte 599" />
                 <RequiredItem items="Gilead_Branch_Seed" targetslot="4" type="Contained" />
                 <SpawnItem identifier="Gilead_Branch" spawnposition="ThisInventory" spawnifcantbecontained="false" SpawnIfInventoryFull="false" MinCount="2" MaxCount="4" />
             </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" stackable="false">
-                <Conditional HasStatusTag="eq Touhou_Machine_On" targetcontainer="true" />
+            <StatusEffect type="OnUse" target="This" stackable="false" comparison="And">
+                <Conditional HasStatusTag="eq Touhou_Machine_On" />
+                <Conditional charge="gte 599" />
                 <RequiredItem items="Cinnamon_Branch_Seed" targetslot="4" type="Contained" />
                 <SpawnItem identifier="Cinnamon_Branch" spawnposition="ThisInventory" spawnifcantbecontained="false" SpawnIfInventoryFull="false" MinCount="1" MaxCount="1" />
             </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" stackable="false" spawnItemRandomly="true">
-                <Conditional HasStatusTag="eq Touhou_Machine_On" targetcontainer="true" />
+            <StatusEffect type="OnUse" target="This" stackable="false" spawnItemRandomly="true" comparison="And">
+                <Conditional HasStatusTag="eq Touhou_Machine_On" />
+                <Conditional charge="gte 599" />
                 <RequiredItem items="Sun_Flower_Seed" targetslot="4" type="Contained" />
                 <SpawnItem identifier="Sun_Flower_Petal01" spawnposition="ThisInventory" spawnifcantbecontained="false" SpawnIfInventoryFull="false" MinCount="2" MaxCount="3" />
                 <SpawnItem identifier="Sun_Flower_Petal02" spawnposition="ThisInventory" spawnifcantbecontained="false" SpawnIfInventoryFull="false" MinCount="2" MaxCount="3" />
                 <SpawnItem identifier="Sun_Flower_Petal03" spawnposition="ThisInventory" spawnifcantbecontained="false" SpawnIfInventoryFull="false" MinCount="2" MaxCount="3" />
             </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" stackable="false" spawnItemRandomly="true">
-                <Conditional HasStatusTag="eq Touhou_Machine_On" targetcontainer="true" />
+            <StatusEffect type="OnUse" target="This" stackable="false" spawnItemRandomly="true" comparison="And">
+                <Conditional HasStatusTag="eq Touhou_Machine_On" />
+                <Conditional charge="gte 599" />
                 <RequiredItem items="Touhou_Potion_Blending_Seeds" targetslot="4" type="Contained" />
                 <SpawnItem identifier="creepingorange" spawnposition="ThisInventory" spawnifcantbecontained="false" SpawnIfInventoryFull="false" MinCount="2" MaxCount="3" />
                 <SpawnItem identifier="tobaccobud" spawnposition="ThisInventory" spawnifcantbecontained="false" SpawnIfInventoryFull="false" MinCount="2" MaxCount="3" />
                 <SpawnItem identifier="saltbulb" spawnposition="ThisInventory" spawnifcantbecontained="false" SpawnIfInventoryFull="false" MinCount="2" MaxCount="3" />
                 <SpawnItem identifier="raptorbane" spawnposition="ThisInventory" spawnifcantbecontained="false" SpawnIfInventoryFull="false" MinCount="2" MaxCount="3" />
             </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" stackable="false" spawnItemRandomly="true">
-                <Conditional HasStatusTag="eq Touhou_Machine_On" targetcontainer="true" />
+            <StatusEffect type="OnUse" target="This" stackable="false" spawnItemRandomly="true" comparison="And">
+                <Conditional HasStatusTag="eq Touhou_Machine_On" />
+                <Conditional charge="gte 599" />
                 <RequiredItem items="Touhou_Spectral_Core_Battery" targetslot="1" type="Contained" />
                 <RequiredItem items="Touhou_Potion_Blending_Seeds" targetslot="4" type="Contained" />
                 <SpawnItem identifier="badcreepingorange" spawnposition="ThisInventory" spawnifcantbecontained="false" SpawnIfInventoryFull="false" MinCount="1" MaxCount="1" />
@@ -1013,7 +1018,7 @@
             </SubContainer>
             <SubContainer capacity="1" maxstacksize="1">
                 <Containable items="fertilizer">
-                    <StatusEffect type="OnContaining" target="Contained" condition="-0.15" Interval="1.0" disabledeltatime="true">
+                    <StatusEffect type="OnContaining" target="Contained" condition="-0.12" Interval="1.0" disabledeltatime="true">
                         <Conditional HasStatusTag="eq Touhou_Machine_On" targetcontainer="true" />
                     </StatusEffect>
                 </Containable>
@@ -1035,7 +1040,7 @@
                     </StatusEffect>
                 </Containable>
                 <Containable items="Touhou_Potion_Blending_Seeds">
-                    <StatusEffect type="OnContaining" target="Contained" condition="-0.075" Interval="1.0" disabledeltatime="true">
+                    <StatusEffect type="OnContaining" target="Contained" condition="-0.0075" Interval="1.0" disabledeltatime="true">
                         <Conditional HasStatusTag="eq Touhou_Machine_On" targetcontainer="true" />
                     </StatusEffect>
                 </Containable>
@@ -1225,7 +1230,11 @@
         <CustomInterface canbeselected="true" drawhudwhenequipped="false">
             <GuiFrame style="ItemUI" absoluteoffset="0,-100" anchor="Center" relativesize="0.07,0.08" />
             <TickBox text="Text.Touhou_Machine_On">
-                <StatusEffect type="OnUse" target="This" tags="Mining_Machine_On" setvalue="true"/>
+                <StatusEffect type="OnUse" target="This" tags="Mining_Machine_On" setvalue="true">
+                    <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0"/>
+                    <RequiredItems items="reactorfuel" type="Contained" targetslot="1"/>
+                    <RequiredItems items="Touhou_Spectral_Core_Item" type="Contained" targetslot="2"/>
+                </StatusEffect>
                 <StatusEffect type="OnSecondaryUse" target="This" tags="Mining_Machine_False" setvalue="true"/>
             </TickBox>
         </CustomInterface>
@@ -1234,11 +1243,11 @@
             <StatusEffect type="OnActive" targettype="This" charge="-18.0" Interval="1.0" disabledeltatime="true" comparison="and">
                 <Conditional HasTag="eq Mining_Machine_On"/>
             </StatusEffect>
-            <StatusEffect type="OnActive" targettype="This" Interval="5.0" disabledeltatime="true" comparison="and" setvalue="true" stackable="false">
+<!--            <StatusEffect type="OnActive" targettype="This" Interval="5.0" disabledeltatime="true" comparison="and" setvalue="true" stackable="false">
                 <RequiredItems items="Spiritual_Water" type="Contained" targetslot="0"/>
                 <RequiredItems items="reactorfuel" type="Contained" targetslot="1"/>
                 <RequiredItems items="Touhou_Spectral_Core_Item" type="Contained" targetslot="2"/>
-            </StatusEffect>
+            </StatusEffect>-->
             <StatusEffect type="OnActive" target="This" comparison="And" Interval="330" stackable="false" spawnItemRandomly="true">
                 <Conditional HasTag="eq Mining_Machine_On"/>
                 <Conditional IsActive="true"/>

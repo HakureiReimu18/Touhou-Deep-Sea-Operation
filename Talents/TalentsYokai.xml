@@ -1227,6 +1227,35 @@
         </AbilityGroupEffect>
     </Talent>
 
+    <!--生存法则02 拥有寄生抗性时，即可免疫水压。
+
+    穿着觉 装束+时，攻击附带长眠不醒的噩梦的效果的敌人时，将会放大目标身上减少抗性的负面效果-->
+    <Talent identifier="Touhou_Yaoguai05_02">
+        <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
+        <Description tag="talentdescription.Touhou_Yaoguai05_02"/>
+        <AbilityGroupInterval Interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="huskinfectionresistance"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyFlag flagtype="ImmuneToPressure"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <!--觉-->
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional Sleepless_Nightmare="gt 1"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Yaoguai05_02_Sleepless_Nightmare_Effect" strength="100.0"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+    </Talent>
+
     <!--“魑魅魍魉” 缓慢治愈自身的精神病。奔跑一定时间后，些许增加下一次攻击的伤害。那之后有5秒冷却。
     穿着幽香装束+时：大大增幅每种花瓣的效果
     穿着鵺 装束+时：当你完成四个阶段的计数后，增加10%攻击速度。免疫长眠不醒的噩梦和古老的哀愁与恐怖。制造物品的质量+1
@@ -1401,6 +1430,104 @@
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+
+    <!--“魑魅魍魉” 缓慢治愈自身的精神病。奔跑一定时间后，些许增加下一次攻击的伤害。那之后有5秒冷却。
+    穿着觉 装束+时：击杀任意生物后，短暂提高10%物理伤害抗性。对敌人造成伤害时，有概率削弱敌人的攻击能力。-->
+    <Talent identifier="Touhou_Yaoguai06_02">
+        <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Direct_Damage.png" sheetindex="0,0" sheetelementsize="400,400"/>
+        <Description tag="talentdescription.Touhou_Yaoguai06_02"/>
+        <AbilityGroupInterval interval="9.9">
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Yaoguai06_Effect01" amount="1"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="4.9">
+            <Conditions>
+                <AbilityConditionRunning/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Yaoguai06_Effect02" amount="1"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yaoguai06_Effect02" minimumPercentage="0.95"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttackResult">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yaoguai06_Effect02" minimumPercentage="0.95"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <Affliction identifier="Touhou_Yaoguai06_Effect02_Removed" amount="100"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--觉-->
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Abilities>
+                <CharacterAbilityResetPermanentStat statidentifier="Touhou_Yaoguai06_02_Satori_Kill"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Yaoguai06_02_Satori_Kill" value="0" setvalue="true"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Yaoguai06_02_Satori_Kill" min="1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Yaoguai06_02_Effect_Satori01" amount="10"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Yaoguai06_02_Satori_Kill" value="-1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Yaoguai06_02_Satori_Kill" value="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Yaoguai06_02_Effect_Satori02" strength="2.0"/>
             </Abilities>
         </AbilityGroupEffect>
     </Talent>
@@ -1596,6 +1723,112 @@
             </Abilities>
         </AbilityGroupEffect>
         <AddedRecipe itemidentifier="Touhou_The_Key_Of_Duality"/>
+    </Talent>
+    <!--巫山云雨
+    穿着觉 装束+时：船员中每有一种不同的职业，弹幕伤害提高3%。最多30%-->
+    <Talent identifier="Touhou_Yaoguai07_02">
+        <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
+        <Description tag="talentdescription.Touhou_Yaoguai07_02"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasDifferentJobs amount="1" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasDifferentJobs amount="2" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasDifferentJobs amount="3" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasDifferentJobs amount="4" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasDifferentJobs amount="5" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasDifferentJobs amount="6" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasDifferentJobs amount="7" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasDifferentJobs amount="8" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasDifferentJobs amount="9" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasDifferentJobs amount="10" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.03"/>
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 
     <!--吸血鬼-->

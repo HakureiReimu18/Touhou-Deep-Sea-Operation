@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="SatoriTalent" >
+        <Icon texture="%ModDir%/Images/Talents/SatoriTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.SatoriTalent"/>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionServerRandom randomchance="0.1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" delay="0.05" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="SatoriTalent_OnAttacked_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionServerRandom randomchance="0.1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAttacker>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true">
+                            <Affliction identifier="SatoriTalent_OnAttacked_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAttacker>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional SatoriTalent_OnAttacked_Effect="gt 0"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasAffliction afflictionidentifier="SatoriTalent_Mind_Reading"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Sleepless_Nightmare" strength="3.0"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasAffliction afflictionidentifier="SatoriTalent_Attack_Effect03"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.25"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasAffliction afflictionidentifier="SatoriTalent_Attack_Effect03"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="5.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasAffliction afflictionidentifier="SatoriTalent_Attack_Effect04"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="bloodloss" multiplier="0.8"/>
+                <CharacterAbilityModifyResistance resistanceid="bleeding" multiplier="0.8"/>
+                <CharacterAbilityModifyResistance resistanceid="oxygenlow" multiplier="0.8"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="5.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasAffliction afflictionidentifier="SatoriTalent_Attack_Effect05"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="debuff" multiplier="0.9"/>
+                <CharacterAbilityModifyResistance resistanceid="psychosis" multiplier="0.0"/>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnRoundEnd">
+            <Abilities>
+                <CharacterAbilityResetPermanentStat statidentifier="Satori_Kill01"/>
+                <CharacterAbilityResetPermanentStat statidentifier="Satori_Kill02"/>
+                <CharacterAbilityResetPermanentStat statidentifier="Satori_Kill03"/>
+                <CharacterAbilityResetPermanentStat statidentifier="Satori_Kill04"/>
+                <CharacterAbilityResetPermanentStat statidentifier="Satori_Kill05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="None">
+            <Abilities>
+                <!--击杀人类-->
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill01" value="0" setvalue="true"/>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill02" value="0" setvalue="true"/>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill03" value="0" setvalue="true"/>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill04" value="0" setvalue="true"/>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill05" value="0" setvalue="true"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="2.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasPermanentStat statidentifier="Satori_Kill01" min="1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="SatoriTalent_Attack_Effect01" amount="10"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill01" value="-1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="2.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasPermanentStat statidentifier="Satori_Kill02" min="1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="SatoriTalent_Attack_Effect02" amount="10"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill02" value="-1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="2.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasPermanentStat statidentifier="Satori_Kill03" min="1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="SatoriTalent_Attack_Effect03" amount="10"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill03" value="-1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="2.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasPermanentStat statidentifier="Satori_Kill04" min="1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="SatoriTalent_Attack_Effect04" amount="10"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill04" value="-1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="2.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasPermanentStat statidentifier="Satori_Kill05" min="1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="SatoriTalent_Attack_Effect05" amount="10"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill05" value="-1"/>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasAffliction afflictionidentifier="SatoriTalent_Mind_Reading"/>
+            </Conditions>
+            <Conditions>
+                <AbilityConditionCharacter targetabilitytarget="true">
+                    <Conditional SpeciesName="eq human" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill01" value="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasAffliction afflictionidentifier="SatoriTalent_Mind_Reading"/>
+            </Conditions>
+            <Conditions>
+                <AbilityConditionCharacter targetabilitytarget="true">
+                    <Conditional TeamID="None" />
+                    <Conditional SpeciesName="neq human" />
+                    <Conditional NeedsAir="false" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill02" value="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasAffliction afflictionidentifier="SatoriTalent_Mind_Reading"/>
+            </Conditions>
+            <Conditions>
+                <AbilityConditionCharacter targetabilitytarget="true">
+                    <Conditional TeamID="None" />
+                    <Conditional SpeciesName="neq human" />
+                    <Conditional mass="gt 1000" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill03" value="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasAffliction afflictionidentifier="SatoriTalent_Mind_Reading"/>
+            </Conditions>
+            <Conditions>
+                <AbilityConditionCharacter targetabilitytarget="true">
+                    <Conditional TeamID="None" />
+                    <Conditional SpeciesName="neq human" />
+                    <Conditional isMachine="true" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill04" value="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Satori_3rd_Eye"/>
+                <AbilityConditionHasAffliction afflictionidentifier="SatoriTalent_Mind_Reading"/>
+            </Conditions>
+            <Conditions>
+                <AbilityConditionCharacter targetabilitytarget="true">
+                    <Conditional TeamID="None" />
+                    <Conditional SpeciesName="neq human" />
+                    <Conditional NeedsAir="true" />
+                    <Conditional mass="lte 1000" />
+                    <Conditional isMachine="false" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Satori_Kill05" value="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+    </Talent>
+</Talents>

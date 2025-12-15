@@ -635,30 +635,30 @@
     </Affliction>
 
     <!--涅槃-->
-    <Affliction identifier="Resurrection" type="talentbuff" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="5"
+    <Affliction identifier="Resurrection" type="talentbuff" isbuff="true" hideiconafterdelay="true" limbspecific="false" maxstrength="1"
                 treatmentthreshold="1000"
-                duration="5" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
-        <Effect minstrength="0" maxstrength="5">
+                showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="1" minvitalitydecrease="0" maxvitalitydecrease="-3" multiplybymaxvitality="true" strengthchange="-0.1">
             <StatusEffect target="Character">
                 <ParticleEmitter particle="StarDanmuBoom" particleamount="1" anglemin="0" anglemax="360" velocitymin="100" velocitymax="250"
                                  scalemin="0.2" scalemax="0.3" drawontop="true" colormultiplier="255,72,36,180"/>
             </StatusEffect>
             <StatusEffect target="Character" CanGiveMedicalSkill="false">
-                <ReduceAffliction type="damage" amount="30"/>
-                <ReduceAffliction type="burn" amount="20"/>
+                <ReduceAffliction type="damage" amount="6"/>
+                <ReduceAffliction type="burn" amount="4"/>
                 <ReduceAffliction type="oxygenlow" amount="20"/>
                 <ReduceAffliction type="poison" amount="20"/>
-                <ReduceAffliction type="infection" amount="20"/>
+                <ReduceAffliction type="infection" amount="4"/>
                 <ReduceAffliction identifier="Phoenix_Burn" amount="20"/>
                 <ReduceAffliction identifier="paralysis" amount="20"/>
-                <ReduceAffliction type="bleeding" amount="20"/>
-                <ReduceAffliction identifier="bloodloss" amount="20"/>
-                <ReduceAffliction identifier="stun" amount="20"/>
-                <ReduceAffliction identifier="Psychosis" amount="20"/>
-                <ReduceAffliction type="invertcontrols" amount="20"/>
-                <ReduceAffliction type="alieninfection" amount="20"/>
+                <ReduceAffliction type="bleeding" amount="5"/>
+                <ReduceAffliction identifier="bloodloss" amount="10"/>
+                <ReduceAffliction identifier="stun" amount="10"/>
+                <ReduceAffliction identifier="Psychosis" amount="10"/>
+                <ReduceAffliction type="invertcontrols" amount="10"/>
+                <ReduceAffliction type="alieninfection" amount="10"/>
                 <ReduceAffliction identifier="Aura_Strip" amount="5"/>
-                <ReduceAffliction type="debuff" amount="5"/>
+                <ReduceAffliction type="debuff" amount="3"/>
                 <ReduceAffliction type="fractures" amount="40"/>
                 <ReduceAffliction type="arterialcut" amount="20"/>
                 <ReduceAffliction type="gaze" amount="20"/>
@@ -667,9 +667,7 @@
                 <ReduceAffliction type="tsm_bl" amount="20"/>
                 <ReduceAffliction type="zlqy" amount="20"/>
             </StatusEffect>
-            <StatValue stattype="MaximumHealthMultiplier" value="-0.25"/>
             <StatValue stattype="MedicalItemEffectivenessMultiplier" value="-0.75"/>
-            <StatValue stattype="MedicalSkillGainSpeed" value="-1.0"/>
             <StatusEffect target="Character" setvalue="true" SpeedMultiplier="0.7"/>
             <StatValue stattype="AttackMultiplier" value="-0.75"/>
             <AbilityFlag flagtype="AlwaysStayConscious"/>
@@ -1211,7 +1209,7 @@
             <StatValue stattype="MeleeAttackMultiplier" value="0.1"/>
             <StatValue stattype="MeleeAttackSpeed" value="0.1"/>
             <StatValue stattype="RangedAttackSpeed" value="0.1"/>
-            <StatValue stattype="MovementSpeed" value="0.11"/>
+            <StatValue stattype="MovementSpeed" value="0.1"/>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Aunn_Lion.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>
@@ -2118,9 +2116,17 @@
     <Affliction identifier="Cascading_Light_Of_The_Star" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false"
                 hideiconafterdelay="false" maxstrength="10"
                 duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
-        <Effect minstrength="0" maxstrength="10" ThermalOverlayRange="1000" ThermalOverlayColor="160,160,255,120">
+        <Effect minstrength="0" maxstrength="10" >
             <StatValue stattype="MaximumHealthMultiplier" value="-0.1"/>
         </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Cascading_Light_Of_The_Star.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--倾泻而下的星之光-间歇性热成像效果-->
+    <Affliction identifier="Cascading_Light_Of_The_Star_Thermal" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false"
+                hideiconafterdelay="false" maxstrength="10" showiconthreshold="100"
+                duration="60.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" ThermalOverlayRange="1200" ThermalOverlayColor="160,160,255,120"/>
         <Icon texture="%ModDir%/Images/Afflictions/Cascading_Light_Of_The_Star.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>
 
@@ -3304,7 +3310,7 @@
     <Affliction identifier="Expressive_Pokerface_Mood04" type="Expressive_Pokerface_Mood" isbuff="true" limbspecific="false" hideiconafterdelay="true"
                 maxstrength="1"
                 resetbetweenrounds="true" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
-        <Effect minstrength="0" maxstrength="1" minskillmultipl="1.2" maxskillmultiplier="1.2"/>
+        <Effect minstrength="0" maxstrength="1" minskillmultiplier="1.2" maxskillmultiplier="1.2"/>
         <Icon texture="%ModDir%/Images/Afflictions/Expressive_Pokerface_Mood04.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>
 
@@ -3320,7 +3326,7 @@
     <Affliction identifier="Hyouibana_Kokoro_Effect" type="Touhou_Character_Affliction" limbspecific="false" hideiconafterdelay="false"
                 maxstrength="1"
                 showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
-        <Effect minstrength="0" maxstrength="1" minskillmultipl="1.1" maxskillmultiplier="1.1"/>
+        <Effect minstrength="0" maxstrength="1" minskillmultiplier="1.1" maxskillmultiplier="1.1"/>
         <Icon texture="%ModDir%/Images/Afflictions/Expressive_Pokerface.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>
 
@@ -3597,6 +3603,124 @@
             <StatValue stattype="MeleeAttackSpeed" value="0.15"/>
         </Effect>
         <Icon texture="%ModDir%/Images/Afflictions/Lilywhite_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--少女觉　～ 3rd eye-->
+    <Affliction identifier="Satori_3rd_Eye" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10"
+                duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" minresistance="1.0" maxresistance="1.0" resistancefor="SatoriTalent_OnAttacked_Effect" >
+            <StatValue stattype="RangedAttackMultiplier" value="-0.1"/>
+            <StatValue stattype="MeleeAttackMultiplier" value="-0.1"/>
+            <StatValue stattype="MovementSpeed" value="-0.15"/>
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Satori_3rd_Eye.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--觉使用心灵读取-->
+    <Affliction identifier="SatoriTalent_Mind_Reading" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10"
+                duration="60.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" ThermalOverlayRange="1000" ThermalOverlayColor="200,100,100,125" />
+        <Icon texture="%ModDir%/Images/Afflictions/SatoriTalent_Mind_Reading.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--觉使用心灵读取CD-->
+    <Affliction identifier="SatoriTalent_Mind_Reading_CD" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" showiconthreshold="100"
+                duration="180.0" showinhealthscannerthreshold="100" iconcolors="100,100,100;100,100,100;100,100,100;100,100,100">
+        <Effect minstrength="0" maxstrength="10" />
+        <Icon texture="%ModDir%/Images/Afflictions/Satori_3rd_Eye.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--觉给予攻击者效果-->
+    <Affliction identifier="SatoriTalent_OnAttacked_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" duration="5.0" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="10" />
+        <Icon texture="%ModDir%/Images/Afflictions/SatoriTalent_OnAttacked_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--人类的恐惧回忆-->
+    <Affliction identifier="SatoriTalent_Attack_Effect01" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" resetbetweenrounds="true" duration="360"
+                showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="10" minskillmultiplier="1.2" maxskillmultiplier="1.2" />
+        <Icon texture="%ModDir%/Images/Afflictions/SatoriTalent_Attack_Effect01.png" sourcerect="0,0,128,128" color="255,150,150,255"/>
+    </Affliction>
+
+    <!--水生物的恐惧回忆-->
+    <Affliction identifier="SatoriTalent_Attack_Effect02" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" resetbetweenrounds="true" duration="420"
+                showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="10" >
+            <StatValue stattype="MovementSpeed" value="0.15"/>
+            <StatValue stattype="FlowResistance" value="0.5"/>
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/SatoriTalent_Attack_Effect02.png" sourcerect="0,0,128,128" color="255,150,150,255"/>
+    </Affliction>
+
+    <!--巨怪的恐惧回忆-->
+    <Affliction identifier="SatoriTalent_Attack_Effect03" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" resetbetweenrounds="true" duration="600"
+                showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="10" />
+        <Icon texture="%ModDir%/Images/Afflictions/SatoriTalent_Attack_Effect03.png" sourcerect="0,0,128,128" color="255,150,150,255"/>
+    </Affliction>
+
+    <!--机械的危险数据-->
+    <Affliction identifier="SatoriTalent_Attack_Effect04" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" resetbetweenrounds="true" duration="600"
+                showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="10" />
+        <Icon texture="%ModDir%/Images/Afflictions/SatoriTalent_Attack_Effect04.png" sourcerect="0,0,128,128" color="255,150,150,255"/>
+    </Affliction>
+
+    <!--异怪的恐惧记忆-->
+    <Affliction identifier="SatoriTalent_Attack_Effect05" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10" resetbetweenrounds="true" duration="480"
+                showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="10" />
+        <Icon texture="%ModDir%/Images/Afflictions/SatoriTalent_Attack_Effect05.png" sourcerect="0,0,128,128" color="255,150,150,255"/>
+    </Affliction>
+
+    <!--凭依觉-->
+    <Affliction identifier="Hyouibana_Satori_Effect" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10"
+                showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="10">
+            <StatusEffect target="Character" Interval="1.0" Duration="1.0" CanGiveMedicalSkill="false">
+                <ReduceAffliction type="oxygenlow" strength="1.0"/>
+            </StatusEffect>
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Satori_3rd_Eye.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--觉-完全凭依-->
+    <Affliction identifier="Hyouibana_Effect_Prefect_Satori" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false"
+                hideiconafterdelay="true"
+                showinhealthscannerthreshold="100" maxstrength="1" iconcolors="126,211,224;126,211,224;126,211,224;126,211,224">
+        <Effect minstrength="0" maxstrength="1"/>
+        <Icon texture="%ModDir%/Images/Afflictions/Satori_3rd_Eye.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
+    </Affliction>
+
+    <!--出血效应-古明地觉-->
+    <Affliction name="" identifier="MRE_Satori_Effect" description="" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false"
+                maxstrength="10"
+                Duration="10.0" showiconthreshold="100" showinhealthscannerthreshold="100" iconcolors="94,94,94;163,164,164;255,255,255">
+        <Effect minstrength="0" maxstrength="10"/>
+        <icon texture="%ModDir%/Images/Divinggear/Yin_Yang_Orb.png" sourcerect="0,0,32,32" color="255,255,255,255" origin="0,0"/>
+    </Affliction>
+
+    <!--觉-专属武器效果-->
+    <Affliction identifier="Satori_Weapons" type="Touhou_Character_Affliction" isbuff="true" limbspecific="false" hideiconafterdelay="false"
+                maxstrength="10"
+                duration="1.0" showinhealthscannerthreshold="100" iconcolors="255,255,255;255,255,255;255,255,255;255,255,255">
+        <Effect minstrength="0" maxstrength="10" resistancefor="stun" minresistance="0.15" maxresistance="0.15">
+            <StatValue stattype="RangedAttackMultiplier" value="0.1"/>
+            <StatValue stattype="MeleeAttackMultiplier" value="0.1"/>
+            <StatValue stattype="MeleeAttackSpeed" value="0.1"/>
+        </Effect>
+        <Icon texture="%ModDir%/Images/Afflictions/Satori_Weapons.png" sourcerect="0,0,128,128" color="255,255,255,255"/>
     </Affliction>
 
 
