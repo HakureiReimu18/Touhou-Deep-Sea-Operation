@@ -9,24 +9,31 @@
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
                 <AbilityConditionCharacter targettype="Enemy">
                     <Conditional speciesname="neq human"/>
-                    <Conditional speciesname="neq HumanTouhou_Tail"/>
                 </AbilityConditionCharacter>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.2"/>
                 <CharacterAbilityModifyAttackData addedpenetration="0.05"/>
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="RedAndWhite"/>
-                <AbilityConditionServerRandom randomchance="0.1"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional speciesname="neq human"/>
+                </AbilityConditionCharacter>
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAffliction
-                        afflictionidentifiers="blunttrauma,lacerations,bitewounds,gunshotwound"
-                        replacewith="explosiondamage"/>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.2"/>
             </Abilities>
         </AbilityGroupEffect>
+        <AbilityGroupInterval Interval="5.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="RedAndWhite"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="Reiki_Side_Effect" multiplier="0.0"/>
+            </Abilities>
+        </AbilityGroupInterval>
     </Talent>
 </Talents>

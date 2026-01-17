@@ -16,7 +16,7 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--妖怪天赋分支 选择此分支后，不可再解锁其它分支。对应角色：风见幽香，封兽鵺，河城荷取，古明地恋-->
+    <!--妖怪天赋分支 选择此分支后，不可再解锁其它分支。对应角色：风见幽香，封兽鵺，河城荷取，古明地恋，紫，古明地觉-->
     <Talent identifier="Yokai_Select_Yaoguai">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128"/>
         <Description tag="talentdescription.Yokai_Select_Yaoguai"/>
@@ -46,7 +46,7 @@
         </AbilityGroupEffect>
     </Talent>
 
-    <!--妖兽/兽人天赋分支 选择此分支后，不可再解锁其它分支。对应角色：高丽野阿吽，铃仙·优昙华院·因幡-->
+    <!--妖兽/兽人天赋分支 选择此分支后，不可再解锁其它分支。对应角色：高丽野阿吽，铃仙·优昙华院·因幡，因幡天为-->
     <Talent identifier="Yokai_Select_Yaoshou">
         <Icon texture="%ModDir%/Images/Talents/Talents_Magician_Primary.png" sheetindex="0,0" sheetelementsize="128,128"/>
         <Description tag="talentdescription.Yokai_Select_Yaoshou"/>
@@ -442,7 +442,7 @@
     140：增加10%最大生命值。双手部位的物理伤害抗性增加5%
     280：些许加快物理伤害、出血的恢复。有船员失去意识时，可以全速拖动生物
     420：增加10%的弹幕伤害-->
-    <Talent identifier="Talents_Yokai_Primary15" trackedstat="Yokai_Counter" trackedmax="480">
+    <Talent identifier="Talents_Yokai_Primary15" trackedstat="Yokai_Counter" trackedmax="420">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Talents_Yokai_Primary15"/>
         <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
@@ -2306,13 +2306,13 @@
 
     <!--妖兽/兽人-->
 
-    <!--同族羁绊 周围有其他船员时，大大增加物理出血和失血的恢复速度。-->
+    <!--同族羁绊 在友方潜艇内时，大大增加物理出血和失血的恢复速度。-->
     <Talent identifier="Touhou_Yaoshou_Shouren01">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Survivable.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_Yaoshou_Shouren01"/>
-        <AbilityGroupInterval interval="2.9">
+        <AbilityGroupInterval interval="4.9">
             <Conditions>
-                <AbilityConditionAllyNearby distance="500" truthywhen="OneCharacterMatches"/>
+                <AbilityConditionInSubmarine submarinetype="Player" />
             </Conditions>
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
@@ -2376,7 +2376,8 @@
 
     <!--骨骼精奇 近战攻击附带少量咬伤。对生命值低于50%的敌人造成额外10%的伤害
         穿着阿吽装束+时：增加10%最大生命值。将“狮子”的效果提高50%
-        穿着铃仙装束+时：增加10%最大生命值。奔跑时，受到的伤害减少10%-->
+        穿着铃仙装束+时：增加10%最大生命值。奔跑时，受到的伤害减少10%
+        穿着因幡天为装束+时：增加10%debuff抗性。拥有幸运眷顾时，受到的伤害减少7%。拥有幸运眷顾时，再减少7%-->
     <Talent identifier="Touhou_Yaoshou_Shouren04">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Direct_Damage.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_Yaoshou_Shouren04"/>
@@ -2385,7 +2386,13 @@
                 <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="Melee"/>
             </Conditions>
             <Abilities>
-                <CharacterAbilityGiveAffliction affliction="bitewounds" strength="1.0"/>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget" targetlimb="Torso" delay="0.1" disabledeltatime="true" stackable="false">
+                            <Affliction identifier="bitewounds" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupEffect>
         <!--高丽野阿吽-->
@@ -2430,11 +2437,31 @@
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1"/>
             </Abilities>
         </AbilityGroupEffect>
+        <!--因幡天为-->
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionHasAffliction afflictionidentifier="TewiTalent_OnAttack_Effect_Flag"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.07"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionHasAffliction afflictionidentifier="TewiTalent_OnApplyTreatment_Effect_Flag"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.07"/>
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 
     <!--意志坚定 增加50%精神病抗性，大大加快幻觉的恢复速度
         穿着阿吽装束+时：获得技能点时，额外获得0.5点技能。给周围船员10%移动速度和50%技能获取速度加成
-        穿着铃仙装束+时：增加50%技能获取速度和15%经验获取速度，提高20%眩晕抗性-->
+        穿着铃仙装束+时：增加50%技能获取速度和15%经验获取速度，提高20%眩晕抗性
+        穿着因幡天为装束+时：增加10%移动速度。每1点魔法能力，提供0.1%攻击速度。最多20%-->
     <Talent identifier="Touhou_Yaoshou_Shouren05">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_Yaoshou_Shouren05"/>
@@ -2490,6 +2517,27 @@
                 <CharacterAbilityModifyResistance resistanceid="stun" multiplier="0.8"/>
             </Abilities>
         </AbilityGroupInterval>
+        <!--因幡天为-->
+        <AbilityGroupInterval interval="7.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="200" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStatToSkill stattype="RangedAttackSpeed" maxvalue="0.1" skillidentifier="Touhou_Magic"/>
+                <CharacterAbilityModifyStatToSkill stattype="MeleeAttackSpeed" maxvalue="0.1" skillidentifier="Touhou_Magic"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval interval="10.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="200"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="0.2"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackSpeed" value="0.2"/>
+            </Abilities>
+        </AbilityGroupInterval>
     </Talent>
 
     <!--妖尾摆风 根据角色等级增加最大生命值，每级增加0.5%，最多10%
@@ -2498,7 +2546,8 @@
         15级：可以全速拖动生物
         20级：提高50%缺氧抗性
         25级：失去意识后，不会成为怪物的攻击目标
-        穿着铃仙装束+时：增加5%远程攻击伤害，远程弹幕额外增加10%，造成的枪伤再额外增加5%。-->
+        穿着铃仙装束+时：增加5%远程攻击伤害，远程弹幕额外增加10%，造成的枪伤再额外增加5%。
+        穿着因幡天为装束+时：受到的伤害降低10%。受到敌人伤害时，有概率给予攻击者梦消失和长眠不醒的噩梦-->
     <Talent identifier="Touhou_Yaoshou_Shouren06">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Buff.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_Yaoshou_Shouren06"/>
@@ -2574,12 +2623,39 @@
                 <CharacterAbilityModifyAffliction afflictionidentifiers="gunshotwound" addedmultiplier="0.05"/>
             </Abilities>
         </AbilityGroupEffect>
+        <!--因幡天为-->
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionServerRandom randomchance="0.1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAttacker>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true">
+                            <Conditional speciesgroup="neq human"/>
+                            <Affliction identifier="Touhou_Lost_Dream" amount="15.0"/>
+                            <Affliction identifier="Sleepless_Nightmare" amount="15.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAttacker>
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 
     <!--变幻莫测
         穿着阿吽装束+时：只要周围有其他船员存活，你受到的伤害减少20%
-        穿着铃仙装束+时：生命值大于50%时，造成的伤害增加15%，生命值低于50%时，增加15%物理伤害抗性和烧伤抗性-->
-    <Talent identifier="Touhou_Yaoshou_Shouren07">
+        穿着铃仙装束+时：生命值大于50%时，造成的伤害增加15%，生命值低于50%时，增加15%物理伤害抗性和烧伤抗性
+        穿着因幡天为装束+时：巡回完成任意任务或船员击杀任意生物后，增加一层计数。使用任意药物时有概率临时给予自己额外生命值，这个效果生效后必须消耗一层计数。拥有计数且生命值低于70%时，弹幕伤害提高20%，受到的伤害减少15%-->
+    <Talent identifier="Touhou_Yaoshou_Shouren07" trackedstat="Touhou_Yaoshou_Shouren07_Tewi_Counter" trackedmax="8">
         <Icon texture="%ModDir%/Images/Talents/Touhou_Talents_Defense.png" sheetindex="0,0" sheetelementsize="400,400"/>
         <Description tag="talentdescription.Touhou_Yaoshou_Shouren07"/>
         <!--高丽野阿吽-->
@@ -2613,6 +2689,63 @@
                 <CharacterAbilityModifyResistance resistanceid="damage,burn" multiplier="0.85"/>
             </Abilities>
         </AbilityGroupInterval>
+        <!--因幡天为-->
+        <AbilityGroupEffect abilityeffecttype="OnCrewKillCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Yaoshou_Shouren07_Tewi_Counter" min="8" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Yaoshou_Shouren07_Tewi_Counter" value="1" removeondeath="false"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Yaoshou_Shouren07_Tewi_Counter" min="7" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Yaoshou_Shouren07_Tewi_Counter" value="1" removeondeath="false"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnApplyTreatment">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionServerRandom randomchance="0.5"/>
+                <AbilityConditionItem tags="medical"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" stackable="false" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" >
+                            <Affliction identifier="Touhou_Yaoshou_Shouren07_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+                <CharacterAbilityGivePermanentStat statidentifier="Touhou_Yaoshou_Shouren07_Tewi_Counter" value="-1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0.7" invert="true"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Yaoshou_Shouren07_Tewi_Counter" min="1" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.2"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0.7" invert="true"/>
+                <AbilityConditionHasPermanentStat statidentifier="Touhou_Yaoshou_Shouren07_Tewi_Counter" min="1" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 
     <!--天狗-->

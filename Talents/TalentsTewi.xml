@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="TewiTalent" >
+        <Icon texture="%ModDir%/Images/Talents/TewiTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.TewiTalent"/>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionHasAffliction afflictionidentifier="TewiTalent_OnAttacked_Effect" invert="true"/>
+                <AbilityConditionServerRandom randomchance="0.1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" delay="1.0" stackable="false" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="TewiTalent_OnAttacked_Effect" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnOpenItemContainer">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionItemInSubmarine submarinetype="Ruin"/>
+                <AbilityConditionItem tags="container,aliencontainer"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilitySpawnItemsToContainer randomchance="0.2" oncepercontainer="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget">
+                            <SpawnItem identifiers="Touhou_Rabbit_Storage_Bag" Count="1" spawnposition="ThisInventory"
+                                       spawnifcantbecontained="false"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilitySpawnItemsToContainer>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnOpenItemContainer">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionItemInSubmarine submarinetype="Outpost"/>
+                <AbilityConditionItem tags="container,aliencontainer"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilitySpawnItemsToContainer randomchance="0.07" oncepercontainer="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget">
+                            <SpawnItem identifiers="Touhou_Rabbit_Storage_Bag" Count="1" spawnposition="ThisInventory"
+                                       spawnifcantbecontained="false"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilitySpawnItemsToContainer>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnOpenItemContainer">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionItemInSubmarine submarinetype="Wreck"/>
+                <AbilityConditionItem tags="container,aliencontainer"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilitySpawnItemsToContainer randomchance="0.2" oncepercontainer="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget">
+                            <SpawnItem identifiers="Touhou_Rabbit_Storage_Bag" Count="1" spawnposition="ThisInventory"
+                                       spawnifcantbecontained="false"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilitySpawnItemsToContainer>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnOpenItemContainer">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionItemInSubmarine submarinetype="BeaconStation"/>
+                <AbilityConditionItem tags="container,aliencontainer"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilitySpawnItemsToContainer randomchance="0.4" oncepercontainer="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget">
+                            <SpawnItem identifiers="Touhou_Rabbit_Storage_Bag" Count="1" spawnposition="ThisInventory"
+                                       spawnifcantbecontained="false"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilitySpawnItemsToContainer>
+            </Abilities>
+        </AbilityGroupEffect>
+
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionHasAffliction afflictionidentifier="TewiTalent_OnAttack_Effect_CD" invert="true"/>
+                <AbilityConditionServerRandom randomchance="0.1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" EventUserTag="Tewi_player" delay="0.5" stackable="false" >
+                            <TriggerEvent identifier="TewiTalent_OnAttack_Event"/>
+                        </StatusEffect>
+                        <StatusEffect type="OnAbility" target="Character" stackable="false" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" >
+                            <Affliction identifier="TewiTalent_OnAttack_Effect_Flag" amount="1.0"/>
+                            <Affliction identifier="TewiTalent_OnAttack_Effect_CD" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionHasAffliction afflictionidentifier="TewiTalent_Attack_Effect07"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAffliction
+                        afflictionidentifiers="internaldamage,blunttrauma,lacerations,bitewounds,gunshotwound,organdamage,Reiki_Pressure,Touhou_Bite"
+                        replacewith="explosiondamage" addedmultiplier="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+
+        <AbilityGroupEffect abilityeffecttype="OnApplyTreatment">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Lucky_Ground_Rabbit"/>
+                <AbilityConditionHasAffliction afflictionidentifier="TewiTalent_OnApplyTreatment_Effect_CD" invert="true"/>
+                <AbilityConditionServerRandom randomchance="0.5"/>
+                <AbilityConditionItem tags="Touhou_Magic_Medical"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" EventUserTag="Tewi_ApplyTreatment_player" delay="0.5" stackable="false" >
+                            <TriggerEvent identifier="TewiTalent_OnApplyTreatment_Event"/>
+                        </StatusEffect>
+                        <StatusEffect type="OnAbility" target="Character" stackable="false" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" >
+                            <Affliction identifier="TewiTalent_OnApplyTreatment_Effect_CD" amount="1.0"/>
+                            <Affliction identifier="TewiTalent_OnApplyTreatment_Effect_Flag" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+    </Talent>
+</Talents>
