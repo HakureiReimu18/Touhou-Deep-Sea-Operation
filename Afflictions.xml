@@ -1907,8 +1907,8 @@
         <icon texture="%ModDir%/Images/Afflictions/Touhou_Tide_Bolt_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
     </Affliction>
 
-    <!--深红幻想乡效果-->
-    <Affliction name="深红幻想乡效果"
+    <!--绯色命运效果-->
+    <Affliction name="绯色命运效果"
                 identifier="Touhou_Scarlet_Gensokyo_Effect"
                 type="Touhou_Scarlet_Gensokyo_Effect"
                 isbuff="true"
@@ -1924,9 +1924,9 @@
         <Effect minstrength="0" maxstrength="10">
             <StatValue stattype="MeleeAttackSpeed" value="0.45"/>
             <StatValue stattype="MeleeAttackMultiplier" value="0.3"/>
-            <StatusEffect target="Character" targettype="Limb" targetlimb="Torso" Interval="5.0" Duration="3.0">
+            <StatusEffect target="Character" targettype="Limb" targetlimb="Torso" Interval="5.0" disabledeltatime="true">
                 <Conditional HasTag="ScarletMode_Open"/>
-                <Affliction identifier="bleeding" strength="6.5"/>
+                <Affliction identifier="bleeding" strength="6.5" penetration="0.35"/>
             </StatusEffect>
         </Effect>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_Tide_Bolt_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
@@ -3502,7 +3502,9 @@
                 iconcolors="94,94,94;163,164,164;255,255,255">
         <Description textidentifier="afflictiondescription.Touhou_Dark_Fog_Effect" minstrength="0" maxstrength="10"/>
         <Effect minstrength="0" maxstrength="10" MinScreenBlur="0.0" MaxScreenBlur="0.18"
-                minafflictionoverlayalphamultiplier="0" maxafflictionoverlayalphamultiplier="0.6" strengthchange="-0.4"/>
+                minafflictionoverlayalphamultiplier="0" maxafflictionoverlayalphamultiplier="0.6" strengthchange="-0.4">
+            <StatValue stattype="MeleeAttackSpeed" value="-0.2"/>
+        </Effect>
         <AfflictionOverlay texture="%ModDir%/Images/Missions/Screen_Black.png"/>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_Deceit_Mod_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
     </Affliction>
@@ -3819,8 +3821,8 @@
                 iconcolors="94,94,94;163,164,164;255,255,255">
         <Description textidentifier="afflictiondescription.Touhou_Cuisine_Effect06" minstrength="0" maxstrength="100"/>
         <Effect minstrength="0" maxstrength="100" minbuffmultiplier="1.25" maxbuffmultiplier="1.25" strengthchange="-0.2">
-            <StatValue stattype="MeleeAttackSpeed" value="0.15"/>
-            <StatValue stattype="MeleeAttackMultiplier" value="0.3"/>
+            <StatValue stattype="MeleeAttackSpeed" value="0.1"/>
+            <StatValue stattype="MeleeAttackMultiplier" value="0.2"/>
         </Effect>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_Cuisine_Effect06.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
     </Affliction>
@@ -4391,6 +4393,7 @@
                 resetbetweenrounds="true" affectmachines="true" iconcolors="94,94,94;163,164,164;255,255,255">
         <Description textidentifier="afflictiondescription.Touhou_ODM11_Aff_Event_Effect" minstrength="0" maxstrength="1"/>
         <Effect minstrength="0" maxstrength="1" resistancefor="sym_unconsciousness,stun" minresistance="2.0" maxresistance="2.0" tag="provocative">
+            <StatValue stattype="MeleeAttackSpeed" value="-0.2"/>
             <StatValue stattype="ExplosionDamageMultiplier" value="0.3"/>
             <StatValue stattype="ExplosionRadiusMultiplier" value="0.3"/>
             <StatValue stattype="TeamAttackMultiplier" value="-0.2"/>
@@ -4565,6 +4568,8 @@
             <StatValue stattype="ExplosionDamageMultiplier" value="-0.3"/>
             <StatValue stattype="ExplosionRadiusMultiplier" value="-0.3"/>
             <StatValue stattype="TeamAttackMultiplier" value="0.5"/>
+            <StatValue stattype="MeleeAttackSpeed" value="-0.3"/>
+            <StatValue stattype="MeleeAttackMultiplier" value="-0.2"/>
         </Effect>
         <icon texture="%ModDir%/Images/Afflictions/Touhou_ODM10_Aff_Event_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
     </Affliction>
@@ -5150,7 +5155,27 @@
                                  ColorMultiplier="40,100,255,200"
                                  Angle="0" Distance="0" CopyEntityAngle="True" CopyTargetAngle="True"/>
             </StatusEffect>
+            <StatusEffect target="Character" invisibletimer="0.5" Interval="3.0" Duration="1.0" setvalue="true" />
         </Effect>
+        <icon texture="%ModDir%/Images/Afflictions/Touhou_Deceit_Mod_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
+    </Affliction>
+
+
+    <!--绯红霰雨击杀效果-->
+    <Affliction name="绯红霰雨击杀效果"
+                identifier="Touhou_ScarletNight_Hailstorm_OnKillCharacter_Effect"
+                type="Touhou_ScarletNight_Hailstorm_OnKillCharacter_Effect"
+                limbspecific="false"
+                indicatorlimb="Head"
+                isbuff="true"
+                maxstrength="1"
+                duration="5.0"
+                showiconthreshold="100"
+                showinhealthscannerthreshold="100"
+                affectmachines="true"
+                iconcolors="94,94,94;163,164,164;255,255,255">
+        <Description textidentifier="afflictiondescription.Touhou_Deceit_Mod_Effect" minstrength="0" maxstrength="1"/>
+        <Effect minstrength="0" maxstrength="1" />
         <icon texture="%ModDir%/Images/Afflictions/Touhou_Deceit_Mod_Effect.png" sourcerect="0,0,128,128" color="255,255,255,255" origin="0,0"/>
     </Affliction>
 

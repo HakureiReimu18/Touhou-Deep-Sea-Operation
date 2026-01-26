@@ -843,6 +843,45 @@
                 <CharacterAbilityGiveAffliction affliction="Touhou_Mental_Image_Deconstructor_Effect" strength="5"/>
             </Abilities>
         </AbilityGroupEffect>
+        <!--绯红霰雨天赋-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_ScarletNight_Hailstorm"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
+            </Conditions>
+            <Conditions>
+                <AbilityConditionCharacter targetabilitytarget="true">
+                    <Conditional isMachine="true" />
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="lacerations" strength="1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnKillCharacter">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_ScarletNight_Hailstorm"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_ScarletNight_Hailstorm_OnKillCharacter_Effect" amount="1000"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_ScarletNight_Hailstorm"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_ScarletNight_Hailstorm_OnKillCharacter_Effect"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
     </Talent>
 
     <Talent identifier="Touhou_Other_Weapon_Talent" IsHiddenExtraTalent="true">
