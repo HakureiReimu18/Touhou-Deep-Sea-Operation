@@ -4,7 +4,7 @@
         <Icon texture="%ModDir%/Images/Talents/ShionTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
         <Description tag="talentdescription.ShionTalent"/>
 
-        <AbilityGroupInterval interval="10.0">
+        <AbilityGroupInterval interval="30.0">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shion_Character_Effect"/>
             </Conditions>
@@ -12,7 +12,7 @@
                 <CharacterAbilityApplyStatusEffects applytoself="true">
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
-                            <Affliction identifier="Touhou_Misfortune_Curse" strength="0.5"/>
+                            <Affliction identifier="Touhou_Misfortune_Curse" strength="1.0"/>
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
@@ -92,6 +92,23 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupEffect>
+
+
+        <AbilityGroupInterval maxtriggercount="1" Interval="10">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shion_Character_Effect" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" EventTargetTag="ShionTalent_InValidTarget">
+                            <Conditional IsBot="false" />
+                            <TriggerEvent identifier="ShionTalent_Effect" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
 
 
     </Talent>

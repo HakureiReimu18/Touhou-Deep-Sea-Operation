@@ -38,13 +38,13 @@
         <Body width="79" height="89" density="10"/>
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="63,0" handle1="-20,0" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Ordinary_Magician="gt 0"/>
+                <Conditional Touhou_Marisa_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Marisa="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Marisa_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Ordinary_Magician="eq 0"/>
+                <Conditional Touhou_Marisa_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Marisa="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -515,7 +515,7 @@
                 <Conditional condition="gte 0"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Ordinary_Magician="eq 0"/>
+                <Conditional Touhou_Marisa_Character_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
             </StatusEffect>
@@ -728,13 +728,13 @@
         <Body width="32" height="32" density="10"/>
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="63,0" handle1="0,0" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Fairy_Of_Ice="gt 0"/>
+                <Conditional Touhou_Cirno_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Cirno="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Cirno_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Fairy_Of_Ice="eq 0"/>
+                <Conditional Touhou_Cirno_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Cirno="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -851,13 +851,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="35,-10" aimpos="45,-10" handle1="-20,-6" handle2="30,10" holdangle="-40"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional scarletdevil="gt 0"/>
+                <Conditional Touhou_Remilia_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Remilia="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Reimilia_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional scarletdevil="eq 0"/>
+                <Conditional Touhou_Remilia_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Remilia="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -905,7 +905,6 @@
           impactsoundtag="impact_metal_light">
         <PreferredContainer primary="harpoongun" amount="6" spawnprobability="0.3"/>
         <PreferredContainer primary="armcab" amount="6" spawnprobability="0.3" notcampaign="true"/>
-        <PreferredContainer secondary="outpostsecarmcab" minamount="1" maxamount="2" spawnprobability="0.3"/>
         <PreferredContainer secondary="wrecksecarmcab" minamount="1" maxamount="2" spawnprobability="0.2"/>
         <PreferredContainer secondary="secarmcab"/>
         <Price baseprice="100" sold="false">
@@ -917,21 +916,14 @@
         </Price>
         <Deconstruct time="2.5"/>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" amount="6">
-            <RequiredSkill identifier="weapons" level="30"/>
-            <RequiredItem identifier="physicorium"/>
+            <RequiredSkill identifier="weapons" level="10"/>
+            <RequiredItem identifier="Magic_Material"/>
             <RequiredItem identifier="Touhou_Plant_Extract"/>
+            <RequiredItem identifier="steel"/>
         </Fabricate>
         <Sprite texture="%ModDir%/Images/OtherWeapons/Remilia_Gungnier.png" sourcerect="200,0,143,50" depth="0.55" origin="0.5,0.5"/>
         <Body width="110" height="30" density="20"/>
         <Pickable slots="Any" msg="ItemMsgPickUpSelect"/>
-        <Rope sourcepullforce="300" targetpullforce="100" projectilepullforce="5" maxlength="1500" snaponcollision="false" spritewidth="3" tile="true"
-              origin="0.05,0.5" targetminmass="30" lerpforces="true" snapanimduration="0.5">
-            <Sprite texture="Content/Map/Thalamus/thalamus.png" sourcerect="617,352,174,32" depth="0.57" color="255,50,50,255" origin="0.5,0.5"/>
-            <!-- Snap after 1 seconds if not stuck to anything -->
-            <StatusEffect type="OnUse" target="This" Snapped="true" delay="1" checkconditionalalways="true">
-                <Conditional targetitemcomponent="Projectile" IsStuckToTarget="false"/>
-            </StatusEffect>
-        </Rope>
         <Projectile characterusable="false" launchimpulse="8.5" sticktocharacters="true" sticktoitems="true" sticktostructures="true"
                     sticktodoors="false" friendlyfire="true">
             <Attack structuredamage="30" itemdamage="30" targetforce="10" severlimbsprobability="0.2" penetration="0.2">
@@ -940,11 +932,6 @@
                 <Affliction identifier="bloodloss" strength="10"/>
                 <Affliction identifier="stun" strength="0.5"/>
             </Attack>
-            <StatusEffect type="OnActive" target="UseTarget,This" checkconditionalalways="true" comparison="And">
-                <Conditional Snapped="false"/>
-                <Conditional mass="lt 30"/>
-                <Affliction identifier="drag" strength="1"/>
-            </StatusEffect>
         </Projectile>
     </Item>
 
@@ -982,13 +969,13 @@
         <Holdable slots="Any,RightHand+LeftHand" UseHandRotationForHoldAngle="true" controlpose="true" aimpos="10,90" holdangle="65" handle1="20,-6"
                   handle2="144,-68" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional scarletdevil="gt 0"/>
+                <Conditional Touhou_Remilia_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Remilia="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Reimilia_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional scarletdevil="eq 0"/>
+                <Conditional Touhou_Remilia_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Remilia="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -1136,13 +1123,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="50,-10" handle1="-30,-15" handle2="26,5" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5" disabledeltatime="true">
-                <Conditional Ancient_Temple="gt 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Youmu="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Bai_Lou_And_Lou_Guan" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Ancient_Temple="eq 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Youmu="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -1455,7 +1442,7 @@
                 <Affliction identifier="Touhou_Lou_Guan_Sword" strength="10"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And">
-                <Conditional Ancient_Temple="eq 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Youmu="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -1550,13 +1537,13 @@
                 <Affliction identifier="Touhou_Lost_Heart" strength="6"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And">
-                <Conditional Ancient_Temple="eq 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Youmu_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character">
-                <Conditional Ancient_Temple="gt 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Youmu_Effect="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Bai_Lou_Sword" strength="10"/>
@@ -1599,14 +1586,14 @@
                 <Conditional reload="gt 0.6"/>
             </StatusEffect>
             <StatusEffect type="OnSuccess" target="Character" setvalue="true" comparison="And">
-                <Conditional Ancient_Temple="eq 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Youmu_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="stun" amount="5"/>
             </StatusEffect>
             <StatusEffect type="OnFailure" target="This" reload="1.5" setvalue="true"/>
             <StatusEffect type="OnFailure" target="Character" comparison="And">
-                <Conditional Ancient_Temple="eq 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Youmu_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="stun" amount="5"/>
@@ -1907,13 +1894,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.6" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.5" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional The_Daughter_Of_Heaven="gt 0"/>
+                <Conditional Touhou_Tenshi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tenshi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Tenshi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional The_Daughter_Of_Heaven="eq 0"/>
+                <Conditional Touhou_Tenshi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tenshi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -1965,7 +1952,7 @@
             </StatusEffect>
             <StatusEffect type="OnFailure" target="This" reload="1.5" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" comparison="And" stackable="false">
-                <Conditional The_Daughter_Of_Heaven="eq 0"/>
+                <Conditional Touhou_Tenshi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tenshi="eq 0"/>
                 <Affliction identifier="organdamage" strength="3"/>
             </StatusEffect>
@@ -2017,13 +2004,13 @@
         <Body width="32" height="32" density="9"/>
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="63,0" handle1="0,-40" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Wind_God_Girl="gt 0"/>
+                <Conditional Touhou_Aya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Aya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Wind_God_Girl="eq 0"/>
+                <Conditional Touhou_Aya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -2167,13 +2154,13 @@
         <Body width="72" height="72" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="45,-10" handle1="-10,-50" handle2="70,10" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional The_Still_Library="gt 0"/>
+                <Conditional Touhou_Patchouli_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Patchouli="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Patchouli_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional The_Still_Library="eq 0"/>
+                <Conditional Touhou_Patchouli_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Patchouli="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -2881,13 +2868,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.6" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.5" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Possessed_By_Phoenix="gt 0"/>
+                <Conditional Touhou_Mokou_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Mokou="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Mokou_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Possessed_By_Phoenix="eq 0"/>
+                <Conditional Touhou_Mokou_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Mokou="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -3006,13 +2993,13 @@
         <Body width="400" height="132" density="25"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="60,-10" handle1="-80,-10" handle2="0,-3" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional The_Daughter_Of_Heaven="gt 0"/>
+                <Conditional Touhou_Tenshi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tenshi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Tenshi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional The_Daughter_Of_Heaven="eq 0"/>
+                <Conditional Touhou_Tenshi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tenshi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -3248,13 +3235,13 @@
                 <Sound file="Content/Sounds/Damage/LimbSlash6.ogg" range="500"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Grunt_Security_Tengu="gt 0"/>
+                <Conditional Touhou_Momizi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Momizi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Momizi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Grunt_Security_Tengu="eq 0"/>
+                <Conditional Touhou_Momizi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Momizi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -3339,7 +3326,7 @@
             </StatusEffect>
             <StatusEffect type="OnContained" target="This,Character" condition="0.6" comparison="And" Interval="1.0" disabledeltatime="true">
                 <Conditional condition="gt 0"/>
-                <Conditional Grunt_Security_Tengu="gt 5"/>
+                <Conditional Touhou_Momizi_Character_Effect="gt 5"/>
             </StatusEffect>
             <StatusEffect type="OnContained" target="This,Character" condition="0.3" comparison="And" Interval="1.0" disabledeltatime="true">
                 <Conditional condition="gt 0"/>
@@ -3463,7 +3450,7 @@
             </StatusEffect>
             <StatusEffect type="OnContained" target="This,Character" condition="1.5" Interval="1.0" disabledeltatime="true" comparison="And">
                 <Conditional condition="gt 5"/>
-                <Conditional Grunt_Security_Tengu="gt 5"/>
+                <Conditional Touhou_Momizi_Character_Effect="gt 5"/>
             </StatusEffect>
             <StatusEffect type="OnContained" target="This,Character" condition="0.75" Interval="1.0" disabledeltatime="true" comparison="And">
                 <Conditional condition="gt 5"/>
@@ -3590,7 +3577,7 @@
                 <Conditional condition="eq 100"/>
             </StatusEffect>
             <!--            <StatusEffect type="OnSecondaryUse" target="This,Character" Interval="0.15" disabledeltatime="true" >
-                <Conditional Flowers_Of_Four_Seasons="gt 2"/>
+                <Conditional Touhou_Yuka_Character_Effect="gt 2"/>
                 <SpawnItem identifier="Yuka_Parasol_Spawn" spawnposition="This" />
             </StatusEffect>-->
             <StatusEffect type="OnActive" targettype="NearbyItems" range="300" targets="plantitem" Condition="5" Interval="5"/>
@@ -3787,7 +3774,7 @@
           tags="smallitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level03,Touhou_Cam_Offset_High" Scale="1.2" impactsoundtag="impact_metal_light">
         <PreferredContainer secondary="wreckarmcab,abandonedarmcab" amount="1" spawnprobability="0.05"/>
         <PreferredContainer primary="secarmcab" secondary="armcab,weaponholder"/>
-        <Price baseprice="2400">
+        <Price baseprice="2000">
             <Price storeidentifier="merchantoutpost" minavailable="3"/>
             <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="3"/>
             <Price storeidentifier="merchantresearch" minavailable="3"/>
@@ -3811,7 +3798,7 @@
         <Body width="32" height="32" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="30,10" handle1="-5,0" handle2="5,-5" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Wind_God_Girl="gt 0"/>
+                <Conditional Touhou_Aya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Aya_Weapons" strength="100"/>
@@ -3820,7 +3807,7 @@
                 <Affliction identifier="Touhou_No_Team_Attack_Effect" strength="10"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Wind_God_Girl="eq 0"/>
+                <Conditional Touhou_Aya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -3936,13 +3923,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.85" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Younger_Sister_Of_Scarlet="gt 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Flandre_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Younger_Sister_Of_Scarlet="eq 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -3990,7 +3977,7 @@
                 <Affliction identifier="bloodloss" strength="0.5"/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="Character" comparison="And">
-                <Conditional Younger_Sister_Of_Scarlet="eq 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="eq 0"/>
                 <Affliction identifier="bloodloss" strength="0.5"/>
             </StatusEffect>
@@ -4039,13 +4026,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.7" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.6" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Unconfirmed_Fantasy_Flying_Girl="gt 0"/>
+                <Conditional Touhou_Nue_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nue="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Nue_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Unconfirmed_Fantasy_Flying_Girl="eq 0"/>
+                <Conditional Touhou_Nue_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nue="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -4096,7 +4083,7 @@
                 <Affliction identifier="psychosis" strength="1.5"/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="Character" comparison="And">
-                <Conditional Unconfirmed_Fantasy_Flying_Girl="eq 0"/>
+                <Conditional Touhou_Nue_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nue="eq 0"/>
                 <Affliction identifier="organdamage" strength="0.75"/>
                 <Affliction identifier="psychosis" strength="1.5"/>
@@ -4176,13 +4163,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.6" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.5" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Younger_Sister_Of_Scarlet="gt 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Flandre_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Younger_Sister_Of_Scarlet="eq 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -4233,7 +4220,7 @@
                 <Affliction identifier="bloodloss" strength="4.0"/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="Character" comparison="And">
-                <Conditional Younger_Sister_Of_Scarlet="eq 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="eq 0"/>
                 <Affliction identifier="bloodloss" strength="1.5"/>
             </StatusEffect>
@@ -4248,7 +4235,7 @@
                 <Affliction identifier="bloodloss" strength="0.4"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And">
-                <Conditional Younger_Sister_Of_Scarlet="eq 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="eq 0"/>
                 <Affliction identifier="bloodloss" strength="0.6"/>
             </StatusEffect>
@@ -4295,13 +4282,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.65" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Fairy_Of_Ice="gt 0"/>
+                <Conditional Touhou_Cirno_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Cirno="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Cirno_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Fairy_Of_Ice="eq 0"/>
+                <Conditional Touhou_Cirno_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Cirno="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -4398,13 +4385,13 @@
         <Body width="32" height="32" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="45,-10" handle1="-10,-50" handle2="70,10" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Fairy_Of_Ice="gt 0"/>
+                <Conditional Touhou_Cirno_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Cirno="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Cirno_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Fairy_Of_Ice="eq 0"/>
+                <Conditional Touhou_Cirno_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Cirno="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -4618,13 +4605,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.8" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.7" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Fairy_Of_Hell="gt 0"/>
+                <Conditional Touhou_Piece_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Piece="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Piece_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Fairy_Of_Hell="eq 0"/>
+                <Conditional Touhou_Piece_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Piece="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -4728,13 +4715,13 @@
         <Body width="63" height="190" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdangle="-40" aimpos="63,0" handle1="0,10" handle2="0,-10" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Younger_Sister_Of_Scarlet="gt 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Flandre_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Younger_Sister_Of_Scarlet="eq 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -4930,13 +4917,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.65" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Koishi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Koishi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Closed_Eyes_Of_Koishi="eq 0"/>
+                <Conditional Touhou_Koishi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Koishi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -5199,13 +5186,13 @@
                 <Conditional Voltage="lt 0.5"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Possessed_By_Phoenix="gt 0"/>
+                <Conditional Touhou_Mokou_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Mokou="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Mokou_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Possessed_By_Phoenix="eq 0"/>
+                <Conditional Touhou_Mokou_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Mokou="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -5426,13 +5413,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.95" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.85" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Puppeteer_Of_Seven_Colors="gt 0"/>
+                <Conditional Touhou_Alice_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Alice="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Alice_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Puppeteer_Of_Seven_Colors="eq 0"/>
+                <Conditional Touhou_Alice_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Alice="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -5518,13 +5505,13 @@
         <Body width="72" height="72" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="45,-10" handle1="-10,-50" handle2="70,10" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Puppeteer_Of_Seven_Colors="gt 0"/>
+                <Conditional Touhou_Alice_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Alice="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Alice_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Puppeteer_Of_Seven_Colors="eq 0"/>
+                <Conditional Touhou_Alice_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Alice="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -5580,6 +5567,7 @@
                     <ReduceAffliction identifier="Alice_Doll_Energy" amount="10"/>
                     <Affliction identifier="Alice_Doll_Spawn" amount="10"/>
                     <SpawnCharacter speciesname="Touhou_Alice_Doll_Normal" count="1" spread="10"/>
+                    <LuaHook name="Touhou_Alice_Magic_Book.Summon"/>
                     <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="2" range="500.0" loop="false"/>
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="Character">
@@ -5592,6 +5580,7 @@
                     <ReduceAffliction identifier="Alice_Doll_Energy" amount="10"/>
                     <Affliction identifier="Alice_Doll_Spawn" amount="10"/>
                     <SpawnCharacter speciesname="Touhou_Alice_Doll_ShangHai" count="1" spread="10"/>
+                    <LuaHook name="Touhou_Alice_Magic_Book.Summon"/>
                     <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="2" range="500.0" loop="false"/>
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="Character">
@@ -5604,6 +5593,7 @@
                     <ReduceAffliction identifier="Alice_Doll_Energy" amount="10"/>
                     <Affliction identifier="Alice_Doll_Spawn" amount="10"/>
                     <SpawnCharacter speciesname="Touhou_Alice_Doll_PengLai" count="1" spread="10"/>
+                    <LuaHook name="Touhou_Alice_Magic_Book.Summon"/>
                     <sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Charging.ogg" type="OnUse" volume="2" range="500.0" loop="false"/>
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="Character">
@@ -5906,13 +5896,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.7" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.6" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional scarletdevil="gt 0"/>
+                <Conditional Touhou_Remilia_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Remilia="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Reimilia_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional scarletdevil="eq 0"/>
+                <Conditional Touhou_Remilia_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Remilia="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -6066,13 +6056,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="40,-10" handle1="5,-15" handle2="34,5" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Shining_Light_Of_The_Sun="gt 0"/>
+                <Conditional Touhou_Sunny_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sunny="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Three_Fairies_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Shining_Light_Of_The_Sun="eq 0"/>
+                <Conditional Touhou_Sunny_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sunny="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -6226,13 +6216,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="45,-10" handle1="-2,-8" handle2="26,0" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Tranquil_Light_Of_The_Moon="gt 0"/>
+                <Conditional Touhou_Luna_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Luna="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Three_Fairies_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Tranquil_Light_Of_The_Moon="eq 0"/>
+                <Conditional Touhou_Luna_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Luna="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -6450,13 +6440,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.85" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Cascading_Light_Of_The_Star="gt 0"/>
+                <Conditional Touhou_Star_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Star="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Three_Fairies_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Cascading_Light_Of_The_Star="eq 0"/>
+                <Conditional Touhou_Star_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Star="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -6604,13 +6594,13 @@
         <Body width="140" height="60" density="10"/>
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="63,0" handle1="-2,0" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Perfect_And_Elegant_Servant="gt 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sakuya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Sakuya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Perfect_And_Elegant_Servant="eq 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sakuya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -6691,11 +6681,11 @@
                 <Affliction identifier="bleeding" strength="8"/>
                 <Affliction identifier="stun" strength="0.08" probability="0.15"/>
             </Attack>
-            <StatusEffect type="OnActive" target="This" lifetime="1">
+            <StatusEffect type="OnActive" target="This" lifetime="0.7">
                 <ParticleEmitter particle="ammotrailwater" copyentityangle="true" anglemin="-5" anglemax="5" particleamount="3" velocitymin="-10"
                                  velocitymax="-100" scalemin="0.8" scalemax="1.6"/>
             </StatusEffect>
-            <StatusEffect type="OnNotContained" target="This" disabledeltatime="true" delay="0.8" stackable="false">
+            <StatusEffect type="OnNotContained" target="This" disabledeltatime="true" delay="0.7" stackable="false">
                 <Remove/>
             </StatusEffect>
             <StatusEffect type="OnImpact" target="UseTarget">
@@ -6754,13 +6744,13 @@
         <Body width="140" height="60" density="10"/>
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="63,0" handle1="-4,0" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Perfect_And_Elegant_Servant="gt 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sakuya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Sakuya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Perfect_And_Elegant_Servant="eq 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sakuya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -6846,7 +6836,7 @@
                 <ParticleEmitter particle="ammotrailwater" copyentityangle="true" anglemin="-5" anglemax="5" particleamount="3" velocitymin="-10"
                                  velocitymax="-100" scalemin="0.8" scalemax="1.6" colormultiplier="255,155,155,255"/>
             </StatusEffect>
-            <StatusEffect type="OnNotContained" target="This" disabledeltatime="true" delay="0.8" stackable="false">
+            <StatusEffect type="OnNotContained" target="This" disabledeltatime="true" delay="0.7" stackable="false">
                 <Remove/>
             </StatusEffect>
             <StatusEffect type="OnImpact" target="UseTarget">
@@ -6891,13 +6881,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.85" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Perfect_And_Elegant_Servant="gt 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sakuya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Sakuya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Perfect_And_Elegant_Servant="eq 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sakuya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -6911,7 +6901,7 @@
                 <Affliction identifier="Touhou_Decreased_Meleedamage_Effect02" strength="100"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="1.0">
-                <Conditional Perfect_And_Elegant_Servant="gt 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Vampire_Fang_Sword_Effect" strength="100"/>
             </StatusEffect>
 
@@ -6996,13 +6986,13 @@
                      range="130" combatPriority="50"
                      allowhitmultiple="true" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Perfect_And_Elegant_Servant="gt 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sakuya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Sakuya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Perfect_And_Elegant_Servant="eq 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sakuya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -7017,7 +7007,7 @@
             </StatusEffect>
 
             <StatusEffect type="OnActive" target="Character" Interval="1.0">
-                <Conditional Perfect_And_Elegant_Servant="gt 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Dream_Luna_Sword_Effect" strength="100"/>
             </StatusEffect>
 
@@ -7150,13 +7140,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.65" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Manifest_God_Of_Miracles="gt 0"/>
+                <Conditional Touhou_Sanae_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sanae="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Sanae_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Manifest_God_Of_Miracles="eq 0"/>
+                <Conditional Touhou_Sanae_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sanae="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -7269,13 +7259,13 @@
         <Body width="64" height="64" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="63,0" handle1="-26,-11" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Lunatic_Moon_Rabbit="gt 0"/>
+                <Conditional Touhou_Reisen_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Reisen="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Reisen_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Lunatic_Moon_Rabbit="eq 0"/>
+                <Conditional Touhou_Reisen_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Reisen="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -7656,13 +7646,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="55,-10" handle1="-80,-15" handle2="0,10" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Lunatic_Moon_Rabbit="gt 0"/>
+                <Conditional Touhou_Reisen_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Reisen="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Reisen_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Lunatic_Moon_Rabbit="eq 0"/>
+                <Conditional Touhou_Reisen_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Reisen="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -7900,12 +7890,12 @@
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" holdpos="40,-10" aimpos="60,0" handle1="-55,-15" handle2="0,5" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Memory_Of_Gensokyo="gt 0"/>
+                <Conditional Touhou_Akyuu_Character_Effect="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Akyuu_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Memory_Of_Gensokyo="eq 0"/>
+                <Conditional Touhou_Akyuu_Character_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
             </StatusEffect>
@@ -8065,13 +8055,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.65" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Flowers_Of_Four_Seasons="gt 0"/>
+                <Conditional Touhou_Yuka_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yuka="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Yuka_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Flowers_Of_Four_Seasons="gt 0"/>
+                <Conditional Touhou_Yuka_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yuka="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -8203,13 +8193,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.85" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Flowers_Of_Four_Seasons="gt 0"/>
+                <Conditional Touhou_Yuka_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yuka="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Yuka_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Flowers_Of_Four_Seasons="gt 0"/>
+                <Conditional Touhou_Yuka_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yuka="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -8292,13 +8282,13 @@
         <Body width="97" height="146" density="10"/>
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="63,0" handle1="-4,0" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Realm_Of_Fantasy="gt 0"/>
+                <Conditional Touhou_Yukari_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yukari="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Yukari_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Realm_Of_Fantasy="eq 0"/>
+                <Conditional Touhou_Yukari_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yukari="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -8467,9 +8457,9 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="60,-10" handle1="-25,-10" handle2="10,-3"
                   holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5" disabledeltatime="true">
-                <Conditional Shining_Light_Of_The_Sun="gt 0"/>
-                <Conditional Tranquil_Light_Of_The_Moon="gt 0"/>
-                <Conditional Cascading_Light_Of_The_Star="gt 0"/>
+                <Conditional Touhou_Sunny_Character_Effect="gt 0"/>
+                <Conditional Touhou_Luna_Character_Effect="gt 0"/>
+                <Conditional Touhou_Star_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sunny="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Luna="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Star="gt 0"/>
@@ -8477,9 +8467,9 @@
                 <Affliction identifier="Touhou_Three_Fairies_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5" disabledeltatime="true">
-                <Conditional Shining_Light_Of_The_Sun="eq 0"/>
-                <Conditional Tranquil_Light_Of_The_Moon="eq 0"/>
-                <Conditional Cascading_Light_Of_The_Star="eq 0"/>
+                <Conditional Touhou_Sunny_Character_Effect="eq 0"/>
+                <Conditional Touhou_Luna_Character_Effect="eq 0"/>
+                <Conditional Touhou_Star_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sunny="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Luna="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Star="eq 0"/>
@@ -8731,13 +8721,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="55,-10" aimpos="70,6" handle1="-124,-17" handle2="-86,0" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Ordinary_Magician="gt 0"/>
+                <Conditional Touhou_Marisa_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Marisa="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Marisa_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Ordinary_Magician="eq 0"/>
+                <Conditional Touhou_Marisa_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Marisa="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -8933,13 +8923,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.85" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional The_Still_Library="gt 0"/>
+                <Conditional Touhou_Patchouli_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Patchouli="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Patchouli_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional The_Still_Library="eq 0"/>
+                <Conditional Touhou_Patchouli_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Patchouli="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -9110,13 +9100,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.85" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Naivete_Koma_Inu="gt 0"/>
+                <Conditional Touhou_Aunn_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aunn="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Aunn_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Naivete_Koma_Inu="eq 0"/>
+                <Conditional Touhou_Aunn_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aunn="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -9220,20 +9210,20 @@
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" holdpos="55,-10" aimpos="75,-5" handle1="-90,-2" handle2="-90,-2" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Wind_God_Girl="gt 0"/>
+                <Conditional Touhou_Aya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Aya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Grunt_Security_Tengu="gt 0"/>
+                <Conditional Touhou_Momizi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Momizi="gt 0"/>
                 <Affliction identifier="Momizi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Wind_God_Girl="eq 0"/>
+                <Conditional Touhou_Aya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aya="eq 0"/>
-                <Conditional Grunt_Security_Tengu="eq 0"/>
+                <Conditional Touhou_Momizi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Momizi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -9386,13 +9376,13 @@
         <Body width="79" height="96" density="10"/>
         <Holdable slots="RightHand+LeftHand" controlpose="true" aimpos="63,0" handle1="-26,-11" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional The_Still_Library="gt 0"/>
+                <Conditional Touhou_Patchouli_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Patchouli="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Patchouli_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional The_Still_Library="eq 0"/>
+                <Conditional Touhou_Patchouli_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Patchouli="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -9558,13 +9548,13 @@
         <Body width="50" height="400" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="63,0" handle1="-18,-58" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Koishi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Koishi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Closed_Eyes_Of_Koishi="eq 0"/>
+                <Conditional Touhou_Koishi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Koishi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -9873,13 +9863,13 @@
         <Body width="400" height="200" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="65,0" handle1="-55,-18" handle2="-15,-6" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Flowers_Of_Four_Seasons="gt 0"/>
+                <Conditional Touhou_Yuka_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yuka="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Yuka_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Flowers_Of_Four_Seasons="gt 0"/>
+                <Conditional Touhou_Yuka_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yuka="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -10043,13 +10033,13 @@
         <Body width="403" height="134" density="10"/>
         <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-80,-13" handle2="0,-12" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Unconfirmed_Fantasy_Flying_Girl="gt 0"/>
+                <Conditional Touhou_Nue_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nue="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Nue_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Unconfirmed_Fantasy_Flying_Girl="eq 0"/>
+                <Conditional Touhou_Nue_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nue="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -10281,13 +10271,13 @@
         </LightComponent>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-80,-13" handle2="0,-12" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Fairy_Of_Ice="gt 0"/>
+                <Conditional Touhou_Cirno_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Cirno="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Cirno_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Fairy_Of_Ice="eq 0"/>
+                <Conditional Touhou_Cirno_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Cirno="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -10501,13 +10491,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="75,0" handle1="-120,-13" handle2="-80,-12"
                   holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Realm_Of_Fantasy="gt 0"/>
+                <Conditional Touhou_Yukari_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yukari="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Yukari_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Realm_Of_Fantasy="eq 0"/>
+                <Conditional Touhou_Yukari_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yukari="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -10686,13 +10676,13 @@
         <Body width="400" height="100" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-100,-13" handle2="-30,2" holdangle="-45">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Puppeteer_Of_Seven_Colors="gt 0"/>
+                <Conditional Touhou_Alice_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Alice="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Alice_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Puppeteer_Of_Seven_Colors="eq 0"/>
+                <Conditional Touhou_Alice_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Alice="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -10851,13 +10841,13 @@
         </Wearable>
         <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-80,-13" handle2="0,-12" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional The_Daughter_Of_Heaven="gt 0"/>
+                <Conditional Touhou_Tenshi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tenshi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Tenshi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional The_Daughter_Of_Heaven="eq 0"/>
+                <Conditional Touhou_Tenshi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tenshi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -10951,7 +10941,7 @@
             <Item identifier="plastic" amount="2"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
-            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="advmunition_core" amount="3"/>
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="titaniumaluminiumalloy" amount="6"/>
@@ -10959,7 +10949,7 @@
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="advmunition_core" amount="3"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
@@ -11063,13 +11053,13 @@
         </LightComponent>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-80,-13" handle2="0,-12" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Manifest_God_Of_Miracles="gt 0"/>
+                <Conditional Touhou_Sanae_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sanae="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Sanae_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Manifest_God_Of_Miracles="eq 0"/>
+                <Conditional Touhou_Sanae_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sanae="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -11143,7 +11133,7 @@
             <Item identifier="titaniumaluminiumalloy" amount="2"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
-            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="potassium"/>
             <RequiredItem identifier="chlorine" amount="2"/>
@@ -11152,7 +11142,7 @@
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="potassium"/>
             <RequiredItem identifier="chlorine" amount="2"/>
@@ -11307,13 +11297,13 @@
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="70,0" handle1="240,-30" handle2="240,-30" holdangle="-35"
                   swingamount="0,3" swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Perfect_And_Elegant_Servant="gt 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sakuya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Sakuya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Perfect_And_Elegant_Servant="eq 0"/>
+                <Conditional Touhou_Sakuya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sakuya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -11388,7 +11378,7 @@
             <Item identifier="plastic" amount="2"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
-            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="lithium" amount="2"/>
             <RequiredItem identifier="Touhou_Bottle_Element" />
             <RequiredItem identifier="plastic" amount="2"/>
@@ -11396,7 +11386,7 @@
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="lithium" amount="2"/>
             <RequiredItem identifier="Touhou_Bottle_Element" />
             <RequiredItem identifier="plastic" amount="2"/>
@@ -11489,13 +11479,13 @@
         <Body width="79" height="96" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="63,0" handle1="-26,-11" holdangle="10" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Koishi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Koishi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Closed_Eyes_Of_Koishi="eq 0"/>
+                <Conditional Touhou_Koishi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Koishi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -11564,13 +11554,13 @@
           impactsoundtag="impact_metal_light">
         <Deconstruct time="3"/>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5">
-            <RequiredSkill identifier="Touhou_Magic" level="100"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="dementonite"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="4"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="Touhou_Recharge">
-            <RequiredSkill identifier="weapons" level="65"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="munition_propulsion" amount="5" defaultitem="phosphorus"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Touhou_Closed_Third_Eye_Ammo01" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
@@ -11739,7 +11729,7 @@
                 <Affliction identifier="Reimu_Weapons" strength="10"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5" comparison="And">
-                <Conditional RedAndWhite="eq 0"/>
+                <Conditional Touhou_Reimu_Character_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
             </StatusEffect>
@@ -11903,13 +11893,13 @@
         </LightComponent>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-80,-13" handle2="0,-12" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Wind_God_Girl="gt 0"/>
+                <Conditional Touhou_Aya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Aya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Wind_God_Girl="eq 0"/>
+                <Conditional Touhou_Aya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -11994,7 +11984,7 @@
             <Item identifier="titaniumaluminiumalloy" amount="2"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
-            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="steel" amount="3"/>
@@ -12002,7 +11992,7 @@
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="munition_propulsion" amount="4" defaultitem="phosphorus"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="steel" amount="2"/>
@@ -12100,13 +12090,13 @@
         </LightComponent>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-65,-13" handle2="0,-12" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Younger_Sister_Of_Scarlet="gt 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Flandre_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Younger_Sister_Of_Scarlet="eq 0"/>
+                <Conditional Touhou_Flandre_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Flandre="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -12183,7 +12173,7 @@
             <Item identifier="titaniumaluminiumalloy" amount="2"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
-            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="compoundn"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
@@ -12191,7 +12181,7 @@
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="Touhou_Recharge">
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="munition_propulsion" amount="2" defaultitem="phosphorus"/>
             <RequiredItem identifier="compoundn"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
@@ -12357,13 +12347,13 @@
         </LightComponent>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-65,-13" handle2="0,-12" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional scarletdevil="gt 0"/>
+                <Conditional Touhou_Remilia_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Remilia="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Reimilia_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional scarletdevil="eq 0"/>
+                <Conditional Touhou_Remilia_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Remilia="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -12466,7 +12456,7 @@
             <Item identifier="titaniumaluminiumalloy"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
-            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="advmunition_core" amount="3"/>
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="titaniumaluminiumalloy"/>
@@ -12474,7 +12464,7 @@
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="Touhou_Recharge">
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="advmunition_core" amount="3"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem identifier="flashpowder" amount="2"/>
@@ -12571,13 +12561,13 @@
         </LightComponent>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-75,-13" handle2="0,-12" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Flowers_Of_Four_Seasons="gt 0"/>
+                <Conditional Touhou_Yuka_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yuka="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Yuka_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Flowers_Of_Four_Seasons="gt 0"/>
+                <Conditional Touhou_Yuka_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yuka="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -12663,7 +12653,7 @@
             <Item identifier="titaniumaluminiumalloy"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
-            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="advmunition_core" amount="2"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="titaniumaluminiumalloy"/>
@@ -12671,7 +12661,7 @@
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="Touhou_Recharge">
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="advmunition_core" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem tag="Sun_Flower_Petal" amount="2"/>
@@ -12776,7 +12766,7 @@
             <Item identifier="titaniumaluminiumalloy"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
-            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="advmunition_core" amount="2"/>
             <RequiredItem identifier="plastic" amount="2"/>
             <RequiredItem identifier="titaniumaluminiumalloy"/>
@@ -12784,7 +12774,7 @@
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="Touhou_Recharge">
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem tag="advmunition_core" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem tag="Sun_Flower_Petal" amount="2"/>
@@ -12879,13 +12869,13 @@
         <Body width="130" height="240" density="10"/>
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="63,0" handle1="-20,-2" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Expressive_Pokerface="gt 0"/>
+                <Conditional Touhou_Kokoro_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kokoro="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Kokoro_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Expressive_Pokerface="eq 0"/>
+                <Conditional Touhou_Kokoro_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kokoro="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -12981,14 +12971,14 @@
             <Item identifier="Touhou_Plant_Extract" amount="2"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="20">
-            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="4"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Score_Point"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10" displayname="recycleitem">
-            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem identifier="Magic_Material"/>
@@ -13088,13 +13078,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.65" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Expressive_Pokerface="gt 0"/>
+                <Conditional Touhou_Kokoro_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kokoro="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Kokoro_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Expressive_Pokerface="eq 0"/>
+                <Conditional Touhou_Kokoro_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kokoro="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -13188,13 +13178,13 @@
         </LightComponent>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-52,-13" handle2="0,-12" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Candid_Friend="gt 0"/>
+                <Conditional Touhou_Nitori_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nitori="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Nitori_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Candid_Friend="eq 0"/>
+                <Conditional Touhou_Nitori_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nitori="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -13291,14 +13281,14 @@
             <Item identifier="plastic" amount="2"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
-            <RequiredSkill identifier="Touhou_Magic" level="60"/>
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
             <RequiredItem tag="munition_propulsion" amount="3" defaultitem="phosphorus"/>
             <RequiredItem identifier="copper"/>
             <RequiredItem identifier="plastic" amount="4"/>
             <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="Touhou_Recharge">
-            <RequiredSkill identifier="Touhou_Magic" level="30"/>
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
             <RequiredItem tag="munition_propulsion" amount="3" defaultitem="phosphorus"/>
             <RequiredItem identifier="copper"/>
             <RequiredItem identifier="Touhou_Base_Metal"/>
@@ -13392,13 +13382,13 @@
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" holdpos="40,-10" aimpos="45,-10" handle1="-30,-15" handle2="36,10" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5" disabledeltatime="true">
-                <Conditional Ancient_Temple="gt 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Youmu="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Bai_Lou_And_Lou_Guan" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Ancient_Temple="eq 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Youmu="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -13470,14 +13460,14 @@
             <Price storeidentifier="merchantarmory" multiplier="0.9" minavailable="4"/>
         </Price>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="7.5">
-            <RequiredSkill identifier="weapons" level="40"/>
+            <RequiredSkill identifier="weapons" level="10"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_core" amount="4" defaultitem="copper"/>
             <RequiredItem identifier="steel" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="recycleitem">
-            <RequiredSkill identifier="weapons" level="20"/>
+            <RequiredSkill identifier="weapons" level="10"/>
             <RequiredItem identifier="Magic_Material"/>
             <RequiredItem tag="munition_core" amount="3" defaultitem="copper"/>
             <RequiredItem tag="Touhou_Whisper_Half_Phantom_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
@@ -13554,7 +13544,7 @@
             <Price storeidentifier="merchantarmory" multiplier="0.9" minavailable="4"/>
         </Price>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="7.5">
-            <RequiredSkill identifier="weapons" level="40"/>
+            <RequiredSkill identifier="weapons" level="10"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_core" amount="1" defaultitem="copper"/>
@@ -13563,7 +13553,7 @@
             <RequiredItem identifier="plastic" amount="3"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="recycleitem">
-            <RequiredSkill identifier="weapons" level="20"/>
+            <RequiredSkill identifier="weapons" level="10"/>
             <RequiredItem identifier="Magic_Material"/>
             <RequiredItem tag="munition_core" amount="1" defaultitem="copper"/>
             <RequiredItem tag="munition_propulsion" amount="1" defaultitem="phosphorus"/>
@@ -13626,7 +13616,7 @@
           Tags="smallitem,weapon,Touhou_Weapon_Level04,Touhou_Cam_Offset_Low" cargocontaineridentifier="metalcrate" scale="0.25"
           impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
-        <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" spawnprobability="0.02"/>
+        <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" spawnprobability="0.02" minleveldifficulty="15"/>
         <Price baseprice="10000">
             <Price storeidentifier="merchantoutpost" multiplier="1.2"/>
             <Price storeidentifier="merchantcity" multiplier="1.0"/>
@@ -13655,13 +13645,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.7" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.6" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Grunt_Security_Tengu="gt 0"/>
+                <Conditional Touhou_Momizi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Momizi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Momizi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Grunt_Security_Tengu="eq 0"/>
+                <Conditional Touhou_Momizi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Momizi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -13756,13 +13746,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="60,0" handle1="-30,-15" handle2="36,10" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Grunt_Security_Tengu="gt 0"/>
+                <Conditional Touhou_Momizi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Momizi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Momizi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Grunt_Security_Tengu="eq 0"/>
+                <Conditional Touhou_Momizi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Momizi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -13845,7 +13835,7 @@
             <Price storeidentifier="merchantarmory" multiplier="0.9" minavailable="4"/>
         </Price>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="7.5">
-            <RequiredSkill identifier="weapons" level="40"/>
+            <RequiredSkill identifier="weapons" level="10"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_core" amount="2" defaultitem="copper"/>
@@ -13853,7 +13843,7 @@
             <RequiredItem identifier="steel" amount="2"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="recycleitem">
-            <RequiredSkill identifier="weapons" level="40"/>
+            <RequiredSkill identifier="weapons" level="10"/>
             <RequiredItem identifier="Magic_Material"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
             <RequiredItem tag="munition_core" amount="2" defaultitem="copper"/>
@@ -13926,14 +13916,14 @@
             <Price storeidentifier="merchantarmory" multiplier="0.9" minavailable="4"/>
         </Price>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="7.5">
-            <RequiredSkill identifier="weapons" level="40"/>
+            <RequiredSkill identifier="weapons" level="10"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
             <RequiredItem identifier="Touhou_Bottle_Element"/>
             <RequiredItem tag="munition_core" amount="3" defaultitem="copper"/>
             <RequiredItem identifier="steel" amount="4"/>
         </Fabricate>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" displayname="recycleitem">
-            <RequiredSkill identifier="weapons" level="40"/>
+            <RequiredSkill identifier="weapons" level="10"/>
             <RequiredItem identifier="Magic_Material" amount="3"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
             <RequiredItem identifier="carbon" amount="2"/>
@@ -14031,13 +14021,13 @@
         <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Komainu_Blaze.png" sourcerect="0,0,400,141" depth="0.5" origin="0.5,0.5"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="55,-3" aimpos="60,-7" handle1="-82,-20" handle2="42,10" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Naivete_Koma_Inu="gt 0"/>
+                <Conditional Touhou_Aunn_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aunn="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Aunn_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Naivete_Koma_Inu="eq 0"/>
+                <Conditional Touhou_Aunn_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aunn="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -14197,13 +14187,13 @@
         <Body width="600" height="136" density="10"/>
         <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="75,-5" handle1="-120,-19" handle2="-40,-8" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Lunatic_Moon_Rabbit="gt 0"/>
+                <Conditional Touhou_Reisen_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Reisen="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Reisen_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Lunatic_Moon_Rabbit="eq 0"/>
+                <Conditional Touhou_Reisen_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Reisen="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -14492,13 +14482,13 @@
         <Body width="400" height="202" density="10"/>
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true" aimpos="63,0" handle1="-2,0" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Manifest_God_Of_Miracles="gt 0"/>
+                <Conditional Touhou_Sanae_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sanae="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Sanae_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Manifest_God_Of_Miracles="eq 0"/>
+                <Conditional Touhou_Sanae_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sanae="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -14683,16 +14673,16 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true"
                   holdpos="60,-15" aimpos="75,0" handle1="-220,-120" handle2="-100,60" holdangle="-25">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional The_Still_Library="gt 0"/>
+                <Conditional Touhou_Patchouli_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Patchouli="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Patchouli_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional The_Still_Library="eq 0"/>
+                <Conditional Touhou_Patchouli_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Patchouli="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
-                <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
+                <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
             </StatusEffect>
 
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.5" setvalue="true" AllowWhenBroken="true"/>
@@ -15128,13 +15118,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true"
                   holdpos="60,-15" aimpos="65,0" handle1="-70,-13" handle2="-10,0" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Spring_Bearer_Fairy="gt 0"/>
+                <Conditional Touhou_Lilywhite_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Lilywhite="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Lilywhite_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Spring_Bearer_Fairy="eq 0"/>
+                <Conditional Touhou_Lilywhite_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Lilywhite="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -15346,13 +15336,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true"
                   holdpos="60,-15" aimpos="65,0" handle1="-70,-13" handle2="-10,0" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Spring_Bearer_Fairy="gt 0"/>
+                <Conditional Touhou_Lilywhite_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Lilywhite="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Lilywhite_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Spring_Bearer_Fairy="eq 0"/>
+                <Conditional Touhou_Lilywhite_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Lilywhite="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -15562,13 +15552,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true"
                   holdpos="60,-15" aimpos="65,0" handle1="-70,-13" handle2="-10,0" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Fairy_Of_Hell="gt 0"/>
+                <Conditional Touhou_Piece_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Piece="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Piece_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Fairy_Of_Hell="eq 0"/>
+                <Conditional Touhou_Piece_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Piece="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -15755,13 +15745,13 @@
         <Holdable slots="Any,RightHand,LeftHand" controlpose="true"
                   holdpos="60,-15" aimpos="65,0" handle1="-70,-10" handle2="-70,-10" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Realm_Of_Fantasy="gt 0"/>
+                <Conditional Touhou_Yukari_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yukari="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Yukari_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Realm_Of_Fantasy="eq 0"/>
+                <Conditional Touhou_Yukari_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Yukari="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -15981,13 +15971,13 @@
                 <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Character_Weapon_Talent"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Unconfirmed_Fantasy_Flying_Girl="gt 0"/>
+                <Conditional Touhou_Nue_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nue="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Nue_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Unconfirmed_Fantasy_Flying_Girl="eq 0"/>
+                <Conditional Touhou_Nue_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nue="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -16171,13 +16161,13 @@
                 <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Character_Weapon_Talent"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Expressive_Pokerface="gt 0"/>
+                <Conditional Touhou_Kokoro_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kokoro="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Kokoro_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Expressive_Pokerface="eq 0"/>
+                <Conditional Touhou_Kokoro_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kokoro="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -16365,13 +16355,13 @@
                 <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Character_Weapon_Talent"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Candid_Friend="gt 0"/>
+                <Conditional Touhou_Nitori_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nitori="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Nitori_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Candid_Friend="eq 0"/>
+                <Conditional Touhou_Nitori_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Nitori="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -16619,7 +16609,7 @@
                 <Affliction identifier="Reimu_Weapons" strength="10"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5" comparison="And">
-                <Conditional RedAndWhite="eq 0"/>
+                <Conditional Touhou_Reimu_Character_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
             </StatusEffect>
@@ -16791,13 +16781,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.65" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Spring_Bearer_Fairy="gt 0"/>
+                <Conditional Touhou_Lilywhite_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Lilywhite="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Lilywhite_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Spring_Bearer_Fairy="eq 0"/>
+                <Conditional Touhou_Lilywhite_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Lilywhite="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -16893,13 +16883,13 @@
         <Body width="400" height="222" density="10"/>
         <Holdable slots="RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="30,20" handle1="0,-10" handle2="80,-25" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Fairy_Of_Hell="gt 0"/>
+                <Conditional Touhou_Piece_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Piece="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Piece_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Fairy_Of_Hell="eq 0"/>
+                <Conditional Touhou_Piece_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Piece="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -17070,13 +17060,13 @@
         <Body width="400" height="172" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,5" handle1="-110,-10" handle2="0,0" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Shining_Light_Of_The_Sun="gt 0"/>
+                <Conditional Touhou_Sunny_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sunny="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Three_Fairies_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Shining_Light_Of_The_Sun="eq 0"/>
+                <Conditional Touhou_Sunny_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sunny="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -17192,9 +17182,9 @@
         <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true">
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.1"
                              colormultiplier="255,180,50,255"/>
-            <Attack itemdamage="20" levelwalldamage="20" targetimpulse="2" penetration="0.2" severlimbsprobability="0.4">
+            <Attack itemdamage="35" levelwalldamage="20" targetimpulse="2" penetration="0.15" severlimbsprobability="0.3">
                 <Affliction identifier="lacerations" strength="50"/>
-                <Affliction identifier="blunttrauma" strength="20"/>
+                <Affliction identifier="blunttrauma" strength="10"/>
                 <Affliction identifier="burn" strength="2"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="5"/>
                 <Affliction identifier="stun" strength="0.1" probability="0.1"/>
@@ -17202,9 +17192,6 @@
                     <Affliction identifier="stun" strength="0.1" probability="0.1"/>
                 </StatusEffect>
             </Attack>
-            <StatusEffect type="OnImpact" target="UseTarget" multiplyafflictionsbymaxvitality="true">
-                <Affliction identifier="Touhou_Lost_Dream" strength="1" probability="0.5"/>
-            </StatusEffect>
             <StatusEffect type="OnImpact" target="This">
                 <ParticleEmitter particle="GlowDot" particleamount="1" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350"
                                  scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,255,255,255"/>
@@ -17293,13 +17280,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.85" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Tranquil_Light_Of_The_Moon="gt 0"/>
+                <Conditional Touhou_Luna_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Luna="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Three_Fairies_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Tranquil_Light_Of_The_Moon="eq 0"/>
+                <Conditional Touhou_Luna_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Luna="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -17385,13 +17372,13 @@
         <Body width="400" height="172" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-90,-50" handle2="20,-30" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Cascading_Light_Of_The_Star="gt 0"/>
+                <Conditional Touhou_Star_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Star="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Three_Fairies_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Cascading_Light_Of_The_Star="eq 0"/>
+                <Conditional Touhou_Star_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Star="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -17578,12 +17565,12 @@
                 <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Character_Weapon_Talent"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Memory_Of_Gensokyo="gt 0"/>
+                <Conditional Touhou_Akyuu_Character_Effect="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Akyuu_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Memory_Of_Gensokyo="eq 0"/>
+                <Conditional Touhou_Akyuu_Character_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
             </StatusEffect>
@@ -17727,7 +17714,7 @@
         <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false"/>
         <Projectile characterusable="false" hitscan="true" removeonhit="true" maxtargetstohit="2" damagedoors="true">
             <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.3" colormultiplier="100,130,255,255"/>
-            <Attack itemdamage="75" levelwalldamage="20" targetimpulse="2" penetration="0.3" severlimbsprobability="0.4">
+            <Attack itemdamage="75" levelwalldamage="20" targetimpulse="2" penetration="0.4" severlimbsprobability="0.4">
                 <Affliction identifier="lacerations" strength="80"/>
                 <Affliction identifier="explosiondamage" strength="10"/>
                 <Affliction identifier="Sleepless_Nightmare" strength="3"/>
@@ -17790,12 +17777,12 @@
                 <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Character_Weapon_Talent"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Satori_3rd_Eye="gt 0"/>
+                <Conditional Touhou_Satori_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Satori="gt 0"/>
                 <Affliction identifier="Satori_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Satori_3rd_Eye="eq 0"/>
+                <Conditional Touhou_Satori_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Satori="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
             </StatusEffect>
@@ -18020,13 +18007,13 @@
                 <Sound file="Content/Sounds/Damage/LimbSlash6.ogg" range="500"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5" disabledeltatime="true">
-                <Conditional Ancient_Temple="gt 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Youmu="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Touhou_Bai_Lou_And_Lou_Guan" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Ancient_Temple="eq 0"/>
+                <Conditional Touhou_Youmu_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Youmu="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -18144,13 +18131,13 @@
         <Body width="400" height="110" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,5" handle1="-80,-10" handle2="0,0" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Lucky_Ground_Rabbit="gt 0"/>
+                <Conditional Touhou_Tewi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tewi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Tewi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Lucky_Ground_Rabbit="eq 0"/>
+                <Conditional Touhou_Tewi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tewi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -18410,13 +18397,13 @@
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.8" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.7" setvalue="true"/>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Lucky_Ground_Rabbit="gt 0"/>
+                <Conditional Touhou_Tewi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tewi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Tewi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Lucky_Ground_Rabbit="eq 0"/>
+                <Conditional Touhou_Tewi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tewi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -18505,13 +18492,13 @@
         <Body width="400" height="85" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-100,-13" handle2="-20,-5" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Lucky_Ground_Rabbit="gt 0"/>
+                <Conditional Touhou_Tewi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tewi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Tewi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Lucky_Ground_Rabbit="eq 0"/>
+                <Conditional Touhou_Tewi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Tewi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -18714,13 +18701,13 @@
         <Body width="400" height="85" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-100,-13" handle2="-20,-5" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Possessed_By_Phoenix="gt 0"/>
+                <Conditional Touhou_Mokou_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Mokou="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Mokou_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Possessed_By_Phoenix="eq 0"/>
+                <Conditional Touhou_Mokou_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Mokou="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -18889,13 +18876,13 @@
         <Body width="400" height="85" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-60,-20" handle2="18,-32" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Fairy_Of_Ice="gt 0"/>
+                <Conditional Touhou_Cirno_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Cirno="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Cirno_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Fairy_Of_Ice="eq 0"/>
+                <Conditional Touhou_Cirno_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Cirno="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -19085,13 +19072,13 @@
                 <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Character_Weapon_Talent"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional scarletdevil="gt 0"/>
+                <Conditional Touhou_Remilia_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Remilia="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Reimilia_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional scarletdevil="eq 0"/>
+                <Conditional Touhou_Remilia_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Remilia="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -19262,13 +19249,13 @@
         <Body width="400" height="85" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-100,-20" handle2="0,-32" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5" disabledeltatime="true">
-                <Conditional Wind_God_Girl="gt 0"/>
+                <Conditional Touhou_Aya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Aya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5" disabledeltatime="true">
-                <Conditional Wind_God_Girl="eq 0"/>
+                <Conditional Touhou_Aya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -19417,7 +19404,7 @@
 
 
     <!--狛犬方盾-->
-    <Item name="狛犬方盾" identifier="Touhou_Aunn_Square_Shield" category="Equipment" subcategory="Touhou" tags="mediumitem,Touhou_Weapon_Level03" health="400"
+    <Item name="狛犬方盾" identifier="Touhou_Aunn_Square_Shield" category="Equipment" subcategory="Touhou" tags="mediumitem,Touhou_Weapon_Level03" health="500"
           damagedbyprojectiles="true"
           impactsoundtag="impact_metal_light" cargocontaineridentifier="metalcrate" scale="0.5" allowasextracargo="true">
         <PreferredContainer primary="armcab" secondary="secarmcab"/>
@@ -19451,11 +19438,11 @@
                   blocksplayers="true" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnContained" target="This,Character" condition="0.75" Interval="1.0" disabledeltatime="true" comparison="And">
                 <Conditional condition="gt 1"/>
-                <Conditional Naivete_Koma_Inu="gt 0"/>
+                <Conditional Touhou_Aunn_Character_Effect="gt 0"/>
             </StatusEffect>
             <StatusEffect type="OnContained" target="This,Character" condition="0.75" Interval="1.0" disabledeltatime="true" comparison="And">
                 <Conditional condition="gt 1"/>
-                <Conditional Naivete_Koma_Inu="eq 0"/>
+                <Conditional Touhou_Aunn_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Aunn="gt 0"/>
             </StatusEffect>
             <StatusEffect type="Always" target="This" scale="0.5" damagedbyprojectiles="false" spritecolor="255,150,150,150" Interval="1.0" disabledeltatime="true"
@@ -19516,13 +19503,13 @@
         <Body width="400" height="76" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-100,-13" handle2="-20,-5" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Sinner_Of_Eternity_And_The_Ephemeral="gt 0"/>
+                <Conditional Touhou_Kaguya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kaguya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Kaguya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Sinner_Of_Eternity_And_The_Ephemeral="eq 0"/>
+                <Conditional Touhou_Kaguya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kaguya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -19687,13 +19674,13 @@
                 <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Character_Weapon_Talent"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Sinner_Of_Eternity_And_The_Ephemeral="gt 0"/>
+                <Conditional Touhou_Kaguya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kaguya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Kaguya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Sinner_Of_Eternity_And_The_Ephemeral="eq 0"/>
+                <Conditional Touhou_Kaguya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kaguya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -20224,13 +20211,13 @@
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" aimpos="63,0" handle1="-10,-40" msg="ItemMsgPickUpSelect">
 
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Sinner_Of_Eternity_And_The_Ephemeral="gt 0"/>
+                <Conditional Touhou_Kaguya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kaguya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Kaguya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Sinner_Of_Eternity_And_The_Ephemeral="eq 0"/>
+                <Conditional Touhou_Kaguya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kaguya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -20528,13 +20515,13 @@
         <Body width="400" height="163" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-100,-13" handle2="-20,-5" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Sinner_Of_Eternity_And_The_Ephemeral="gt 0"/>
+                <Conditional Touhou_Kaguya_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kaguya="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Kaguya_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Sinner_Of_Eternity_And_The_Ephemeral="eq 0"/>
+                <Conditional Touhou_Kaguya_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Kaguya="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -20557,7 +20544,7 @@
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true" delay="0.1" Condition="-10"/>
                 <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true" delay="0.1" Condition="-10">
-                    <Conditional Sinner_Of_Eternity_And_The_Ephemeral="lte 0" TargetContainer="true" TargetGrandParent="true"/>
+                    <Conditional Touhou_Kaguya_Character_Effect="lte 0" TargetContainer="true" TargetGrandParent="true"/>
                 </StatusEffect>
             </Button>
             <Button text="清毒针">
@@ -20572,7 +20559,7 @@
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true" delay="0.1" Condition="-10"/>
                 <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true" delay="0.1" Condition="-10">
-                    <Conditional Sinner_Of_Eternity_And_The_Ephemeral="lte 0" TargetContainer="true" TargetGrandParent="true"/>
+                    <Conditional Touhou_Kaguya_Character_Effect="lte 0" TargetContainer="true" TargetGrandParent="true"/>
                 </StatusEffect>
             </Button>
             <Button text="提神针">
@@ -20587,7 +20574,7 @@
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true" delay="0.1" Condition="-10"/>
                 <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true" delay="0.1" Condition="-10">
-                    <Conditional Sinner_Of_Eternity_And_The_Ephemeral="lte 0" TargetContainer="true" TargetGrandParent="true"/>
+                    <Conditional Touhou_Kaguya_Character_Effect="lte 0" TargetContainer="true" TargetGrandParent="true"/>
                 </StatusEffect>
             </Button>
             <Button text="守护针">
@@ -20602,7 +20589,7 @@
                 </StatusEffect>
                 <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true" delay="0.1" Condition="-10"/>
                 <StatusEffect type="OnUse" target="Contained" targetslot="0" disabledeltatime="true" delay="0.1" Condition="-10">
-                    <Conditional Sinner_Of_Eternity_And_The_Ephemeral="lte 0" TargetContainer="true" TargetGrandParent="true"/>
+                    <Conditional Touhou_Kaguya_Character_Effect="lte 0" TargetContainer="true" TargetGrandParent="true"/>
                 </StatusEffect>
             </Button>
             <Button text="清除针剂">
@@ -20916,13 +20903,13 @@
         <Body width="400" height="86" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-100,-13" handle2="-20,-5" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Ordinary_Magician="gt 0"/>
+                <Conditional Touhou_Marisa_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Marisa="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Marisa_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Ordinary_Magician="eq 0"/>
+                <Conditional Touhou_Marisa_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Marisa="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -21121,13 +21108,13 @@
         <Body width="400" height="111" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-55,-12" handle2="25,-19" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Koishi="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Koishi_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Closed_Eyes_Of_Koishi="eq 0"/>
+                <Conditional Touhou_Koishi_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Koishi="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -21298,13 +21285,13 @@
         <Body width="400" height="128" density="10"/>
         <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-100,-13" handle2="-20,-5" holdangle="-35">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
-                <Conditional Manifest_God_Of_Miracles="gt 0"/>
+                <Conditional Touhou_Sanae_Character_Effect="gt 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sanae="gt 0"/>
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Sanae_Weapons" strength="50"/>
             </StatusEffect>
             <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
-                <Conditional Manifest_God_Of_Miracles="eq 0"/>
+                <Conditional Touhou_Sanae_Character_Effect="eq 0"/>
                 <Conditional Hyouibana_Effect_Prefect_Sanae="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -22228,7 +22215,7 @@
                     <Conditional isActive="eq true"/>
                     <Sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Weapon_Reload06.ogg" type="OnUse" range="500" volume="2.0" selectionmode="Random"/>
                 </StatusEffect>
-                <StatusEffect target="This"  holdpos="60,-15" aimpos="70,0" handle1="-120,-10" handle2="-10,-13" holdangle="-25" maxchargetime="0.5"
+                <StatusEffect target="This"  holdpos="60,-15" aimpos="70,0" handle1="-120,-10" handle2="-10,-13" holdangle="-25" maxchargetime="0.4"
                               disabledeltatime="true" checkconditionalalways="true" delay="0.8" setvalue="true">
                     <Conditional maxchargetime="eq 999"/>
                 </StatusEffect>
@@ -22264,8 +22251,7 @@
             <Price storeidentifier="merchantengineering" maxavailable="1" multiplier="0.9"/>
         </Price>
         <Deconstruct time="6">
-            <Item identifier="uranium" amount="2"/>
-            <Item identifier="titaniumaluminiumalloy" amount="2"/>
+            <Item identifier="Touhou_Plant_Extract" amount="2"/>
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="10"/>
@@ -22280,7 +22266,7 @@
             <RequiredItem identifier="steel" />
             <RequiredItem identifier="magnesium" />
             <RequiredItem identifier="Touhou_Base_Metal" />
-            <RequiredItem identifier="Touhou_Makai_Essence" amount="3"/>
+            <RequiredItem identifier="Touhou_Makai_Essence" amount="2"/>
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem identifier="Touhou_Genesis_Engine_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
@@ -22325,7 +22311,7 @@
                                  scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255"/>
                 <ParticleEmitter particle="FlareBubbles" particleamount="6" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
                 <ParticleEmitter particle="Touhou_Electric_Shock" copyentityangle="false" anglemin="0" anglemax="360" particleamount="4" lifetimemultiplier="2.0"
-                                 velocitymin="100" velocitymax="150" scalemin="0.7" scalemax="1.0" colormultiplier="255,10,255,180"/>
+                                 velocitymin="100" velocitymax="150" scalemin="0.3" scalemax="0.6" colormultiplier="255,10,255,180"/>
             </StatusEffect>
             <StatusEffect type="OnImpact" target="UseTarget">
                 <Conditional entitytype="eq Structure"/>
@@ -22451,6 +22437,7 @@
         </Deconstruct>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
+            <RequiredItem identifier="Touhou_Makai_Essence" />
             <RequiredItem identifier="Touhou_Base_Metal" />
             <RequiredItem identifier="magnesium" amount="3" />
             <RequiredItem tag="advmunition_jacket" amount="3"/>
@@ -22459,6 +22446,7 @@
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" displayname="recycleitem">
             <RequiredSkill identifier="Touhou_Magic" level="20"/>
             <RequiredItem identifier="Touhou_Base_Metal" />
+            <RequiredItem identifier="Touhou_Makai_Essence" />
             <RequiredItem identifier="magnesium" amount="3" />
             <RequiredItem tag="advmunition_jacket" amount="3"/>
             <RequiredItem identifier="Magic_Material" amount="2" />
@@ -23511,6 +23499,8 @@
             <Crosshair texture="%ModDir%/Images/OtherWeapons/Touhou_Magic_Crosshair04.png" sourcerect="0,0,512,512"/>
             <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256"/>
             <ChargeSound file="Content/Items/Weapons/CHAINGUN_chargeUp_loop.ogg" range="2000"/>
+            <ParticleEmitterCharge particle="chargenucleargun" particlespersecond="60" scalemultiplier="0.25,0.25" scalemin="1.0" scalemax="1.0"
+                                   anglemax="360" colormultiplier="255,0,255,255"/>
             <ParticleEmitter particle="FlareBubbles" scalemin="0.4" scalemax="0.8" particleamount="14" anglemin="0" anglemax="360" velocitymin="0"
                              velocitymax="50"/>
             <ParticleEmitter particle="GlowDot" scalemin="0.6" scalemax="0.6" particleamount="10" anglemin="0" anglemax="360" velocitymin="0"
@@ -23784,7 +23774,7 @@
                 <Affliction identifier="blunttrauma" strength="4"/>
                 <Affliction identifier="Touhou_Lost_Dream" strength="2"/>
                 <Affliction identifier="Sleepless_Nightmare" strength="2"/>
-                <Affliction identifier="stun" strength="0.1" probability="0.2"/>
+                <Affliction identifier="stun" strength="0.2" probability="0.2"/>
             </Attack>
             <StatusEffect type="OnImpact" target="This">
                 <ParticleEmitter particle="GlowDot" particleamount="1" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350"
@@ -23893,6 +23883,561 @@
         <aitarget sightrange="500" soundrange="250" fadeouttime="1"/>
         <SkillRequirementHint identifier="Touhou_Magic" level="70"/>
     </Item>
+
+
+
+
+
+    <!--浮华征收器-->
+    <Item name="浮华征收器" identifier="Touhou_Gaudy_Tax_Collector" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level02,Touhou_Cam_Offset_Normal"
+          Scale="0.28" impactsoundtag="impact_metal_light">
+        <PreferredContainer secondary="armcab"/>
+        <Price baseprice="800" maxavailable="1" sold="true">
+            <Price storeidentifier="merchantoutpost" maxavailable="3"/>
+            <Price storeidentifier="merchantcity" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1"/>
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1"/>
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3"/>
+        </Price>
+        <Deconstruct time="3">
+            <Item identifier="Touhou_Plant_Extract" amount="2"/>
+            <Item identifier="Magic_Material" amount="2"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="5">
+            <RequiredSkill identifier="Touhou_Magic" level="30"/>
+            <RequiredItem identifier="titanium" amount="2"/>
+            <RequiredItem identifier="Magic_Material" amount="2"/>
+            <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Gaudy_Tax_Collector.png" sourcerect="411,0,185,137" origin="0.5,0.5"/>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Gaudy_Tax_Collector.png" sourcerect="0,0,400,146" depth="0.55" origin="0.5,0.5"/>
+        <Body width="400" height="146" density="10"/>
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="65,0" handle1="-50,-10" handle2="0,-20" holdangle="-35">
+            <StatusEffect type="OnActive" target="Character" Interval="0.5">
+                <Conditional Touhou_Jyoon_Character_Effect="gt 0"/>
+                <Conditional Hyouibana_Effect_Prefect_Jyoon="gt 0"/>
+                <Conditional MRE_Satori_Effect="gt 0"/>
+                <Affliction identifier="Jyoon_Weapons" strength="50"/>
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
+                <Conditional Touhou_Jyoon_Character_Effect="eq 0"/>
+                <Conditional Hyouibana_Effect_Prefect_Jyoon="eq 0"/>
+                <Conditional MRE_Satori_Effect="eq 0"/>
+                <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.85" setvalue="true"/>
+            <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.7" setvalue="true"/>
+        </Holdable>
+
+        <RangedWeapon reload="0.13" holdtrigger="true" barrelpos="200,2" spread="8" unskilledspread="16"
+                      combatPriority="80" drawhudwhenequipped="true" crosshairscale="0.15">
+            <Crosshair texture="%ModDir%/Images/OtherWeapons/Touhou_Magic_Crosshair06.png" sourcerect="0,0,512,512"/>
+            <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256"/>
+            <ParticleEmitter particle="FlareBubbles" scalemin="0.4" scalemax="0.8" particleamount="14" anglemin="0" anglemax="360" velocitymin="0"
+                             velocitymax="50"/>
+            <ParticleEmitter particle="GlowDot" scalemin="0.6" scalemax="0.6" particleamount="10" anglemin="0" anglemax="360" velocitymin="0"
+                             velocitymax="0" colormultiplier="100,100,255,255"/>
+            <StatusEffect type="OnUse" target="This" forceplaysounds="true">
+                <sound file="%ModDir%/Sounds/Weapons/Touhou_Malevolent_Fantasy_Attack.ogg" volume="2.0" range="3000" type="OnUse" selectionmode="random"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This">
+                <Explosion range="200.0" force="0.8" shockwave="false" smoke="false" flash="false" sparks="false" flames="false"
+                           underwaterbubble="false" camerashake="28.0"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="Contained">
+                <Use/>
+            </StatusEffect>
+            <RequiredItems items="Touhou_Gaudy_Foam_Ammo" type="Contained" msg="ItemMsgAmmoRequired"/>
+            <RequiredSkill identifier="Touhou_Magic" level="30"/>
+        </RangedWeapon>
+
+        <ItemContainer capacity="0" maxstacksize="1" hideitems="true" containedstateindicatorslot="0">
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="Touhou_Gaudy_Foam_Ammo" hide="false" itempos="-21,-3" depth="0.56" setactive="true">
+                    <StatusEffect type="OnInserted" target="This" holdpos="46,-40" holdangle="70" maxchargetime="999" setvalue="true"/>
+                    <StatusEffect type="OnInserted" target="This" setvalue="true">
+                        <Conditional isActive="eq true"/>
+                        <Sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Weapon_Reload01.ogg" type="OnUse" range="500" volume="1.5"
+                               selectionmode="Random"/>
+                    </StatusEffect>
+                    <StatusEffect target="This" holdpos="60,-15" aimpos="65,0" holdangle="-35" maxchargetime="0"
+                                  disabledeltatime="true" checkconditionalalways="true" delay="1.1" setvalue="true">
+                        <Conditional maxchargetime="eq 999"/>
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+            <SlotIcon slotindex="1" texture="%ModDir%/Images/Tools/Touhou_Enhanced_Crystal01.png" sourcerect="0,0,68,100" origin="0.5,0.5"/>
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="Touhou_Enhanced_Crystal" hide="false" itempos="33,2" setactive="true"/>
+            </SubContainer>
+        </ItemContainer>
+        <Quality>
+            <QualityStat stattype="FirepowerMultiplier" value="0.15"/>
+        </Quality>
+        <aitarget sightrange="1000" soundrange="3000" fadeouttime="5"/>
+        <SkillRequirementHint identifier="Touhou_Magic" level="30"/>
+    </Item>
+
+
+    <!--浮世泡沫罐-->
+    <Item name="浮世泡沫罐" identifier="Touhou_Gaudy_Tax_Collector_Ammo" scale="0.2" subcategory="Touhou" category="Weapon" maxstacksize="16"
+          maxstacksizecharacterinventory="4" cargocontaineridentifier="metalcrate" Health="90"
+          tags="smallitem,Touhou_Gaudy_Foam_Ammo,Touhou_Magic_Charging02" impactsoundtag="impact_metal_light">
+        <PreferredContainer secondary="armcab"/>
+        <Price baseprice="200" maxavailable="1" sold="true">
+            <Price storeidentifier="merchantoutpost" maxavailable="3"/>
+            <Price storeidentifier="merchantcity" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1"/>
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1"/>
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3"/>
+        </Price>
+        <Deconstruct time="3">
+            <Item identifier="plastic"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
+            <RequiredItem identifier="plastic" />
+            <RequiredItem tag="advmunition_jacket" />
+            <RequiredItem identifier="Touhou_Plant_Extract" amount="2"/>
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" displayname="recycleitem">
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
+            <RequiredItem tag="advmunition_jacket" />
+            <RequiredItem identifier="Touhou_Plant_Extract" />
+            <RequiredItem identifier="Touhou_Gaudy_Tax_Collector_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Gaudy_Tax_Collector.png" sourcerect="5,150,29,100" depth="0.56" origin="0.5,0.5"/>
+        <Body width="29" height="100" density="10"/>
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect"/>
+        <Holdable canBeCombined="true" removeOnCombined="false" slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0"/>
+        <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Touhou_Gaudy_Tax_Collector_Bullet"
+                       removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="Touhou_Gaudy_Tax_Collector_Bullet"/>
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
+            <StatusEffect type="OnUse" target="This" condition="-2" disabledeltatime="true">
+                <SpawnItem identifiers="Touhou_Gaudy_Tax_Collector_Bullet" spawnposition="ThisInventory"/>
+            </StatusEffect>
+        </ItemContainer>
+    </Item>
+
+    <!--浮华征收器射弹-->
+    <Item name="浮华征收器射弹" identifier="Touhou_Gaudy_Tax_Collector_Bullet" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.3"
+          sonarsize="0.3" hideinmenus="true">
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Lightsmithing.png" sourcerect="185,145,1,1" depth="0.56" origin="0.5,0.5"/>
+        <Body width="170" height="10" density="10" gravityscale="0.2" waterdragcoefficient="0.1"/>
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false"/>
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true">
+            <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.1"
+                             colormultiplier="255,200,100,255"/>
+            <Attack itemdamage="8" targetimpulse="1" penetration="0.05" severlimbsprobability="0.2">
+                <Affliction identifier="lacerations" strength="13"/>
+                <Affliction identifier="Touhou_Lost_Dream" strength="3"/>
+                <Affliction identifier="Sleepless_Nightmare" strength="3"/>
+                <Affliction identifier="stun" strength="0.1" probability="0.1"/>
+            </Attack>
+            <StatusEffect type="OnImpact" target="This">
+                <ParticleEmitter particle="GlowDot" particleamount="1" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350"
+                                 scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,255,150,255"/>
+                <ParticleEmitter particle="FlareBubbles" particleamount="6" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
+                <ParticleEmitter particle="weldspark" particleamount="2" anglemin="0" anglemax="360" velocitymin="600" velocitymax="800" scalemin="1.75" scalemax="2"
+                                 drawontop="true" colormultiplier="255,200,50,175"/>
+            </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This" delay="1.0" stackable="false">
+                <Remove/>
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
+
+
+    <!--泡沫女王-->
+    <Item name="泡沫女王" identifier="Touhou_Foam_Queen" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
+          allowasextracargo="true"
+          tags="mediumitem,weapon,bulkyweapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_High,Touhou_Foam_Queen" Scale="0.26" impactsoundtag="impact_metal_heavy">
+        <PreferredContainer primary="secarmcab" secondary="weaponholder,armcab"/>
+        <Price baseprice="6000" sold="false">
+            <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
+            <Price storeidentifier="merchantcity" multiplier="1.25"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.25"/>
+            <Price storeidentifier="merchantmilitary" multiplier="0.9" minavailable="1" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" multiplier="1.25"/>
+            <Price storeidentifier="Merchant_Kawasiro_Nitori" multiplier="0.75" sold="false" minavailable="1"/>
+        </Price>
+        <Deconstruct time="5">
+            <Item identifier="titaniumaluminiumalloy" amount="2"/>
+            <Item identifier="fulgurium" amount="2"/>
+            <Item identifier="Power_Point"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
+            <RequiredSkill identifier="Touhou_Magic" level="70"/>
+            <RequiredItem identifier="titaniumaluminiumalloy" amount="2"/>
+            <RequiredItem identifier="fulgurium" amount="2"/>
+            <RequiredItem identifier="Power_Point"/>
+            <RequiredItem identifier="Touhou_Gaudy_Tax_Collector"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Foam_Queen.png" sourcerect="411,1,186,135" origin="0.5,0.5"/>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Foam_Queen.png" sourcerect="0,0,400,136" depth="0.55" origin="0.5,0.5"/>
+        <LightComponent LightColor="255,120,255,100" Range="130" powerconsumption="10" IsOn="true">
+            <sprite texture="Content/Particles/ParticleAtlas.png" sourcerect="1,1,1,1" origin="0.15,0"/>
+        </LightComponent>
+        <Body width="400" height="136" density="10"/>
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="70,0" handle1="-70,-13" handle2="-40,-13" holdangle="-25">
+            <StatusEffect type="OnActive" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Character_Weapon_Talent"/>
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="Character" Interval="0.5">
+                <Conditional Touhou_Jyoon_Character_Effect="gt 0"/>
+                <Conditional Hyouibana_Effect_Prefect_Jyoon="gt 0"/>
+                <Conditional MRE_Satori_Effect="gt 0"/>
+                <Affliction identifier="Jyoon_Weapons" strength="50"/>
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
+                <Conditional Touhou_Jyoon_Character_Effect="eq 0"/>
+                <Conditional Hyouibana_Effect_Prefect_Jyoon="eq 0"/>
+                <Conditional MRE_Satori_Effect="eq 0"/>
+                <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="This" Condition="0.5" Interval="1.0" disabledeltatime="true">
+                <RequiredItem items="fuelrod" type="Contained"/>
+                <Conditional condition="gt 0"/>
+            </StatusEffect>
+            <StatusEffect type="OnContained" target="This" Condition="1" Interval="1.0" disabledeltatime="true">
+                <Conditional condition="gt 0"/>
+            </StatusEffect>
+            <StatusEffect type="OnBroken" target="This" Condition="20" disabledeltatime="true" delay="8" setvalue="true"/>
+            <StatusEffect type="OnBroken" target="This">
+                <sound file="%ModDir%/Sounds/Tools/Overheating_Restart01.ogg" type="OnUse" range="500.0" loop="false"/>
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.7" setvalue="true"/>
+            <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.5" setvalue="true"/>
+        </Holdable>
+        <RangedWeapon weapondamagemodifier="1.7" penetration="0.1" reload="0.18" holdtrigger="true"
+                      barrelpos="198,5" spread="3" unskilledspread="15" combatPriority="80" drawhudwhenequipped="true" crosshairscale="0.5">
+            <Crosshair texture="%ModDir%/Images/OtherWeapons/Blunderbuss.png" sourcerect="0,77,108,108"/>
+            <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256"/>
+            <ParticleEmitter particle="FlareBubbles" scalemin="0.4" scalemax="0.8" particleamount="14" anglemin="0" anglemax="360" velocitymin="0"
+                             velocitymax="50"/>
+            <ParticleEmitter particle="GlowDot" scalemin="0.5" scalemax="0.5" particleamount="20" anglemin="0" anglemax="360" velocitymin="0"
+                             velocitymax="0" colormultiplier="255,0,0,255"/>
+            <Sound file="%ModDir%/Sounds/Weapons/Touhou_Foam_Queen_Attack.ogg" type="OnUse" range="3000" selectionmode="Random"/>
+            <ChargeSound file="Content/Items/JobGear/Engineer/WEAPONS_rapidFissileAcceleratorStartLoop.ogg" range="1000"/>
+            <StatusEffect type="OnUse" target="This">
+                <Explosion range="150.0" force="0.5" shockwave="true" smoke="false" flash="true" sparks="false" flames="false" underwaterbubble="false"
+                           camerashake="10.0"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" Condition="-1.5" disabledeltatime="true"/>
+            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-1.0" disabledeltatime="true">
+                <RequiredItem items="fuelrod" type="Contained"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-1.0" disabledeltatime="true">
+                <RequiredItem items="thoriumfuelrod" type="Contained"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-0.4" disabledeltatime="true">
+                <RequiredItem items="fulguriumfuelrod" type="Contained"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-0.5" disabledeltatime="true">
+                <RequiredItem items="fusionfuel" type="Contained"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="Contained" targetslot="0">
+                <Use/>
+            </StatusEffect>
+            <RequiredItems items="Touhou_Gaudy_Foam_Ammo" type="Contained" msg="ItemMsgAmmoRequired"/>
+            <RequiredSkill identifier="Touhou_Magic" level="70"/>
+        </RangedWeapon>
+        <ItemContainer capacity="1" maxstacksize="1" itempos="10,-5" containedspritedepths="0.562,0.561" containedstateindicatorstyle="default"
+                       containedstateindicatorslot="0">
+            <Containable items="Touhou_Gaudy_Foam_Ammo" hide="true">
+                <StatusEffect type="OnInserted" target="This" holdpos="46,-40" holdangle="70" maxchargetime="999" setvalue="true"/>
+                <StatusEffect type="OnInserted" target="This" setvalue="true">
+                    <Conditional isActive="eq true"/>
+                    <Sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Weapon_Reload06.ogg" type="OnUse" range="500" volume="2.0" selectionmode="Random"/>
+                </StatusEffect>
+                <StatusEffect target="This" holdpos="60,-15" aimpos="70,0"  holdangle="-25" maxchargetime="0.0"
+                              disabledeltatime="true" checkconditionalalways="true" delay="0.8" setvalue="true">
+                    <Conditional maxchargetime="eq 999"/>
+                </StatusEffect>
+            </Containable>
+            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="192,448,64,64" origin="0.5,0.5"/>
+            <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="192,448,64,64" origin="0.5,0.5"/>
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="reactorfuel" setactive="true">
+                    <StatusEffect type="OnContaining" target="This" Voltage="1.0" setvalue="true">
+                        <Conditional condition="gt 0"/>
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+        </ItemContainer>
+        <aitarget sightrange="1500" soundrange="3000" fadeouttime="5"/>
+        <Quality>
+            <QualityStat stattype="FirepowerMultiplier" value="0.1"/>
+        </Quality>
+        <SkillRequirementHint identifier="Touhou_Magic" level="70"/>
+    </Item>
+
+    <!--幻财泡沫罐-->
+    <Item name="幻财泡沫罐" identifier="Touhou_Foam_Queen_Ammo" scale="0.15" subcategory="Touhou" category="Weapon"
+          maxstacksize="16" maxstacksizecharacterinventory="3" cargocontaineridentifier="metalcrate" Health="120"
+          tags="smallitem,Touhou_Gaudy_Foam_Ammo,Touhou_Magic_Charging04" impactsoundtag="impact_metal_light">
+        <PreferredContainer secondary="armcab"/>
+        <Price baseprice="200" sold="false">
+            <Price storeidentifier="merchantoutpost" maxavailable="3"/>
+            <Price storeidentifier="merchantcity" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1"/>
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1"/>
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3"/>
+            <Price storeidentifier="merchantengineering" maxavailable="1" multiplier="0.9"/>
+        </Price>
+        <Deconstruct time="3">
+            <Item identifier="titaniumaluminiumalloy" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
+            <RequiredItem identifier="titaniumaluminiumalloy" amount="3" />
+            <RequiredItem identifier="magnesium" />
+            <RequiredItem identifier="Touhou_Base_Metal" amount="2"/>
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" displayname="Touhou_Recharge" >
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
+            <RequiredItem identifier="titaniumaluminiumalloy" amount="2" />
+            <RequiredItem identifier="magnesium" />
+            <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
+            <RequiredItem identifier="Touhou_Foam_Queen_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Gaudy_Tax_Collector.png" sourcerect="48,174,160,57" depth="0.45" origin="0.5,0.5"/>
+        <Body width="160" height="57" density="10"/>
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect"/>
+        <Holdable canBeCombined="true" slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0"/>
+        <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Touhou_Foam_Queen_Bullet"
+                       removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="Touhou_Foam_Queen_Bullet"/>
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
+            <StatusEffect type="OnUse" target="This" condition="-2.0" disabledeltatime="true">
+                <SpawnItem identifiers="Touhou_Foam_Queen_Bullet" spawnposition="ThisInventory"/>
+            </StatusEffect>
+        </ItemContainer>
+    </Item>
+
+    <!--泡沫女王射弹-->
+    <Item name="泡沫女王射弹" identifier="Touhou_Foam_Queen_Bullet" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.5" sonarsize="0.5"
+          hideinmenus="true">
+        <Sprite texture="Content/Items/Weapons/weapons_new.png" sourcerect="143,414,113,9" depth="0.55"/>
+        <Body width="170" height="10" density="10"/>
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false"/>
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true">
+            <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.4"
+                             colormultiplier="255,200,120,255"/>
+            <Attack itemdamage="30" targetforce="1" targetimpulse="1" penetration="0.2" severlimbsprobability="0.6">
+                <Affliction identifier="explosiondamage" strength="2"/>
+                <Affliction identifier="lacerations" strength="15"/>
+                <Affliction identifier="Touhou_Lost_Dream" strength="20"/>
+                <Affliction identifier="stun" strength="0.1" probability="0.1"/>
+            </Attack>
+            <StatusEffect type="OnImpact" target="UseTarget" multiplyafflictionsbymaxvitality="true">
+                <Affliction identifier="Touhou_Lost_Dream" strength="1" probability="0.5" />
+                <Affliction identifier="Sleepless_Nightmare" strength="1" probability="0.5" />
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="UseTarget">
+                <ParticleEmitter particle="weldspark" particleamount="5" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350"
+                                 scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,200,70,255"/>
+                <ParticleEmitter particle="FlareBubbles" particleamount="6" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
+                <ParticleEmitter particle="Touhou_Electric_Shock" copyentityangle="false" anglemin="0" anglemax="360" particleamount="2" lifetimemultiplier="2.0"
+                                 velocitymin="100" velocitymax="150" scalemin="0.1" scalemax="0.2" colormultiplier="255,200,120,180"/>
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="UseTarget">
+                <Conditional entitytype="eq Structure"/>
+                <Conditional hastag="eq door"/>
+                <ParticleEmitter particle="spark" copyentityangle="true" anglemin="-10" anglemax="10" particleamount="5" velocitymin="-10"
+                                 velocitymax="-200" scalemin="0.5" scalemax="1"/>
+                <ParticleEmitter particle="Touhou_Electric_Shock" copyentityangle="false" anglemin="0" anglemax="360" particleamount="2" ScaleMultiplier="0.2,0.2"
+                                 velocitymin="100" velocitymax="150" colormultiplier="255,200,120,180"/>
+            </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This">
+                <Remove/>
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
+
+    <!--繁华世界-->
+    <Item name="繁华世界" identifier="Touhou_Bustling_World" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
+          tags="mediumitem,bulkyweapon,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level05,Touhou_Cam_Offset_High,Touhou_Bustling_World"
+          Scale="0.3" impactsoundtag="impact_metal_light">
+        <PreferredContainer secondary="armcab"/>
+        <Price baseprice="30000" maxavailable="1" sold="false">
+            <Price storeidentifier="merchantoutpost" maxavailable="3"/>
+            <Price storeidentifier="merchantcity" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1"/>
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1"/>
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3"/>
+        </Price>
+        <Deconstruct time="3">
+            <Item identifier="Touhou_Plant_Extract" amount="2"/>
+            <Item identifier="Score_Point" amount="2"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
+            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+            <RequiredItem identifier="titanium" amount="2"/>
+            <RequiredItem tag="tsm_touhou_item_3" amount="2"/>
+            <RequiredItem identifier="Power_Point"/>
+            <RequiredItem identifier="Touhou_Plant_Extract" amount="4"/>
+        </Fabricate>
+        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Bustling_World.png" sourcerect="409,0,226,205" origin="0.5,0.5"/>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Bustling_World.png" sourcerect="0,0,400,391" depth="0.55" origin="0.5,0.5"/>
+        <Body width="400" height="114" density="10"/>
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="60,-15" aimpos="80,0" handle1="30,30" handle2="50,-10" holdangle="-35">
+            <StatusEffect type="OnActive" target="Character" Interval="0.5">
+                <Conditional Touhou_Jyoon_Character_Effect="gt 0"/>
+                <Conditional Hyouibana_Effect_Prefect_Jyoon="gt 0"/>
+                <Conditional MRE_Satori_Effect="gt 0"/>
+                <Affliction identifier="Jyoon_Weapons" strength="50"/>
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="Character" comparison="And" Interval="0.5">
+                <Conditional Touhou_Jyoon_Character_Effect="eq 0"/>
+                <Conditional Hyouibana_Effect_Prefect_Jyoon="eq 0"/>
+                <Conditional MRE_Satori_Effect="eq 0"/>
+                <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
+            </StatusEffect>
+            <StatusEffect type="OnActive" target="Character" interval="5">
+                <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Character_Weapon_Talent"/>
+            </StatusEffect>
+            <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.8" setvalue="true"/>
+            <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.5" setvalue="true"/>
+        </Holdable>
+
+        <RangedWeapon reload="0.5" holdtrigger="true" barrelpos="200,-5" spread="1" unskilledspread="16" maxchargetime="0.5"
+                      ChargeSoundWindupPitchSlide="1.0,1.3" combatPriority="80" drawhudwhenequipped="true" crosshairscale="0.15">
+            <Crosshair texture="%ModDir%/Images/OtherWeapons/Touhou_Magic_Crosshair06.png" sourcerect="0,0,512,512"/>
+            <CrosshairPointer texture="Content/Items/Weapons/Crosshairs.png" sourcerect="256,256,256,256"/>
+            <ChargeSound file="Content/Items/Weapons/CHAINGUN_chargeUp_loop.ogg" range="2000"/>
+            <ParticleEmitterCharge particle="chargenucleargun" particlespersecond="60" scalemultiplier="0.25,0.25" scalemin="1.0" scalemax="1.0"
+                                   anglemax="360" colormultiplier="255,200,120,255"/>
+            <ParticleEmitter particle="FlareBubbles" scalemin="0.4" scalemax="0.8" particleamount="14" anglemin="0" anglemax="360" velocitymin="0"
+                             velocitymax="50"/>
+            <ParticleEmitter particle="GlowDot" scalemin="0.6" scalemax="0.6" particleamount="10" anglemin="0" anglemax="360" velocitymin="0"
+                             velocitymax="0" colormultiplier="100,100,255,255"/>
+            <StatusEffect type="OnUse" target="This" forceplaysounds="true">
+                <sound file="%ModDir%/Sounds/Weapons/Touhou_Calamity_Wither_Bloom_Attack.ogg" volume="2.0" range="3000" type="OnUse" selectionmode="random"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This">
+                <Explosion range="200.0" force="0.8" shockwave="false" smoke="false" flash="false" sparks="false" flames="false"
+                           underwaterbubble="false" camerashake="20.0"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="Contained">
+                <Use/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="Character" disabledeltatime="true">
+                <Affliction identifier="strengthen" amount="15" />
+            </StatusEffect>
+            <RequiredItems items="Touhou_Bustling_World_Ammo" type="Contained" msg="ItemMsgAmmoRequired"/>
+            <RequiredSkill identifier="Touhou_Magic" level="100"/>
+        </RangedWeapon>
+
+        <ItemContainer capacity="0" maxstacksize="1" hideitems="true" containedstateindicatorslot="0">
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="Touhou_Bustling_World_Ammo" hide="false" itempos="-21,-3" depth="0.56" setactive="true">
+                    <StatusEffect type="OnInserted" target="This" holdpos="46,-40" holdangle="70" maxchargetime="999" setvalue="true"/>
+                    <StatusEffect type="OnInserted" target="This" setvalue="true">
+                        <Conditional isActive="eq true"/>
+                        <Sound file="%ModDir%/Sounds/Weapons/Touhou_Magic_Weapon_Reload01.ogg" type="OnUse" range="500" volume="1.5"
+                               selectionmode="Random"/>
+                    </StatusEffect>
+                    <StatusEffect target="This" holdpos="60,-15" aimpos="65,0" holdangle="-35" maxchargetime="0.5"
+                                  disabledeltatime="true" checkconditionalalways="true" delay="1.1" setvalue="true">
+                        <Conditional maxchargetime="eq 999"/>
+                    </StatusEffect>
+                </Containable>
+            </SubContainer>
+        </ItemContainer>
+        <aitarget sightrange="1000" soundrange="3000" fadeouttime="5"/>
+        <SkillRequirementHint identifier="Touhou_Magic" level="100"/>
+    </Item>
+
+
+    <!--繁荣空壳-->
+    <Item name="繁荣空壳" identifier="Touhou_Bustling_World_Ammo" scale="0.2" subcategory="Touhou" category="Weapon" maxstacksize="16"
+          maxstacksizecharacterinventory="3" cargocontaineridentifier="metalcrate" Health="60"
+          tags="smallitem,Touhou_Magic_Charging05" impactsoundtag="impact_metal_light">
+        <PreferredContainer secondary="armcab"/>
+        <Price baseprice="200" maxavailable="1" sold="false">
+            <Price storeidentifier="merchantoutpost" maxavailable="3"/>
+            <Price storeidentifier="merchantcity" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" multiplier="1.25" maxavailable="1"/>
+            <Price storeidentifier="merchantmilitary" multiplier="1.25" maxavailable="1"/>
+            <Price storeidentifier="merchantmine" multiplier="0.9" maxavailable="3"/>
+        </Price>
+        <Deconstruct time="6">
+            <Item identifier="plastic"/>
+            <Item identifier="Magic_Material" amount="2"/>
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="10">
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
+            <RequiredItem identifier="Touhou_Base_Metal" />
+            <RequiredItem identifier="magnesium" amount="3" />
+            <RequiredItem tag="advmunition_jacket" amount="3"/>
+            <RequiredItem identifier="Magic_Material" amount="3" />
+        </Fabricate>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" displayname="recycleitem">
+            <RequiredSkill identifier="Touhou_Magic" level="20"/>
+            <RequiredItem identifier="Touhou_Base_Metal" />
+            <RequiredItem identifier="magnesium" amount="3" />
+            <RequiredItem tag="advmunition_jacket" amount="3"/>
+            <RequiredItem identifier="Magic_Material" amount="2" />
+            <RequiredItem identifier="Touhou_Bustling_World_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Bustling_World.png" sourcerect="0,394,86,100" depth="0.56" origin="0.5,0.5"/>
+        <Body width="86" height="100" density="10"/>
+        <Pickable slots="Any" msg="ItemMsgPickUpSelect"/>
+        <Holdable canBeCombined="true" removeOnCombined="false" slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0"/>
+        <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Touhou_Bustling_World_Bullet"
+                       removecontaineditemsondeconstruct="true"
+                       drawinventory="false" canbeselected="false" ShowConditionInContainedStateIndicator="true">
+            <Containable items="Touhou_Bustling_World_Bullet"/>
+            <ContainedStateIndicator texture="Content/UI/ContainerIndicators.png" sourcerect="0,184,120,32"/>
+            <StatusEffect type="OnUse" target="This" condition="-2" disabledeltatime="true">
+                <SpawnItem identifiers="Touhou_Bustling_World_Bullet" spawnposition="ThisInventory"/>
+            </StatusEffect>
+        </ItemContainer>
+    </Item>
+
+    <!--繁华世界射弹-->
+    <Item name="繁华世界射弹" identifier="Touhou_Bustling_World_Bullet" category="Weapon" tags="Touhou_Magic_Danmu" scale="0.3"
+          sonarsize="0.3" hideinmenus="true">
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Lightsmithing.png" sourcerect="185,145,1,1" depth="0.56" origin="0.5,0.5"/>
+        <Body width="170" height="10" density="10" gravityscale="0.2" waterdragcoefficient="0.1"/>
+        <Holdable slots="RightHand+LeftHand" holdpos="0,-50" handle1="-10,0" handle2="10,0" aimable="false"/>
+        <Projectile characterusable="false" hitscan="true" removeonhit="true" damagedoors="true" hitscancount="2" >
+            <ParticleEmitter particle="UFO_Danmu_Laser" particleamount="1" velocitymin="0" velocitymax="0" scalemultiplier="1,0.2"
+                             colormultiplier="255,200,120,255"/>
+            <Attack itemdamage="85" levelwalldamage="20" targetimpulse="2" penetration="0.4" severlimbsprobability="0.8">
+                <Affliction identifier="lacerations" strength="60"/>
+                <Affliction identifier="explosiondamage" strength="10" />
+                <Affliction identifier="burn" strength="10" />
+                <Affliction identifier="stun" strength="0.3" probability="0.5"/>
+            </Attack>
+            <StatusEffect type="OnImpact" target="UseTarget" multiplyafflictionsbymaxvitality="true">
+                <Affliction identifier="Touhou_Lost_Dream" strength="1" probability="0.6"/>
+                <Affliction identifier="Sleepless_Nightmare" strength="1" probability="0.6"/>
+            </StatusEffect>
+            <StatusEffect type="OnImpact" target="This">
+                <ParticleEmitter particle="GlowDot" particleamount="1" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350"
+                                 scalemin="1.5" scalemax="1.9" drawontop="true" colormultiplier="255,100,255,255"/>
+                <ParticleEmitter particle="FlareBubbles" particleamount="6" anglemin="0" anglemax="360" velocitymin="0" velocitymax="50"/>
+                <ParticleEmitter particle="weldspark" particleamount="7" anglemin="0" anglemax="360" velocitymin="600" velocitymax="800" scalemin="1.75" scalemax="2"
+                                 drawontop="true" colormultiplier="255,50,255,175"/>
+                <ParticleEmitter particle="Touhou_Electric_Shock" copyentityangle="false" anglemin="0" anglemax="360" particleamount="2"
+                                 velocitymin="100" velocitymax="150" scalemin="0.1" scalemax="0.3" colormultiplier="255,10,255,180"/>
+            </StatusEffect>
+            <StatusEffect type="OnNotContained" target="This" delay="1.0" stackable="false">
+                <Remove/>
+            </StatusEffect>
+        </Projectile>
+    </Item>
+
 
 
 </Items>
