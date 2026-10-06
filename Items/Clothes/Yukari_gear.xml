@@ -164,13 +164,13 @@
             <CustomInterface canbeselected="true" drawhudwhenequipped="true">
                 <GuiFrame relativesize="0.1,0.09" anchor="BottomLeft" absoluteoffset="20,60" relativeoffset="0,0.5" style="ItemUI"/>
                 <Button text="Text.Yukari_Plus">
-                    <StatusEffect type="OnUse" target="Character" delay="0.1" disabledeltatime="true">
+                    <!-- 传送改由 Lua 脚本执行（Lua/Scripts/Server/Talents/Yukari_Teleport.lua）：
+                         按一下只挂请求标记，服务端轮询到就传送全队清醒的人并挂上「本巡回已用」。
+                         下面这行原来的写法（TriggerEvent 触发 YukariTalent_Effect_Self 事件、再延迟挂标记）保留备查：
+                         StatusEffect type="OnUse" target="Character" delay="0.1" disabledeltatime="true" 内含 TriggerEvent identifier="YukariTalent_Effect_Self" -->
+                    <StatusEffect type="OnUse" target="Character" disabledeltatime="true">
                         <Conditional YukariTalent_Effect_Self_Effect="eq 0"/>
-                        <TriggerEvent identifier="YukariTalent_Effect_Self"/>
-                    </StatusEffect>
-                    <StatusEffect type="OnUse" target="Character" tags="YukariTalent_Effect_Self" delay="0.12" disabledeltatime="true">
-                        <Conditional YukariTalent_Effect_Self_Effect="eq 0"/>
-                        <Affliction identifier="YukariTalent_Effect_Self_Effect" strength="100"/>
+                        <Affliction identifier="YukariTalent_Teleport_Request" strength="1"/>
                     </StatusEffect>
                 </Button>
             </CustomInterface>

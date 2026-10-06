@@ -514,7 +514,7 @@
             <StatusEffect type="InWater" target="This" Condition="8">
                 <Conditional condition="gte 0"/>
             </StatusEffect>
-            <StatusEffect type="OnActive" target="Character" Interval="0.5">
+            <StatusEffect type="OnActive" target="Character" Interval="0.5" comparison="And">
                 <Conditional Touhou_Marisa_Character_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -6026,7 +6026,7 @@
     <!--阳光大炮-->
     <Item name="阳光大炮" identifier="Touhou_Sun_Cannon" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
           HideConditionBar="true"
-          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="1.0" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_Normal" Scale="0.3" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="armcab"/>
         <Price baseprice="8000" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -6048,12 +6048,10 @@
             <RequiredItem identifier="incendium" amount="4"/>
             <RequiredItem identifier="Power_Point"/>
         </Fabricate>
-        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Three_Fairies_Weapon.png" sourcerect="0,0,68,67" origin="0.5,0.5"/>
-        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Three_Fairies_Weapon.png" sourcerect="71,0,79,38" depth="0.55" origin="0.5,0.5"/>
-        <BrokenSprite texture="%ModDir%/Images/OtherWeapons/Touhou_Three_Fairies_Weapon.png" sourcerect="71,40,79,38" depth="0.55" maxcondition="60"
-                      origin="0.5,0.5"/>
+        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Sun_Cannon.png" sourcerect="410,0,184,121" origin="0.5,0.5"/>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Sun_Cannon.png" sourcerect="0,0,400,126" depth="0.55" origin="0.5,0.5"/>
         <Body width="79" height="38" density="10"/>
-        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="40,-10" handle1="5,-15" handle2="34,5" holdangle="-35"
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="60,-5" handle1="-85,-22" handle2="-35,-5" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
                 <Conditional Touhou_Sunny_Character_Effect="gt 0"/>
@@ -6067,6 +6065,7 @@
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
             </StatusEffect>
+            <StatusEffect type="OnActive" target="This" scale="0.3" setvalue="true" Interval="0.5"/>
 
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.65" setvalue="true"/>
@@ -6093,8 +6092,6 @@
             <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-4" disabledeltatime="true">
                 <RequiredItem items="mobilebattery" type="Contained"/>
             </StatusEffect>
-            <StatusEffect type="OnUse" target="This" Condition="-50" disabledeltatime="true" stackable="false"/>
-            <StatusEffect type="OnUse" target="This" Condition="100" disabledeltatime="true" setvalue="true" delay="0.5" stackable="false"/>
             <RequiredItems items="Touhou_Sun_Cannon_Ammo,grenade" type="Contained" msg="ItemMsgAmmoRequired"/>
             <RequiredSkill identifier="weapons" level="60"/>
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
@@ -6112,7 +6109,7 @@
                         <Sound file="%ModDir%/Sounds/Weapons/Touhou_Grenade_Pistol_Reload.ogg" type="OnUse" range="500" volume="5.0"
                                selectionmode="Random"/>
                     </StatusEffect>
-                    <StatusEffect target="This" holdpos="40,-10" aimpos="40,-10" handle1="5,-15" handle2="34,5" holdangle="-35" maxchargetime="0"
+                    <StatusEffect target="This" holdpos="40,-10" holdangle="-35" maxchargetime="0"
                                   disabledeltatime="true" checkconditionalalways="true" delay="1.1" setvalue="true">
                         <Conditional maxchargetime="eq 999"/>
                     </StatusEffect>
@@ -6137,7 +6134,7 @@
     <!--金红石榴弹-->
     <Item name="金红石榴弹" identifier="Touhou_Sun_Cannon_Ammo" category="Weapon" subcategory="Touhou" maxstacksize="32"
           maxstacksizecharacterinventory="8"
-          interactthroughwalls="true" cargocontaineridentifier="metalcrate" tags="smallitem" Scale="0.75" impactsoundtag="impact_metal_light">
+          interactthroughwalls="true" cargocontaineridentifier="metalcrate" tags="smallitem" Scale="0.28" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
         <PreferredContainer secondary="wreckarmcab,abandonedarmcab,piratearmcab" minamount="1" maxamount="2" spawnprobability="0.1"/>
         <Price baseprice="150">
@@ -6158,9 +6155,9 @@
             <RequiredItem identifier="Touhou_Bottle_Element" amount="2"/>
             <RequiredItem identifier="uex" amount="2"/>
         </Fabricate>
-        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Three_Fairies_Weapon.png" sourcerect="195,85,33,35" origin="0.5,0.5"/>
-        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Three_Fairies_Weapon.png" sourcerect="235,85,37,17" depth="0.55" origin="0.5,0.5"/>
-        <Body width="38" height="25" density="10"/>
+        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Sun_Cannon.png" sourcerect="106,142,94,67" origin="0.5,0.5"/>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Sun_Cannon.png" sourcerect="0,142,104,32" depth="0.55" origin="0.5,0.5"/>
+        <Body width="104" height="32" density="10"/>
         <Pickable slots="Any" msg="ItemMsgPickUpSelect"/>
         <Projectile characterusable="false" launchimpulse="22.0" sticktocharacters="false">
             <Attack itemdamage="60" penetration="0.3" severlimbsprobability="1">
@@ -6187,7 +6184,7 @@
 
     <!--环月轨道-->
     <Item name="环月轨道" identifier="Touhou_Lunar_Orbit_Gun" subcategory="Touhou" category="Weapon" cargocontaineridentifier="metalcrate"
-          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_High" Scale="1.0" impactsoundtag="impact_metal_light">
+          tags="mediumitem,weapon,ProvocativeToHumanAI,Touhou_Weapon_Level04,Touhou_Cam_Offset_High" Scale="0.3" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="armcab"/>
         <Price baseprice="8000" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="1.5"/>
@@ -6210,10 +6207,10 @@
             <RequiredItem identifier="dementonite" amount="4"/>
             <RequiredItem identifier="Power_Point"/>
         </Fabricate>
-        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Three_Fairies_Weapon.png" sourcerect="151,0,82,84" origin="0.5,0.5"/>
-        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Three_Fairies_Weapon.png" sourcerect="234,0,92,33" depth="0.55" origin="0.5,0.5"/>
-        <Body width="92" height="33" density="10"/>
-        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="45,-10" handle1="-2,-8" handle2="26,0" holdangle="-35"
+        <InventoryIcon texture="%ModDir%/Images/OtherWeapons/Touhou_Lunar_Orbit_Gun.png" sourcerect="410,0,174,106" origin="0.5,0.5"/>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Lunar_Orbit_Gun.png" sourcerect="0,0,400,132" depth="0.55" origin="0.5,0.5"/>
+        <Body width="400" height="132" density="10"/>
+        <Holdable slots="Any,RightHand+LeftHand" controlpose="true" holdpos="40,-10" aimpos="60,6" handle1="-62,-10" handle2="-6,0" holdangle="-35"
                   msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnActive" target="Character" Interval="0.5">
                 <Conditional Touhou_Luna_Character_Effect="gt 0"/>
@@ -6227,11 +6224,12 @@
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
             </StatusEffect>
+            <StatusEffect type="OnActive" target="This" scale="0.3" setvalue="true" Interval="0.5"/>
 
             <StatusEffect type="OnSecondaryUse" target="Character" SpeedMultiplier="0.75" setvalue="true"/>
             <StatusEffect type="OnUse" target="Character" SpeedMultiplier="0.65" setvalue="true"/>
         </Holdable>
-        <RangedWeapon reload="0.4" holdtrigger="true" maxchargetime="0.6" barrelpos="52,0" spread="3" unskilledspread="14"
+        <RangedWeapon reload="0.4" holdtrigger="true" maxchargetime="0.6" barrelpos="210,3" spread="3" unskilledspread="14"
                       combatPriority="80" drawhudwhenequipped="true" crosshairscale="0.2">
             <Crosshair texture="Content/Items/Weapons/Crosshairs.png" sourcerect="0,256,256,256"/>
             <CrosshairPointer texture="%ModDir%/Images/OtherWeapons/Youmu_Weapons.png" sourcerect="0,0,180,180"/>
@@ -6267,7 +6265,7 @@
                     <Sound file="%ModDir%/Sounds/Weapons/Touhou_Unknown_X_Reload.ogg" type="OnUse" range="500" volume="1.2"
                            selectionmode="Random"/>
                 </StatusEffect>
-                <StatusEffect target="This" holdpos="40,-10" aimpos="45,-10" handle1="-2,-8" handle2="26,0" holdangle="-35" maxchargetime="0.6"
+                <StatusEffect target="This" holdpos="40,-10" holdangle="-35" maxchargetime="0.6"
                               disabledeltatime="true" checkconditionalalways="true" delay="1.0" setvalue="true">
                     <Conditional maxchargetime="eq 999"/>
                 </StatusEffect>
@@ -6283,11 +6281,12 @@
         </Quality>
         <SkillRequirementHint identifier="weapons" level="60"/>
         <SkillRequirementHint identifier="Touhou_Magic" level="60"/>
+        <Upgrade gameversion="1.13.4.0" scale="0.3" />
     </Item>
 
     <!--月面流矢-->
     <Item name="月面流矢" identifier="Touhou_Lunar_Orbit_Gun_Ammo" category="Weapon" subcategory="Touhou" maxstacksize="32" maxstacksizecharacterinventory="4"
-          Health="90" interactthroughwalls="true" cargocontaineridentifier="metalcrate" tags="smallitem,Touhou_Magic_Charging04" Scale="0.5" impactsoundtag="impact_metal_light">
+          Health="90" interactthroughwalls="true" cargocontaineridentifier="metalcrate" tags="smallitem,Touhou_Magic_Charging04" Scale="0.15" impactsoundtag="impact_metal_light">
         <PreferredContainer primary="secarmcab" secondary="armcab"/>
         <Price baseprice="400">
             <Price storeidentifier="merchantoutpost" multiplier="1.5" sold="false"/>
@@ -6316,8 +6315,8 @@
             <RequiredItem identifier="Touhou_Plant_Extract" amount="3"/>
             <RequiredItem identifier="Touhou_Lunar_Orbit_Gun_Ammo" mincondition="0.0" maxcondition="0.5" usecondition="false"/>
         </Fabricate>
-        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Three_Fairies_Weapon.png" sourcerect="270,67,58,61" depth="0.55" origin="0.5,0.5"/>
-        <Body width="38" height="15" density="10"/>
+        <Sprite texture="%ModDir%/Images/OtherWeapons/Touhou_Lunar_Orbit_Gun.png" sourcerect="6,138,80,80" depth="0.55" origin="0.5,0.5"/>
+        <Body width="80" height="80" density="10"/>
         <Holdable canBeCombined="true" slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,0" handle2="0,0"/>
         <ItemContainer autofill="False" hideitems="true" capacity="1" maxstacksize="1" SpawnWithId="Touhou_Lunar_Orbit_Gun_Bullet"
                        removecontaineditemsondeconstruct="true"
@@ -6328,6 +6327,7 @@
                 <SpawnItem identifiers="Touhou_Lunar_Orbit_Gun_Bullet" spawnposition="ThisInventory"/>
             </StatusEffect>
         </ItemContainer>
+        <Upgrade gameversion="1.13.4.0" scale="0.3" />
     </Item>
 
     <!--月面流矢-->
@@ -7894,7 +7894,7 @@
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Akyuu_Weapons" strength="50"/>
             </StatusEffect>
-            <StatusEffect type="OnActive" target="Character" Interval="0.5">
+            <StatusEffect type="OnActive" target="Character" Interval="0.5" comparison="And">
                 <Conditional Touhou_Akyuu_Character_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect01" strength="100"/>
@@ -17569,7 +17569,7 @@
                 <Conditional MRE_Satori_Effect="gt 0"/>
                 <Affliction identifier="Akyuu_Weapons" strength="50"/>
             </StatusEffect>
-            <StatusEffect type="OnActive" target="Character" Interval="0.5">
+            <StatusEffect type="OnActive" target="Character" Interval="0.5" comparison="And">
                 <Conditional Touhou_Akyuu_Character_Effect="eq 0"/>
                 <Conditional MRE_Satori_Effect="eq 0"/>
                 <Affliction identifier="Touhou_Character_Incompatible_Attack_Multiply_Effect02" strength="100"/>
@@ -17605,7 +17605,7 @@
             <StatusEffect type="OnUse" target="Contained" targetslot="0">
                 <Use/>
             </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-15.0" disabledeltatime="true">
+            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-10.0" disabledeltatime="true">
                 <RequiredItem items="Touhou_Book" type="Contained"/>
             </StatusEffect>
             <RequiredItems items="Touhou_TidalInk_Rail_Caster_Ammo" type="Contained" msg="ItemMsgAmmoRequired"/>
@@ -21664,7 +21664,7 @@
             <StatusEffect type="OnImpact" target="UseTarget" multiplyafflictionsbymaxvitality="true">
                 <Affliction identifier="Touhou_Lost_Dream" strength="4.0" />
                 <Affliction identifier="Sleepless_Nightmare" strength="4.0" />
-                <Affliction identifier="slow" strength="25" probability="0.5"/>
+                <Affliction identifier="slow" strength="75" probability="0.5"/>
             </StatusEffect>
             <StatusEffect type="OnImpact" target="UseTarget">
                 <ParticleEmitter particle="GlowDot" particleamount="1" anglemin="0" anglemax="360" velocitymin="300" velocitymax="350"
@@ -24129,16 +24129,16 @@
                            camerashake="10.0"/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="This" Condition="-1.5" disabledeltatime="true"/>
-            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-1.0" disabledeltatime="true">
+            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-0.5" disabledeltatime="true">
                 <RequiredItem items="fuelrod" type="Contained"/>
             </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-1.0" disabledeltatime="true">
+            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-0.5" disabledeltatime="true">
                 <RequiredItem items="thoriumfuelrod" type="Contained"/>
             </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-0.4" disabledeltatime="true">
+            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-0.2" disabledeltatime="true">
                 <RequiredItem items="fulguriumfuelrod" type="Contained"/>
             </StatusEffect>
-            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-0.5" disabledeltatime="true">
+            <StatusEffect type="OnUse" target="Contained" targetslot="1" Condition="-0.25" disabledeltatime="true">
                 <RequiredItem items="fusionfuel" type="Contained"/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="Contained" targetslot="0">
@@ -24160,7 +24160,6 @@
                     <Conditional maxchargetime="eq 999"/>
                 </StatusEffect>
             </Containable>
-            <SlotIcon slotindex="0" texture="Content/UI/StatusMonitorUI.png" sourcerect="192,448,64,64" origin="0.5,0.5"/>
             <SlotIcon slotindex="1" texture="Content/UI/StatusMonitorUI.png" sourcerect="192,448,64,64" origin="0.5,0.5"/>
             <SubContainer capacity="1" maxstacksize="1">
                 <Containable items="reactorfuel" setactive="true">
