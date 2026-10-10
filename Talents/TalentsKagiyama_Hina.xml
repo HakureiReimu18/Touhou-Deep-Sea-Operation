@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="Kagiyama_HinaTalent">
+        <Icon texture="%ModDir%/Images/Talents/Kagiyama_HinaTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.Kagiyama_HinaTalent"/>
+
+        <AbilityGroupInterval interval="10.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Kagiyama_Hina_Character_Effect"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Misfortune_Curse" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Kagiyama_Hina_Character_Effect"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Kagiyama_Hina_Character_Effect"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Misfortune_Curse" minimumPercentage="0.5"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupInterval interval="2.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Kagiyama_Hina_Character_Effect"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Misfortune_Curse" minimumPercentage="0.5"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.15"/>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupInterval interval="0.9">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Kagiyama_Hina_Character_Effect"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Misfortune_Curse_Release"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="NearbyCharacters" range="2500" disabledeltatime="true" >
+                            <Affliction identifier="Touhou_Misfortune_Curse_Release_Debuff" amount="10"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Kagiyama_Hina_Character_Effect"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Kagiyama_Hina_Weapons"/>
+                <AbilityConditionAboveVitality invert="true" vitalitypercentage="1.0"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged,Melee"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Misfortune_Curse" strength="1.0"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Kagiyama_Hina_Character_Effect"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Kagiyama_Hina_Character_Effect_OnAttacked_CD" invert="true"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAttacker>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true">
+                            <Conditional TeamID="None"/>
+                            <Conditional TeamID="Team2"/>
+                            <Affliction identifier="Touhou_Misfortune_Curse" amount="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAttacker>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="This">
+                            <ReduceAffliction identifier="Touhou_Kagiyama_Hina_Character_Effect_OnAttacked_CD" strength="10.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+
+    </Talent>
+</Talents>

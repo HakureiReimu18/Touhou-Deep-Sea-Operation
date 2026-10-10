@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Talents>
-    <Talent identifier="Knowledge_And_Solitude_Girl">
-        <Icon texture="%ModDir%/Images/Talents/Knowledge_And_Solitude_Girl.png" sheetindex="0,0" sheetelementsize="128,128"/>
-        <Description tag="talentdescription.Knowledge_And_Solitude_Girl"/>
+    <Talent identifier="PatchouliTalent">
+        <Icon texture="%ModDir%/Images/Talents/PatchouliTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.PatchouliTalent"/>
 
         <AbilityGroupInterval Interval="0.5">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Patchouli_Character_Effect"/>
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Budesonide_Effect" minimumPercentage="0.2" invert="true"/>
                 <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.8"/>
                 <AbilityConditionServerRandom randomchance="0.35"/>
@@ -33,7 +33,7 @@
 
         <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Patchouli_Character_Effect"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAffliction afflictionidentifiers="Touhou_Mu_Elements" addedmultiplier="3"/>
@@ -44,18 +44,18 @@
                 <CharacterAbilityModifyAffliction afflictionidentifiers="Touhou_Shui_Elements" addedmultiplier="3"/>
             </Abilities>
         </AbilityGroupEffect>
-        <AbilityGroupInterval interval="0.5">
+        <AbilityGroupInterval interval="5.0">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Patchouli_Character_Effect"/>
                 <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="300" invert="true"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyStatToSkill stattype="RangedAttackMultiplier" maxvalue="0.05" skillidentifier="Touhou_Magic"/>
             </Abilities>
         </AbilityGroupInterval>
-        <AbilityGroupInterval interval="0.5">
+        <AbilityGroupInterval interval="5.0">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Patchouli_Character_Effect"/>
                 <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="300"/>
             </Conditions>
             <Abilities>
@@ -64,7 +64,7 @@
         </AbilityGroupInterval>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Patchouli_Character_Effect"/>
                 <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
                 <AbilityConditionCharacter targettype="Enemy">
                     <Conditional Touhou_Elements_Marked="gt 0"/>
@@ -77,7 +77,7 @@
 
         <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Patchouli_Character_Effect"/>
                 <AbilityConditionHasAffliction afflictionidentifier="Gensokyo_Divinggear_Unlocked_Effect01"/>
             </Conditions>
             <Abilities>
@@ -92,9 +92,9 @@
 
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Patchouli_Character_Effect"/>
                 <AbilityConditionCharacter targettype="Enemy">
-                    <Conditional The_Still_Library_Marked_Effect="lte 0"/>
+                    <Conditional Touhou_Patchouli_Character_Effect_Marked_Effect="lte 0"/>
                 </AbilityConditionCharacter>
             </Conditions>
             <Abilities>
@@ -103,15 +103,32 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="The_Still_Library"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Patchouli_Character_Effect"/>
                 <AbilityConditionCharacter targettype="Enemy">
-                    <Conditional The_Still_Library_Marked_Effect="gt 0"/>
+                    <Conditional Touhou_Patchouli_Character_Effect_Marked_Effect="gt 0"/>
                 </AbilityConditionCharacter>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAttackData addedpenetration="0.05"/>
             </Abilities>
         </AbilityGroupEffect>
+
+        <AbilityGroupInterval maxtriggercount="1" Interval="10">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Patchouli_Character_Effect" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" EventTargetTag="PatchouliTalent_InValidTarget">
+                            <Conditional IsBot="false" />
+                            <TriggerEvent identifier="PatchouliTalent_Effect" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
 
     </Talent>
 </Talents>

@@ -343,7 +343,7 @@
         <PreferredContainer primary="medcab"/>
         <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" spawnprobability="0.04"/>
         <PreferredContainer secondary="wreckmedcab,abandonedmedcab" minamount="1" maxamount="1" spawnprobability="0.05"/>
-        <Price baseprice="6000" minleveldifficulty="30">
+        <Price baseprice="4000" minleveldifficulty="30">
             <Price storeidentifier="merchantoutpost" maxavailable="1" sold="false"/>
             <Price storeidentifier="merchantcity" multiplier="0.9" maxavailable="1"/>
             <Price storeidentifier="merchantresearch" multiplier="1.1" maxavailable="1"/>
@@ -366,7 +366,8 @@
                                 Hyouibana_Tenshi,Hyouibana_Reimu,Hyouibana_Momizi,Hyouibana_Yuka,Hyouibana_Aunn,Hyouibana_Flandre,Hyouibana_Nue,Hyouibana_Piece,
                                 Hyouibana_Cirno,Hyouibana_Koishi,Hyouibana_Alice,Hyouibana_Sunny,Hyouibana_Luna,Hyouibana_Star,Hyouibana_Sakuya,Hyouibana_Sanae，
                                 Hyouibana_Reisen,Hyouibana_Yukari,Hyouibana_Merry,Hyouibana_Renko,Hyouibana_Kokoro,Hyouibana_Lilywhite,Hyouibana_Satori,Hyouibana_Tewi,
-                                Hyouibana_Kaguya,Hyouibana_Yuyuko"/>
+                                Hyouibana_Kaguya,Hyouibana_Yuyuko,Hyouibana_Shinki,Hyouibana_Koakuma,Hyouibana_Kagiyama_Hina,Hyouibana_Shion,Hyouibana_Jyoon,
+                                Hyouibana_Hong_Meirin"/>
             </StatusEffect>
             <StatusEffect type="OnUse" target="UseTarget">
                 <Conditional Hyouibana_Effect_Flag="gt 0"/>
@@ -454,7 +455,7 @@
           cargocontaineridentifier="metalcrate" maxstacksize="32" maxstacksizecharacterinventory="4"
           scale="0.45" useinhealthinterface="true">
         <PreferredContainer primary="medcab" secondary="medcontainer"/>
-        <Price baseprice="12000" minleveldifficulty="55">
+        <Price baseprice="8000" minleveldifficulty="55">
             <Price storeidentifier="merchantoutpost" minavailable="2" sold="false"/>
             <Price storeidentifier="merchantcity" maxavailable="1"/>
             <Price storeidentifier="merchantresearch" minavailable="1" sold="false"/>
@@ -484,7 +485,6 @@
         <Sprite texture="%ModDir%/Images/Materials/Touhou_MEID.png" depth="0.4" sourcerect="0,0,40,72"/>
         <Body width="20" height="36" density="10"/>
         <!--治疗作用-->
-        <SuitableTreatment type="Patchouli_Asthma" suitability="10"/>
         <MeleeWeapon canBeCombined="true" removeOnCombined="true" slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0" holdangle="220"
                      reload="1.0" msg="ItemMsgPickUpSelect" HitOnlyCharacters="true">
             <RequiredSkill identifier="Touhou_Magic" level="60"/>
@@ -757,7 +757,7 @@
     <!--糖果精华-->
     <Item name="糖果精华" identifier="Touhou_Candy_Essence" subcategory="Touhou" category="Medical" maxstacksize="1" Tags="smallitem"
           allowasextracargo="true" description=""
-          useinhealthinterface="true" scale="0.5" impactsoundtag="impact_metal_light" spritecolor="0,0,255,255">
+          useinhealthinterface="true" scale="0.1" impactsoundtag="impact_metal_light" >
         <PreferredContainer primary="medcab"/>
         <Deconstruct time="15"/>
         <Fabricate suitablefabricators="Magic_Altar" requiredtime="5" requiresrecipe="true">
@@ -791,7 +791,6 @@
           cargocontaineridentifier="metalcrate" tags="smallitem,medical,Touhou_Magic_Medical"
           impactsoundtag="impact_metal_light" useinhealthinterface="true">
         <PreferredContainer primary="medcab" secondary="medcontainer"/>
-        <PreferredContainer primary="ruinstoragelarge" amount="1" spawnprobability="0.005"/>
         <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Elixir_Of_Penglai.png" sourcerect="0,0,108,108"/>
         <Sprite texture="%ModDir%/Images/Materials/Touhou_Elixir_Of_Penglai.png" depth="0.55" sourcerect="0,0,108,108"/>
         <Body width="50" height="50" density="10"/>
@@ -849,8 +848,7 @@
           subcategory="Touhou" category="medical"
           cargocontaineridentifier="metalcrate" scale="0.4" useinhealthinterface="true" RequireAimToUse="false">
         <PreferredContainer primary="medcab"/>
-        <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.01"/>
-        <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.02"/>
+        <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.005"/>
         <Price baseprice="8000" minleveldifficulty="50" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="2"/>
             <Price storeidentifier="merchantcity" minavailable="2"/>
@@ -905,20 +903,23 @@
             <StatusEffect type="OnActive" target="Character" interval="5">
                 <GiveTalentInfo giverandom="false" talentidentifiers="Touhou_Medical_Toolkit_Talent"/>
             </StatusEffect>
-            <StatusEffect type="OnContained" target="This" Condition="2.5" Interval="5">
+            <StatusEffect type="OnContained" target="This" Condition="6" Interval="150" disabledeltatime="true">
                 <Conditional condition="gt 0"/>
             </StatusEffect>
-            <StatusEffect type="OnBroken" target="This" Condition="5" disabledeltatime="true" delay="20" setvalue="true"/>
+            <StatusEffect type="OnBroken" target="This" Condition="5" disabledeltatime="true" delay="20" stackable="false" setvalue="true"/>
 
             <!--使用消耗耐久-->
-            <StatusEffect type="OnUse" target="This" condition="-6">
+            <StatusEffect type="OnUse" target="This" condition="-1">
                 <RequiredItem items="opium,antidama1,antidama2,pomegrenadeextract,antibloodloss1,antibloodloss2,
                 antibleeding1,antibleeding2,antibleeding3,Plant_Essential_Oil,Europa_Infusion,Balm_Of_Gilead" type="Contained"/>
             </StatusEffect>
-            <StatusEffect type="OnUse" target="This" condition="-18">
+            <StatusEffect type="OnUse" target="This" condition="-13">
                 <RequiredItem items="opium,antidama1,antidama2,pomegrenadeextract,antibloodloss1,antibloodloss2,
                 antibleeding1,antibleeding2,antibleeding3,Plant_Essential_Oil,Europa_Infusion,Balm_Of_Gilead" type="Contained"/>
                 <Conditional Hastag="eq Medical_Toolkit_All"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" condition="-5">
+                <Conditional condition="gte 5"/>
             </StatusEffect>
 
             <!--止痛药物使用-->
@@ -956,7 +957,7 @@
                 <Affliction identifier="chemaddiction" amount="1"/>
                 <Affliction identifier="opiateoverdose" amount="2"/>
             </StatusEffect>
-            <!--意外发现，如果有tags的medical的话，在健康界面使用才能触发下放SE，否则是不生效的-->
+            <!--意外发现，如果有tags的medical的话，在健康界面使用才能触发下方SE，否则是不生效的-->
             <StatusEffect type="OnUse" disabledeltatime="true" target="Contained" targetslot="0" condition="-100">
                 <RequiredItem items="opium,antidama1,antidama2,pomegrenadeextract" type="Contained" targetslot="0"/>
                 <Conditional Hastag="eq Medical_Toolkit_AntiDamage" TargetContainer="true"/>
@@ -1392,8 +1393,8 @@
             </StatusEffect>
             <StatusEffect statuseffecttags="medical" type="OnSuccess" target="This, Limb" duration="2.0">
                 <ReduceAffliction type="bleeding" amount="40"/>
-                <ReduceAffliction type="burn" amount="15"/>
-                <ReduceAffliction type="damage" amount="4"/>
+                <ReduceAffliction type="burn" amount="12"/>
+                <ReduceAffliction type="damage" amount="2"/>
             </StatusEffect>
             <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" duration="10.0">
                 <ReduceAffliction type="infection" amount="1.5"/>
@@ -1407,14 +1408,14 @@
             </StatusEffect>
             <StatusEffect statuseffecttags="medical" type="OnFailure" target="This, Limb" duration="2.0">
                 <ReduceAffliction type="bleeding" amount="20"/>
-                <ReduceAffliction type="burn" amount="7.5"/>
+                <ReduceAffliction type="burn" amount="6"/>
             </StatusEffect>
             <StatusEffect statuseffecttags="medical" type="OnFailure" target="UseTarget" duration="10.0">
                 <ReduceAffliction type="bleeding" amount="1"/>
                 <ReduceAffliction type="burn" amount="0.5"/>
             </StatusEffect>
             <StatusEffect statuseffecttags="medical" type="OnFailure" target="UseTarget" multiplyafflictionsbymaxvitality="true">
-                <Affliction identifier="Reiki_Side_Effect" amount="15.0"/>
+                <Affliction identifier="Reiki_Side_Effect" amount="12.0"/>
             </StatusEffect>
             <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" multiplyafflictionsbymaxvitality="true">
                 <Affliction identifier="Reiki_Side_Effect" amount="3.0"/>
@@ -1497,7 +1498,7 @@
             </StatusEffect>
             <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" delay="5.0" stackable="false" duration="5.0">
                 <ReduceAffliction type="nausea" amount="5"/>
-                <ReduceAffliction type="bleeding" amount="5"/>
+                <ReduceAffliction type="bleeding" amount="4"/>
                 <ReduceAffliction type="damage" amount="5"/>
             </StatusEffect>
             <StatusEffect statuseffecttags="medical" type="OnFailure" target="UseTarget" delay="10.0" stackable="false" duration="20.0">
@@ -1761,6 +1762,295 @@
         <SkillRequirementHint identifier="medical" level="30"/>
         <SkillRequirementHint identifier="Touhou_Magic" level="20"/>
     </Item>
+
+
+
+
+    <!--永远亭止血药盒-->
+    <Item name="永远亭止血药盒" identifier="Touhou_Eternal_House_Hemostatic_Kit" tags="smallitem,medical,Touhou_Magic_Medical"
+          subcategory="Touhou" category="medical"
+          cargocontaineridentifier="metalcrate" scale="0.18" useinhealthinterface="true" >
+        <PreferredContainer primary="medcab"/>
+        <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.02" minleveldifficulty="15"/>
+        <Price baseprice="1000" minleveldifficulty="36" sold="true">
+            <Price storeidentifier="merchantoutpost" multiplier="4.0" maxavailable="2"/>
+            <Price storeidentifier="merchantcity" multiplier="4.0" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" multiplier="4.0" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" multiplier="4.0" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" multiplier="4.0" maxavailable="2"/>
+            <Price storeidentifier="merchantmedical" multiplier="4.0" maxavailable="4"/>
+        </Price>
+        <Deconstruct time="5"/>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Eternal_House_Medical_Kit.png" sourcerect="0,0,300,210" origin="0.5,0.5"/>
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Eternal_House_Medical_Kit.png" depth="0.4" sourcerect="0,0,300,210"/>
+        <Body width="300" height="210" density="10"/>
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0">
+            <RequiredSkill identifier="medical" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+
+            <!--使用消耗耐久-->
+            <StatusEffect type="OnUse" target="This" condition="-5">
+                <Conditional condition="gte 5"/>
+            </StatusEffect>
+
+            <!--治疗效果-->
+            <StatusEffect statuseffecttags="medical" type="OnSuccess" target="This,Limb" duration="3.0">
+                <ReduceAffliction type="bleeding" amount="30"/>
+                <ReduceAffliction type="burn" amount="8"/>
+                <ReduceAffliction type="damage" amount="1"/>
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" duration="6.0">
+                <ReduceAffliction type="infection" amount="2.5"/>
+                <ReduceAffliction type="bleeding" amount="3"/>
+                <ReduceAffliction type="burn" amount="1"/>
+                <ReduceAffliction type="debuff" amount="0.2"/>
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" duration="6.0">
+                <Conditional Touhou_External_Pain_Absorber_Effect="gt 0"/>
+                <ReduceAffliction type="bleeding" amount="1.5"/>
+                <ReduceAffliction type="burn" amount="0.5"/>
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnFailure" target="This, Limb" duration="3.0">
+                <ReduceAffliction type="bleeding" amount="20"/>
+                <ReduceAffliction type="burn" amount="5"/>
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnFailure" target="UseTarget" duration="6.0">
+                <ReduceAffliction type="bleeding" amount="1"/>
+                <ReduceAffliction type="burn" amount="0.5"/>
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnFailure" target="UseTarget" multiplyafflictionsbymaxvitality="true">
+                <Affliction identifier="Reiki_Side_Effect" amount="10.0"/>
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" multiplyafflictionsbymaxvitality="true">
+                <Affliction identifier="Reiki_Side_Effect" amount="2.0"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" disabledeltatime="true">
+                <Conditional condition="gte 5"/>
+                <Sound file="Content/Items/Medical/Bandage1.ogg" range="500"/>
+                <Sound file="Content/Items/Medical/Bandage2.ogg" range="500"/>
+            </StatusEffect>
+
+        </Holdable>
+        <ItemContainer capacity="0" hideitems="true" >
+            <SlotIcon slotindex="0" texture="%ModDir%/Images/Materials/Touhou_Medical_Toolkit_Indicator.png" sourcerect="80,0,59,55" origin="0.5,0.5"/>
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="antibleeding1,antibleeding2">
+                    <StatusEffect type="OnContaining" target="Contained" NonPlayerTeamInteractable="true" setvalue="true" Interval="1.0" />
+                </Containable>
+                <Containable items="antibleeding1" >
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-99" Interval="1.0" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="antibleeding1" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-2" Interval="1.0" delay="0.01" stackable="false" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="antibleeding1" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="This" Condition="1" Interval="1.0" comparison="And" disabledeltatime="true" >
+                        <Conditional ConditionPercentage="lt 100" TargetContainedItem="true"/>
+                        <RequiredItem items="antibleeding1" type="Contained"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="antibleeding2" >
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-99" Interval="1.0" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="antibleeding2" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-2" Interval="1.0" delay="0.01" stackable="false" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="antibleeding2" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="This" Condition="2.5" Interval="1.0" comparison="And" disabledeltatime="true" >
+                        <Conditional ConditionPercentage="lt 100" TargetContainedItem="true"/>
+                        <RequiredItem items="antibleeding2" type="Contained"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="antibleeding3" >
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-24" Interval="1.0" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="antibleeding3" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-1" Interval="1.0" delay="0.01" stackable="false" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="antibleeding3" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="This" Condition="+5.0" Interval="1.0" comparison="And" disabledeltatime="true" >
+                        <Conditional ConditionPercentage="lt 100" TargetContainedItem="true"/>
+                        <RequiredItem items="antibleeding3" type="Contained"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Touhou_External_Medicine_Box" >
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-9" Interval="1.0" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="Touhou_External_Medicine_Box" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-1" Interval="1.0" delay="0.01" stackable="false" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="Touhou_External_Medicine_Box" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="This" Condition="+10" Interval="1.0" comparison="And" disabledeltatime="true" >
+                        <Conditional ConditionPercentage="lt 100" TargetContainedItem="true"/>
+                        <RequiredItem items="Touhou_External_Medicine_Box" type="Contained"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="antibleeding1,antibleeding2,antibleeding3,Touhou_External_Medicine_Box">
+                    <StatusEffect type="OnContaining" target="This" TargetItemComponent="CustomInterface" Interval="1.0" drawhudwhenequipped="true"
+                                  setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
+                </Containable>
+            </SubContainer>
+        </ItemContainer>
+        <SkillRequirementHint identifier="medical" level="50"/>
+        <SkillRequirementHint identifier="Touhou_Magic" level="50"/>
+    </Item>
+
+
+
+    <!--永远亭止痛药盒-->
+    <Item name="永远亭止痛药盒" identifier="Touhou_Eternal_House_Painkiller_Kit" tags="smallitem,medical,Touhou_Magic_Medical"
+          subcategory="Touhou" category="medical"
+          cargocontaineridentifier="metalcrate" scale="0.2" useinhealthinterface="true" >
+        <PreferredContainer primary="medcab"/>
+        <PreferredContainer secondary="wrecksecarmcab,abandonedsecarmcab" amount="1" spawnprobability="0.02" minleveldifficulty="15"/>
+        <Price baseprice="1000" minleveldifficulty="36" sold="false">
+            <Price storeidentifier="merchantoutpost" multiplier="4.0" maxavailable="2"/>
+            <Price storeidentifier="merchantcity" multiplier="4.0" maxavailable="2"/>
+            <Price storeidentifier="merchantresearch" multiplier="4.0" maxavailable="2"/>
+            <Price storeidentifier="merchantmilitary" multiplier="4.0" maxavailable="2"/>
+            <Price storeidentifier="merchantmine" multiplier="4.0" maxavailable="2"/>
+            <Price storeidentifier="merchantmedical" multiplier="4.0" maxavailable="4"/>
+        </Price>
+        <Deconstruct time="5"/>
+        <InventoryIcon texture="%ModDir%/Images/Materials/Touhou_Eternal_House_Medical_Kit.png" sourcerect="323,7,155,196" origin="0.5,0.5"/>
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Eternal_House_Medical_Kit.png" depth="0.4" sourcerect="323,7,155,196"/>
+        <Body width="155" height="196" density="10"/>
+        <Holdable slots="Any,RightHand,LeftHand" aimpos="40,5" handle1="0,0">
+            <RequiredSkill identifier="medical" level="50"/>
+            <RequiredSkill identifier="Touhou_Magic" level="50"/>
+
+            <!--使用消耗耐久-->
+            <StatusEffect type="OnUse" target="This" condition="-10">
+                <Conditional condition="gte 10"/>
+            </StatusEffect>
+
+            <!--治疗效果-->
+            <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" delay="10.0" stackable="false" duration="30.0">
+                <ReduceAffliction identifier="nausea" amount="2.0"/>
+                <ReduceAffliction type="damage" amount="1.5"/>
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" delay="10.0" stackable="false" duration="20.0">
+                <Conditional Touhou_External_Pain_Absorber_Effect="gt 0"/>
+                <ReduceAffliction type="damage" amount="1"/>
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnSuccess" target="UseTarget" delay="5.0" stackable="false" duration="4.0">
+                <ReduceAffliction type="nausea" amount="5"/>
+                <ReduceAffliction type="bleeding" amount="5"/>
+                <ReduceAffliction type="damage" amount="7"/>
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnFailure" target="UseTarget" delay="10.0" stackable="false" duration="20.0">
+                <ReduceAffliction identifier="hallucinating" amount="2.0"/>
+                <ReduceAffliction identifier="nausea" amount="2.0"/>
+                <ReduceAffliction type="damage" amount="1"/>
+                <ReduceAffliction identifier="oxygenlow" amount="0.2"/>
+            </StatusEffect>
+            <StatusEffect statuseffecttags="medical" type="OnUse" target="UseTarget" multiplyafflictionsbymaxvitality="true">
+                <Affliction identifier="Reiki_Side_Effect" amount="2.0"/>
+                <Affliction identifier="chemaddiction" amount="2.5"/>
+                <Affliction identifier="chemwithdrawal" amount="2.5"/>
+            </StatusEffect>
+            <StatusEffect type="OnUse" target="This" disabledeltatime="true">
+                <Conditional condition="gt 10"/>
+                <Sound file="Content/Items/Medical/ITEM_eatingBiteQuick.ogg" range="250"/>
+            </StatusEffect>
+
+        </Holdable>
+        <ItemContainer capacity="0" hideitems="true" >
+            <SlotIcon slotindex="0" texture="%ModDir%/Images/Materials/Touhou_Medical_Toolkit_Indicator.png" sourcerect="0,0,46,53" origin="0.5,0.5"/>
+            <SubContainer capacity="1" maxstacksize="1">
+                <Containable items="pomegrenadeextract,opium,antidama1,antidama2">
+                    <StatusEffect type="OnContaining" target="Contained" NonPlayerTeamInteractable="true" setvalue="true" Interval="1.0" />
+                </Containable>
+                <Containable items="pomegrenadeextract" >
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-99" Interval="1.0" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="pomegrenadeextract" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-2" Interval="1.0" delay="0.01" stackable="false" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="pomegrenadeextract" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="This" Condition="+1" Interval="1.0" comparison="And" disabledeltatime="true" >
+                        <Conditional ConditionPercentage="lt 100" TargetContainedItem="true"/>
+                        <RequiredItem items="pomegrenadeextract" type="Contained"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="opium" >
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-99" Interval="1.0" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="opium" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-2" Interval="1.0" delay="0.01" stackable="false" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="opium" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="This" Condition="+2" Interval="1.0" comparison="And" disabledeltatime="true" >
+                        <Conditional ConditionPercentage="lt 100" TargetContainedItem="true"/>
+                        <RequiredItem items="opium" type="Contained"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="antidama1" >
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-99" Interval="1.0" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="antidama1" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-2" Interval="1.0" delay="0.01" stackable="false" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="antidama1" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="This" Condition="+5.0" Interval="1.0" comparison="And" disabledeltatime="true" >
+                        <Conditional ConditionPercentage="lt 100" TargetContainedItem="true"/>
+                        <RequiredItem items="antidama1" type="Contained"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="antidama2" >
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-99" Interval="1.0" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="antidama2" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-2" Interval="1.0" delay="0.01" stackable="false" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="antidama2" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="This" Condition="+10.0" Interval="1.0" comparison="And" disabledeltatime="true" >
+                        <Conditional ConditionPercentage="lt 100" TargetContainedItem="true"/>
+                        <RequiredItem items="antidama2" type="Contained"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="Touhou_External_Within_Pill" >
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-24" Interval="1.0" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="Touhou_External_Within_Pill" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="Contained" Condition="-1" Interval="1.0" delay="0.01" stackable="false" disabledeltatime="true" comparison="And" >
+                        <Conditional ConditionPercentage="lt 100" targetcontainer="true"/>
+                        <RequiredItem items="Touhou_External_Within_Pill" type="Contained"/>
+                    </StatusEffect>
+                    <StatusEffect type="OnContaining" target="This" Condition="+10" Interval="1.0" comparison="And" disabledeltatime="true" >
+                        <Conditional ConditionPercentage="lt 100" TargetContainedItem="true"/>
+                        <RequiredItem items="Touhou_External_Within_Pill" type="Contained"/>
+                    </StatusEffect>
+                </Containable>
+                <Containable items="pomegrenadeextract,opium,antidama1,antidama2,Touhou_External_Within_Pill">
+                    <StatusEffect type="OnContaining" target="This" TargetItemComponent="CustomInterface" Interval="1.0" drawhudwhenequipped="true"
+                                  setvalue="true"/>
+                    <StatusEffect type="OnRemoved" target="This" TargetItemComponent="CustomInterface" drawhudwhenequipped="false" setvalue="true"/>
+                </Containable>
+            </SubContainer>
+        </ItemContainer>
+        <SkillRequirementHint identifier="medical" level="50"/>
+        <SkillRequirementHint identifier="Touhou_Magic" level="50"/>
+    </Item>
+
 
 
 </Items>

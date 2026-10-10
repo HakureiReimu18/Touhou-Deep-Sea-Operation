@@ -1,50 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RandomEvents>
         <EventPrefabs>
-            <!--恋恋的无意识概率事件-->
-            <ScriptedEvent identifier="KoishiTalent_Unconscious" commonness="0">
+            <!-- 恋的无意识事件改由 Lua 脚本 Lua/Scripts/Server/Talents/Koishi_Unconscious.lua 实现（随机 15~30 秒间隔、5~15 秒时长、1~3 级），以下旧事件保留备查 -->
+                        <!-- 恋天赋的无意识事件改由 Lua 脚本
+                 Lua/Scripts/Server/Talents/Koishi_Unconscious.lua 实现（东方潜渊行动组Lua补丁）。
+                 旧 XML 的行为：固定 15 秒间隔 + 75% 概率、时长只有 15/12/8/6 四档。
+                 内含注释已按项目惯例转义，以下旧 XML 保留备查：
+
+<ScriptedEvent identifier="KoishiTalent_Unconscious" commonness="0">
                 <CheckAfflictionAction identifier="Koishi_Unconscious_Flag" MinStrength="0.1">
                     <Success>
 
                     </Success>
                     <Failure>
                         <RNGAction chance="0.5">
-                            <!--长时间无意识-->
+                            &lt;!&ndash;长时间无意识&ndash;&gt;
                             <Success>
                                 <RNGAction chance="0.5">
-                                    <!--最长时间无意识-->
+                                    &lt;!&ndash;最长时间无意识&ndash;&gt;
                                     <Success>
                                         <RNGAction chance="0.33">
-                                            <!--3级无意识-->
+                                            &lt;!&ndash;3级无意识&ndash;&gt;
                                             <Success>
                                                 <StatusEffectAction targettag="statuseffectuser">
                                                     <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                        <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                        <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                         <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                         <Affliction identifier="Koishi_Unconscious_Flag" strength="25"/>
                                                         <Affliction identifier="Koishi_Unconscious03" strength="25"/>
                                                     </StatusEffect>
                                                 </StatusEffectAction>
                                             </Success>
-                                            <!--低等级无意识-->
+                                            &lt;!&ndash;低等级无意识&ndash;&gt;
                                             <Failure>
                                                 <RNGAction chance="0.5">
-                                                    <!--2级无意识-->
+                                                    &lt;!&ndash;2级无意识&ndash;&gt;
                                                     <Success>
                                                         <StatusEffectAction targettag="statuseffectuser">
                                                             <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                                 <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                                 <Affliction identifier="Koishi_Unconscious_Flag" strength="25"/>
                                                                 <Affliction identifier="Koishi_Unconscious02" strength="25"/>
                                                             </StatusEffect>
                                                         </StatusEffectAction>
                                                     </Success>
-                                                    <!--1级无意识-->
+                                                    &lt;!&ndash;1级无意识&ndash;&gt;
                                                     <Failure>
                                                         <StatusEffectAction targettag="statuseffectuser">
                                                             <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                                 <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                                 <Affliction identifier="Koishi_Unconscious_Flag" strength="25"/>
                                                                 <Affliction identifier="Koishi_Unconscious01" strength="25"/>
@@ -55,39 +60,39 @@
                                             </Failure>
                                         </RNGAction>
                                     </Success>
-                                    <!--较长时间无意识-->
+                                    &lt;!&ndash;较长时间无意识&ndash;&gt;
                                     <Failure>
                                         <RNGAction chance="0.33">
-                                            <!--3级无意识-->
+                                            &lt;!&ndash;3级无意识&ndash;&gt;
                                             <Success>
                                                 <StatusEffectAction targettag="statuseffectuser">
                                                     <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                        <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                        <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                         <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                         <Affliction identifier="Koishi_Unconscious_Flag" strength="12"/>
                                                         <Affliction identifier="Koishi_Unconscious03" strength="12"/>
                                                     </StatusEffect>
                                                 </StatusEffectAction>
                                             </Success>
-                                            <!--低等级无意识-->
+                                            &lt;!&ndash;低等级无意识&ndash;&gt;
                                             <Failure>
                                                 <RNGAction chance="0.5">
-                                                    <!--2级无意识-->
+                                                    &lt;!&ndash;2级无意识&ndash;&gt;
                                                     <Success>
                                                         <StatusEffectAction targettag="statuseffectuser">
                                                             <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                                 <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                                 <Affliction identifier="Koishi_Unconscious_Flag" strength="12"/>
                                                                 <Affliction identifier="Koishi_Unconscious02" strength="12"/>
                                                             </StatusEffect>
                                                         </StatusEffectAction>
                                                     </Success>
-                                                    <!--1级无意识-->
+                                                    &lt;!&ndash;1级无意识&ndash;&gt;
                                                     <Failure>
                                                         <StatusEffectAction targettag="statuseffectuser">
                                                             <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                                 <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                                 <Affliction identifier="Koishi_Unconscious_Flag" strength="12"/>
                                                                 <Affliction identifier="Koishi_Unconscious01" strength="12"/>
@@ -100,42 +105,42 @@
                                     </Failure>
                                 </RNGAction>
                             </Success>
-                            <!--短时间无意识-->
+                            &lt;!&ndash;短时间无意识&ndash;&gt;
                             <Failure>
                                 <RNGAction chance="0.5">
-                                    <!--较短时间无意识-->
+                                    &lt;!&ndash;较短时间无意识&ndash;&gt;
                                     <Success>
                                         <RNGAction chance="0.33">
-                                            <!--3级无意识-->
+                                            &lt;!&ndash;3级无意识&ndash;&gt;
                                             <Success>
                                                 <StatusEffectAction targettag="statuseffectuser">
                                                     <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                        <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                        <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                         <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                         <Affliction identifier="Koishi_Unconscious_Flag" strength="8"/>
                                                         <Affliction identifier="Koishi_Unconscious03" strength="8"/>
                                                     </StatusEffect>
                                                 </StatusEffectAction>
                                             </Success>
-                                            <!--低等级无意识-->
+                                            &lt;!&ndash;低等级无意识&ndash;&gt;
                                             <Failure>
                                                 <RNGAction chance="0.5">
-                                                    <!--2级无意识-->
+                                                    &lt;!&ndash;2级无意识&ndash;&gt;
                                                     <Success>
                                                         <StatusEffectAction targettag="statuseffectuser">
                                                             <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                                 <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                                 <Affliction identifier="Koishi_Unconscious_Flag" strength="8"/>
                                                                 <Affliction identifier="Koishi_Unconscious02" strength="8"/>
                                                             </StatusEffect>
                                                         </StatusEffectAction>
                                                     </Success>
-                                                    <!--1级无意识-->
+                                                    &lt;!&ndash;1级无意识&ndash;&gt;
                                                     <Failure>
                                                         <StatusEffectAction targettag="statuseffectuser">
                                                             <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                                 <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                                 <Affliction identifier="Koishi_Unconscious_Flag" strength="8"/>
                                                                 <Affliction identifier="Koishi_Unconscious01" strength="8"/>
@@ -146,39 +151,39 @@
                                             </Failure>
                                         </RNGAction>
                                     </Success>
-                                    <!--最短时间无意识-->
+                                    &lt;!&ndash;最短时间无意识&ndash;&gt;
                                     <Failure>
                                         <RNGAction chance="0.33">
-                                            <!--3级无意识-->
+                                            &lt;!&ndash;3级无意识&ndash;&gt;
                                             <Success>
                                                 <StatusEffectAction targettag="statuseffectuser">
                                                     <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                        <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                        <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                         <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                         <Affliction identifier="Koishi_Unconscious_Flag" strength="5"/>
                                                         <Affliction identifier="Koishi_Unconscious03" strength="5"/>
                                                     </StatusEffect>
                                                 </StatusEffectAction>
                                             </Success>
-                                            <!--低等级无意识-->
+                                            &lt;!&ndash;低等级无意识&ndash;&gt;
                                             <Failure>
                                                 <RNGAction chance="0.5">
-                                                    <!--2级无意识-->
+                                                    &lt;!&ndash;2级无意识&ndash;&gt;
                                                     <Success>
                                                         <StatusEffectAction targettag="statuseffectuser">
                                                             <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                                 <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                                 <Affliction identifier="Koishi_Unconscious_Flag" strength="5"/>
                                                                 <Affliction identifier="Koishi_Unconscious02" strength="5"/>
                                                             </StatusEffect>
                                                         </StatusEffectAction>
                                                     </Success>
-                                                    <!--1级无意识-->
+                                                    &lt;!&ndash;1级无意识&ndash;&gt;
                                                     <Failure>
                                                         <StatusEffectAction targettag="statuseffectuser">
                                                             <StatusEffect target="Character" disabledeltatime="true" comparison="And">
-                                                                <Conditional Closed_Eyes_Of_Koishi="gt 0"/>
+                                                                <Conditional Touhou_Koishi_Character_Effect="gt 0"/>
                                                                 <Conditional Koishi_Unconscious_Flag="lte 0"/>
                                                                 <Affliction identifier="Koishi_Unconscious_Flag" strength="5"/>
                                                                 <Affliction identifier="Koishi_Unconscious01" strength="5"/>
@@ -195,6 +200,8 @@
                     </Failure>
                 </CheckAfflictionAction>
             </ScriptedEvent>
+
+        -->
 
             <!--斯塔的出血效应概率事件-->
             <!--概率：15*2,14*5-->
@@ -310,7 +317,7 @@
                                             <Success>
                                                 <StatusEffectAction targettag="SanaeTalent_Target">
                                                     <StatusEffect target="Character" delay="0.1" stackable="false" comparison="And" disabledeltatime="true">
-                                                        <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                                        <Conditional Touhou_Sanae_Character_Effect="lte 0"/>
                                                         <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                                         <Affliction identifier="SanaeTalent_Effect01" strength="10"/>
                                                         <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
@@ -321,7 +328,7 @@
                                             <Failure>
                                                 <StatusEffectAction targettag="SanaeTalent_Target">
                                                     <StatusEffect target="Character" delay="0.2" stackable="false" comparison="And" disabledeltatime="true">
-                                                        <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                                        <Conditional Touhou_Sanae_Character_Effect="lte 0"/>
                                                         <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                                         <Affliction identifier="SanaeTalent_Effect02" strength="10"/>
                                                         <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
@@ -334,7 +341,7 @@
                                     <Failure>
                                         <StatusEffectAction targettag="SanaeTalent_Target">
                                             <StatusEffect target="Character" delay="0.3" stackable="false" comparison="And" disabledeltatime="true">
-                                                <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                                <Conditional Touhou_Sanae_Character_Effect="lte 0"/>
                                                 <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                                 <Affliction identifier="SanaeTalent_Effect03" strength="10"/>
                                                 <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
@@ -350,7 +357,7 @@
                                     <Success>
                                         <StatusEffectAction targettag="SanaeTalent_Target">
                                             <StatusEffect target="Character" delay="0.4" stackable="false" comparison="And" disabledeltatime="true">
-                                                <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                                <Conditional Touhou_Sanae_Character_Effect="lte 0"/>
                                                 <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                                 <Affliction identifier="SanaeTalent_Effect04" strength="10"/>
                                                 <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
@@ -361,7 +368,7 @@
                                     <Failure>
                                         <StatusEffectAction targettag="SanaeTalent_Target">
                                             <StatusEffect target="Character" delay="0.5" stackable="false" comparison="And" disabledeltatime="true">
-                                                <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                                <Conditional Touhou_Sanae_Character_Effect="lte 0"/>
                                                 <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                                 <Affliction identifier="SanaeTalent_Effect05" strength="10"/>
                                                 <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
@@ -379,7 +386,7 @@
                             <Success>
                                 <StatusEffectAction targettag="SanaeTalent_Target">
                                     <StatusEffect target="Character" delay="0.6" stackable="false" comparison="And" disabledeltatime="true">
-                                        <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                        <Conditional Touhou_Sanae_Character_Effect="lte 0"/>
                                         <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                         <Affliction identifier="SanaeTalent_Effect06" strength="10"/>
                                         <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
@@ -391,7 +398,7 @@
                             <Failure>
                                 <StatusEffectAction targettag="SanaeTalent_Target">
                                     <StatusEffect target="Character" delay="0.7" stackable="false" comparison="And" disabledeltatime="true">
-                                        <Conditional Manifest_God_Of_Miracles="lte 0"/>
+                                        <Conditional Touhou_Sanae_Character_Effect="lte 0"/>
                                         <Conditional SanaeTalent_Effect_Flag="lte 0"/>
                                         <Affliction identifier="SanaeTalent_Effect07" strength="10"/>
                                         <Affliction identifier="SanaeTalent_Effect_Flag" strength="10"/>
@@ -524,8 +531,12 @@
             </ScriptedEvent>
 -->
 
-            <!--八云紫传送事件-->
-            <ScriptedEvent identifier="YukariTalent_Effect_Self" commonness="0">
+            <!-- 八云紫传送事件改由 Lua 脚本 Lua/Scripts/Server/Talents/Yukari_Teleport.lua 实现（按装束按钮挂请求标记 → 服务端轮询传送），以下旧事件保留备查 -->
+                        <!-- 紫天赋的传送事件改由 Lua 脚本
+                 Lua/Scripts/Server/Talents/Yukari_Teleport.lua 实现（东方潜渊行动组Lua补丁）。
+                 旧写法由装束按钮的 TriggerEvent 触发本事件，现有旧 XML 保留备查：
+
+<ScriptedEvent identifier="YukariTalent_Effect_Self" commonness="0">
                 <TagAction Criteria="player" Tag="YukariTalent_Effect_Self" IgnoreIncapacitatedCharacters="true"/>
                 <TeleportAction Position="MainSub" targettag="YukariTalent_Effect_Self" SpawnPointTag=""/>
                 <StatusEffectAction targettag="YukariTalent_Effect_Self">
@@ -535,10 +546,15 @@
                 </StatusEffectAction>
             </ScriptedEvent>
 
-            <!--莲子过巡回给予博物志事件-->
+        -->
+
+            <!-- 莲子过巡回发放《红斑博物志》的事件改由 Lua 脚本
+                 Lua/Scripts/Server/Renko_Red_Spot_Freak_Report.lua 实现，以下旧 XML 保留备查：
+
+            莲子过巡回给予博物志事件
             <ScriptedEvent identifier="RenkoTalent_MissionCompleted_Check" commonness="0">
                 <TagAction Criteria="crew" Tag="crew" IgnoreIncapacitatedCharacters="false"/>
-                <CheckAfflictionAction identifier="Hifuu_Club_Merry" MinStrength="0.1" TargetTag="crew">
+                <CheckAfflictionAction identifier="Touhou_Merry_Character_Effect" MinStrength="0.1" TargetTag="crew">
                     <Success>
                         <TriggerEventAction identifier="RenkoTalent_MissionCompleted" nextround="true"/>
                     </Success>
@@ -548,14 +564,14 @@
                 </CheckAfflictionAction>
             </ScriptedEvent>
 
-            <!--莲子过巡回给予博物志事件-->
+            莲子过巡回给予博物志事件
             <ScriptedEvent identifier="RenkoTalent_MissionCompleted" commonness="0">
                 <TagAction Criteria="crew" Tag="crew" IgnoreIncapacitatedCharacters="false"/>
-                <CheckAfflictionAction identifier="Hifuu_Club_Merry" MinStrength="0.1" TargetTag="crew">
+                <CheckAfflictionAction identifier="Touhou_Merry_Character_Effect" MinStrength="0.1" TargetTag="crew">
                     <Success>
                         <StatusEffectAction targettag="crew">
                             <StatusEffect target="Character" disabledeltatime="true">
-                                <Conditional Hifuu_Club_Renko="gt 0"/>
+                                <Conditional Touhou_Renko_Character_Effect="gt 0"/>
                                 <SpawnItem identifiers="Touhou_Red_Spot_Freak_Report" spawnposition="ThisInventory"/>
                             </StatusEffect>
                         </StatusEffectAction>
@@ -566,34 +582,39 @@
                 </CheckAfflictionAction>
             </ScriptedEvent>
 
+            -->
 
+
+            <!-- 早苗降奇迹事件已迁移至 Lua（东方潜渊行动组Lua补丁/Lua/Scripts/Server/Sanae_Miracle_Talent.lua）。
+                 以下三段已无任何 TriggerEvent 调用，特此停用；文本保留备查，内层注释按本文件惯例转义：
+                 SanaeTalent_Effect01~07 / SanaeTalent_Effect / SanaeTalent_Effect_Self
             <ScriptedEvent identifier="SanaeTalent_Effect01" Tags="SanaeTalent_Effect">
-                <!-- 星之奇迹：增加30%技能获取速度，技能水平提高10% -->
+                &lt;!&ndash; 星之奇迹：增加30%技能获取速度，技能水平提高10% &ndash;&gt;
                 <AfflictionAction Affliction="SanaeTalent_Effect01" Strength="10" TargetTag="SanaeTalent_Target" />
                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
             </ScriptedEvent>
             <ScriptedEvent identifier="SanaeTalent_Effect02" Tags="SanaeTalent_Effect">
-                <!-- 月之奇迹：修复速度和船体修复速度提高30%，提高10%眩晕抗性 -->
+                &lt;!&ndash; 月之奇迹：修复速度和船体修复速度提高30%，提高10%眩晕抗性 &ndash;&gt;
                 <AfflictionAction Affliction="SanaeTalent_Effect02" Strength="10" TargetTag="SanaeTalent_Target" />
                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
             </ScriptedEvent>
             <ScriptedEvent identifier="SanaeTalent_Effect03" Tags="SanaeTalent_Effect">
-                <!-- 日之奇迹：远程攻击伤害提高5%，近战攻击伤害提高15% -->
+                &lt;!&ndash; 日之奇迹：远程攻击伤害提高5%，近战攻击伤害提高15% &ndash;&gt;
                 <AfflictionAction Affliction="SanaeTalent_Effect03" Strength="10" TargetTag="SanaeTalent_Target" />
                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
             </ScriptedEvent>
             <ScriptedEvent identifier="SanaeTalent_Effect04" Tags="SanaeTalent_Effect">
-                <!-- 山之奇迹：增加10%最大生命值，双腿的物理伤害抗性提高20% -->
+                &lt;!&ndash; 山之奇迹：增加10%最大生命值，双腿的物理伤害抗性提高20% &ndash;&gt;
                 <AfflictionAction Affliction="SanaeTalent_Effect04" Strength="10" TargetTag="SanaeTalent_Target" />
                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
             </ScriptedEvent>
             <ScriptedEvent identifier="SanaeTalent_Effect05" Tags="SanaeTalent_Effect">
-                <!-- 海之奇迹：增加30%游泳速度，烧伤抗性提高10% -->
+                &lt;!&ndash; 海之奇迹：增加30%游泳速度，烧伤抗性提高10% &ndash;&gt;
                 <AfflictionAction Affliction="SanaeTalent_Effect05" Strength="10" TargetTag="SanaeTalent_Target" />
                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
             </ScriptedEvent>
             <ScriptedEvent identifier="SanaeTalent_Effect06" Tags="SanaeTalent_Effect">
-                <!-- 空之奇迹：获得随机技能7点，经验获取速度提高10% -->
+                &lt;!&ndash; 空之奇迹：获得随机技能7点，经验获取速度提高10% &ndash;&gt;
                 <StatusEffectAction targettag="SanaeTalent_Target">
                     <StatusEffect target="Character">
                         <GiveSkill skillidentifier="randomskill" amount="7" triggertalents="false" />
@@ -603,7 +624,7 @@
                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
             </ScriptedEvent>
             <ScriptedEvent identifier="SanaeTalent_Effect07" Tags="SanaeTalent_Effect">
-                <!--风之奇迹：移动速度提高10%，降低20%友军伤害-->
+                &lt;!&ndash;风之奇迹：移动速度提高10%，降低20%友军伤害&ndash;&gt;
                 <AfflictionAction Affliction="SanaeTalent_Effect07" Strength="10" TargetTag="SanaeTalent_Target" />
                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
             </ScriptedEvent>
@@ -616,12 +637,12 @@
                 <CountTargetsAction TargetTag="SanaeTalent_Target" MinAmount="1">
                     <Success>
                         <CheckConditionalAction TargetTag="SanaeTalent_Target" LogicalOperator="And">
-                            <Conditional Manifest_God_Of_Miracles="lte 0" />
+                            <Conditional Touhou_Sanae_Character_Effect="lte 0" />
                             <Conditional SanaeTalent_Effect_Flag="lte 0" />
                             <Success>
                                 <StatusEffectAction TargetTag="SanaeTalent_Target">
                                     <StatusEffect target="This" EventTargetTag="SanaeTalent_Target">
-                                        <!-- <TriggerEvent EventTag="SanaeTalent_Effect" /> -->
+                                        &lt;!&ndash; <TriggerEvent EventTag="SanaeTalent_Effect" /> &ndash;&gt;
                                         <TriggerEvent identifier="SanaeTalent_Effect_Self" />
                                     </StatusEffect>
                                 </StatusEffectAction>
@@ -636,44 +657,44 @@
 
             <ScriptedEvent identifier="SanaeTalent_Effect_Self">
                 <RNGAction chance="0.7">
-                    <!--另外五项-->
+                    &lt;!&ndash;另外五项&ndash;&gt;
                     <Success>
                         <RNGAction chance="0.5">
-                            <!--另外三项-->
+                            &lt;!&ndash;另外三项&ndash;&gt;
                             <Success>
                                 <RNGAction chance="0.666">
-                                    <!--另外两项-->
+                                    &lt;!&ndash;另外两项&ndash;&gt;
                                     <Success>
                                         <RNGAction chance="0.5">
                                             <Success>
-                                                <!-- 星之奇迹：增加30%技能获取速度，技能水平提高10% -->
+                                                &lt;!&ndash; 星之奇迹：增加30%技能获取速度，技能水平提高10% &ndash;&gt;
                                                 <AfflictionAction Affliction="SanaeTalent_Effect01" Strength="10" TargetTag="SanaeTalent_Target" />
                                                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
                                             </Success>
                                             <Failure>
-                                                <!-- 月之奇迹：修复速度和船体修复速度提高30%，提高10%眩晕抗性 -->
+                                                &lt;!&ndash; 月之奇迹：修复速度和船体修复速度提高30%，提高10%眩晕抗性 &ndash;&gt;
                                                 <AfflictionAction Affliction="SanaeTalent_Effect02" Strength="10" TargetTag="SanaeTalent_Target" />
                                                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
                                             </Failure>
                                         </RNGAction>
                                     </Success>
                                     <Failure>
-                                        <!-- 日之奇迹：远程攻击伤害提高5%，近战攻击伤害提高15% -->
+                                        &lt;!&ndash; 日之奇迹：远程攻击伤害提高5%，近战攻击伤害提高15% &ndash;&gt;
                                         <AfflictionAction Affliction="SanaeTalent_Effect03" Strength="10" TargetTag="SanaeTalent_Target" />
                                         <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
                                     </Failure>
                                 </RNGAction>
                             </Success>
-                            <!--另外两项-->
+                            &lt;!&ndash;另外两项&ndash;&gt;
                             <Failure>
                                 <RNGAction chance="0.5">
                                     <Success>
-                                        <!-- 山之奇迹：增加10%最大生命值，双腿的物理伤害抗性提高20% -->
+                                        &lt;!&ndash; 山之奇迹：增加10%最大生命值，双腿的物理伤害抗性提高20% &ndash;&gt;
                                         <AfflictionAction Affliction="SanaeTalent_Effect04" Strength="10" TargetTag="SanaeTalent_Target" />
                                         <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
                                     </Success>
                                     <Failure>
-                                        <!-- 海之奇迹：增加30%游泳速度，烧伤抗性提高10% -->
+                                        &lt;!&ndash; 海之奇迹：增加30%游泳速度，烧伤抗性提高10% &ndash;&gt;
                                         <AfflictionAction Affliction="SanaeTalent_Effect05" Strength="10" TargetTag="SanaeTalent_Target" />
                                         <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
                                     </Failure>
@@ -681,11 +702,11 @@
                             </Failure>
                         </RNGAction>
                     </Success>
-                    <!--另外两项-->
+                    &lt;!&ndash;另外两项&ndash;&gt;
                     <Failure>
                         <RNGAction chance="0.5">
                             <Success>
-                                <!-- 空之奇迹：获得随机技能7点，经验获取速度提高10% -->
+                                &lt;!&ndash; 空之奇迹：获得随机技能7点，经验获取速度提高10% &ndash;&gt;
                                 <StatusEffectAction targettag="SanaeTalent_Target">
                                     <StatusEffect target="Character">
                                         <GiveSkill skillidentifier="randomskill" amount="7" triggertalents="false" />
@@ -695,7 +716,7 @@
                                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
                             </Success>
                             <Failure>
-                                <!--风之奇迹：移动速度提高10%，降低20%友军伤害-->
+                                &lt;!&ndash;风之奇迹：移动速度提高10%，降低20%友军伤害&ndash;&gt;
                                 <AfflictionAction Affliction="SanaeTalent_Effect07" Strength="10" TargetTag="SanaeTalent_Target" />
                                 <AfflictionAction Affliction="SanaeTalent_Effect_Flag" Strength="10" TargetTag="SanaeTalent_Target" />
                             </Failure>
@@ -703,17 +724,19 @@
                     </Failure>
                 </RNGAction>
             </ScriptedEvent>
+            -->
 
 
+            <!--庭师的职责天赋事件-->
             <ScriptedEvent identifier="YuyukoTalent_Effect">
                 <Label name="eventstart" />
                 <ClearTagAction tag="YuyukoTalent_Target" />
-                <TagAction Criteria="crew" Tag="YuyukoTalent_Target" IgnoreIncapacitatedCharacters="true" ChooseRandom="true" ChooseRandomExcludingTag="SanaeTalent_InValidTarget" ContinueIfNoTargetsFound="true" />
+                <TagAction Criteria="crew" Tag="YuyukoTalent_Target" IgnoreIncapacitatedCharacters="true" ChooseRandom="true" ChooseRandomExcludingTag="YuyukoTalent_InValidTarget" ContinueIfNoTargetsFound="true" />
                 <TagAction Criteria="eventtag:YuyukoTalent_Target" Tag="YuyukoTalent_InValidTarget" ContinueIfNoTargetsFound="true" />
                 <CountTargetsAction TargetTag="YuyukoTalent_Target" MinAmount="1">
                     <Success>
                         <CheckConditionalAction TargetTag="YuyukoTalent_Target" >
-                            <Conditional Ancient_Temple="gt 0" />
+                            <Conditional Touhou_Youmu_Character_Effect="gt 0" />
                             <Success>
                                 <StatusEffectAction TargetTag="YuyukoTalent_Target">
                                     <StatusEffect target="This" EventTargetTag="YuyukoTalent_Target">
@@ -732,6 +755,100 @@
 
             <ScriptedEvent identifier="YuyukoTalent_Effect_Self">
                 <AfflictionAction Affliction="Touhou_Yuyuko_Youmu_Effect" Strength="10" TargetTag="YuyukoTalent_Target" />
+            </ScriptedEvent>
+
+
+
+            <!--魔界之女天赋事件-->
+            <ScriptedEvent identifier="ShinkiTalent_Effect">
+                <Label name="eventstart" />
+                <ClearTagAction tag="ShinkiTalent_Target" />
+                <TagAction Criteria="crew" Tag="ShinkiTalent_Target" IgnoreIncapacitatedCharacters="true" ChooseRandom="true" ChooseRandomExcludingTag="ShinkiTalent_InValidTarget" ContinueIfNoTargetsFound="true" />
+                <TagAction Criteria="eventtag:ShinkiTalent_Target" Tag="ShinkiTalent_InValidTarget" ContinueIfNoTargetsFound="true" />
+                <CountTargetsAction TargetTag="ShinkiTalent_Target" MinAmount="1">
+                    <Success>
+                        <CheckConditionalAction TargetTag="ShinkiTalent_Target" >
+                            <Conditional Touhou_Alice_Character_Effect="gt 0" />
+                            <Success>
+                                <StatusEffectAction TargetTag="ShinkiTalent_Target">
+                                    <StatusEffect target="This" EventTargetTag="ShinkiTalent_Target">
+                                        <!-- <TriggerEvent EventTag="SanaeTalent_Effect" /> -->
+                                        <TriggerEvent identifier="ShinkiTalent_Effect_Self" />
+                                    </StatusEffect>
+                                </StatusEffectAction>
+                            </Success>
+                            <Failure>
+                                <GoTo Name="eventstart" />
+                            </Failure>
+                        </CheckConditionalAction>
+                    </Success>
+                </CountTargetsAction>
+            </ScriptedEvent>
+
+            <ScriptedEvent identifier="ShinkiTalent_Effect_Self">
+                <AfflictionAction Affliction="Touhou_Shinki_Alice_Effect" Strength="10" TargetTag="ShinkiTalent_Target" />
+            </ScriptedEvent>
+
+
+            <!--职责所在天赋事件-->
+            <ScriptedEvent identifier="PatchouliTalent_Effect">
+                <Label name="eventstart" />
+                <ClearTagAction tag="PatchouliTalent_Target" />
+                <TagAction Criteria="crew" Tag="PatchouliTalent_Target" IgnoreIncapacitatedCharacters="true" ChooseRandom="true" ChooseRandomExcludingTag="PatchouliTalent_InValidTarget" ContinueIfNoTargetsFound="true" />
+                <TagAction Criteria="eventtag:PatchouliTalent_Target" Tag="PatchouliTalent_InValidTarget" ContinueIfNoTargetsFound="true" />
+                <CountTargetsAction TargetTag="PatchouliTalent_Target" MinAmount="1">
+                    <Success>
+                        <CheckConditionalAction TargetTag="PatchouliTalent_Target" >
+                            <Conditional Touhou_Koakuma_Character_Effect="gt 0" />
+                            <Success>
+                                <StatusEffectAction TargetTag="PatchouliTalent_Target">
+                                    <StatusEffect target="This" EventTargetTag="PatchouliTalent_Target">
+                                        <!-- <TriggerEvent EventTag="SanaeTalent_Effect" /> -->
+                                        <TriggerEvent identifier="PatchouliTalent_Effect_Self" />
+                                    </StatusEffect>
+                                </StatusEffectAction>
+                            </Success>
+                            <Failure>
+                                <GoTo Name="eventstart" />
+                            </Failure>
+                        </CheckConditionalAction>
+                    </Success>
+                </CountTargetsAction>
+            </ScriptedEvent>
+
+            <ScriptedEvent identifier="PatchouliTalent_Effect_Self">
+                <AfflictionAction Affliction="Touhou_Patchouli_Koakuma_Effect" Strength="10" TargetTag="PatchouliTalent_Target" />
+            </ScriptedEvent>
+
+
+            <!--振奋天赋事件-->
+            <ScriptedEvent identifier="ShionTalent_Effect">
+                <Label name="eventstart" />
+                <ClearTagAction tag="ShionTalent_Target" />
+                <TagAction Criteria="crew" Tag="ShionTalent_Target" IgnoreIncapacitatedCharacters="true" ChooseRandom="true" ChooseRandomExcludingTag="ShionTalent_InValidTarget" ContinueIfNoTargetsFound="true" />
+                <TagAction Criteria="eventtag:ShionTalent_Target" Tag="ShionTalent_InValidTarget" ContinueIfNoTargetsFound="true" />
+                <CountTargetsAction TargetTag="ShionTalent_Target" MinAmount="1">
+                    <Success>
+                        <CheckConditionalAction TargetTag="ShionTalent_Target" >
+                            <Conditional Touhou_Jyoon_Character_Effect="gt 0" />
+                            <Success>
+                                <StatusEffectAction TargetTag="ShionTalent_Target">
+                                    <StatusEffect target="This" EventTargetTag="ShionTalent_Target">
+                                        <!-- <TriggerEvent EventTag="SanaeTalent_Effect" /> -->
+                                        <TriggerEvent identifier="ShionTalent_Effect_Self" />
+                                    </StatusEffect>
+                                </StatusEffectAction>
+                            </Success>
+                            <Failure>
+                                <GoTo Name="eventstart" />
+                            </Failure>
+                        </CheckConditionalAction>
+                    </Success>
+                </CountTargetsAction>
+            </ScriptedEvent>
+
+            <ScriptedEvent identifier="ShionTalent_Effect_Self">
+                <AfflictionAction Affliction="Touhou_Shion_Jyoon_Effect" Strength="10" TargetTag="ShionTalent_Target" />
             </ScriptedEvent>
 
         </EventPrefabs>

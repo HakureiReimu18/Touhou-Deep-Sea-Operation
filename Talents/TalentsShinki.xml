@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="ShinkiTalent">
+        <Icon texture="%ModDir%/Images/Talents/ShinkiTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.ShinkiTalent"/>
+        <AbilityGroupInterval Interval="3.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shinki_Character_Effect"/>
+                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.7"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="RangedAttackMultiplier" value="-0.15"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackMultiplier" value="-0.15"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="3.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shinki_Character_Effect"/>
+                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.4"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyStat stattype="RangedAttackSpeed" value="-0.15"/>
+                <CharacterAbilityModifyStat stattype="MeleeAttackSpeed" value="-0.15"/>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupInterval Interval="3.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shinki_Character_Effect"/>
+                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.1"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyResistance resistanceid="damage" multiplier="1.2"/>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupInterval interval="2.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shinki_Character_Effect"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0.8"/>
+                <AbilityConditionAboveVitality vitalitypercentage="1.0" invert="true"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects SetUser="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <ReduceAffliction type="damage" amount="0.2"/>
+                            <ReduceAffliction type="burn" amount="0.2"/>
+                            <ReduceAffliction type="bleeding" amount="0.4"/>
+                            <ReduceAffliction type="debuff" amount="0.02"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+        <AbilityGroupEffect abilityeffecttype="OnDieToCharacter">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shinki_Character_Effect"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shinki_Character_Effect_Check"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffectsToAllies requiresalive="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character">
+                            <Affliction identifier="Touhou_Shinki_Talent_Death_For_Team" amount="120"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffectsToAllies>
+            </Abilities>
+        </AbilityGroupEffect>
+
+
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shinki_Character_Effect"/>
+                <AbilityConditionServerRandom randomchance="0.7"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityPutItem itemidentifier="Touhou_Makai_Essence" amount="2"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+
+        <AbilityGroupInterval maxtriggercount="1" Interval="10">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shinki_Character_Effect" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" EventTargetTag="ShinkiTalent_InValidTarget">
+                            <Conditional IsBot="false" />
+                            <TriggerEvent identifier="ShinkiTalent_Effect" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AddedRecipe itemidentifier="Touhou_Makai_Essence"/>
+    </Talent>
+</Talents>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="KoakumaTalent">
+        <Icon texture="%ModDir%/Images/Talents/KoakumaTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.KoakumaTalent"/>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Koakuma_Character_Effect"/>
+                <AbilityConditionInFriendlySubmarine invert="true" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupInterval interval="2.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Koakuma_Character_Effect"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Koakuma_Character_State_Relaxed"/>
+                <AbilityConditionAboveVitality vitalitypercentage="0.5"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects SetUser="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true">
+                            <ReduceAffliction type="damage" amount="0.2"/>
+                            <ReduceAffliction type="bleeding" amount="0.4"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AddedRecipe itemidentifier="Touhou_Refined_Grimoire"/>
+    </Talent>
+</Talents>

@@ -1,20 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Talents>
-    <Talent identifier="Casket_Of_Star">
-        <Icon texture="%ModDir%/Images/Talents/Casket_Of_Star.png" sheetindex="0,0" sheetelementsize="128,128"/>
-        <Description tag="talentdescription.Casket_Of_Star"/>
+    <Talent identifier="MarisaTalent">
+        <Icon texture="%ModDir%/Images/Talents/MarisaTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.MarisaTalent"/>
         <AbilityGroupInterval Interval="3.0">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Marisa_Character_Effect"/>
                 <AbilityConditionHasAffliction afflictionidentifier="Marisa_Weapons"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyResistance resistanceid="Touhou_Magic_Overload" multiplier="0.25"/>
             </Abilities>
         </AbilityGroupInterval>
+        <!-- 「每次攻击增长魔力过载」改由 Lua 脚本
+             Lua/Scripts/Server/Marisa_Magic_Overload.lua 实现（东方潜渊行动组Lua补丁），以下旧 XML 保留备查。
+             旧版问题：爆炸类伤害会在 Explosion.DamageCharacters 里按每个受波及肢体各触发一次 OnAttack，
+             同一发爆炸把概率和数值放大了好几倍；近战/弹幕命中多个肢体同理。
+
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Marisa_Character_Effect"/>
                 <AbilityConditionServerRandom randomchance="0.3"/>
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
                 <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="70" invert="true"/>
@@ -31,7 +36,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Marisa_Character_Effect"/>
                 <AbilityConditionServerRandom randomchance="0.2"/>
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
                 <AbilityConditionHasSkill skillidentifier="Touhou_Magic" minvalue="70"/>
@@ -46,9 +51,11 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupEffect>
+
+        -->
         <AbilityGroupEffect abilityeffecttype="OnOpenItemContainer">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Marisa_Character_Effect"/>
                 <AbilityConditionItemInSubmarine submarinetype="Wreck"/>
                 <AbilityConditionItem tags="container"/>
             </Conditions>
@@ -64,7 +71,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAddDamageAffliction">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Marisa_Character_Effect"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAffliction afflictionidentifiers="burn,acidburn" addedmultiplier="0.04"/>
@@ -72,7 +79,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Marisa_Character_Effect"/>
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
             </Conditions>
             <Abilities>
@@ -81,7 +88,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Marisa_Character_Effect"/>
                 <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
             </Conditions>
             <Abilities>
@@ -90,7 +97,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Marisa_Character_Effect"/>
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
                 <AbilityConditionCharacter targettype="Enemy">
                     <Conditional speciesname="neq human"/>
@@ -103,7 +110,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Ordinary_Magician"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Marisa_Character_Effect"/>
                 <AbilityConditionServerRandom randomchance="0.25"/>
                 <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
             </Conditions>

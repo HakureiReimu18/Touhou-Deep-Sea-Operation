@@ -3,10 +3,10 @@
     <Talent identifier="SanaeTalent">
         <Icon texture="%ModDir%/Images/Talents/SanaeTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
         <Description tag="talentdescription.SanaeTalent"/>
-        <!-- 每个巡回开始时会给除自己外的随机的清醒船员降下一种奇迹 -->
+<!--        &lt;!&ndash; 每个巡回开始时会给除自己外的随机的清醒船员降下一种奇迹 &ndash;&gt;
         <AbilityGroupInterval maxtriggercount="1" Interval="10">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Sanae_Character_Effect" />
             </Conditions>
             <Abilities>
                 <CharacterAbilityApplyStatusEffects>
@@ -19,10 +19,10 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
-        <!-- 角色等级超过10后，可以触发两次 -->
+        &lt;!&ndash; 角色等级超过10后，可以触发两次 &ndash;&gt;
         <AbilityGroupInterval maxtriggercount="1" Interval="15">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Sanae_Character_Effect" />
                 <AbilityConditionHasLevel minlevel="10" />
             </Conditions>
             <Abilities>
@@ -36,27 +36,27 @@
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
-        <!-- 佩戴护符时，也会给予自身随机一种奇迹 -->
+        &lt;!&ndash; 佩戴护符时，也会给予自身随机一种奇迹 &ndash;&gt;
         <AbilityGroupInterval maxtriggercount="1" Interval="4.9">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Sanae_Character_Effect" />
                 <AbilityConditionHasItem tags="Illness_Recovery_Charm" />
             </Conditions>
             <Abilities>
                 <CharacterAbilityApplyStatusEffects applytoself="true">
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" EventTargetTag="SanaeTalent_Target">
-                            <!-- <TriggerEvent EventTag="SanaeTalent_Effect" /> -->
+                            &lt;!&ndash; <TriggerEvent EventTag="SanaeTalent_Effect" /> &ndash;&gt;
                             <TriggerEvent identifier="SanaeTalent_Effect_Self" />
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
         </AbilityGroupInterval>
-        <!-- 一巡回两次，当船员获得至少一点技能点时，自己有25%概率获得随机一种奇迹，这个效果无论是否触发成功都有有1分钟冷却 -->
+        &lt;!&ndash; 一巡回两次，当船员获得至少一点技能点时，自己有25%概率获得随机一种奇迹，这个效果无论是否触发成功都有有1分钟冷却 &ndash;&gt;
         <AbilityGroupEffect abilityeffecttype="OnAllyGainSkillPoint" maxtriggercount="2">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Sanae_Character_Effect" />
                 <AbilityConditionHasStatusTag tag="SanaeTalent_Gain_Skill_Point_CD" invert="true" />
                 <AbilityConditionServerRandom randomchance="0.25" />
             </Conditions>
@@ -64,7 +64,7 @@
                 <CharacterAbilityApplyStatusEffects applytoself="true">
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" EventTargetTag="SanaeTalent_Target">
-                            <!-- <TriggerEvent EventTag="SanaeTalent_Effect" /> -->
+                            &lt;!&ndash; <TriggerEvent EventTag="SanaeTalent_Effect" /> &ndash;&gt;
                             <TriggerEvent identifier="SanaeTalent_Effect_Self" />
                         </StatusEffect>
                     </StatusEffects>
@@ -73,7 +73,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAllyGainSkillPoint">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Sanae_Character_Effect" />
                 <AbilityConditionHasStatusTag tag="SanaeTalent_Gain_Skill_Point_CD" invert="true" />
             </Conditions>
             <Abilities>
@@ -83,11 +83,11 @@
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>
             </Abilities>
-        </AbilityGroupEffect>
+        </AbilityGroupEffect>-->
         <!-- 当你拥有任意一种奇迹时，受到的伤害下降10%，最大生命值提高10% -->
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Sanae_Character_Effect" />
                 <AbilityConditionHasAffliction afflictionidentifier="SanaeTalent_Effect_Flag" />
             </Conditions>
             <Abilities>
@@ -96,39 +96,39 @@
         </AbilityGroupEffect>
         <AbilityGroupInterval Interval="0.9">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Sanae_Character_Effect" />
                 <AbilityConditionHasAffliction afflictionidentifier="SanaeTalent_Effect_Flag" />
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyStat stattype="MaximumHealthMultiplier" value="0.1" />
             </Abilities>
         </AbilityGroupInterval>
-        <!-- 生命值越低，受到的伤害越高，最大增加25%受到的伤害 -->
+        <!-- 生命值越低，受到的伤害越高，最大增加50%受到的伤害 -->
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Sanae_Character_Effect" />
                 <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.9" />
             </Conditions>
             <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.07" />
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.15" />
             </Abilities>
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
-                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.6" />
-            </Conditions>
-            <Abilities>
-                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.08" />
-            </Abilities>
-        </AbilityGroupEffect>
-        <AbilityGroupEffect abilityeffecttype="OnAttacked">
-            <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="Manifest_God_Of_Miracles" />
-                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.3" />
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Sanae_Character_Effect" />
+                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.7" />
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="0.1" />
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttacked">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Sanae_Character_Effect" />
+                <AbilityConditionAboveVitality invert="true" vitalitypercentage="0.5" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.15" />
             </Abilities>
         </AbilityGroupEffect>
     </Talent>

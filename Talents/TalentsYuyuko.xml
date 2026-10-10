@@ -38,13 +38,18 @@
             </Abilities>
         </AbilityGroupEffect>
 
+        <!-- 「一分钟一次，专属武器处决失去意识的敌对生物」改由 Lua 脚本
+             Lua/Scripts/Server/Yuyuko_Talent.lua 实现（东方潜渊行动组Lua补丁），以下旧 XML 保留备查。
+             旧版问题：CD 属性写成 applytpself（应为 applytoself），冷却被施加到被打的目标身上，
+             攻击者没有冷却；且尸体的 isunconscious 同样为真，打尸体也会白转一次冷却。
+
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yuyuko_Character_Effect"/>
                 <AbilityConditionHasAffliction afflictionidentifier="Yuyuko_Weapons"/>
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yuyuko_Attack_Implode_CD" invert="true"/>
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
-                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionAttackData ignorenonharmfulattacks="true" weapontype="HandheldRanged,Melee"/>
                 <AbilityConditionCharacter targetabilitytarget="true" targettype="Enemy">
                     <Conditional isunconscious="true"/>
                 </AbilityConditionCharacter>
@@ -61,6 +66,8 @@
             </Abilities>
         </AbilityGroupEffect>
 
+        -->
+
         <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
             <Conditions>
                 <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yuyuko_Character_Effect"/>
@@ -70,5 +77,21 @@
                 <CharacterAbilityPutItem itemidentifier="Touhou_Spring_Fragment" amount="2"/>
             </Abilities>
         </AbilityGroupEffect>
+
+        <AbilityGroupInterval maxtriggercount="1" Interval="10">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Yuyuko_Character_Effect" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" EventTargetTag="YuyukoTalent_InValidTarget">
+                            <Conditional IsBot="false" />
+                            <TriggerEvent identifier="YuyukoTalent_Effect" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
     </Talent>
 </Talents>

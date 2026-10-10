@@ -3,13 +3,13 @@
     <Item identifier="Yukari_gear" subcategory="Touhou" category="Equipment" cargocontaineridentifier="metalcrate" tags="smallitem,clothing"
           scale="0.5" impactsoundtag="impact_soft">
         <PreferredContainer primary="crewcab"/>
-        <Price baseprice="100">
+        <Price baseprice="100" sold="false">
             <Price storeidentifier="merchantoutpost" minavailable="1"/>
             <Price storeidentifier="merchantcity" multiplier="0.9" minavailable="1"/>
             <Price storeidentifier="merchantresearch" minavailable="1"/>
             <Price storeidentifier="merchantmilitary" minavailable="1"/>
             <Price storeidentifier="merchantmine" minavailable="1"/>
-            <Price storeidentifier="Costume_Merchant_Kawasiro_Nitori" sold="true" minavailable="1"/>
+            <Price storeidentifier="Costume_Merchant_Kawasiro_Nitori" minavailable="1"/>
         </Price>
         <Deconstruct time="10">
             <Item identifier="organicfiber"/>
@@ -91,7 +91,7 @@
     <Item identifier="Yukari_Plus" subcategory="Touhou" category="Equipment" cargocontaineridentifier="metalcrate" tags="smallitem,clothing,Touhou_Clothes"
           scale="0.5" impactsoundtag="impact_soft">
         <PreferredContainer primary="crewcab"/>
-        <Price baseprice="200" minleveldifficulty="15">
+        <Price baseprice="200" minleveldifficulty="15" sold="false">
             <Price storeidentifier="merchantoutpost" multiplier="2.9" minavailable="1"/>
             <Price storeidentifier="merchantcity" multiplier="2.9" minavailable="1"/>
             <Price storeidentifier="merchantresearch" multiplier="2.9" minavailable="1"/>
@@ -156,7 +156,7 @@
             </StatusEffect>
 
             <StatusEffect type="OnWearing" target="Character" Interval="0.5" disabledeltatime="true">
-                <Affliction identifier="Realm_Of_Fantasy" strength="50"/>
+                <Affliction identifier="Touhou_Yukari_Character_Effect" strength="50"/>
             </StatusEffect>
 
             <StatusEffect type="OnWearing" target="Character" tags="YukariTalent_Effect_Self_False" Interval="10" disabledeltatime="true"/>
@@ -164,13 +164,13 @@
             <CustomInterface canbeselected="true" drawhudwhenequipped="true">
                 <GuiFrame relativesize="0.1,0.09" anchor="BottomLeft" absoluteoffset="20,60" relativeoffset="0,0.5" style="ItemUI"/>
                 <Button text="Text.Yukari_Plus">
-                    <StatusEffect type="OnUse" target="Character" delay="0.1" disabledeltatime="true">
+                    <!-- 传送改由 Lua 脚本执行（Lua/Scripts/Server/Talents/Yukari_Teleport.lua）：
+                         按一下只挂请求标记，服务端轮询到就传送全队清醒的人并挂上「本巡回已用」。
+                         下面这行原来的写法（TriggerEvent 触发 YukariTalent_Effect_Self 事件、再延迟挂标记）保留备查：
+                         StatusEffect type="OnUse" target="Character" delay="0.1" disabledeltatime="true" 内含 TriggerEvent identifier="YukariTalent_Effect_Self" -->
+                    <StatusEffect type="OnUse" target="Character" disabledeltatime="true">
                         <Conditional YukariTalent_Effect_Self_Effect="eq 0"/>
-                        <TriggerEvent identifier="YukariTalent_Effect_Self"/>
-                    </StatusEffect>
-                    <StatusEffect type="OnUse" target="Character" tags="YukariTalent_Effect_Self" delay="0.12" disabledeltatime="true">
-                        <Conditional YukariTalent_Effect_Self_Effect="eq 0"/>
-                        <Affliction identifier="YukariTalent_Effect_Self_Effect" strength="100"/>
+                        <Affliction identifier="YukariTalent_Teleport_Request" strength="1"/>
                     </StatusEffect>
                 </Button>
             </CustomInterface>

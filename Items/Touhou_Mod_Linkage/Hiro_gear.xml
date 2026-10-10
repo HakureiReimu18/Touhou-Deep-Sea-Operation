@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
     <Items>
         <!--二阶堂希罗装束-->
-        <Item identifier="Hiro_Plus" subcategory="Touhou" category="Equipment" cargocontaineridentifier="metalcrate" tags="smallitem,clothing,Touhou_Clothes" scale="0.5" impactsoundtag="impact_soft">
+        <Item identifier="Hiro_Plus" subcategory="Touhou" category="Equipment" cargocontaineridentifier="metalcrate" tags="smallitem,clothing,Touhou_Clothes,charscale_0.83" scale="0.5" impactsoundtag="impact_soft">
             <PreferredContainer primary="crewcab"/>
-            <Price baseprice="1500"  minleveldifficulty="15">
+            <Price baseprice="1500"  minleveldifficulty="15" sold="false">
                 <Price storeidentifier="merchantoutpost" multiplier="1.0" minavailable="1"/>
                 <Price storeidentifier="merchantcity" multiplier="1.0" minavailable="1"/>
                 <Price storeidentifier="merchantresearch" multiplier="1.0" minavailable="1"/>
@@ -52,7 +52,7 @@
                     <GiveTalentInfo giverandom="false" talentidentifiers="HiroTalent"/>
                 </StatusEffect>
                 <StatusEffect type="OnWearing" target="Character" Interval="0.5" disabledeltatime="true">
-                    <Affliction identifier="Hiro_Executor_Of_Justice" strength="50"/>
+                    <Affliction identifier="Touhou_Hiro_Character_Effect" strength="50"/>
                 </StatusEffect>
 
                 <StatusEffect target="This,Character" type="OnWearing" targetitemcomponent="Wearable" variant="2" setvalue="true" disabledeltatime="true" Interval="1.0">
@@ -62,6 +62,21 @@
                 <StatusEffect target="This,Character" type="OnWearing" targetitemcomponent="Wearable" variant="1" setvalue="true" disabledeltatime="true" Interval="1.0">
                     <Conditional HiroTalent_Witch_Transformation="lt 100"/>
                 </StatusEffect>
+
+
+                <CustomInterface canbeselected="true" drawhudwhenequipped="true">
+                    <GuiFrame relativesize="0.1,0.09" anchor="BottomLeft" absoluteoffset="20,60" relativeoffset="0,0.5" style="ItemUI"/>
+                    <Button text="Text.Hiro_Pseudo_Button">
+                        <StatusEffect type="OnUse" target="Character" disabledeltatime="true">
+                            <Conditional Hiro_Pseudo_Buff_CD="eq 0"/>
+                            <Affliction identifier="Hiro_Pseudo_Buff" strength="100"/>
+                        </StatusEffect>
+                        <StatusEffect type="OnUse" target="Character" disabledeltatime="true" delay="0.1" stackable="false">
+                            <Conditional Hiro_Pseudo_Buff_CD="eq 0"/>
+                            <Affliction identifier="Hiro_Pseudo_Buff_CD" strength="100"/>
+                        </StatusEffect>
+                    </Button>
+                </CustomInterface>
 
                 <ItemContainer capacity="1" maxstacksize="1" slotsperrow="1" hideitems="true" containedstateindicatorslot="0">
                     <Containable items="healthscanner" excludebroken="false">

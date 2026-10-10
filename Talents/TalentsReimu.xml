@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Talents>
-    <Talent identifier="Innocent_Treasures">
-        <Icon texture="%ModDir%/Images/Talents/Innocent_Treasures.png" sheetindex="0,0" sheetelementsize="128,128"/>
-        <Description tag="talentdescription.Innocent_Treasures"/>
+    <Talent identifier="ReimuTalent">
+        <Icon texture="%ModDir%/Images/Talents/ReimuTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.ReimuTalent"/>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="RedAndWhite"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Reimu_Character_Effect"/>
                 <AbilityConditionAttackData weapontype="Turret" invert="true"/>
                 <AbilityConditionCharacter targettype="Enemy">
                     <Conditional speciesname="neq human"/>
@@ -16,18 +16,25 @@
                 <CharacterAbilityModifyAttackData addedpenetration="0.05"/>
             </Abilities>
         </AbilityGroupEffect>
+        <!-- 「受到非人类造成的伤害降低 20%」改由 Lua 脚本
+             Lua/Scripts/Server/Talents/Reimu_Protection.lua 实现（东方潜渊行动组Lua补丁）：
+             按描述改成「攻击者不是人类」都减伤（含怪物远程/爆炸），不再只限无武器/近战。
+             以下旧 XML 保留备查。
+
         <AbilityGroupEffect abilityeffecttype="OnAttacked">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="RedAndWhite"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Reimu_Character_Effect"/>
                 <AbilityConditionAttackData ignorenonharmfulattacks="true" ignoreOwnAttacks="true" weapontype="NoWeapon,Melee"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyAttackData addeddamagemultiplier="-0.2"/>
             </Abilities>
         </AbilityGroupEffect>
+
+        -->
         <AbilityGroupInterval Interval="5.0">
             <Conditions>
-                <AbilityConditionHasAffliction afflictionidentifier="RedAndWhite"/>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Reimu_Character_Effect"/>
             </Conditions>
             <Abilities>
                 <CharacterAbilityModifyResistance resistanceid="Reiki_Side_Effect" multiplier="0.0"/>

@@ -451,7 +451,7 @@
         <!--痛苦天赋-->
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasItem tags="Touhou_Savior"/>
+                <AbilityConditionHasItem tags="Touhou_Anguish"/>
                 <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
                 <AbilityConditionCharacter targetabilitytarget="true">
                     <Conditional HealthPercentage="lte 90"/>
@@ -463,7 +463,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasItem tags="Touhou_Savior"/>
+                <AbilityConditionHasItem tags="Touhou_Anguish"/>
                 <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
                 <AbilityConditionCharacter targetabilitytarget="true">
                     <Conditional HealthPercentage="lte 70"/>
@@ -475,7 +475,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasItem tags="Touhou_Savior"/>
+                <AbilityConditionHasItem tags="Touhou_Anguish"/>
                 <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
                 <AbilityConditionCharacter targetabilitytarget="true">
                     <Conditional HealthPercentage="lte 50"/>
@@ -487,7 +487,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasItem tags="Touhou_Savior"/>
+                <AbilityConditionHasItem tags="Touhou_Anguish"/>
                 <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
                 <AbilityConditionCharacter targetabilitytarget="true">
                     <Conditional HealthPercentage="lte 30"/>
@@ -499,7 +499,7 @@
         </AbilityGroupEffect>
         <AbilityGroupEffect abilityeffecttype="OnAttack">
             <Conditions>
-                <AbilityConditionHasItem tags="Touhou_Savior"/>
+                <AbilityConditionHasItem tags="Touhou_Anguish"/>
                 <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
                 <AbilityConditionCharacter targetabilitytarget="true">
                     <Conditional HealthPercentage="lte 10"/>
@@ -931,9 +931,165 @@
                 <CharacterAbilityApplyStatusEffects applytoself="true">
                     <StatusEffects>
                         <StatusEffect type="OnAbility" target="Character" duration="1.0" CanGiveMedicalSkill="false">
-                            <ReduceAffliction identifier="damage" strength="8"/>
-                            <ReduceAffliction identifier="burn" strength="8"/>
-                            <ReduceAffliction identifier="bleeding" strength="16"/>
+                            <ReduceAffliction identifier="damage" strength="16"/>
+                            <ReduceAffliction identifier="burn" strength="16"/>
+                            <ReduceAffliction identifier="bleeding" strength="32"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--绮梦终焉仪天赋-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Chimeric_Dreamer"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
+                <AbilityConditionServerRandom randomchance="0.35"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget" limb="Torso" disabledeltatime="true" multiplyafflictionsbymaxvitality="true" >
+                            <Affliction identifier="Touhou_Alice_Magic_Book_Bolt_Effect" strength="1"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Chimeric_Dreamer"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
+                <AbilityConditionCharacter targettype="Enemy">
+                    <Conditional Touhou_Alice_Magic_Book_Bolt_Effect="gt 0"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addedpenetration="0.1"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--禁书索引器天赋-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Forbidden_Book_Indexer"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
+                <AbilityConditionCharacter targettype="Enemy" targetabilitytarget="true" />
+                <AbilityConditionServerRandom randomchance="0.35"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Mu_Elements" strength="7"/>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Huo_Elements" strength="7"/>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Tu_Elements" strength="7"/>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Jin_Elements" strength="7"/>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Shui_Elements" strength="7"/>
+                <CharacterAbilityGiveAffliction affliction="Touhou_Elements_Marked" strength="7"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--灾厄洪流天赋-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Calamity_Torrent"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
+                <AbilityConditionCharacter targettype="Enemy" targetabilitytarget="true">
+                    <Conditional HealthPercentage="lte 50"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveAffliction affliction="Sleepless_Nightmare" strength="30"/>
+                <CharacterAbilityApplyStatusEffects applytoself="false">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="UseTarget" duration="1.0" CanGiveMedicalSkill="false">
+                            <ReduceAffliction type="resistance" strength="8"/>
+                            <ReduceAffliction type="strengthbuff" strength="8"/>
+                            <ReduceAffliction type="talentbuff" amount="8"/>
+                            <ReduceAffliction type="durationincrease" amount="8"/>
+                            <ReduceAffliction type="haste" amount="8"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--灾厄枯荣天赋-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Calamity_Wither_Bloom"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
+                <AbilityConditionCharacter targettype="Enemy" targetabilitytarget="true">
+                    <Conditional MaxHealth="lte 1000"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Calamity_Wither_Bloom"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
+                <AbilityConditionCharacter targettype="Enemy" targetabilitytarget="true">
+                    <Conditional MaxHealth="lte 500"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Calamity_Wither_Bloom"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
+                <AbilityConditionCharacter targettype="Enemy" targetabilitytarget="true">
+                    <Conditional MaxHealth="lte 400"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Calamity_Wither_Bloom"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="HandheldRanged"/>
+                <AbilityConditionCharacter targettype="Enemy" targetabilitytarget="true">
+                    <Conditional MaxHealth="lte 200"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.05"/>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--泡沫女王天赋-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Foam_Queen"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Conditional TeamID="None"/>
+                            <Conditional TeamID="Team2"/>
+                            <Affliction identifier="Touhou_Misfortune_Curse" amount="2.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+        <!--繁华世界天赋-->
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasItem tags="Touhou_Bustling_World"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Conditional TeamID="None"/>
+                            <Conditional TeamID="Team2"/>
+                            <ReduceAffliction type="resistance" amount="200.0"/>
+                            <ReduceAffliction type="strengthbuff" amount="200.0"/>
                         </StatusEffect>
                     </StatusEffects>
                 </CharacterAbilityApplyStatusEffects>

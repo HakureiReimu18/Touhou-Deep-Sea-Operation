@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Talents>
+    <Talent identifier="ShionTalent">
+        <Icon texture="%ModDir%/Images/Talents/ShionTalent.png" sheetindex="0,0" sheetelementsize="128,128"/>
+        <Description tag="talentdescription.ShionTalent"/>
+
+        <AbilityGroupInterval interval="30.0">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shion_Character_Effect"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects applytoself="true">
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Affliction identifier="Touhou_Misfortune_Curse" strength="1.0"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+        <AbilityGroupEffect abilityeffecttype="OnAnyMissionCompleted">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shion_Character_Effect"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityGiveMoney amount="-50"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnApplyTreatment">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shion_Character_Effect"/>
+                <AbilityConditionItem tags="medical"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect statuseffecttags="medical" type="OnAbility" target="Character" duration="10.0">
+                            <ReduceAffliction type="Touhou_Misfortune_Curse" amount="3"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+
+
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shion_Character_Effect"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionCharacter targettype="Enemy" targetabilitytarget="true">
+                    <Conditional Touhou_Misfortune_Curse="gt 0"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shion_Character_Effect"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+                <AbilityConditionCharacter targettype="Enemy" targetabilitytarget="true">
+                    <Conditional Touhou_Misfortune_Curse="gt 0"/>
+                    <Conditional HealthPercentage="lt 50"/>
+                </AbilityConditionCharacter>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityModifyAttackData addeddamagemultiplier="0.15"/>
+            </Abilities>
+        </AbilityGroupEffect>
+
+
+        <AbilityGroupEffect abilityeffecttype="OnAttack">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shion_Character_Effect"/>
+                <AbilityConditionAttackData tags="Touhou_Magic_Danmu" ignorenonharmfulattacks="true" weapontype="Ranged"/>
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" targetlimb="Torso" delay="0.1" disabledeltatime="true" multiplyafflictionsbymaxvitality="true">
+                            <Conditional TeamID="None"/>
+                            <Conditional TeamID="Team2"/>
+                            <Affliction identifier="Touhou_Misfortune_Curse" amount="2.0"/>
+                            <Affliction identifier="Touhou_Misfortune_Curse_MaxHealth_Debuff" amount="0.2"/>
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupEffect>
+
+
+        <AbilityGroupInterval maxtriggercount="1" Interval="10">
+            <Conditions>
+                <AbilityConditionHasAffliction afflictionidentifier="Touhou_Shion_Character_Effect" />
+            </Conditions>
+            <Abilities>
+                <CharacterAbilityApplyStatusEffects>
+                    <StatusEffects>
+                        <StatusEffect type="OnAbility" target="Character" EventTargetTag="ShionTalent_InValidTarget">
+                            <Conditional IsBot="false" />
+                            <TriggerEvent identifier="ShionTalent_Effect" />
+                        </StatusEffect>
+                    </StatusEffects>
+                </CharacterAbilityApplyStatusEffects>
+            </Abilities>
+        </AbilityGroupInterval>
+
+
+    </Talent>
+</Talents>

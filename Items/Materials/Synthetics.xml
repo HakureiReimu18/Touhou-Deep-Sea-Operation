@@ -211,7 +211,7 @@
 
     <!--灵水-->
     <Item name="" identifier="Spiritual_Water" tags="smallitem,Spiritual_Water,Touhou_Magic_Item" subcategory="Touhou" category="Alien"
-          cargocontaineridentifier="metalcrate" maxstacksize="6" scale="0.35">
+          cargocontaineridentifier="metalcrate" maxstacksize="6" scale="0.2">
         <PreferredContainer primary="medcab" secondary="medcontainer" spawnprobability="0.02"/>
         <PreferredContainer secondary="outpostmedcompartment" amount="1" spawnprobability="0.02"/>
         <PreferredContainer secondary="supplycab" minamount="1" maxamount="2" spawnprobability="0.05" notcampaign="true"/>
@@ -363,11 +363,11 @@
         <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="-20" handangle="300" swingamount="0,3"
                   swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnSecondaryUse" target="This,Character" Condition="-32.0">
-                <Conditional Memory_Of_Gensokyo="eq 0"/>
+                <Conditional Touhou_Akyuu_Character_Effect="eq 0"/>
             </StatusEffect>
             <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And">
                 <Conditional Condition="lte 0"/>
-                <Conditional Memory_Of_Gensokyo="eq 0"/>
+                <Conditional Touhou_Akyuu_Character_Effect="eq 0"/>
                 <GiveSkill skillidentifier="electrical" amount="1" triggertalents="false"/>
                 <GiveSkill skillidentifier="helm" amount="1" triggertalents="false"/>
                 <GiveSkill skillidentifier="mechanical" amount="1" triggertalents="false"/>
@@ -400,11 +400,11 @@
         <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="-20" handangle="300" swingamount="0,3"
                   swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
             <StatusEffect type="OnSecondaryUse" target="This,Character" Condition="-22.0">
-                <Conditional Memory_Of_Gensokyo="eq 0"/>
+                <Conditional Touhou_Akyuu_Character_Effect="eq 0"/>
             </StatusEffect>
             <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true" comparison="And">
                 <Conditional Condition="lte 0"/>
-                <Conditional Memory_Of_Gensokyo="eq 0"/>
+                <Conditional Touhou_Akyuu_Character_Effect="eq 0"/>
                 <GiveSkill skillidentifier="Touhou_Magic" amount="4" triggertalents="false"/>
                 <GiveExperience amount="200"/>
                 <RemoveItem/>
@@ -1046,7 +1046,7 @@
 
 
     <!--春度碎片-->
-    <Item name="春度碎片" identifier="Touhou_Spring_Fragment" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Mild" subcategory="Touhou" category="Alien"
+    <Item name="春度碎片" identifier="Touhou_Spring_Fragment" tags="smallitem,Touhou_Food_Ingredients,Vegetarian,Mild,Premium,Sweet,Dreamy" subcategory="Touhou" category="Alien"
           cargocontaineridentifier="metalcrate" maxstacksize="32" maxstacksizecharacterinventory="16" scale="0.25" useinhealthinterface="true">
         <PreferredContainer primary="engcab"/>
         <Deconstruct time="5"/>
@@ -1074,6 +1074,59 @@
         <Sprite texture="%ModDir%/Images/Materials/Touhou_Eidolon_Shard.png" depth="0.4" sourcerect="0,0,96,100"/>
         <Body width="96" height="100" density="10.5" gravityscale="0.4"/>
         <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,-55" handle2="0,-55"/>
+    </Item>
+
+    <!--魔素-->
+    <Item name="魔素" identifier="Touhou_Makai_Essence" tags="smallitem,advmunition_core,munition_core,munition_propulsion" subcategory="Touhou" category="Alien"
+          cargocontaineridentifier="metalcrate" maxstacksize="32" maxstacksizecharacterinventory="8" scale="0.25" >
+        <PreferredContainer primary="engcab"/>
+        <Deconstruct time="5"/>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" amount="3" requiresrecipe="true" HideIfNoRecipe="true">
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
+            <RequiredItem identifier="Byproduct_Alchemical" />
+            <RequiredItem identifier="scrap" />
+            <RequiredItem identifier="Magic_Material" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Makai_Essence.png" depth="0.4" sourcerect="0,0,64,72"/>
+        <Body width="96" height="100" density="10" />
+        <Holdable slots="RightHand,LeftHand,Any" holdpos="0,0" handle1="0,-55" handle2="0,-55"/>
+    </Item>
+
+
+    <!--《精编魔法书》-->
+    <Item name="" identifier="Touhou_Refined_Grimoire" tags="smallitem,Touhou_Book" subcategory="Touhou" category="Alien,Misc" cargocontaineridentifier="metalcrate"
+          maxstacksize="32" maxstacksizecharacterinventory="16" scale="0.8">
+        <Price baseprice="100" sold="false">
+            <Price storeidentifier="merchantoutpost" minavailable="8"/>
+            <Price storeidentifier="merchantcity" minavailable="8"/>
+            <Price storeidentifier="merchantresearch" minavailable="8"/>
+            <Price storeidentifier="merchantmilitary" minavailable="8"/>
+            <Price storeidentifier="merchantmine" minavailable="8"/>
+        </Price>
+        <Deconstruct time="4" >
+            <Item identifier="Touhou_Bottle_Element" />
+        </Deconstruct>
+        <Fabricate suitablefabricators="Magic_Altar" requiredtime="3" requiresrecipe="true" HideIfNoRecipe="true">
+            <RequiredSkill identifier="Touhou_Magic" level="10"/>
+            <RequiredItem identifier="Touhou_Bottle_Element" />
+            <RequiredItem identifier="Touhou_Spell_Book" />
+            <RequiredItem identifier="Magic_Material" />
+        </Fabricate>
+        <Sprite texture="%ModDir%/Images/Materials/Touhou_Refined_Grimoire.png" depth="0.4" sourcerect="0,0,48,48"/>
+        <Body width="28" height="36" density="14"/>
+        <Holdable slots="Any,RightHand+LeftHand" aimable="false" aimpos="40,-20" handle1="5,0" aimangle="340" handangle="300" swingamount="0,3"
+                  swingspeed="0.5" swingwhenaiming="true" msg="ItemMsgPickUpSelect">
+            <StatusEffect type="OnSecondaryUse" target="This" Condition="-20"/>
+            <StatusEffect type="OnSecondaryUse" target="This,Character" disabledeltatime="true">
+                <Conditional Condition="lte 0"/>
+                <GiveSkill skillidentifier="Touhou_Magic" amount="6" triggertalents="false"/>
+                <GiveExperience amount="600"/>
+                <RemoveItem/>
+            </StatusEffect>
+            <StatusEffect type="OnContained" target="This" condition="2.0">
+                <Conditional condition="gt 10"/>
+            </StatusEffect>
+        </Holdable>
     </Item>
 
 
